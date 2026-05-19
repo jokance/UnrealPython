@@ -1,0 +1,113 @@
+// Copyright Epic Games, Inc. All Rights Reserved.
+
+#pragma once
+
+#include "Wrapper/UPyWrapperBase.h"
+#include "Utils/UPyUtil.h"
+#include "DynamicTypes/UPyGeneratedWrappedType.h"
+#include "UPyGeneratedClass.generated.h"
+
+extern PyTypeObject UPyUClassDecoratorType;
+extern PyTypeObject UPyUFunctionDecoratorType;
+
+void InitializeUPyUClassDecorator(UPyGenUtil::FNativePythonModule& ModuleInfo);
+void InitializeUPyUFunctionDecorator(UPyGenUtil::FNativePythonModule& ModuleInfo);
+
+PyObject* PyCallGenerateClass(PyObject* InSelf, PyObject* InArgs, PyObject* InKwds);
+PyObject* PyCallGenerateFunction(PyObject* InSelf, PyObject* InArgs, PyObject* InKwds);
+
+/** An Unreal class that was generated from a Python type */
+UCLASS(Transient)
+class UUPyGeneratedClass final : public UClass, public IUPythonResourceOwner
+{
+	GENERATED_BODY()
+
+public:
+	//~ UObject interface
+	static void AddReferencedObjects(UObject* InThis, FReferenceCollector& Collector);
+	virtual void PostRename(UObject* OldOuter, const FName OldName) override;
+	virtual void BeginDestroy() override;
+	virtual bool IsAsset() const override
+	{
+		return false;
+	}
+
+	//~ UClass interface
+	virtual void PostInitInstance(UObject* InObj, FObjectInstancingGraph* InstanceGraph) override;
+
+	//~ IPythonResourceOwner interface
+	virtual void ReleasePythonResources() override;
+
+	/** Unregister this type from FPyWrapperTypeRegistry */
+	void UnregisterGeneratedType();
+
+	virtual bool IsFunctionImplementedInScript(FName InFunctionName) const override;
+
+	/** Generate an Unreal class from the given Python type */
+	static UUPyGeneratedClass* GenerateClass(PyTypeObject* InPyType);
+
+	/** Generate an Unreal class for all child classes of the old parent using the new parent class as their base (also update the Python types) */
+	static bool ReparentDerivedClasses(UUPyGeneratedClass* InOldParent, UUPyGeneratedClass* InNewParent);
+
+	/** Generate an Unreal class based on the given class, but using the given parent class (also update the Python type) */
+	static UUPyGeneratedClass* ReparentClass(UUPyGeneratedClass* InOldClass, UUPyGeneratedClass* InNewParent);
+
+private:
+	/** Native function used to call the Python functions from C code */
+	DECLARE_FUNCTION(CallPythonFunction);
+
+	/** Python type this class was generated from */
+	FUPyTypeObjectPtr PyType;
+
+	/** PostInit function for this class */
+	FUPyObjectPtr PyPostInitFunction;
+
+	/** Array of properties generated for this class */
+	TArray<TSharedPtr<UPyGenUtil::FPropertyDef>> PropertyDefs;
+
+	/** Array of functions generated for this class */
+	TArray<TSharedPtr<UPyGenUtil::FFunctionDef>> FunctionDefs;
+
+	/** Meta-data for this generated class that is applied to the Python type */
+	// FUPyWrapperObjectMetaData PyMetaData;
+
+	TObjectPtr<UObjectRedirector> ClassRedirector;
+	TObjectPtr<UObjectRedirector> CDORedirector;
+
+	friend class FUPythonGeneratedClassBuilder;
+};
+
+struct FUPyUClassDecorator
+{
+	/** Common Python Object */
+	PyObject_HEAD
+	
+	static FUPyUClassDecorator* New(PyTypeObject* InType, PyObject* InArgs, PyObject* InKwds);
+	
+	static void Dealloc(FUPyUClassDecorator* InSelf);
+	
+	static int Init(FUPyUClassDecorator* InSelf, PyObject* InArgs, PyObject* InKwds);
+	
+	static void Deinit(FUPyUClassDecorator* InSelf);
+	
+	static PyObject* Call(FUPyUClassDecorator* InSelf, PyObject* InArgs, PyObject* InKwds);
+};
+
+struct FUPyUFunctionDecorator
+{
+	/** Common Python Object */
+	PyObject_HEAD
+	
+	PyObject* CacheArgs;
+	PyObject* CacheKwds;
+	
+	static FUPyUFunctionDecorator* New(PyTypeObject* InType, PyObject* InArgs, PyObject* InKwds);
+	
+	static void Dealloc(FUPyUFunctionDecorator* InSelf);
+	
+	static int Init(FUPyUFunctionDecorator* InSelf, PyObject* InArgs, PyObject* InKwds);
+	
+	static void Deinit(FUPyUFunctionDecorator* InSelf);
+	
+	static PyObject* Call(FUPyUFunctionDecorator* InSelf, PyObject* InArgs, PyObject* InKwds);
+};

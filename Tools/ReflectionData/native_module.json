@@ -1,0 +1,762 @@
+{
+	"ue":
+	{
+		"NativeMethods": [
+			{
+				"MethodName": "Log",
+				"MethodDoc": "Log(msg: str) -> None -- log the given argument as information in the LogPython category",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "LogWarning",
+				"MethodDoc": "LogWarning(msg: str) -> None -- log the given argument as a warning in the LogPython category",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "LogError",
+				"MethodDoc": "LogError(msg: str) -> None -- log the given argument as an error in the LogPython category",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "LogFatal",
+				"MethodDoc": "LogFatal(msg: str) -> None -- log the given argument as a fatal error in the LogPython category",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "LogDisplay",
+				"MethodDoc": "LogDisplay(msg: str) -> None -- log the given argument as a display message in the LogPython category",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "LogVerbose",
+				"MethodDoc": "LogVerbose(msg: str) -> None -- log the given argument as a verbose message in the LogPython category",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "LogFlush",
+				"MethodDoc": "LogFlush() -> None -- flush the log to disk.",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "NewObject",
+				"MethodDoc": "NewObject(Type: Union[Class, type], Outer: Optional[Object]=None, Name: str=\"\", BaseType: Optional[Object]=None) -> Object -- create an Unreal object of the given class (and optional outer and name), optionally validating its type",
+				"PyMethodFlags": 3
+			},
+			{
+				"MethodName": "FindObject",
+				"MethodDoc": "FindObject(Type: Union[Class, type], Name: str, Outer: Optional[Object]=None, FollowRedirectors: bool=True) -> Object | None -- find an already loaded Unreal object with the given outer and name, optionally validating its type",
+				"PyMethodFlags": 3
+			},
+			{
+				"MethodName": "LoadObject",
+				"MethodDoc": "LoadObject(Type: Union[Class, type], Name: str, Outer: Optional[Object]=None, FollowRedirectors: bool=True) -> Object | None -- load an Unreal object with the given outer and name, optionally validating its type",
+				"PyMethodFlags": 3
+			},
+			{
+				"MethodName": "LoadClass",
+				"MethodDoc": "LoadClass(Name: str, Type: Union[Class, type]=Object.StaticClass(), Outer: Optional[Object]=None) -> Class | None -- load an Unreal class with the given outer and name, optionally validating its base type",
+				"PyMethodFlags": 3
+			},
+			{
+				"MethodName": "FindAsset",
+				"MethodDoc": "FindAsset(Name: str, Type: Union[Class, type]=Object.StaticClass(), FollowRedirectors: bool=True) -> Object | None -- find an already loaded Unreal asset with the given name, optionally validating its type",
+				"PyMethodFlags": 3
+			},
+			{
+				"MethodName": "LoadAsset",
+				"MethodDoc": "LoadAsset(Name: str, Type: Union[Class, type]=Object.StaticClass(), FollowRedirectors: bool=True) -> Object | None -- load an Unreal asset with the given name, optionally validating its type",
+				"PyMethodFlags": 3
+			},
+			{
+				"MethodName": "FindPackage",
+				"MethodDoc": "FindPackage(Name: str) -> Optional[Package] -- find an already loaded Unreal package with the given name",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "LoadPackage",
+				"MethodDoc": "LoadPackage(Name: str) -> Optional[Package] -- load an Unreal package with the given name",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "GetDefaultObject",
+				"MethodDoc": "GetDefaultObject(Type: Union[Class, type]) -> Object | None -- get the Unreal class default object (CDO) of the given type",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "uclass",
+				"MethodDoc": "uclass() -> None -- generate an Unreal class for the given Python type",
+				"PyMethodFlags": 3
+			},
+			{
+				"MethodName": "ustruct",
+				"MethodDoc": "ustruct() -> None -- generate an Unreal struct for the given Python type",
+				"PyMethodFlags": 3
+			},
+			{
+				"MethodName": "uenum",
+				"MethodDoc": "uenum() -> None -- generate an Unreal enum for the given Python type",
+				"PyMethodFlags": 3
+			},
+			{
+				"MethodName": "uvalue",
+				"MethodDoc": "uvalue(Val: int, Meta: Optional[dict[str, Any]]=None) -> ValueDef -- generate an Unreal const value form Python",
+				"PyMethodFlags": 3
+			},
+			{
+				"MethodName": "uproperty",
+				"MethodDoc": "uproperty(Type: type, Meta: Optional[dict[str, Any]]=None, Getter: Optional[str]=None, Setter: Optional[str]=None) -> PropertyDef -- generate an Unreal FProperty field form Python",
+				"PyMethodFlags": 3
+			},
+			{
+				"MethodName": "ufunction",
+				"MethodDoc": "ufunction(Meta: Optional[dict[str, Any]]=None, Ret: Optional[type]=None, Params: Optional[list[type]]=None, Override: Optional[bool]=None, Static: Optional[bool]=None, Pure: Optional[bool]=None, Getter: Optional[bool]=None, Setter: Optional[bool]=None) -> FunctionDef -- generate an Unreal FProperty field form Python",
+				"PyMethodFlags": 3
+			},
+			{
+				"MethodName": "FlushGeneratedTypeReinstancing",
+				"MethodDoc": "FlushGeneratedTypeReinstancing() -> None -- flush any pending reinstancing requests for Python generated types",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "CollectGarbage",
+				"MethodDoc": "CollectGarbage() -> None -- run Unreal garbage collection",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "GetTypeFromClass",
+				"MethodDoc": "GetTypeFromClass(Class_: Class) -> type -- get the best matching Python type for the given Unreal class",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "GetTypeFromStruct",
+				"MethodDoc": "GetTypeFromStruct(Struct_: Struct) -> type -- get the best matching Python type for the given Unreal struct",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "GetTypeFromEnum",
+				"MethodDoc": "GetTypeFromEnum(Enum_: Enum) -> type -- get the best matching Python type for the given Unreal enum",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "IsEditor",
+				"MethodDoc": "IsEditor() -> bool -- tells if the editor is running or not",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "GetContentDir",
+				"MethodDoc": "GetContentDir() -> str -- get the content directory of the project",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "GetGameSavedDir",
+				"MethodDoc": "GetGameSavedDir() -> str -- get the saved directory of the project",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "ConvertAbsolutePathApp",
+				"MethodDoc": "ConvertAbsolutePathApp(path: str) -> str -- convert a path to an absolute path suitable for external applications",
+				"PyMethodFlags": 1
+			}
+		]
+	},
+	"ValueDef":
+	{
+		"NativeMethods": []
+	},
+	"PropertyDef":
+	{
+		"NativeMethods": []
+	},
+	"FunctionDef":
+	{
+		"NativeMethods": []
+	},
+	"_ObjectBase":
+	{
+		"NativeMethods": [
+			{
+				"MethodName": "_post_init",
+				"MethodDoc": "_post_init(self) -> None -- called during Unreal object initialization (equivalent to PostInitProperties in C++)",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "IsValid",
+				"MethodDoc": "IsValid(self) -> bool -- returns true if this instance is valid (not null and not pending kill)",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "Cast",
+				"MethodDoc": "Cast(cls: Type[_T], object: object) -> _T -- cast the given object to this Unreal object type or raise an exception if the cast is not possible",
+				"PyMethodFlags": 17
+			},
+			{
+				"MethodName": "IsA",
+				"MethodDoc": "IsA(self, type: Union[Class, type]) -> bool -- returns true if this instance is of the given type",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "IsChildOf",
+				"MethodDoc": "IsChildOf(self, type: Union[Class, type]) -> bool -- returns true if this class is a child of the given type",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "GetDefaultObject",
+				"MethodDoc": "GetDefaultObject(cls: Type[_T]) -> _T -- get the Unreal class default object (CDO) of this type",
+				"PyMethodFlags": 20
+			},
+			{
+				"MethodName": "StaticClass",
+				"MethodDoc": "StaticClass(cls) -> Class -- get the Unreal class of this type",
+				"PyMethodFlags": 20
+			},
+			{
+				"MethodName": "GetClass",
+				"MethodDoc": "GetClass(self) -> Class -- get the Unreal class of this instance",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "GetOuter",
+				"MethodDoc": "GetOuter(self) -> Any -- get the outer object from this instance (if any)",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "GetTypedOuter",
+				"MethodDoc": "GetTypedOuter(self, type: Union[Class, type]) -> Any -- get the first outer object of the given type from this instance (if any)",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "GetOutermost",
+				"MethodDoc": "GetOutermost(self) -> Package -- get the outermost object (the package) from this instance",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "IsPackageExternal",
+				"MethodDoc": "IsPackageExternal(self) -> bool -- returns true if this instance has a different package than its outer's package",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "GetPackage",
+				"MethodDoc": "GetPackage(self) -> Package -- get the package directly associated with this instance",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "GetName",
+				"MethodDoc": "GetName(self) -> str -- get the name of this instance",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "GetFullName",
+				"MethodDoc": "GetFullName(self) -> str -- get the full name (class name + full path) of this instance",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "GetPathName",
+				"MethodDoc": "GetPathName(self) -> str -- get the path name of this instance",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "GetWorld",
+				"MethodDoc": "GetWorld(self) -> Optional[World] -- get the world associated with this instance (if any)",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "Modify",
+				"MethodDoc": "Modify(self, always_mark_dirty: bool = True) -> bool -- inform that this instance is about to be modified (tracks changes for undo/redo if transactional)",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "Rename",
+				"MethodDoc": "Rename(self, name: str=\"None\", outer: Optional[Object]=None) -> bool -- rename this instance and/or change its outer",
+				"PyMethodFlags": 3
+			},
+			{
+				"MethodName": "GetEditorProperty",
+				"MethodDoc": "GetEditorProperty(self, name: str) -> object -- get the value of any property visible to the editor",
+				"PyMethodFlags": 3
+			},
+			{
+				"MethodName": "SetEditorProperty",
+				"MethodDoc": "SetEditorProperty(self, name: str, value: object, notify_mode: EPropertyAccessChangeNotifyMode=EPropertyAccessChangeNotifyMode.Default) -> None -- set the value of any property visible to the editor, ensuring that the pre/post change notifications are called",
+				"PyMethodFlags": 3
+			},
+			{
+				"MethodName": "SetEditorProperties",
+				"MethodDoc": "SetEditorProperties(self, properties: dict[str, object]) -> None -- set the value of any properties visible to the editor (from a name->value dict), ensuring that the pre/post change notifications are called",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "AddPythonOwned",
+				"MethodDoc": "AddPythonOwned(self) -> None -- add this object to the python owned set (prevents garbage collection until removed)",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "RemovePythonOwned",
+				"MethodDoc": "RemovePythonOwned(self) -> None -- remove this object from the python owned set",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "IsPythonOwned",
+				"MethodDoc": "IsPythonOwned(self) -> bool -- returns true if this object is in the python owned set",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "AddToRoot",
+				"MethodDoc": "AddToRoot(self) -> None -- add this object to the root set (prevents garbage collection)",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "RemoveFromRoot",
+				"MethodDoc": "RemoveFromRoot(self) -> None -- remove this object from the root set (allows garbage collection)",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "CallMethod",
+				"MethodDoc": "CallMethod(self, name: str, *args: tuple[object, ...], **kwargs: dict[str, object]) -> Any -- call a method on this object via Unreal reflection using the given ordered (a tuple passed as args) or named (a dict passed as kwargs) argument data - allows calling methods that don't have Python glue",
+				"PyMethodFlags": 3
+			}
+		]
+	},
+	"StructBase":
+	{
+		"NativeMethods": [
+			{
+				"MethodName": "StaticStruct",
+				"MethodDoc": "StaticStruct(cls) -> ScriptStruct -- get the Unreal struct of this type",
+				"PyMethodFlags": 20
+			},
+			{
+				"MethodName": "_post_init",
+				"MethodDoc": "_post_init(self) -> None -- called during Unreal struct initialization",
+				"PyMethodFlags": 4
+			}
+		]
+	},
+	"_EnumEntry":
+	{
+		"NativeMethods": []
+	},
+	"EnumBase":
+	{
+		"NativeMethods": []
+	},
+	"Array":
+	{
+		"NativeMethods": [
+			{
+				"MethodName": "__class_getitem__",
+				"MethodDoc": "__class_getitem__(cls, item: _ElemType) -- implemented for type hinting purpose only",
+				"PyMethodFlags": 24
+			},
+			{
+				"MethodName": "Cast",
+				"MethodDoc": "Cast(cls, type: Type[_ElemType], obj: object) -> Array[_ElemType] -- cast the given object to this Unreal array type",
+				"PyMethodFlags": 19
+			},
+			{
+				"MethodName": "__copy__",
+				"MethodDoc": "__copy__(self) -> Array[_ElemType] -- copy this Unreal array",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "Copy",
+				"MethodDoc": "Copy(self) -> Array[_ElemType] -- copy this Unreal array",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "Append",
+				"MethodDoc": "Append(self, value: _ElemType) -> None -- append the given value to the end of this Unreal array (equivalent to TArray::Add in C++)",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "Count",
+				"MethodDoc": "Count(self, value: _ElemType) -> int -- return the number of times that value appears in this this Unreal array",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "Extend",
+				"MethodDoc": "Extend(self, values: Iterable[_ElemType]) -> None -- extend this Unreal array by appending elements from the given iterable (equivalent to TArray::Append in C++)",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "Index",
+				"MethodDoc": "Index(self, value: _ElemType, start: int = 0, stop: int = -1) -> int -- get the index of the first matching value in this Unreal array, or raise ValueError if missing (equivalent to TArray::IndexOfByKey in C++)",
+				"PyMethodFlags": 3
+			},
+			{
+				"MethodName": "Insert",
+				"MethodDoc": "Insert(self, index: int, value: _ElemType) -> None -- insert the given value at the given index in this Unreal array",
+				"PyMethodFlags": 3
+			},
+			{
+				"MethodName": "Pop",
+				"MethodDoc": "Pop(self, index: int = -1) -> _ElemType -- remove and return the value at the given index in this Unreal array, or raise IndexError if the index is out-of-bounds",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "Clear",
+				"MethodDoc": "Clear(self) -> None -- remove all values from this Unreal array",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "Remove",
+				"MethodDoc": "Remove(self, value: _ElemType) -> None -- remove the first matching value in this Unreal array, or raise ValueError if missing",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "Reverse",
+				"MethodDoc": "Reverse(self) -> None -- reverse this Unreal array in-place",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "Sort",
+				"MethodDoc": "Sort(self, key: Optional[Callable[[_ElemType], object]]=None, reverse: bool=False) -> None -- stable sort this Unreal array in-place",
+				"PyMethodFlags": 3
+			},
+			{
+				"MethodName": "Resize",
+				"MethodDoc": "Resize(self, len: int) -> None -- resize this Unreal array to hold the given number of elements",
+				"PyMethodFlags": 1
+			}
+		]
+	},
+	"Set":
+	{
+		"NativeMethods": [
+			{
+				"MethodName": "__class_getitem__",
+				"MethodDoc": "__class_getitem__(cls, item: _ElemType) -- implemented for type hinting purpose only",
+				"PyMethodFlags": 24
+			},
+			{
+				"MethodName": "Cast",
+				"MethodDoc": "Cast(cls, type: Type[_ElemType], obj: object) -> Set[_ElemType] -- cast the given object to this Unreal set type",
+				"PyMethodFlags": 19
+			},
+			{
+				"MethodName": "__copy__",
+				"MethodDoc": "__copy__(self) -> Set[_ElemType] -- copy this Unreal set",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "Copy",
+				"MethodDoc": "Copy(self) -> Set[_ElemType] -- copy this Unreal set",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "Add",
+				"MethodDoc": "Add(self, value: _ElemType) -> None -- add the given value to this Unreal set if not already present",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "Discard",
+				"MethodDoc": "Discard(self, value: _ElemType) -> None -- remove the given value from this Unreal set, or do nothing if not present",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "Remove",
+				"MethodDoc": "Remove(self, value: _ElemType) -> None -- remove the given value from this Unreal set, or raise KeyError if not present",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "Pop",
+				"MethodDoc": "Pop(self) -> _ElemType -- remove and return an arbitrary value from this Unreal set, or raise KeyError if the set is empty",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "Clear",
+				"MethodDoc": "Clear(self) -> None -- remove all values from this Unreal set",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "Difference",
+				"MethodDoc": "Difference(self, *iterable: Iterable[_ElemType]) -> Set[_ElemType] -- return the difference between this Unreal set and the other iterables passed for comparison (ie, all values that are in this set but not the others)",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "DifferenceUpdate",
+				"MethodDoc": "DifferenceUpdate(self, *iterables: Iterable[_ElemType]) -> None -- make this set the difference between this Unreal set and the other iterables passed for comparison (ie, all values that are in this set but not the others)",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "Intersection",
+				"MethodDoc": "Intersection(self, *iterables: Iterable[_ElemType]) -> Set[_ElemType] -- return the intersection between this Unreal set and the other iterables passed for comparison (ie, values that are common to all of the sets)",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "IntersectionUpdate",
+				"MethodDoc": "IntersectionUpdate(self, *iterables: Iterable[_ElemType]) -> None -- make this set the intersection between this Unreal set and the other iterables passed for comparison (ie, values that are common to all of the sets)",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "SymmetricDifference",
+				"MethodDoc": "SymmetricDifference(self, other: Iterable[_ElemType]) -> Set[_ElemType] -- return the symmetric difference between this Unreal set and another (ie, values that are in exactly one of the sets)",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "SymmetricDifferenceUpdate",
+				"MethodDoc": "SymmetricDifferenceUpdate(self, other: Iterable[_ElemType]) -> None -- make this set the symmetric difference between this Unreal set and another (ie, values that are in exactly one of the sets)",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "Union",
+				"MethodDoc": "Union(self, *iterables: Iterable[_ElemType]) -> Set[_ElemType] -- return the union between this Unreal set and the other iterables passed for comparison (ie, values that are in any set)",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "Update",
+				"MethodDoc": "Update(self, *iterables: Iterable[_ElemType]) -> None -- make this set the union between this Unreal set and the other iterables passed for comparison (ie, values that are in any set)",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "IsDisjoint",
+				"MethodDoc": "IsDisjoint(self, other: Iterable[_ElemType]) -> bool -- return True if there is a null intersection between this Unreal set and another",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "IsSubset",
+				"MethodDoc": "IsSubset(self, other: Iterable[_ElemType]) -> bool -- return True if another set contains this Unreal set",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "IsSuperset",
+				"MethodDoc": "IsSuperset(self, other: Iterable[_ElemType]) -> bool -- return True if this Unreal set contains another",
+				"PyMethodFlags": 1
+			}
+		]
+	},
+	"Map":
+	{
+		"NativeMethods": [
+			{
+				"MethodName": "__class_getitem__",
+				"MethodDoc": "__class_getitem__(cls, item:_KeyType) -- implemented for type hinting purpose only",
+				"PyMethodFlags": 24
+			},
+			{
+				"MethodName": "Cast",
+				"MethodDoc": "Cast(cls, key: Type[_KeyType], value: Type[_ValueType], obj: object) -> Map[_KeyType, _ValueType] -- cast the given object to this Unreal map type",
+				"PyMethodFlags": 19
+			},
+			{
+				"MethodName": "__copy__",
+				"MethodDoc": "__copy__(self) -> Map[_KeyType, _ValueType] -- copy this Unreal map",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "Copy",
+				"MethodDoc": "Copy(self) -> Map[_KeyType, _ValueType] -- copy this Unreal map",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "Clear",
+				"MethodDoc": "Clear(self) -> None -- remove all items from this Unreal map",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "FromKeys",
+				"MethodDoc": "FromKeys(cls, sequence: Iterable[_KeyType], value: _ValueType) -> Map[_KeyType, _ValueType] -- returns a new Unreal map of keys from the sequence using the given value (types are inferred)",
+				"PyMethodFlags": 19
+			},
+			{
+				"MethodName": "Get",
+				"MethodDoc": "Get(self, key: _KeyType, default: _ValueType=...) -> _ValueType -- x[key] if key in x, otherwise default",
+				"PyMethodFlags": 3
+			},
+			{
+				"MethodName": "SetDefault",
+				"MethodDoc": "SetDefault(self, key: _KeyType, default: _ValueType=...) -> _ValueType -- set key to default if key not in x and return the value of key",
+				"PyMethodFlags": 3
+			},
+			{
+				"MethodName": "Pop",
+				"MethodDoc": "Pop(self, key: _KeyType, default: _ValueType=...) -> _ValueType -- remove key and return its value, or default if key not present, or raise KeyError if no default",
+				"PyMethodFlags": 3
+			},
+			{
+				"MethodName": "PopItem",
+				"MethodDoc": "PopItem(self) -> tuple[_KeyType, _ValueType] -- remove and return an arbitrary pair from this Unreal map, or raise KeyError if the map is empty",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "Update",
+				"MethodDoc": "Update(self, pairs: Union[dict[_KeyType, _ValueType], Iterable[tuple[_KeyType, _ValueType]], Iterable[list[Union[_KeyType, _ValueType]]]]) -> None -- update this Unreal map from the given mapping or sequence pairs type or key->value arguments",
+				"PyMethodFlags": 3
+			},
+			{
+				"MethodName": "Items",
+				"MethodDoc": "Items(self) -> ItemsView[_KeyType, _ValueType] -- a set-like view of the key->value pairs of this Unreal map",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "Keys",
+				"MethodDoc": "Keys(self) -> KeysView[_KeyType] -- a set-like view of the keys of this Unreal map",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "Values",
+				"MethodDoc": "Values(self) -> ValuesView[_ValueType] -- a view of the values of this Unreal map",
+				"PyMethodFlags": 4
+			}
+		]
+	},
+	"FixedArray":
+	{
+		"NativeMethods": [
+			{
+				"MethodName": "__class_getitem__",
+				"MethodDoc": "__class_getitem__(cls, item: _ElemType) -- implemented for type hinting purpose only",
+				"PyMethodFlags": 24
+			},
+			{
+				"MethodName": "Cast",
+				"MethodDoc": "Cast(cls, type: Type[_ElemType], obj: object) -> FixedArray[_ElemType] -- cast the given object to this Unreal fixed-array type",
+				"PyMethodFlags": 19
+			},
+			{
+				"MethodName": "__copy__",
+				"MethodDoc": "__copy__(self) -> FixedArray[_ElemType] -- copy this Unreal fixed-array",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "Copy",
+				"MethodDoc": "Copy(self) -> FixedArray[_ElemType] -- copy this Unreal fixed-array",
+				"PyMethodFlags": 4
+			}
+		]
+	},
+	"FieldPath":
+	{
+		"NativeMethods": [
+			{
+				"MethodName": "Cast",
+				"MethodDoc": "Cast(cls, obj: object) -> FieldPath -- cast the given object to this Unreal field path type",
+				"PyMethodFlags": 17
+			},
+			{
+				"MethodName": "__copy__",
+				"MethodDoc": "__copy__(self) -> FieldPath -- copy this Unreal field path",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "Copy",
+				"MethodDoc": "Copy(self) -> FieldPath -- copy this Unreal field path",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "IsValid",
+				"MethodDoc": "IsValid(self) -> bool -- whether this Unreal field path refers to an existing Unreal field",
+				"PyMethodFlags": 4
+			}
+		]
+	},
+	"DelegateBase":
+	{
+		"NativeMethods": [
+			{
+				"MethodName": "Cast",
+				"MethodDoc": "Cast(cls: Type[_T], object: object) -> _T -- cast the given object to this Unreal delegate type",
+				"PyMethodFlags": 17
+			},
+			{
+				"MethodName": "IsBound",
+				"MethodDoc": "IsBound(self) -> bool -- is this Unreal delegate bound to something?",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "BindFunction",
+				"MethodDoc": "BindFunction(self, obj: Object, name: str) -> None -- bind this Unreal delegate to a named Unreal function on the given object instance",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "Bind",
+				"MethodDoc": "Bind(self, callable: Callable[..., Any]) -> None -- bind this Unreal delegate to a Python callable",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "Unbind",
+				"MethodDoc": "Unbind(self) -> None -- unbind this Unreal delegate",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "Execute",
+				"MethodDoc": "Execute(self, *args: Any) -> Any -- call this Unreal delegate, but error if it's unbound",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "ExecuteIfBound",
+				"MethodDoc": "ExecuteIfBound(self, *args: Any) -> Any -- call this Unreal delegate, but only if it's bound to something",
+				"PyMethodFlags": 1
+			}
+		]
+	},
+	"MulticastDelegateBase":
+	{
+		"NativeMethods": [
+			{
+				"MethodName": "Cast",
+				"MethodDoc": "Cast(cls: Type[_T], object: object) -> _T -- cast the given object to this Unreal delegate type",
+				"PyMethodFlags": 17
+			},
+			{
+				"MethodName": "IsBound",
+				"MethodDoc": "IsBound(self) -> bool -- is this Unreal delegate bound to something?",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "AddFunction",
+				"MethodDoc": "AddFunction(self, obj: Object, name: str) -> None -- add a binding to a named Unreal function on the given object instance to the invocation list of this Unreal delegate",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "Add",
+				"MethodDoc": "Add(self, callable: Callable[..., Any]) -> None -- add a binding to a Python callable to the invocation list of this Unreal delegate",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "AddFunctionUnique",
+				"MethodDoc": "AddFunctionUnique(self, obj: Object, name: str) -> None -- add a unique binding to a named Unreal function on the given object instance to the invocation list of this Unreal delegate",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "AddUnique",
+				"MethodDoc": "AddUnique(self, callable: Callable[..., Any]) -> None -- add a unique binding to a Python callable to the invocation list of this Unreal delegate",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "RemoveFunction",
+				"MethodDoc": "RemoveFunction(self, obj: Object, name: str) -> None -- remove a binding to a named Unreal function on the given object instance from the invocation list of this Unreal delegate",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "Remove",
+				"MethodDoc": "Remove(self, callable: Callable[..., Any]) -> None -- remove a binding to a Python callable from the invocation list of this Unreal delegate",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "RemoveObject",
+				"MethodDoc": "RemoveObject(self, obj: Object) -> None -- remove all bindings for the given object instance from the invocation list of this Unreal delegate",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "ContainsFunction",
+				"MethodDoc": "ContainsFunction(self, obj: Object, name: str) -> bool -- does the invocation list of this Unreal delegate contain a binding to a named Unreal function on the given object instance",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "Contains",
+				"MethodDoc": "Contains(self, callable: Callable[..., Any]) -> bool -- does the invocation list of this Unreal delegate contain a binding to a Python callable",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "Clear",
+				"MethodDoc": "x.Clear() -> None -- clear the invocation list of this Unreal delegate",
+				"PyMethodFlags": 4
+			},
+			{
+				"MethodName": "Broadcast",
+				"MethodDoc": "x.Broadcast(*args: Any) -> None -- invoke this Unreal multicast delegate",
+				"PyMethodFlags": 1
+			}
+		]
+	}
+}

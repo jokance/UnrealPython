@@ -1,0 +1,175 @@
+{
+    "CommentStart": "注释开始===================",
+    "IncludeProperties": "若设置，仅导出这些属性；否则导出所有属性，除非在ExcludeProperties中排除。",
+    "IncludeMethods": "若设置，仅导出这些方法；否则导出所有方法，除非在ExcludeMethods中排除。",
+    "ExcludeProperties": "排除导出这些属性。",
+    "ExcludeMethods": "排除导出这些方法。",
+    "IsInline": "设置IsInline为true的结构体会继承TUPyWrapperInlineStruct, 否则继承FUPyWrapperStruct。IsInline多数情况仅用于小型结构体，以减少内存分配开销。",
+    "ForceReflectionProperties": "对外部模块无法访问的属性，可以通过反射查找方式进行读写",
+    "ForceReflectionMethods": "对外部模块无法访问的方法，可以通过反射查找方式进行调用",
+    "CommentEnd": "注释结束==========================",
+
+    "StubFilePath": "../../../../.idea/intellisense/pystubs/ue/__init__.pyi",
+    "GameExportPath": "Source/SampleGame/Public/UPy/Wrapper/AutoGen",
+    "ExportToGameModules": ["AkAudio"],
+
+    "AutoGenClasses": {
+        "Actor": {
+            "ExcludeProperties": ["MinNetUpdateFrequency", "NetCullDistanceSquared", "NetUpdateFrequency"]
+        },
+        "Pawn": {
+            "ExcludeMethods": ["IsControlled"],
+            "ExcludeProperties": ["RemoteViewPitch"]
+        },
+        "Character": {
+            "ExcludeMethods": [
+                "ClientAckGoodMove",
+                "ClientAdjustPosition",
+                "ClientAdjustRootMotionPosition",
+                "ClientAdjustRootMotionSourcePosition",
+                "ClientVeryShortAdjustPosition",
+                "ServerMove",
+                "ServerMoveDual",
+                "ServerMoveDualHybridRootMotion",
+                "ServerMoveDualNoBase",
+                "ServerMoveNoBase",
+                "ServerMoveOld"
+            ]
+        },
+        "PlayerController": {
+            "ExcludeMethods": [
+                "GetDeprecatedInputPitchScale",
+                "GetDeprecatedInputRollScale",
+                "GetDeprecatedInputYawScale",
+                "SetDeprecatedInputPitchScale",
+                "SetDeprecatedInputRollScale",
+                "SetDeprecatedInputYawScale"
+            ]
+        },
+        "PlayerCameraManager": {},
+        "GameInstance": {},
+        "World": {},
+        "GameModeBase": {},
+        "ActorComponent": {},
+        "SceneComponent": {
+            "ExcludeMethods": ["DetachFromParent", "K2_AttachTo"]
+        },
+        "PrimitiveComponent": {
+            "ExcludeProperties": ["LightmapType"]
+        },
+        "StaticMeshComponent": {},
+        "SkeletalMeshComponent": {
+            "ForceReflectionProperties": ["GlobalAnimRateScale", "ClothTeleportMode"],
+            "ExcludeProperties": ["AnimBlueprintGeneratedClass", "SubInstances", "ClothingSimulationFactory"],
+            "ExcludeMethods": ["GetDisableAnimCurves", "SetDisableAnimCurves"]
+        },
+        "GameplayStatics": {
+            "ForceReflectionMethods": ["BlueprintSuggestProjectileVelocity"]
+        },
+        "KismetSystemLibrary": {
+            "ExcludeMethods": ["StackTrace", "RaiseScriptError", "GetStructTopLevelAssetPath", "GetEnumTopLevelAssetPath", "IsObjectOfSoftClass", "GetCollisionProfileNames"]
+        },
+        "KismetMathLibrary": {},
+        "InputSettings": {},
+        "FXSystemComponent": {},
+        "ParticleSystemComponent": {},
+
+        "Widget": {
+            "ExcludeProperties": [
+                "Clipping",
+                "Cursor",
+                "FlowDirectionPreference",
+                "RenderTransform",
+                "RenderTransformPivot",
+                "ToolTipText",
+                "ToolTipWidget",
+                "Visibility",
+                "bIsEnabled"
+            ]
+        },
+        "UserWidget": {
+            "ExcludeProperties": [
+                "ActiveSequencePlayers",
+                "ColorAndOpacity",
+                "ForegroundColor",
+                "Padding",
+                "Priority",
+                "StoppedSequencePlayers",
+                "bIsFocusable",
+                "bStopAction"
+            ]
+        },
+        "ListViewBase": {
+			"ExcludeMethods": ["CreateDragDropOperation"]
+		},
+        "ListView": {},
+        "ProgressBar": {
+            "ExcludeProperties": [
+                "BarFillStyle",
+                "BarFillType",
+                "BorderPadding",
+                "FillColorAndOpacity",
+                "Percent",
+                "WidgetStyle",
+                "bIsMarquee"
+            ]
+        },
+        "GameViewportSubsystem": {},
+
+
+        "TriggerBase": {},
+        "SphereComponent": {},
+        "BoxComponent": {},
+
+        "SlateBlueprintLibrary": {}
+    },
+
+    "AutoGenStructs": {
+        "Vector": {
+            "IsInline": true
+        },
+        "Rotator": {
+            "IsInline": true
+        },
+        "Transform": {
+            "IsInline": true,
+            "ExcludeProperties": ["Rotation", "Translation", "Scale3D"]
+        },
+        "Quat": {
+            "IsInline": true
+        },
+        "Vector2D": {
+            "IsInline": true
+        },
+        "Color": {
+            "IsInline": true
+        },
+        "LinearColor": {
+            "IsInline": true
+        },
+        "HitResult": {},
+        "Key": {
+            "IsInline": true
+        },
+        "Guid": {
+            "IsInline": true
+        },
+        "Box": {
+            "IsInline": true
+        },
+        "Box2D": {
+            "IsInline": true
+        },
+        "Matrix": {
+            "IsInline": true,
+            "ExcludeProperties": ["XPlane", "YPlane", "ZPlane", "WPlane"]
+        },
+        "SoftObjectPath": {
+            "ExcludeProperties": ["AssetPath", "SubPathString"]
+        },
+        "SoftClassPath": {},
+        "SlateColor": {},
+        "Geometry": {},
+        "Vector2f": {}
+    }
+}

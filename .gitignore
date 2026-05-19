@@ -1,0 +1,14 @@
+Binaries/
+Build/
+DerivedDataCache/
+Intermediate/
+Saved/
+.vs/
+*.xcworkspace
+.idea/
+obj/
+*.DotSettings.user
+*.pyc
+*.sln
+unreal.json
+*.csproj.props
