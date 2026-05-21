@@ -1,4 +1,3 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "Wrapper/UPyWrapperBase.h"
 #include "Core/UPyGIL.h"

@@ -1,4 +1,3 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "DynamicTypes/UPyDynamicTypeFactory.h"
 #include "DynamicTypes/UPyGeneratedWrappedClassType.h"

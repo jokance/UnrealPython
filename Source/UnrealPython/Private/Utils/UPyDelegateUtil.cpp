@@ -1,4 +1,3 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "Utils/UPyDelegateUtil.h"
 #include "Utils/UPyUtil.h"

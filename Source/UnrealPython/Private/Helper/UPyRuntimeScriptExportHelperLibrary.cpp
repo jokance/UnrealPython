@@ -1,4 +1,3 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "Helper/UPyRuntimeScriptExportHelperLibrary.h"
 #include "Blueprint/UserWidget.h"

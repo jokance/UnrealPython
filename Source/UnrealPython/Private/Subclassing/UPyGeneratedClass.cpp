@@ -1,4 +1,3 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "Subclassing/UPyGeneratedClass.h"
 #include "Wrapper/UPyWrapperTypeRegistry.h"

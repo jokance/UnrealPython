@@ -1,4 +1,3 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "PyGameFramework/UPyGameInstance.h"
 #include "Core/UPyGIL.h"

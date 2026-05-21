@@ -1,4 +1,3 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "Subclassing/UPyGeneratedStruct.h"
 #include "Core/UPyGIL.h"
