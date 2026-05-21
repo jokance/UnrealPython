@@ -116,7 +116,30 @@ public class UnrealPython : ModuleRules
 
 	private void ConfigureMacPython(ReadOnlyTargetRules Target, string ThirdPartyPath)
 	{
-		// PublicAdditionalLibraries.Add(Path.Combine(ThirdPartyPath, PythonVersion, "Mac", "libs", $"{PythonVersion}.lib"));
+		string MacPythonPath = Path.Combine(ThirdPartyPath, PythonVersion, "Mac");
+		string MacLibPath = Path.Combine(MacPythonPath, "lib");
+		string PythonDylibPath = Path.Combine(MacLibPath, "libpython3.14.dylib");
+		string PythonStdLibPath = Path.Combine(MacLibPath, "python3.14");
+
+		PublicIncludePaths.Add(Path.Combine(MacPythonPath, "include"));
+		PublicAdditionalLibraries.Add(PythonDylibPath);
+		PublicSystemLibraries.Add("dl");
+		PublicFrameworks.Add("CoreFoundation");
+
+		string RuntimeOutputDir = Target.bBuildEditor ? "$(BinaryOutputDir)" : "$(TargetOutputDir)";
+		RuntimeDependencies.Add(Path.Combine(RuntimeOutputDir, "libpython3.14.dylib"), PythonDylibPath);
+
+		foreach (string RuntimeFile in Directory.EnumerateFiles(PythonStdLibPath, "*", SearchOption.AllDirectories))
+		{
+			FileAttributes RuntimeFileAttributes = File.GetAttributes(RuntimeFile);
+			if (RuntimeFile.EndsWith(".pyc") || (RuntimeFileAttributes & FileAttributes.ReparsePoint) != 0)
+			{
+				continue;
+			}
+
+			string RelativePath = Path.GetRelativePath(PythonStdLibPath, RuntimeFile);
+			RuntimeDependencies.Add(Path.Combine(RuntimeOutputDir, "python3.14", RelativePath), RuntimeFile);
+		}
 	}
 
 	private void ConfigureIOSPython(ReadOnlyTargetRules Target, string ThirdPartyPath)

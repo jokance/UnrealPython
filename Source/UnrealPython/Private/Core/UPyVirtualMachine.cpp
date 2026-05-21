@@ -1,6 +1,7 @@
 
 #include "UPyVirtualMachine.h"
 #include "UPySettings.h"
+#include "Interfaces/IPluginManager.h"
 #include "Misc/PackageName.h"
 
 FUPyVirtualMachine& FUPyVirtualMachine::Get()
@@ -112,6 +113,27 @@ void FUPyVirtualMachine::ConfigureSearchPaths(PyConfig& PythonConfig)
 	const UUPySettings* PySettings = GetDefault<UUPySettings>();
 
 	const FString ScriptPath = GetPythonScriptPath();
+
+#if PLATFORM_MAC
+	if (TSharedPtr<IPlugin> Plugin = IPluginManager::Get().FindPlugin(TEXT("UnrealPython")))
+	{
+		const FString PluginBaseDir = Plugin->GetBaseDir();
+		const TArray<FString> BundledPythonPaths = {
+			FPaths::Combine(PluginBaseDir, TEXT("ThirdParty/python314/Mac/lib/python3.14")),
+			FPaths::Combine(PluginBaseDir, TEXT("ThirdParty/python314/Mac/lib/python3.14/lib-dynload")),
+			FPaths::Combine(PluginBaseDir, TEXT("Binaries/Mac/python3.14")),
+			FPaths::Combine(PluginBaseDir, TEXT("Binaries/Mac/python3.14/lib-dynload"))
+		};
+
+		for (const FString& BundledPythonPath : BundledPythonPaths)
+		{
+			if (FPaths::DirectoryExists(BundledPythonPath))
+			{
+				PyWideStringList_Append(&PythonConfig.module_search_paths, TCHAR_TO_WCHAR(*FPaths::ConvertRelativePathToFull(BundledPythonPath)));
+			}
+		}
+	}
+#endif
 
 	if (!ScriptPath.IsEmpty())
 	{

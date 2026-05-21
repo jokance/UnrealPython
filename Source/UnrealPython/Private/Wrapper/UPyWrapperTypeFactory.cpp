@@ -85,7 +85,7 @@ FUPyWrapperObjectBase* FUPyWrapperObjectFactory::CreateInstance(UObject* InUnrea
 	return CreateInstanceInternal(InUnrealInstance, PyType, [InUnrealInstance](FUPyWrapperObjectBase* InSelf)
 	{
 		return FUPyWrapperObjectBase::Init(InSelf, InUnrealInstance);
-	});
+	}, false);
 }
 
 FUPyWrapperObjectBase* FUPyWrapperObjectFactory::CreateInstance(const PyTypeObject* InPyType, UObject* InUnrealInstance)
@@ -98,7 +98,7 @@ FUPyWrapperObjectBase* FUPyWrapperObjectFactory::CreateInstance(const PyTypeObje
 	return CreateInstanceInternal(InUnrealInstance, InPyType, [InUnrealInstance](FUPyWrapperObjectBase* InSelf)
 	{
 		return FUPyWrapperObjectBase::Init(InSelf, InUnrealInstance);
-	});
+	}, false);
 }
 
 FUPyWrapperObjectBase* FUPyWrapperObjectFactory::CreateInstance(UClass* InInterfaceClass, UObject* InUnrealInstance)
@@ -112,7 +112,7 @@ FUPyWrapperObjectBase* FUPyWrapperObjectFactory::CreateInstance(UClass* InInterf
 	return CreateInstanceInternal(InUnrealInstance, PyType, [InUnrealInstance](FUPyWrapperObjectBase* InSelf)
 	{
 		return FUPyWrapperObjectBase::Init(InSelf, InUnrealInstance);
-	});
+	}, false);
 }
 
 void FUPyWrapperObjectFactory::AddOwnedPyProp(UObject* InUnrealInstance, FUPyWrapperBase* PyProp)

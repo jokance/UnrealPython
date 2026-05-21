@@ -1394,94 +1394,6 @@ struct FMethods_ListView
 		return UPyConversion::Pythonize(Result);
 	}
 
-	static PyObject* CallInsertItem(FUPyWrapperListView* InSelf, PyObject* InArgs)
-	{
-		if (!InSelf->ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		PyObject* PyArg0 = PyTuple_GetItem(InArgs, 0);
-		if (PyArg0 == nullptr)
-		{
-			return nullptr;
-		}
-		int32 Arg0 = 0;
-		if (!UPyConversion::Nativize(PyArg0, Arg0))
-		{
-			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("ListView::InsertItem"), TEXT("invalid argument"));
-			return nullptr;
-		}
-
-		PyObject* PyArg1 = PyTuple_GetItem(InArgs, 1);
-		if (PyArg1 == nullptr)
-		{
-			return nullptr;
-		}
-		UObject* Arg1 = nullptr;
-		if (!UPyConversion::Nativize(PyArg1, Arg1))
-		{
-			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("ListView::InsertItem"), TEXT("invalid argument"));
-			return nullptr;
-		}
-
-		InSelf->ValuePtr()->InsertItem(Arg0, Arg1);
-		Py_RETURN_NONE;
-	}
-
-	static PyObject* CallInsertListItems(FUPyWrapperListView* InSelf, PyObject* InArgs)
-	{
-		if (!InSelf->ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		PyObject* PyArg0 = PyTuple_GetItem(InArgs, 0);
-		if (PyArg0 == nullptr)
-		{
-			return nullptr;
-		}
-		TArray<UObject*> Arg0;
-		if (!PySequence_Check(PyArg0))
-		{
-			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("ListView::InsertListItems"), TEXT("invalid argument"));
-			return nullptr;
-		}
-		Py_ssize_t Len_Arg0 = PySequence_Size(PyArg0);
-		Arg0.SetNum(Len_Arg0);
-		for (Py_ssize_t i = 0; i < Len_Arg0; ++i)
-		{
-			PyObject* Item = PySequence_GetItem(PyArg0, i);
-			if (!Item)
-			{
-				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("ListView::InsertListItems"), TEXT("invalid argument"));
-				return nullptr;
-	
-			}
-			if (!UPyConversion::Nativize(Item, Arg0[i]))
-			{
-				Py_DECREF(Item);
-				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("ListView::InsertListItems"), TEXT("invalid argument"));
-				return nullptr;
-	
-			}
-			Py_DECREF(Item);
-		}
-
-		PyObject* PyArg1 = PyTuple_GetItem(InArgs, 1);
-		if (PyArg1 == nullptr)
-		{
-			return nullptr;
-		}
-		int32 Arg1 = 0;
-		if (!UPyConversion::Nativize(PyArg1, Arg1))
-		{
-			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("ListView::InsertListItems"), TEXT("invalid argument"));
-			return nullptr;
-		}
-
-		InSelf->ValuePtr()->InsertListItems(Arg0, Arg1);
-		Py_RETURN_NONE;
-	}
-
 	static PyObject* CallIsRefreshPending(FUPyWrapperListView* InSelf, PyObject* Py_UNUSED(InUnused))
 	{
 		if (!InSelf->ValidateInternalState(InSelf))
@@ -1737,8 +1649,6 @@ static PyMethodDef FUPyWrapperListViewPyMethodDefs[] = {
 	{ "GetNumItems", UPyCFunctionCast(&FMethods_ListView::CallGetNumItems), METH_NOARGS, nullptr },
 	{ "GetScrollBarPadding", UPyCFunctionCast(&FMethods_ListView::CallGetScrollBarPadding), METH_NOARGS, nullptr },
 	{ "GetVerticalEntrySpacing", UPyCFunctionCast(&FMethods_ListView::CallGetVerticalEntrySpacing), METH_NOARGS, nullptr },
-	{ "InsertItem", UPyCFunctionCast(&FMethods_ListView::CallInsertItem), METH_VARARGS, nullptr },
-	{ "InsertListItems", UPyCFunctionCast(&FMethods_ListView::CallInsertListItems), METH_VARARGS, nullptr },
 	{ "IsRefreshPending", UPyCFunctionCast(&FMethods_ListView::CallIsRefreshPending), METH_NOARGS, nullptr },
 	{ "NavigateToIndex", UPyCFunctionCast(&FMethods_ListView::CallNavigateToIndex), METH_O, nullptr },
 	{ "OnListItemEndPlayed", UPyCFunctionCast(&FMethods_ListView::CallOnListItemEndPlayed), METH_VARARGS, nullptr },

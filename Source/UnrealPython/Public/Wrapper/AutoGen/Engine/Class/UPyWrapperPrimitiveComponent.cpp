@@ -2001,23 +2001,6 @@ struct FGetSets_PrimitiveComponent
 		return -1;
 	}
 
-	static PyObject* GetbUseLandscapeSurfaceShadow(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
-	{
-		return UPyConversion::Pythonize(InSelf->ValuePtr()->bUseLandscapeSurfaceShadow);
-	}
-
-	static int SetbUseLandscapeSurfaceShadow(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
-	{
-		bool bTemp = false;
-		if (UPyConversion::Nativize(InValue, bTemp))
-		{
-			InSelf->ValuePtr()->bUseLandscapeSurfaceShadow = bTemp;
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("PrimitiveComponent::bUseLandscapeSurfaceShadow"), TEXT("value is not bool"));
-		return -1;
-	}
-
 	static PyObject* GetbUseViewOwnerDepthPriorityGroup(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bUseViewOwnerDepthPriorityGroup);
@@ -2232,7 +2215,6 @@ static PyGetSetDef FUPyWrapperPrimitiveComponentGetSets[] = {
 	{ UPyCStrCast("bTreatAsBackgroundForOcclusion"), (getter)&FGetSets_PrimitiveComponent::GetbTreatAsBackgroundForOcclusion, (setter)&FGetSets_PrimitiveComponent::SetbTreatAsBackgroundForOcclusion, nullptr, nullptr },
 	{ UPyCStrCast("bUseAsOccluder"), (getter)&FGetSets_PrimitiveComponent::GetbUseAsOccluder, (setter)&FGetSets_PrimitiveComponent::SetbUseAsOccluder, nullptr, nullptr },
 	{ UPyCStrCast("bUseEditorCompositing"), (getter)&FGetSets_PrimitiveComponent::GetbUseEditorCompositing, (setter)&FGetSets_PrimitiveComponent::SetbUseEditorCompositing, nullptr, nullptr },
-	{ UPyCStrCast("bUseLandscapeSurfaceShadow"), (getter)&FGetSets_PrimitiveComponent::GetbUseLandscapeSurfaceShadow, (setter)&FGetSets_PrimitiveComponent::SetbUseLandscapeSurfaceShadow, nullptr, nullptr },
 	{ UPyCStrCast("bUseViewOwnerDepthPriorityGroup"), (getter)&FGetSets_PrimitiveComponent::GetbUseViewOwnerDepthPriorityGroup, (setter)&FGetSets_PrimitiveComponent::SetbUseViewOwnerDepthPriorityGroup, nullptr, nullptr },
 	{ UPyCStrCast("bVisibleInRayTracing"), (getter)&FGetSets_PrimitiveComponent::GetbVisibleInRayTracing, (setter)&FGetSets_PrimitiveComponent::SetbVisibleInRayTracing, nullptr, nullptr },
 	{ UPyCStrCast("bVisibleInRealTimeSkyCaptures"), (getter)&FGetSets_PrimitiveComponent::GetbVisibleInRealTimeSkyCaptures, (setter)&FGetSets_PrimitiveComponent::SetbVisibleInRealTimeSkyCaptures, nullptr, nullptr },
