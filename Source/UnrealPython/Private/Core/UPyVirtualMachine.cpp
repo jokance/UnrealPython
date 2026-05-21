@@ -1,6 +1,7 @@
 
 #include "UPyVirtualMachine.h"
 #include "UPySettings.h"
+#include "HAL/PlatformProcess.h"
 #include "Interfaces/IPluginManager.h"
 #include "Misc/PackageName.h"
 
@@ -131,6 +132,28 @@ void FUPyVirtualMachine::ConfigureSearchPaths(PyConfig& PythonConfig)
 			{
 				PyWideStringList_Append(&PythonConfig.module_search_paths, TCHAR_TO_WCHAR(*FPaths::ConvertRelativePathToFull(BundledPythonPath)));
 			}
+		}
+	}
+#endif
+
+#if PLATFORM_IOS
+	const FString IOSBundleDir = FPlatformProcess::BaseDir();
+	const FString IOSPythonHome = FPaths::Combine(IOSBundleDir, TEXT("python"));
+	const TArray<FString> BundledPythonPaths = {
+		FPaths::Combine(IOSPythonHome, TEXT("lib/python3.14")),
+		FPaths::Combine(IOSPythonHome, TEXT("lib/python3.14/lib-dynload"))
+	};
+
+	if (FPaths::DirectoryExists(IOSPythonHome))
+	{
+		PyConfig_SetString(&PythonConfig, &PythonConfig.home, TCHAR_TO_WCHAR(*FPaths::ConvertRelativePathToFull(IOSPythonHome)));
+	}
+
+	for (const FString& BundledPythonPath : BundledPythonPaths)
+	{
+		if (FPaths::DirectoryExists(BundledPythonPath))
+		{
+			PyWideStringList_Append(&PythonConfig.module_search_paths, TCHAR_TO_WCHAR(*FPaths::ConvertRelativePathToFull(BundledPythonPath)));
 		}
 	}
 #endif

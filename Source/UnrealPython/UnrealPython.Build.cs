@@ -144,6 +144,19 @@ public class UnrealPython : ModuleRules
 
 	private void ConfigureIOSPython(ReadOnlyTargetRules Target, string ThirdPartyPath)
 	{
-		PublicAdditionalLibraries.Add(Path.Combine(ThirdPartyPath, PythonVersion, "IOS", "libs", $"{PythonVersion}.lib"));
+		string IOSPythonPath = Path.Combine(ThirdPartyPath, PythonVersion, "IOS");
+		string PythonXCFrameworkPath = Path.Combine(IOSPythonPath, "Python.xcframework");
+		string PythonXCFrameworkRelativePath = Path.Combine("..", "..", "ThirdParty", PythonVersion, "IOS", "Python.xcframework");
+		string PythonHeadersPath = Path.Combine(PythonXCFrameworkPath, "ios-arm64_x86_64-simulator", "Python.framework", "Headers");
+		string PythonRuntimePath = Path.Combine(IOSPythonPath, "Runtime");
+		string PlatformRuntimeName = Target.Architecture == UnrealArch.IOSSimulator ? "IOSSimulator" : "IOSDevice";
+
+		PublicIncludePaths.Add(PythonHeadersPath);
+		PublicAdditionalFrameworks.Add(new Framework("Python", PythonXCFrameworkRelativePath, Framework.FrameworkMode.LinkAndCopy));
+		PublicFrameworks.Add("CoreFoundation");
+		PublicSystemLibraries.Add("dl");
+
+		AdditionalBundleResources.Add(new BundleResource(Path.Combine(PythonRuntimePath, PlatformRuntimeName, "python")));
+		AdditionalBundleResources.Add(new BundleResource(Path.Combine(PythonRuntimePath, PlatformRuntimeName, "Frameworks")));
 	}
 }
