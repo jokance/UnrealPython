@@ -172,9 +172,6 @@ void FUPyVirtualMachine::ConfigureSearchPaths(PyConfig& PythonConfig)
 		PyWideStringList_Append(&PythonConfig.module_search_paths, TCHAR_TO_WCHAR(*AbsoluteScriptDir));
 	}
 
-
-
-
 	UE_LOG(LogUnrealPython, Log, TEXT("ConfigureSearchPaths--------: %s"), *FPaths::ProjectUserDir());
 }
 
@@ -186,7 +183,7 @@ FString FUPyVirtualMachine::GetPythonScriptPath()
 		return FPaths::ConvertRelativePathToFull(FPaths::Combine(*FPaths::ProjectDir(), OverridePath));
 	}
 
-	return TEXT(""); // FPaths::ConvertRelativePathToFull(FPaths::Combine(*FPaths::ProjectContentDir(), TEXT("Scripts")));
+	return FPaths::ConvertRelativePathToFull(FPaths::Combine(*FPaths::ProjectContentDir(), TEXT("Scripts")));
 }
 
 void FUPyVirtualMachine::SetPythonSysArgv()
