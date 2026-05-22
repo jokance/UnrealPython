@@ -7,6 +7,7 @@
 #include "Core/UPyGIL.h"
 #include "Wrapper/UPyWrapperObjectBase.h"
 #include "Wrapper/UPyWrapperTypeFactory.h"
+#include "HAL/PlatformFileManager.h"
 
 UUPyManager* UUPyManager::Get()
 {

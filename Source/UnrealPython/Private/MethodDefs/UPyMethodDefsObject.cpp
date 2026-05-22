@@ -6,6 +6,7 @@
 #include "Core/UPyConversion.h"
 #include "Core/UPyPtr.h"
 #include "Wrapper/UPyWrapperTypeRegistry.h"
+#include "Engine/World.h"
 
 struct FMethods_WrapperObjectBase
 {

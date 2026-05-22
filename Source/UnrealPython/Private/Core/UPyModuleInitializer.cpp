@@ -2,6 +2,7 @@
 #include "UPyModuleInitializer.h"
 #include "Core/UPyPtr.h"
 #include "Core/UPyCore.h"
+#include "Engine/BlueprintGeneratedClass.h"
 #include "Engine/UserDefinedEnum.h"
 #include "StructUtils/UserDefinedStruct.h"
 #include "Utils/UPyGenUtil.h"

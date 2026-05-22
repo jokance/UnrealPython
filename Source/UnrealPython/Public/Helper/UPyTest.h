@@ -2,6 +2,7 @@
 #pragma once
 
 #include "Helper/UPyTestInterface.h"
+#include "Kismet/BlueprintFunctionLibrary.h"
 #include "UPyTest.generated.h"
 
 /**
