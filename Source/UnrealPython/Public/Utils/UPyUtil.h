@@ -440,6 +440,9 @@ namespace UPyUtil
 	/** Validate that the given Python object is valid for the 'len' parameter used by containers */
 	int ValidateContainerLenParam(PyObject* InPyObj, int32 &OutLen, const char* InPythonArgName, const TCHAR* InErrorCtxt);
 
+	/** Validate that a Python sequence length fits in an Unreal container */
+	int ValidateContainerLenValue(Py_ssize_t InLen, int32& OutLen, const TCHAR* InErrorCtxt);
+
 	/** Validate that the given index is valid for the container length */
 	int ValidateContainerIndexParam(const Py_ssize_t InIndex, const Py_ssize_t InLen, const FProperty* InProp, const TCHAR* InErrorCtxt);
 

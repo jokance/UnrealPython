@@ -35,7 +35,7 @@ struct FMethods_WrapperMap
 			}
 
 			PyObject* PyCastResult = (PyObject*)FUPyWrapperMap::CastPyObject(PyObj, InType, MapKeyDef, MapValueDef);
-			if (!PyCastResult)
+			if (!PyCastResult && !PyErr_Occurred())
 			{
 				UPyUtil::SetPythonError(PyExc_TypeError, InType, *FString::Printf(TEXT("Cannot cast type '%s' to '%s'"), *UPyUtil::GetFriendlyTypename(PyObj), *UPyUtil::GetFriendlyTypename(InType)));
 			}

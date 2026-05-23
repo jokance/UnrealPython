@@ -735,6 +735,27 @@ int ValidateContainerLenParam(PyObject* InPyObj, int32 &OutLen, const char* InPy
 	return 0;
 }
 
+int ValidateContainerLenValue(const Py_ssize_t InLen, int32& OutLen, const TCHAR* InErrorCtxt)
+{
+	if (InLen < 0)
+	{
+		if (!PyErr_Occurred())
+		{
+			SetPythonError(PyExc_Exception, InErrorCtxt, TEXT("Container length must be positive"));
+		}
+		return -1;
+	}
+
+	if (InLen > MAX_int32)
+	{
+		SetPythonError(PyExc_OverflowError, InErrorCtxt, *FString::Printf(TEXT("Container length %zd exceeds the maximum supported length %d"), InLen, MAX_int32));
+		return -1;
+	}
+
+	OutLen = static_cast<int32>(InLen);
+	return 0;
+}
+
 int ValidateContainerIndexParam(const Py_ssize_t InIndex, const Py_ssize_t InLen, const FProperty* InProp, const TCHAR* InErrorCtxt)
 {
 	if (InIndex < 0 || InIndex >= InLen)

@@ -30,7 +30,7 @@ struct FMethods_WrapperSet
 			}
 
 			PyObject* PyCastResult = (PyObject*)FUPyWrapperSet::CastPyObject(PyObj, InType, SetElementDef);
-			if (!PyCastResult)
+			if (!PyCastResult && !PyErr_Occurred())
 			{
 				UPyUtil::SetPythonError(PyExc_TypeError, InType, *FString::Printf(TEXT("Cannot cast type '%s' to '%s'"), *UPyUtil::GetFriendlyTypename(PyObj), *UPyUtil::GetFriendlyTypename(InType)));
 			}

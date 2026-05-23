@@ -369,7 +369,8 @@ FUPyWrapperArray* FUPyWrapperArray::CastPyObject(PyObject* InPyObject, PyTypeObj
 	if (!UPyUtil::IsMappingType(InPyObject))
 	{
 		const Py_ssize_t SequenceLen = PyObject_Length(InPyObject);
-		if (SequenceLen != -1)
+		int32 ElementCount = 0;
+		if (UPyUtil::ValidateContainerLenValue(SequenceLen, ElementCount, *UPyUtil::GetErrorContext(InType)) == 0)
 		{
 				FUPyObjectPtr PyObjIter = FUPyObjectPtr::StealReference(PyObject_GetIter(InPyObject));
 			if (PyObjIter)
@@ -381,9 +382,9 @@ FUPyWrapperArray* FUPyWrapperArray::CastPyObject(PyObject* InPyObject, PyTypeObj
 				}
 
 				FScriptArrayHelper NewScriptArrayHelper(NewArray->ArrayProp, NewArray->ArrayInstance);
-				NewScriptArrayHelper.Resize(SequenceLen);
+				NewScriptArrayHelper.Resize(ElementCount);
 
-				for (Py_ssize_t SequenceIndex = 0; SequenceIndex < SequenceLen; ++SequenceIndex)
+				for (int32 SequenceIndex = 0; SequenceIndex < ElementCount; ++SequenceIndex)
 				{
 					FUPyObjectPtr SequenceItem = FUPyObjectPtr::StealReference(PyIter_Next(PyObjIter));
 					if (!SequenceItem)

@@ -703,7 +703,8 @@ FUPyWrapperMap* FUPyWrapperMap::CastPyObject(PyObject* InPyObject, PyTypeObject*
 	if (UPyUtil::HasLength(InPyObject))
 	{
 		const Py_ssize_t SequenceLen = PyObject_Length(InPyObject);
-		if (SequenceLen != -1)
+		int32 ElementCount = 0;
+		if (UPyUtil::ValidateContainerLenValue(SequenceLen, ElementCount, *UPyUtil::GetErrorContext(InType)) == 0)
 		{
 			FUPyObjectPtr PyObjIter = FUPyObjectPtr::StealReference(PyObject_GetIter(InPyObject));
 			if (PyObjIter)
@@ -719,7 +720,7 @@ FUPyWrapperMap* FUPyWrapperMap::CastPyObject(PyObject* InPyObject, PyTypeObject*
 				if (UPyUtil::IsMappingType(InPyObject))
 				{
 					// Conversion from a mapping type
-					for (Py_ssize_t SequenceIndex = 0; SequenceIndex < SequenceLen; ++SequenceIndex)
+					for (int32 SequenceIndex = 0; SequenceIndex < ElementCount; ++SequenceIndex)
 					{
 						FUPyObjectPtr KeyItem = FUPyObjectPtr::StealReference(PyIter_Next(PyObjIter));
 						if (!KeyItem)
@@ -747,7 +748,7 @@ FUPyWrapperMap* FUPyWrapperMap::CastPyObject(PyObject* InPyObject, PyTypeObject*
 				else
 				{
 					// Conversion from a sequence of pairs
-					for (Py_ssize_t SequenceIndex = 0; SequenceIndex < SequenceLen; ++SequenceIndex)
+					for (int32 SequenceIndex = 0; SequenceIndex < ElementCount; ++SequenceIndex)
 					{
 						FUPyObjectPtr PairItem = FUPyObjectPtr::StealReference(PyIter_Next(PyObjIter));
 						if (!PairItem)
@@ -1100,7 +1101,13 @@ PyObject* FUPyWrapperMap::Values(FUPyWrapperMap* InSelf)
 FUPyWrapperMap* FUPyWrapperMap::FromKeys(PyObject* InSequence, PyObject* InValue, PyTypeObject* InType)
 {
 	const Py_ssize_t SequenceLen = PyObject_Length(InSequence);
-	if (SequenceLen <= 0)
+	int32 ElementCount = 0;
+	if (UPyUtil::ValidateContainerLenValue(SequenceLen, ElementCount, *UPyUtil::GetErrorContext(InType)) != 0)
+	{
+		return nullptr;
+	}
+
+	if (ElementCount == 0)
 	{
 		UPyUtil::SetPythonError(PyExc_Exception, InType, *FString::Printf(TEXT("'sequence' (%s) cannot be empty"), *UPyUtil::GetFriendlyTypename(InSequence)));
 		return nullptr;
@@ -1121,7 +1128,7 @@ FUPyWrapperMap* FUPyWrapperMap::FromKeys(PyObject* InSequence, PyObject* InValue
 	}
 
 	FUPyWrapperMapPtr NewMap;
-	for (Py_ssize_t SequenceIndex = 0; SequenceIndex < SequenceLen; ++SequenceIndex)
+	for (int32 SequenceIndex = 0; SequenceIndex < ElementCount; ++SequenceIndex)
 	{
 		FUPyObjectPtr PyKeyItem = FUPyObjectPtr::StealReference(PyIter_Next(PySequenceIter));
 		if (!PyKeyItem)

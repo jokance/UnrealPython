@@ -333,18 +333,19 @@ FUPyWrapperFixedArray* FUPyWrapperFixedArray::CastPyObject(PyObject* InPyObject,
 	if (!UPyUtil::IsMappingType(InPyObject))
 	{
 		const Py_ssize_t SequenceLen = PyObject_Length(InPyObject);
-		if (SequenceLen != -1)
+		int32 ElementCount = 0;
+		if (UPyUtil::ValidateContainerLenValue(SequenceLen, ElementCount, *UPyUtil::GetErrorContext(InType)) == 0)
 		{
 			FUPyObjectPtr PyObjIter = FUPyObjectPtr::StealReference(PyObject_GetIter(InPyObject));
 			if (PyObjIter)
 			{
 				FUPyWrapperFixedArrayPtr NewArray = FUPyWrapperFixedArrayPtr::StealReference(FUPyWrapperFixedArray::New(InType));
-				if (FUPyWrapperFixedArray::Init(NewArray, InPropDef, SequenceLen) != 0)
+				if (FUPyWrapperFixedArray::Init(NewArray, InPropDef, ElementCount) != 0)
 				{
 					return nullptr;
 				}
 
-				for (Py_ssize_t SequenceIndex = 0; SequenceIndex < SequenceLen; ++SequenceIndex)
+				for (int32 SequenceIndex = 0; SequenceIndex < ElementCount; ++SequenceIndex)
 				{
 					FUPyObjectPtr SequenceItem = FUPyObjectPtr::StealReference(PyIter_Next(PyObjIter));
 					if (!SequenceItem)
