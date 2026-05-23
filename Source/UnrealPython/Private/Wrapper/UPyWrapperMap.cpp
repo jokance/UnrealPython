@@ -18,6 +18,14 @@ extern PyTypeObject PyWrapperMapKeyIteratorType;
 /** Python type for FPyWrapperMapValueIterator */
 extern PyTypeObject PyWrapperMapValueIteratorType;
 
+namespace
+{
+	bool IsSameMapInstance(const FUPyWrapperMap* InLhs, const FUPyWrapperMap* InRhs)
+	{
+		return InLhs == InRhs || (InLhs && InRhs && InLhs->MapInstance == InRhs->MapInstance && InLhs->MapProp.Get() == InRhs->MapProp.Get());
+	}
+}
+
 /** Python type for FPyWrapperMapItemView */
 extern PyTypeObject PyWrapperMapItemViewType;
 
@@ -1079,6 +1087,11 @@ int FUPyWrapperMap::Update(FUPyWrapperMap* InSelf, PyObject* InOther)
 	{
 		UPyUtil::SetPythonError(PyExc_TypeError, InSelf, *FString::Printf(TEXT("Cannot convert argument (%s) to '%s'"), *UPyUtil::GetFriendlyTypename(InOther), *UPyUtil::GetFriendlyTypename(InSelf)));
 		return -1;
+	}
+
+	if (IsSameMapInstance(InSelf, Other.GetPtr()))
+	{
+		return 0;
 	}
 
 	FScriptMapHelper SelfScriptMapHelper(InSelf->MapProp, InSelf->MapInstance);
