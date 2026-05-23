@@ -145,7 +145,10 @@ public:
 		// If NewClass is still set at this point, if means Finalize wasn't called and we should destroy the partially built class
 		if (NewClass)
 		{
+			NewClass->ClassFlags |= CLASS_NewerVersionExists | CLASS_TokenStreamAssembled;
+			NewClass->SetFlags(RF_BeingRegenerated | RF_NewerVersionExists);
 			NewClass->ClearFlags(RF_Public | RF_Standalone);
+			NewClass->MarkAsGarbage();
 			NewClass = nullptr;
 
 			Py_BEGIN_ALLOW_THREADS

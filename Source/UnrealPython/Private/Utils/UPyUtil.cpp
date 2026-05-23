@@ -417,6 +417,10 @@ bool CalculatePropertyDef(PyObject* InPyObj, FPropertyDef& OutPropertyDef)
 	if (PyObject_IsInstance(InPyObj, (PyObject*)&UPyWrapperArrayType) == 1)
 	{
 		FUPyWrapperArray* PyArray = (FUPyWrapperArray*)InPyObj;
+		if (!FUPyWrapperArray::ValidateInternalState(PyArray))
+		{
+			return false;
+		}
 		OutPropertyDef.PropertyClass = PyArray->ArrayProp->GetClass();
 		OutPropertyDef.ValueDef = MakeShared<FPropertyDef>(PyArray->ArrayProp->Inner);
 		return true;
@@ -425,6 +429,10 @@ bool CalculatePropertyDef(PyObject* InPyObj, FPropertyDef& OutPropertyDef)
 	if (PyObject_IsInstance(InPyObj, (PyObject*)&UPyWrapperSetType) == 1)
 	{
 		FUPyWrapperSet* PySet = (FUPyWrapperSet*)InPyObj;
+		if (!FUPyWrapperSet::ValidateInternalState(PySet))
+		{
+			return false;
+		}
 		OutPropertyDef.PropertyClass = PySet->SetProp->GetClass();
 		OutPropertyDef.ValueDef = MakeShared<FPropertyDef>(PySet->SetProp->ElementProp);
 		return true;
@@ -433,6 +441,10 @@ bool CalculatePropertyDef(PyObject* InPyObj, FPropertyDef& OutPropertyDef)
 	if (PyObject_IsInstance(InPyObj, (PyObject*)&UPyWrapperMapType) == 1)
 	{
 		FUPyWrapperMap* PyMap = (FUPyWrapperMap*)InPyObj;
+		if (!FUPyWrapperMap::ValidateInternalState(PyMap))
+		{
+			return false;
+		}
 		OutPropertyDef.PropertyClass = PyMap->MapProp->GetClass();
 		OutPropertyDef.KeyDef = MakeShared<FPropertyDef>(PyMap->MapProp->KeyProp);
 		OutPropertyDef.ValueDef = MakeShared<FPropertyDef>(PyMap->MapProp->ValueProp);
