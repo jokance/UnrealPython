@@ -46,6 +46,8 @@ public:
 
 	void AddOwnedPyProp(FUPyWrapperBase* PyProp) const;
 
+	void RemoveOwnedPyProp(FUPyWrapperBase* PyProp) const;
+
 #if WITH_EDITOR
 	void UpdateOwnerProperty(const FProperty* InProp) { OwnerProperty = InProp; }
 #endif

@@ -234,6 +234,7 @@ void FUPyWrapperFixedArray::Deinit(FUPyWrapperFixedArray* InSelf)
 
 	if (InSelf->OwnerContext.HasOwner())
 	{
+		InSelf->OwnerContext.RemoveOwnedPyProp(InSelf);
 		InSelf->OwnerContext.Reset();
 	}
 	else if (InSelf->ArrayInstance)

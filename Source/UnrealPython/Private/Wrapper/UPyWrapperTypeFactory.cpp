@@ -211,6 +211,21 @@ void FUPyWrapperObjectFactory::AddOwnedPyProp(UObject* InUnrealInstance, FUPyWra
 	PyProps.Add(PyProp);
 }
 
+void FUPyWrapperObjectFactory::RemoveOwnedPyProp(UObject* InUnrealInstance, FUPyWrapperBase* PyProp)
+{
+	if (auto* PyProps = MappedOwnedPyProps.Find(InUnrealInstance))
+	{
+		if (PyProps->Remove(PyProp) > 0)
+		{
+			Py_DECREF(PyProp);
+		}
+		if (PyProps->Num() == 0)
+		{
+			MappedOwnedPyProps.Remove(InUnrealInstance);
+		}
+	}
+}
+
 void FUPyWrapperObjectFactory::RemoveOwnedPyProps(const UObject* InUnrealInstance)
 {
 	FUPyScopedGIL Gil;

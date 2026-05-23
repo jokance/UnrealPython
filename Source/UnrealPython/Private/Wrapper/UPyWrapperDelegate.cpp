@@ -372,6 +372,7 @@ struct TUPyWrapperDelegateImpl
 
 		if (InSelf->OwnerContext.HasOwner())
 		{
+			InSelf->OwnerContext.RemoveOwnedPyProp(InSelf);
 			InSelf->OwnerContext.Reset();
 		}
 

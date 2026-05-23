@@ -581,6 +581,7 @@ void FUPyWrapperMap::Deinit(FUPyWrapperMap* InSelf)
 
 	if (InSelf->OwnerContext.HasOwner())
 	{
+		InSelf->OwnerContext.RemoveOwnedPyProp(InSelf);
 		InSelf->OwnerContext.Reset();
 	}
 	else if (InSelf->MapInstance)

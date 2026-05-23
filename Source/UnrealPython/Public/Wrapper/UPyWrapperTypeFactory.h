@@ -123,6 +123,8 @@ public:
 
 	void AddOwnedPyProp(UObject* InUnrealInstance, FUPyWrapperBase* PyProp);
 
+	void RemoveOwnedPyProp(UObject* InUnrealInstance, FUPyWrapperBase* PyProp);
+
 	void RemoveOwnedPyProps(const UObject* InUnrealInstance);
 
 	/** Map from the internal key to wrapped Python instance */

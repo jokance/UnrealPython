@@ -166,3 +166,11 @@ void FUPyWrapperOwnerContext::AddOwnedPyProp(FUPyWrapperBase* PyProp) const
 		FUPyWrapperObjectFactory::Get().AddOwnedPyProp(Object, PyProp);
 	}
 }
+
+void FUPyWrapperOwnerContext::RemoveOwnedPyProp(FUPyWrapperBase* PyProp) const
+{
+	if (UObject* Object = FindChangeNotifyObject())
+	{
+		FUPyWrapperObjectFactory::Get().RemoveOwnedPyProp(Object, PyProp);
+	}
+}

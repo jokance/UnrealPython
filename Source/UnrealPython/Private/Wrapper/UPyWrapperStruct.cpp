@@ -178,6 +178,7 @@ void FUPyWrapperStruct::Deinit(FUPyWrapperStruct* InSelf)
 
 	if (InSelf->OwnerContext.HasOwner())
 	{
+		InSelf->OwnerContext.RemoveOwnedPyProp(InSelf);
 		InSelf->OwnerContext.Reset();
 	}
 	else if (InSelf->StructInstance)
@@ -232,6 +233,7 @@ bool FUPyWrapperStruct::DetachFromOwner(FUPyWrapperStruct* InSelf)
 	InSelf->ScriptStruct->CopyScriptStruct(NewStructInstance, OldStructInstance);
 
 	FUPyWrapperStructFactory::Get().UnmapInstance(OldStructInstance);
+	InSelf->OwnerContext.RemoveOwnedPyProp(InSelf);
 	InSelf->OwnerContext.Reset();
 	InSelf->StructInstance = NewStructInstance;
 	return true;
