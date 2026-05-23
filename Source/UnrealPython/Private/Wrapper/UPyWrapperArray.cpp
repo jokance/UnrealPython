@@ -575,10 +575,17 @@ int FUPyWrapperArray::RepeatInplace(FUPyWrapperArray* InSelf, Py_ssize_t InMulti
 	FScriptArrayHelper SelfScriptArrayHelper(InSelf->ArrayProp, InSelf->ArrayInstance);
 	const int32 SelfElementCount = SelfScriptArrayHelper.Num();
 
-	SelfScriptArrayHelper.Resize(SelfElementCount * InMultiplier);
+	int32 NewElementCount = 0;
+	int32 Multiplier = 0;
+	if (UPyUtil::ValidateContainerRepeatValue(SelfElementCount, InMultiplier, NewElementCount, Multiplier, *UPyUtil::GetErrorContext(InSelf)) != 0)
+	{
+		return -1;
+	}
+
+	SelfScriptArrayHelper.Resize(NewElementCount);
 
 	int32 NewElementIndex = SelfElementCount;
-	for (int32 MultipleIndex = 1; MultipleIndex < (int32)InMultiplier; ++MultipleIndex)
+	for (int32 MultipleIndex = 1; MultipleIndex < Multiplier; ++MultipleIndex)
 	{
 		for (int32 ElementIndex = 0; ElementIndex < SelfElementCount; ++ElementIndex, ++NewElementIndex)
 		{
@@ -844,7 +851,13 @@ int FUPyWrapperArray::Resize(FUPyWrapperArray* InSelf, Py_ssize_t InLen)
 	}
 
 	FScriptArrayHelper SelfScriptArrayHelper(InSelf->ArrayProp, InSelf->ArrayInstance);
-	SelfScriptArrayHelper.Resize(FMath::Max(0, (int32)InLen));
+	int32 ElementCount = 0;
+	if (UPyUtil::ValidateContainerLenValue(FMath::Max(InLen, (Py_ssize_t)0), ElementCount, *UPyUtil::GetErrorContext(InSelf)) != 0)
+	{
+		return -1;
+	}
+
+	SelfScriptArrayHelper.Resize(ElementCount);
 	return 0;
 }
 

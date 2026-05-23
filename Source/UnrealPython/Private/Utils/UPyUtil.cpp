@@ -756,6 +756,35 @@ int ValidateContainerLenValue(const Py_ssize_t InLen, int32& OutLen, const TCHAR
 	return 0;
 }
 
+int ValidateContainerRepeatValue(const int32 InLen, const Py_ssize_t InMultiplier, int32& OutLen, int32& OutMultiplier, const TCHAR* InErrorCtxt)
+{
+	check(InLen >= 0);
+	check(InMultiplier >= 0);
+
+	if (InMultiplier > MAX_int32)
+	{
+		if (InLen == 0)
+		{
+			OutLen = 0;
+			OutMultiplier = 0;
+			return 0;
+		}
+
+		SetPythonError(PyExc_OverflowError, InErrorCtxt, *FString::Printf(TEXT("Container repeat multiplier %zd exceeds the maximum supported multiplier %d"), InMultiplier, MAX_int32));
+		return -1;
+	}
+
+	OutMultiplier = static_cast<int32>(InMultiplier);
+	if (OutMultiplier > 0 && InLen > MAX_int32 / OutMultiplier)
+	{
+		SetPythonError(PyExc_OverflowError, InErrorCtxt, *FString::Printf(TEXT("Repeated container length exceeds the maximum supported length %d"), MAX_int32));
+		return -1;
+	}
+
+	OutLen = InLen * OutMultiplier;
+	return 0;
+}
+
 int ValidateContainerIndexParam(const Py_ssize_t InIndex, const Py_ssize_t InLen, const FProperty* InProp, const TCHAR* InErrorCtxt)
 {
 	if (InIndex < 0 || InIndex >= InLen)

@@ -510,7 +510,13 @@ FUPyWrapperFixedArray* FUPyWrapperFixedArray::Repeat(FUPyWrapperFixedArray* InSe
 	}
 
 	const UPyUtil::FPropertyDef SelfPropDef = InSelf->ArrayProp.Get();
-	const int32 NewArrayLen = InSelf->ArrayProp->ArrayDim * InMultiplier;
+	int32 NewArrayLen = 0;
+	int32 Multiplier = 0;
+	if (UPyUtil::ValidateContainerRepeatValue(InSelf->ArrayProp->ArrayDim, InMultiplier, NewArrayLen, Multiplier, *UPyUtil::GetErrorContext(InSelf)) != 0)
+	{
+		return nullptr;
+	}
+
 	FUPyWrapperFixedArrayPtr NewArray = FUPyWrapperFixedArrayPtr::StealReference(FUPyWrapperFixedArray::New(Py_TYPE(InSelf)));
 	if (FUPyWrapperFixedArray::Init(NewArray, SelfPropDef, NewArrayLen) != 0)
 	{
@@ -518,7 +524,7 @@ FUPyWrapperFixedArray* FUPyWrapperFixedArray::Repeat(FUPyWrapperFixedArray* InSe
 	}
 
 	int32 NewArrayIndex = 0;
-	for (int32 MultipleIndex = 0; MultipleIndex < (int32)InMultiplier; ++MultipleIndex)
+	for (int32 MultipleIndex = 0; MultipleIndex < Multiplier; ++MultipleIndex)
 	{
 		for (int32 ArrIndex = 0; ArrIndex < InSelf->ArrayProp->ArrayDim; ++ArrIndex, ++NewArrayIndex)
 		{
