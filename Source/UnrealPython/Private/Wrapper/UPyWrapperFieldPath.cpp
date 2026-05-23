@@ -120,7 +120,7 @@ struct FFuncs_WrapperFieldPath
 
 	static PyObject* Str(FUPyWrapperFieldPath* InSelf)
 	{
-		return PyUnicode_FromFormat(TCHAR_TO_UTF8(*InSelf->Value.ToString()));
+		return PyUnicode_FromString(TCHAR_TO_UTF8(*InSelf->Value.ToString()));
 	}
 
 	static PyObject* Repr(FUPyWrapperFieldPath* InSelf)
