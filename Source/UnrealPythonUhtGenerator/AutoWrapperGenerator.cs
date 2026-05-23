@@ -762,17 +762,18 @@ internal static class AutoWrapperGenerator
 						$"if (!PySequence_Check({pyArgName}))\n" +
 						$"{{\n" +
 						$"\treturn -1;\n" +
-						$"}}\n" +
-						$"Py_ssize_t Len_{varName} = PySequence_Size({pyArgName});\n" +
-						$"if (Len_{varName} < 0)\n" +
-						$"{{\n" +
-						$"\treturn -1;\n" +
-						$"}}\n" +
-						$"{varName}.SetNum(Len_{varName});\n" +
-						$"for (Py_ssize_t i = 0; i < Len_{varName}; ++i)\n" +
-						$"{{\n" +
-						$"\tPyObject* Item = PySequence_GetItem({pyArgName}, i);\n" +
-						$"\tif (!Item)\n" +
+							$"}}\n" +
+							$"Py_ssize_t Len_{varName} = PySequence_Size({pyArgName});\n" +
+							$"int32 ElementCount_{varName} = 0;\n" +
+							$"if (UPyUtil::ValidateContainerLenValue(Len_{varName}, ElementCount_{varName}, TEXT(\"Array\")) != 0)\n" +
+							$"{{\n" +
+							$"\treturn -1;\n" +
+							$"}}\n" +
+							$"{varName}.SetNum(ElementCount_{varName});\n" +
+							$"for (int32 i = 0; i < ElementCount_{varName}; ++i)\n" +
+							$"{{\n" +
+							$"\tPyObject* Item = PySequence_GetItem({pyArgName}, i);\n" +
+							$"\tif (!Item)\n" +
 						$"\t{{\n" +
 						$"\t\treturn -1;\n" +
 						$"\t}}\n" +
@@ -1515,18 +1516,19 @@ internal static class AutoWrapperGenerator
 					string loopCode =
 						$"{indent}if (!PySequence_Check({rhsExpression}))\n" +
 						$"{indent}{{\n" +
-						failureStatement +
-						$"{indent}}}\n" +
-						$"{indent}Py_ssize_t Len_{varName} = PySequence_Size({rhsExpression});\n" +
-						$"{indent}if (Len_{varName} < 0)\n" +
-						$"{indent}{{\n" +
-						failureStatement +
-						$"{indent}}}\n" +
-						$"{indent}{varName}.SetNum(Len_{varName});\n" +
-						$"{indent}for (Py_ssize_t i = 0; i < Len_{varName}; ++i)\n" +
-						$"{indent}{{\n" +
-						$"{indent}\tPyObject* Item = PySequence_GetItem({rhsExpression}, i);\n" +
-						$"{indent}\tif (!Item)\n" +
+							failureStatement +
+							$"{indent}}}\n" +
+							$"{indent}Py_ssize_t Len_{varName} = PySequence_Size({rhsExpression});\n" +
+							$"{indent}int32 ElementCount_{varName} = 0;\n" +
+							$"{indent}if (UPyUtil::ValidateContainerLenValue(Len_{varName}, ElementCount_{varName}, TEXT(\"Array\")) != 0)\n" +
+							$"{indent}{{\n" +
+							failureStatement +
+							$"{indent}}}\n" +
+							$"{indent}{varName}.SetNum(ElementCount_{varName});\n" +
+							$"{indent}for (int32 i = 0; i < ElementCount_{varName}; ++i)\n" +
+							$"{indent}{{\n" +
+							$"{indent}\tPyObject* Item = PySequence_GetItem({rhsExpression}, i);\n" +
+							$"{indent}\tif (!Item)\n" +
 						$"{indent}\t{{\n" +
 						loopFailureStatement + "\n" +
 						$"{indent}\t}}\n" +

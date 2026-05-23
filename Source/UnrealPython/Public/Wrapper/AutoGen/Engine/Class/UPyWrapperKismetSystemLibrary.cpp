@@ -161,13 +161,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg3 = PySequence_Size(PyArg3);
-		if (Len_Arg3 < 0)
+		int32 ElementCount_Arg3 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg3, ElementCount_Arg3, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxOverlapActors"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg3.SetNum(Len_Arg3);
-		for (Py_ssize_t i = 0; i < Len_Arg3; ++i)
+		Arg3.SetNum(ElementCount_Arg3);
+		for (int32 i = 0; i < ElementCount_Arg3; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg3, i);
 			if (!Item)
@@ -210,13 +211,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg5 = PySequence_Size(PyArg5);
-		if (Len_Arg5 < 0)
+		int32 ElementCount_Arg5 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg5, ElementCount_Arg5, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxOverlapActors"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg5.SetNum(Len_Arg5);
-		for (Py_ssize_t i = 0; i < Len_Arg5; ++i)
+		Arg5.SetNum(ElementCount_Arg5);
+		for (int32 i = 0; i < ElementCount_Arg5; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg5, i);
 			if (!Item)
@@ -322,13 +324,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg4 = PySequence_Size(PyArg4);
-		if (Len_Arg4 < 0)
+		int32 ElementCount_Arg4 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg4, ElementCount_Arg4, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxOverlapActorsWithOrientation"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg4.SetNum(Len_Arg4);
-		for (Py_ssize_t i = 0; i < Len_Arg4; ++i)
+		Arg4.SetNum(ElementCount_Arg4);
+		for (int32 i = 0; i < ElementCount_Arg4; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg4, i);
 			if (!Item)
@@ -371,13 +374,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg6 = PySequence_Size(PyArg6);
-		if (Len_Arg6 < 0)
+		int32 ElementCount_Arg6 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg6, ElementCount_Arg6, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxOverlapActorsWithOrientation"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg6.SetNum(Len_Arg6);
-		for (Py_ssize_t i = 0; i < Len_Arg6; ++i)
+		Arg6.SetNum(ElementCount_Arg6);
+		for (int32 i = 0; i < ElementCount_Arg6; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg6, i);
 			if (!Item)
@@ -471,13 +475,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg3 = PySequence_Size(PyArg3);
-		if (Len_Arg3 < 0)
+		int32 ElementCount_Arg3 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg3, ElementCount_Arg3, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxOverlapComponents"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg3.SetNum(Len_Arg3);
-		for (Py_ssize_t i = 0; i < Len_Arg3; ++i)
+		Arg3.SetNum(ElementCount_Arg3);
+		for (int32 i = 0; i < ElementCount_Arg3; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg3, i);
 			if (!Item)
@@ -520,13 +525,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg5 = PySequence_Size(PyArg5);
-		if (Len_Arg5 < 0)
+		int32 ElementCount_Arg5 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg5, ElementCount_Arg5, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxOverlapComponents"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg5.SetNum(Len_Arg5);
-		for (Py_ssize_t i = 0; i < Len_Arg5; ++i)
+		Arg5.SetNum(ElementCount_Arg5);
+		for (int32 i = 0; i < ElementCount_Arg5; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg5, i);
 			if (!Item)
@@ -632,13 +638,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg4 = PySequence_Size(PyArg4);
-		if (Len_Arg4 < 0)
+		int32 ElementCount_Arg4 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg4, ElementCount_Arg4, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxOverlapComponentsWithOrientation"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg4.SetNum(Len_Arg4);
-		for (Py_ssize_t i = 0; i < Len_Arg4; ++i)
+		Arg4.SetNum(ElementCount_Arg4);
+		for (int32 i = 0; i < ElementCount_Arg4; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg4, i);
 			if (!Item)
@@ -681,13 +688,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg6 = PySequence_Size(PyArg6);
-		if (Len_Arg6 < 0)
+		int32 ElementCount_Arg6 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg6, ElementCount_Arg6, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxOverlapComponentsWithOrientation"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg6.SetNum(Len_Arg6);
-		for (Py_ssize_t i = 0; i < Len_Arg6; ++i)
+		Arg6.SetNum(ElementCount_Arg6);
+		for (int32 i = 0; i < ElementCount_Arg6; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg6, i);
 			if (!Item)
@@ -830,13 +838,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg7 = PySequence_Size(PyArg7);
-		if (Len_Arg7 < 0)
+		int32 ElementCount_Arg7 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg7, ElementCount_Arg7, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxTraceMulti"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg7.SetNum(Len_Arg7);
-		for (Py_ssize_t i = 0; i < Len_Arg7; ++i)
+		Arg7.SetNum(ElementCount_Arg7);
+		for (int32 i = 0; i < ElementCount_Arg7; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg7, i);
 			if (!Item)
@@ -1036,13 +1045,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg7 = PySequence_Size(PyArg7);
-		if (Len_Arg7 < 0)
+		int32 ElementCount_Arg7 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg7, ElementCount_Arg7, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxTraceMultiByProfile"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg7.SetNum(Len_Arg7);
-		for (Py_ssize_t i = 0; i < Len_Arg7; ++i)
+		Arg7.SetNum(ElementCount_Arg7);
+		for (int32 i = 0; i < ElementCount_Arg7; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg7, i);
 			if (!Item)
@@ -1218,13 +1228,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg5 = PySequence_Size(PyArg5);
-		if (Len_Arg5 < 0)
+		int32 ElementCount_Arg5 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg5, ElementCount_Arg5, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxTraceMultiForObjects"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg5.SetNum(Len_Arg5);
-		for (Py_ssize_t i = 0; i < Len_Arg5; ++i)
+		Arg5.SetNum(ElementCount_Arg5);
+		for (int32 i = 0; i < ElementCount_Arg5; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg5, i);
 			if (!Item)
@@ -1267,13 +1278,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg7 = PySequence_Size(PyArg7);
-		if (Len_Arg7 < 0)
+		int32 ElementCount_Arg7 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg7, ElementCount_Arg7, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxTraceMultiForObjects"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg7.SetNum(Len_Arg7);
-		for (Py_ssize_t i = 0; i < Len_Arg7; ++i)
+		Arg7.SetNum(ElementCount_Arg7);
+		for (int32 i = 0; i < ElementCount_Arg7; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg7, i);
 			if (!Item)
@@ -1473,13 +1485,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg7 = PySequence_Size(PyArg7);
-		if (Len_Arg7 < 0)
+		int32 ElementCount_Arg7 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg7, ElementCount_Arg7, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxTraceSingle"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg7.SetNum(Len_Arg7);
-		for (Py_ssize_t i = 0; i < Len_Arg7; ++i)
+		Arg7.SetNum(ElementCount_Arg7);
+		for (int32 i = 0; i < ElementCount_Arg7; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg7, i);
 			if (!Item)
@@ -1673,13 +1686,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg7 = PySequence_Size(PyArg7);
-		if (Len_Arg7 < 0)
+		int32 ElementCount_Arg7 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg7, ElementCount_Arg7, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxTraceSingleByProfile"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg7.SetNum(Len_Arg7);
-		for (Py_ssize_t i = 0; i < Len_Arg7; ++i)
+		Arg7.SetNum(ElementCount_Arg7);
+		for (int32 i = 0; i < ElementCount_Arg7; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg7, i);
 			if (!Item)
@@ -1849,13 +1863,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg5 = PySequence_Size(PyArg5);
-		if (Len_Arg5 < 0)
+		int32 ElementCount_Arg5 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg5, ElementCount_Arg5, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxTraceSingleForObjects"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg5.SetNum(Len_Arg5);
-		for (Py_ssize_t i = 0; i < Len_Arg5; ++i)
+		Arg5.SetNum(ElementCount_Arg5);
+		for (int32 i = 0; i < ElementCount_Arg5; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg5, i);
 			if (!Item)
@@ -1898,13 +1913,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg7 = PySequence_Size(PyArg7);
-		if (Len_Arg7 < 0)
+		int32 ElementCount_Arg7 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg7, ElementCount_Arg7, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxTraceSingleForObjects"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg7.SetNum(Len_Arg7);
-		for (Py_ssize_t i = 0; i < Len_Arg7; ++i)
+		Arg7.SetNum(ElementCount_Arg7);
+		for (int32 i = 0; i < ElementCount_Arg7; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg7, i);
 			if (!Item)
@@ -2226,13 +2242,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg4 = PySequence_Size(PyArg4);
-		if (Len_Arg4 < 0)
+		int32 ElementCount_Arg4 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg4, ElementCount_Arg4, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleOverlapActors"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg4.SetNum(Len_Arg4);
-		for (Py_ssize_t i = 0; i < Len_Arg4; ++i)
+		Arg4.SetNum(ElementCount_Arg4);
+		for (int32 i = 0; i < ElementCount_Arg4; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg4, i);
 			if (!Item)
@@ -2275,13 +2292,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg6 = PySequence_Size(PyArg6);
-		if (Len_Arg6 < 0)
+		int32 ElementCount_Arg6 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg6, ElementCount_Arg6, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleOverlapActors"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg6.SetNum(Len_Arg6);
-		for (Py_ssize_t i = 0; i < Len_Arg6; ++i)
+		Arg6.SetNum(ElementCount_Arg6);
+		for (int32 i = 0; i < ElementCount_Arg6; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg6, i);
 			if (!Item)
@@ -2399,13 +2417,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg5 = PySequence_Size(PyArg5);
-		if (Len_Arg5 < 0)
+		int32 ElementCount_Arg5 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg5, ElementCount_Arg5, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleOverlapActorsWithOrientation"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg5.SetNum(Len_Arg5);
-		for (Py_ssize_t i = 0; i < Len_Arg5; ++i)
+		Arg5.SetNum(ElementCount_Arg5);
+		for (int32 i = 0; i < ElementCount_Arg5; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg5, i);
 			if (!Item)
@@ -2448,13 +2467,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg7 = PySequence_Size(PyArg7);
-		if (Len_Arg7 < 0)
+		int32 ElementCount_Arg7 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg7, ElementCount_Arg7, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleOverlapActorsWithOrientation"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg7.SetNum(Len_Arg7);
-		for (Py_ssize_t i = 0; i < Len_Arg7; ++i)
+		Arg7.SetNum(ElementCount_Arg7);
+		for (int32 i = 0; i < ElementCount_Arg7; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg7, i);
 			if (!Item)
@@ -2560,13 +2580,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg4 = PySequence_Size(PyArg4);
-		if (Len_Arg4 < 0)
+		int32 ElementCount_Arg4 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg4, ElementCount_Arg4, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleOverlapComponents"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg4.SetNum(Len_Arg4);
-		for (Py_ssize_t i = 0; i < Len_Arg4; ++i)
+		Arg4.SetNum(ElementCount_Arg4);
+		for (int32 i = 0; i < ElementCount_Arg4; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg4, i);
 			if (!Item)
@@ -2609,13 +2630,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg6 = PySequence_Size(PyArg6);
-		if (Len_Arg6 < 0)
+		int32 ElementCount_Arg6 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg6, ElementCount_Arg6, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleOverlapComponents"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg6.SetNum(Len_Arg6);
-		for (Py_ssize_t i = 0; i < Len_Arg6; ++i)
+		Arg6.SetNum(ElementCount_Arg6);
+		for (int32 i = 0; i < ElementCount_Arg6; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg6, i);
 			if (!Item)
@@ -2733,13 +2755,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg5 = PySequence_Size(PyArg5);
-		if (Len_Arg5 < 0)
+		int32 ElementCount_Arg5 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg5, ElementCount_Arg5, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleOverlapComponentsWithOrientation"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg5.SetNum(Len_Arg5);
-		for (Py_ssize_t i = 0; i < Len_Arg5; ++i)
+		Arg5.SetNum(ElementCount_Arg5);
+		for (int32 i = 0; i < ElementCount_Arg5; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg5, i);
 			if (!Item)
@@ -2782,13 +2805,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg7 = PySequence_Size(PyArg7);
-		if (Len_Arg7 < 0)
+		int32 ElementCount_Arg7 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg7, ElementCount_Arg7, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleOverlapComponentsWithOrientation"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg7.SetNum(Len_Arg7);
-		for (Py_ssize_t i = 0; i < Len_Arg7; ++i)
+		Arg7.SetNum(ElementCount_Arg7);
+		for (int32 i = 0; i < ElementCount_Arg7; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg7, i);
 			if (!Item)
@@ -2931,13 +2955,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg7 = PySequence_Size(PyArg7);
-		if (Len_Arg7 < 0)
+		int32 ElementCount_Arg7 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg7, ElementCount_Arg7, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleTraceMulti"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg7.SetNum(Len_Arg7);
-		for (Py_ssize_t i = 0; i < Len_Arg7; ++i)
+		Arg7.SetNum(ElementCount_Arg7);
+		for (int32 i = 0; i < ElementCount_Arg7; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg7, i);
 			if (!Item)
@@ -3137,13 +3162,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg7 = PySequence_Size(PyArg7);
-		if (Len_Arg7 < 0)
+		int32 ElementCount_Arg7 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg7, ElementCount_Arg7, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleTraceMultiByProfile"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg7.SetNum(Len_Arg7);
-		for (Py_ssize_t i = 0; i < Len_Arg7; ++i)
+		Arg7.SetNum(ElementCount_Arg7);
+		for (int32 i = 0; i < ElementCount_Arg7; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg7, i);
 			if (!Item)
@@ -3319,13 +3345,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg5 = PySequence_Size(PyArg5);
-		if (Len_Arg5 < 0)
+		int32 ElementCount_Arg5 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg5, ElementCount_Arg5, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleTraceMultiForObjects"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg5.SetNum(Len_Arg5);
-		for (Py_ssize_t i = 0; i < Len_Arg5; ++i)
+		Arg5.SetNum(ElementCount_Arg5);
+		for (int32 i = 0; i < ElementCount_Arg5; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg5, i);
 			if (!Item)
@@ -3368,13 +3395,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg7 = PySequence_Size(PyArg7);
-		if (Len_Arg7 < 0)
+		int32 ElementCount_Arg7 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg7, ElementCount_Arg7, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleTraceMultiForObjects"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg7.SetNum(Len_Arg7);
-		for (Py_ssize_t i = 0; i < Len_Arg7; ++i)
+		Arg7.SetNum(ElementCount_Arg7);
+		for (int32 i = 0; i < ElementCount_Arg7; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg7, i);
 			if (!Item)
@@ -3574,13 +3602,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg7 = PySequence_Size(PyArg7);
-		if (Len_Arg7 < 0)
+		int32 ElementCount_Arg7 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg7, ElementCount_Arg7, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleTraceSingle"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg7.SetNum(Len_Arg7);
-		for (Py_ssize_t i = 0; i < Len_Arg7; ++i)
+		Arg7.SetNum(ElementCount_Arg7);
+		for (int32 i = 0; i < ElementCount_Arg7; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg7, i);
 			if (!Item)
@@ -3774,13 +3803,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg7 = PySequence_Size(PyArg7);
-		if (Len_Arg7 < 0)
+		int32 ElementCount_Arg7 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg7, ElementCount_Arg7, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleTraceSingleByProfile"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg7.SetNum(Len_Arg7);
-		for (Py_ssize_t i = 0; i < Len_Arg7; ++i)
+		Arg7.SetNum(ElementCount_Arg7);
+		for (int32 i = 0; i < ElementCount_Arg7; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg7, i);
 			if (!Item)
@@ -3950,13 +3980,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg5 = PySequence_Size(PyArg5);
-		if (Len_Arg5 < 0)
+		int32 ElementCount_Arg5 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg5, ElementCount_Arg5, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleTraceSingleForObjects"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg5.SetNum(Len_Arg5);
-		for (Py_ssize_t i = 0; i < Len_Arg5; ++i)
+		Arg5.SetNum(ElementCount_Arg5);
+		for (int32 i = 0; i < ElementCount_Arg5; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg5, i);
 			if (!Item)
@@ -3999,13 +4030,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg7 = PySequence_Size(PyArg7);
-		if (Len_Arg7 < 0)
+		int32 ElementCount_Arg7 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg7, ElementCount_Arg7, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleTraceSingleForObjects"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg7.SetNum(Len_Arg7);
-		for (Py_ssize_t i = 0; i < Len_Arg7; ++i)
+		Arg7.SetNum(ElementCount_Arg7);
+		for (int32 i = 0; i < ElementCount_Arg7; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg7, i);
 			if (!Item)
@@ -4144,13 +4176,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg2 = PySequence_Size(PyArg2);
-		if (Len_Arg2 < 0)
+		int32 ElementCount_Arg2 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg2, ElementCount_Arg2, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::ComponentOverlapActors"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg2.SetNum(Len_Arg2);
-		for (Py_ssize_t i = 0; i < Len_Arg2; ++i)
+		Arg2.SetNum(ElementCount_Arg2);
+		for (int32 i = 0; i < ElementCount_Arg2; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg2, i);
 			if (!Item)
@@ -4193,13 +4226,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg4 = PySequence_Size(PyArg4);
-		if (Len_Arg4 < 0)
+		int32 ElementCount_Arg4 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg4, ElementCount_Arg4, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::ComponentOverlapActors"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg4.SetNum(Len_Arg4);
-		for (Py_ssize_t i = 0; i < Len_Arg4; ++i)
+		Arg4.SetNum(ElementCount_Arg4);
+		for (int32 i = 0; i < ElementCount_Arg4; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg4, i);
 			if (!Item)
@@ -4281,13 +4315,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg2 = PySequence_Size(PyArg2);
-		if (Len_Arg2 < 0)
+		int32 ElementCount_Arg2 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg2, ElementCount_Arg2, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::ComponentOverlapComponents"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg2.SetNum(Len_Arg2);
-		for (Py_ssize_t i = 0; i < Len_Arg2; ++i)
+		Arg2.SetNum(ElementCount_Arg2);
+		for (int32 i = 0; i < ElementCount_Arg2; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg2, i);
 			if (!Item)
@@ -4330,13 +4365,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg4 = PySequence_Size(PyArg4);
-		if (Len_Arg4 < 0)
+		int32 ElementCount_Arg4 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg4, ElementCount_Arg4, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::ComponentOverlapComponents"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg4.SetNum(Len_Arg4);
-		for (Py_ssize_t i = 0; i < Len_Arg4; ++i)
+		Arg4.SetNum(ElementCount_Arg4);
+		for (int32 i = 0; i < ElementCount_Arg4; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg4, i);
 			if (!Item)
@@ -6511,13 +6547,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg0 = PySequence_Size(PyArg0);
-		if (Len_Arg0 < 0)
+		int32 ElementCount_Arg0 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg0, ElementCount_Arg0, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::GetActorListFromComponentList"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg0.SetNum(Len_Arg0);
-		for (Py_ssize_t i = 0; i < Len_Arg0; ++i)
+		Arg0.SetNum(ElementCount_Arg0);
+		for (int32 i = 0; i < ElementCount_Arg0; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg0, i);
 			if (!Item)
@@ -7136,13 +7173,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg0 = PySequence_Size(PyArg0);
-		if (Len_Arg0 < 0)
+		int32 ElementCount_Arg0 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg0, ElementCount_Arg0, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::GetPrimaryAssetsWithBundleState"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg0.SetNum(Len_Arg0);
-		for (Py_ssize_t i = 0; i < Len_Arg0; ++i)
+		Arg0.SetNum(ElementCount_Arg0);
+		for (int32 i = 0; i < ElementCount_Arg0; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg0, i);
 			if (!Item)
@@ -7173,13 +7211,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg1 = PySequence_Size(PyArg1);
-		if (Len_Arg1 < 0)
+		int32 ElementCount_Arg1 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg1, ElementCount_Arg1, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::GetPrimaryAssetsWithBundleState"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg1.SetNum(Len_Arg1);
-		for (Py_ssize_t i = 0; i < Len_Arg1; ++i)
+		Arg1.SetNum(ElementCount_Arg1);
+		for (int32 i = 0; i < ElementCount_Arg1; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg1, i);
 			if (!Item)
@@ -7210,13 +7249,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg2 = PySequence_Size(PyArg2);
-		if (Len_Arg2 < 0)
+		int32 ElementCount_Arg2 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg2, ElementCount_Arg2, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::GetPrimaryAssetsWithBundleState"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg2.SetNum(Len_Arg2);
-		for (Py_ssize_t i = 0; i < Len_Arg2; ++i)
+		Arg2.SetNum(ElementCount_Arg2);
+		for (int32 i = 0; i < ElementCount_Arg2; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg2, i);
 			if (!Item)
@@ -8308,13 +8348,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg0 = PySequence_Size(PyArg0);
-		if (Len_Arg0 < 0)
+		int32 ElementCount_Arg0 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg0, ElementCount_Arg0, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LaunchExternalUrl"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg0.SetNum(Len_Arg0);
-		for (Py_ssize_t i = 0; i < Len_Arg0; ++i)
+		Arg0.SetNum(ElementCount_Arg0);
+		for (int32 i = 0; i < ElementCount_Arg0; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg0, i);
 			if (!Item)
@@ -8437,13 +8478,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg5 = PySequence_Size(PyArg5);
-		if (Len_Arg5 < 0)
+		int32 ElementCount_Arg5 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg5, ElementCount_Arg5, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LineTraceMulti"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg5.SetNum(Len_Arg5);
-		for (Py_ssize_t i = 0; i < Len_Arg5; ++i)
+		Arg5.SetNum(ElementCount_Arg5);
+		for (int32 i = 0; i < ElementCount_Arg5; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg5, i);
 			if (!Item)
@@ -8619,13 +8661,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg5 = PySequence_Size(PyArg5);
-		if (Len_Arg5 < 0)
+		int32 ElementCount_Arg5 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg5, ElementCount_Arg5, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LineTraceMultiByProfile"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg5.SetNum(Len_Arg5);
-		for (Py_ssize_t i = 0; i < Len_Arg5; ++i)
+		Arg5.SetNum(ElementCount_Arg5);
+		for (int32 i = 0; i < ElementCount_Arg5; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg5, i);
 			if (!Item)
@@ -8777,13 +8820,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg3 = PySequence_Size(PyArg3);
-		if (Len_Arg3 < 0)
+		int32 ElementCount_Arg3 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg3, ElementCount_Arg3, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LineTraceMultiForObjects"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg3.SetNum(Len_Arg3);
-		for (Py_ssize_t i = 0; i < Len_Arg3; ++i)
+		Arg3.SetNum(ElementCount_Arg3);
+		for (int32 i = 0; i < ElementCount_Arg3; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg3, i);
 			if (!Item)
@@ -8826,13 +8870,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg5 = PySequence_Size(PyArg5);
-		if (Len_Arg5 < 0)
+		int32 ElementCount_Arg5 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg5, ElementCount_Arg5, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LineTraceMultiForObjects"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg5.SetNum(Len_Arg5);
-		for (Py_ssize_t i = 0; i < Len_Arg5; ++i)
+		Arg5.SetNum(ElementCount_Arg5);
+		for (int32 i = 0; i < ElementCount_Arg5; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg5, i);
 			if (!Item)
@@ -9008,13 +9053,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg5 = PySequence_Size(PyArg5);
-		if (Len_Arg5 < 0)
+		int32 ElementCount_Arg5 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg5, ElementCount_Arg5, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LineTraceSingle"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg5.SetNum(Len_Arg5);
-		for (Py_ssize_t i = 0; i < Len_Arg5; ++i)
+		Arg5.SetNum(ElementCount_Arg5);
+		for (int32 i = 0; i < ElementCount_Arg5; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg5, i);
 			if (!Item)
@@ -9184,13 +9230,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg5 = PySequence_Size(PyArg5);
-		if (Len_Arg5 < 0)
+		int32 ElementCount_Arg5 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg5, ElementCount_Arg5, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LineTraceSingleByProfile"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg5.SetNum(Len_Arg5);
-		for (Py_ssize_t i = 0; i < Len_Arg5; ++i)
+		Arg5.SetNum(ElementCount_Arg5);
+		for (int32 i = 0; i < ElementCount_Arg5; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg5, i);
 			if (!Item)
@@ -9336,13 +9383,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg3 = PySequence_Size(PyArg3);
-		if (Len_Arg3 < 0)
+		int32 ElementCount_Arg3 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg3, ElementCount_Arg3, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LineTraceSingleForObjects"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg3.SetNum(Len_Arg3);
-		for (Py_ssize_t i = 0; i < Len_Arg3; ++i)
+		Arg3.SetNum(ElementCount_Arg3);
+		for (int32 i = 0; i < ElementCount_Arg3; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg3, i);
 			if (!Item)
@@ -9385,13 +9433,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg5 = PySequence_Size(PyArg5);
-		if (Len_Arg5 < 0)
+		int32 ElementCount_Arg5 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg5, ElementCount_Arg5, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LineTraceSingleForObjects"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg5.SetNum(Len_Arg5);
-		for (Py_ssize_t i = 0; i < Len_Arg5; ++i)
+		Arg5.SetNum(ElementCount_Arg5);
+		for (int32 i = 0; i < ElementCount_Arg5; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg5, i);
 			if (!Item)
@@ -9587,13 +9636,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg0 = PySequence_Size(PyArg0);
-		if (Len_Arg0 < 0)
+		int32 ElementCount_Arg0 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg0, ElementCount_Arg0, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::MakeARFilter"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg0.SetNum(Len_Arg0);
-		for (Py_ssize_t i = 0; i < Len_Arg0; ++i)
+		Arg0.SetNum(ElementCount_Arg0);
+		for (int32 i = 0; i < ElementCount_Arg0; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg0, i);
 			if (!Item)
@@ -9624,13 +9674,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg1 = PySequence_Size(PyArg1);
-		if (Len_Arg1 < 0)
+		int32 ElementCount_Arg1 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg1, ElementCount_Arg1, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::MakeARFilter"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg1.SetNum(Len_Arg1);
-		for (Py_ssize_t i = 0; i < Len_Arg1; ++i)
+		Arg1.SetNum(ElementCount_Arg1);
+		for (int32 i = 0; i < ElementCount_Arg1; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg1, i);
 			if (!Item)
@@ -9661,13 +9712,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg2 = PySequence_Size(PyArg2);
-		if (Len_Arg2 < 0)
+		int32 ElementCount_Arg2 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg2, ElementCount_Arg2, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::MakeARFilter"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg2.SetNum(Len_Arg2);
-		for (Py_ssize_t i = 0; i < Len_Arg2; ++i)
+		Arg2.SetNum(ElementCount_Arg2);
+		for (int32 i = 0; i < ElementCount_Arg2; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg2, i);
 			if (!Item)
@@ -9698,13 +9750,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg3 = PySequence_Size(PyArg3);
-		if (Len_Arg3 < 0)
+		int32 ElementCount_Arg3 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg3, ElementCount_Arg3, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::MakeARFilter"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg3.SetNum(Len_Arg3);
-		for (Py_ssize_t i = 0; i < Len_Arg3; ++i)
+		Arg3.SetNum(ElementCount_Arg3);
+		for (int32 i = 0; i < ElementCount_Arg3; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg3, i);
 			if (!Item)
@@ -9774,13 +9827,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg5 = PySequence_Size(PyArg5);
-		if (Len_Arg5 < 0)
+		int32 ElementCount_Arg5 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg5, ElementCount_Arg5, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::MakeARFilter"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg5.SetNum(Len_Arg5);
-		for (Py_ssize_t i = 0; i < Len_Arg5; ++i)
+		Arg5.SetNum(ElementCount_Arg5);
+		for (int32 i = 0; i < ElementCount_Arg5; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg5, i);
 			if (!Item)
@@ -11896,13 +11950,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg3 = PySequence_Size(PyArg3);
-		if (Len_Arg3 < 0)
+		int32 ElementCount_Arg3 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg3, ElementCount_Arg3, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereOverlapActors"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg3.SetNum(Len_Arg3);
-		for (Py_ssize_t i = 0; i < Len_Arg3; ++i)
+		Arg3.SetNum(ElementCount_Arg3);
+		for (int32 i = 0; i < ElementCount_Arg3; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg3, i);
 			if (!Item)
@@ -11945,13 +12000,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg5 = PySequence_Size(PyArg5);
-		if (Len_Arg5 < 0)
+		int32 ElementCount_Arg5 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg5, ElementCount_Arg5, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereOverlapActors"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg5.SetNum(Len_Arg5);
-		for (Py_ssize_t i = 0; i < Len_Arg5; ++i)
+		Arg5.SetNum(ElementCount_Arg5);
+		for (int32 i = 0; i < ElementCount_Arg5; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg5, i);
 			if (!Item)
@@ -12045,13 +12101,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg3 = PySequence_Size(PyArg3);
-		if (Len_Arg3 < 0)
+		int32 ElementCount_Arg3 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg3, ElementCount_Arg3, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereOverlapComponents"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg3.SetNum(Len_Arg3);
-		for (Py_ssize_t i = 0; i < Len_Arg3; ++i)
+		Arg3.SetNum(ElementCount_Arg3);
+		for (int32 i = 0; i < ElementCount_Arg3; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg3, i);
 			if (!Item)
@@ -12094,13 +12151,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg5 = PySequence_Size(PyArg5);
-		if (Len_Arg5 < 0)
+		int32 ElementCount_Arg5 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg5, ElementCount_Arg5, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereOverlapComponents"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg5.SetNum(Len_Arg5);
-		for (Py_ssize_t i = 0; i < Len_Arg5; ++i)
+		Arg5.SetNum(ElementCount_Arg5);
+		for (int32 i = 0; i < ElementCount_Arg5; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg5, i);
 			if (!Item)
@@ -12231,13 +12289,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg6 = PySequence_Size(PyArg6);
-		if (Len_Arg6 < 0)
+		int32 ElementCount_Arg6 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg6, ElementCount_Arg6, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereTraceMulti"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg6.SetNum(Len_Arg6);
-		for (Py_ssize_t i = 0; i < Len_Arg6; ++i)
+		Arg6.SetNum(ElementCount_Arg6);
+		for (int32 i = 0; i < ElementCount_Arg6; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg6, i);
 			if (!Item)
@@ -12425,13 +12484,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg6 = PySequence_Size(PyArg6);
-		if (Len_Arg6 < 0)
+		int32 ElementCount_Arg6 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg6, ElementCount_Arg6, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereTraceMultiByProfile"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg6.SetNum(Len_Arg6);
-		for (Py_ssize_t i = 0; i < Len_Arg6; ++i)
+		Arg6.SetNum(ElementCount_Arg6);
+		for (int32 i = 0; i < ElementCount_Arg6; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg6, i);
 			if (!Item)
@@ -12595,13 +12655,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg4 = PySequence_Size(PyArg4);
-		if (Len_Arg4 < 0)
+		int32 ElementCount_Arg4 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg4, ElementCount_Arg4, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereTraceMultiForObjects"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg4.SetNum(Len_Arg4);
-		for (Py_ssize_t i = 0; i < Len_Arg4; ++i)
+		Arg4.SetNum(ElementCount_Arg4);
+		for (int32 i = 0; i < ElementCount_Arg4; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg4, i);
 			if (!Item)
@@ -12644,13 +12705,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg6 = PySequence_Size(PyArg6);
-		if (Len_Arg6 < 0)
+		int32 ElementCount_Arg6 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg6, ElementCount_Arg6, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereTraceMultiForObjects"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg6.SetNum(Len_Arg6);
-		for (Py_ssize_t i = 0; i < Len_Arg6; ++i)
+		Arg6.SetNum(ElementCount_Arg6);
+		for (int32 i = 0; i < ElementCount_Arg6; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg6, i);
 			if (!Item)
@@ -12838,13 +12900,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg6 = PySequence_Size(PyArg6);
-		if (Len_Arg6 < 0)
+		int32 ElementCount_Arg6 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg6, ElementCount_Arg6, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereTraceSingle"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg6.SetNum(Len_Arg6);
-		for (Py_ssize_t i = 0; i < Len_Arg6; ++i)
+		Arg6.SetNum(ElementCount_Arg6);
+		for (int32 i = 0; i < ElementCount_Arg6; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg6, i);
 			if (!Item)
@@ -13026,13 +13089,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg6 = PySequence_Size(PyArg6);
-		if (Len_Arg6 < 0)
+		int32 ElementCount_Arg6 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg6, ElementCount_Arg6, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereTraceSingleByProfile"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg6.SetNum(Len_Arg6);
-		for (Py_ssize_t i = 0; i < Len_Arg6; ++i)
+		Arg6.SetNum(ElementCount_Arg6);
+		for (int32 i = 0; i < ElementCount_Arg6; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg6, i);
 			if (!Item)
@@ -13190,13 +13254,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg4 = PySequence_Size(PyArg4);
-		if (Len_Arg4 < 0)
+		int32 ElementCount_Arg4 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg4, ElementCount_Arg4, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereTraceSingleForObjects"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg4.SetNum(Len_Arg4);
-		for (Py_ssize_t i = 0; i < Len_Arg4; ++i)
+		Arg4.SetNum(ElementCount_Arg4);
+		for (int32 i = 0; i < ElementCount_Arg4; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg4, i);
 			if (!Item)
@@ -13239,13 +13304,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg6 = PySequence_Size(PyArg6);
-		if (Len_Arg6 < 0)
+		int32 ElementCount_Arg6 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg6, ElementCount_Arg6, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereTraceSingleForObjects"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg6.SetNum(Len_Arg6);
-		for (Py_ssize_t i = 0; i < Len_Arg6; ++i)
+		Arg6.SetNum(ElementCount_Arg6);
+		for (int32 i = 0; i < ElementCount_Arg6; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(PyArg6, i);
 			if (!Item)
@@ -13375,13 +13441,14 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg0 = PySequence_Size(InArg);
-		if (Len_Arg0 < 0)
+		int32 ElementCount_Arg0 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg0, ElementCount_Arg0, TEXT("GeneratedWrapper")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::UnloadPrimaryAssetList"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		Arg0.SetNum(Len_Arg0);
-		for (Py_ssize_t i = 0; i < Len_Arg0; ++i)
+		Arg0.SetNum(ElementCount_Arg0);
+		for (int32 i = 0; i < ElementCount_Arg0; ++i)
 		{
 			PyObject* Item = PySequence_GetItem(InArg, i);
 			if (!Item)
