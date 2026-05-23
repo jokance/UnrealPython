@@ -10,6 +10,14 @@
 
 extern PyMethodDef SetPyMethodDefs[];
 
+namespace
+{
+	bool IsSameSetInstance(const FUPyWrapperSet* InLhs, const FUPyWrapperSet* InRhs)
+	{
+		return InLhs == InRhs || (InLhs && InRhs && InLhs->SetInstance == InRhs->SetInstance && InLhs->SetProp.Get() == InRhs->SetProp.Get());
+	}
+}
+
 PyTypeObject UPyWrapperSetType = {
 	PyVarObject_HEAD_INIT(nullptr, 0)
 	"Set", /* tp_name */
@@ -837,6 +845,11 @@ int FUPyWrapperSet::Update(FUPyWrapperSet* InSelf, PyObject* InOthers)
 		{
 			UPyUtil::SetPythonError(PyExc_TypeError, InSelf, *FString::Printf(TEXT("Cannot convert argument %d (%s) to '%s'"), InObjIndex, *UPyUtil::GetFriendlyTypename(InOtherObj), *UPyUtil::GetFriendlyTypename(InSelf)));
 			return false;
+		}
+
+		if (IsSameSetInstance(InSelf, Other.GetPtr()))
+		{
+			return true;
 		}
 
 		const FScriptSetHelper OtherScriptSetHelper(Other->SetProp, Other->SetInstance);
