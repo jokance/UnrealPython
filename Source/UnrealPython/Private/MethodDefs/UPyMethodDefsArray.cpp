@@ -117,7 +117,7 @@ struct FMethods_WrapperArray
 			return nullptr;
 		}
 
-		int32 StopIndex = -1;
+		int32 StopIndex = MAX_int32;
 		if (PyStopObj && !UPyConversion::Nativize(PyStopObj, StopIndex))
 		{
 			UPyUtil::SetPythonError(PyExc_TypeError, InSelf, *FString::Printf(TEXT("Failed to convert 'stop' (%s) to 'int32'"), *UPyUtil::GetFriendlyTypename(PyStopObj)));
@@ -272,7 +272,7 @@ PyMethodDef ArrayPyMethodDefs[] = {
 	{ "Append", UPyCFunctionCast(&FMethods_WrapperArray::Append), METH_VARARGS, UPyDoc_STR("Append(self, value: _ElemType) -> None -- append the given value to the end of this Unreal array (equivalent to TArray::Add in C++)") },
 	{ "Count", UPyCFunctionCast(&FMethods_WrapperArray::Count), METH_VARARGS, UPyDoc_STR("Count(self, value: _ElemType) -> int -- return the number of times that value appears in this this Unreal array") },
 	{ "Extend", UPyCFunctionCast(&FMethods_WrapperArray::Extend), METH_VARARGS, UPyDoc_STR("Extend(self, values: Iterable[_ElemType]) -> None -- extend this Unreal array by appending elements from the given iterable (equivalent to TArray::Append in C++)") },
-	{ "Index", UPyCFunctionCast(&FMethods_WrapperArray::Index), METH_VARARGS | METH_KEYWORDS, UPyDoc_STR("Index(self, value: _ElemType, start: int = 0, stop: int = -1) -> int -- get the index of the first matching value in this Unreal array, or raise ValueError if missing (equivalent to TArray::IndexOfByKey in C++)") },
+	{ "Index", UPyCFunctionCast(&FMethods_WrapperArray::Index), METH_VARARGS | METH_KEYWORDS, UPyDoc_STR("Index(self, value: _ElemType, start: int = 0, stop: int = len(self)) -> int -- get the index of the first matching value in this Unreal array, or raise ValueError if missing (equivalent to TArray::IndexOfByKey in C++)") },
 	{ "Insert", UPyCFunctionCast(&FMethods_WrapperArray::Insert), METH_VARARGS | METH_KEYWORDS, UPyDoc_STR("Insert(self, index: int, value: _ElemType) -> None -- insert the given value at the given index in this Unreal array") },
 	{ "Pop", UPyCFunctionCast(&FMethods_WrapperArray::Pop), METH_VARARGS, UPyDoc_STR("Pop(self, index: int = -1) -> _ElemType -- remove and return the value at the given index in this Unreal array, or raise IndexError if the index is out-of-bounds") },
 	{ "Clear", UPyCFunctionCast(&FMethods_WrapperArray::Clear), METH_NOARGS, UPyDoc_STR("Clear(self) -> None -- remove all values from this Unreal array") },

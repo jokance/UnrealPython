@@ -13,6 +13,15 @@ extern PyMethodDef ArrayPyMethodDefs[];
 /** Python type for FUPyWrapperArrayIterator */
 extern PyTypeObject UPyWrapperArrayIteratorType;
 
+namespace
+{
+	Py_ssize_t ResolveContainerBoundParam(const Py_ssize_t InIndex, const Py_ssize_t InLen)
+	{
+		const Py_ssize_t ResolvedIndex = UPyUtil::ResolveContainerIndexParam(InIndex, InLen);
+		return FMath::Clamp(ResolvedIndex, (Py_ssize_t)0, InLen);
+	}
+}
+
 PyTypeObject UPyWrapperArrayType = {
 	PyVarObject_HEAD_INIT(nullptr, 0)
 	"Array", /* tp_name */
@@ -674,11 +683,11 @@ Py_ssize_t FUPyWrapperArray::Index(FUPyWrapperArray* InSelf, PyObject* InValue, 
 
 	FScriptArrayHelper SelfScriptArrayHelper(InSelf->ArrayProp, InSelf->ArrayInstance);
 	const int32 ElementCount = SelfScriptArrayHelper.Num();
-	const Py_ssize_t ResolvedStartIndex = UPyUtil::ResolveContainerIndexParam(InStartIndex, ElementCount);
-	const Py_ssize_t ResolvedStopIndex = UPyUtil::ResolveContainerIndexParam(InStopIndex, ElementCount);
+	const Py_ssize_t ResolvedStartIndex = ResolveContainerBoundParam(InStartIndex, ElementCount);
+	const Py_ssize_t ResolvedStopIndex = ResolveContainerBoundParam(InStopIndex, ElementCount);
 
-	const int32 StartIndex = FMath::Min((int32)ResolvedStartIndex, ElementCount);
-	const int32 StopIndex = FMath::Max((int32)ResolvedStopIndex, ElementCount);
+	const int32 StartIndex = (int32)ResolvedStartIndex;
+	const int32 StopIndex = (int32)ResolvedStopIndex;
 
 	int32 ReturnIndex = INDEX_NONE;
 	for (int32 ElementIndex = StartIndex; ElementIndex < StopIndex; ++ElementIndex)

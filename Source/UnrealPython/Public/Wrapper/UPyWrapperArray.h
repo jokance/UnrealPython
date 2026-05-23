@@ -80,7 +80,7 @@ struct FUPyWrapperArray : public FUPyWrapperBase
 	static Py_ssize_t Count(FUPyWrapperArray* InSelf, PyObject* InValue);
 
 	/** Get the index of the first the given value appears in this container (equivalent to 'x.index(v)' in Python) */
-	static Py_ssize_t Index(FUPyWrapperArray* InSelf, PyObject* InValue, Py_ssize_t InStartIndex = 0, Py_ssize_t InStopIndex = INDEX_NONE);
+	static Py_ssize_t Index(FUPyWrapperArray* InSelf, PyObject* InValue, Py_ssize_t InStartIndex = 0, Py_ssize_t InStopIndex = MAX_int32);
 
 	/** Insert the given value into this container at the given index (equivalent to 'x.insert(i, v)' in Python) */
 	static int Insert(FUPyWrapperArray* InSelf, Py_ssize_t InIndex, PyObject* InValue);
