@@ -815,6 +815,8 @@ int FUPyWrapperArray::Sort(FUPyWrapperArray* InSelf, PyObject* InKey, bool InRev
 
 	FScriptArrayHelper SelfScriptArrayHelper(InSelf->ArrayProp, InSelf->ArrayInstance);
 	const int32 ElementCount = SelfScriptArrayHelper.Num();
+	const FArrayProperty* InitialArrayProp = InSelf->ArrayProp.Get();
+	void* InitialArrayInstance = InSelf->ArrayInstance;
 
 	// This isn't ideal, but we have no sorting algorithms that take untyped data, and it's the simplest way to deal with the key (and cmp) arguments that need processing in Python.
 	FUPyObjectPtr PyList = FUPyObjectPtr::StealReference(PyList_New(ElementCount));
@@ -848,10 +850,28 @@ int FUPyWrapperArray::Sort(FUPyWrapperArray* InSelf, PyObject* InKey, bool InRev
 		return -1;
 	}
 
+	if (!ValidateInternalState(InSelf))
+	{
+		return -1;
+	}
+
+	if (InSelf->ArrayProp.Get() != InitialArrayProp || InSelf->ArrayInstance != InitialArrayInstance)
+	{
+		UPyUtil::SetPythonError(PyExc_RuntimeError, InSelf, TEXT("Array was re-initialized during sort"));
+		return -1;
+	}
+
+	FScriptArrayHelper PostSortScriptArrayHelper(InSelf->ArrayProp, InSelf->ArrayInstance);
+	if (PostSortScriptArrayHelper.Num() != ElementCount)
+	{
+		UPyUtil::SetPythonError(PyExc_RuntimeError, InSelf, TEXT("Array changed size during sort"));
+		return -1;
+	}
+
 	for (int32 ElementIndex = 0; ElementIndex < ElementCount; ++ElementIndex)
 	{
 		PyObject* PyItemObj = PyList_GetItem(PyList, ElementIndex);
-		UPyConversion::NativizeProperty(PyItemObj, InSelf->ArrayProp->Inner, SelfScriptArrayHelper.GetRawPtr(ElementIndex));
+		UPyConversion::NativizeProperty(PyItemObj, InSelf->ArrayProp->Inner, PostSortScriptArrayHelper.GetRawPtr(ElementIndex));
 	}
 
 	return 0;
