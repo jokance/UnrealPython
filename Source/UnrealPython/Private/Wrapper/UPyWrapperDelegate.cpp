@@ -523,10 +523,16 @@ FUPyWrapperDelegate* FUPyWrapperDelegate::CastPyObject(PyObject* InPyObject, FUP
 
 	if (PyObject_IsInstance(InPyObject, (PyObject*)&UPyWrapperDelegateType) == 1)
 	{
+		FUPyWrapperDelegate* Self = (FUPyWrapperDelegate*)InPyObject;
+		if (!ValidateInternalState(Self))
+		{
+			return nullptr;
+		}
+
 		SetOptionalUPyConversionResult(FUPyConversionResult::Success(), OutCastResult);
 
 		Py_INCREF(InPyObject);
-		return (FUPyWrapperDelegate*)InPyObject;
+		return Self;
 	}
 
 	return nullptr;
@@ -538,10 +544,16 @@ FUPyWrapperDelegate* FUPyWrapperDelegate::CastPyObject(PyObject* InPyObject, con
 
 	if (PyObject_IsInstance(InPyObject, (PyObject*)InType) == 1 && (InType == &UPyWrapperDelegateType || PyObject_IsInstance(InPyObject, (PyObject*)&UPyWrapperDelegateType) == 1))
 	{
+		FUPyWrapperDelegate* Self = (FUPyWrapperDelegate*)InPyObject;
+		if (!ValidateInternalState(Self))
+		{
+			return nullptr;
+		}
+
 		SetOptionalUPyConversionResult(Py_TYPE(InPyObject) == InType ? FUPyConversionResult::Success() : FUPyConversionResult::SuccessWithCoercion(), OutCastResult);
 
 		Py_INCREF(InPyObject);
-		return (FUPyWrapperDelegate*)InPyObject;
+		return Self;
 	}
 
 	// Note: -----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -617,10 +629,16 @@ FUPyWrapperMulticastDelegate* FUPyWrapperMulticastDelegate::CastPyObject(PyObjec
 
 	if (PyObject_IsInstance(InPyObject, (PyObject*)&UPyWrapperMulticastDelegateType) == 1)
 	{
+		FUPyWrapperMulticastDelegate* Self = (FUPyWrapperMulticastDelegate*)InPyObject;
+		if (!ValidateInternalState(Self))
+		{
+			return nullptr;
+		}
+
 		SetOptionalUPyConversionResult(FUPyConversionResult::Success(), OutCastResult);
 
 		Py_INCREF(InPyObject);
-		return (FUPyWrapperMulticastDelegate*)InPyObject;
+		return Self;
 	}
 
 	return nullptr;
@@ -632,10 +650,16 @@ FUPyWrapperMulticastDelegate* FUPyWrapperMulticastDelegate::CastPyObject(PyObjec
 
 	if (PyObject_IsInstance(InPyObject, (PyObject*)InType) == 1 && (InType == &UPyWrapperMulticastDelegateType || PyObject_IsInstance(InPyObject, (PyObject*)&UPyWrapperMulticastDelegateType) == 1))
 	{
+		FUPyWrapperMulticastDelegate* Self = (FUPyWrapperMulticastDelegate*)InPyObject;
+		if (!ValidateInternalState(Self))
+		{
+			return nullptr;
+		}
+
 		SetOptionalUPyConversionResult(Py_TYPE(InPyObject) == InType ? FUPyConversionResult::Success() : FUPyConversionResult::SuccessWithCoercion(), OutCastResult);
 
 		Py_INCREF(InPyObject);
-		return (FUPyWrapperMulticastDelegate*)InPyObject;
+		return Self;
 	}
 
 	return nullptr;
