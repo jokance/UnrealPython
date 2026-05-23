@@ -81,7 +81,7 @@ struct FUPyWrapperSetIterator
 			return false;
 		}
 
-		return true;
+		return FUPyWrapperSet::ValidateInternalState(InSelf->IterInstance);
 	}
 
 	/** Given a sparse index, get the first element index from this point in the set (including the given index) */

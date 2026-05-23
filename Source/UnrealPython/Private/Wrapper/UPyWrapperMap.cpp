@@ -166,7 +166,7 @@ struct TUPyWrapperMapIterator
 			return false;
 		}
 
-		return true;
+		return FUPyWrapperMap::ValidateInternalState(InSelf->IterInstance);
 	}
 
 	/** Given a sparse index, get the first element index from this point in the map (including the given index) */

@@ -51,6 +51,11 @@ struct FUPyWrapperFixedArrayIterator
 	{
 		Deinit(InSelf);
 
+		if (!FUPyWrapperFixedArray::ValidateInternalState(InInstance))
+		{
+			return -1;
+		}
+
 		Py_INCREF(InInstance);
 		InSelf->IterInstance = InInstance;
 		InSelf->IterIndex = 0;
@@ -75,7 +80,7 @@ struct FUPyWrapperFixedArrayIterator
 			return false;
 		}
 
-		return true;
+		return FUPyWrapperFixedArray::ValidateInternalState(InSelf->IterInstance);
 	}
 
 	/** Get the iterator */
