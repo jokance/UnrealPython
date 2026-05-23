@@ -1330,37 +1330,51 @@ FString GetFriendlyPropertyValue(const FProperty* InProp, const void* InPropValu
 
 FString GetFriendlyTypename(PyTypeObject* InPyType)
 {
+	if (!InPyType)
+	{
+		return TEXT("<null>");
+	}
+
 	return UTF8_TO_TCHAR(InPyType->tp_name);
 }
 
 FString GetFriendlyTypename(PyObject* InPyObj)
 {
+	if (!InPyObj)
+	{
+		return TEXT("<null>");
+	}
+
 	if (PyObject_IsInstance(InPyObj, (PyObject*)&UPyWrapperArrayType) == 1)
 	{
 		FUPyWrapperArray* PyArray = (FUPyWrapperArray*)InPyObj;
-		const FString PropTypeName = PyArray->ArrayProp->Inner ? PyArray->ArrayProp->Inner->GetClass()->GetName() : FString();
+		const FArrayProperty* ArrayProp = PyArray->ArrayProp.Get();
+		const FString PropTypeName = ArrayProp && ArrayProp->Inner ? ArrayProp->Inner->GetClass()->GetName() : TEXT("<invalid>");
 		return FString::Printf(TEXT("%s (%s)"), UTF8_TO_TCHAR(Py_TYPE(InPyObj)->tp_name), *PropTypeName);
 	}
 
 	if (PyObject_IsInstance(InPyObj, (PyObject*)&UPyWrapperFixedArrayType) == 1)
 	{
 		FUPyWrapperFixedArray* PyFixedArray = (FUPyWrapperFixedArray*)InPyObj;
-		const FString PropTypeName = PyFixedArray->ArrayProp ? PyFixedArray->ArrayProp->GetClass()->GetName() : FString();
+		const FProperty* ArrayProp = PyFixedArray->ArrayProp.Get();
+		const FString PropTypeName = ArrayProp ? ArrayProp->GetClass()->GetName() : TEXT("<invalid>");
 		return FString::Printf(TEXT("%s (%s)"), UTF8_TO_TCHAR(Py_TYPE(InPyObj)->tp_name), *PropTypeName);
 	}
 
 	if (PyObject_IsInstance(InPyObj, (PyObject*)&UPyWrapperSetType) == 1)
 	{
 		FUPyWrapperSet* PySet = (FUPyWrapperSet*)InPyObj;
-		const FString PropTypeName = PySet->SetProp ? PySet->SetProp->ElementProp->GetClass()->GetName() : FString();
+		const FSetProperty* SetProp = PySet->SetProp.Get();
+		const FString PropTypeName = SetProp && SetProp->ElementProp ? SetProp->ElementProp->GetClass()->GetName() : TEXT("<invalid>");
 		return FString::Printf(TEXT("%s (%s)"), UTF8_TO_TCHAR(Py_TYPE(InPyObj)->tp_name), *PropTypeName);
 	}
 
 	if (PyObject_IsInstance(InPyObj, (PyObject*)&UPyWrapperMapType) == 1)
 	{
 		FUPyWrapperMap* PyMap = (FUPyWrapperMap*)InPyObj;
-		const FString PropKeyName = PyMap->MapProp ? PyMap->MapProp->KeyProp->GetClass()->GetName() : FString();
-		const FString PropTypeName = PyMap->MapProp ? PyMap->MapProp->ValueProp->GetClass()->GetName() : FString();
+		const FMapProperty* MapProp = PyMap->MapProp.Get();
+		const FString PropKeyName = MapProp && MapProp->KeyProp ? MapProp->KeyProp->GetClass()->GetName() : TEXT("<invalid>");
+		const FString PropTypeName = MapProp && MapProp->ValueProp ? MapProp->ValueProp->GetClass()->GetName() : TEXT("<invalid>");
 		return FString::Printf(TEXT("%s (%s, %s)"), UTF8_TO_TCHAR(Py_TYPE(InPyObj)->tp_name), *PropKeyName, *PropTypeName);
 	}
 
