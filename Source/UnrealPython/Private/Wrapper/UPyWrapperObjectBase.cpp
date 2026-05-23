@@ -434,7 +434,8 @@ struct FFuncs_WrapperObjectBase
 {
 	static PyObject* New(PyTypeObject* InType, PyObject* InArgs, PyObject* InKwds)
 	{
-		return (PyObject*)FUPyWrapperObjectBase::New(InType);
+		PyErr_Format(PyExc_RuntimeError, "Direct object wrapper allocation of %s failed, please use World.SpawnActor() or ue.NewObject() to create objects", InType->tp_name);
+		return nullptr;
 	}
 
 	static void Dealloc(FUPyWrapperObjectBase* InSelf)
