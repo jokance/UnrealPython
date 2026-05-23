@@ -432,13 +432,17 @@ FUPyWrapperSet* FUPyWrapperSet::CastPyObject(PyObject* InPyObject, PyTypeObject*
 				}
 
 				FScriptSetHelper NewScriptSetHelper(NewSet->SetProp, NewSet->SetInstance);
-				for (int32 SequenceIndex = 0; SequenceIndex < ElementCount; ++SequenceIndex)
-				{
-					FUPyObjectPtr SequenceItem = FUPyObjectPtr::StealReference(PyIter_Next(PyObjIter));
-					if (!SequenceItem)
+					for (int32 SequenceIndex = 0; SequenceIndex < ElementCount; ++SequenceIndex)
 					{
-						return nullptr;
-					}
+						FUPyObjectPtr SequenceItem = FUPyObjectPtr::StealReference(PyIter_Next(PyObjIter));
+						if (!SequenceItem)
+						{
+							if (!PyErr_Occurred())
+							{
+								UPyUtil::SetPythonError(PyExc_RuntimeError, InType, *FString::Printf(TEXT("Iterable ended after %d of %d items"), SequenceIndex, ElementCount));
+							}
+							return nullptr;
+						}
 
 					const int32 NewElementIndex = NewScriptSetHelper.AddDefaultValue_Invalid_NeedsRehash();
 					if (!UPyConversion::NativizeProperty(SequenceItem, NewScriptSetHelper.GetElementProperty(), NewScriptSetHelper.GetElementPtr(NewElementIndex)))

@@ -720,13 +720,17 @@ FUPyWrapperMap* FUPyWrapperMap::CastPyObject(PyObject* InPyObject, PyTypeObject*
 				if (UPyUtil::IsMappingType(InPyObject))
 				{
 					// Conversion from a mapping type
-					for (int32 SequenceIndex = 0; SequenceIndex < ElementCount; ++SequenceIndex)
-					{
-						FUPyObjectPtr KeyItem = FUPyObjectPtr::StealReference(PyIter_Next(PyObjIter));
-						if (!KeyItem)
+						for (int32 SequenceIndex = 0; SequenceIndex < ElementCount; ++SequenceIndex)
 						{
-							return nullptr;
-						}
+							FUPyObjectPtr KeyItem = FUPyObjectPtr::StealReference(PyIter_Next(PyObjIter));
+							if (!KeyItem)
+							{
+								if (!PyErr_Occurred())
+								{
+									UPyUtil::SetPythonError(PyExc_RuntimeError, InType, *FString::Printf(TEXT("Mapping iterator ended after %d of %d keys"), SequenceIndex, ElementCount));
+								}
+								return nullptr;
+							}
 
 						FUPyObjectPtr ValueItem = FUPyObjectPtr::StealReference(PyObject_GetItem(InPyObject, KeyItem));
 						if (!ValueItem)
@@ -748,13 +752,17 @@ FUPyWrapperMap* FUPyWrapperMap::CastPyObject(PyObject* InPyObject, PyTypeObject*
 				else
 				{
 					// Conversion from a sequence of pairs
-					for (int32 SequenceIndex = 0; SequenceIndex < ElementCount; ++SequenceIndex)
-					{
-						FUPyObjectPtr PairItem = FUPyObjectPtr::StealReference(PyIter_Next(PyObjIter));
-						if (!PairItem)
+						for (int32 SequenceIndex = 0; SequenceIndex < ElementCount; ++SequenceIndex)
 						{
-							return nullptr;
-						}
+							FUPyObjectPtr PairItem = FUPyObjectPtr::StealReference(PyIter_Next(PyObjIter));
+							if (!PairItem)
+							{
+								if (!PyErr_Occurred())
+								{
+									UPyUtil::SetPythonError(PyExc_RuntimeError, InType, *FString::Printf(TEXT("Iterable ended after %d of %d items"), SequenceIndex, ElementCount));
+								}
+								return nullptr;
+							}
 
 						FUPyObjectPtr PairSequence = FUPyObjectPtr::StealReference(PySequence_Fast(PairItem, ""));
 						if (!PairSequence)
@@ -1133,6 +1141,10 @@ FUPyWrapperMap* FUPyWrapperMap::FromKeys(PyObject* InSequence, PyObject* InValue
 		FUPyObjectPtr PyKeyItem = FUPyObjectPtr::StealReference(PyIter_Next(PySequenceIter));
 		if (!PyKeyItem)
 		{
+			if (!PyErr_Occurred())
+			{
+				UPyUtil::SetPythonError(PyExc_RuntimeError, InType, *FString::Printf(TEXT("'sequence' iterator ended after %d of %d keys"), SequenceIndex, ElementCount));
+			}
 			return nullptr;
 		}
 

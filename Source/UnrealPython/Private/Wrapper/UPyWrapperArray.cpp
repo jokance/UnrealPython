@@ -384,13 +384,17 @@ FUPyWrapperArray* FUPyWrapperArray::CastPyObject(PyObject* InPyObject, PyTypeObj
 				FScriptArrayHelper NewScriptArrayHelper(NewArray->ArrayProp, NewArray->ArrayInstance);
 				NewScriptArrayHelper.Resize(ElementCount);
 
-				for (int32 SequenceIndex = 0; SequenceIndex < ElementCount; ++SequenceIndex)
-				{
-					FUPyObjectPtr SequenceItem = FUPyObjectPtr::StealReference(PyIter_Next(PyObjIter));
-					if (!SequenceItem)
+					for (int32 SequenceIndex = 0; SequenceIndex < ElementCount; ++SequenceIndex)
 					{
-						return nullptr;
-					}
+						FUPyObjectPtr SequenceItem = FUPyObjectPtr::StealReference(PyIter_Next(PyObjIter));
+						if (!SequenceItem)
+						{
+							if (!PyErr_Occurred())
+							{
+								UPyUtil::SetPythonError(PyExc_RuntimeError, InType, *FString::Printf(TEXT("Iterable ended after %d of %d items"), SequenceIndex, ElementCount));
+							}
+							return nullptr;
+						}
 
 					if (!UPyConversion::NativizeProperty(SequenceItem, NewArray->ArrayProp->Inner, NewScriptArrayHelper.GetRawPtr((int32)SequenceIndex)))
 					{

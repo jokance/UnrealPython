@@ -345,13 +345,17 @@ FUPyWrapperFixedArray* FUPyWrapperFixedArray::CastPyObject(PyObject* InPyObject,
 					return nullptr;
 				}
 
-				for (int32 SequenceIndex = 0; SequenceIndex < ElementCount; ++SequenceIndex)
-				{
-					FUPyObjectPtr SequenceItem = FUPyObjectPtr::StealReference(PyIter_Next(PyObjIter));
-					if (!SequenceItem)
+					for (int32 SequenceIndex = 0; SequenceIndex < ElementCount; ++SequenceIndex)
 					{
-						return nullptr;
-					}
+						FUPyObjectPtr SequenceItem = FUPyObjectPtr::StealReference(PyIter_Next(PyObjIter));
+						if (!SequenceItem)
+						{
+							if (!PyErr_Occurred())
+							{
+								UPyUtil::SetPythonError(PyExc_RuntimeError, InType, *FString::Printf(TEXT("Iterable ended after %d of %d items"), SequenceIndex, ElementCount));
+							}
+							return nullptr;
+						}
 
 					if (!UPyConversion::NativizeProperty_Direct(SequenceItem, NewArray->ArrayProp, GetItemPtr(NewArray, SequenceIndex)))
 					{
