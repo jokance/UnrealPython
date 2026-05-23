@@ -6421,6 +6421,11 @@ struct FMethods_GameplayStatics
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::SpawnObject"), TEXT("invalid argument"));
 			return nullptr;
 		}
+		if (Arg0 && Arg0->HasAnyClassFlags(CLASS_Abstract))
+		{
+			UPyUtil::SetPythonError(PyExc_Exception, TEXT("GameplayStatics::SpawnObject"), *FString::Printf(TEXT("Class '%s' is abstract"), *Arg0->GetName()));
+			return nullptr;
+		}
 
 		PyObject* PyArg1 = PyTuple_GetItem(InArgs, 1);
 		if (PyArg1 == nullptr)

@@ -3024,6 +3024,16 @@ internal static class AutoWrapperGenerator
 					previousWasOptional = isOptional;
 				}
 
+				if (rawType.Equals("UGameplayStatics", StringComparison.Ordinal) && nativeMethodName.Equals("SpawnObject", StringComparison.Ordinal))
+				{
+					methodBuilder.AppendLine("\t\tif (Arg0 && Arg0->HasAnyClassFlags(CLASS_Abstract))");
+					methodBuilder.AppendLine("\t\t{");
+					methodBuilder.AppendLine("\t\t\tUPyUtil::SetPythonError(PyExc_Exception, TEXT(\"GameplayStatics::SpawnObject\"), *FString::Printf(TEXT(\"Class '%s' is abstract\"), *Arg0->GetName()));");
+					methodBuilder.AppendLine("\t\t\treturn nullptr;");
+					methodBuilder.AppendLine("\t\t}");
+					methodBuilder.AppendLine();
+				}
+
 				if (generatedBinding)
 				{
 					// Declare output parameter variables and build a map for later
