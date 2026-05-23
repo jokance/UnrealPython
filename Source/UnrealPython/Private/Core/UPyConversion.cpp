@@ -190,18 +190,40 @@ FUPyConversionResult NativizeReal(PyObject* PyObj, T& OutVal, const ESetErrorSta
 	{
 		if (PyLong_Check(PyObj))
 		{
-			OutVal = PyLong_AsDouble(PyObj);
+			const double PyVal = PyLong_AsDouble(PyObj);
+			if (PyErr_Occurred())
+			{
+				return NativizeError(PyObj, SetErrorState, InErrorType, TEXT("value out of range"));
+			}
+
+			if (!(PyVal >= static_cast<double>(std::numeric_limits<T>::lowest()) && PyVal <= static_cast<double>(std::numeric_limits<T>::max())))
+			{
+				return NativizeError(PyObj, SetErrorState, InErrorType, TEXT("value out of range"));
+			}
+
+			OutVal = static_cast<T>(PyVal);
 			return FUPyConversionResult::SuccessWithCoercion();
 		}
 
 		if (PyFloat_Check(PyObj))
 		{
-			OutVal = PyFloat_AsDouble(PyObj);
+			const double PyVal = PyFloat_AsDouble(PyObj);
+			if (PyErr_Occurred())
+			{
+				return NativizeError(PyObj, SetErrorState, InErrorType, TEXT("value out of range"));
+			}
+
+			if (!(PyVal >= static_cast<double>(std::numeric_limits<T>::lowest()) && PyVal <= static_cast<double>(std::numeric_limits<T>::max())))
+			{
+				return NativizeError(PyObj, SetErrorState, InErrorType, TEXT("value out of range"));
+			}
+
+			OutVal = static_cast<T>(PyVal);
 			return FUPyConversionResult::Success();
 		}
 	}
 
-	UPYCONVERSION_RETURN(FUPyConversionResult::Failure(), TEXT("Nativize"), *FString::Printf(TEXT("Cannot nativize '%s' as '%s'"), *UPyUtil::GetFriendlyTypename(PyObj), InErrorType));
+	return NativizeError(PyObj, SetErrorState, InErrorType);
 }
 
 template <typename T>
