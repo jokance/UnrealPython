@@ -269,7 +269,7 @@ FUPyWrapperFixedArray* FUPyWrapperFixedArray::CastPyObject(PyObject* InPyObject,
 {
 	SetOptionalUPyConversionResult(FUPyConversionResult::Failure(), OutCastResult);
 
-	if (PyObject_IsInstance(InPyObject, (PyObject*)&UPyWrapperFixedArrayType) == 1)
+	if (PyObject_TypeCheck(InPyObject, &UPyWrapperFixedArrayType))
 	{
 		SetOptionalUPyConversionResult(FUPyConversionResult::Success(), OutCastResult);
 
@@ -284,7 +284,7 @@ FUPyWrapperFixedArray* FUPyWrapperFixedArray::CastPyObject(PyObject* InPyObject,
 {
 	SetOptionalUPyConversionResult(FUPyConversionResult::Failure(), OutCastResult);
 
-	if (PyObject_IsInstance(InPyObject, (PyObject*)InType) == 1 && (InType == &UPyWrapperFixedArrayType || PyObject_IsInstance(InPyObject, (PyObject*)&UPyWrapperFixedArrayType) == 1))
+	if (PyObject_TypeCheck(InPyObject, InType) && (InType == &UPyWrapperFixedArrayType || PyObject_TypeCheck(InPyObject, &UPyWrapperFixedArrayType)))
 	{
 		FUPyWrapperFixedArray* Self = (FUPyWrapperFixedArray*)InPyObject;
 		if (!ValidateInternalState(Self))
@@ -669,6 +669,7 @@ struct FFuncs_WrapperFixedArray
 		FUPyWrapperFixedArrayPtr Other = FUPyWrapperFixedArrayPtr::StealReference(FUPyWrapperFixedArray::CastPyObject(InOther, &UPyWrapperFixedArrayType, SelfPropDef));
 		if (!Other)
 		{
+			PyErr_Clear();
 			Py_INCREF(Py_NotImplemented);
 			return Py_NotImplemented;
 		}

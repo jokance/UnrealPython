@@ -346,7 +346,7 @@ FUPyWrapperSet* FUPyWrapperSet::CastPyObject(PyObject* InPyObject, FUPyConversio
 {
 	SetOptionalUPyConversionResult(FUPyConversionResult::Failure(), OutCastResult);
 
-	if (PyObject_IsInstance(InPyObject, (PyObject*)&UPyWrapperSetType) == 1)
+	if (PyObject_TypeCheck(InPyObject, &UPyWrapperSetType))
 	{
 		SetOptionalUPyConversionResult(FUPyConversionResult::Success(), OutCastResult);
 
@@ -361,7 +361,7 @@ FUPyWrapperSet* FUPyWrapperSet::CastPyObject(PyObject* InPyObject, PyTypeObject*
 {
 	SetOptionalUPyConversionResult(FUPyConversionResult::Failure(), OutCastResult);
 
-	if (PyObject_IsInstance(InPyObject, (PyObject*)InType) == 1 && (InType == &UPyWrapperSetType || PyObject_IsInstance(InPyObject, (PyObject*)&UPyWrapperSetType) == 1))
+	if (PyObject_TypeCheck(InPyObject, InType) && (InType == &UPyWrapperSetType || PyObject_TypeCheck(InPyObject, &UPyWrapperSetType)))
 	{
 		FUPyWrapperSet* Self = (FUPyWrapperSet*)InPyObject;
 
@@ -1078,6 +1078,7 @@ struct FFuncs_WrapperSet
 		FUPyWrapperSetPtr Other = FUPyWrapperSetPtr::StealReference(FUPyWrapperSet::CastPyObject(InOther, &UPyWrapperSetType, SelfElementDef));
 		if (!Other)
 		{
+			PyErr_Clear();
 			Py_INCREF(Py_NotImplemented);
 			return Py_NotImplemented;
 		}
