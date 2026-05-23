@@ -5847,6 +5847,11 @@ struct FMethods_PrimitiveComponent
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg1 = PySequence_Size(PyArg1);
+		if (Len_Arg1 < 0)
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("PrimitiveComponent::SetCustomPrimitiveDataFloatArray"), TEXT("invalid argument"));
+			return nullptr;
+		}
 		Arg1.SetNum(Len_Arg1);
 		for (Py_ssize_t i = 0; i < Len_Arg1; ++i)
 		{
@@ -6037,6 +6042,11 @@ struct FMethods_PrimitiveComponent
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg1 = PySequence_Size(PyArg1);
+		if (Len_Arg1 < 0)
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("PrimitiveComponent::SetDefaultCustomPrimitiveDataFloatArray"), TEXT("invalid argument"));
+			return nullptr;
+		}
 		Arg1.SetNum(Len_Arg1);
 		for (Py_ssize_t i = 0; i < Len_Arg1; ++i)
 		{
@@ -6210,6 +6220,11 @@ struct FMethods_PrimitiveComponent
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg0 = PySequence_Size(InArg);
+		if (Len_Arg0 < 0)
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("PrimitiveComponent::SetExcludeForSpecificHLODLevels"), TEXT("invalid argument"));
+			return nullptr;
+		}
 		Arg0.SetNum(Len_Arg0);
 		for (Py_ssize_t i = 0; i < Len_Arg0; ++i)
 		{

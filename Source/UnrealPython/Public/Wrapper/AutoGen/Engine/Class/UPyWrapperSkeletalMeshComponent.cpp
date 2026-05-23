@@ -4501,6 +4501,11 @@ struct FMethods_SkeletalMeshComponent
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg0 = PySequence_Size(PyArg0);
+		if (Len_Arg0 < 0)
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("SkeletalMeshComponent::SetAllowedAnimCurvesEvaluation"), TEXT("invalid argument"));
+			return nullptr;
+		}
 		Arg0.SetNum(Len_Arg0);
 		for (Py_ssize_t i = 0; i < Len_Arg0; ++i)
 		{

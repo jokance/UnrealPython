@@ -387,6 +387,11 @@ struct FMethods_GameplayStatics
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg5 = PySequence_Size(PyArg5);
+		if (Len_Arg5 < 0)
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::ApplyRadialDamage"), TEXT("invalid argument"));
+			return nullptr;
+		}
 		Arg5.SetNum(Len_Arg5);
 		for (Py_ssize_t i = 0; i < Len_Arg5; ++i)
 		{
@@ -566,6 +571,11 @@ struct FMethods_GameplayStatics
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg8 = PySequence_Size(PyArg8);
+		if (Len_Arg8 < 0)
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::ApplyRadialDamageWithFalloff"), TEXT("invalid argument"));
+			return nullptr;
+		}
 		Arg8.SetNum(Len_Arg8);
 		for (Py_ssize_t i = 0; i < Len_Arg8; ++i)
 		{
@@ -1071,6 +1081,11 @@ struct FMethods_GameplayStatics
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg5 = PySequence_Size(PyArg5);
+		if (Len_Arg5 < 0)
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::Blueprint_PredictProjectilePath_ByObjectType"), TEXT("invalid argument"));
+			return nullptr;
+		}
 		Arg5.SetNum(Len_Arg5);
 		for (Py_ssize_t i = 0; i < Len_Arg5; ++i)
 		{
@@ -1115,6 +1130,11 @@ struct FMethods_GameplayStatics
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg7 = PySequence_Size(PyArg7);
+		if (Len_Arg7 < 0)
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::Blueprint_PredictProjectilePath_ByObjectType"), TEXT("invalid argument"));
+			return nullptr;
+		}
 		Arg7.SetNum(Len_Arg7);
 		for (Py_ssize_t i = 0; i < Len_Arg7; ++i)
 		{
@@ -1322,6 +1342,11 @@ struct FMethods_GameplayStatics
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg7 = PySequence_Size(PyArg7);
+		if (Len_Arg7 < 0)
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::Blueprint_PredictProjectilePath_ByTraceChannel"), TEXT("invalid argument"));
+			return nullptr;
+		}
 		Arg7.SetNum(Len_Arg7);
 		for (Py_ssize_t i = 0; i < Len_Arg7; ++i)
 		{
@@ -2091,6 +2116,11 @@ struct FMethods_GameplayStatics
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg1 = PySequence_Size(PyArg1);
+		if (Len_Arg1 < 0)
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::FindNearestActor"), TEXT("invalid argument"));
+			return nullptr;
+		}
 		Arg1.SetNum(Len_Arg1);
 		for (Py_ssize_t i = 0; i < Len_Arg1; ++i)
 		{
@@ -2229,6 +2259,11 @@ struct FMethods_GameplayStatics
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg0 = PySequence_Size(InArg);
+		if (Len_Arg0 < 0)
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::GetActorArrayAverageLocation"), TEXT("invalid argument"));
+			return nullptr;
+		}
 		Arg0.SetNum(Len_Arg0);
 		for (Py_ssize_t i = 0; i < Len_Arg0; ++i)
 		{
@@ -2267,6 +2302,11 @@ struct FMethods_GameplayStatics
 			return nullptr;
 		}
 		Py_ssize_t Len_Arg0 = PySequence_Size(PyArg0);
+		if (Len_Arg0 < 0)
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::GetActorArrayBounds"), TEXT("invalid argument"));
+			return nullptr;
+		}
 		Arg0.SetNum(Len_Arg0);
 		for (Py_ssize_t i = 0; i < Len_Arg0; ++i)
 		{

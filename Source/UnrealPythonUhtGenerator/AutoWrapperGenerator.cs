@@ -764,6 +764,10 @@ internal static class AutoWrapperGenerator
 						$"\treturn -1;\n" +
 						$"}}\n" +
 						$"Py_ssize_t Len_{varName} = PySequence_Size({pyArgName});\n" +
+						$"if (Len_{varName} < 0)\n" +
+						$"{{\n" +
+						$"\treturn -1;\n" +
+						$"}}\n" +
 						$"{varName}.SetNum(Len_{varName});\n" +
 						$"for (Py_ssize_t i = 0; i < Len_{varName}; ++i)\n" +
 						$"{{\n" +
@@ -1514,6 +1518,10 @@ internal static class AutoWrapperGenerator
 						failureStatement +
 						$"{indent}}}\n" +
 						$"{indent}Py_ssize_t Len_{varName} = PySequence_Size({rhsExpression});\n" +
+						$"{indent}if (Len_{varName} < 0)\n" +
+						$"{indent}{{\n" +
+						failureStatement +
+						$"{indent}}}\n" +
 						$"{indent}{varName}.SetNum(Len_{varName});\n" +
 						$"{indent}for (Py_ssize_t i = 0; i < Len_{varName}; ++i)\n" +
 						$"{indent}{{\n" +
