@@ -458,7 +458,15 @@ public:
 		if (!SuperFunc)
 		{
 			// Make sure the number of function arguments matches the number of argument types specified
-			const int32 NumArgTypes = (InPyFuncDef->FuncParamTypes && InPyFuncDef->FuncParamTypes != Py_None) ? PySequence_Size(InPyFuncDef->FuncParamTypes) : 0;
+			int32 NumArgTypes = 0;
+			if (InPyFuncDef->FuncParamTypes && InPyFuncDef->FuncParamTypes != Py_None)
+			{
+				const Py_ssize_t NumArgTypesRaw = PySequence_Size(InPyFuncDef->FuncParamTypes);
+				if (UPyUtil::ValidateContainerLenValue(NumArgTypesRaw, NumArgTypes, *FString::Printf(TEXT("%s::%s"), *ClassName, *InFieldName)) != 0)
+				{
+					return false;
+				}
+			}
 			if (NumArgTypes != FuncArgNames.Num())
 			{
 				UPyUtil::SetPythonError(PyExc_Exception, PyType, *FString::Printf(TEXT("Incorrect number of arguments specified for '%s' (expected %d, got %d)"), *InFieldName, NumArgTypes, FuncArgNames.Num()));
@@ -486,7 +494,12 @@ public:
 					const int32 NumOutArgs = PyTuple_Size(InPyFuncDef->FuncRetType);
 					for (int32 ArgIndex = 0; ArgIndex < NumOutArgs; ++ArgIndex)
 					{
-						PyObject* ArgTypeObj = PySequence_GetItem(InPyFuncDef->FuncRetType, ArgIndex);
+						FUPyObjectPtr ArgTypeObj = FUPyObjectPtr::StealReference(PySequence_GetItem(InPyFuncDef->FuncRetType, ArgIndex));
+						if (!ArgTypeObj)
+						{
+							UPyUtil::SetPythonError(PyExc_Exception, PyType, *FString::Printf(TEXT("Failed to read output property type for function '%s' at index %d"), *InFieldName, ArgIndex));
+							return false;
+						}
 						FProperty* ArgProp = UPyUtil::CreateProperty(ArgTypeObj, 1, Func, *FString::Printf(TEXT("OutValue%d"), ArgIndex));
 						if (!ArgProp)
 						{
@@ -505,7 +518,12 @@ public:
 				int32 ArgIndex = FuncArgNames.Num() - 1;
 				while (ArgIndex >= 0)
 				{
-					PyObject* ArgTypeObj = PySequence_GetItem(InPyFuncDef->FuncParamTypes, ArgIndex);
+					FUPyObjectPtr ArgTypeObj = FUPyObjectPtr::StealReference(PySequence_GetItem(InPyFuncDef->FuncParamTypes, ArgIndex));
+					if (!ArgTypeObj)
+					{
+						UPyUtil::SetPythonError(PyExc_Exception, PyType, *FString::Printf(TEXT("Failed to read property type for function '%s' argument '%s'"), *InFieldName, *FuncArgNames[ArgIndex]));
+						return false;
+					}
 					FProperty* ArgProp = UPyUtil::CreateProperty(ArgTypeObj, 1, Func, *FuncArgNames[ArgIndex]);
 					if (!ArgProp)
 					{
