@@ -717,9 +717,9 @@ int FUPyWrapperArray::Insert(FUPyWrapperArray* InSelf, Py_ssize_t InIndex, PyObj
 
 	FScriptArrayHelper SelfScriptArrayHelper(InSelf->ArrayProp, InSelf->ArrayInstance);
 	const int32 ElementCount = SelfScriptArrayHelper.Num();
-	const Py_ssize_t ResolvedIndex = UPyUtil::ResolveContainerIndexParam(InIndex, ElementCount);
+	const Py_ssize_t ResolvedIndex = ResolveContainerBoundParam(InIndex, ElementCount);
 
-	const int32 InsertIndex = FMath::Min((int32)ResolvedIndex, ElementCount);
+	const int32 InsertIndex = (int32)ResolvedIndex;
 	SelfScriptArrayHelper.InsertValues(InsertIndex);
 
 	if (!UPyConversion::NativizeProperty(InValue, InSelf->ArrayProp->Inner, SelfScriptArrayHelper.GetRawPtr(InsertIndex)))
