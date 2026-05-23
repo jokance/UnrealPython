@@ -221,10 +221,16 @@ FUPyWrapperStruct* FUPyWrapperStruct::CastPyObject(PyObject* InPyObject, FUPyCon
 
 	if (PyObject_IsInstance(InPyObject, (PyObject*)&UPyWrapperStructType) == 1)
 	{
+		FUPyWrapperStruct* Self = (FUPyWrapperStruct*)InPyObject;
+		if (!ValidateInternalState(Self))
+		{
+			return nullptr;
+		}
+
 		SetOptionalUPyConversionResult(FUPyConversionResult::Success(), OutCastResult);
 
 		Py_INCREF(InPyObject);
-		return (FUPyWrapperStruct*)InPyObject;
+		return Self;
 	}
 
 	return nullptr;
@@ -234,10 +240,17 @@ FUPyWrapperStruct* FUPyWrapperStruct::CastPyObject(PyObject* InPyObject, PyTypeO
 {
 	if (PyObject_IsInstance(InPyObject, (PyObject*)InType) == 1 && (InType == &UPyWrapperStructType || PyObject_IsInstance(InPyObject, (PyObject*)&UPyWrapperStructType) == 1))
 	{
+		FUPyWrapperStruct* Self = (FUPyWrapperStruct*)InPyObject;
+		if (!ValidateInternalState(Self))
+		{
+			SetOptionalUPyConversionResult(FUPyConversionResult::Failure(), OutCastResult);
+			return nullptr;
+		}
+
 		SetOptionalUPyConversionResult(Py_TYPE(InPyObject) == InType ? FUPyConversionResult::Success() : FUPyConversionResult::SuccessWithCoercion(), OutCastResult);
-	
+
 		Py_INCREF(InPyObject);
-		return (FUPyWrapperStruct*)InPyObject;
+		return Self;
 	}
 	SetOptionalUPyConversionResult(FUPyConversionResult::Failure(), OutCastResult);
 	
