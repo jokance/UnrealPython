@@ -17,7 +17,8 @@ struct FMethods_WrapperObjectBase
 
 	static PyObject* CallIsValid(FUPyWrapperObjectBase* InSelf)
 	{
-		return UPyConversion::Pythonize(FUPyWrapperObjectBase::ValidateInternalState(InSelf));
+		const bool bIsValid = ::IsValid(InSelf->ObjectInstance) && InSelf->ObjectInstance->GetFName() != NAME_None;
+		return UPyConversion::Pythonize(bIsValid);
 	}
 
 	static PyObject* Cast(PyTypeObject* InType, PyObject* InArgs)

@@ -13,6 +13,79 @@
 #include "Wrapper/UPyWrapperDelegate.h"
 #include "UObject/UObjectGlobals.h"
 
+namespace
+{
+
+void InvalidateOwnedDelegate(FUPyWrapperDelegate* InSelf)
+{
+	if (InSelf->DelegateInstance)
+	{
+		FUPyWrapperDelegateFactory::Get().UnmapInstance(InSelf->DelegateInstance);
+	}
+	if (InSelf->OwnerContext.HasOwner())
+	{
+		InSelf->OwnerContext.Reset();
+	}
+	InSelf->DelegateInstance = nullptr;
+	InSelf->PropAddr = nullptr;
+	InSelf->DelegateProp = nullptr;
+}
+
+void InvalidateOwnedMulticastDelegate(FUPyWrapperMulticastDelegate* InSelf)
+{
+	if (InSelf->DelegateInstance)
+	{
+		FUPyWrapperMulticastDelegateFactory::Get().UnmapInstance(InSelf->DelegateInstance);
+	}
+	if (InSelf->OwnerContext.HasOwner())
+	{
+		InSelf->OwnerContext.Reset();
+	}
+	InSelf->DelegateInstance = nullptr;
+	InSelf->PropAddr = nullptr;
+	InSelf->DelegateProp = nullptr;
+}
+
+void InvalidateOwnedPyProp(FUPyWrapperBase* PyProp)
+{
+	if (!PyProp)
+	{
+		return;
+	}
+
+	PyObject* PyObj = reinterpret_cast<PyObject*>(PyProp);
+	if (PyObject_TypeCheck(PyObj, &UPyWrapperArrayType))
+	{
+		FUPyWrapperArray::Deinit(reinterpret_cast<FUPyWrapperArray*>(PyProp));
+	}
+	else if (PyObject_TypeCheck(PyObj, &UPyWrapperFixedArrayType))
+	{
+		FUPyWrapperFixedArray::Deinit(reinterpret_cast<FUPyWrapperFixedArray*>(PyProp));
+	}
+	else if (PyObject_TypeCheck(PyObj, &UPyWrapperSetType))
+	{
+		FUPyWrapperSet::Deinit(reinterpret_cast<FUPyWrapperSet*>(PyProp));
+	}
+	else if (PyObject_TypeCheck(PyObj, &UPyWrapperMapType))
+	{
+		FUPyWrapperMap::Deinit(reinterpret_cast<FUPyWrapperMap*>(PyProp));
+	}
+	else if (PyObject_TypeCheck(PyObj, &UPyWrapperStructType))
+	{
+		FUPyWrapperStruct::Deinit(reinterpret_cast<FUPyWrapperStruct*>(PyProp));
+	}
+	else if (PyObject_TypeCheck(PyObj, &UPyWrapperDelegateType))
+	{
+		InvalidateOwnedDelegate(reinterpret_cast<FUPyWrapperDelegate*>(PyProp));
+	}
+	else if (PyObject_TypeCheck(PyObj, &UPyWrapperMulticastDelegateType))
+	{
+		InvalidateOwnedMulticastDelegate(reinterpret_cast<FUPyWrapperMulticastDelegate*>(PyProp));
+	}
+}
+
+} // namespace
+
 #if WITH_EDITOR
 void FUPyWrapperObjectFactory::OnObjectsReplaced(const TMap<UObject*, UObject*>& ReplacementMap)
 {
@@ -63,8 +136,8 @@ void FUPyWrapperObjectFactory::UnmapInstance(UObject* InUnrealInstance)
 	FUPyWrapperObjectBase* PyObj = FindInstance(InUnrealInstance);
 	if (PyObj)
 	{
-		Py_DECREF(PyObj);
 		TUPyWrapperTypeFactory::UnmapInstance(InUnrealInstance);
+		Py_DECREF(PyObj);
 	}
 }
 
@@ -135,22 +208,16 @@ void FUPyWrapperObjectFactory::AddOwnedPyProp(UObject* InUnrealInstance, FUPyWra
 void FUPyWrapperObjectFactory::RemoveOwnedPyProps(const UObject* InUnrealInstance)
 {
 	FUPyScopedGIL Gil;
-	if (auto* PyProps = MappedOwnedPyProps.Find(InUnrealInstance))
+	if (auto* PyPropsPtr = MappedOwnedPyProps.Find(InUnrealInstance))
 	{
-		for (auto& PyProp : *PyProps)
-		{
-			Py_XDECREF(PyProp);
-			// if (PyObject_TypeCheck(PyProp, &UPyWrapperArrayType) == 1)
-			// {
-			// 	FUPyWrapperArray::Deinit(reinterpret_cast<FUPyWrapperArray*>(PyProp));
-			// }
-			// else if (PyObject_TypeCheck(PyProp, &UPyWrapperStructType) == 1)
-			// {
-			// 	FUPyWrapperStruct::Deinit(reinterpret_cast<FUPyWrapperStruct*>(PyProp));
-			// }
-		}
-
+		TSet<FUPyWrapperBase*> PyProps = MoveTemp(*PyPropsPtr);
 		MappedOwnedPyProps.Remove(InUnrealInstance);
+
+		for (FUPyWrapperBase* PyProp : PyProps)
+		{
+			InvalidateOwnedPyProp(PyProp);
+			Py_XDECREF(PyProp);
+		}
 	}
 }
 

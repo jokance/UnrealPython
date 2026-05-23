@@ -196,6 +196,8 @@ int FUPyWrapperFixedArray::Init(FUPyWrapperFixedArray* InSelf, const FUPyWrapper
 		{
 			PropToUse = UPyUtil::FConstPropOnScope::ExternalReference(InProp);
 			ArrayInstanceToUse = InValue;
+
+			InOwnerContext.AddOwnedPyProp(InSelf);
 		}
 		break;
 
