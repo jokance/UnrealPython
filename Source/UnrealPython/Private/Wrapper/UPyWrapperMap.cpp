@@ -137,6 +137,11 @@ struct TUPyWrapperMapIterator
 	{
 		Deinit(InSelf);
 
+		if (!FUPyWrapperMap::ValidateInternalState(InInstance))
+		{
+			return -1;
+		}
+
 		Py_INCREF(InInstance);
 		InSelf->IterInstance = InInstance;
 		InSelf->IterIndex = GetElementIndex(InSelf, 0);

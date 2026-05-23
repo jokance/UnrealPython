@@ -52,6 +52,11 @@ struct FUPyWrapperSetIterator
 	{
 		Deinit(InSelf);
 
+		if (!FUPyWrapperSet::ValidateInternalState(InInstance))
+		{
+			return -1;
+		}
+
 		Py_INCREF(InInstance);
 		InSelf->IterInstance = InInstance;
 		InSelf->IterIndex = GetElementIndex(InSelf, 0);
