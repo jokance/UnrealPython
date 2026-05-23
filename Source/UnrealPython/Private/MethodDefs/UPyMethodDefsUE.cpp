@@ -630,6 +630,12 @@ PyObject* CallGetTypeFromEnum(PyObject* InSelf, PyObject* InArgs)
 	}
 
 	const PyTypeObject* PyType = FUPyWrapperTypeRegistry::Get().GetWrappedEnumType(Enum);
+	if (!PyType)
+	{
+		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("GetTypeFromEnum"), *FString::Printf(TEXT("Enum '%s' does not have a Python wrapper type"), *Enum->GetPathName()));
+		return nullptr;
+	}
+
 	Py_INCREF(PyType);
 	return (PyObject*)PyType;
 }
