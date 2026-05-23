@@ -100,7 +100,7 @@ FUPyWrapperEnum* FUPyWrapperEnum::CastPyObject(PyObject* InPyObject, FUPyConvers
 {
 	SetOptionalUPyConversionResult(FUPyConversionResult::Failure(), OutCastResult);
 
-	if (PyObject_IsInstance(InPyObject, (PyObject*)&UPyWrapperEnumType) == 1)
+	if (PyObject_TypeCheck(InPyObject, &UPyWrapperEnumType))
 	{
 		FUPyWrapperEnum* Self = (FUPyWrapperEnum*)InPyObject;
 		if (!ValidateInternalState(Self))
@@ -121,7 +121,7 @@ FUPyWrapperEnum* FUPyWrapperEnum::CastPyObject(PyObject* InPyObject, const PyTyp
 {
 	SetOptionalUPyConversionResult(FUPyConversionResult::Failure(), OutCastResult);
 
-	if (PyObject_IsInstance(InPyObject, (PyObject*)InType) == 1 && (InType == &UPyWrapperEnumType || PyObject_IsInstance(InPyObject, (PyObject*)&UPyWrapperEnumType) == 1))
+	if (PyObject_TypeCheck(InPyObject, (PyTypeObject*)InType) && (InType == &UPyWrapperEnumType || PyObject_TypeCheck(InPyObject, &UPyWrapperEnumType)))
 	{
 		FUPyWrapperEnum* Self = (FUPyWrapperEnum*)InPyObject;
 		if (!ValidateInternalState(Self))
@@ -138,7 +138,7 @@ FUPyWrapperEnum* FUPyWrapperEnum::CastPyObject(PyObject* InPyObject, const PyTyp
 	// Allow casting from a different enum type using the same UEnum (for deprecation)
 	const UEnum* RequiredEnum = FUPyWrapperTypeRegistry::Get().FindEnum(InType);
 
-	if (PyObject_IsInstance(InPyObject, (PyObject*)&UPyWrapperEnumType) == 1)
+	if (PyObject_TypeCheck(InPyObject, &UPyWrapperEnumType))
 	{
 		FUPyWrapperEnum* Self = (FUPyWrapperEnum*)InPyObject;
 		if (!ValidateInternalState(Self))
@@ -511,6 +511,7 @@ static PyObject* RichCmp_WrapperEnum(FUPyWrapperEnum* InSelf, PyObject* InOther,
 	FUPyWrapperEnumPtr Other = FUPyWrapperEnumPtr::StealReference(FUPyWrapperEnum::CastPyObject(InOther, Py_TYPE(InSelf)));
 	if (!Other)
 	{
+		PyErr_Clear();
 		Py_INCREF(Py_NotImplemented);
 		return Py_NotImplemented;
 	}
