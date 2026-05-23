@@ -110,6 +110,7 @@ struct FMethods_WrapperDelegate
 		{
 			return nullptr;
 		}
+		FUPyWrapperDelegate::TrackCallableProxy(InSelf, PythonCallableForDelegate);
 
 		Py_RETURN_NONE;
 	}

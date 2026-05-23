@@ -108,12 +108,14 @@ void UUPyManager::RedirectOutput()
 	}
 }
 
-void UUPyManager::AddPythonOwnedObject(FUPyWrapperObjectBase* InSelf)
+bool UUPyManager::AddPythonOwnedObject(FUPyWrapperObjectBase* InSelf)
 {
 	if (FUPyWrapperObjectBase::ValidateInternalState(InSelf))
 	{
 		PythonOwnedObjects.Add(InSelf->ObjectInstance);
+		return true;
 	}
+	return false;
 }
 
 void UUPyManager::RemovePythonOwnedObject(FUPyWrapperObjectBase* InSelf)

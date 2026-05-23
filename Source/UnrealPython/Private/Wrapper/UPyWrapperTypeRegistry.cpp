@@ -233,7 +233,7 @@ const PyTypeObject* FUPyWrapperTypeRegistry::GenerateWrappedClassType(const UCla
 	}
 
 	// todo: allow generation of Blueprint generated classes
-	if (((UObject*)InClass)->IsA<UBlueprintGeneratedClass>())
+	if (((UObject*)InClass)->IsA<UBlueprintGeneratedClass>() || !EnumHasAnyFlags(InClass->ClassFlags, EClassFlags::CLASS_Native))
 	{
 		return nullptr;
 	}
@@ -265,8 +265,6 @@ const PyTypeObject* FUPyWrapperTypeRegistry::GenerateWrappedClassType(const UCla
 	//		PyTuple_SetItem(SuperPyTypes, i + 1, (PyObject*)InterfacePyType);
 	//	}
 	//}
-
-	check(EnumHasAnyFlags(InClass->ClassFlags, EClassFlags::CLASS_Native));
 
 	TSharedPtr<FUPyGeneratedWrappedClassType> GeneratedWrappedType = MakeShared<FUPyGeneratedWrappedClassType>();
 	GeneratedWrappedTypes.Add(InClass, GeneratedWrappedType);

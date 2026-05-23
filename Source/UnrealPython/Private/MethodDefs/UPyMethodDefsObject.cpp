@@ -592,7 +592,10 @@ struct FMethods_WrapperObjectBase
 
 	static PyObject* AddPythonOwned(FUPyWrapperObjectBase* InSelf)
 	{
-		UUPyManager::Get()->AddPythonOwnedObject(InSelf);
+		if (!UUPyManager::Get()->AddPythonOwnedObject(InSelf))
+		{
+			return nullptr;
+		}
 		Py_RETURN_NONE;
 	}
 

@@ -18,6 +18,7 @@ namespace
 
 void InvalidateOwnedDelegate(FUPyWrapperDelegate* InSelf)
 {
+	FUPyWrapperDelegate::ReleaseTrackedCallableProxies(InSelf);
 	if (InSelf->DelegateInstance)
 	{
 		FUPyWrapperDelegateFactory::Get().UnmapInstance(InSelf->DelegateInstance);
@@ -33,6 +34,7 @@ void InvalidateOwnedDelegate(FUPyWrapperDelegate* InSelf)
 
 void InvalidateOwnedMulticastDelegate(FUPyWrapperMulticastDelegate* InSelf)
 {
+	FUPyWrapperMulticastDelegate::ReleaseTrackedCallableProxies(InSelf);
 	if (InSelf->DelegateInstance)
 	{
 		FUPyWrapperMulticastDelegateFactory::Get().UnmapInstance(InSelf->DelegateInstance);

@@ -75,8 +75,10 @@ struct TUPyWrapperDelegate : public FUPyWrapperBase
 
 	/** Internal delegate instance (DelegateInstance is set to this when we own the instance) */
 	// DelegateType InternalDelegateInstance;
-	
+
 	const PropType* DelegateProp;
+
+	TArray<TWeakObjectPtr<UUPyCallableForDelegate>> CallableProxies;
 };
 
 /** Base meta-data for all Unreal exposed delegate types */
@@ -168,6 +170,8 @@ struct FUPyWrapperDelegate : public TUPyWrapperDelegate<FScriptDelegate, FDelega
 	static PyObject* CallDelegate(FUPyWrapperDelegate* InSelf, PyObject* InArgs);
 
 	static bool Unbind(FUPyWrapperDelegate* InSelf);
+	static void TrackCallableProxy(FUPyWrapperDelegate* InSelf, UUPyCallableForDelegate* InProxy);
+	static void ReleaseTrackedCallableProxies(FUPyWrapperDelegate* InSelf);
 };
 
 /** Meta-data for all Unreal exposed delegate types */
@@ -208,8 +212,10 @@ struct FUPyWrapperMulticastDelegate : public TUPyWrapperDelegate<FMulticastScrip
 
 	/** Call the delegate */
 	static PyObject* CallDelegate(FUPyWrapperMulticastDelegate* InSelf, PyObject* InArgs);
-	
+
 	static bool Unbind(FUPyWrapperMulticastDelegate* InSelf);
+	static void TrackCallableProxy(FUPyWrapperMulticastDelegate* InSelf, UUPyCallableForDelegate* InProxy);
+	static void ReleaseTrackedCallableProxies(FUPyWrapperMulticastDelegate* InSelf);
 };
 
 /** Meta-data for all Unreal exposed multicast delegate types */

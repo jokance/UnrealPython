@@ -110,12 +110,14 @@ struct FMethods_WrapperMulticastDelegate
 		if (InSelf->DelegateInstance)
 		{
 			InSelf->DelegateInstance->Add(Delegate);
+			FUPyWrapperMulticastDelegate::TrackCallableProxy(InSelf, PythonCallableForDelegate);
 			Py_RETURN_NONE;
 		}
 
 		if (const FMulticastDelegateProperty* MulticastProp = CastField<FMulticastDelegateProperty>(InSelf->DelegateProp))
 		{
 			MulticastProp->AddDelegate(MoveTemp(Delegate), nullptr, InSelf->PropAddr);
+			FUPyWrapperMulticastDelegate::TrackCallableProxy(InSelf, PythonCallableForDelegate);
 			Py_RETURN_NONE;
 		}
 
@@ -210,7 +212,8 @@ struct FMethods_WrapperMulticastDelegate
 			// const UClass* PythonCallableForDelegateClass = FUPyWrapperMulticastDelegateMetaData::GetPythonCallableForDelegateClass(InSelf);
 
 			FScriptDelegate Delegate;
-			if (!UPyDelegateUtil::PythonCallableToDelegate(PyCallable, InSelf->DelegateProp->SignatureFunction, Delegate))
+			UUPyCallableForDelegate* PythonCallableForDelegate = UPyDelegateUtil::PythonCallableToDelegate(PyCallable, InSelf->DelegateProp->SignatureFunction, Delegate);
+			if (!PythonCallableForDelegate)
 			{
 				return nullptr;
 			}
@@ -218,12 +221,14 @@ struct FMethods_WrapperMulticastDelegate
 			if (InSelf->DelegateInstance)
 			{
 				InSelf->DelegateInstance->Add(Delegate);
+				FUPyWrapperMulticastDelegate::TrackCallableProxy(InSelf, PythonCallableForDelegate);
 				Py_RETURN_NONE;
 			}
 
 			if (const FMulticastDelegateProperty* MulticastProp = CastField<FMulticastDelegateProperty>(InSelf->DelegateProp))
 			{
 				MulticastProp->AddDelegate(MoveTemp(Delegate), nullptr, InSelf->PropAddr);
+				FUPyWrapperMulticastDelegate::TrackCallableProxy(InSelf, PythonCallableForDelegate);
 				Py_RETURN_NONE;
 			}
 		}

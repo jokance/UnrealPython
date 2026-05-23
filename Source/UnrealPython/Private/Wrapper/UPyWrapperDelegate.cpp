@@ -86,12 +86,16 @@ void UUPyCallableForDelegate::SetCallable(PyObject* InCallable, const UFunction*
 
 void UUPyCallableForDelegate::Deinit()
 {
-	if (!PyCallable.IsValid())
+	if (IsRooted())
 	{
-		return;
+		RemoveFromRoot();
 	}
 
-	RemoveFromRoot();
+	DelegateSignature = nullptr;
+	if (PyCallable.IsValid())
+	{
+		ReleasePythonResources();
+	}
 }
 
 void UUPyCallableForDelegate::CallPython()
@@ -268,6 +272,7 @@ struct TUPyWrapperDelegateImpl
 		if (Self)
 		{
 			new(&Self->OwnerContext) FUPyWrapperOwnerContext();
+			new(&Self->CallableProxies) TArray<TWeakObjectPtr<UUPyCallableForDelegate>>();
 			Self->DelegateInstance = nullptr;
 			Self->PropAddr = nullptr;
 			Self->DelegateProp = nullptr;
@@ -281,6 +286,7 @@ struct TUPyWrapperDelegateImpl
 		Deinit(InSelf);
 
 		InSelf->OwnerContext.~FUPyWrapperOwnerContext();
+		InSelf->CallableProxies.~TArray<TWeakObjectPtr<UUPyCallableForDelegate>>();
 		// InSelf->InternalDelegateInstance.~DelegateType();
 		FUPyWrapperBase::Free(InSelf);
 	}
@@ -353,7 +359,11 @@ struct TUPyWrapperDelegateImpl
 
 	static void Deinit(WrapperType* InSelf)
 	{
-		WrapperType::Unbind(InSelf);
+		if (InSelf->DelegateInstance || InSelf->DelegateProp)
+		{
+			WrapperType::Unbind(InSelf);
+		}
+		ReleaseTrackedCallableProxies(InSelf);
 
 		if (InSelf->DelegateInstance)
 		{
@@ -370,6 +380,26 @@ struct TUPyWrapperDelegateImpl
 		InSelf->DelegateProp = nullptr;
 
 		// InSelf->InternalDelegateInstance.Clear();
+	}
+
+	static void TrackCallableProxy(WrapperType* InSelf, UUPyCallableForDelegate* InProxy)
+	{
+		if (InProxy)
+		{
+			InSelf->CallableProxies.AddUnique(InProxy);
+		}
+	}
+
+	static void ReleaseTrackedCallableProxies(WrapperType* InSelf)
+	{
+		for (const TWeakObjectPtr<UUPyCallableForDelegate>& ProxyPtr : InSelf->CallableProxies)
+		{
+			if (UUPyCallableForDelegate* Proxy = ProxyPtr.Get())
+			{
+				Proxy->Deinit();
+			}
+		}
+		InSelf->CallableProxies.Reset();
 	}
 
 	static bool ValidateInternalState(WrapperType* InSelf)
@@ -541,6 +571,16 @@ bool FUPyWrapperDelegate::Unbind(FUPyWrapperDelegate* InSelf)
 	return true;
 }
 
+void FUPyWrapperDelegate::TrackCallableProxy(FUPyWrapperDelegate* InSelf, UUPyCallableForDelegate* InProxy)
+{
+	FUPyWrapperDelegateImpl::TrackCallableProxy(InSelf, InProxy);
+}
+
+void FUPyWrapperDelegate::ReleaseTrackedCallableProxies(FUPyWrapperDelegate* InSelf)
+{
+	FUPyWrapperDelegateImpl::ReleaseTrackedCallableProxies(InSelf);
+}
+
 FUPyWrapperMulticastDelegate* FUPyWrapperMulticastDelegate::New(PyTypeObject* InType)
 {
 	return FPyWrapperMulticastDelegateImpl::New(InType);
@@ -609,6 +649,16 @@ PyObject* FUPyWrapperMulticastDelegate::CallDelegate(FUPyWrapperMulticastDelegat
 bool FUPyWrapperMulticastDelegate::Unbind(FUPyWrapperMulticastDelegate* InSelf)
 {
 	return true;
+}
+
+void FUPyWrapperMulticastDelegate::TrackCallableProxy(FUPyWrapperMulticastDelegate* InSelf, UUPyCallableForDelegate* InProxy)
+{
+	FPyWrapperMulticastDelegateImpl::TrackCallableProxy(InSelf, InProxy);
+}
+
+void FUPyWrapperMulticastDelegate::ReleaseTrackedCallableProxies(FUPyWrapperMulticastDelegate* InSelf)
+{
+	FPyWrapperMulticastDelegateImpl::ReleaseTrackedCallableProxies(InSelf);
 }
 
 // ==================== Wrapper WrapperDelegate type BEGIN ====================

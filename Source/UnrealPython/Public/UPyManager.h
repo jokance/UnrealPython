@@ -21,7 +21,7 @@ public:
 
 	void RedirectOutput();
 
-	void AddPythonOwnedObject(FUPyWrapperObjectBase* InSelf);
+	bool AddPythonOwnedObject(FUPyWrapperObjectBase* InSelf);
 	void RemovePythonOwnedObject(FUPyWrapperObjectBase* InSelf);
 	bool IsPythonOwnedObject(FUPyWrapperObjectBase* InSelf) const;
 
