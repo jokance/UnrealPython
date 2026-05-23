@@ -635,44 +635,81 @@ bool InspectFunctionArgs(PyObject* InFunc, TArray<FString>& OutArgNames, TArray<
 	if (PyInspectModule)
 	{
 		PyObject* PyInspectDict = PyModule_GetDict(PyInspectModule);
-		PyObject* PyGetArgSpecFunc = PyDict_GetItemString(PyInspectDict, "getfullargspec");
-		if (PyGetArgSpecFunc)
-		{
-			FUPyObjectPtr PyGetArgSpecResult = FUPyObjectPtr::StealReference(PyObject_CallFunctionObjArgs(PyGetArgSpecFunc, InFunc, nullptr));
-			if (PyGetArgSpecResult)
+			PyObject* PyGetArgSpecFunc = PyDict_GetItemString(PyInspectDict, "getfullargspec");
+			if (PyGetArgSpecFunc)
 			{
-				PyObject* PyFuncArgNames = PyTuple_GetItem(PyGetArgSpecResult, 0);
-				const int32 NumArgNames = (PyFuncArgNames && PyFuncArgNames != Py_None) ? PySequence_Size(PyFuncArgNames) : 0;
-
-				PyObject* PyFuncArgDefaults = PyTuple_GetItem(PyGetArgSpecResult, 3);
-				const int32 NumArgDefaults = (PyFuncArgDefaults && PyFuncArgDefaults != Py_None) ? PySequence_Size(PyFuncArgDefaults) : 0;
-
-				OutArgNames.Reset(NumArgNames);
-				if (OutArgDefaults)
+				FUPyObjectPtr PyGetArgSpecResult = FUPyObjectPtr::StealReference(PyObject_CallFunctionObjArgs(PyGetArgSpecFunc, InFunc, nullptr));
+				if (PyGetArgSpecResult)
 				{
-					OutArgDefaults->Reset(NumArgNames);
-				}
-
-				// Get the names
-				for (int32 ArgNameIndex = 0; ArgNameIndex < NumArgNames; ++ArgNameIndex)
-				{
-					PyObject* PyArgName = PySequence_GetItem(PyFuncArgNames, ArgNameIndex);
-					OutArgNames.Emplace(PyObjectToUEString(PyArgName));
-				}
-
-				// Get the defaults (padding the start of the array with empty strings)
-				if (OutArgDefaults)
-				{
-					OutArgDefaults->AddDefaulted(NumArgNames - NumArgDefaults);
-					for (int32 ArgDefaultIndex = 0; ArgDefaultIndex < NumArgDefaults; ++ArgDefaultIndex)
+					if (!PyTuple_Check(PyGetArgSpecResult) || PyTuple_Size(PyGetArgSpecResult) < 4)
 					{
-						PyObject* PyArgDefault = PySequence_GetItem(PyFuncArgDefaults, ArgDefaultIndex);
-						OutArgDefaults->Emplace(FUPyObjectPtr::NewReference(PyArgDefault));
+						SetPythonError(PyExc_TypeError, TEXT("inspect.getfullargspec"), TEXT("Expected a tuple with at least four entries"));
+						return false;
 					}
-				}
 
-				check(!OutArgDefaults || OutArgNames.Num() == OutArgDefaults->Num());
-				return true;
+					PyObject* PyFuncArgNames = PyTuple_GetItem(PyGetArgSpecResult, 0);
+					int32 NumArgNames = 0;
+					if (PyFuncArgNames && PyFuncArgNames != Py_None)
+					{
+						const Py_ssize_t NumArgNamesRaw = PySequence_Size(PyFuncArgNames);
+						if (ValidateContainerLenValue(NumArgNamesRaw, NumArgNames, TEXT("inspect.getfullargspec")) != 0)
+						{
+							return false;
+						}
+					}
+
+					PyObject* PyFuncArgDefaults = PyTuple_GetItem(PyGetArgSpecResult, 3);
+					int32 NumArgDefaults = 0;
+					if (PyFuncArgDefaults && PyFuncArgDefaults != Py_None)
+					{
+						const Py_ssize_t NumArgDefaultsRaw = PySequence_Size(PyFuncArgDefaults);
+						if (ValidateContainerLenValue(NumArgDefaultsRaw, NumArgDefaults, TEXT("inspect.getfullargspec")) != 0)
+						{
+							return false;
+						}
+					}
+					if (NumArgDefaults > NumArgNames)
+					{
+						SetPythonError(PyExc_TypeError, TEXT("inspect.getfullargspec"), TEXT("Defaults cannot outnumber argument names"));
+						return false;
+					}
+
+					OutArgNames.Reset(NumArgNames);
+					if (OutArgDefaults)
+					{
+						OutArgDefaults->Reset(NumArgNames);
+					}
+
+					// Get the names
+					for (int32 ArgNameIndex = 0; ArgNameIndex < NumArgNames; ++ArgNameIndex)
+					{
+						FUPyObjectPtr PyArgName = FUPyObjectPtr::StealReference(PySequence_GetItem(PyFuncArgNames, ArgNameIndex));
+						if (!PyArgName)
+						{
+							SetPythonError(PyExc_Exception, TEXT("inspect.getfullargspec"), *FString::Printf(TEXT("Failed to read argument name at index %d"), ArgNameIndex));
+							return false;
+						}
+						OutArgNames.Emplace(PyObjectToUEString(PyArgName));
+					}
+
+					// Get the defaults (padding the start of the array with empty strings)
+					if (OutArgDefaults)
+					{
+						OutArgDefaults->AddDefaulted(NumArgNames - NumArgDefaults);
+						for (int32 ArgDefaultIndex = 0; ArgDefaultIndex < NumArgDefaults; ++ArgDefaultIndex)
+						{
+							FUPyObjectPtr PyArgDefault = FUPyObjectPtr::StealReference(PySequence_GetItem(PyFuncArgDefaults, ArgDefaultIndex));
+							if (!PyArgDefault)
+							{
+								SetPythonError(PyExc_Exception, TEXT("inspect.getfullargspec"), *FString::Printf(TEXT("Failed to read argument default at index %d"), ArgDefaultIndex));
+								return false;
+							}
+							OutArgDefaults->Emplace(MoveTemp(PyArgDefault));
+						}
+					}
+
+					check(!OutArgDefaults || OutArgNames.Num() == OutArgDefaults->Num());
+					return true;
 			}
 		}
 	}
