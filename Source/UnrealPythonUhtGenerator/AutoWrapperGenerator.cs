@@ -1950,6 +1950,10 @@ internal static class AutoWrapperGenerator
 						builder.AppendLine("\t\t\t\t\tbResult = !bResult;");
 					}
 					builder.AppendLine("\t\t\t\t}");
+					builder.AppendLine("\t\t\t\telse");
+					builder.AppendLine("\t\t\t\t{");
+					builder.AppendLine("\t\t\t\t\tPyErr_Clear();");
+					builder.AppendLine("\t\t\t\t}");
 					builder.AppendLine("\t\t\t}");
 				}
 				builder.AppendLine("\t\t\tbreak;");

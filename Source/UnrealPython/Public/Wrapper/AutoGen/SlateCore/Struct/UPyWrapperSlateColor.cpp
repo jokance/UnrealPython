@@ -228,6 +228,10 @@ struct FFuncs_SlateColor
 					bHandled = true;
 					bResult = AttemptResult != 0;
 				}
+				else
+				{
+					PyErr_Clear();
+				}
 			}
 			break;
 		}
@@ -240,6 +244,10 @@ struct FFuncs_SlateColor
 				{
 					bHandled = true;
 					bResult = AttemptResult != 0;
+				}
+				else
+				{
+					PyErr_Clear();
 				}
 			}
 			break;

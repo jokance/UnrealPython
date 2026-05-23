@@ -202,6 +202,10 @@ struct FFuncs_Vector2D
 					bHandled = true;
 					bResult = AttemptResult != 0;
 				}
+				else
+				{
+					PyErr_Clear();
+				}
 			}
 			break;
 		}
@@ -214,6 +218,10 @@ struct FFuncs_Vector2D
 				{
 					bHandled = true;
 					bResult = AttemptResult != 0;
+				}
+				else
+				{
+					PyErr_Clear();
 				}
 			}
 			break;

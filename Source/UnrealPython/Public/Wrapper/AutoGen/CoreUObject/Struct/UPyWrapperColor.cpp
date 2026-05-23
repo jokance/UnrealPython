@@ -256,6 +256,10 @@ struct FFuncs_Color
 					bHandled = true;
 					bResult = AttemptResult != 0;
 				}
+				else
+				{
+					PyErr_Clear();
+				}
 			}
 			break;
 		}
@@ -268,6 +272,10 @@ struct FFuncs_Color
 				{
 					bHandled = true;
 					bResult = AttemptResult != 0;
+				}
+				else
+				{
+					PyErr_Clear();
 				}
 			}
 			break;

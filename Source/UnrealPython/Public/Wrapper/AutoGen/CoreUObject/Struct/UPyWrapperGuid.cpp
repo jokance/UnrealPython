@@ -227,6 +227,10 @@ struct FFuncs_Guid
 					bHandled = true;
 					bResult = AttemptResult != 0;
 				}
+				else
+				{
+					PyErr_Clear();
+				}
 			}
 			break;
 		}
@@ -239,6 +243,10 @@ struct FFuncs_Guid
 				{
 					bHandled = true;
 					bResult = AttemptResult != 0;
+				}
+				else
+				{
+					PyErr_Clear();
 				}
 			}
 			break;

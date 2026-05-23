@@ -133,6 +133,7 @@ struct FFuncs_WrapperFieldPath
 		FFieldPath Other;
 		if (!UPyConversion::Nativize(InOther, Other))
 		{
+			PyErr_Clear();
 			Py_INCREF(Py_NotImplemented);
 			return Py_NotImplemented;
 		}

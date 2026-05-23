@@ -191,6 +191,10 @@ struct FFuncs_Box
 					bHandled = true;
 					bResult = AttemptResult != 0;
 				}
+				else
+				{
+					PyErr_Clear();
+				}
 			}
 			break;
 		}
@@ -203,6 +207,10 @@ struct FFuncs_Box
 				{
 					bHandled = true;
 					bResult = AttemptResult != 0;
+				}
+				else
+				{
+					PyErr_Clear();
 				}
 			}
 			break;
