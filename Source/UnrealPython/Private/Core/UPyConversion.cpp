@@ -405,11 +405,21 @@ FUPyConversionResult Nativize(PyObject* PyObj, const char*& OutVal, const ESetEr
 	if (PyUnicode_Check(PyObj))
 	{
 		OutVal = PyUnicode_AsUTF8(PyObj);
+		if (!OutVal || PyErr_Occurred())
+		{
+			UPYCONVERSION_RETURN(FUPyConversionResult::Failure(), TEXT("Nativize"), *FString::Printf(TEXT("Cannot nativize '%s' as 'const char*'"), *UPyUtil::GetFriendlyTypename(PyObj)));
+		}
+
 		return FUPyConversionResult::Success();
 	}
 	if (PyBytes_Check(PyObj))
 	{
 		OutVal = PyBytes_AsString(PyObj);
+		if (!OutVal || PyErr_Occurred())
+		{
+			UPYCONVERSION_RETURN(FUPyConversionResult::Failure(), TEXT("Nativize"), *FString::Printf(TEXT("Cannot nativize '%s' as 'const char*'"), *UPyUtil::GetFriendlyTypename(PyObj)));
+		}
+
 		return FUPyConversionResult::Success();
 	}
 	UPYCONVERSION_RETURN(FUPyConversionResult::Failure(), TEXT("Nativize"), *FString::Printf(TEXT("Cannot nativize '%s' as 'const char*'"), *UPyUtil::GetFriendlyTypename(PyObj)));
