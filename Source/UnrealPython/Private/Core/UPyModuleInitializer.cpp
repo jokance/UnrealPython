@@ -42,6 +42,11 @@ static PyObject* Getattro2UEModule(PyObject* Self, PyObject* AttrName)
 	PyErr_Clear();
 
 	const char* AttrStr = PyUnicode_AsUTF8(AttrName);
+	if (!AttrStr || PyErr_Occurred())
+	{
+		return nullptr;
+	}
+
 	FoundPyType = FUPyModuleInitializer::Get().FindOrAddPyTypeByName(AttrStr);
 	if (!FoundPyType)
 	{
