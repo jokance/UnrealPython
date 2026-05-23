@@ -36,6 +36,10 @@ int32 UUPyTimerManager::SetTimerInternal(float Rate, bool bLoop)
 			{
 				// One-shot timer, remove from map
 				ActiveTimers.Remove(TimerId);
+				if (ActiveTimers.Num() == 0)
+				{
+					ReleaseTimerCallback();
+				}
 				return false;
 			}
 			
@@ -127,8 +131,12 @@ void UUPyTimerManager::ClearTimer(int32 Handle)
 		{
 			FTSTicker::GetCoreTicker().RemoveTicker(*TickerHandle);
 		}
-		
+
 		ActiveTimers.Remove(Handle);
+		if (ActiveTimers.Num() == 0)
+		{
+			ReleaseTimerCallback();
+		}
 		
 		UE_LOG(LogUnrealPython, Verbose, TEXT("UUPyTimerManager: Cleared timer %u"), Handle);
 	}
@@ -145,6 +153,12 @@ void UUPyTimerManager::ClearAllTimers()
 	}
 	
 	ActiveTimers.Empty();
+	ReleaseTimerCallback();
 	
 	UE_LOG(LogUnrealPython, Verbose, TEXT("UUPyTimerManager: Cleared all timers"));
+}
+
+void UUPyTimerManager::ReleaseTimerCallback()
+{
+	OnTimerFunc = FUPyAutoGILPtr();
 }
