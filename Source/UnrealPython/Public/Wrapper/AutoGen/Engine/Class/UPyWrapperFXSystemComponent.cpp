@@ -435,6 +435,11 @@ namespace UPyConversion
 	{
 		if (FUPyWrapperFXSystemComponent* PyFXSystemComponent = UPyIsFXSystemComponent(PyObj))
 		{
+			if (!FUPyWrapperObjectBase::ValidateInternalState(PyFXSystemComponent))
+			{
+				return FUPyConversionResult::Failure();
+			}
+
 			OutVal = PyFXSystemComponent->ValuePtr();
 			return FUPyConversionResult::Success();
 		}

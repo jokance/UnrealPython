@@ -143,9 +143,12 @@ void UUPyManager::NotifyUObjectDeleted(const UObjectBase* ObjectBase, int32 Inde
 	FUPyScopedGIL GIL;
 
 	FUPyWrapperObjectFactory::Get().RemoveOwnedPyProps(Object);
+	PythonOwnedObjects.Remove(Object);
 
-	// FUPyWrapperObjectBase* PyObj = FUPyWrapperObjectFactory::Get().FindInstance(Object);
-	// Py_XDECREF(PyObj);
+	if (FUPyWrapperObjectBase* PyObj = FUPyWrapperObjectFactory::Get().FindInstance(Object))
+	{
+		PyObj->ObjectInstance = nullptr;
+	}
 	FUPyWrapperObjectFactory::Get().UnmapInstance(Object);
 }
 

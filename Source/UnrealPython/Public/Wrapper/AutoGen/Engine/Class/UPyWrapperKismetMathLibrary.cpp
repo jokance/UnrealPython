@@ -21197,6 +21197,11 @@ namespace UPyConversion
 	{
 		if (FUPyWrapperKismetMathLibrary* PyKismetMathLibrary = UPyIsKismetMathLibrary(PyObj))
 		{
+			if (!FUPyWrapperObjectBase::ValidateInternalState(PyKismetMathLibrary))
+			{
+				return FUPyConversionResult::Failure();
+			}
+
 			OutVal = PyKismetMathLibrary->ValuePtr();
 			return FUPyConversionResult::Success();
 		}

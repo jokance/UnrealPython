@@ -13423,6 +13423,11 @@ namespace UPyConversion
 	{
 		if (FUPyWrapperKismetSystemLibrary* PyKismetSystemLibrary = UPyIsKismetSystemLibrary(PyObj))
 		{
+			if (!FUPyWrapperObjectBase::ValidateInternalState(PyKismetSystemLibrary))
+			{
+				return FUPyConversionResult::Failure();
+			}
+
 			OutVal = PyKismetSystemLibrary->ValuePtr();
 			return FUPyConversionResult::Success();
 		}

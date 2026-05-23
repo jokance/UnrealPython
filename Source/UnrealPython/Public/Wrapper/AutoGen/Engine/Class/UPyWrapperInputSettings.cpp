@@ -38,11 +38,19 @@ struct FGetSets_InputSettings
 
 	static PyObject* GetActionMappings(FUPyWrapperInputSettings* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ActionMappings(), "ActionMappings");
 	}
 
 	static int SetActionMappings(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ActionMappings(), "ActionMappings");
 	}
 
@@ -66,11 +74,19 @@ struct FGetSets_InputSettings
 
 	static PyObject* GetAxisConfig(FUPyWrapperInputSettings* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->AxisConfig, CastField<FArrayProperty>(GetPropertyDef_AxisConfig().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetAxisConfig(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_AxisConfig(), "AxisConfig");
 	}
 
@@ -94,11 +110,19 @@ struct FGetSets_InputSettings
 
 	static PyObject* GetAxisMappings(FUPyWrapperInputSettings* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_AxisMappings(), "AxisMappings");
 	}
 
 	static int SetAxisMappings(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_AxisMappings(), "AxisMappings");
 	}
 
@@ -122,11 +146,19 @@ struct FGetSets_InputSettings
 
 	static PyObject* GetConsoleKeys(FUPyWrapperInputSettings* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->ConsoleKeys, CastField<FArrayProperty>(GetPropertyDef_ConsoleKeys().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetConsoleKeys(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ConsoleKeys(), "ConsoleKeys");
 	}
 
@@ -150,11 +182,19 @@ struct FGetSets_InputSettings
 
 	static PyObject* GetDefaultInputComponentClass(FUPyWrapperInputSettings* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_DefaultInputComponentClass(), "DefaultInputComponentClass");
 	}
 
 	static int SetDefaultInputComponentClass(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_DefaultInputComponentClass(), "DefaultInputComponentClass");
 	}
 
@@ -178,21 +218,37 @@ struct FGetSets_InputSettings
 
 	static PyObject* GetDefaultPlayerInputClass(FUPyWrapperInputSettings* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_DefaultPlayerInputClass(), "DefaultPlayerInputClass");
 	}
 
 	static int SetDefaultPlayerInputClass(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_DefaultPlayerInputClass(), "DefaultPlayerInputClass");
 	}
 
 	static PyObject* GetDefaultTouchInterface(FUPyWrapperInputSettings* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FSoftObjectPath>::Get(), (void*)&InSelf->ValuePtr()->DefaultTouchInterface, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetDefaultTouchInterface(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->DefaultTouchInterface))
 		{
 			return 0;
@@ -203,11 +259,19 @@ struct FGetSets_InputSettings
 
 	static PyObject* GetDefaultViewportMouseCaptureMode(FUPyWrapperInputSettings* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->DefaultViewportMouseCaptureMode, StaticEnum<EMouseCaptureMode>());
 	}
 
 	static int SetDefaultViewportMouseCaptureMode(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<EMouseCaptureMode>(), InSelf->ValuePtr()->DefaultViewportMouseCaptureMode))
 		{
 			return 0;
@@ -218,11 +282,19 @@ struct FGetSets_InputSettings
 
 	static PyObject* GetDefaultViewportMouseLockMode(FUPyWrapperInputSettings* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->DefaultViewportMouseLockMode, StaticEnum<EMouseLockMode>());
 	}
 
 	static int SetDefaultViewportMouseLockMode(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<EMouseLockMode>(), InSelf->ValuePtr()->DefaultViewportMouseLockMode))
 		{
 			return 0;
@@ -251,21 +323,37 @@ struct FGetSets_InputSettings
 
 	static PyObject* GetDeprecatedActionAndAxisNames(FUPyWrapperInputSettings* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_DeprecatedActionAndAxisNames(), "DeprecatedActionAndAxisNames");
 	}
 
 	static int SetDeprecatedActionAndAxisNames(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_DeprecatedActionAndAxisNames(), "DeprecatedActionAndAxisNames");
 	}
 
 	static PyObject* GetDoubleClickTime(FUPyWrapperInputSettings* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->DoubleClickTime);
 	}
 
 	static int SetDoubleClickTime(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->DoubleClickTime))
 		{
 			return 0;
@@ -294,11 +382,19 @@ struct FGetSets_InputSettings
 
 	static PyObject* GetExcludedAutocorrectCultures(FUPyWrapperInputSettings* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->ExcludedAutocorrectCultures, CastField<FArrayProperty>(GetPropertyDef_ExcludedAutocorrectCultures().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetExcludedAutocorrectCultures(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ExcludedAutocorrectCultures(), "ExcludedAutocorrectCultures");
 	}
 
@@ -322,11 +418,19 @@ struct FGetSets_InputSettings
 
 	static PyObject* GetExcludedAutocorrectDeviceModels(FUPyWrapperInputSettings* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->ExcludedAutocorrectDeviceModels, CastField<FArrayProperty>(GetPropertyDef_ExcludedAutocorrectDeviceModels().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetExcludedAutocorrectDeviceModels(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ExcludedAutocorrectDeviceModels(), "ExcludedAutocorrectDeviceModels");
 	}
 
@@ -350,21 +454,37 @@ struct FGetSets_InputSettings
 
 	static PyObject* GetExcludedAutocorrectOS(FUPyWrapperInputSettings* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->ExcludedAutocorrectOS, CastField<FArrayProperty>(GetPropertyDef_ExcludedAutocorrectOS().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetExcludedAutocorrectOS(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ExcludedAutocorrectOS(), "ExcludedAutocorrectOS");
 	}
 
 	static PyObject* GetFOVScale(FUPyWrapperInputSettings* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->FOVScale);
 	}
 
 	static int SetFOVScale(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->FOVScale))
 		{
 			return 0;
@@ -375,11 +495,19 @@ struct FGetSets_InputSettings
 
 	static PyObject* GetPlatformSettings(FUPyWrapperInputSettings* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FPerPlatformSettings>::Get(), (void*)&InSelf->ValuePtr()->PlatformSettings, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetPlatformSettings(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->PlatformSettings))
 		{
 			return 0;
@@ -408,21 +536,37 @@ struct FGetSets_InputSettings
 
 	static PyObject* GetSpeechMappings(FUPyWrapperInputSettings* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_SpeechMappings(), "SpeechMappings");
 	}
 
 	static int SetSpeechMappings(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_SpeechMappings(), "SpeechMappings");
 	}
 
 	static PyObject* GetbAltEnterTogglesFullscreen(FUPyWrapperInputSettings* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bAltEnterTogglesFullscreen);
 	}
 
 	static int SetbAltEnterTogglesFullscreen(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -435,11 +579,19 @@ struct FGetSets_InputSettings
 
 	static PyObject* GetbAlwaysShowTouchInterface(FUPyWrapperInputSettings* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bAlwaysShowTouchInterface);
 	}
 
 	static int SetbAlwaysShowTouchInterface(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -452,11 +604,19 @@ struct FGetSets_InputSettings
 
 	static PyObject* GetbCaptureMouseOnLaunch(FUPyWrapperInputSettings* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bCaptureMouseOnLaunch);
 	}
 
 	static int SetbCaptureMouseOnLaunch(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -469,11 +629,19 @@ struct FGetSets_InputSettings
 
 	static PyObject* GetbEnableFOVScaling(FUPyWrapperInputSettings* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bEnableFOVScaling);
 	}
 
 	static int SetbEnableFOVScaling(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -486,11 +654,19 @@ struct FGetSets_InputSettings
 
 	static PyObject* GetbEnableGestureRecognizer(FUPyWrapperInputSettings* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bEnableGestureRecognizer);
 	}
 
 	static int SetbEnableGestureRecognizer(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -503,11 +679,19 @@ struct FGetSets_InputSettings
 
 	static PyObject* GetbEnableLegacyInputScales(FUPyWrapperInputSettings* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bEnableLegacyInputScales);
 	}
 
 	static int SetbEnableLegacyInputScales(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -520,11 +704,19 @@ struct FGetSets_InputSettings
 
 	static PyObject* GetbEnableMotionControls(FUPyWrapperInputSettings* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bEnableMotionControls);
 	}
 
 	static int SetbEnableMotionControls(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -537,11 +729,19 @@ struct FGetSets_InputSettings
 
 	static PyObject* GetbEnableMouseSmoothing(FUPyWrapperInputSettings* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bEnableMouseSmoothing);
 	}
 
 	static int SetbEnableMouseSmoothing(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -554,11 +754,19 @@ struct FGetSets_InputSettings
 
 	static PyObject* GetbEnabledLegacyMappingDeprecationWarnings(FUPyWrapperInputSettings* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bEnabledLegacyMappingDeprecationWarnings);
 	}
 
 	static int SetbEnabledLegacyMappingDeprecationWarnings(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -571,11 +779,19 @@ struct FGetSets_InputSettings
 
 	static PyObject* GetbF11TogglesFullscreen(FUPyWrapperInputSettings* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bF11TogglesFullscreen);
 	}
 
 	static int SetbF11TogglesFullscreen(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -588,11 +804,19 @@ struct FGetSets_InputSettings
 
 	static PyObject* GetbFilterInputByPlatformUser(FUPyWrapperInputSettings* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bFilterInputByPlatformUser);
 	}
 
 	static int SetbFilterInputByPlatformUser(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -605,11 +829,19 @@ struct FGetSets_InputSettings
 
 	static PyObject* GetbShouldFlushPressedKeysOnViewportFocusLost(FUPyWrapperInputSettings* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bShouldFlushPressedKeysOnViewportFocusLost);
 	}
 
 	static int SetbShouldFlushPressedKeysOnViewportFocusLost(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -622,11 +854,19 @@ struct FGetSets_InputSettings
 
 	static PyObject* GetbShowConsoleOnFourFingerTap(FUPyWrapperInputSettings* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bShowConsoleOnFourFingerTap);
 	}
 
 	static int SetbShowConsoleOnFourFingerTap(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -639,11 +879,19 @@ struct FGetSets_InputSettings
 
 	static PyObject* GetbUseAutocorrect(FUPyWrapperInputSettings* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bUseAutocorrect);
 	}
 
 	static int SetbUseAutocorrect(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -656,11 +904,19 @@ struct FGetSets_InputSettings
 
 	static PyObject* GetbUseMouseForTouch(FUPyWrapperInputSettings* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bUseMouseForTouch);
 	}
 
 	static int SetbUseMouseForTouch(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1043,6 +1299,11 @@ namespace UPyConversion
 	{
 		if (FUPyWrapperInputSettings* PyInputSettings = UPyIsInputSettings(PyObj))
 		{
+			if (!FUPyWrapperObjectBase::ValidateInternalState(PyInputSettings))
+			{
+				return FUPyConversionResult::Failure();
+			}
+
 			OutVal = PyInputSettings->ValuePtr();
 			return FUPyConversionResult::Success();
 		}

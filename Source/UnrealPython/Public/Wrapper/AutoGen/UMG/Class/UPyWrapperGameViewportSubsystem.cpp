@@ -342,6 +342,11 @@ namespace UPyConversion
 	{
 		if (FUPyWrapperGameViewportSubsystem* PyGameViewportSubsystem = UPyIsGameViewportSubsystem(PyObj))
 		{
+			if (!FUPyWrapperObjectBase::ValidateInternalState(PyGameViewportSubsystem))
+			{
+				return FUPyConversionResult::Failure();
+			}
+
 			OutVal = PyGameViewportSubsystem->ValuePtr();
 			return FUPyConversionResult::Success();
 		}

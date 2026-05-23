@@ -31,11 +31,19 @@ struct FGetSets_Widget
 #if WITH_EDITOR
 	static PyObject* GetAccessibleBehavior(FUPyWrapperWidget* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->AccessibleBehavior, StaticEnum<ESlateAccessibleBehavior>());
 	}
 
 	static int SetAccessibleBehavior(FUPyWrapperWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<ESlateAccessibleBehavior>(), InSelf->ValuePtr()->AccessibleBehavior))
 		{
 			return 0;
@@ -48,11 +56,19 @@ struct FGetSets_Widget
 #if WITH_EDITOR
 	static PyObject* GetAccessibleSummaryBehavior(FUPyWrapperWidget* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->AccessibleSummaryBehavior, StaticEnum<ESlateAccessibleBehavior>());
 	}
 
 	static int SetAccessibleSummaryBehavior(FUPyWrapperWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<ESlateAccessibleBehavior>(), InSelf->ValuePtr()->AccessibleSummaryBehavior))
 		{
 			return 0;
@@ -65,11 +81,19 @@ struct FGetSets_Widget
 #if WITH_EDITOR
 	static PyObject* GetAccessibleSummaryText(FUPyWrapperWidget* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->AccessibleSummaryText);
 	}
 
 	static int SetAccessibleSummaryText(FUPyWrapperWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->AccessibleSummaryText))
 		{
 			return 0;
@@ -100,11 +124,19 @@ struct FGetSets_Widget
 
 	static PyObject* GetAccessibleSummaryTextDelegate(FUPyWrapperWidget* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_AccessibleSummaryTextDelegate(), "AccessibleSummaryTextDelegate");
 	}
 
 	static int SetAccessibleSummaryTextDelegate(FUPyWrapperWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_AccessibleSummaryTextDelegate(), "AccessibleSummaryTextDelegate");
 	}
 
@@ -112,11 +144,19 @@ struct FGetSets_Widget
 #if WITH_EDITOR
 	static PyObject* GetAccessibleText(FUPyWrapperWidget* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->AccessibleText);
 	}
 
 	static int SetAccessibleText(FUPyWrapperWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->AccessibleText))
 		{
 			return 0;
@@ -147,11 +187,19 @@ struct FGetSets_Widget
 
 	static PyObject* GetAccessibleTextDelegate(FUPyWrapperWidget* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_AccessibleTextDelegate(), "AccessibleTextDelegate");
 	}
 
 	static int SetAccessibleTextDelegate(FUPyWrapperWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_AccessibleTextDelegate(), "AccessibleTextDelegate");
 	}
 
@@ -176,11 +224,19 @@ struct FGetSets_Widget
 
 	static PyObject* GetAccessibleWidgetData(FUPyWrapperWidget* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_AccessibleWidgetData(), "AccessibleWidgetData");
 	}
 
 	static int SetAccessibleWidgetData(FUPyWrapperWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_AccessibleWidgetData(), "AccessibleWidgetData");
 	}
 
@@ -205,11 +261,19 @@ struct FGetSets_Widget
 
 	static PyObject* GetCategoryName(FUPyWrapperWidget* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_CategoryName(), "CategoryName");
 	}
 
 	static int SetCategoryName(FUPyWrapperWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_CategoryName(), "CategoryName");
 	}
 
@@ -235,11 +299,19 @@ struct FGetSets_Widget
 
 	static PyObject* GetDesignerFlags(FUPyWrapperWidget* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_DesignerFlags(), "DesignerFlags");
 	}
 
 	static int SetDesignerFlags(FUPyWrapperWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_DesignerFlags(), "DesignerFlags");
 	}
 
@@ -265,11 +337,19 @@ struct FGetSets_Widget
 
 	static PyObject* GetDisplayLabel(FUPyWrapperWidget* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_DisplayLabel(), "DisplayLabel");
 	}
 
 	static int SetDisplayLabel(FUPyWrapperWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_DisplayLabel(), "DisplayLabel");
 	}
 
@@ -294,21 +374,37 @@ struct FGetSets_Widget
 
 	static PyObject* GetNativeBindings(FUPyWrapperWidget* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_NativeBindings(), "NativeBindings");
 	}
 
 	static int SetNativeBindings(FUPyWrapperWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_NativeBindings(), "NativeBindings");
 	}
 
 	static PyObject* GetNavigation(FUPyWrapperWidget* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->Navigation);
 	}
 
 	static int SetNavigation(FUPyWrapperWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->Navigation))
 		{
 			return 0;
@@ -337,11 +433,19 @@ struct FGetSets_Widget
 
 	static PyObject* GetPixelSnapping(FUPyWrapperWidget* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_PixelSnapping(), "PixelSnapping");
 	}
 
 	static int SetPixelSnapping(FUPyWrapperWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_PixelSnapping(), "PixelSnapping");
 	}
 
@@ -365,21 +469,37 @@ struct FGetSets_Widget
 
 	static PyObject* GetRenderOpacity(FUPyWrapperWidget* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_RenderOpacity(), "RenderOpacity");
 	}
 
 	static int SetRenderOpacity(FUPyWrapperWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_RenderOpacity(), "RenderOpacity");
 	}
 
 	static PyObject* GetSlot(FUPyWrapperWidget* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->Slot);
 	}
 
 	static int SetSlot(FUPyWrapperWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->Slot))
 		{
 			return 0;
@@ -408,11 +528,19 @@ struct FGetSets_Widget
 
 	static PyObject* GetToolTipTextDelegate(FUPyWrapperWidget* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ToolTipTextDelegate(), "ToolTipTextDelegate");
 	}
 
 	static int SetToolTipTextDelegate(FUPyWrapperWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ToolTipTextDelegate(), "ToolTipTextDelegate");
 	}
 
@@ -436,11 +564,19 @@ struct FGetSets_Widget
 
 	static PyObject* GetToolTipWidgetDelegate(FUPyWrapperWidget* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ToolTipWidgetDelegate(), "ToolTipWidgetDelegate");
 	}
 
 	static int SetToolTipWidgetDelegate(FUPyWrapperWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ToolTipWidgetDelegate(), "ToolTipWidgetDelegate");
 	}
 
@@ -464,22 +600,38 @@ struct FGetSets_Widget
 
 	static PyObject* GetVisibilityDelegate(FUPyWrapperWidget* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_VisibilityDelegate(), "VisibilityDelegate");
 	}
 
 	static int SetVisibilityDelegate(FUPyWrapperWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_VisibilityDelegate(), "VisibilityDelegate");
 	}
 
 #if WITH_EDITOR
 	static PyObject* GetbCanChildrenBeAccessible(FUPyWrapperWidget* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bCanChildrenBeAccessible);
 	}
 
 	static int SetbCanChildrenBeAccessible(FUPyWrapperWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -493,11 +645,19 @@ struct FGetSets_Widget
 #endif
 	static PyObject* GetbCreatedByConstructionScript(FUPyWrapperWidget* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bCreatedByConstructionScript);
 	}
 
 	static int SetbCreatedByConstructionScript(FUPyWrapperWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -511,11 +671,19 @@ struct FGetSets_Widget
 #if WITH_EDITOR
 	static PyObject* GetbExpandedInDesigner(FUPyWrapperWidget* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bExpandedInDesigner);
 	}
 
 	static int SetbExpandedInDesigner(FUPyWrapperWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -530,11 +698,19 @@ struct FGetSets_Widget
 #if WITH_EDITOR
 	static PyObject* GetbHiddenInDesigner(FUPyWrapperWidget* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bHiddenInDesigner);
 	}
 
 	static int SetbHiddenInDesigner(FUPyWrapperWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -566,21 +742,37 @@ struct FGetSets_Widget
 
 	static PyObject* GetbIsEnabledDelegate(FUPyWrapperWidget* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bIsEnabledDelegate(), "bIsEnabledDelegate");
 	}
 
 	static int SetbIsEnabledDelegate(FUPyWrapperWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bIsEnabledDelegate(), "bIsEnabledDelegate");
 	}
 
 	static PyObject* GetbIsVariable(FUPyWrapperWidget* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bIsVariable);
 	}
 
 	static int SetbIsVariable(FUPyWrapperWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -611,22 +803,38 @@ struct FGetSets_Widget
 
 	static PyObject* GetbIsVolatile(FUPyWrapperWidget* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bIsVolatile(), "bIsVolatile");
 	}
 
 	static int SetbIsVolatile(FUPyWrapperWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bIsVolatile(), "bIsVolatile");
 	}
 
 #if WITH_EDITOR
 	static PyObject* GetbLockedInDesigner(FUPyWrapperWidget* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bLockedInDesigner);
 	}
 
 	static int SetbLockedInDesigner(FUPyWrapperWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -641,11 +849,19 @@ struct FGetSets_Widget
 #if WITH_EDITOR
 	static PyObject* GetbOverrideAccessibleDefaults(FUPyWrapperWidget* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bOverrideAccessibleDefaults);
 	}
 
 	static int SetbOverrideAccessibleDefaults(FUPyWrapperWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -659,11 +875,19 @@ struct FGetSets_Widget
 #endif
 	static PyObject* GetbOverride_Cursor(FUPyWrapperWidget* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bOverride_Cursor);
 	}
 
 	static int SetbOverride_Cursor(FUPyWrapperWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -676,11 +900,19 @@ struct FGetSets_Widget
 
 	static PyObject* GetbWrappedByComponent(FUPyWrapperWidget* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bWrappedByComponent);
 	}
 
 	static int SetbWrappedByComponent(FUPyWrapperWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1650,6 +1882,11 @@ namespace UPyConversion
 	{
 		if (FUPyWrapperWidget* PyWidget = UPyIsWidget(PyObj))
 		{
+			if (!FUPyWrapperObjectBase::ValidateInternalState(PyWidget))
+			{
+				return FUPyConversionResult::Failure();
+			}
+
 			OutVal = PyWidget->ValuePtr();
 			return FUPyConversionResult::Success();
 		}

@@ -7374,6 +7374,11 @@ namespace UPyConversion
 	{
 		if (FUPyWrapperGameplayStatics* PyGameplayStatics = UPyIsGameplayStatics(PyObj))
 		{
+			if (!FUPyWrapperObjectBase::ValidateInternalState(PyGameplayStatics))
+			{
+				return FUPyConversionResult::Failure();
+			}
+
 			OutVal = PyGameplayStatics->ValuePtr();
 			return FUPyConversionResult::Success();
 		}

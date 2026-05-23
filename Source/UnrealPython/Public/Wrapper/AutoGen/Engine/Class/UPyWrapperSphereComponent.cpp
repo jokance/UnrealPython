@@ -35,11 +35,19 @@ struct FGetSets_SphereComponent
 
 	static PyObject* GetSphereRadius(FUPyWrapperSphereComponent* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_SphereRadius(), "SphereRadius");
 	}
 
 	static int SetSphereRadius(FUPyWrapperSphereComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_SphereRadius(), "SphereRadius");
 	}
 
@@ -180,6 +188,11 @@ namespace UPyConversion
 	{
 		if (FUPyWrapperSphereComponent* PySphereComponent = UPyIsSphereComponent(PyObj))
 		{
+			if (!FUPyWrapperObjectBase::ValidateInternalState(PySphereComponent))
+			{
+				return FUPyConversionResult::Failure();
+			}
+
 			OutVal = PySphereComponent->ValuePtr();
 			return FUPyConversionResult::Success();
 		}

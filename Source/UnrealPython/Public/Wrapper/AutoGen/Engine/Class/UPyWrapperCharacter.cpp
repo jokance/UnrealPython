@@ -41,11 +41,19 @@ struct FGetSets_Character
 
 	static PyObject* GetAnimRootMotionTranslationScale(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_AnimRootMotionTranslationScale(), "AnimRootMotionTranslationScale");
 	}
 
 	static int SetAnimRootMotionTranslationScale(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_AnimRootMotionTranslationScale(), "AnimRootMotionTranslationScale");
 	}
 
@@ -70,11 +78,19 @@ struct FGetSets_Character
 
 	static PyObject* GetArrowComponent(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ArrowComponent(), "ArrowComponent");
 	}
 
 	static int SetArrowComponent(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ArrowComponent(), "ArrowComponent");
 	}
 
@@ -99,11 +115,19 @@ struct FGetSets_Character
 
 	static PyObject* GetBaseRotationOffset(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_BaseRotationOffset(), "BaseRotationOffset");
 	}
 
 	static int SetBaseRotationOffset(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_BaseRotationOffset(), "BaseRotationOffset");
 	}
 
@@ -127,11 +151,19 @@ struct FGetSets_Character
 
 	static PyObject* GetBaseTranslationOffset(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_BaseTranslationOffset(), "BaseTranslationOffset");
 	}
 
 	static int SetBaseTranslationOffset(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_BaseTranslationOffset(), "BaseTranslationOffset");
 	}
 
@@ -155,11 +187,19 @@ struct FGetSets_Character
 
 	static PyObject* GetBasedMovement(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_BasedMovement(), "BasedMovement");
 	}
 
 	static int SetBasedMovement(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_BasedMovement(), "BasedMovement");
 	}
 
@@ -183,11 +223,19 @@ struct FGetSets_Character
 
 	static PyObject* GetCapsuleComponent(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_CapsuleComponent(), "CapsuleComponent");
 	}
 
 	static int SetCapsuleComponent(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_CapsuleComponent(), "CapsuleComponent");
 	}
 
@@ -211,21 +259,37 @@ struct FGetSets_Character
 
 	static PyObject* GetCharacterMovement(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_CharacterMovement(), "CharacterMovement");
 	}
 
 	static int SetCharacterMovement(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_CharacterMovement(), "CharacterMovement");
 	}
 
 	static PyObject* GetClientRootMotionParams(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FRootMotionMovementParams>::Get(), (void*)&InSelf->ValuePtr()->ClientRootMotionParams, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetClientRootMotionParams(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->ClientRootMotionParams))
 		{
 			return 0;
@@ -236,11 +300,19 @@ struct FGetSets_Character
 
 	static PyObject* GetCrouchedEyeHeight(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->CrouchedEyeHeight);
 	}
 
 	static int SetCrouchedEyeHeight(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->CrouchedEyeHeight))
 		{
 			return 0;
@@ -251,11 +323,19 @@ struct FGetSets_Character
 
 	static PyObject* GetJumpCurrentCount(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->JumpCurrentCount);
 	}
 
 	static int SetJumpCurrentCount(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->JumpCurrentCount))
 		{
 			return 0;
@@ -266,11 +346,19 @@ struct FGetSets_Character
 
 	static PyObject* GetJumpCurrentCountPreJump(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->JumpCurrentCountPreJump);
 	}
 
 	static int SetJumpCurrentCountPreJump(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->JumpCurrentCountPreJump))
 		{
 			return 0;
@@ -281,11 +369,19 @@ struct FGetSets_Character
 
 	static PyObject* GetJumpForceTimeRemaining(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->JumpForceTimeRemaining);
 	}
 
 	static int SetJumpForceTimeRemaining(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->JumpForceTimeRemaining))
 		{
 			return 0;
@@ -296,11 +392,19 @@ struct FGetSets_Character
 
 	static PyObject* GetJumpKeyHoldTime(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->JumpKeyHoldTime);
 	}
 
 	static int SetJumpKeyHoldTime(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->JumpKeyHoldTime))
 		{
 			return 0;
@@ -311,11 +415,19 @@ struct FGetSets_Character
 
 	static PyObject* GetJumpMaxCount(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->JumpMaxCount);
 	}
 
 	static int SetJumpMaxCount(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->JumpMaxCount))
 		{
 			return 0;
@@ -326,11 +438,19 @@ struct FGetSets_Character
 
 	static PyObject* GetJumpMaxHoldTime(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->JumpMaxHoldTime);
 	}
 
 	static int SetJumpMaxHoldTime(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->JumpMaxHoldTime))
 		{
 			return 0;
@@ -359,11 +479,19 @@ struct FGetSets_Character
 
 	static PyObject* GetLandedDelegate(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_LandedDelegate(), "LandedDelegate");
 	}
 
 	static int SetLandedDelegate(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_LandedDelegate(), "LandedDelegate");
 	}
 
@@ -387,11 +515,19 @@ struct FGetSets_Character
 
 	static PyObject* GetMesh(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_Mesh(), "Mesh");
 	}
 
 	static int SetMesh(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_Mesh(), "Mesh");
 	}
 
@@ -415,11 +551,19 @@ struct FGetSets_Character
 
 	static PyObject* GetMovementModeChangedDelegate(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_MovementModeChangedDelegate(), "MovementModeChangedDelegate");
 	}
 
 	static int SetMovementModeChangedDelegate(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_MovementModeChangedDelegate(), "MovementModeChangedDelegate");
 	}
 
@@ -443,11 +587,19 @@ struct FGetSets_Character
 
 	static PyObject* GetOnCharacterMovementUpdated(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnCharacterMovementUpdated(), "OnCharacterMovementUpdated");
 	}
 
 	static int SetOnCharacterMovementUpdated(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnCharacterMovementUpdated(), "OnCharacterMovementUpdated");
 	}
 
@@ -471,21 +623,37 @@ struct FGetSets_Character
 
 	static PyObject* GetOnReachedJumpApex(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnReachedJumpApex(), "OnReachedJumpApex");
 	}
 
 	static int SetOnReachedJumpApex(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnReachedJumpApex(), "OnReachedJumpApex");
 	}
 
 	static PyObject* GetProxyJumpForceStartedTime(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->ProxyJumpForceStartedTime);
 	}
 
 	static int SetProxyJumpForceStartedTime(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->ProxyJumpForceStartedTime))
 		{
 			return 0;
@@ -496,11 +664,19 @@ struct FGetSets_Character
 
 	static PyObject* GetRepRootMotion(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FRepRootMotionMontage>::Get(), (void*)&InSelf->ValuePtr()->RepRootMotion, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetRepRootMotion(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->RepRootMotion))
 		{
 			return 0;
@@ -529,11 +705,19 @@ struct FGetSets_Character
 
 	static PyObject* GetReplayLastTransformUpdateTimeStamp(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ReplayLastTransformUpdateTimeStamp(), "ReplayLastTransformUpdateTimeStamp");
 	}
 
 	static int SetReplayLastTransformUpdateTimeStamp(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ReplayLastTransformUpdateTimeStamp(), "ReplayLastTransformUpdateTimeStamp");
 	}
 
@@ -557,11 +741,19 @@ struct FGetSets_Character
 
 	static PyObject* GetReplicatedBasedMovement(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ReplicatedBasedMovement(), "ReplicatedBasedMovement");
 	}
 
 	static int SetReplicatedBasedMovement(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ReplicatedBasedMovement(), "ReplicatedBasedMovement");
 	}
 
@@ -585,11 +777,19 @@ struct FGetSets_Character
 
 	static PyObject* GetReplicatedGravityDirection(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ReplicatedGravityDirection(), "ReplicatedGravityDirection");
 	}
 
 	static int SetReplicatedGravityDirection(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ReplicatedGravityDirection(), "ReplicatedGravityDirection");
 	}
 
@@ -613,11 +813,19 @@ struct FGetSets_Character
 
 	static PyObject* GetReplicatedMovementMode(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ReplicatedMovementMode(), "ReplicatedMovementMode");
 	}
 
 	static int SetReplicatedMovementMode(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ReplicatedMovementMode(), "ReplicatedMovementMode");
 	}
 
@@ -641,11 +849,19 @@ struct FGetSets_Character
 
 	static PyObject* GetReplicatedServerLastTransformUpdateTimeStamp(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ReplicatedServerLastTransformUpdateTimeStamp(), "ReplicatedServerLastTransformUpdateTimeStamp");
 	}
 
 	static int SetReplicatedServerLastTransformUpdateTimeStamp(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ReplicatedServerLastTransformUpdateTimeStamp(), "ReplicatedServerLastTransformUpdateTimeStamp");
 	}
 
@@ -669,21 +885,37 @@ struct FGetSets_Character
 
 	static PyObject* GetRootMotionRepMoves(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->RootMotionRepMoves, CastField<FArrayProperty>(GetPropertyDef_RootMotionRepMoves().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetRootMotionRepMoves(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_RootMotionRepMoves(), "RootMotionRepMoves");
 	}
 
 	static PyObject* GetSavedRootMotion(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FRootMotionSourceGroup>::Get(), (void*)&InSelf->ValuePtr()->SavedRootMotion, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetSavedRootMotion(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->SavedRootMotion))
 		{
 			return 0;
@@ -694,11 +926,19 @@ struct FGetSets_Character
 
 	static PyObject* GetbClientCheckEncroachmentOnNetUpdate(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bClientCheckEncroachmentOnNetUpdate);
 	}
 
 	static int SetbClientCheckEncroachmentOnNetUpdate(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -711,11 +951,19 @@ struct FGetSets_Character
 
 	static PyObject* GetbClientResimulateRootMotion(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bClientResimulateRootMotion);
 	}
 
 	static int SetbClientResimulateRootMotion(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -728,11 +976,19 @@ struct FGetSets_Character
 
 	static PyObject* GetbClientResimulateRootMotionSources(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bClientResimulateRootMotionSources);
 	}
 
 	static int SetbClientResimulateRootMotionSources(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -745,11 +1001,19 @@ struct FGetSets_Character
 
 	static PyObject* GetbClientUpdating(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bClientUpdating);
 	}
 
 	static int SetbClientUpdating(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -762,11 +1026,19 @@ struct FGetSets_Character
 
 	static PyObject* GetbClientWasFalling(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bClientWasFalling);
 	}
 
 	static int SetbClientWasFalling(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -797,21 +1069,37 @@ struct FGetSets_Character
 
 	static PyObject* GetbInBaseReplication(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bInBaseReplication(), "bInBaseReplication");
 	}
 
 	static int SetbInBaseReplication(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bInBaseReplication(), "bInBaseReplication");
 	}
 
 	static PyObject* GetbIsCrouched(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bIsCrouched);
 	}
 
 	static int SetbIsCrouched(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -824,11 +1112,19 @@ struct FGetSets_Character
 
 	static PyObject* GetbPressedJump(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bPressedJump);
 	}
 
 	static int SetbPressedJump(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -841,11 +1137,19 @@ struct FGetSets_Character
 
 	static PyObject* GetbProxyIsJumpForceApplied(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bProxyIsJumpForceApplied);
 	}
 
 	static int SetbProxyIsJumpForceApplied(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -858,11 +1162,19 @@ struct FGetSets_Character
 
 	static PyObject* GetbServerMoveIgnoreRootMotion(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bServerMoveIgnoreRootMotion);
 	}
 
 	static int SetbServerMoveIgnoreRootMotion(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -875,11 +1187,19 @@ struct FGetSets_Character
 
 	static PyObject* GetbSimGravityDisabled(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bSimGravityDisabled);
 	}
 
 	static int SetbSimGravityDisabled(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -892,11 +1212,19 @@ struct FGetSets_Character
 
 	static PyObject* GetbWasJumping(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bWasJumping);
 	}
 
 	static int SetbWasJumping(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1795,6 +2123,11 @@ namespace UPyConversion
 	{
 		if (FUPyWrapperCharacter* PyCharacter = UPyIsCharacter(PyObj))
 		{
+			if (!FUPyWrapperObjectBase::ValidateInternalState(PyCharacter))
+			{
+				return FUPyConversionResult::Failure();
+			}
+
 			OutVal = PyCharacter->ValuePtr();
 			return FUPyConversionResult::Success();
 		}

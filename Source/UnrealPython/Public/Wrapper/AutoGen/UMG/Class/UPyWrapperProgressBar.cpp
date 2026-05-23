@@ -38,11 +38,19 @@ struct FGetSets_ProgressBar
 
 	static PyObject* GetFillColorAndOpacityDelegate(FUPyWrapperProgressBar* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_FillColorAndOpacityDelegate(), "FillColorAndOpacityDelegate");
 	}
 
 	static int SetFillColorAndOpacityDelegate(FUPyWrapperProgressBar* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_FillColorAndOpacityDelegate(), "FillColorAndOpacityDelegate");
 	}
 
@@ -66,11 +74,19 @@ struct FGetSets_ProgressBar
 
 	static PyObject* GetPercentDelegate(FUPyWrapperProgressBar* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_PercentDelegate(), "PercentDelegate");
 	}
 
 	static int SetPercentDelegate(FUPyWrapperProgressBar* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_PercentDelegate(), "PercentDelegate");
 	}
 
@@ -336,6 +352,11 @@ namespace UPyConversion
 	{
 		if (FUPyWrapperProgressBar* PyProgressBar = UPyIsProgressBar(PyObj))
 		{
+			if (!FUPyWrapperObjectBase::ValidateInternalState(PyProgressBar))
+			{
+				return FUPyConversionResult::Failure();
+			}
+
 			OutVal = PyProgressBar->ValuePtr();
 			return FUPyConversionResult::Success();
 		}

@@ -606,6 +606,11 @@ namespace UPyConversion
 	{
 		if (FUPyWrapperSlateBlueprintLibrary* PySlateBlueprintLibrary = UPyIsSlateBlueprintLibrary(PyObj))
 		{
+			if (!FUPyWrapperObjectBase::ValidateInternalState(PySlateBlueprintLibrary))
+			{
+				return FUPyConversionResult::Failure();
+			}
+
 			OutVal = PySlateBlueprintLibrary->ValuePtr();
 			return FUPyConversionResult::Success();
 		}

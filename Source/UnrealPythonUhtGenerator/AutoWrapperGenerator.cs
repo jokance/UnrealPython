@@ -2510,6 +2510,10 @@ internal static class AutoWrapperGenerator
 
 			helperBuilder.AppendLine($"\tstatic PyObject* {getterName}({cppType}* InSelf, void* InClosure)");
 			helperBuilder.AppendLine("\t{");
+			helperBuilder.AppendLine("\t\tif (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))");
+			helperBuilder.AppendLine("\t\t{");
+			helperBuilder.AppendLine("\t\t\treturn nullptr;");
+			helperBuilder.AppendLine("\t\t}");
 			helperBuilder.AppendLine(IndentCode(getterBody.TrimEnd(), 2));
 			helperBuilder.AppendLine("\t}");
 			helperBuilder.AppendLine();
@@ -2520,6 +2524,10 @@ internal static class AutoWrapperGenerator
 			{
 				helperBuilder.AppendLine($"\tstatic int {setterName}({cppType}* InSelf, PyObject* InValue, void* InClosure)");
 				helperBuilder.AppendLine("\t{");
+				helperBuilder.AppendLine("\t\tif (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))");
+				helperBuilder.AppendLine("\t\t{");
+				helperBuilder.AppendLine("\t\t\treturn -1;");
+				helperBuilder.AppendLine("\t\t}");
 				helperBuilder.AppendLine(IndentCode(setterBody.TrimEnd(), 2));
 				helperBuilder.AppendLine("\t}");
 				helperBuilder.AppendLine();

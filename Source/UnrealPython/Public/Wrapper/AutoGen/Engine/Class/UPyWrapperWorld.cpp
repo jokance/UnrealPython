@@ -37,11 +37,19 @@ struct FGetSets_World
 
 	static PyObject* GetAISystem(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_AISystem(), "AISystem");
 	}
 
 	static int SetAISystem(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_AISystem(), "AISystem");
 	}
 
@@ -66,11 +74,19 @@ struct FGetSets_World
 
 	static PyObject* GetActiveGroupActors(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->ActiveGroupActors, CastField<FArrayProperty>(GetPropertyDef_ActiveGroupActors().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetActiveGroupActors(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ActiveGroupActors(), "ActiveGroupActors");
 	}
 
@@ -95,11 +111,19 @@ struct FGetSets_World
 
 	static PyObject* GetAuthorityGameMode(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_AuthorityGameMode(), "AuthorityGameMode");
 	}
 
 	static int SetAuthorityGameMode(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_AuthorityGameMode(), "AuthorityGameMode");
 	}
 
@@ -123,11 +147,19 @@ struct FGetSets_World
 
 	static PyObject* GetAvoidanceManager(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_AvoidanceManager(), "AvoidanceManager");
 	}
 
 	static int SetAvoidanceManager(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_AvoidanceManager(), "AvoidanceManager");
 	}
 
@@ -151,11 +183,19 @@ struct FGetSets_World
 
 	static PyObject* GetCanvasForDrawMaterialToRenderTarget(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_CanvasForDrawMaterialToRenderTarget(), "CanvasForDrawMaterialToRenderTarget");
 	}
 
 	static int SetCanvasForDrawMaterialToRenderTarget(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_CanvasForDrawMaterialToRenderTarget(), "CanvasForDrawMaterialToRenderTarget");
 	}
 
@@ -179,11 +219,19 @@ struct FGetSets_World
 
 	static PyObject* GetCanvasForRenderingToTarget(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_CanvasForRenderingToTarget(), "CanvasForRenderingToTarget");
 	}
 
 	static int SetCanvasForRenderingToTarget(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_CanvasForRenderingToTarget(), "CanvasForRenderingToTarget");
 	}
 
@@ -207,11 +255,19 @@ struct FGetSets_World
 
 	static PyObject* GetComponentsThatNeedEndOfFrameMarkRenderStateDirty(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ComponentsThatNeedEndOfFrameMarkRenderStateDirty(), "ComponentsThatNeedEndOfFrameMarkRenderStateDirty");
 	}
 
 	static int SetComponentsThatNeedEndOfFrameMarkRenderStateDirty(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ComponentsThatNeedEndOfFrameMarkRenderStateDirty(), "ComponentsThatNeedEndOfFrameMarkRenderStateDirty");
 	}
 
@@ -235,11 +291,19 @@ struct FGetSets_World
 
 	static PyObject* GetComponentsThatNeedEndOfFrameUpdate(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ComponentsThatNeedEndOfFrameUpdate(), "ComponentsThatNeedEndOfFrameUpdate");
 	}
 
 	static int SetComponentsThatNeedEndOfFrameUpdate(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ComponentsThatNeedEndOfFrameUpdate(), "ComponentsThatNeedEndOfFrameUpdate");
 	}
 
@@ -263,11 +327,19 @@ struct FGetSets_World
 
 	static PyObject* GetComponentsThatNeedEndOfFrameUpdate_AsyncTick(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ComponentsThatNeedEndOfFrameUpdate_AsyncTick(), "ComponentsThatNeedEndOfFrameUpdate_AsyncTick");
 	}
 
 	static int SetComponentsThatNeedEndOfFrameUpdate_AsyncTick(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ComponentsThatNeedEndOfFrameUpdate_AsyncTick(), "ComponentsThatNeedEndOfFrameUpdate_AsyncTick");
 	}
 
@@ -291,11 +363,19 @@ struct FGetSets_World
 
 	static PyObject* GetComponentsThatNeedEndOfFrameUpdate_OnGameThread(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ComponentsThatNeedEndOfFrameUpdate_OnGameThread(), "ComponentsThatNeedEndOfFrameUpdate_OnGameThread");
 	}
 
 	static int SetComponentsThatNeedEndOfFrameUpdate_OnGameThread(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ComponentsThatNeedEndOfFrameUpdate_OnGameThread(), "ComponentsThatNeedEndOfFrameUpdate_OnGameThread");
 	}
 
@@ -319,11 +399,19 @@ struct FGetSets_World
 
 	static PyObject* GetComponentsThatNeedPreEndOfFrameSync(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ComponentsThatNeedPreEndOfFrameSync(), "ComponentsThatNeedPreEndOfFrameSync");
 	}
 
 	static int SetComponentsThatNeedPreEndOfFrameSync(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ComponentsThatNeedPreEndOfFrameSync(), "ComponentsThatNeedPreEndOfFrameSync");
 	}
 
@@ -347,21 +435,37 @@ struct FGetSets_World
 
 	static PyObject* GetComponentsThatNeedPreEndOfFrameSync_AsyncTick(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ComponentsThatNeedPreEndOfFrameSync_AsyncTick(), "ComponentsThatNeedPreEndOfFrameSync_AsyncTick");
 	}
 
 	static int SetComponentsThatNeedPreEndOfFrameSync_AsyncTick(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ComponentsThatNeedPreEndOfFrameSync_AsyncTick(), "ComponentsThatNeedPreEndOfFrameSync_AsyncTick");
 	}
 
 	static PyObject* GetContentBundleManager(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->ContentBundleManager);
 	}
 
 	static int SetContentBundleManager(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->ContentBundleManager))
 		{
 			return 0;
@@ -391,11 +495,19 @@ struct FGetSets_World
 
 	static PyObject* GetCurrentLevel(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_CurrentLevel(), "CurrentLevel");
 	}
 
 	static int SetCurrentLevel(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_CurrentLevel(), "CurrentLevel");
 	}
 
@@ -420,11 +532,19 @@ struct FGetSets_World
 
 	static PyObject* GetDefaultPhysicsVolume(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_DefaultPhysicsVolume(), "DefaultPhysicsVolume");
 	}
 
 	static int SetDefaultPhysicsVolume(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_DefaultPhysicsVolume(), "DefaultPhysicsVolume");
 	}
 
@@ -448,11 +568,19 @@ struct FGetSets_World
 
 	static PyObject* GetDemoNetDriver(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_DemoNetDriver(), "DemoNetDriver");
 	}
 
 	static int SetDemoNetDriver(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_DemoNetDriver(), "DemoNetDriver");
 	}
 
@@ -477,11 +605,19 @@ struct FGetSets_World
 
 	static PyObject* GetEditorViews(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->EditorViews, CastField<FArrayProperty>(GetPropertyDef_EditorViews().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetEditorViews(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_EditorViews(), "EditorViews");
 	}
 
@@ -506,11 +642,19 @@ struct FGetSets_World
 
 	static PyObject* GetExtraReferencedObjects(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->ExtraReferencedObjects, CastField<FArrayProperty>(GetPropertyDef_ExtraReferencedObjects().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetExtraReferencedObjects(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ExtraReferencedObjects(), "ExtraReferencedObjects");
 	}
 
@@ -534,11 +678,19 @@ struct FGetSets_World
 
 	static PyObject* GetGameState(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_GameState(), "GameState");
 	}
 
 	static int SetGameState(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_GameState(), "GameState");
 	}
 
@@ -563,11 +715,19 @@ struct FGetSets_World
 
 	static PyObject* GetLayers(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->Layers, CastField<FArrayProperty>(GetPropertyDef_Layers().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetLayers(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_Layers(), "Layers");
 	}
 
@@ -592,11 +752,19 @@ struct FGetSets_World
 
 	static PyObject* GetLevelCollections(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_LevelCollections(), "LevelCollections");
 	}
 
 	static int SetLevelCollections(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_LevelCollections(), "LevelCollections");
 	}
 
@@ -620,11 +788,19 @@ struct FGetSets_World
 
 	static PyObject* GetLevels(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_Levels(), "Levels");
 	}
 
 	static int SetLevels(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_Levels(), "Levels");
 	}
 
@@ -648,11 +824,19 @@ struct FGetSets_World
 
 	static PyObject* GetLineBatchers(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_LineBatchers(), "LineBatchers");
 	}
 
 	static int SetLineBatchers(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_LineBatchers(), "LineBatchers");
 	}
 
@@ -676,11 +860,19 @@ struct FGetSets_World
 
 	static PyObject* GetMakingInvisibleLevels(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_MakingInvisibleLevels(), "MakingInvisibleLevels");
 	}
 
 	static int SetMakingInvisibleLevels(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_MakingInvisibleLevels(), "MakingInvisibleLevels");
 	}
 
@@ -704,21 +896,37 @@ struct FGetSets_World
 
 	static PyObject* GetMakingVisibleLevels(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_MakingVisibleLevels(), "MakingVisibleLevels");
 	}
 
 	static int SetMakingVisibleLevels(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_MakingVisibleLevels(), "MakingVisibleLevels");
 	}
 
 	static PyObject* GetMyParticleEventManager(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->MyParticleEventManager);
 	}
 
 	static int SetMyParticleEventManager(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->MyParticleEventManager))
 		{
 			return 0;
@@ -747,21 +955,37 @@ struct FGetSets_World
 
 	static PyObject* GetNavigationSystem(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_NavigationSystem(), "NavigationSystem");
 	}
 
 	static int SetNavigationSystem(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_NavigationSystem(), "NavigationSystem");
 	}
 
 	static PyObject* GetNetDriver(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->NetDriver);
 	}
 
 	static int SetNetDriver(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->NetDriver))
 		{
 			return 0;
@@ -772,11 +996,19 @@ struct FGetSets_World
 
 	static PyObject* GetNetworkManager(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->NetworkManager);
 	}
 
 	static int SetNetworkManager(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->NetworkManager))
 		{
 			return 0;
@@ -805,11 +1037,19 @@ struct FGetSets_World
 
 	static PyObject* GetOwningGameInstance(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OwningGameInstance(), "OwningGameInstance");
 	}
 
 	static int SetOwningGameInstance(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OwningGameInstance(), "OwningGameInstance");
 	}
 
@@ -833,11 +1073,19 @@ struct FGetSets_World
 
 	static PyObject* GetPSCPool(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_PSCPool(), "PSCPool");
 	}
 
 	static int SetPSCPool(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_PSCPool(), "PSCPool");
 	}
 
@@ -861,11 +1109,19 @@ struct FGetSets_World
 
 	static PyObject* GetParameterCollectionInstances(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ParameterCollectionInstances(), "ParameterCollectionInstances");
 	}
 
 	static int SetParameterCollectionInstances(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ParameterCollectionInstances(), "ParameterCollectionInstances");
 	}
 
@@ -889,21 +1145,37 @@ struct FGetSets_World
 
 	static PyObject* GetPerModuleDataObjects(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->PerModuleDataObjects, CastField<FArrayProperty>(GetPropertyDef_PerModuleDataObjects().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetPerModuleDataObjects(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_PerModuleDataObjects(), "PerModuleDataObjects");
 	}
 
 	static PyObject* GetPersistentLevel(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->PersistentLevel);
 	}
 
 	static int SetPersistentLevel(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->PersistentLevel))
 		{
 			return 0;
@@ -914,11 +1186,19 @@ struct FGetSets_World
 
 	static PyObject* GetPhysicsCollisionHandler(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->PhysicsCollisionHandler);
 	}
 
 	static int SetPhysicsCollisionHandler(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->PhysicsCollisionHandler))
 		{
 			return 0;
@@ -929,11 +1209,19 @@ struct FGetSets_World
 
 	static PyObject* GetPhysicsField(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->PhysicsField);
 	}
 
 	static int SetPhysicsField(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->PhysicsField))
 		{
 			return 0;
@@ -944,11 +1232,19 @@ struct FGetSets_World
 
 	static PyObject* GetPhysicsQueryHandler(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->PhysicsQueryHandler);
 	}
 
 	static int SetPhysicsQueryHandler(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->PhysicsQueryHandler))
 		{
 			return 0;
@@ -978,11 +1274,19 @@ struct FGetSets_World
 
 	static PyObject* GetSelectedLevels(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_SelectedLevels(), "SelectedLevels");
 	}
 
 	static int SetSelectedLevels(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_SelectedLevels(), "SelectedLevels");
 	}
 
@@ -1007,11 +1311,19 @@ struct FGetSets_World
 
 	static PyObject* GetServerStreamingLevelsVisibility(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ServerStreamingLevelsVisibility(), "ServerStreamingLevelsVisibility");
 	}
 
 	static int SetServerStreamingLevelsVisibility(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ServerStreamingLevelsVisibility(), "ServerStreamingLevelsVisibility");
 	}
 
@@ -1035,21 +1347,37 @@ struct FGetSets_World
 
 	static PyObject* GetStreamingLevels(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_StreamingLevels(), "StreamingLevels");
 	}
 
 	static int SetStreamingLevels(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_StreamingLevels(), "StreamingLevels");
 	}
 
 	static PyObject* GetStreamingLevelsPrefix(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->StreamingLevelsPrefix);
 	}
 
 	static int SetStreamingLevelsPrefix(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->StreamingLevelsPrefix))
 		{
 			return 0;
@@ -1078,22 +1406,38 @@ struct FGetSets_World
 
 	static PyObject* GetStreamingLevelsToConsider(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_StreamingLevelsToConsider(), "StreamingLevelsToConsider");
 	}
 
 	static int SetStreamingLevelsToConsider(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_StreamingLevelsToConsider(), "StreamingLevelsToConsider");
 	}
 
 #if WITH_EDITOR
 	static PyObject* GetThumbnailInfo(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->ThumbnailInfo);
 	}
 
 	static int SetThumbnailInfo(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->ThumbnailInfo))
 		{
 			return 0;
@@ -1105,11 +1449,19 @@ struct FGetSets_World
 #endif
 	static PyObject* GetWorldComposition(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->WorldComposition);
 	}
 
 	static int SetWorldComposition(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->WorldComposition))
 		{
 			return 0;
@@ -1120,11 +1472,19 @@ struct FGetSets_World
 
 	static PyObject* GetbAreConstraintsDirty(FUPyWrapperWorld* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bAreConstraintsDirty);
 	}
 
 	static int SetbAreConstraintsDirty(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1293,6 +1653,11 @@ namespace UPyConversion
 	{
 		if (FUPyWrapperWorld* PyWorld = UPyIsWorld(PyObj))
 		{
+			if (!FUPyWrapperObjectBase::ValidateInternalState(PyWorld))
+			{
+				return FUPyConversionResult::Failure();
+			}
+
 			OutVal = PyWorld->ValuePtr();
 			return FUPyConversionResult::Success();
 		}
