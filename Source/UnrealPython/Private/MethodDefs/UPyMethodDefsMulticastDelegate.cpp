@@ -483,6 +483,11 @@ struct FMethods_WrapperMulticastDelegate
 
 	static PyObject* Broadcast(FUPyWrapperMulticastDelegate* InSelf, PyObject* InArgs)
 	{
+		if (!FUPyWrapperMulticastDelegate::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+
 		if (InSelf->DelegateInstance)
 		{
 			return FUPyWrapperMulticastDelegate::CallDelegate(InSelf, InArgs);
