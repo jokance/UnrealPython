@@ -904,7 +904,11 @@ int FUPyWrapperMap::SetItem(FUPyWrapperMap* InSelf, PyObject* InKey, PyObject* I
 	}
 	else
 	{
-		SelfScriptMapHelper.RemovePair(MapKey.GetValue());
+		if (!SelfScriptMapHelper.RemovePair(MapKey.GetValue()))
+		{
+			UPyUtil::SetPythonError(PyExc_KeyError, InSelf, *FString::Printf(TEXT("Key '%s' was not found in the map"), *UPyUtil::PyObjectToUEString(InKey)));
+			return -1;
+		}
 	}
 
 	return 0;
