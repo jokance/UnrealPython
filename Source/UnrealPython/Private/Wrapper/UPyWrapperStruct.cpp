@@ -203,6 +203,40 @@ void FUPyWrapperStruct::Deinit(FUPyWrapperStruct* InSelf)
 	InSelf->StructInstance = nullptr;
 }
 
+bool FUPyWrapperStruct::DetachFromOwner(FUPyWrapperStruct* InSelf)
+{
+	if (!InSelf || !InSelf->OwnerContext.HasOwner())
+	{
+		return true;
+	}
+
+	if (!InSelf->ScriptStruct || !InSelf->StructInstance)
+	{
+		return false;
+	}
+
+	const IUPyWrapperStructAllocationPolicy* AllocPolicy = GetPyWrapperStructAllocationPolicy(InSelf->ScriptStruct);
+	if (!AllocPolicy)
+	{
+		return false;
+	}
+
+	void* OldStructInstance = InSelf->StructInstance;
+	void* NewStructInstance = AllocPolicy->AllocateStruct(InSelf, InSelf->ScriptStruct);
+	if (!NewStructInstance)
+	{
+		return false;
+	}
+
+	InSelf->ScriptStruct->InitializeStruct(NewStructInstance);
+	InSelf->ScriptStruct->CopyScriptStruct(NewStructInstance, OldStructInstance);
+
+	FUPyWrapperStructFactory::Get().UnmapInstance(OldStructInstance);
+	InSelf->OwnerContext.Reset();
+	InSelf->StructInstance = NewStructInstance;
+	return true;
+}
+
 bool FUPyWrapperStruct::ValidateInternalState(FUPyWrapperStruct* InSelf)
 {
 	if (!InSelf->ScriptStruct)

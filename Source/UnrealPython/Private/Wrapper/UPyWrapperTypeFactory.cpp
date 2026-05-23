@@ -74,7 +74,11 @@ void InvalidateOwnedPyProp(FUPyWrapperBase* PyProp)
 	}
 	else if (PyObject_TypeCheck(PyObj, &UPyWrapperStructType))
 	{
-		FUPyWrapperStruct::Deinit(reinterpret_cast<FUPyWrapperStruct*>(PyProp));
+		FUPyWrapperStruct* PyStruct = reinterpret_cast<FUPyWrapperStruct*>(PyProp);
+		if (!FUPyWrapperStruct::DetachFromOwner(PyStruct))
+		{
+			FUPyWrapperStruct::Deinit(PyStruct);
+		}
 	}
 	else if (PyObject_TypeCheck(PyObj, &UPyWrapperDelegateType))
 	{

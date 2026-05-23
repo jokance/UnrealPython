@@ -47,6 +47,9 @@ struct FUPyWrapperStruct : public FUPyWrapperBase
 	/** Deinitialize this wrapper instance (called via Init and Free to restore the instance to its New state) */
 	static void Deinit(FUPyWrapperStruct* InSelf);
 
+	/** Detach this wrapper from an owned property while preserving its current value as an independent copy */
+	static bool DetachFromOwner(FUPyWrapperStruct* InSelf);
+
 	/** Called to validate the internal state of this wrapper instance prior to operating on it (should be called by all functions that expect to operate on an initialized type; will set an error state on failure) */
 	static bool ValidateInternalState(FUPyWrapperStruct* InSelf);
 
