@@ -8,8 +8,273 @@
 
 - Python: `3.14.5`
 - 插件目录名: `ThirdParty/python314`
+- Android 运行时: `ThirdParty/python314/android`
 - Mac 运行时: `ThirdParty/python314/Mac`
 - iOS 运行时: `ThirdParty/python314/IOS`
+
+## Android 运行时
+
+Android 运行时从 CPython 3.14.5 源码构建，使用 CPython 官方 `Android/android.py` 交叉编译流程作为基础。CPython 官方 Android release package 默认产出 shared `libpython3.14.so`；本插件的 Android 接入选择静态链接，所以构建脚本会在源码构建目录中把官方脚本的 `--enable-shared --without-static-libpython` 调整为 `--disable-shared --with-static-libpython`，再执行官方 build 流程。
+
+参考资料：
+
+- CPython Android 使用说明: <https://docs.python.org/3/using/android.html>
+- CPython Android 构建脚本说明: <https://github.com/python/cpython/blob/3.14/Android/README.md>
+- CPython 3.14.5 发布目录: <https://www.python.org/ftp/python/3.14.5/>
+
+构建环境：
+
+```text
+Linux, macOS, or WSL
+Android SDK, with ANDROID_HOME pointing to the SDK root
+Java, curl, tar, make, python3
+```
+
+默认目标 ABI：
+
+```text
+aarch64-linux-android
+x86_64-linux-android
+```
+
+当前插件只提交这两个 host。UE Android 正式包一般使用 `aarch64-linux-android`；`x86_64-linux-android` 用于模拟器或需要 x86_64 Android target 的场景。
+
+### Android 开发机配置
+
+Windows 开发机需要先安装 UE 对应版本的 Android target platform 组件，并保证引擎目录下存在 Android target 文件，例如：
+
+```text
+D:\Games\UE_5.7\Engine\Binaries\Android\UnrealGame.target
+D:\Games\UE_5.7\Engine\Build\Android
+D:\Games\UE_5.7\Engine\Build\Android\Java
+```
+
+当前本机验证过的 SDK/JDK/NDK 环境变量：
+
+```powershell
+ANDROID_HOME=C:\Users\Nien\AppData\Local\Android\Sdk
+ANDROID_SDK_ROOT=C:\Users\Nien\AppData\Local\Android\Sdk
+JAVA_HOME=C:\Program Files\Microsoft\jdk-17.0.19.10-hotspot
+NDKROOT=C:\Users\Nien\AppData\Local\Android\Sdk\ndk\27.2.12479018
+NDK_ROOT=C:\Users\Nien\AppData\Local\Android\Sdk\ndk\27.2.12479018
+ANDROID_AVD_HOME=D:\Android\avd
+```
+
+模拟器测试使用 x86_64 ABI，所以项目里需要开启 x86_64 Android 包。当前 `Config/DefaultEngine.ini` 中使用：
+
+```ini
+[/Script/AndroidRuntimeSettings.AndroidRuntimeSettings]
+bBuildForArm64=False
+bBuildForX8664=True
+SDKAPILevel=android-34
+NDKAPILevel=android-26
+```
+
+真机 arm64 测试时通常应改回：
+
+```ini
+[/Script/AndroidRuntimeSettings.AndroidRuntimeSettings]
+bBuildForArm64=True
+bBuildForX8664=False
+SDKAPILevel=android-34
+NDKAPILevel=android-26
+```
+
+### Android 构建命令
+
+从项目根目录执行：
+
+```sh
+export ANDROID_HOME=/path/to/android-sdk
+
+Plugins/UnrealPython/Scripts/build_android_python_runtime.sh \
+  --host aarch64-linux-android \
+  --host x86_64-linux-android
+```
+
+可选参数：
+
+```sh
+# 清理脚本管理的 CPython source/build 目录后重建
+Plugins/UnrealPython/Scripts/build_android_python_runtime.sh --clean
+
+# 只构建 Android arm64
+Plugins/UnrealPython/Scripts/build_android_python_runtime.sh --host aarch64-linux-android
+
+# 使用自定义工作目录，避免占用项目 Intermediate
+Plugins/UnrealPython/Scripts/build_android_python_runtime.sh --work-dir /tmp/unrealpython-python-android-build
+```
+
+脚本会完成以下步骤：
+
+1. 下载 `https://www.python.org/ftp/python/3.14.5/Python-3.14.5.tgz`。
+2. 解压到 `Intermediate/UnrealPython/PythonAndroidBuild`。
+3. 基于 CPython `Android/android.py` 构建指定 host。
+4. 生成并安装 CPython host prefix。
+5. 把头文件和静态库复制到插件：
+
+```text
+ThirdParty/python314/android/<host>/include
+ThirdParty/python314/android/<host>/include/python3.14
+ThirdParty/python314/android/<host>/lib/libpython3.14.a
+ThirdParty/python314/android/<host>/lib/libUnrealPython3.14.a
+ThirdParty/python314/android/<host>/lib/libssl.a
+ThirdParty/python314/android/<host>/lib/libcrypto.a
+ThirdParty/python314/android/<host>/lib/libUnrealPythonSSL.a
+ThirdParty/python314/android/<host>/lib/libUnrealPythonCrypto.a
+ThirdParty/python314/android/<host>/lib/libbz2.a
+ThirdParty/python314/android/<host>/lib/libffi.a
+ThirdParty/python314/android/<host>/lib/liblzma.a
+ThirdParty/python314/android/<host>/lib/libzstd.a
+ThirdParty/python314/android/<host>/lib/libmpdec.a
+```
+
+其中 `libpython3.14.a`、`libssl.a`、`libcrypto.a` 是原始 CPython/OpenSSL 静态库；`libUnrealPython3.14.a`、`libUnrealPythonSSL.a`、`libUnrealPythonCrypto.a` 是给 UE Android 链接使用的改写后产物。不要手工删除这三份 `libUnrealPython*` 库。
+
+### Android Build.cs 接入
+
+Android 链接逻辑在 `Source/UnrealPython/UnrealPython.Build.cs`：
+
+- 根据 `Target.Architecture` 选择 `aarch64-linux-android` 或 `x86_64-linux-android`
+- 添加 `<host>/include` 和 `<host>/include/python3.14`
+- 链接 `libUnrealPython3.14.a`
+- 链接 OpenSSL、bz2、ffi、lzma、zstd、mpdec 等 CPython 模块依赖的静态库
+- Android 上 UE 自带 OpenSSL 1.1.1 的库路径可能先于插件库路径出现，且最终 Android game `.so` 会把所有静态库链接进同一个二进制。插件使用 `libUnrealPython3.14.a`、`libUnrealPythonSSL.a` 和 `libUnrealPythonCrypto.a` 作为改写后的 Android 链接产物：OpenSSL 3 导出符号会加上 `UPY_OPENSSL3_` 前缀，Python 中 `_ssl/_hashopenssl` 对 OpenSSL 的引用也会同步改写，避免和 UE 自带 OpenSSL 冲突。
+- 如果 host 目录或任一必需库缺失，UBT 会直接抛出 `BuildException`
+
+Android cook 会以 commandlet 方式加载插件。当前插件在 commandlet 下跳过 Python VM 初始化，避免 Windows cook 阶段因为没有 Win64 标准库 `encodings` 而失败；`StartupModule()` 和 `ShutdownModule()` 都需要保持这个对称跳过逻辑。
+
+### Android 工程内验证
+
+在 Windows 开发机上，从项目根目录执行：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File Plugins\UnrealPython\Scripts\verify_android_python_runtime.ps1
+```
+
+验证脚本会检查：
+
+- `aarch64-linux-android` 和 `x86_64-linux-android` host 目录存在
+- `Python.h` 和 `pyconfig.h` 存在
+- `pyconfig.h` 中 `ANDROID_API_LEVEL` 为 `24`
+- `pyconfig.h` 中 `Py_ENABLE_SHARED` 未启用，确认当前产物是静态 libpython 形态
+- 所有必需 `.a` 文件存在、大小正常，并且是 Unix static archive 格式
+- `UnrealPython.Build.cs` 中包含 Android host 选择和所有必需库引用
+- `SampleGame.uproject` 中已启用 `UnrealPython`
+
+验证通过后再执行 UE Android 编译：
+
+```bat
+"%UE_ENGINE_DIR%\Engine\Build\BatchFiles\Build.bat" SampleGame Android Development ^
+  -Project="D:\Projects\SampleGame\SampleGame.uproject" ^
+  -WaitMutex ^
+  -NoHotReloadFromIDE
+```
+
+如果只想验证插件模块能被 UBT 解析，先运行 `verify_android_python_runtime.ps1`，再运行 Android target build。前者验证第三方 Python runtime 文件和工程接入；后者验证 UE/NDK/链接器实际接受这些静态库。
+
+### Android 打包流程
+
+从 Windows 项目根目录执行完整 BuildCookRun：
+
+```powershell
+$env:ANDROID_HOME=[Environment]::GetEnvironmentVariable('ANDROID_HOME','User')
+$env:ANDROID_SDK_ROOT=[Environment]::GetEnvironmentVariable('ANDROID_SDK_ROOT','User')
+$env:JAVA_HOME=[Environment]::GetEnvironmentVariable('JAVA_HOME','User')
+$env:NDKROOT=[Environment]::GetEnvironmentVariable('NDKROOT','User')
+$env:NDK_ROOT=[Environment]::GetEnvironmentVariable('NDK_ROOT','User')
+
+& 'D:\Games\UE_5.7\Engine\Build\BatchFiles\RunUAT.bat' BuildCookRun `
+  -project='D:\Projects\SampleGame\SampleGame.uproject' `
+  -noP4 `
+  -platform=Android `
+  -cookflavor=ASTC `
+  -clientconfig=Development `
+  -build `
+  -cook `
+  -stage `
+  -pak `
+  -package `
+  -archive `
+  -archivedirectory='D:\Projects\SampleGame\Saved\AndroidTest' `
+  -utf8output
+```
+
+首次运行 Android Gradle wrapper 时会下载 `gradle-8.7-all.zip`，缓存位置为：
+
+```text
+C:\Users\Nien\.gradle\wrapper\dists\gradle-8.7-all
+```
+
+如果网络较慢，UAT 可能长时间停在 `:app:assembleDebug`。只要 `gradle-8.7-all.zip.part` 持续增长，就表示 wrapper 仍在下载，不是 UE cook 或链接失败。
+
+模拟器 x86_64 包的成功输出示例：
+
+```text
+Saved/AndroidTest/SampleGame-x64.apk
+Saved/AndroidTest/main.1.com.YourCompany.SampleGame.obb
+Saved/AndroidTest/Install_YourGame-x64.bat
+Saved/AndroidTest/Uninstall_YourGame-x64.bat
+Saved/AndroidTest/win-x64/UnrealAndroidFileTool.exe
+```
+
+`Install_YourGame-x64.bat` 不只是安装 APK，还会通过 `UnrealAndroidFileTool.exe` 推送 OBB。手工测试时优先使用这个脚本，避免只装 APK 导致运行时找不到 pak/obb 数据。
+
+### Android 模拟器安装与启动验证
+
+确认模拟器在线：
+
+```powershell
+$adb=Join-Path ([Environment]::GetEnvironmentVariable('ANDROID_HOME','User')) 'platform-tools\adb.exe'
+& $adb devices
+```
+
+安装 APK 和 OBB：
+
+```powershell
+cd D:\Projects\SampleGame\Saved\AndroidTest
+.\Install_YourGame-x64.bat emulator-5554
+```
+
+启动并抓取关键日志：
+
+```powershell
+$adb=Join-Path ([Environment]::GetEnvironmentVariable('ANDROID_HOME','User')) 'platform-tools\adb.exe'
+& $adb -s emulator-5554 logcat -c
+& $adb -s emulator-5554 shell monkey -p com.YourCompany.SampleGame -c android.intent.category.LAUNCHER 1
+Start-Sleep -Seconds 20
+& $adb -s emulator-5554 shell pidof com.YourCompany.SampleGame
+& $adb -s emulator-5554 logcat -d -t 1200 |
+  Select-String -Pattern 'SampleGame|Unreal|UnrealPython|Python|Fatal|AndroidRuntime|Exception|signal|crash|Py_Initialize|encodings'
+```
+
+当前验证通过时看到的关键日志：
+
+```text
+Mounted main OBB: /storage/emulated/0/Android/obb/com.YourCompany.SampleGame/main.1.com.YourCompany.SampleGame.obb
+LogPluginManager: Mounting Project plugin UnrealPython
+```
+
+并且 60 秒后：
+
+```text
+pidof com.YourCompany.SampleGame
+8301
+
+topResumedActivity=ActivityRecord{... com.YourCompany.SampleGame/com.epicgames.unreal.GameActivity ...}
+```
+
+不应出现以下错误：
+
+```text
+LogUnrealPython: Error: Py_InitializeFromConfig() failed: Failed to import encodings module
+Fatal error
+AndroidRuntime
+signal 6
+signal 11
+```
+
+如果包能启动但后续真正执行 Python 脚本时报 `encodings` 或标准库导入失败，需要继续补 Android Python 标准库资源 staging 和 `PyConfig.module_search_paths`。本文当前 Android 部分首先覆盖静态库编译、UE 链接、APK/OBB 打包和启动烟测流程。
 
 ## Mac 运行时
 

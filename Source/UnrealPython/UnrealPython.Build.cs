@@ -101,18 +101,56 @@ public class UnrealPython : ModuleRules
 
 	private void ConfigureAndroidPython(ReadOnlyTargetRules Target, string ThirdPartyPath)
 	{
-		PublicIncludePaths.Add(Path.Combine(ThirdPartyPath, PythonVersion, "android", "aarch64-linux-android", "include"));
-		PublicIncludePaths.Add(Path.Combine(ThirdPartyPath, PythonVersion, "android", "aarch64-linux-android", "include", "python3.14"));
+		string AndroidHost = GetAndroidPythonHost(Target);
+		string AndroidPythonPath = Path.Combine(ThirdPartyPath, PythonVersion, "android", AndroidHost);
+		if (!Directory.Exists(AndroidPythonPath))
+		{
+			throw new BuildException($"Missing UnrealPython Android Python runtime for {AndroidHost}: {AndroidPythonPath}");
+		}
 
-		PublicAdditionalLibraries.Add(Path.Combine(ThirdPartyPath, PythonVersion, "android", "aarch64-linux-android", "lib", "libpython3.14.a"));
-		PublicAdditionalLibraries.Add(Path.Combine(ThirdPartyPath, PythonVersion, "android", "aarch64-linux-android", "lib", "libssl.a"));
-		PublicAdditionalLibraries.Add(Path.Combine(ThirdPartyPath, PythonVersion, "android", "aarch64-linux-android", "lib", "libcrypto.a"));
-		PublicAdditionalLibraries.Add(Path.Combine(ThirdPartyPath, PythonVersion, "android", "aarch64-linux-android", "lib", "libbz2.a"));
-		PublicAdditionalLibraries.Add(Path.Combine(ThirdPartyPath, PythonVersion, "android", "aarch64-linux-android", "lib", "libffi.a"));
-		PublicAdditionalLibraries.Add(Path.Combine(ThirdPartyPath, PythonVersion, "android", "aarch64-linux-android", "lib", "liblzma.a"));
-		PublicAdditionalLibraries.Add(Path.Combine(ThirdPartyPath, PythonVersion, "android", "aarch64-linux-android", "lib", "libzstd.a"));
-		PublicAdditionalLibraries.Add(Path.Combine(ThirdPartyPath, PythonVersion, "android", "aarch64-linux-android", "lib", "libmpdec.a"));
-		
+		PublicIncludePaths.Add(Path.Combine(AndroidPythonPath, "include"));
+		PublicIncludePaths.Add(Path.Combine(AndroidPythonPath, "include", "python3.14"));
+
+		AddAndroidPythonLibrary(AndroidPythonPath, "libUnrealPython3.14.a");
+		AddAndroidPythonLibrary(AndroidPythonPath, "libUnrealPythonSSL.a");
+		AddAndroidPythonLibrary(AndroidPythonPath, "libUnrealPythonCrypto.a");
+		AddAndroidPythonLibrary(AndroidPythonPath, "libbz2.a");
+		AddAndroidPythonLibrary(AndroidPythonPath, "libffi.a");
+		AddAndroidPythonLibrary(AndroidPythonPath, "liblzma.a");
+		AddAndroidPythonLibrary(AndroidPythonPath, "libzstd.a");
+		AddAndroidPythonLibrary(AndroidPythonPath, "libmpdec.a");
+	}
+
+	private string GetAndroidPythonHost(ReadOnlyTargetRules Target)
+	{
+		string ArchitectureName = Target.Architecture.ToString().ToLowerInvariant();
+		if (ArchitectureName.Contains("arm64") || ArchitectureName.Contains("aarch64"))
+		{
+			return "aarch64-linux-android";
+		}
+
+		if (ArchitectureName.Contains("x64") || ArchitectureName.Contains("x86_64"))
+		{
+			return "x86_64-linux-android";
+		}
+
+		if (ArchitectureName.Contains("x86") || ArchitectureName.Contains("armv7") || ArchitectureName.Contains("armv"))
+		{
+			throw new BuildException($"UnrealPython has no Android Python runtime for architecture '{Target.Architecture}'. Build and add that host first.");
+		}
+
+		return "aarch64-linux-android";
+	}
+
+	private void AddAndroidPythonLibrary(string AndroidPythonPath, string LibraryName)
+	{
+		string LibraryPath = Path.Combine(AndroidPythonPath, "lib", LibraryName);
+		if (!File.Exists(LibraryPath))
+		{
+			throw new BuildException($"Missing UnrealPython Android Python library: {LibraryPath}");
+		}
+
+		PublicAdditionalLibraries.Add(LibraryPath);
 	}
 
 	private void ConfigureMacPython(ReadOnlyTargetRules Target, string ThirdPartyPath)

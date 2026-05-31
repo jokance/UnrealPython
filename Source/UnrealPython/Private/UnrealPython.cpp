@@ -1,5 +1,6 @@
 
 #include "UnrealPython.h"
+#include "UPyCommon.h"
 #include "UPyManager.h"
 #include "Core/UPyModuleInitializer.h"
 #if WITH_EDITOR
@@ -15,6 +16,12 @@ FOnInitializePythonWrappers FUnrealPythonModule::OnInitializePythonWrappers;
 
 void FUnrealPythonModule::StartupModule()
 {
+	if (IsRunningCommandlet())
+	{
+		UE_LOG(LogUnrealPython, Log, TEXT("Skipping Python VM initialization while running a commandlet."));
+		return;
+	}
+
 	UUPyManager* PyManager = UUPyManager::Get();
 	PyManager->Initialize();
 	
@@ -34,6 +41,11 @@ void FUnrealPythonModule::StartupModule()
 
 void FUnrealPythonModule::ShutdownModule()
 {
+	if (IsRunningCommandlet())
+	{
+		return;
+	}
+
 	UUPyManager* PyManager = UUPyManager::Get();
 	PyManager->Shutdown();
 	
