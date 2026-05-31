@@ -1,5 +1,6 @@
 
 using System.IO;
+using EpicGames.Core;
 using UnrealBuildTool;
 
 public class UnrealPython : ModuleRules
@@ -149,7 +150,7 @@ public class UnrealPython : ModuleRules
 		string PythonXCFrameworkRelativePath = Path.Combine("..", "..", "ThirdParty", PythonVersion, "IOS", "Python.xcframework");
 		string PythonHeadersPath = Path.Combine(PythonXCFrameworkPath, "ios-arm64_x86_64-simulator", "Python.framework", "Headers");
 		string PythonRuntimePath = Path.Combine(IOSPythonPath, "Runtime");
-		string PlatformRuntimeName = Target.Architecture == UnrealArch.IOSSimulator ? "IOSSimulator" : "IOSDevice";
+		string PlatformRuntimeName = ShouldUseIOSSimulatorRuntime(Target) ? "IOSSimulator" : "IOSDevice";
 
 		PublicIncludePaths.Add(PythonHeadersPath);
 		PublicAdditionalFrameworks.Add(new Framework("Python", PythonXCFrameworkRelativePath, Framework.FrameworkMode.LinkAndCopy));
@@ -158,5 +159,24 @@ public class UnrealPython : ModuleRules
 
 		AdditionalBundleResources.Add(new BundleResource(Path.Combine(PythonRuntimePath, PlatformRuntimeName, "python")));
 		AdditionalBundleResources.Add(new BundleResource(Path.Combine(PythonRuntimePath, PlatformRuntimeName, "Frameworks")));
+	}
+
+	private bool ShouldUseIOSSimulatorRuntime(ReadOnlyTargetRules Target)
+	{
+		if (Target.Architecture == UnrealArch.IOSSimulator)
+		{
+			return true;
+		}
+
+		if (Target.IntermediateEnvironment == UnrealIntermediateEnvironment.GenerateProjectFiles)
+		{
+			ConfigHierarchy PlatformEngineConfig = ConfigCache.ReadHierarchy(ConfigHierarchyType.Engine, Target.ProjectFile?.Directory, UnrealTargetPlatform.IOS);
+			if (PlatformEngineConfig.GetBool("/Script/IOSRuntimeSettings.IOSRuntimeSettings", "bEnableSimulatorSupport", out bool bEnableSimulatorSupport) && bEnableSimulatorSupport)
+			{
+				return true;
+			}
+		}
+
+		return false;
 	}
 }

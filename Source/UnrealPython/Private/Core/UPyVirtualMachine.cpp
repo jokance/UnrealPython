@@ -5,6 +5,56 @@
 #include "Interfaces/IPluginManager.h"
 #include "Misc/PackageName.h"
 
+#if PLATFORM_IOS
+#include <CoreFoundation/CoreFoundation.h>
+#endif
+
+namespace
+{
+#if PLATFORM_IOS
+FString GetFileSystemPathFromCFURL(CFURLRef URL)
+{
+	if (URL == nullptr)
+	{
+		return FString();
+	}
+
+	CFStringRef PathString = CFURLCopyFileSystemPath(URL, kCFURLPOSIXPathStyle);
+	if (PathString == nullptr)
+	{
+		return FString();
+	}
+
+	char PathBuffer[4096] = {};
+	const bool bConverted = CFStringGetCString(PathString, PathBuffer, sizeof(PathBuffer), kCFStringEncodingUTF8);
+	CFRelease(PathString);
+
+	return bConverted ? FString(UTF8_TO_TCHAR(PathBuffer)) : FString();
+}
+
+void AddIOSBundlePythonHomeCandidates(TArray<FString>& OutCandidates)
+{
+	CFBundleRef MainBundle = CFBundleGetMainBundle();
+	if (MainBundle == nullptr)
+	{
+		return;
+	}
+
+	if (CFURLRef ResourcesURL = CFBundleCopyResourcesDirectoryURL(MainBundle))
+	{
+		OutCandidates.Add(FPaths::Combine(GetFileSystemPathFromCFURL(ResourcesURL), TEXT("python")));
+		CFRelease(ResourcesURL);
+	}
+
+	if (CFURLRef BundleURL = CFBundleCopyBundleURL(MainBundle))
+	{
+		OutCandidates.Add(FPaths::Combine(GetFileSystemPathFromCFURL(BundleURL), TEXT("python")));
+		CFRelease(BundleURL);
+	}
+}
+#endif
+}
+
 FUPyVirtualMachine& FUPyVirtualMachine::Get()
 {
 	static FUPyVirtualMachine PyVMInst;
@@ -137,24 +187,48 @@ void FUPyVirtualMachine::ConfigureSearchPaths(PyConfig& PythonConfig)
 #endif
 
 #if PLATFORM_IOS
-	const FString IOSBundleDir = FPlatformProcess::BaseDir();
-	const FString IOSPythonHome = FPaths::Combine(IOSBundleDir, TEXT("python"));
-	const TArray<FString> BundledPythonPaths = {
-		FPaths::Combine(IOSPythonHome, TEXT("lib/python3.14")),
-		FPaths::Combine(IOSPythonHome, TEXT("lib/python3.14/lib-dynload"))
+	TArray<FString> IOSPythonHomeCandidates = {
+		FPaths::Combine(FPlatformProcess::BaseDir(), TEXT("python")),
+		FPaths::Combine(FPaths::ProjectDir(), TEXT("python")),
+		FPaths::Combine(FPaths::ProjectContentDir(), TEXT("../python"))
 	};
+	AddIOSBundlePythonHomeCandidates(IOSPythonHomeCandidates);
 
-	if (FPaths::DirectoryExists(IOSPythonHome))
+	FString IOSPythonHome;
+	for (const FString& IOSPythonHomeCandidate : IOSPythonHomeCandidates)
 	{
-		PyConfig_SetString(&PythonConfig, &PythonConfig.home, TCHAR_TO_WCHAR(*FPaths::ConvertRelativePathToFull(IOSPythonHome)));
+		const FString FullPythonHomeCandidate = FPaths::ConvertRelativePathToFull(IOSPythonHomeCandidate);
+		if (FPaths::DirectoryExists(FullPythonHomeCandidate) || FullPythonHomeCandidate.Contains(TEXT(".app/python")))
+		{
+			IOSPythonHome = FullPythonHomeCandidate;
+			break;
+		}
 	}
 
-	for (const FString& BundledPythonPath : BundledPythonPaths)
+	if (!IOSPythonHome.IsEmpty())
 	{
-		if (FPaths::DirectoryExists(BundledPythonPath))
+		const FString IOSStdLibPath = FPaths::Combine(IOSPythonHome, TEXT("lib/python3.14"));
+		const TArray<FString> BundledPythonPaths = {
+			IOSStdLibPath,
+			FPaths::Combine(IOSStdLibPath, TEXT("lib-dynload"))
+		};
+
+		PyConfig_SetString(&PythonConfig, &PythonConfig.home, TCHAR_TO_WCHAR(*IOSPythonHome));
+		PyConfig_SetString(&PythonConfig, &PythonConfig.prefix, TCHAR_TO_WCHAR(*IOSPythonHome));
+		PyConfig_SetString(&PythonConfig, &PythonConfig.exec_prefix, TCHAR_TO_WCHAR(*IOSPythonHome));
+		PyConfig_SetString(&PythonConfig, &PythonConfig.base_prefix, TCHAR_TO_WCHAR(*IOSPythonHome));
+		PyConfig_SetString(&PythonConfig, &PythonConfig.base_exec_prefix, TCHAR_TO_WCHAR(*IOSPythonHome));
+		PyConfig_SetString(&PythonConfig, &PythonConfig.stdlib_dir, TCHAR_TO_WCHAR(*IOSStdLibPath));
+
+		for (const FString& BundledPythonPath : BundledPythonPaths)
 		{
-			PyWideStringList_Append(&PythonConfig.module_search_paths, TCHAR_TO_WCHAR(*FPaths::ConvertRelativePathToFull(BundledPythonPath)));
+			PyWideStringList_Append(&PythonConfig.module_search_paths, TCHAR_TO_WCHAR(*BundledPythonPath));
+			UE_LOG(LogUnrealPython, Log, TEXT("Added bundled iOS Python path: %s"), *BundledPythonPath);
 		}
+	}
+	else
+	{
+		UE_LOG(LogUnrealPython, Warning, TEXT("Bundled iOS Python runtime was not found"));
 	}
 #endif
 
@@ -162,6 +236,15 @@ void FUPyVirtualMachine::ConfigureSearchPaths(PyConfig& PythonConfig)
 	{
 		PyWideStringList_Append(&PythonConfig.module_search_paths, TCHAR_TO_WCHAR(*ScriptPath));
 	}
+
+#if PLATFORM_IOS
+	const FString ExternalScriptPathForWrite = IFileManager::Get().ConvertToAbsolutePathForExternalAppForWrite(*FPaths::Combine(FPaths::ProjectContentDir(), TEXT("Scripts")));
+	const FString ExternalScriptPathForRead = IFileManager::Get().ConvertToAbsolutePathForExternalAppForRead(*FPaths::Combine(FPaths::ProjectContentDir(), TEXT("Scripts")));
+	PyWideStringList_Append(&PythonConfig.module_search_paths, TCHAR_TO_WCHAR(*ExternalScriptPathForWrite));
+	PyWideStringList_Append(&PythonConfig.module_search_paths, TCHAR_TO_WCHAR(*ExternalScriptPathForRead));
+	UE_LOG(LogUnrealPython, Log, TEXT("Added external iOS script path: %s"), *ExternalScriptPathForWrite);
+	UE_LOG(LogUnrealPython, Log, TEXT("Added external iOS script path: %s"), *ExternalScriptPathForRead);
+#endif
 
 	for (const FDirectoryPath& AdditionalPath : PySettings->AdditionalPaths)
 	{
