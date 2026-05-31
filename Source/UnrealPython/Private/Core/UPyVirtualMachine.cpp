@@ -238,12 +238,9 @@ void FUPyVirtualMachine::ConfigureSearchPaths(PyConfig& PythonConfig)
 	}
 
 #if PLATFORM_IOS
-	const FString ExternalScriptPathForWrite = IFileManager::Get().ConvertToAbsolutePathForExternalAppForWrite(*FPaths::Combine(FPaths::ProjectContentDir(), TEXT("Scripts")));
-	const FString ExternalScriptPathForRead = IFileManager::Get().ConvertToAbsolutePathForExternalAppForRead(*FPaths::Combine(FPaths::ProjectContentDir(), TEXT("Scripts")));
-	PyWideStringList_Append(&PythonConfig.module_search_paths, TCHAR_TO_WCHAR(*ExternalScriptPathForWrite));
-	PyWideStringList_Append(&PythonConfig.module_search_paths, TCHAR_TO_WCHAR(*ExternalScriptPathForRead));
-	UE_LOG(LogUnrealPython, Log, TEXT("Added external iOS script path: %s"), *ExternalScriptPathForWrite);
-	UE_LOG(LogUnrealPython, Log, TEXT("Added external iOS script path: %s"), *ExternalScriptPathForRead);
+	const FString PackagedScriptPath = IFileManager::Get().ConvertToAbsolutePathForExternalAppForRead(*FPaths::Combine(FPaths::ProjectContentDir(), TEXT("Scripts")));
+	PyWideStringList_Append(&PythonConfig.module_search_paths, TCHAR_TO_WCHAR(*PackagedScriptPath));
+	UE_LOG(LogUnrealPython, Log, TEXT("Added packaged iOS script path: %s"), *PackagedScriptPath);
 #endif
 
 	for (const FDirectoryPath& AdditionalPath : PySettings->AdditionalPaths)
