@@ -11,8 +11,7 @@ $ProjectRoot = (Resolve-Path -LiteralPath (Join-Path $PluginDir "..\..")).Path
 $ProjectFile = Get-ChildItem -LiteralPath $ProjectRoot -Filter "*.uproject" -File | Select-Object -First 1
 $RuntimeRoot = Join-Path $PluginDir "ThirdParty\python314\android"
 $ContentPythonRoot = Join-Path $PluginDir "Content\Python"
-$AndroidStdLibDir = Join-Path $ContentPythonRoot "Lib"
-$AndroidSupportModule = Join-Path $ContentPythonRoot "_android_support.py"
+$AndroidSupportModule = Join-Path $RuntimeRoot "_android_support.py"
 $BuildCs = Join-Path $PluginDir "Source\UnrealPython\UnrealPython.Build.cs"
 $RequiredRuntimeLibraries = @(
 	"libpython3.14.a",
@@ -90,6 +89,7 @@ else {
 		Assert-Regex $BuildCs ([Regex]::Escape($Library)) "Build.cs reference to $Library"
 	}
 	Assert-Regex $BuildCs 'AndroidStdLibDir' "Build.cs reference to Android stdlib directory"
+	Assert-Regex $BuildCs ([Regex]::Escape('lib", "python3.14"')) "Build.cs reference to per-host Android stdlib directory"
 	Assert-Regex $BuildCs ([Regex]::Escape("_android_support.py")) "Build.cs reference to Android support module"
 	foreach ($HostTriplet in $Hosts) {
 		Assert-Regex $BuildCs ([Regex]::Escape($HostTriplet)) "Build.cs reference to $HostTriplet"
@@ -102,21 +102,6 @@ if (!(Test-Path -LiteralPath $AndroidSupportModule -PathType Leaf)) {
 else {
 	Assert-Regex $AndroidSupportModule 'def init_streams' "Android support init_streams"
 	Assert-Regex $AndroidSupportModule 'python\.stdout' "Android support stdout logcat bridge"
-}
-
-if (!(Test-Path -LiteralPath $AndroidStdLibDir -PathType Container)) {
-	Add-Failure "Missing Android stdlib directory: $AndroidStdLibDir"
-}
-else {
-	foreach ($RequiredEntry in @("encodings\__init__.py", "threading.py", "io.py", "importlib\__init__.py")) {
-		$RequiredPath = Join-Path $AndroidStdLibDir $RequiredEntry
-		if (!(Test-Path -LiteralPath $RequiredPath -PathType Leaf)) {
-			Add-Failure "Missing stdlib file: $RequiredPath"
-		}
-	}
-	if (Test-Path -LiteralPath (Join-Path $AndroidStdLibDir "_android_support.py") -PathType Leaf) {
-		Add-Warning "Android stdlib directory contains _android_support.py; Content\Python\_android_support.py should be the support module loaded first."
-	}
 }
 
 if ($null -eq $ProjectFile) {
@@ -132,6 +117,7 @@ else {
 
 foreach ($HostTriplet in $Hosts) {
 	$HostRoot = Join-Path $RuntimeRoot $HostTriplet
+	$AndroidStdLibDir = Join-Path $HostRoot "lib\python3.14"
 	$IncludeRoot = Join-Path $HostRoot "include"
 	$PythonIncludeRoot = Join-Path $IncludeRoot "python3.14"
 	$LibRoot = Join-Path $HostRoot "lib"
@@ -157,6 +143,29 @@ foreach ($HostTriplet in $Hosts) {
 
 	foreach ($Library in $RequiredRuntimeLibraries) {
 		Test-ArchiveFile (Join-Path $LibRoot $Library)
+	}
+
+	if (!(Test-Path -LiteralPath $AndroidStdLibDir -PathType Container)) {
+		Add-Failure "Missing Android stdlib directory for ${HostTriplet}: $AndroidStdLibDir"
+	}
+	else {
+		foreach ($RequiredEntry in @("encodings\__init__.py", "threading.py", "io.py", "importlib\__init__.py")) {
+			$RequiredPath = Join-Path $AndroidStdLibDir $RequiredEntry
+			if (!(Test-Path -LiteralPath $RequiredPath -PathType Leaf)) {
+				Add-Failure "Missing stdlib file for ${HostTriplet}: $RequiredPath"
+			}
+		}
+		$ExpectedSysConfigData = Join-Path $AndroidStdLibDir "_sysconfigdata__android_$HostTriplet.py"
+		$ExpectedSysConfigVars = Join-Path $AndroidStdLibDir "_sysconfig_vars__android_$HostTriplet.json"
+		if (!(Test-Path -LiteralPath $ExpectedSysConfigData -PathType Leaf)) {
+			Add-Failure "Missing Android sysconfig data for ${HostTriplet}: $ExpectedSysConfigData"
+		}
+		if (!(Test-Path -LiteralPath $ExpectedSysConfigVars -PathType Leaf)) {
+			Add-Failure "Missing Android sysconfig vars for ${HostTriplet}: $ExpectedSysConfigVars"
+		}
+		if (Test-Path -LiteralPath (Join-Path $AndroidStdLibDir "_android_support.py") -PathType Leaf) {
+			Add-Warning "Android stdlib directory for ${HostTriplet} contains _android_support.py; Content\Python\_android_support.py should be the support module loaded first."
+		}
 	}
 
 	$SharedObjects = @(Get-ChildItem -LiteralPath $LibRoot -Filter "*.so" -File -Recurse -ErrorAction SilentlyContinue)

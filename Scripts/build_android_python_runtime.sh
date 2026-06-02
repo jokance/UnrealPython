@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-PYTHON_VERSION="${PYTHON_VERSION:-3.14.5}"
+PYTHON_VERSION="${PYTHON_VERSION:-3.14.2}"
 ANDROID_API_LEVEL="${ANDROID_API_LEVEL:-24}"
 HOSTS=()
 CLEAN=0
@@ -244,8 +244,8 @@ copy_android_stdlib() {
 	local host="$1"
 	local prefix="${SOURCE_DIR}/cross-build/${host}/prefix"
 	local stdlib_dir="${prefix}/lib/python${PYTHON_SHORT_VERSION}"
-	local stdlib_dest="${CONTENT_PYTHON_DIR}/Lib"
-	local support_module="${CONTENT_PYTHON_DIR}/_android_support.py"
+	local stdlib_dest="${RUNTIME_ROOT}/${host}/lib/python${PYTHON_SHORT_VERSION}"
+	local support_module="${RUNTIME_ROOT}/_android_support.py"
 
 	if [[ ! -d "${stdlib_dir}" ]]; then
 		echo "Missing CPython Android stdlib output: ${stdlib_dir}" >&2
@@ -256,7 +256,7 @@ copy_android_stdlib() {
 		exit 1
 	fi
 
-	mkdir -p "${CONTENT_PYTHON_DIR}"
+	mkdir -p "${RUNTIME_ROOT}"
 	cp "${stdlib_dir}/_android_support.py" "${support_module}"
 	python3 - "${support_module}" <<'PY'
 from pathlib import Path
@@ -307,7 +307,6 @@ patch_static_libpython
 
 LLVM_NM="$(find_llvm_tool llvm-nm)"
 LLVM_OBJCOPY="$(find_llvm_tool llvm-objcopy)"
-STDLIB_COPIED=0
 
 export ANDROID_API_LEVEL
 
@@ -319,10 +318,7 @@ for host in "${HOSTS[@]}"; do
 	)
 	copy_host_runtime "${host}"
 	namespace_host_openssl_symbols "${host}" "${LLVM_NM}" "${LLVM_OBJCOPY}"
-	if [[ ${STDLIB_COPIED} -eq 0 ]]; then
-		copy_android_stdlib "${host}"
-		STDLIB_COPIED=1
-	fi
+	copy_android_stdlib "${host}"
 done
 
 echo "Android Python runtime copied to ${RUNTIME_ROOT}"

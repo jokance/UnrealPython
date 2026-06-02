@@ -115,16 +115,15 @@ public class UnrealPython : ModuleRules
 		AddAndroidPythonLibrary(AndroidPythonPath, "libzstd.a");
 		AddAndroidPythonLibrary(AndroidPythonPath, "libmpdec.a");
 
-		string PluginPath = Path.GetFullPath(Path.Combine(ModuleDirectory, "..", ".."));
-		string AndroidSupportModule = Path.Combine(PluginPath, "Content", "Python", "_android_support.py");
-		string AndroidStdLibDir = Path.Combine(PluginPath, "Content", "Python", "Lib");
+		string AndroidSupportModule = Path.Combine(ThirdPartyPath, PythonVersion, "android", "_android_support.py");
+		string AndroidStdLibDir = Path.Combine(AndroidPythonPath, "lib", "python3.14");
 		if (!File.Exists(AndroidSupportModule))
 		{
 			throw new BuildException($"Missing UnrealPython Android Python support module: {AndroidSupportModule}");
 		}
 		if (!Directory.Exists(AndroidStdLibDir))
 		{
-			throw new BuildException($"Missing UnrealPython Android Python stdlib directory: {AndroidStdLibDir}");
+			throw new BuildException($"Missing UnrealPython Android Python stdlib directory for {AndroidHost}: {AndroidStdLibDir}");
 		}
 
 		RuntimeDependencies.Add(AndroidSupportModule, StagedFileType.NonUFS);

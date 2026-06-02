@@ -11,6 +11,10 @@
 #include <CoreFoundation/CoreFoundation.h>
 #endif
 
+#if PLATFORM_ANDROID
+#include "Android/AndroidJavaEnv.h"
+#endif
+
 namespace
 {
 #if PLATFORM_IOS
@@ -57,6 +61,126 @@ void AddIOSBundlePythonHomeCandidates(TArray<FString>& OutCandidates)
 #endif
 
 #if PLATFORM_ANDROID
+#if USE_ANDROID_JNI
+FString GetJavaFileAbsolutePath(JNIEnv* Env, jobject FileObject)
+{
+	if (Env == nullptr || FileObject == nullptr)
+	{
+		return FString();
+	}
+
+	jclass FileClass = Env->GetObjectClass(FileObject);
+	if (FileClass == nullptr || AndroidJavaEnv::CheckJavaException())
+	{
+		return FString();
+	}
+
+	jmethodID GetAbsolutePathMethod = Env->GetMethodID(FileClass, "getAbsolutePath", "()Ljava/lang/String;");
+	Env->DeleteLocalRef(FileClass);
+	if (GetAbsolutePathMethod == nullptr || AndroidJavaEnv::CheckJavaException())
+	{
+		return FString();
+	}
+
+	jstring PathString = static_cast<jstring>(Env->CallObjectMethod(FileObject, GetAbsolutePathMethod));
+	if (PathString == nullptr || AndroidJavaEnv::CheckJavaException())
+	{
+		return FString();
+	}
+
+	return FJavaHelper::FStringFromLocalRef(Env, PathString);
+}
+#endif
+
+TArray<FString> GetAndroidObbDirsFromJava()
+{
+	TArray<FString> ObbDirs;
+
+#if USE_ANDROID_JNI
+	JNIEnv* Env = AndroidJavaEnv::GetJavaEnv();
+	jobject Activity = AndroidJavaEnv::GetGameActivityThis();
+	if (Env == nullptr || Activity == nullptr)
+	{
+		return ObbDirs;
+	}
+
+	jclass ActivityClass = Env->GetObjectClass(Activity);
+	if (ActivityClass == nullptr || AndroidJavaEnv::CheckJavaException())
+	{
+		return ObbDirs;
+	}
+
+	jmethodID GetObbDirsMethod = Env->GetMethodID(ActivityClass, "getObbDirs", "()[Ljava/io/File;");
+	if (GetObbDirsMethod != nullptr && !AndroidJavaEnv::CheckJavaException())
+	{
+		jobjectArray ObbDirArray = static_cast<jobjectArray>(Env->CallObjectMethod(Activity, GetObbDirsMethod));
+		if (ObbDirArray != nullptr && !AndroidJavaEnv::CheckJavaException())
+		{
+			const jsize ObbDirCount = Env->GetArrayLength(ObbDirArray);
+			for (jsize Index = 0; Index < ObbDirCount; ++Index)
+			{
+				jobject ObbDirObject = Env->GetObjectArrayElement(ObbDirArray, Index);
+				if (ObbDirObject != nullptr && !AndroidJavaEnv::CheckJavaException())
+				{
+					const FString ObbDirPath = GetJavaFileAbsolutePath(Env, ObbDirObject);
+					if (!ObbDirPath.IsEmpty())
+					{
+						ObbDirs.AddUnique(ObbDirPath);
+					}
+
+					Env->DeleteLocalRef(ObbDirObject);
+				}
+				else
+				{
+					AndroidJavaEnv::CheckJavaException();
+				}
+			}
+
+			Env->DeleteLocalRef(ObbDirArray);
+		}
+		else
+		{
+			AndroidJavaEnv::CheckJavaException();
+		}
+	}
+	else
+	{
+		AndroidJavaEnv::CheckJavaException();
+	}
+
+	if (ObbDirs.IsEmpty())
+	{
+		jmethodID GetObbDirMethod = Env->GetMethodID(ActivityClass, "getObbDir", "()Ljava/io/File;");
+		if (GetObbDirMethod != nullptr && !AndroidJavaEnv::CheckJavaException())
+		{
+			jobject ObbDirObject = Env->CallObjectMethod(Activity, GetObbDirMethod);
+			if (ObbDirObject != nullptr && !AndroidJavaEnv::CheckJavaException())
+			{
+				const FString ObbDirPath = GetJavaFileAbsolutePath(Env, ObbDirObject);
+				if (!ObbDirPath.IsEmpty())
+				{
+					ObbDirs.AddUnique(ObbDirPath);
+				}
+
+				Env->DeleteLocalRef(ObbDirObject);
+			}
+			else
+			{
+				AndroidJavaEnv::CheckJavaException();
+			}
+		}
+		else
+		{
+			AndroidJavaEnv::CheckJavaException();
+		}
+	}
+
+	Env->DeleteLocalRef(ActivityClass);
+#endif
+
+	return ObbDirs;
+}
+
 FString GetAndroidPackageName()
 {
 	FString PackageName = TEXT("com.YourCompany.[PROJECT]");
@@ -80,15 +204,24 @@ int32 GetAndroidStoreVersion()
 	return StoreVersion;
 }
 
+FString GetAndroidPythonHost()
+{
+#if PLATFORM_ANDROID_ARM64
+	return TEXT("aarch64-linux-android");
+#elif defined(__x86_64__)
+	return TEXT("x86_64-linux-android");
+#else
+	return FString();
+#endif
+}
+
 void AddAndroidObbScriptPaths(PyConfig& PythonConfig)
 {
 	const FString PackageName = GetAndroidPackageName();
 	const int32 StoreVersion = GetAndroidStoreVersion();
 	const FString ObbFileName = FString::Printf(TEXT("main.%d.%s.obb"), StoreVersion, *PackageName);
-	const TArray<FString> ObbRoots = {
-		FString::Printf(TEXT("/storage/emulated/0/Android/obb/%s"), *PackageName),
-		FString::Printf(TEXT("/storage/emulated/0/obb/%s"), *PackageName)
-	};
+	const FString AndroidPythonHost = GetAndroidPythonHost();
+	const TArray<FString> ObbRoots = GetAndroidObbDirsFromJava();
 
 	for (const FString& ObbRoot : ObbRoots)
 	{
@@ -99,13 +232,16 @@ void AddAndroidObbScriptPaths(PyConfig& PythonConfig)
 			PyWideStringList_Append(&PythonConfig.module_search_paths, TCHAR_TO_WCHAR(*ObbScriptPath));
 			UE_LOG(LogUnrealPython, Log, TEXT("Added packaged Android OBB script path: %s"), *ObbScriptPath);
 
-			const FString ObbPluginPythonPath = ObbPath / FApp::GetProjectName() / TEXT("Plugins/UnrealPython/Content/Python");
-			PyWideStringList_Append(&PythonConfig.module_search_paths, TCHAR_TO_WCHAR(*ObbPluginPythonPath));
-			UE_LOG(LogUnrealPython, Log, TEXT("Added packaged Android OBB plugin Python path: %s"), *ObbPluginPythonPath);
+			const FString ObbAndroidPythonPath = ObbPath / FApp::GetProjectName() / TEXT("Plugins/UnrealPython/ThirdParty/python314/android");
+			PyWideStringList_Append(&PythonConfig.module_search_paths, TCHAR_TO_WCHAR(*ObbAndroidPythonPath));
+			UE_LOG(LogUnrealPython, Log, TEXT("Added packaged Android Python support path: %s"), *ObbAndroidPythonPath);
 
-			const FString ObbPythonStdLibPath = ObbPluginPythonPath / TEXT("Lib");
-			PyWideStringList_Append(&PythonConfig.module_search_paths, TCHAR_TO_WCHAR(*ObbPythonStdLibPath));
-			UE_LOG(LogUnrealPython, Log, TEXT("Added packaged Android Python stdlib path: %s"), *ObbPythonStdLibPath);
+			if (!AndroidPythonHost.IsEmpty())
+			{
+				const FString ObbPythonStdLibPath = ObbAndroidPythonPath / AndroidPythonHost / TEXT("lib/python3.14");
+				PyWideStringList_Append(&PythonConfig.module_search_paths, TCHAR_TO_WCHAR(*ObbPythonStdLibPath));
+				UE_LOG(LogUnrealPython, Log, TEXT("Added packaged Android Python stdlib path: %s"), *ObbPythonStdLibPath);
+			}
 		}
 	}
 }
