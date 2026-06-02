@@ -186,6 +186,15 @@ void FUPyVirtualMachine::ConfigureSearchPaths(PyConfig& PythonConfig)
 	}
 #endif
 
+#if PLATFORM_WINDOWS
+	const FString WindowsPythonZipPath = FPaths::Combine(FPlatformProcess::BaseDir(), TEXT("python314.zip"));
+	if (FPaths::FileExists(WindowsPythonZipPath))
+	{
+		PyWideStringList_Append(&PythonConfig.module_search_paths, TCHAR_TO_WCHAR(*FPaths::ConvertRelativePathToFull(WindowsPythonZipPath)));
+		UE_LOG(LogUnrealPython, Log, TEXT("Added bundled Windows Python path: %s"), *WindowsPythonZipPath);
+	}
+#endif
+
 #if PLATFORM_IOS
 	TArray<FString> IOSPythonHomeCandidates = {
 		FPaths::Combine(FPlatformProcess::BaseDir(), TEXT("python")),

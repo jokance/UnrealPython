@@ -85,18 +85,13 @@ public class UnrealPython : ModuleRules
 	{
 		PublicIncludePaths.Add(Path.Combine(ThirdPartyPath, PythonVersion, "include"));
 
-		if (Target.LinkType == TargetLinkType.Modular)
-		{
-			PublicAdditionalLibraries.Add(Path.Combine(ThirdPartyPath, PythonVersion, "Win64", "libs", $"{PythonVersion}.lib"));
+		PublicAdditionalLibraries.Add(Path.Combine(ThirdPartyPath, PythonVersion, "Win64", "libs", $"{PythonVersion}.lib"));
 
-			string DllOutputDir = Target.bBuildEditor ? "$(BinaryOutputDir)" : "$(TargetOutputDir)";
-			RuntimeDependencies.Add(Path.Combine(DllOutputDir, $"{PythonVersion}.dll"),
-				Path.Combine(ThirdPartyPath, PythonVersion, "Win64", $"{PythonVersion}.dll"));
-		}
-		else
-		{
-			PublicAdditionalLibraries.Add(Path.Combine(ThirdPartyPath, PythonVersion, "Win64", "libs", $"{PythonVersion}.lib"));
-		}
+		string DllOutputDir = Target.bBuildEditor ? "$(BinaryOutputDir)" : "$(TargetOutputDir)";
+		RuntimeDependencies.Add(Path.Combine(DllOutputDir, $"{PythonVersion}.dll"),
+			Path.Combine(ThirdPartyPath, PythonVersion, "Win64", $"{PythonVersion}.dll"));
+		RuntimeDependencies.Add(Path.Combine(DllOutputDir, $"{PythonVersion}.zip"),
+			Path.Combine(ThirdPartyPath, PythonVersion, "Win64", $"{PythonVersion}.zip"));
 	}
 
 	private void ConfigureAndroidPython(ReadOnlyTargetRules Target, string ThirdPartyPath)
