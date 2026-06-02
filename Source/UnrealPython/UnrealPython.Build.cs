@@ -114,6 +114,21 @@ public class UnrealPython : ModuleRules
 		AddAndroidPythonLibrary(AndroidPythonPath, "liblzma.a");
 		AddAndroidPythonLibrary(AndroidPythonPath, "libzstd.a");
 		AddAndroidPythonLibrary(AndroidPythonPath, "libmpdec.a");
+
+		string PluginPath = Path.GetFullPath(Path.Combine(ModuleDirectory, "..", ".."));
+		string AndroidSupportModule = Path.Combine(PluginPath, "Content", "Python", "_android_support.py");
+		string AndroidStdLibDir = Path.Combine(PluginPath, "Content", "Python", "Lib");
+		if (!File.Exists(AndroidSupportModule))
+		{
+			throw new BuildException($"Missing UnrealPython Android Python support module: {AndroidSupportModule}");
+		}
+		if (!Directory.Exists(AndroidStdLibDir))
+		{
+			throw new BuildException($"Missing UnrealPython Android Python stdlib directory: {AndroidStdLibDir}");
+		}
+
+		RuntimeDependencies.Add(AndroidSupportModule, StagedFileType.NonUFS);
+		RuntimeDependencies.Add(Path.Combine(AndroidStdLibDir, "..."), StagedFileType.NonUFS);
 	}
 
 	private string GetAndroidPythonHost(ReadOnlyTargetRules Target)

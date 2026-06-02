@@ -11,6 +11,7 @@ PLUGIN_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
 PROJECT_ROOT="$(cd "${PLUGIN_DIR}/../.." && pwd)"
 WORK_DIR="${WORK_DIR:-${PROJECT_ROOT}/Intermediate/UnrealPython/PythonAndroidBuild}"
 RUNTIME_ROOT="${PLUGIN_DIR}/ThirdParty/python314/android"
+CONTENT_PYTHON_DIR="${PLUGIN_DIR}/Content/Python"
 
 usage() {
 	cat <<'EOF'
@@ -239,11 +240,74 @@ for symbol in sorted(symbols):
 	"${objcopy_tool}" "--redefine-syms=${map_file}" "${lib_dir}/libUnrealPythonCrypto.a"
 }
 
+copy_android_stdlib() {
+	local host="$1"
+	local prefix="${SOURCE_DIR}/cross-build/${host}/prefix"
+	local stdlib_dir="${prefix}/lib/python${PYTHON_SHORT_VERSION}"
+	local stdlib_dest="${CONTENT_PYTHON_DIR}/Lib"
+	local support_module="${CONTENT_PYTHON_DIR}/_android_support.py"
+
+	if [[ ! -d "${stdlib_dir}" ]]; then
+		echo "Missing CPython Android stdlib output: ${stdlib_dir}" >&2
+		exit 1
+	fi
+	if [[ ! -f "${stdlib_dir}/_android_support.py" ]]; then
+		echo "Missing CPython Android support module: ${stdlib_dir}/_android_support.py" >&2
+		exit 1
+	fi
+
+	mkdir -p "${CONTENT_PYTHON_DIR}"
+	cp "${stdlib_dir}/_android_support.py" "${support_module}"
+	python3 - "${support_module}" <<'PY'
+from pathlib import Path
+import sys
+
+path = Path(sys.argv[1])
+text = path.read_text(encoding="utf-8")
+old = "            fileno = original.fileno()\n"
+new = """            try:
+                fileno = original.fileno()
+            except (AttributeError, OSError, io.UnsupportedOperation):
+                fileno = None
+"""
+if new not in text:
+    if old not in text:
+        raise SystemExit(f"Could not find fileno block in {path}")
+    path.write_text(text.replace(old, new), encoding="utf-8")
+PY
+
+	rm -rf "${stdlib_dest}"
+	python3 - "${stdlib_dir}" "${stdlib_dest}" <<'PY'
+from pathlib import Path
+import shutil
+import sys
+
+src = Path(sys.argv[1])
+dst = Path(sys.argv[2])
+exclude_prefixes = ("lib-dynload/", "site-packages/")
+
+for path in sorted(src.rglob("*")):
+    if not path.is_file():
+        continue
+    rel = path.relative_to(src).as_posix()
+    if rel == "_android_support.py":
+        continue
+    if rel.endswith(".pyc") or "/__pycache__/" in f"/{rel}":
+        continue
+    if rel.startswith(exclude_prefixes):
+        continue
+    target = dst / rel
+    target.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(path, target)
+PY
+}
+
 prepare_source
 patch_static_libpython
 
 LLVM_NM="$(find_llvm_tool llvm-nm)"
 LLVM_OBJCOPY="$(find_llvm_tool llvm-objcopy)"
+STDLIB_COPIED=0
 
 export ANDROID_API_LEVEL
 
@@ -255,6 +319,10 @@ for host in "${HOSTS[@]}"; do
 	)
 	copy_host_runtime "${host}"
 	namespace_host_openssl_symbols "${host}" "${LLVM_NM}" "${LLVM_OBJCOPY}"
+	if [[ ${STDLIB_COPIED} -eq 0 ]]; then
+		copy_android_stdlib "${host}"
+		STDLIB_COPIED=1
+	fi
 done
 
 echo "Android Python runtime copied to ${RUNTIME_ROOT}"

@@ -191,7 +191,7 @@ bool UUPyManager::Tick(float DeltaTime)
 void UUPyManager::CheckPyScript()
 {
 #if !WITH_EDITOR
-#if PLATFORM_IOS || PLATFORM_WINDOWS
+#if PLATFORM_IOS || PLATFORM_WINDOWS || PLATFORM_ANDROID
 	UE_LOG(LogUnrealPython, Log, TEXT("Skipping CheckPyScript copy; Python scripts are loaded from staged package content."));
 #else
 	UE_LOG(LogTemp, Warning, TEXT("begin CheckPyScript"));

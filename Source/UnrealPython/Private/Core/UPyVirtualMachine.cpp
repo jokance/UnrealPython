@@ -3,6 +3,8 @@
 #include "UPySettings.h"
 #include "HAL/PlatformProcess.h"
 #include "Interfaces/IPluginManager.h"
+#include "Misc/App.h"
+#include "Misc/ConfigCacheIni.h"
 #include "Misc/PackageName.h"
 
 #if PLATFORM_IOS
@@ -50,6 +52,61 @@ void AddIOSBundlePythonHomeCandidates(TArray<FString>& OutCandidates)
 	{
 		OutCandidates.Add(FPaths::Combine(GetFileSystemPathFromCFURL(BundleURL), TEXT("python")));
 		CFRelease(BundleURL);
+	}
+}
+#endif
+
+#if PLATFORM_ANDROID
+FString GetAndroidPackageName()
+{
+	FString PackageName = TEXT("com.YourCompany.[PROJECT]");
+	if (GConfig)
+	{
+		GConfig->GetString(TEXT("/Script/AndroidRuntimeSettings.AndroidRuntimeSettings"), TEXT("PackageName"), PackageName, GEngineIni);
+	}
+
+	PackageName.ReplaceInline(TEXT("[PROJECT]"), FApp::GetProjectName());
+	return PackageName;
+}
+
+int32 GetAndroidStoreVersion()
+{
+	int32 StoreVersion = 1;
+	if (GConfig)
+	{
+		GConfig->GetInt(TEXT("/Script/AndroidRuntimeSettings.AndroidRuntimeSettings"), TEXT("StoreVersion"), StoreVersion, GEngineIni);
+	}
+
+	return StoreVersion;
+}
+
+void AddAndroidObbScriptPaths(PyConfig& PythonConfig)
+{
+	const FString PackageName = GetAndroidPackageName();
+	const int32 StoreVersion = GetAndroidStoreVersion();
+	const FString ObbFileName = FString::Printf(TEXT("main.%d.%s.obb"), StoreVersion, *PackageName);
+	const TArray<FString> ObbRoots = {
+		FString::Printf(TEXT("/storage/emulated/0/Android/obb/%s"), *PackageName),
+		FString::Printf(TEXT("/storage/emulated/0/obb/%s"), *PackageName)
+	};
+
+	for (const FString& ObbRoot : ObbRoots)
+	{
+		const FString ObbPath = FPaths::Combine(ObbRoot, ObbFileName);
+		if (FPaths::FileExists(ObbPath))
+		{
+			const FString ObbScriptPath = ObbPath / FApp::GetProjectName() / TEXT("Content/Scripts");
+			PyWideStringList_Append(&PythonConfig.module_search_paths, TCHAR_TO_WCHAR(*ObbScriptPath));
+			UE_LOG(LogUnrealPython, Log, TEXT("Added packaged Android OBB script path: %s"), *ObbScriptPath);
+
+			const FString ObbPluginPythonPath = ObbPath / FApp::GetProjectName() / TEXT("Plugins/UnrealPython/Content/Python");
+			PyWideStringList_Append(&PythonConfig.module_search_paths, TCHAR_TO_WCHAR(*ObbPluginPythonPath));
+			UE_LOG(LogUnrealPython, Log, TEXT("Added packaged Android OBB plugin Python path: %s"), *ObbPluginPythonPath);
+
+			const FString ObbPythonStdLibPath = ObbPluginPythonPath / TEXT("Lib");
+			PyWideStringList_Append(&PythonConfig.module_search_paths, TCHAR_TO_WCHAR(*ObbPythonStdLibPath));
+			UE_LOG(LogUnrealPython, Log, TEXT("Added packaged Android Python stdlib path: %s"), *ObbPythonStdLibPath);
+		}
 	}
 }
 #endif
@@ -246,10 +303,14 @@ void FUPyVirtualMachine::ConfigureSearchPaths(PyConfig& PythonConfig)
 		PyWideStringList_Append(&PythonConfig.module_search_paths, TCHAR_TO_WCHAR(*ScriptPath));
 	}
 
-#if PLATFORM_IOS
+#if PLATFORM_IOS || PLATFORM_ANDROID
 	const FString PackagedScriptPath = IFileManager::Get().ConvertToAbsolutePathForExternalAppForRead(*FPaths::Combine(FPaths::ProjectContentDir(), TEXT("Scripts")));
 	PyWideStringList_Append(&PythonConfig.module_search_paths, TCHAR_TO_WCHAR(*PackagedScriptPath));
-	UE_LOG(LogUnrealPython, Log, TEXT("Added packaged iOS script path: %s"), *PackagedScriptPath);
+	UE_LOG(LogUnrealPython, Log, TEXT("Added packaged script path: %s"), *PackagedScriptPath);
+#endif
+
+#if PLATFORM_ANDROID
+	AddAndroidObbScriptPaths(PythonConfig);
 #endif
 
 	for (const FDirectoryPath& AdditionalPath : PySettings->AdditionalPaths)

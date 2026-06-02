@@ -10,6 +10,9 @@ $PluginDir = (Resolve-Path -LiteralPath $PluginDir).Path
 $ProjectRoot = (Resolve-Path -LiteralPath (Join-Path $PluginDir "..\..")).Path
 $ProjectFile = Get-ChildItem -LiteralPath $ProjectRoot -Filter "*.uproject" -File | Select-Object -First 1
 $RuntimeRoot = Join-Path $PluginDir "ThirdParty\python314\android"
+$ContentPythonRoot = Join-Path $PluginDir "Content\Python"
+$AndroidStdLibDir = Join-Path $ContentPythonRoot "Lib"
+$AndroidSupportModule = Join-Path $ContentPythonRoot "_android_support.py"
 $BuildCs = Join-Path $PluginDir "Source\UnrealPython\UnrealPython.Build.cs"
 $RequiredRuntimeLibraries = @(
 	"libpython3.14.a",
@@ -86,8 +89,33 @@ else {
 	foreach ($Library in $RequiredBuildCsLibraries) {
 		Assert-Regex $BuildCs ([Regex]::Escape($Library)) "Build.cs reference to $Library"
 	}
+	Assert-Regex $BuildCs 'AndroidStdLibDir' "Build.cs reference to Android stdlib directory"
+	Assert-Regex $BuildCs ([Regex]::Escape("_android_support.py")) "Build.cs reference to Android support module"
 	foreach ($HostTriplet in $Hosts) {
 		Assert-Regex $BuildCs ([Regex]::Escape($HostTriplet)) "Build.cs reference to $HostTriplet"
+	}
+}
+
+if (!(Test-Path -LiteralPath $AndroidSupportModule -PathType Leaf)) {
+	Add-Failure "Missing Android support module: $AndroidSupportModule"
+}
+else {
+	Assert-Regex $AndroidSupportModule 'def init_streams' "Android support init_streams"
+	Assert-Regex $AndroidSupportModule 'python\.stdout' "Android support stdout logcat bridge"
+}
+
+if (!(Test-Path -LiteralPath $AndroidStdLibDir -PathType Container)) {
+	Add-Failure "Missing Android stdlib directory: $AndroidStdLibDir"
+}
+else {
+	foreach ($RequiredEntry in @("encodings\__init__.py", "threading.py", "io.py", "importlib\__init__.py")) {
+		$RequiredPath = Join-Path $AndroidStdLibDir $RequiredEntry
+		if (!(Test-Path -LiteralPath $RequiredPath -PathType Leaf)) {
+			Add-Failure "Missing stdlib file: $RequiredPath"
+		}
+	}
+	if (Test-Path -LiteralPath (Join-Path $AndroidStdLibDir "_android_support.py") -PathType Leaf) {
+		Add-Warning "Android stdlib directory contains _android_support.py; Content\Python\_android_support.py should be the support module loaded first."
 	}
 }
 
