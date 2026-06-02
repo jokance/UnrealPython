@@ -12,9 +12,140 @@
 - Mac 运行时: `ThirdParty/python314/Mac`
 - iOS 运行时: `ThirdParty/python314/IOS`
 
+## Windows 运行时
+
+Windows 运行时使用 CPython embeddable package 形态。插件不解压 `python314.zip`，运行时直接把 zip 文件加入 `PyConfig.module_search_paths`，由 Python 的 zipimport 读取标准库。
+
+插件内关键文件：
+
+```text
+ThirdParty/python314/include
+ThirdParty/python314/Win64/libs/python314.lib
+ThirdParty/python314/Win64/python314.dll
+ThirdParty/python314/Win64/python314.zip
+```
+
+`python314.zip` 是标准库压缩包。它需要和游戏 exe 放在同一目录，不能只留在插件 ThirdParty 目录下。`Source/UnrealPython/UnrealPython.Build.cs` 的 Win64 配置会：
+
+- 添加 `ThirdParty/python314/include`
+- 链接 `ThirdParty/python314/Win64/libs/python314.lib`
+- 在 Editor 构建中把 `python314.dll` 和 `python314.zip` staged 到 `$(BinaryOutputDir)`
+- 在非 Editor 构建中把 `python314.dll` 和 `python314.zip` staged 到 `$(TargetOutputDir)`
+
+Windows 初始化逻辑在 `Source/UnrealPython/Private/Core/UPyVirtualMachine.cpp`。运行时会检查：
+
+```text
+<GameExeDir>/python314.zip
+```
+
+如果存在，会记录日志：
+
+```text
+LogUnrealPython: Added bundled Windows Python path: .../python314.zip
+```
+
+### Windows 项目配置
+
+项目脚本默认放在：
+
+```text
+Content/Scripts
+```
+
+打包时需要作为 Non-UFS 文件 staged，这样包体运行时可以按文件系统路径读取脚本，而不是依赖 `CheckPyScript` 把脚本复制到外部目录。
+
+推荐在项目 `Config/DefaultGame.ini` 中配置：
+
+```ini
+[/Script/UnrealEd.ProjectPackagingSettings]
++DirectoriesToAlwaysStageAsNonUFS=(Path="Scripts")
+
+[UnrealPython]
+ScriptPath=Content/Scripts
+```
+
+说明：
+
+- `DirectoriesToAlwaysStageAsNonUFS=(Path="Scripts")` 对应项目 `Content/Scripts`。
+- `[UnrealPython] ScriptPath=Content/Scripts` 保持编辑器和包体使用同一套脚本目录约定。
+- `UUPyManager::CheckPyScript` 在 Windows 包体中会跳过复制，日志为 `Skipping CheckPyScript copy; Python scripts are loaded from staged package content.`。
+
+### Windows 打包流程
+
+从 Windows 项目根目录执行完整 BuildCookRun：
+
+```powershell
+& 'D:\Games\UE_5.7\Engine\Build\BatchFiles\RunUAT.bat' BuildCookRun `
+  -project='D:\Projects\SampleGame\SampleGame.uproject' `
+  -noP4 `
+  -platform=Win64 `
+  -clientconfig=Development `
+  -build `
+  -cook `
+  -stage `
+  -pak `
+  -package `
+  -archive `
+  -archivedirectory='D:\Projects\SampleGame\Saved\WindowsTest' `
+  -utf8output
+```
+
+如果只需要验证插件模块能编译，可以先跑 Win64 target build：
+
+```bat
+"D:\Games\UE_5.7\Engine\Build\BatchFiles\Build.bat" SampleGame Win64 Development ^
+  -Project="D:\Projects\SampleGame\SampleGame.uproject" ^
+  -WaitMutex ^
+  -NoHotReloadFromIDE
+```
+
+### Windows 包体验证
+
+打包成功后检查 archive 目录中是否存在：
+
+```text
+SampleGame.exe
+python314.dll
+python314.zip
+Content/Scripts
+```
+
+启动包体后重点检查日志：
+
+```text
+LogUnrealPython: Skipping CheckPyScript copy; Python scripts are loaded from staged package content.
+LogUnrealPython: Added bundled Windows Python path: .../python314.zip
+LogUnrealPython: Python VM init success!
+```
+
+如果出现：
+
+```text
+Py_InitializeFromConfig() failed: Failed to import encodings module
+```
+
+优先检查 `python314.zip` 是否和 exe 在同一目录，以及 UBT 是否执行了 Win64 `RuntimeDependencies` staging。
+
 ## Android 运行时
 
 Android 运行时从 CPython 3.14.5 源码构建，使用 CPython 官方 `Android/android.py` 交叉编译流程作为基础。CPython 官方 Android release package 默认产出 shared `libpython3.14.so`；本插件的 Android 接入选择静态链接，所以构建脚本会在源码构建目录中把官方脚本的 `--enable-shared --without-static-libpython` 调整为 `--disable-shared --with-static-libpython`，再执行官方 build 流程。
+
+Android 标准库使用 Python 官方 Android embeddable package 同步到插件 ThirdParty 目录。当前同步脚本为 `Scripts/sync_official_android_stdlib.ps1`，默认下载：
+
+```text
+https://www.python.org/ftp/python/3.14.2/python-3.14.2-aarch64-linux-android.tar.gz
+https://www.python.org/ftp/python/3.14.2/python-3.14.2-x86_64-linux-android.tar.gz
+```
+
+同步后的目录结构：
+
+```text
+ThirdParty/python314/android/_android_support.py
+ThirdParty/python314/android/aarch64-linux-android/lib/python3.14
+ThirdParty/python314/android/x86_64-linux-android/lib/python3.14
+```
+
+`_android_support.py` 来自官方包的 `prefix/lib/python3.14/_android_support.py`，插件只补了 `fileno()` 兼容保护，避免 UE 嵌入环境中 stdout/stderr 不支持 `fileno()` 时初始化失败。
 
 参考资料：
 
@@ -140,9 +271,13 @@ Android 链接逻辑在 `Source/UnrealPython/UnrealPython.Build.cs`：
 - 链接 `libUnrealPython3.14.a`
 - 链接 OpenSSL、bz2、ffi、lzma、zstd、mpdec 等 CPython 模块依赖的静态库
 - Android 上 UE 自带 OpenSSL 1.1.1 的库路径可能先于插件库路径出现，且最终 Android game `.so` 会把所有静态库链接进同一个二进制。插件使用 `libUnrealPython3.14.a`、`libUnrealPythonSSL.a` 和 `libUnrealPythonCrypto.a` 作为改写后的 Android 链接产物：OpenSSL 3 导出符号会加上 `UPY_OPENSSL3_` 前缀，Python 中 `_ssl/_hashopenssl` 对 OpenSSL 的引用也会同步改写，避免和 UE 自带 OpenSSL 冲突。
+- 把 `ThirdParty/python314/android/_android_support.py` 作为 Non-UFS runtime dependency staged 进包体。
+- 把当前 host 的 `ThirdParty/python314/android/<host>/lib/python3.14` 作为 Non-UFS runtime dependency staged 进包体。
 - 如果 host 目录或任一必需库缺失，UBT 会直接抛出 `BuildException`
 
 Android cook 会以 commandlet 方式加载插件。当前插件在 commandlet 下跳过 Python VM 初始化，避免 Windows cook 阶段因为没有 Win64 标准库 `encodings` 而失败；`StartupModule()` 和 `ShutdownModule()` 都需要保持这个对称跳过逻辑。
+
+Android 包体运行时不调用 `CheckPyScript` 复制脚本。`Content/Scripts`、`_android_support.py` 和 host stdlib 都应该在 stage/package 阶段进入 APK/OBB。运行时通过 Java `GameActivity.getObbDirs()` 获取设备实际 OBB 目录，找不到数组时回退到 `getObbDir()`，避免写死 `/storage/emulated/0`。
 
 ### Android 工程内验证
 
@@ -160,6 +295,8 @@ powershell -ExecutionPolicy Bypass -File Plugins\UnrealPython\Scripts\verify_and
 - `pyconfig.h` 中 `Py_ENABLE_SHARED` 未启用，确认当前产物是静态 libpython 形态
 - 所有必需 `.a` 文件存在、大小正常，并且是 Unix static archive 格式
 - `UnrealPython.Build.cs` 中包含 Android host 选择和所有必需库引用
+- `ThirdParty/python314/android/_android_support.py` 存在并包含 Android logcat bridge
+- 每个 host 的 `lib/python3.14` 标准库存在，并包含 Android sysconfig 文件
 - `SampleGame.uproject` 中已启用 `UnrealPython`
 
 验证通过后再执行 UE Android 编译：
@@ -174,6 +311,33 @@ powershell -ExecutionPolicy Bypass -File Plugins\UnrealPython\Scripts\verify_and
 如果只想验证插件模块能被 UBT 解析，先运行 `verify_android_python_runtime.ps1`，再运行 Android target build。前者验证第三方 Python runtime 文件和工程接入；后者验证 UE/NDK/链接器实际接受这些静态库。
 
 ### Android 打包流程
+
+打包前确认项目 Android ABI 与要验证的设备一致：
+
+```ini
+[/Script/AndroidRuntimeSettings.AndroidRuntimeSettings]
+; Android 模拟器
+bBuildForArm64=False
+bBuildForX8664=True
+
+; Android 真机
+; bBuildForArm64=True
+; bBuildForX8664=False
+```
+
+如果要重新同步官方 Android 标准库，从 UnrealPython 插件目录执行：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File Scripts\sync_official_android_stdlib.ps1 `
+  -PluginDir 'D:\Projects\SampleGame\Plugins\UnrealPython'
+```
+
+同步后再执行：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File Scripts\verify_android_python_runtime.ps1 `
+  -PluginDir 'D:\Projects\SampleGame\Plugins\UnrealPython'
+```
 
 从 Windows 项目根目录执行完整 BuildCookRun：
 
@@ -198,6 +362,12 @@ $env:NDK_ROOT=[Environment]::GetEnvironmentVariable('NDK_ROOT','User')
   -archive `
   -archivedirectory='D:\Projects\SampleGame\Saved\AndroidTest' `
   -utf8output
+```
+
+`-pak` 包体会生成 APK 加 OBB。当前 Android Python stdlib 是 Non-UFS runtime dependency，打包日志应能看到类似路径进入 OBB：
+
+```text
+SampleGame/Plugins/UnrealPython/ThirdParty/python314/android/x86_64-linux-android/lib/python3.14/...
 ```
 
 首次运行 Android Gradle wrapper 时会下载 `gradle-8.7-all.zip`，缓存位置为：
@@ -253,6 +423,11 @@ Start-Sleep -Seconds 20
 ```text
 Mounted main OBB: /storage/emulated/0/Android/obb/com.YourCompany.SampleGame/main.1.com.YourCompany.SampleGame.obb
 LogPluginManager: Mounting Project plugin UnrealPython
+LogUnrealPython: Skipping CheckPyScript copy; Python scripts are loaded from staged package content.
+LogUnrealPython: Added packaged Android OBB script path: .../Content/Scripts
+LogUnrealPython: Added packaged Android Python support path: .../Plugins/UnrealPython/ThirdParty/python314/android
+LogUnrealPython: Added packaged Android Python stdlib path: .../Plugins/UnrealPython/ThirdParty/python314/android/x86_64-linux-android/lib/python3.14
+LogUnrealPython: Python VM init success!
 ```
 
 并且 60 秒后：
@@ -274,7 +449,13 @@ signal 6
 signal 11
 ```
 
-如果包能启动但后续真正执行 Python 脚本时报 `encodings` 或标准库导入失败，需要继续补 Android Python 标准库资源 staging 和 `PyConfig.module_search_paths`。本文当前 Android 部分首先覆盖静态库编译、UE 链接、APK/OBB 打包和启动烟测流程。
+如果包能启动但 Python 初始化失败，优先检查：
+
+- 是否只安装了 APK，漏推 OBB。
+- `Install_YourGame-x64.bat` 或 arm64 安装脚本是否成功推送 `main.<StoreVersion>.<PackageName>.obb`。
+- 打包日志里是否包含 `Plugins/UnrealPython/ThirdParty/python314/android/<host>/lib/python3.14`。
+- 运行日志里是否出现 `Added packaged Android Python stdlib path`。
+- 项目 Android ABI 是否和运行设备一致，例如模拟器需要 `x86_64-linux-android`，真机通常需要 `aarch64-linux-android`。
 
 ## Mac 运行时
 
