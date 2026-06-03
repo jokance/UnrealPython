@@ -40,19 +40,11 @@ struct FGetSets_ActorComponent
 
 	static PyObject* GetAssetUserData(FUPyWrapperActorComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_AssetUserData(), "AssetUserData");
 	}
 
 	static int SetAssetUserData(FUPyWrapperActorComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_AssetUserData(), "AssetUserData");
 	}
 
@@ -77,19 +69,11 @@ struct FGetSets_ActorComponent
 
 	static PyObject* GetAssetUserDataEditorOnly(FUPyWrapperActorComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_AssetUserDataEditorOnly(), "AssetUserDataEditorOnly");
 	}
 
 	static int SetAssetUserDataEditorOnly(FUPyWrapperActorComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_AssetUserDataEditorOnly(), "AssetUserDataEditorOnly");
 	}
 
@@ -114,37 +98,21 @@ struct FGetSets_ActorComponent
 
 	static PyObject* GetComponentTags(FUPyWrapperActorComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->ComponentTags, CastField<FArrayProperty>(GetPropertyDef_ComponentTags().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetComponentTags(FUPyWrapperActorComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ComponentTags(), "ComponentTags");
 	}
 
 	static PyObject* GetCreationMethod(FUPyWrapperActorComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->CreationMethod, StaticEnum<EComponentCreationMethod>());
 	}
 
 	static int SetCreationMethod(FUPyWrapperActorComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<EComponentCreationMethod>(), InSelf->ValuePtr()->CreationMethod))
 		{
 			return 0;
@@ -173,19 +141,11 @@ struct FGetSets_ActorComponent
 
 	static PyObject* GetOnComponentActivated(FUPyWrapperActorComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnComponentActivated(), "OnComponentActivated");
 	}
 
 	static int SetOnComponentActivated(FUPyWrapperActorComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnComponentActivated(), "OnComponentActivated");
 	}
 
@@ -209,28 +169,16 @@ struct FGetSets_ActorComponent
 
 	static PyObject* GetOnComponentDeactivated(FUPyWrapperActorComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnComponentDeactivated(), "OnComponentDeactivated");
 	}
 
 	static int SetOnComponentDeactivated(FUPyWrapperActorComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnComponentDeactivated(), "OnComponentDeactivated");
 	}
 
 	static PyObject* GetPrimaryComponentTick(FUPyWrapperActorComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FActorComponentTickFunction>::Get(), (void*)&InSelf->ValuePtr()->PrimaryComponentTick, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
@@ -254,37 +202,21 @@ struct FGetSets_ActorComponent
 
 	static PyObject* GetUCSSerializationIndex(FUPyWrapperActorComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_UCSSerializationIndex(), "UCSSerializationIndex");
 	}
 
 	static int SetUCSSerializationIndex(FUPyWrapperActorComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_UCSSerializationIndex(), "UCSSerializationIndex");
 	}
 
 	static PyObject* GetbAutoActivate(FUPyWrapperActorComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bAutoActivate);
 	}
 
 	static int SetbAutoActivate(FUPyWrapperActorComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -315,28 +247,16 @@ struct FGetSets_ActorComponent
 
 	static PyObject* GetbCanEverAffectNavigation(FUPyWrapperActorComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bCanEverAffectNavigation(), "bCanEverAffectNavigation");
 	}
 
 	static int SetbCanEverAffectNavigation(FUPyWrapperActorComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bCanEverAffectNavigation(), "bCanEverAffectNavigation");
 	}
 
 	static PyObject* GetbEditableWhenInherited(FUPyWrapperActorComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bEditableWhenInherited);
 	}
 
@@ -360,37 +280,21 @@ struct FGetSets_ActorComponent
 
 	static PyObject* GetbIsActive(FUPyWrapperActorComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bIsActive(), "bIsActive");
 	}
 
 	static int SetbIsActive(FUPyWrapperActorComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bIsActive(), "bIsActive");
 	}
 
 	static PyObject* GetbIsEditorOnly(FUPyWrapperActorComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bIsEditorOnly);
 	}
 
 	static int SetbIsEditorOnly(FUPyWrapperActorComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -422,19 +326,11 @@ struct FGetSets_ActorComponent
 
 	static PyObject* GetbIsVisualizationComponent(FUPyWrapperActorComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bIsVisualizationComponent(), "bIsVisualizationComponent");
 	}
 
 	static int SetbIsVisualizationComponent(FUPyWrapperActorComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bIsVisualizationComponent(), "bIsVisualizationComponent");
 	}
 
@@ -460,19 +356,11 @@ struct FGetSets_ActorComponent
 
 	static PyObject* GetbNeedsUCSSerializationIndexEvaluted(FUPyWrapperActorComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bNeedsUCSSerializationIndexEvaluted(), "bNeedsUCSSerializationIndexEvaluted");
 	}
 
 	static int SetbNeedsUCSSerializationIndexEvaluted(FUPyWrapperActorComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bNeedsUCSSerializationIndexEvaluted(), "bNeedsUCSSerializationIndexEvaluted");
 	}
 
@@ -497,19 +385,11 @@ struct FGetSets_ActorComponent
 
 	static PyObject* GetbNetAddressable(FUPyWrapperActorComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bNetAddressable(), "bNetAddressable");
 	}
 
 	static int SetbNetAddressable(FUPyWrapperActorComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bNetAddressable(), "bNetAddressable");
 	}
 
@@ -533,10 +413,6 @@ struct FGetSets_ActorComponent
 
 	static PyObject* GetbReplicateUsingRegisteredSubObjectList(FUPyWrapperActorComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bReplicateUsingRegisteredSubObjectList(), "bReplicateUsingRegisteredSubObjectList");
 	}
 
@@ -560,10 +436,6 @@ struct FGetSets_ActorComponent
 
 	static PyObject* GetbReplicates(FUPyWrapperActorComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bReplicates(), "bReplicates");
 	}
 

@@ -40,11 +40,19 @@ struct FGetSets_SlateColor
 
 	static PyObject* GetColorUseRule(FUPyWrapperSlateColor* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperStruct::GetPropertyValue(InSelf, GetPropertyDef_ColorUseRule(), "ColorUseRule");
 	}
 
 	static int SetColorUseRule(FUPyWrapperSlateColor* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperStruct::SetPropertyValue(InSelf, InValue, GetPropertyDef_ColorUseRule(), "ColorUseRule");
 	}
 
@@ -68,11 +76,19 @@ struct FGetSets_SlateColor
 
 	static PyObject* GetSpecifiedColor(FUPyWrapperSlateColor* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperStruct::GetPropertyValue(InSelf, GetPropertyDef_SpecifiedColor(), "SpecifiedColor");
 	}
 
 	static int SetSpecifiedColor(FUPyWrapperSlateColor* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperStruct::SetPropertyValue(InSelf, InValue, GetPropertyDef_SpecifiedColor(), "SpecifiedColor");
 	}
 

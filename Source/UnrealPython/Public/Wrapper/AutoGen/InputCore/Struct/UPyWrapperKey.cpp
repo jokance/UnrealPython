@@ -38,11 +38,19 @@ struct FGetSets_Key
 
 	static PyObject* GetKeyName(FUPyWrapperKey* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperStruct::GetPropertyValue(InSelf, GetPropertyDef_KeyName(), "KeyName");
 	}
 
 	static int SetKeyName(FUPyWrapperKey* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperStruct::SetPropertyValue(InSelf, InValue, GetPropertyDef_KeyName(), "KeyName");
 	}
 

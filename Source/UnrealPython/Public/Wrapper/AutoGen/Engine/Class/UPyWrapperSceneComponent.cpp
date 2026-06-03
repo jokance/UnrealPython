@@ -41,19 +41,11 @@ struct FGetSets_SceneComponent
 
 	static PyObject* GetAttachChildren(FUPyWrapperSceneComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_AttachChildren(), "AttachChildren");
 	}
 
 	static int SetAttachChildren(FUPyWrapperSceneComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_AttachChildren(), "AttachChildren");
 	}
 
@@ -77,19 +69,11 @@ struct FGetSets_SceneComponent
 
 	static PyObject* GetAttachParent(FUPyWrapperSceneComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_AttachParent(), "AttachParent");
 	}
 
 	static int SetAttachParent(FUPyWrapperSceneComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_AttachParent(), "AttachParent");
 	}
 
@@ -113,19 +97,11 @@ struct FGetSets_SceneComponent
 
 	static PyObject* GetAttachSocketName(FUPyWrapperSceneComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_AttachSocketName(), "AttachSocketName");
 	}
 
 	static int SetAttachSocketName(FUPyWrapperSceneComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_AttachSocketName(), "AttachSocketName");
 	}
 
@@ -149,37 +125,21 @@ struct FGetSets_SceneComponent
 
 	static PyObject* GetClientAttachedChildren(FUPyWrapperSceneComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ClientAttachedChildren(), "ClientAttachedChildren");
 	}
 
 	static int SetClientAttachedChildren(FUPyWrapperSceneComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ClientAttachedChildren(), "ClientAttachedChildren");
 	}
 
 	static PyObject* GetComponentVelocity(FUPyWrapperSceneComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FVector>::Get(), (void*)&InSelf->ValuePtr()->ComponentVelocity, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetComponentVelocity(FUPyWrapperSceneComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->ComponentVelocity))
 		{
 			return 0;
@@ -190,19 +150,11 @@ struct FGetSets_SceneComponent
 
 	static PyObject* GetDetailMode(FUPyWrapperSceneComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->DetailMode, StaticEnum<EDetailMode>());
 	}
 
 	static int SetDetailMode(FUPyWrapperSceneComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<EDetailMode>(), InSelf->ValuePtr()->DetailMode))
 		{
 			return 0;
@@ -213,19 +165,11 @@ struct FGetSets_SceneComponent
 
 	static PyObject* GetMobility(FUPyWrapperSceneComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->Mobility, StaticEnum<EComponentMobility::Type>());
 	}
 
 	static int SetMobility(FUPyWrapperSceneComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<EComponentMobility::Type>(), InSelf->ValuePtr()->Mobility))
 		{
 			return 0;
@@ -254,19 +198,11 @@ struct FGetSets_SceneComponent
 
 	static PyObject* GetPhysicsVolume(FUPyWrapperSceneComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_PhysicsVolume(), "PhysicsVolume");
 	}
 
 	static int SetPhysicsVolume(FUPyWrapperSceneComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_PhysicsVolume(), "PhysicsVolume");
 	}
 
@@ -290,19 +226,11 @@ struct FGetSets_SceneComponent
 
 	static PyObject* GetPhysicsVolumeChangedDelegate(FUPyWrapperSceneComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_PhysicsVolumeChangedDelegate(), "PhysicsVolumeChangedDelegate");
 	}
 
 	static int SetPhysicsVolumeChangedDelegate(FUPyWrapperSceneComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_PhysicsVolumeChangedDelegate(), "PhysicsVolumeChangedDelegate");
 	}
 
@@ -326,19 +254,11 @@ struct FGetSets_SceneComponent
 
 	static PyObject* GetRelativeLocation(FUPyWrapperSceneComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_RelativeLocation(), "RelativeLocation");
 	}
 
 	static int SetRelativeLocation(FUPyWrapperSceneComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_RelativeLocation(), "RelativeLocation");
 	}
 
@@ -362,19 +282,11 @@ struct FGetSets_SceneComponent
 
 	static PyObject* GetRelativeRotation(FUPyWrapperSceneComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_RelativeRotation(), "RelativeRotation");
 	}
 
 	static int SetRelativeRotation(FUPyWrapperSceneComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_RelativeRotation(), "RelativeRotation");
 	}
 
@@ -398,19 +310,11 @@ struct FGetSets_SceneComponent
 
 	static PyObject* GetRelativeScale3D(FUPyWrapperSceneComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_RelativeScale3D(), "RelativeScale3D");
 	}
 
 	static int SetRelativeScale3D(FUPyWrapperSceneComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_RelativeScale3D(), "RelativeScale3D");
 	}
 
@@ -434,19 +338,11 @@ struct FGetSets_SceneComponent
 
 	static PyObject* GetbAbsoluteLocation(FUPyWrapperSceneComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bAbsoluteLocation(), "bAbsoluteLocation");
 	}
 
 	static int SetbAbsoluteLocation(FUPyWrapperSceneComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bAbsoluteLocation(), "bAbsoluteLocation");
 	}
 
@@ -470,19 +366,11 @@ struct FGetSets_SceneComponent
 
 	static PyObject* GetbAbsoluteRotation(FUPyWrapperSceneComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bAbsoluteRotation(), "bAbsoluteRotation");
 	}
 
 	static int SetbAbsoluteRotation(FUPyWrapperSceneComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bAbsoluteRotation(), "bAbsoluteRotation");
 	}
 
@@ -506,37 +394,21 @@ struct FGetSets_SceneComponent
 
 	static PyObject* GetbAbsoluteScale(FUPyWrapperSceneComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bAbsoluteScale(), "bAbsoluteScale");
 	}
 
 	static int SetbAbsoluteScale(FUPyWrapperSceneComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bAbsoluteScale(), "bAbsoluteScale");
 	}
 
 	static PyObject* GetbBoundsChangeTriggersStreamingDataRebuild(FUPyWrapperSceneComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bBoundsChangeTriggersStreamingDataRebuild);
 	}
 
 	static int SetbBoundsChangeTriggersStreamingDataRebuild(FUPyWrapperSceneComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -567,37 +439,21 @@ struct FGetSets_SceneComponent
 
 	static PyObject* GetbComponentToWorldUpdated(FUPyWrapperSceneComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bComponentToWorldUpdated(), "bComponentToWorldUpdated");
 	}
 
 	static int SetbComponentToWorldUpdated(FUPyWrapperSceneComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bComponentToWorldUpdated(), "bComponentToWorldUpdated");
 	}
 
 	static PyObject* GetbComputeBoundsOnceForGame(FUPyWrapperSceneComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bComputeBoundsOnceForGame);
 	}
 
 	static int SetbComputeBoundsOnceForGame(FUPyWrapperSceneComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -610,19 +466,11 @@ struct FGetSets_SceneComponent
 
 	static PyObject* GetbComputeFastLocalBounds(FUPyWrapperSceneComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bComputeFastLocalBounds);
 	}
 
 	static int SetbComputeFastLocalBounds(FUPyWrapperSceneComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -635,19 +483,11 @@ struct FGetSets_SceneComponent
 
 	static PyObject* GetbComputedBoundsOnceForGame(FUPyWrapperSceneComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bComputedBoundsOnceForGame);
 	}
 
 	static int SetbComputedBoundsOnceForGame(FUPyWrapperSceneComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -679,38 +519,22 @@ struct FGetSets_SceneComponent
 
 	static PyObject* GetbHiddenEdTemporary(FUPyWrapperSceneComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bHiddenEdTemporary(), "bHiddenEdTemporary");
 	}
 
 	static int SetbHiddenEdTemporary(FUPyWrapperSceneComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bHiddenEdTemporary(), "bHiddenEdTemporary");
 	}
 
 #endif
 	static PyObject* GetbHiddenInGame(FUPyWrapperSceneComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bHiddenInGame);
 	}
 
 	static int SetbHiddenInGame(FUPyWrapperSceneComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -723,19 +547,11 @@ struct FGetSets_SceneComponent
 
 	static PyObject* GetbIsNotRenderAttachmentRoot(FUPyWrapperSceneComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bIsNotRenderAttachmentRoot);
 	}
 
 	static int SetbIsNotRenderAttachmentRoot(FUPyWrapperSceneComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -766,19 +582,11 @@ struct FGetSets_SceneComponent
 
 	static PyObject* GetbShouldBeAttached(FUPyWrapperSceneComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bShouldBeAttached(), "bShouldBeAttached");
 	}
 
 	static int SetbShouldBeAttached(FUPyWrapperSceneComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bShouldBeAttached(), "bShouldBeAttached");
 	}
 
@@ -802,19 +610,11 @@ struct FGetSets_SceneComponent
 
 	static PyObject* GetbShouldSnapLocationWhenAttached(FUPyWrapperSceneComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bShouldSnapLocationWhenAttached(), "bShouldSnapLocationWhenAttached");
 	}
 
 	static int SetbShouldSnapLocationWhenAttached(FUPyWrapperSceneComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bShouldSnapLocationWhenAttached(), "bShouldSnapLocationWhenAttached");
 	}
 
@@ -838,19 +638,11 @@ struct FGetSets_SceneComponent
 
 	static PyObject* GetbShouldSnapRotationWhenAttached(FUPyWrapperSceneComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bShouldSnapRotationWhenAttached(), "bShouldSnapRotationWhenAttached");
 	}
 
 	static int SetbShouldSnapRotationWhenAttached(FUPyWrapperSceneComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bShouldSnapRotationWhenAttached(), "bShouldSnapRotationWhenAttached");
 	}
 
@@ -874,19 +666,11 @@ struct FGetSets_SceneComponent
 
 	static PyObject* GetbShouldSnapScaleWhenAttached(FUPyWrapperSceneComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bShouldSnapScaleWhenAttached(), "bShouldSnapScaleWhenAttached");
 	}
 
 	static int SetbShouldSnapScaleWhenAttached(FUPyWrapperSceneComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bShouldSnapScaleWhenAttached(), "bShouldSnapScaleWhenAttached");
 	}
 
@@ -910,37 +694,21 @@ struct FGetSets_SceneComponent
 
 	static PyObject* GetbShouldUpdatePhysicsVolume(FUPyWrapperSceneComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bShouldUpdatePhysicsVolume(), "bShouldUpdatePhysicsVolume");
 	}
 
 	static int SetbShouldUpdatePhysicsVolume(FUPyWrapperSceneComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bShouldUpdatePhysicsVolume(), "bShouldUpdatePhysicsVolume");
 	}
 
 	static PyObject* GetbUseAttachParentBound(FUPyWrapperSceneComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bUseAttachParentBound);
 	}
 
 	static int SetbUseAttachParentBound(FUPyWrapperSceneComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -971,38 +739,22 @@ struct FGetSets_SceneComponent
 
 	static PyObject* GetbVisible(FUPyWrapperSceneComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bVisible(), "bVisible");
 	}
 
 	static int SetbVisible(FUPyWrapperSceneComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bVisible(), "bVisible");
 	}
 
 #if WITH_EDITOR
 	static PyObject* GetbVisualizeComponent(FUPyWrapperSceneComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bVisualizeComponent);
 	}
 
 	static int SetbVisualizeComponent(FUPyWrapperSceneComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{

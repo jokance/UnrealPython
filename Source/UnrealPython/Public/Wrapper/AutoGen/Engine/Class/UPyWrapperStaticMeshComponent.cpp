@@ -19,19 +19,11 @@ struct FGetSets_StaticMeshComponent
 {
 	static PyObject* GetDistanceFieldIndirectShadowMinVisibility(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->DistanceFieldIndirectShadowMinVisibility);
 	}
 
 	static int SetDistanceFieldIndirectShadowMinVisibility(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->DistanceFieldIndirectShadowMinVisibility))
 		{
 			return 0;
@@ -42,19 +34,11 @@ struct FGetSets_StaticMeshComponent
 
 	static PyObject* GetDistanceFieldSelfShadowBias(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->DistanceFieldSelfShadowBias);
 	}
 
 	static int SetDistanceFieldSelfShadowBias(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->DistanceFieldSelfShadowBias))
 		{
 			return 0;
@@ -65,19 +49,11 @@ struct FGetSets_StaticMeshComponent
 
 	static PyObject* GetForcedLodModel(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->ForcedLodModel);
 	}
 
 	static int SetForcedLodModel(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->ForcedLodModel))
 		{
 			return 0;
@@ -106,37 +82,21 @@ struct FGetSets_StaticMeshComponent
 
 	static PyObject* GetLODData(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->LODData, CastField<FArrayProperty>(GetPropertyDef_LODData().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetLODData(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_LODData(), "LODData");
 	}
 
 	static PyObject* GetLightmassSettings(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FLightmassPrimitiveSettings>::Get(), (void*)&InSelf->ValuePtr()->LightmassSettings, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetLightmassSettings(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->LightmassSettings))
 		{
 			return 0;
@@ -165,37 +125,21 @@ struct FGetSets_StaticMeshComponent
 
 	static PyObject* GetMaterialCacheTextures(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->MaterialCacheTextures, CastField<FArrayProperty>(GetPropertyDef_MaterialCacheTextures().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetMaterialCacheTextures(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_MaterialCacheTextures(), "MaterialCacheTextures");
 	}
 
 	static PyObject* GetMaterialCacheTileCount(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FIntPoint>::Get(), (void*)&InSelf->ValuePtr()->MaterialCacheTileCount, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetMaterialCacheTileCount(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->MaterialCacheTileCount))
 		{
 			return 0;
@@ -207,19 +151,11 @@ struct FGetSets_StaticMeshComponent
 #if WITH_EDITOR
 	static PyObject* GetMaterialIndexPreview(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->MaterialIndexPreview);
 	}
 
 	static int SetMaterialIndexPreview(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->MaterialIndexPreview))
 		{
 			return 0;
@@ -250,19 +186,11 @@ struct FGetSets_StaticMeshComponent
 
 	static PyObject* GetMaterialStreamingRelativeBoxes(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->MaterialStreamingRelativeBoxes, CastField<FArrayProperty>(GetPropertyDef_MaterialStreamingRelativeBoxes().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetMaterialStreamingRelativeBoxes(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_MaterialStreamingRelativeBoxes(), "MaterialStreamingRelativeBoxes");
 	}
 
@@ -270,19 +198,11 @@ struct FGetSets_StaticMeshComponent
 #if WITH_EDITOR
 	static PyObject* GetMeshPaintTexture(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->MeshPaintTexture);
 	}
 
 	static int SetMeshPaintTexture(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->MeshPaintTexture))
 		{
 			return 0;
@@ -294,19 +214,11 @@ struct FGetSets_StaticMeshComponent
 #endif
 	static PyObject* GetMeshPaintTextureCooked(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->MeshPaintTextureCooked);
 	}
 
 	static int SetMeshPaintTextureCooked(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->MeshPaintTextureCooked))
 		{
 			return 0;
@@ -317,19 +229,11 @@ struct FGetSets_StaticMeshComponent
 
 	static PyObject* GetMeshPaintTextureOverride(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->MeshPaintTextureOverride);
 	}
 
 	static int SetMeshPaintTextureOverride(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->MeshPaintTextureOverride))
 		{
 			return 0;
@@ -340,19 +244,11 @@ struct FGetSets_StaticMeshComponent
 
 	static PyObject* GetMinLOD(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->MinLOD);
 	}
 
 	static int SetMinLOD(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->MinLOD))
 		{
 			return 0;
@@ -363,19 +259,11 @@ struct FGetSets_StaticMeshComponent
 
 	static PyObject* GetNanitePixelProgrammableDistance(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->NanitePixelProgrammableDistance);
 	}
 
 	static int SetNanitePixelProgrammableDistance(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->NanitePixelProgrammableDistance))
 		{
 			return 0;
@@ -386,19 +274,11 @@ struct FGetSets_StaticMeshComponent
 
 	static PyObject* GetOverriddenLightMapRes(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->OverriddenLightMapRes);
 	}
 
 	static int SetOverriddenLightMapRes(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->OverriddenLightMapRes))
 		{
 			return 0;
@@ -409,19 +289,11 @@ struct FGetSets_StaticMeshComponent
 
 	static PyObject* GetOverriddenMeshPaintTextureCoordinateIndex(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->OverriddenMeshPaintTextureCoordinateIndex);
 	}
 
 	static int SetOverriddenMeshPaintTextureCoordinateIndex(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->OverriddenMeshPaintTextureCoordinateIndex))
 		{
 			return 0;
@@ -432,19 +304,11 @@ struct FGetSets_StaticMeshComponent
 
 	static PyObject* GetOverriddenMeshPaintTextureResolution(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->OverriddenMeshPaintTextureResolution);
 	}
 
 	static int SetOverriddenMeshPaintTextureResolution(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->OverriddenMeshPaintTextureResolution))
 		{
 			return 0;
@@ -456,19 +320,11 @@ struct FGetSets_StaticMeshComponent
 #if WITH_EDITOR
 	static PyObject* GetSectionIndexPreview(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->SectionIndexPreview);
 	}
 
 	static int SetSectionIndexPreview(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->SectionIndexPreview))
 		{
 			return 0;
@@ -481,19 +337,11 @@ struct FGetSets_StaticMeshComponent
 #if WITH_EDITOR
 	static PyObject* GetSelectedEditorMaterial(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->SelectedEditorMaterial);
 	}
 
 	static int SetSelectedEditorMaterial(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->SelectedEditorMaterial))
 		{
 			return 0;
@@ -506,19 +354,11 @@ struct FGetSets_StaticMeshComponent
 #if WITH_EDITOR
 	static PyObject* GetSelectedEditorSection(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->SelectedEditorSection);
 	}
 
 	static int SetSelectedEditorSection(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->SelectedEditorSection))
 		{
 			return 0;
@@ -548,38 +388,22 @@ struct FGetSets_StaticMeshComponent
 
 	static PyObject* GetStaticMesh(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_StaticMesh(), "StaticMesh");
 	}
 
 	static int SetStaticMesh(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_StaticMesh(), "StaticMesh");
 	}
 
 #if WITH_EDITOR
 	static PyObject* GetStaticMeshDerivedDataKey(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->StaticMeshDerivedDataKey);
 	}
 
 	static int SetStaticMeshDerivedDataKey(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->StaticMeshDerivedDataKey))
 		{
 			return 0;
@@ -592,19 +416,11 @@ struct FGetSets_StaticMeshComponent
 #if WITH_EDITOR
 	static PyObject* GetStaticMeshImportVersion(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->StaticMeshImportVersion);
 	}
 
 	static int SetStaticMeshImportVersion(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->StaticMeshImportVersion))
 		{
 			return 0;
@@ -616,19 +432,11 @@ struct FGetSets_StaticMeshComponent
 #endif
 	static PyObject* GetStreamingDistanceMultiplier(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->StreamingDistanceMultiplier);
 	}
 
 	static int SetStreamingDistanceMultiplier(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->StreamingDistanceMultiplier))
 		{
 			return 0;
@@ -657,37 +465,21 @@ struct FGetSets_StaticMeshComponent
 
 	static PyObject* GetStreamingTextureData(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->StreamingTextureData, CastField<FArrayProperty>(GetPropertyDef_StreamingTextureData().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetStreamingTextureData(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_StreamingTextureData(), "StreamingTextureData");
 	}
 
 	static PyObject* GetSubDivisionStepSize(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->SubDivisionStepSize);
 	}
 
 	static int SetSubDivisionStepSize(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->SubDivisionStepSize))
 		{
 			return 0;
@@ -698,19 +490,11 @@ struct FGetSets_StaticMeshComponent
 
 	static PyObject* GetWireframeColorOverride(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FColor>::Get(), (void*)&InSelf->ValuePtr()->WireframeColorOverride, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetWireframeColorOverride(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->WireframeColorOverride))
 		{
 			return 0;
@@ -721,19 +505,11 @@ struct FGetSets_StaticMeshComponent
 
 	static PyObject* GetWorldPositionOffsetDisableDistance(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->WorldPositionOffsetDisableDistance);
 	}
 
 	static int SetWorldPositionOffsetDisableDistance(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->WorldPositionOffsetDisableDistance))
 		{
 			return 0;
@@ -744,19 +520,11 @@ struct FGetSets_StaticMeshComponent
 
 	static PyObject* GetbCastDistanceFieldIndirectShadow(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bCastDistanceFieldIndirectShadow);
 	}
 
 	static int SetbCastDistanceFieldIndirectShadow(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -770,19 +538,11 @@ struct FGetSets_StaticMeshComponent
 #if WITH_EDITOR
 	static PyObject* GetbCustomOverrideVertexColorPerLOD(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bCustomOverrideVertexColorPerLOD);
 	}
 
 	static int SetbCustomOverrideVertexColorPerLOD(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -796,19 +556,11 @@ struct FGetSets_StaticMeshComponent
 #endif
 	static PyObject* GetbDisallowNanite(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bDisallowNanite);
 	}
 
 	static int SetbDisallowNanite(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -822,19 +574,11 @@ struct FGetSets_StaticMeshComponent
 #if WITH_EDITOR
 	static PyObject* GetbDisplayNaniteFallbackMesh(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bDisplayNaniteFallbackMesh);
 	}
 
 	static int SetbDisplayNaniteFallbackMesh(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -849,19 +593,11 @@ struct FGetSets_StaticMeshComponent
 #if WITH_EDITOR
 	static PyObject* GetbDisplayPhysicalMaterialMasks(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bDisplayPhysicalMaterialMasks);
 	}
 
 	static int SetbDisplayPhysicalMaterialMasks(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -876,19 +612,11 @@ struct FGetSets_StaticMeshComponent
 #if WITH_EDITOR
 	static PyObject* GetbDisplayVertexColors(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bDisplayVertexColors);
 	}
 
 	static int SetbDisplayVertexColors(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -902,19 +630,11 @@ struct FGetSets_StaticMeshComponent
 #endif
 	static PyObject* GetbEnableTextureColorMeshPainting(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bEnableTextureColorMeshPainting);
 	}
 
 	static int SetbEnableTextureColorMeshPainting(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -927,19 +647,11 @@ struct FGetSets_StaticMeshComponent
 
 	static PyObject* GetbEnableVertexColorMeshPainting(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bEnableVertexColorMeshPainting);
 	}
 
 	static int SetbEnableVertexColorMeshPainting(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -952,19 +664,11 @@ struct FGetSets_StaticMeshComponent
 
 	static PyObject* GetbEvaluateWorldPositionOffset(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bEvaluateWorldPositionOffset);
 	}
 
 	static int SetbEvaluateWorldPositionOffset(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -977,19 +681,11 @@ struct FGetSets_StaticMeshComponent
 
 	static PyObject* GetbEvaluateWorldPositionOffsetInRayTracing(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bEvaluateWorldPositionOffsetInRayTracing);
 	}
 
 	static int SetbEvaluateWorldPositionOffsetInRayTracing(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1002,19 +698,11 @@ struct FGetSets_StaticMeshComponent
 
 	static PyObject* GetbForceDisableNanite(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bForceDisableNanite);
 	}
 
 	static int SetbForceDisableNanite(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1027,19 +715,11 @@ struct FGetSets_StaticMeshComponent
 
 	static PyObject* GetbForceNaniteForMasked(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bForceNaniteForMasked);
 	}
 
 	static int SetbForceNaniteForMasked(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1052,19 +732,11 @@ struct FGetSets_StaticMeshComponent
 
 	static PyObject* GetbForceNavigationObstacle(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bForceNavigationObstacle);
 	}
 
 	static int SetbForceNavigationObstacle(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1077,19 +749,11 @@ struct FGetSets_StaticMeshComponent
 
 	static PyObject* GetbIgnoreInstanceForTextureStreaming(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bIgnoreInstanceForTextureStreaming);
 	}
 
 	static int SetbIgnoreInstanceForTextureStreaming(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1102,19 +766,11 @@ struct FGetSets_StaticMeshComponent
 
 	static PyObject* GetbOverrideDistanceFieldSelfShadowBias(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bOverrideDistanceFieldSelfShadowBias);
 	}
 
 	static int SetbOverrideDistanceFieldSelfShadowBias(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1127,19 +783,11 @@ struct FGetSets_StaticMeshComponent
 
 	static PyObject* GetbOverrideLightMapRes(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bOverrideLightMapRes);
 	}
 
 	static int SetbOverrideLightMapRes(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1152,19 +800,11 @@ struct FGetSets_StaticMeshComponent
 
 	static PyObject* GetbOverrideMeshPaintTextureCoordinateIndex(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bOverrideMeshPaintTextureCoordinateIndex);
 	}
 
 	static int SetbOverrideMeshPaintTextureCoordinateIndex(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1177,19 +817,11 @@ struct FGetSets_StaticMeshComponent
 
 	static PyObject* GetbOverrideMeshPaintTextureResolution(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bOverrideMeshPaintTextureResolution);
 	}
 
 	static int SetbOverrideMeshPaintTextureResolution(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1202,19 +834,11 @@ struct FGetSets_StaticMeshComponent
 
 	static PyObject* GetbOverrideMinLOD(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bOverrideMinLOD);
 	}
 
 	static int SetbOverrideMinLOD(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1227,19 +851,11 @@ struct FGetSets_StaticMeshComponent
 
 	static PyObject* GetbOverrideNavigationExport(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bOverrideNavigationExport);
 	}
 
 	static int SetbOverrideNavigationExport(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1252,19 +868,11 @@ struct FGetSets_StaticMeshComponent
 
 	static PyObject* GetbOverrideWireframeColor(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bOverrideWireframeColor);
 	}
 
 	static int SetbOverrideWireframeColor(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1278,19 +886,11 @@ struct FGetSets_StaticMeshComponent
 #if WITH_EDITOR
 	static PyObject* GetbRegistering(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bRegistering);
 	}
 
 	static int SetbRegistering(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1304,19 +904,11 @@ struct FGetSets_StaticMeshComponent
 #endif
 	static PyObject* GetbReverseCulling(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bReverseCulling);
 	}
 
 	static int SetbReverseCulling(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1329,19 +921,11 @@ struct FGetSets_StaticMeshComponent
 
 	static PyObject* GetbSortTriangles(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bSortTriangles);
 	}
 
 	static int SetbSortTriangles(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1354,19 +938,11 @@ struct FGetSets_StaticMeshComponent
 
 	static PyObject* GetbUseDefaultCollision(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bUseDefaultCollision);
 	}
 
 	static int SetbUseDefaultCollision(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1379,19 +955,11 @@ struct FGetSets_StaticMeshComponent
 
 	static PyObject* GetbUseSubDivisions(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bUseSubDivisions);
 	}
 
 	static int SetbUseSubDivisions(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1404,19 +972,11 @@ struct FGetSets_StaticMeshComponent
 
 	static PyObject* GetbWorldPositionOffsetWritesVelocity(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bWorldPositionOffsetWritesVelocity);
 	}
 
 	static int SetbWorldPositionOffsetWritesVelocity(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{

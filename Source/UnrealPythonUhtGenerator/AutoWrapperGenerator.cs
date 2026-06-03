@@ -4373,7 +4373,7 @@ internal static class AutoWrapperGenerator
 
 		if (projectRoot != null)
 		{
-			// GameExportPath is relative to project root, e.g. "Source/SampleGame/Public/UPy/Wrapper/AutoGen"
+			// GameExportPath is relative to project root, e.g. "Source/MyGame/Public/UPy/Wrapper/AutoGen"
 			string gameExportFullPath = Path.Combine(projectRoot.FullName, gameExportPath);
 			moduleDirectory = Path.Combine(gameExportFullPath, moduleName);
 			return true;
@@ -4553,6 +4553,7 @@ internal static class AutoWrapperGenerator
 		string settingsPath = Path.Combine(pluginRoot, "Tools", "GenerationSettings.json");
 		if (!File.Exists(settingsPath))
 		{
+			ApplyGameExportDefaults(config, pluginRoot);
 			return config;
 		}
 
@@ -4568,15 +4569,6 @@ internal static class AutoWrapperGenerator
 		if (root.TryGetProperty("GameExportPath", out JsonElement gameExportPathElement) && gameExportPathElement.ValueKind == JsonValueKind.String)
 		{
 			config.GameExportPath = gameExportPathElement.GetString();
-			// Extract include path from GameExportPath (e.g., "Source/SampleGame/Public/UPy/Wrapper/AutoGen" -> "UPy/Wrapper/AutoGen")
-			if (!String.IsNullOrEmpty(config.GameExportPath))
-			{
-				int publicIndex = config.GameExportPath.IndexOf("/Public/", StringComparison.OrdinalIgnoreCase);
-				if (publicIndex >= 0)
-				{
-					config.GameIncludePath = config.GameExportPath[(publicIndex + 8)..]; // Skip "/Public/"
-				}
-			}
 		}
 
 		if (root.TryGetProperty("ExportToGameModules", out JsonElement exportToGameModulesElement) && exportToGameModulesElement.ValueKind == JsonValueKind.Array)
@@ -4666,7 +4658,102 @@ internal static class AutoWrapperGenerator
 			}
 		}
 
+		ApplyGameExportDefaults(config, pluginRoot);
 		return config;
+	}
+
+	private static void ApplyGameExportDefaults(GenerationConfig config, string pluginRoot)
+	{
+		if (String.IsNullOrWhiteSpace(config.GameExportPath))
+		{
+			config.GameExportPath = ResolveDefaultGameExportPath(pluginRoot);
+		}
+
+		config.GameIncludePath = GetGameIncludePath(config.GameExportPath);
+	}
+
+	private static string ResolveDefaultGameExportPath(string pluginRoot)
+	{
+		string moduleName = ResolveProjectGameModuleName(pluginRoot);
+		return $"Source/{moduleName}/Public/UPy/Wrapper/AutoGen";
+	}
+
+	private static string ResolveProjectGameModuleName(string pluginRoot)
+	{
+		DirectoryInfo? pluginDir = new(pluginRoot);
+		DirectoryInfo? projectRoot = pluginDir.Parent?.Parent;
+		if (projectRoot == null)
+		{
+			return "Game";
+		}
+
+		string[] projectFiles = Directory.GetFiles(projectRoot.FullName, "*.uproject");
+		foreach (string projectFile in projectFiles.OrderBy(path => path, StringComparer.Ordinal))
+		{
+			string? moduleName = TryReadProjectModuleName(projectFile, projectRoot.FullName);
+			if (!String.IsNullOrWhiteSpace(moduleName))
+			{
+				return moduleName;
+			}
+		}
+
+		return projectRoot.Name;
+	}
+
+	private static string? TryReadProjectModuleName(string projectFile, string projectRoot)
+	{
+		using JsonDocument document = JsonDocument.Parse(File.ReadAllText(projectFile));
+		if (!document.RootElement.TryGetProperty("Modules", out JsonElement modulesElement) || modulesElement.ValueKind != JsonValueKind.Array)
+		{
+			return null;
+		}
+
+		List<(string Name, bool IsRuntime, bool HasSourceDirectory)> modules = new();
+		foreach (JsonElement moduleElement in modulesElement.EnumerateArray())
+		{
+			if (moduleElement.ValueKind != JsonValueKind.Object ||
+				!moduleElement.TryGetProperty("Name", out JsonElement nameElement) ||
+				nameElement.ValueKind != JsonValueKind.String)
+			{
+				continue;
+			}
+
+			string? moduleName = nameElement.GetString();
+			if (String.IsNullOrWhiteSpace(moduleName))
+			{
+				continue;
+			}
+
+			string moduleType = moduleElement.TryGetProperty("Type", out JsonElement typeElement) && typeElement.ValueKind == JsonValueKind.String
+				? typeElement.GetString() ?? String.Empty
+				: String.Empty;
+			bool hasSourceDirectory = Directory.Exists(Path.Combine(projectRoot, "Source", moduleName));
+			modules.Add((moduleName, moduleType.Equals("Runtime", StringComparison.OrdinalIgnoreCase), hasSourceDirectory));
+		}
+
+		return modules
+			.OrderByDescending(module => module.HasSourceDirectory)
+			.ThenByDescending(module => module.IsRuntime)
+			.Select(module => module.Name)
+			.FirstOrDefault();
+	}
+
+	private static string? GetGameIncludePath(string? gameExportPath)
+	{
+		if (String.IsNullOrWhiteSpace(gameExportPath))
+		{
+			return null;
+		}
+
+		// Extract include path from GameExportPath, e.g.
+		// "Source/MyGame/Public/UPy/Wrapper/AutoGen" -> "UPy/Wrapper/AutoGen".
+		int publicIndex = gameExportPath.IndexOf("/Public/", StringComparison.OrdinalIgnoreCase);
+		if (publicIndex >= 0)
+		{
+			return gameExportPath[(publicIndex + 8)..];
+		}
+
+		return null;
 	}
 
 	private static string ResolveModuleName(string moduleName, string packageName)

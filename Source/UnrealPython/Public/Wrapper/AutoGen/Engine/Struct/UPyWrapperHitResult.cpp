@@ -19,11 +19,19 @@ struct FGetSets_HitResult
 {
 	static PyObject* GetBoneName(FUPyWrapperHitResult* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->BoneName);
 	}
 
 	static int SetBoneName(FUPyWrapperHitResult* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->BoneName))
 		{
 			return 0;
@@ -52,21 +60,37 @@ struct FGetSets_HitResult
 
 	static PyObject* GetComponent(FUPyWrapperHitResult* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperStruct::GetPropertyValue(InSelf, GetPropertyDef_Component(), "Component");
 	}
 
 	static int SetComponent(FUPyWrapperHitResult* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperStruct::SetPropertyValue(InSelf, InValue, GetPropertyDef_Component(), "Component");
 	}
 
 	static PyObject* GetDistance(FUPyWrapperHitResult* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->Distance);
 	}
 
 	static int SetDistance(FUPyWrapperHitResult* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->Distance))
 		{
 			return 0;
@@ -77,11 +101,19 @@ struct FGetSets_HitResult
 
 	static PyObject* GetElementIndex(FUPyWrapperHitResult* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->ElementIndex);
 	}
 
 	static int SetElementIndex(FUPyWrapperHitResult* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->ElementIndex))
 		{
 			return 0;
@@ -92,11 +124,19 @@ struct FGetSets_HitResult
 
 	static PyObject* GetFaceIndex(FUPyWrapperHitResult* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->FaceIndex);
 	}
 
 	static int SetFaceIndex(FUPyWrapperHitResult* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->FaceIndex))
 		{
 			return 0;
@@ -107,11 +147,19 @@ struct FGetSets_HitResult
 
 	static PyObject* GetHitObjectHandle(FUPyWrapperHitResult* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FActorInstanceHandle>::Get(), (void*)&InSelf->ValuePtr()->HitObjectHandle, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetHitObjectHandle(FUPyWrapperHitResult* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->HitObjectHandle))
 		{
 			return 0;
@@ -122,11 +170,19 @@ struct FGetSets_HitResult
 
 	static PyObject* GetImpactNormal(FUPyWrapperHitResult* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FVector_NetQuantizeNormal>::Get(), (void*)&InSelf->ValuePtr()->ImpactNormal, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetImpactNormal(FUPyWrapperHitResult* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->ImpactNormal))
 		{
 			return 0;
@@ -137,11 +193,19 @@ struct FGetSets_HitResult
 
 	static PyObject* GetImpactPoint(FUPyWrapperHitResult* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FVector_NetQuantize>::Get(), (void*)&InSelf->ValuePtr()->ImpactPoint, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetImpactPoint(FUPyWrapperHitResult* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->ImpactPoint))
 		{
 			return 0;
@@ -152,11 +216,19 @@ struct FGetSets_HitResult
 
 	static PyObject* GetItem(FUPyWrapperHitResult* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->Item);
 	}
 
 	static int SetItem(FUPyWrapperHitResult* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->Item))
 		{
 			return 0;
@@ -167,11 +239,19 @@ struct FGetSets_HitResult
 
 	static PyObject* GetLocation(FUPyWrapperHitResult* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FVector_NetQuantize>::Get(), (void*)&InSelf->ValuePtr()->Location, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetLocation(FUPyWrapperHitResult* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->Location))
 		{
 			return 0;
@@ -182,11 +262,19 @@ struct FGetSets_HitResult
 
 	static PyObject* GetMyBoneName(FUPyWrapperHitResult* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->MyBoneName);
 	}
 
 	static int SetMyBoneName(FUPyWrapperHitResult* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->MyBoneName))
 		{
 			return 0;
@@ -197,11 +285,19 @@ struct FGetSets_HitResult
 
 	static PyObject* GetMyItem(FUPyWrapperHitResult* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->MyItem);
 	}
 
 	static int SetMyItem(FUPyWrapperHitResult* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->MyItem))
 		{
 			return 0;
@@ -212,11 +308,19 @@ struct FGetSets_HitResult
 
 	static PyObject* GetNormal(FUPyWrapperHitResult* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FVector_NetQuantizeNormal>::Get(), (void*)&InSelf->ValuePtr()->Normal, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetNormal(FUPyWrapperHitResult* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->Normal))
 		{
 			return 0;
@@ -227,11 +331,19 @@ struct FGetSets_HitResult
 
 	static PyObject* GetPenetrationDepth(FUPyWrapperHitResult* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->PenetrationDepth);
 	}
 
 	static int SetPenetrationDepth(FUPyWrapperHitResult* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->PenetrationDepth))
 		{
 			return 0;
@@ -260,21 +372,37 @@ struct FGetSets_HitResult
 
 	static PyObject* GetPhysMaterial(FUPyWrapperHitResult* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperStruct::GetPropertyValue(InSelf, GetPropertyDef_PhysMaterial(), "PhysMaterial");
 	}
 
 	static int SetPhysMaterial(FUPyWrapperHitResult* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperStruct::SetPropertyValue(InSelf, InValue, GetPropertyDef_PhysMaterial(), "PhysMaterial");
 	}
 
 	static PyObject* GetTime(FUPyWrapperHitResult* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->Time);
 	}
 
 	static int SetTime(FUPyWrapperHitResult* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->Time))
 		{
 			return 0;
@@ -285,11 +413,19 @@ struct FGetSets_HitResult
 
 	static PyObject* GetTraceEnd(FUPyWrapperHitResult* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FVector_NetQuantize>::Get(), (void*)&InSelf->ValuePtr()->TraceEnd, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetTraceEnd(FUPyWrapperHitResult* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->TraceEnd))
 		{
 			return 0;
@@ -300,11 +436,19 @@ struct FGetSets_HitResult
 
 	static PyObject* GetTraceStart(FUPyWrapperHitResult* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FVector_NetQuantize>::Get(), (void*)&InSelf->ValuePtr()->TraceStart, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetTraceStart(FUPyWrapperHitResult* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->TraceStart))
 		{
 			return 0;
@@ -315,11 +459,19 @@ struct FGetSets_HitResult
 
 	static PyObject* GetbBlockingHit(FUPyWrapperHitResult* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bBlockingHit);
 	}
 
 	static int SetbBlockingHit(FUPyWrapperHitResult* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -332,11 +484,19 @@ struct FGetSets_HitResult
 
 	static PyObject* GetbStartPenetrating(FUPyWrapperHitResult* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bStartPenetrating);
 	}
 
 	static int SetbStartPenetrating(FUPyWrapperHitResult* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{

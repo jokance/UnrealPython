@@ -20,11 +20,19 @@ struct FGetSets_Box2D
 {
 	static PyObject* GetMax(FUPyWrapperBox2D* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FVector2D>::Get(), (void*)&InSelf->ValuePtr()->Max, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetMax(FUPyWrapperBox2D* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->Max))
 		{
 			return 0;
@@ -35,11 +43,19 @@ struct FGetSets_Box2D
 
 	static PyObject* GetMin(FUPyWrapperBox2D* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FVector2D>::Get(), (void*)&InSelf->ValuePtr()->Min, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetMin(FUPyWrapperBox2D* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->Min))
 		{
 			return 0;
@@ -50,11 +66,19 @@ struct FGetSets_Box2D
 
 	static PyObject* GetbIsValid(FUPyWrapperBox2D* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bIsValid);
 	}
 
 	static int SetbIsValid(FUPyWrapperBox2D* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{

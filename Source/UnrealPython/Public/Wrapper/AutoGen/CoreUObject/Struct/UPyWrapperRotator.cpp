@@ -21,11 +21,19 @@ struct FGetSets_Rotator
 {
 	static PyObject* GetPitch(FUPyWrapperRotator* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->Pitch);
 	}
 
 	static int SetPitch(FUPyWrapperRotator* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->Pitch))
 		{
 			return 0;
@@ -36,11 +44,19 @@ struct FGetSets_Rotator
 
 	static PyObject* GetRoll(FUPyWrapperRotator* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->Roll);
 	}
 
 	static int SetRoll(FUPyWrapperRotator* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->Roll))
 		{
 			return 0;
@@ -51,11 +67,19 @@ struct FGetSets_Rotator
 
 	static PyObject* GetYaw(FUPyWrapperRotator* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->Yaw);
 	}
 
 	static int SetYaw(FUPyWrapperRotator* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->Yaw))
 		{
 			return 0;

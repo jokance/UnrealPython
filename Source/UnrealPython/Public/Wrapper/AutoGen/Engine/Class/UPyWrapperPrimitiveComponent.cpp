@@ -31,19 +31,11 @@ struct FGetSets_PrimitiveComponent
 {
 	static PyObject* GetAlwaysLoadOnClient(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->AlwaysLoadOnClient);
 	}
 
 	static int SetAlwaysLoadOnClient(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -56,19 +48,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetAlwaysLoadOnServer(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->AlwaysLoadOnServer);
 	}
 
 	static int SetAlwaysLoadOnServer(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -81,19 +65,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetBodyInstance(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FBodyInstance>::Get(), (void*)&InSelf->ValuePtr()->BodyInstance, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetBodyInstance(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->BodyInstance))
 		{
 			return 0;
@@ -104,19 +80,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetBoundsScale(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->BoundsScale);
 	}
 
 	static int SetBoundsScale(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->BoundsScale))
 		{
 			return 0;
@@ -127,19 +95,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetCachedMaxDrawDistance(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->CachedMaxDrawDistance);
 	}
 
 	static int SetCachedMaxDrawDistance(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->CachedMaxDrawDistance))
 		{
 			return 0;
@@ -150,19 +110,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetCanCharacterStepUpOn(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->CanCharacterStepUpOn, StaticEnum<ECanBeCharacterBase>());
 	}
 
 	static int SetCanCharacterStepUpOn(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<ECanBeCharacterBase>(), InSelf->ValuePtr()->CanCharacterStepUpOn))
 		{
 			return 0;
@@ -173,19 +125,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetCastShadow(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->CastShadow);
 	}
 
 	static int SetCastShadow(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -198,19 +142,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetCustomDepthStencilValue(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->CustomDepthStencilValue);
 	}
 
 	static int SetCustomDepthStencilValue(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->CustomDepthStencilValue))
 		{
 			return 0;
@@ -221,19 +157,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetCustomDepthStencilWriteMask(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->CustomDepthStencilWriteMask, StaticEnum<ERendererStencilMask>());
 	}
 
 	static int SetCustomDepthStencilWriteMask(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<ERendererStencilMask>(), InSelf->ValuePtr()->CustomDepthStencilWriteMask))
 		{
 			return 0;
@@ -262,19 +190,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetCustomPrimitiveData(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_CustomPrimitiveData(), "CustomPrimitiveData");
 	}
 
 	static int SetCustomPrimitiveData(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_CustomPrimitiveData(), "CustomPrimitiveData");
 	}
 
@@ -298,37 +218,21 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetCustomPrimitiveDataInternal(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_CustomPrimitiveDataInternal(), "CustomPrimitiveDataInternal");
 	}
 
 	static int SetCustomPrimitiveDataInternal(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_CustomPrimitiveDataInternal(), "CustomPrimitiveDataInternal");
 	}
 
 	static PyObject* GetDepthPriorityGroup(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->DepthPriorityGroup, StaticEnum<ESceneDepthPriorityGroup>());
 	}
 
 	static int SetDepthPriorityGroup(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<ESceneDepthPriorityGroup>(), InSelf->ValuePtr()->DepthPriorityGroup))
 		{
 			return 0;
@@ -357,37 +261,21 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetExcludeFromHLODLevels(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ExcludeFromHLODLevels(), "ExcludeFromHLODLevels");
 	}
 
 	static int SetExcludeFromHLODLevels(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ExcludeFromHLODLevels(), "ExcludeFromHLODLevels");
 	}
 
 	static PyObject* GetFirstPersonPrimitiveType(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->FirstPersonPrimitiveType, StaticEnum<EFirstPersonPrimitiveType>());
 	}
 
 	static int SetFirstPersonPrimitiveType(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<EFirstPersonPrimitiveType>(), InSelf->ValuePtr()->FirstPersonPrimitiveType))
 		{
 			return 0;
@@ -398,19 +286,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetHLODBatchingPolicy(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->HLODBatchingPolicy, StaticEnum<EHLODBatchingPolicy>());
 	}
 
 	static int SetHLODBatchingPolicy(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<EHLODBatchingPolicy>(), InSelf->ValuePtr()->HLODBatchingPolicy))
 		{
 			return 0;
@@ -422,19 +302,11 @@ struct FGetSets_PrimitiveComponent
 #if WITH_EDITOR
 	static PyObject* GetHitProxyPriority(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->HitProxyPriority, StaticEnum<EHitProxyPriority>());
 	}
 
 	static int SetHitProxyPriority(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<EHitProxyPriority>(), InSelf->ValuePtr()->HitProxyPriority))
 		{
 			return 0;
@@ -446,19 +318,11 @@ struct FGetSets_PrimitiveComponent
 #endif
 	static PyObject* GetIndirectLightingCacheQuality(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->IndirectLightingCacheQuality, StaticEnum<EIndirectLightingCacheQuality>());
 	}
 
 	static int SetIndirectLightingCacheQuality(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<EIndirectLightingCacheQuality>(), InSelf->ValuePtr()->IndirectLightingCacheQuality))
 		{
 			return 0;
@@ -469,19 +333,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetLDMaxDrawDistance(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->LDMaxDrawDistance);
 	}
 
 	static int SetLDMaxDrawDistance(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->LDMaxDrawDistance))
 		{
 			return 0;
@@ -510,37 +366,21 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetLODParentPrimitive(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_LODParentPrimitive(), "LODParentPrimitive");
 	}
 
 	static int SetLODParentPrimitive(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_LODParentPrimitive(), "LODParentPrimitive");
 	}
 
 	static PyObject* GetLightingChannels(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FLightingChannels>::Get(), (void*)&InSelf->ValuePtr()->LightingChannels, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetLightingChannels(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->LightingChannels))
 		{
 			return 0;
@@ -551,19 +391,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetMinDrawDistance(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->MinDrawDistance);
 	}
 
 	static int SetMinDrawDistance(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->MinDrawDistance))
 		{
 			return 0;
@@ -592,19 +424,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetMoveIgnoreActors(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->MoveIgnoreActors, CastField<FArrayProperty>(GetPropertyDef_MoveIgnoreActors().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetMoveIgnoreActors(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_MoveIgnoreActors(), "MoveIgnoreActors");
 	}
 
@@ -628,19 +452,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetMoveIgnoreComponents(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->MoveIgnoreComponents, CastField<FArrayProperty>(GetPropertyDef_MoveIgnoreComponents().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetMoveIgnoreComponents(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_MoveIgnoreComponents(), "MoveIgnoreComponents");
 	}
 
@@ -664,19 +480,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetOnBeginCursorOver(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnBeginCursorOver(), "OnBeginCursorOver");
 	}
 
 	static int SetOnBeginCursorOver(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnBeginCursorOver(), "OnBeginCursorOver");
 	}
 
@@ -700,19 +508,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetOnClicked(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnClicked(), "OnClicked");
 	}
 
 	static int SetOnClicked(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnClicked(), "OnClicked");
 	}
 
@@ -736,19 +536,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetOnComponentBeginOverlap(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnComponentBeginOverlap(), "OnComponentBeginOverlap");
 	}
 
 	static int SetOnComponentBeginOverlap(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnComponentBeginOverlap(), "OnComponentBeginOverlap");
 	}
 
@@ -772,19 +564,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetOnComponentEndOverlap(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnComponentEndOverlap(), "OnComponentEndOverlap");
 	}
 
 	static int SetOnComponentEndOverlap(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnComponentEndOverlap(), "OnComponentEndOverlap");
 	}
 
@@ -808,19 +592,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetOnComponentHit(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnComponentHit(), "OnComponentHit");
 	}
 
 	static int SetOnComponentHit(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnComponentHit(), "OnComponentHit");
 	}
 
@@ -844,19 +620,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetOnComponentPhysicsStateChanged(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnComponentPhysicsStateChanged(), "OnComponentPhysicsStateChanged");
 	}
 
 	static int SetOnComponentPhysicsStateChanged(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnComponentPhysicsStateChanged(), "OnComponentPhysicsStateChanged");
 	}
 
@@ -880,19 +648,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetOnComponentSleep(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnComponentSleep(), "OnComponentSleep");
 	}
 
 	static int SetOnComponentSleep(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnComponentSleep(), "OnComponentSleep");
 	}
 
@@ -916,19 +676,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetOnComponentWake(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnComponentWake(), "OnComponentWake");
 	}
 
 	static int SetOnComponentWake(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnComponentWake(), "OnComponentWake");
 	}
 
@@ -952,19 +704,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetOnEndCursorOver(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnEndCursorOver(), "OnEndCursorOver");
 	}
 
 	static int SetOnEndCursorOver(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnEndCursorOver(), "OnEndCursorOver");
 	}
 
@@ -988,19 +732,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetOnInputTouchBegin(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnInputTouchBegin(), "OnInputTouchBegin");
 	}
 
 	static int SetOnInputTouchBegin(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnInputTouchBegin(), "OnInputTouchBegin");
 	}
 
@@ -1024,19 +760,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetOnInputTouchEnd(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnInputTouchEnd(), "OnInputTouchEnd");
 	}
 
 	static int SetOnInputTouchEnd(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnInputTouchEnd(), "OnInputTouchEnd");
 	}
 
@@ -1060,19 +788,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetOnInputTouchEnter(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnInputTouchEnter(), "OnInputTouchEnter");
 	}
 
 	static int SetOnInputTouchEnter(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnInputTouchEnter(), "OnInputTouchEnter");
 	}
 
@@ -1096,19 +816,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetOnInputTouchLeave(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnInputTouchLeave(), "OnInputTouchLeave");
 	}
 
 	static int SetOnInputTouchLeave(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnInputTouchLeave(), "OnInputTouchLeave");
 	}
 
@@ -1132,37 +844,21 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetOnReleased(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnReleased(), "OnReleased");
 	}
 
 	static int SetOnReleased(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnReleased(), "OnReleased");
 	}
 
 	static PyObject* GetRayTracingGroupCullingPriority(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->RayTracingGroupCullingPriority, StaticEnum<ERayTracingGroupCullingPriority>());
 	}
 
 	static int SetRayTracingGroupCullingPriority(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<ERayTracingGroupCullingPriority>(), InSelf->ValuePtr()->RayTracingGroupCullingPriority))
 		{
 			return 0;
@@ -1173,19 +869,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetRayTracingGroupId(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->RayTracingGroupId);
 	}
 
 	static int SetRayTracingGroupId(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->RayTracingGroupId))
 		{
 			return 0;
@@ -1214,37 +902,21 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetRuntimeVirtualTextures(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->RuntimeVirtualTextures, CastField<FArrayProperty>(GetPropertyDef_RuntimeVirtualTextures().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetRuntimeVirtualTextures(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_RuntimeVirtualTextures(), "RuntimeVirtualTextures");
 	}
 
 	static PyObject* GetShadowCacheInvalidationBehavior(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->ShadowCacheInvalidationBehavior, StaticEnum<EShadowCacheInvalidationBehavior>());
 	}
 
 	static int SetShadowCacheInvalidationBehavior(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<EShadowCacheInvalidationBehavior>(), InSelf->ValuePtr()->ShadowCacheInvalidationBehavior))
 		{
 			return 0;
@@ -1255,19 +927,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetTranslucencySortDistanceOffset(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->TranslucencySortDistanceOffset);
 	}
 
 	static int SetTranslucencySortDistanceOffset(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->TranslucencySortDistanceOffset))
 		{
 			return 0;
@@ -1278,19 +942,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetTranslucencySortPriority(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->TranslucencySortPriority);
 	}
 
 	static int SetTranslucencySortPriority(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->TranslucencySortPriority))
 		{
 			return 0;
@@ -1301,19 +957,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetViewOwnerDepthPriorityGroup(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->ViewOwnerDepthPriorityGroup, StaticEnum<ESceneDepthPriorityGroup>());
 	}
 
 	static int SetViewOwnerDepthPriorityGroup(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<ESceneDepthPriorityGroup>(), InSelf->ValuePtr()->ViewOwnerDepthPriorityGroup))
 		{
 			return 0;
@@ -1324,19 +972,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetVirtualTextureCullMips(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->VirtualTextureCullMips);
 	}
 
 	static int SetVirtualTextureCullMips(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->VirtualTextureCullMips))
 		{
 			return 0;
@@ -1347,19 +987,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetVirtualTextureLodBias(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->VirtualTextureLodBias);
 	}
 
 	static int SetVirtualTextureLodBias(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->VirtualTextureLodBias))
 		{
 			return 0;
@@ -1370,19 +1002,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetVirtualTextureMinCoverage(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->VirtualTextureMinCoverage);
 	}
 
 	static int SetVirtualTextureMinCoverage(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->VirtualTextureMinCoverage))
 		{
 			return 0;
@@ -1393,19 +1017,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetVirtualTextureRenderPassType(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->VirtualTextureRenderPassType, StaticEnum<ERuntimeVirtualTextureMainPassType>());
 	}
 
 	static int SetVirtualTextureRenderPassType(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<ERuntimeVirtualTextureMainPassType>(), InSelf->ValuePtr()->VirtualTextureRenderPassType))
 		{
 			return 0;
@@ -1416,19 +1032,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetVisibilityId(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->VisibilityId);
 	}
 
 	static int SetVisibilityId(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->VisibilityId))
 		{
 			return 0;
@@ -1439,19 +1047,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbAffectDistanceFieldLighting(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bAffectDistanceFieldLighting);
 	}
 
 	static int SetbAffectDistanceFieldLighting(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1464,19 +1064,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbAffectDynamicIndirectLighting(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bAffectDynamicIndirectLighting);
 	}
 
 	static int SetbAffectDynamicIndirectLighting(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1489,19 +1081,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbAffectIndirectLightingWhileHidden(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bAffectIndirectLightingWhileHidden);
 	}
 
 	static int SetbAffectIndirectLightingWhileHidden(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1514,19 +1098,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbAllowCullDistanceVolume(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bAllowCullDistanceVolume);
 	}
 
 	static int SetbAllowCullDistanceVolume(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1539,19 +1115,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbAlwaysCreatePhysicsState(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bAlwaysCreatePhysicsState);
 	}
 
 	static int SetbAlwaysCreatePhysicsState(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1564,19 +1132,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbApplyImpulseOnDamage(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bApplyImpulseOnDamage);
 	}
 
 	static int SetbApplyImpulseOnDamage(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1589,19 +1149,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbCastCinematicShadow(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bCastCinematicShadow);
 	}
 
 	static int SetbCastCinematicShadow(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1614,19 +1166,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbCastContactShadow(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bCastContactShadow);
 	}
 
 	static int SetbCastContactShadow(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1639,19 +1183,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbCastDynamicShadow(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bCastDynamicShadow);
 	}
 
 	static int SetbCastDynamicShadow(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1664,19 +1200,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbCastFarShadow(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bCastFarShadow);
 	}
 
 	static int SetbCastFarShadow(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1689,19 +1217,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbCastHiddenShadow(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bCastHiddenShadow);
 	}
 
 	static int SetbCastHiddenShadow(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1714,19 +1234,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbCastInsetShadow(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bCastInsetShadow);
 	}
 
 	static int SetbCastInsetShadow(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1739,19 +1251,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbCastShadowAsTwoSided(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bCastShadowAsTwoSided);
 	}
 
 	static int SetbCastShadowAsTwoSided(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1764,19 +1268,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbCastStaticShadow(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bCastStaticShadow);
 	}
 
 	static int SetbCastStaticShadow(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1789,19 +1285,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbCastVolumetricTranslucentShadow(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bCastVolumetricTranslucentShadow);
 	}
 
 	static int SetbCastVolumetricTranslucentShadow(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1815,19 +1303,11 @@ struct FGetSets_PrimitiveComponent
 #if WITH_EDITOR
 	static PyObject* GetbConsiderForActorPlacementWhenHidden(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bConsiderForActorPlacementWhenHidden);
 	}
 
 	static int SetbConsiderForActorPlacementWhenHidden(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1841,19 +1321,11 @@ struct FGetSets_PrimitiveComponent
 #endif
 	static PyObject* GetbEmissiveLightSource(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bEmissiveLightSource);
 	}
 
 	static int SetbEmissiveLightSource(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1866,19 +1338,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbEnableAutoLODGeneration(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bEnableAutoLODGeneration);
 	}
 
 	static int SetbEnableAutoLODGeneration(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1891,19 +1355,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbExcludeFromLightAttachmentGroup(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bExcludeFromLightAttachmentGroup);
 	}
 
 	static int SetbExcludeFromLightAttachmentGroup(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1916,19 +1372,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbFillCollisionUnderneathForNavmesh(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bFillCollisionUnderneathForNavmesh);
 	}
 
 	static int SetbFillCollisionUnderneathForNavmesh(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1941,19 +1389,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbForceMipStreaming(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bForceMipStreaming);
 	}
 
 	static int SetbForceMipStreaming(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1984,37 +1424,21 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbGenerateOverlapEvents(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bGenerateOverlapEvents(), "bGenerateOverlapEvents");
 	}
 
 	static int SetbGenerateOverlapEvents(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bGenerateOverlapEvents(), "bGenerateOverlapEvents");
 	}
 
 	static PyObject* GetbHasCustomNavigableGeometry(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->bHasCustomNavigableGeometry, StaticEnum<EHasCustomNavigableGeometry::Type>());
 	}
 
 	static int SetbHasCustomNavigableGeometry(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<EHasCustomNavigableGeometry::Type>(), InSelf->ValuePtr()->bHasCustomNavigableGeometry))
 		{
 			return 0;
@@ -2043,46 +1467,26 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbHasNoStreamableTextures(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bHasNoStreamableTextures(), "bHasNoStreamableTextures");
 	}
 
 	static int SetbHasNoStreamableTextures(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bHasNoStreamableTextures(), "bHasNoStreamableTextures");
 	}
 
 	static PyObject* GetbHasPerInstanceHitProxies(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bHasPerInstanceHitProxies);
 	}
 
 	static PyObject* GetbHiddenInSceneCapture(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bHiddenInSceneCapture);
 	}
 
 	static int SetbHiddenInSceneCapture(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -2095,19 +1499,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbHoldout(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bHoldout);
 	}
 
 	static int SetbHoldout(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -2120,19 +1516,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbIgnoreRadialForce(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bIgnoreRadialForce);
 	}
 
 	static int SetbIgnoreRadialForce(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -2145,19 +1533,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbIgnoreRadialImpulse(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bIgnoreRadialImpulse);
 	}
 
 	static int SetbIgnoreRadialImpulse(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -2170,19 +1550,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbIsActorTextureStreamingBuiltData(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bIsActorTextureStreamingBuiltData);
 	}
 
 	static int SetbIsActorTextureStreamingBuiltData(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -2195,19 +1567,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbIsBeingMovedByEditor(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bIsBeingMovedByEditor);
 	}
 
 	static int SetbIsBeingMovedByEditor(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -2220,19 +1584,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbIsValidTextureStreamingBuiltData(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bIsValidTextureStreamingBuiltData);
 	}
 
 	static int SetbIsValidTextureStreamingBuiltData(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -2245,19 +1601,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbLightAttachmentsAsGroup(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bLightAttachmentsAsGroup);
 	}
 
 	static int SetbLightAttachmentsAsGroup(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -2270,19 +1618,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbLumenHeightfield(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bLumenHeightfield);
 	}
 
 	static int SetbLumenHeightfield(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -2295,19 +1635,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbMultiBodyOverlap(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bMultiBodyOverlap);
 	}
 
 	static int SetbMultiBodyOverlap(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -2320,19 +1652,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbNeverDistanceCull(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bNeverDistanceCull);
 	}
 
 	static int SetbNeverDistanceCull(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -2345,19 +1669,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbOnlyOwnerSee(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bOnlyOwnerSee);
 	}
 
 	static int SetbOnlyOwnerSee(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -2370,19 +1686,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbOwnerNoSee(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bOwnerNoSee);
 	}
 
 	static int SetbOwnerNoSee(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -2395,19 +1703,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbRasterizeAsFilledConvexVolume(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bRasterizeAsFilledConvexVolume);
 	}
 
 	static int SetbRasterizeAsFilledConvexVolume(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -2420,19 +1720,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbRayTracingFarField(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bRayTracingFarField);
 	}
 
 	static int SetbRayTracingFarField(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -2445,19 +1737,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbReceiveMobileCSMShadows(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bReceiveMobileCSMShadows);
 	}
 
 	static int SetbReceiveMobileCSMShadows(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -2470,19 +1754,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbReceivesDecals(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bReceivesDecals);
 	}
 
 	static int SetbReceivesDecals(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -2495,19 +1771,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbRenderCustomDepth(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bRenderCustomDepth);
 	}
 
 	static int SetbRenderCustomDepth(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -2520,19 +1788,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbRenderInDepthPass(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bRenderInDepthPass);
 	}
 
 	static int SetbRenderInDepthPass(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -2545,19 +1805,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbRenderInMainPass(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bRenderInMainPass);
 	}
 
 	static int SetbRenderInMainPass(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -2570,19 +1822,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbReplicatePhysicsToAutonomousProxy(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bReplicatePhysicsToAutonomousProxy);
 	}
 
 	static int SetbReplicatePhysicsToAutonomousProxy(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -2595,19 +1839,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbReturnMaterialOnMove(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bReturnMaterialOnMove);
 	}
 
 	static int SetbReturnMaterialOnMove(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -2620,19 +1856,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbSelectable(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bSelectable);
 	}
 
 	static int SetbSelectable(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -2645,19 +1873,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbSelfShadowOnly(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bSelfShadowOnly);
 	}
 
 	static int SetbSelfShadowOnly(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -2670,19 +1890,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbSingleSampleShadowFromStationaryLights(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bSingleSampleShadowFromStationaryLights);
 	}
 
 	static int SetbSingleSampleShadowFromStationaryLights(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -2713,37 +1925,21 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbStaticWhenNotMoveable(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bStaticWhenNotMoveable(), "bStaticWhenNotMoveable");
 	}
 
 	static int SetbStaticWhenNotMoveable(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bStaticWhenNotMoveable(), "bStaticWhenNotMoveable");
 	}
 
 	static PyObject* GetbTraceComplexOnMove(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bTraceComplexOnMove);
 	}
 
 	static int SetbTraceComplexOnMove(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -2756,19 +1952,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbTreatAsBackgroundForOcclusion(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bTreatAsBackgroundForOcclusion);
 	}
 
 	static int SetbTreatAsBackgroundForOcclusion(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -2781,19 +1969,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbUseAsOccluder(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bUseAsOccluder);
 	}
 
 	static int SetbUseAsOccluder(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -2806,19 +1986,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbUseEditorCompositing(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bUseEditorCompositing);
 	}
 
 	static int SetbUseEditorCompositing(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -2831,19 +2003,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbUseViewOwnerDepthPriorityGroup(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bUseViewOwnerDepthPriorityGroup);
 	}
 
 	static int SetbUseViewOwnerDepthPriorityGroup(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -2856,19 +2020,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbVisibleInRayTracing(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bVisibleInRayTracing);
 	}
 
 	static int SetbVisibleInRayTracing(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -2881,19 +2037,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbVisibleInRealTimeSkyCaptures(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bVisibleInRealTimeSkyCaptures);
 	}
 
 	static int SetbVisibleInRealTimeSkyCaptures(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -2906,19 +2054,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbVisibleInReflectionCaptures(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bVisibleInReflectionCaptures);
 	}
 
 	static int SetbVisibleInReflectionCaptures(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -2931,19 +2071,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbVisibleInSceneCaptureOnly(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bVisibleInSceneCaptureOnly);
 	}
 
 	static int SetbVisibleInSceneCaptureOnly(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -2956,19 +2088,11 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbWantsEditorEffects(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bWantsEditorEffects);
 	}
 
 	static int SetbWantsEditorEffects(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -5848,7 +4972,7 @@ struct FMethods_PrimitiveComponent
 		}
 		Py_ssize_t Len_Arg1 = PySequence_Size(PyArg1);
 		int32 ElementCount_Arg1 = 0;
-		if (UPyUtil::ValidateContainerLenValue(Len_Arg1, ElementCount_Arg1, TEXT("GeneratedWrapper")) != 0)
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg1, ElementCount_Arg1, TEXT("Array")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("PrimitiveComponent::SetCustomPrimitiveDataFloatArray"), TEXT("invalid argument"));
 			return nullptr;
@@ -6044,7 +5168,7 @@ struct FMethods_PrimitiveComponent
 		}
 		Py_ssize_t Len_Arg1 = PySequence_Size(PyArg1);
 		int32 ElementCount_Arg1 = 0;
-		if (UPyUtil::ValidateContainerLenValue(Len_Arg1, ElementCount_Arg1, TEXT("GeneratedWrapper")) != 0)
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg1, ElementCount_Arg1, TEXT("Array")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("PrimitiveComponent::SetDefaultCustomPrimitiveDataFloatArray"), TEXT("invalid argument"));
 			return nullptr;
@@ -6223,7 +5347,7 @@ struct FMethods_PrimitiveComponent
 		}
 		Py_ssize_t Len_Arg0 = PySequence_Size(InArg);
 		int32 ElementCount_Arg0 = 0;
-		if (UPyUtil::ValidateContainerLenValue(Len_Arg0, ElementCount_Arg0, TEXT("GeneratedWrapper")) != 0)
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg0, ElementCount_Arg0, TEXT("Array")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("PrimitiveComponent::SetExcludeForSpecificHLODLevels"), TEXT("invalid argument"));
 			return nullptr;

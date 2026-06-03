@@ -21,11 +21,19 @@ struct FGetSets_LinearColor
 {
 	static PyObject* GetA(FUPyWrapperLinearColor* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->A);
 	}
 
 	static int SetA(FUPyWrapperLinearColor* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->A))
 		{
 			return 0;
@@ -36,11 +44,19 @@ struct FGetSets_LinearColor
 
 	static PyObject* GetB(FUPyWrapperLinearColor* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->B);
 	}
 
 	static int SetB(FUPyWrapperLinearColor* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->B))
 		{
 			return 0;
@@ -51,11 +67,19 @@ struct FGetSets_LinearColor
 
 	static PyObject* GetG(FUPyWrapperLinearColor* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->G);
 	}
 
 	static int SetG(FUPyWrapperLinearColor* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->G))
 		{
 			return 0;
@@ -66,11 +90,19 @@ struct FGetSets_LinearColor
 
 	static PyObject* GetR(FUPyWrapperLinearColor* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->R);
 	}
 
 	static int SetR(FUPyWrapperLinearColor* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->R))
 		{
 			return 0;

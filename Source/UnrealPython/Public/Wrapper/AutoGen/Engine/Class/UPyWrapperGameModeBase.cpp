@@ -24,19 +24,11 @@ struct FGetSets_GameModeBase
 {
 	static PyObject* GetDefaultPawnClass(FUPyWrapperGameModeBase* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->DefaultPawnClass);
 	}
 
 	static int SetDefaultPawnClass(FUPyWrapperGameModeBase* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->DefaultPawnClass))
 		{
 			return 0;
@@ -47,19 +39,11 @@ struct FGetSets_GameModeBase
 
 	static PyObject* GetDefaultPlayerName(FUPyWrapperGameModeBase* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->DefaultPlayerName);
 	}
 
 	static int SetDefaultPlayerName(FUPyWrapperGameModeBase* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->DefaultPlayerName))
 		{
 			return 0;
@@ -88,37 +72,21 @@ struct FGetSets_GameModeBase
 
 	static PyObject* GetGameNetDriverReplicationSystem(FUPyWrapperGameModeBase* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_GameNetDriverReplicationSystem(), "GameNetDriverReplicationSystem");
 	}
 
 	static int SetGameNetDriverReplicationSystem(FUPyWrapperGameModeBase* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_GameNetDriverReplicationSystem(), "GameNetDriverReplicationSystem");
 	}
 
 	static PyObject* GetGameSession(FUPyWrapperGameModeBase* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->GameSession);
 	}
 
 	static int SetGameSession(FUPyWrapperGameModeBase* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->GameSession))
 		{
 			return 0;
@@ -129,19 +97,11 @@ struct FGetSets_GameModeBase
 
 	static PyObject* GetGameSessionClass(FUPyWrapperGameModeBase* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->GameSessionClass);
 	}
 
 	static int SetGameSessionClass(FUPyWrapperGameModeBase* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->GameSessionClass))
 		{
 			return 0;
@@ -152,19 +112,11 @@ struct FGetSets_GameModeBase
 
 	static PyObject* GetGameState(FUPyWrapperGameModeBase* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->GameState);
 	}
 
 	static int SetGameState(FUPyWrapperGameModeBase* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->GameState))
 		{
 			return 0;
@@ -175,19 +127,11 @@ struct FGetSets_GameModeBase
 
 	static PyObject* GetGameStateClass(FUPyWrapperGameModeBase* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->GameStateClass);
 	}
 
 	static int SetGameStateClass(FUPyWrapperGameModeBase* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->GameStateClass))
 		{
 			return 0;
@@ -198,19 +142,11 @@ struct FGetSets_GameModeBase
 
 	static PyObject* GetHUDClass(FUPyWrapperGameModeBase* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->HUDClass);
 	}
 
 	static int SetHUDClass(FUPyWrapperGameModeBase* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->HUDClass))
 		{
 			return 0;
@@ -221,19 +157,11 @@ struct FGetSets_GameModeBase
 
 	static PyObject* GetOptionsString(FUPyWrapperGameModeBase* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->OptionsString);
 	}
 
 	static int SetOptionsString(FUPyWrapperGameModeBase* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->OptionsString))
 		{
 			return 0;
@@ -244,19 +172,11 @@ struct FGetSets_GameModeBase
 
 	static PyObject* GetPlayerControllerClass(FUPyWrapperGameModeBase* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->PlayerControllerClass);
 	}
 
 	static int SetPlayerControllerClass(FUPyWrapperGameModeBase* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->PlayerControllerClass))
 		{
 			return 0;
@@ -267,19 +187,11 @@ struct FGetSets_GameModeBase
 
 	static PyObject* GetPlayerStateClass(FUPyWrapperGameModeBase* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->PlayerStateClass);
 	}
 
 	static int SetPlayerStateClass(FUPyWrapperGameModeBase* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->PlayerStateClass))
 		{
 			return 0;
@@ -290,19 +202,11 @@ struct FGetSets_GameModeBase
 
 	static PyObject* GetReplaySpectatorPlayerControllerClass(FUPyWrapperGameModeBase* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->ReplaySpectatorPlayerControllerClass);
 	}
 
 	static int SetReplaySpectatorPlayerControllerClass(FUPyWrapperGameModeBase* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->ReplaySpectatorPlayerControllerClass))
 		{
 			return 0;
@@ -313,19 +217,11 @@ struct FGetSets_GameModeBase
 
 	static PyObject* GetServerStatReplicator(FUPyWrapperGameModeBase* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->ServerStatReplicator);
 	}
 
 	static int SetServerStatReplicator(FUPyWrapperGameModeBase* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->ServerStatReplicator))
 		{
 			return 0;
@@ -336,19 +232,11 @@ struct FGetSets_GameModeBase
 
 	static PyObject* GetServerStatReplicatorClass(FUPyWrapperGameModeBase* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->ServerStatReplicatorClass);
 	}
 
 	static int SetServerStatReplicatorClass(FUPyWrapperGameModeBase* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->ServerStatReplicatorClass))
 		{
 			return 0;
@@ -359,19 +247,11 @@ struct FGetSets_GameModeBase
 
 	static PyObject* GetSpectatorClass(FUPyWrapperGameModeBase* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->SpectatorClass);
 	}
 
 	static int SetSpectatorClass(FUPyWrapperGameModeBase* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->SpectatorClass))
 		{
 			return 0;
@@ -400,19 +280,11 @@ struct FGetSets_GameModeBase
 
 	static PyObject* GetbPauseable(FUPyWrapperGameModeBase* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bPauseable(), "bPauseable");
 	}
 
 	static int SetbPauseable(FUPyWrapperGameModeBase* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bPauseable(), "bPauseable");
 	}
 
@@ -436,37 +308,21 @@ struct FGetSets_GameModeBase
 
 	static PyObject* GetbStartPlayersAsSpectators(FUPyWrapperGameModeBase* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bStartPlayersAsSpectators(), "bStartPlayersAsSpectators");
 	}
 
 	static int SetbStartPlayersAsSpectators(FUPyWrapperGameModeBase* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bStartPlayersAsSpectators(), "bStartPlayersAsSpectators");
 	}
 
 	static PyObject* GetbUseSeamlessTravel(FUPyWrapperGameModeBase* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bUseSeamlessTravel);
 	}
 
 	static int SetbUseSeamlessTravel(FUPyWrapperGameModeBase* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{

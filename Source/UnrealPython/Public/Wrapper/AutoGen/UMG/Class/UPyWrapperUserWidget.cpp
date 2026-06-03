@@ -55,37 +55,21 @@ struct FGetSets_UserWidget
 
 	static PyObject* GetAnimationCallbacks(FUPyWrapperUserWidget* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_AnimationCallbacks(), "AnimationCallbacks");
 	}
 
 	static int SetAnimationCallbacks(FUPyWrapperUserWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_AnimationCallbacks(), "AnimationCallbacks");
 	}
 
 	static PyObject* GetAnimationTickManager(FUPyWrapperUserWidget* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->AnimationTickManager);
 	}
 
 	static int SetAnimationTickManager(FUPyWrapperUserWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->AnimationTickManager))
 		{
 			return 0;
@@ -114,38 +98,22 @@ struct FGetSets_UserWidget
 
 	static PyObject* GetColorAndOpacityDelegate(FUPyWrapperUserWidget* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ColorAndOpacityDelegate(), "ColorAndOpacityDelegate");
 	}
 
 	static int SetColorAndOpacityDelegate(FUPyWrapperUserWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ColorAndOpacityDelegate(), "ColorAndOpacityDelegate");
 	}
 
 #if WITH_EDITOR
 	static PyObject* GetDesignSizeMode(FUPyWrapperUserWidget* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->DesignSizeMode, StaticEnum<EDesignPreviewSizeMode>());
 	}
 
 	static int SetDesignSizeMode(FUPyWrapperUserWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<EDesignPreviewSizeMode>(), InSelf->ValuePtr()->DesignSizeMode))
 		{
 			return 0;
@@ -158,19 +126,11 @@ struct FGetSets_UserWidget
 #if WITH_EDITOR
 	static PyObject* GetDesignTimeSize(FUPyWrapperUserWidget* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FVector2D>::Get(), (void*)&InSelf->ValuePtr()->DesignTimeSize, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetDesignTimeSize(FUPyWrapperUserWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->DesignTimeSize))
 		{
 			return 0;
@@ -200,10 +160,6 @@ struct FGetSets_UserWidget
 
 	static PyObject* GetDesiredFocusWidget(FUPyWrapperUserWidget* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_DesiredFocusWidget(), "DesiredFocusWidget");
 	}
 
@@ -227,19 +183,11 @@ struct FGetSets_UserWidget
 
 	static PyObject* GetExtensions(FUPyWrapperUserWidget* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_Extensions(), "Extensions");
 	}
 
 	static int SetExtensions(FUPyWrapperUserWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_Extensions(), "Extensions");
 	}
 
@@ -263,19 +211,11 @@ struct FGetSets_UserWidget
 
 	static PyObject* GetForegroundColorDelegate(FUPyWrapperUserWidget* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ForegroundColorDelegate(), "ForegroundColorDelegate");
 	}
 
 	static int SetForegroundColorDelegate(FUPyWrapperUserWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ForegroundColorDelegate(), "ForegroundColorDelegate");
 	}
 
@@ -299,19 +239,11 @@ struct FGetSets_UserWidget
 
 	static PyObject* GetInputComponent(FUPyWrapperUserWidget* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_InputComponent(), "InputComponent");
 	}
 
 	static int SetInputComponent(FUPyWrapperUserWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_InputComponent(), "InputComponent");
 	}
 
@@ -335,19 +267,11 @@ struct FGetSets_UserWidget
 
 	static PyObject* GetNamedSlotBindings(FUPyWrapperUserWidget* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_NamedSlotBindings(), "NamedSlotBindings");
 	}
 
 	static int SetNamedSlotBindings(FUPyWrapperUserWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_NamedSlotBindings(), "NamedSlotBindings");
 	}
 
@@ -371,38 +295,22 @@ struct FGetSets_UserWidget
 
 	static PyObject* GetOnVisibilityChanged(FUPyWrapperUserWidget* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnVisibilityChanged(), "OnVisibilityChanged");
 	}
 
 	static int SetOnVisibilityChanged(FUPyWrapperUserWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnVisibilityChanged(), "OnVisibilityChanged");
 	}
 
 #if WITH_EDITOR
 	static PyObject* GetPaletteCategory(FUPyWrapperUserWidget* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->PaletteCategory);
 	}
 
 	static int SetPaletteCategory(FUPyWrapperUserWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->PaletteCategory))
 		{
 			return 0;
@@ -415,10 +323,6 @@ struct FGetSets_UserWidget
 #if WITH_EDITOR
 	static PyObject* GetPreviewBackground(FUPyWrapperUserWidget* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->PreviewBackground);
 	}
 
@@ -443,19 +347,11 @@ struct FGetSets_UserWidget
 
 	static PyObject* GetQueuedWidgetAnimationTransitions(FUPyWrapperUserWidget* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->QueuedWidgetAnimationTransitions, CastField<FArrayProperty>(GetPropertyDef_QueuedWidgetAnimationTransitions().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetQueuedWidgetAnimationTransitions(FUPyWrapperUserWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_QueuedWidgetAnimationTransitions(), "QueuedWidgetAnimationTransitions");
 	}
 
@@ -479,28 +375,16 @@ struct FGetSets_UserWidget
 
 	static PyObject* GetTickFrequency(FUPyWrapperUserWidget* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_TickFrequency(), "TickFrequency");
 	}
 
 	static PyObject* GetWidgetTree(FUPyWrapperUserWidget* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->WidgetTree);
 	}
 
 	static int SetWidgetTree(FUPyWrapperUserWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->WidgetTree))
 		{
 			return 0;
@@ -511,19 +395,11 @@ struct FGetSets_UserWidget
 
 	static PyObject* GetbAutomaticallyRegisterInputOnConstruction(FUPyWrapperUserWidget* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bAutomaticallyRegisterInputOnConstruction);
 	}
 
 	static int SetbAutomaticallyRegisterInputOnConstruction(FUPyWrapperUserWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -536,19 +412,11 @@ struct FGetSets_UserWidget
 
 	static PyObject* GetbHasScriptImplementedPaint(FUPyWrapperUserWidget* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bHasScriptImplementedPaint);
 	}
 
 	static int SetbHasScriptImplementedPaint(FUPyWrapperUserWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -561,19 +429,11 @@ struct FGetSets_UserWidget
 
 	static PyObject* GetbHasScriptImplementedTick(FUPyWrapperUserWidget* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bHasScriptImplementedTick);
 	}
 
 	static int SetbHasScriptImplementedTick(FUPyWrapperUserWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{

@@ -20,11 +20,19 @@ struct FGetSets_Guid
 {
 	static PyObject* GetA(FUPyWrapperGuid* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->A);
 	}
 
 	static int SetA(FUPyWrapperGuid* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->A))
 		{
 			return 0;
@@ -35,11 +43,19 @@ struct FGetSets_Guid
 
 	static PyObject* GetB(FUPyWrapperGuid* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->B);
 	}
 
 	static int SetB(FUPyWrapperGuid* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->B))
 		{
 			return 0;
@@ -50,11 +66,19 @@ struct FGetSets_Guid
 
 	static PyObject* GetC(FUPyWrapperGuid* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->C);
 	}
 
 	static int SetC(FUPyWrapperGuid* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->C))
 		{
 			return 0;
@@ -65,11 +89,19 @@ struct FGetSets_Guid
 
 	static PyObject* GetD(FUPyWrapperGuid* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->D);
 	}
 
 	static int SetD(FUPyWrapperGuid* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->D))
 		{
 			return 0;

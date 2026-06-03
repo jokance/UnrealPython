@@ -41,19 +41,11 @@ struct FGetSets_ListView
 
 	static PyObject* GetBP_OnEntryInitialized(FUPyWrapperListView* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_BP_OnEntryInitialized(), "BP_OnEntryInitialized");
 	}
 
 	static int SetBP_OnEntryInitialized(FUPyWrapperListView* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_BP_OnEntryInitialized(), "BP_OnEntryInitialized");
 	}
 
@@ -77,19 +69,11 @@ struct FGetSets_ListView
 
 	static PyObject* GetBP_OnIsItemSelectableOrNavigable(FUPyWrapperListView* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_BP_OnIsItemSelectableOrNavigable(), "BP_OnIsItemSelectableOrNavigable");
 	}
 
 	static int SetBP_OnIsItemSelectableOrNavigable(FUPyWrapperListView* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_BP_OnIsItemSelectableOrNavigable(), "BP_OnIsItemSelectableOrNavigable");
 	}
 
@@ -113,19 +97,11 @@ struct FGetSets_ListView
 
 	static PyObject* GetBP_OnItemAcceptDrop(FUPyWrapperListView* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_BP_OnItemAcceptDrop(), "BP_OnItemAcceptDrop");
 	}
 
 	static int SetBP_OnItemAcceptDrop(FUPyWrapperListView* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_BP_OnItemAcceptDrop(), "BP_OnItemAcceptDrop");
 	}
 
@@ -149,19 +125,11 @@ struct FGetSets_ListView
 
 	static PyObject* GetBP_OnItemClicked(FUPyWrapperListView* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_BP_OnItemClicked(), "BP_OnItemClicked");
 	}
 
 	static int SetBP_OnItemClicked(FUPyWrapperListView* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_BP_OnItemClicked(), "BP_OnItemClicked");
 	}
 
@@ -185,19 +153,11 @@ struct FGetSets_ListView
 
 	static PyObject* GetBP_OnItemDoubleClicked(FUPyWrapperListView* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_BP_OnItemDoubleClicked(), "BP_OnItemDoubleClicked");
 	}
 
 	static int SetBP_OnItemDoubleClicked(FUPyWrapperListView* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_BP_OnItemDoubleClicked(), "BP_OnItemDoubleClicked");
 	}
 
@@ -221,19 +181,11 @@ struct FGetSets_ListView
 
 	static PyObject* GetBP_OnItemDragCancelled(FUPyWrapperListView* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_BP_OnItemDragCancelled(), "BP_OnItemDragCancelled");
 	}
 
 	static int SetBP_OnItemDragCancelled(FUPyWrapperListView* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_BP_OnItemDragCancelled(), "BP_OnItemDragCancelled");
 	}
 
@@ -257,19 +209,11 @@ struct FGetSets_ListView
 
 	static PyObject* GetBP_OnItemDragDetected(FUPyWrapperListView* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_BP_OnItemDragDetected(), "BP_OnItemDragDetected");
 	}
 
 	static int SetBP_OnItemDragDetected(FUPyWrapperListView* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_BP_OnItemDragDetected(), "BP_OnItemDragDetected");
 	}
 
@@ -293,19 +237,11 @@ struct FGetSets_ListView
 
 	static PyObject* GetBP_OnItemDragEnter(FUPyWrapperListView* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_BP_OnItemDragEnter(), "BP_OnItemDragEnter");
 	}
 
 	static int SetBP_OnItemDragEnter(FUPyWrapperListView* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_BP_OnItemDragEnter(), "BP_OnItemDragEnter");
 	}
 
@@ -329,19 +265,11 @@ struct FGetSets_ListView
 
 	static PyObject* GetBP_OnItemDragLeave(FUPyWrapperListView* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_BP_OnItemDragLeave(), "BP_OnItemDragLeave");
 	}
 
 	static int SetBP_OnItemDragLeave(FUPyWrapperListView* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_BP_OnItemDragLeave(), "BP_OnItemDragLeave");
 	}
 
@@ -365,19 +293,11 @@ struct FGetSets_ListView
 
 	static PyObject* GetBP_OnItemIsHoveredChanged(FUPyWrapperListView* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_BP_OnItemIsHoveredChanged(), "BP_OnItemIsHoveredChanged");
 	}
 
 	static int SetBP_OnItemIsHoveredChanged(FUPyWrapperListView* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_BP_OnItemIsHoveredChanged(), "BP_OnItemIsHoveredChanged");
 	}
 
@@ -401,19 +321,11 @@ struct FGetSets_ListView
 
 	static PyObject* GetBP_OnItemScrolledIntoView(FUPyWrapperListView* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_BP_OnItemScrolledIntoView(), "BP_OnItemScrolledIntoView");
 	}
 
 	static int SetBP_OnItemScrolledIntoView(FUPyWrapperListView* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_BP_OnItemScrolledIntoView(), "BP_OnItemScrolledIntoView");
 	}
 
@@ -437,19 +349,11 @@ struct FGetSets_ListView
 
 	static PyObject* GetBP_OnItemSelectionChanged(FUPyWrapperListView* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_BP_OnItemSelectionChanged(), "BP_OnItemSelectionChanged");
 	}
 
 	static int SetBP_OnItemSelectionChanged(FUPyWrapperListView* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_BP_OnItemSelectionChanged(), "BP_OnItemSelectionChanged");
 	}
 
@@ -473,19 +377,11 @@ struct FGetSets_ListView
 
 	static PyObject* GetBP_OnListViewDraggingStateChanged(FUPyWrapperListView* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_BP_OnListViewDraggingStateChanged(), "BP_OnListViewDraggingStateChanged");
 	}
 
 	static int SetBP_OnListViewDraggingStateChanged(FUPyWrapperListView* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_BP_OnListViewDraggingStateChanged(), "BP_OnListViewDraggingStateChanged");
 	}
 
@@ -509,19 +405,11 @@ struct FGetSets_ListView
 
 	static PyObject* GetBP_OnListViewFinishedScrolling(FUPyWrapperListView* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_BP_OnListViewFinishedScrolling(), "BP_OnListViewFinishedScrolling");
 	}
 
 	static int SetBP_OnListViewFinishedScrolling(FUPyWrapperListView* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_BP_OnListViewFinishedScrolling(), "BP_OnListViewFinishedScrolling");
 	}
 
@@ -545,19 +433,11 @@ struct FGetSets_ListView
 
 	static PyObject* GetBP_OnListViewScrolled(FUPyWrapperListView* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_BP_OnListViewScrolled(), "BP_OnListViewScrolled");
 	}
 
 	static int SetBP_OnListViewScrolled(FUPyWrapperListView* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_BP_OnListViewScrolled(), "BP_OnListViewScrolled");
 	}
 
@@ -581,19 +461,11 @@ struct FGetSets_ListView
 
 	static PyObject* GetConsumeMouseWheel(FUPyWrapperListView* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ConsumeMouseWheel(), "ConsumeMouseWheel");
 	}
 
 	static int SetConsumeMouseWheel(FUPyWrapperListView* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ConsumeMouseWheel(), "ConsumeMouseWheel");
 	}
 
@@ -617,19 +489,11 @@ struct FGetSets_ListView
 
 	static PyObject* GetHorizontalEntrySpacing(FUPyWrapperListView* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_HorizontalEntrySpacing(), "HorizontalEntrySpacing");
 	}
 
 	static int SetHorizontalEntrySpacing(FUPyWrapperListView* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_HorizontalEntrySpacing(), "HorizontalEntrySpacing");
 	}
 
@@ -653,19 +517,11 @@ struct FGetSets_ListView
 
 	static PyObject* GetListItems(FUPyWrapperListView* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ListItems(), "ListItems");
 	}
 
 	static int SetListItems(FUPyWrapperListView* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ListItems(), "ListItems");
 	}
 
@@ -689,19 +545,11 @@ struct FGetSets_ListView
 
 	static PyObject* GetOrientation(FUPyWrapperListView* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_Orientation(), "Orientation");
 	}
 
 	static int SetOrientation(FUPyWrapperListView* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_Orientation(), "Orientation");
 	}
 
@@ -725,19 +573,11 @@ struct FGetSets_ListView
 
 	static PyObject* GetScrollBarPadding(FUPyWrapperListView* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ScrollBarPadding(), "ScrollBarPadding");
 	}
 
 	static int SetScrollBarPadding(FUPyWrapperListView* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ScrollBarPadding(), "ScrollBarPadding");
 	}
 
@@ -761,19 +601,11 @@ struct FGetSets_ListView
 
 	static PyObject* GetScrollBarStyle(FUPyWrapperListView* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ScrollBarStyle(), "ScrollBarStyle");
 	}
 
 	static int SetScrollBarStyle(FUPyWrapperListView* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ScrollBarStyle(), "ScrollBarStyle");
 	}
 
@@ -797,19 +629,11 @@ struct FGetSets_ListView
 
 	static PyObject* GetScrollIntoViewAlignment(FUPyWrapperListView* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ScrollIntoViewAlignment(), "ScrollIntoViewAlignment");
 	}
 
 	static int SetScrollIntoViewAlignment(FUPyWrapperListView* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ScrollIntoViewAlignment(), "ScrollIntoViewAlignment");
 	}
 
@@ -833,19 +657,11 @@ struct FGetSets_ListView
 
 	static PyObject* GetSelectionMode(FUPyWrapperListView* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_SelectionMode(), "SelectionMode");
 	}
 
 	static int SetSelectionMode(FUPyWrapperListView* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_SelectionMode(), "SelectionMode");
 	}
 
@@ -869,19 +685,11 @@ struct FGetSets_ListView
 
 	static PyObject* GetShadowBrushStyle(FUPyWrapperListView* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ShadowBrushStyle(), "ShadowBrushStyle");
 	}
 
 	static int SetShadowBrushStyle(FUPyWrapperListView* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ShadowBrushStyle(), "ShadowBrushStyle");
 	}
 
@@ -905,19 +713,11 @@ struct FGetSets_ListView
 
 	static PyObject* GetVerticalEntrySpacing(FUPyWrapperListView* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_VerticalEntrySpacing(), "VerticalEntrySpacing");
 	}
 
 	static int SetVerticalEntrySpacing(FUPyWrapperListView* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_VerticalEntrySpacing(), "VerticalEntrySpacing");
 	}
 
@@ -941,19 +741,11 @@ struct FGetSets_ListView
 
 	static PyObject* GetWidgetStyle(FUPyWrapperListView* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_WidgetStyle(), "WidgetStyle");
 	}
 
 	static int SetWidgetStyle(FUPyWrapperListView* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_WidgetStyle(), "WidgetStyle");
 	}
 
@@ -977,19 +769,11 @@ struct FGetSets_ListView
 
 	static PyObject* GetbClearScrollVelocityOnSelection(FUPyWrapperListView* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bClearScrollVelocityOnSelection(), "bClearScrollVelocityOnSelection");
 	}
 
 	static int SetbClearScrollVelocityOnSelection(FUPyWrapperListView* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bClearScrollVelocityOnSelection(), "bClearScrollVelocityOnSelection");
 	}
 
@@ -1013,19 +797,11 @@ struct FGetSets_ListView
 
 	static PyObject* GetbClearSelectionOnClick(FUPyWrapperListView* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bClearSelectionOnClick(), "bClearSelectionOnClick");
 	}
 
 	static int SetbClearSelectionOnClick(FUPyWrapperListView* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bClearSelectionOnClick(), "bClearSelectionOnClick");
 	}
 
@@ -1049,19 +825,11 @@ struct FGetSets_ListView
 
 	static PyObject* GetbEnableShadowBrush(FUPyWrapperListView* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bEnableShadowBrush(), "bEnableShadowBrush");
 	}
 
 	static int SetbEnableShadowBrush(FUPyWrapperListView* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bEnableShadowBrush(), "bEnableShadowBrush");
 	}
 
@@ -1085,19 +853,11 @@ struct FGetSets_ListView
 
 	static PyObject* GetbIsFocusable(FUPyWrapperListView* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bIsFocusable(), "bIsFocusable");
 	}
 
 	static int SetbIsFocusable(FUPyWrapperListView* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bIsFocusable(), "bIsFocusable");
 	}
 
@@ -1121,19 +881,11 @@ struct FGetSets_ListView
 
 	static PyObject* GetbReturnFocusToSelection(FUPyWrapperListView* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
 		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bReturnFocusToSelection(), "bReturnFocusToSelection");
 	}
 
 	static int SetbReturnFocusToSelection(FUPyWrapperListView* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
 		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bReturnFocusToSelection(), "bReturnFocusToSelection");
 	}
 
@@ -1478,7 +1230,7 @@ struct FMethods_ListView
 		}
 		Py_ssize_t Len_Arg0 = PySequence_Size(InArg);
 		int32 ElementCount_Arg0 = 0;
-		if (UPyUtil::ValidateContainerLenValue(Len_Arg0, ElementCount_Arg0, TEXT("GeneratedWrapper")) != 0)
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg0, ElementCount_Arg0, TEXT("Array")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("ListView::BP_SetListItems"), TEXT("invalid argument"));
 			return nullptr;

@@ -388,7 +388,7 @@ struct FMethods_GameplayStatics
 		}
 		Py_ssize_t Len_Arg5 = PySequence_Size(PyArg5);
 		int32 ElementCount_Arg5 = 0;
-		if (UPyUtil::ValidateContainerLenValue(Len_Arg5, ElementCount_Arg5, TEXT("GeneratedWrapper")) != 0)
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg5, ElementCount_Arg5, TEXT("Array")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::ApplyRadialDamage"), TEXT("invalid argument"));
 			return nullptr;
@@ -573,7 +573,7 @@ struct FMethods_GameplayStatics
 		}
 		Py_ssize_t Len_Arg8 = PySequence_Size(PyArg8);
 		int32 ElementCount_Arg8 = 0;
-		if (UPyUtil::ValidateContainerLenValue(Len_Arg8, ElementCount_Arg8, TEXT("GeneratedWrapper")) != 0)
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg8, ElementCount_Arg8, TEXT("Array")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::ApplyRadialDamageWithFalloff"), TEXT("invalid argument"));
 			return nullptr;
@@ -1084,7 +1084,7 @@ struct FMethods_GameplayStatics
 		}
 		Py_ssize_t Len_Arg5 = PySequence_Size(PyArg5);
 		int32 ElementCount_Arg5 = 0;
-		if (UPyUtil::ValidateContainerLenValue(Len_Arg5, ElementCount_Arg5, TEXT("GeneratedWrapper")) != 0)
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg5, ElementCount_Arg5, TEXT("Array")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::Blueprint_PredictProjectilePath_ByObjectType"), TEXT("invalid argument"));
 			return nullptr;
@@ -1134,7 +1134,7 @@ struct FMethods_GameplayStatics
 		}
 		Py_ssize_t Len_Arg7 = PySequence_Size(PyArg7);
 		int32 ElementCount_Arg7 = 0;
-		if (UPyUtil::ValidateContainerLenValue(Len_Arg7, ElementCount_Arg7, TEXT("GeneratedWrapper")) != 0)
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg7, ElementCount_Arg7, TEXT("Array")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::Blueprint_PredictProjectilePath_ByObjectType"), TEXT("invalid argument"));
 			return nullptr;
@@ -1347,7 +1347,7 @@ struct FMethods_GameplayStatics
 		}
 		Py_ssize_t Len_Arg7 = PySequence_Size(PyArg7);
 		int32 ElementCount_Arg7 = 0;
-		if (UPyUtil::ValidateContainerLenValue(Len_Arg7, ElementCount_Arg7, TEXT("GeneratedWrapper")) != 0)
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg7, ElementCount_Arg7, TEXT("Array")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::Blueprint_PredictProjectilePath_ByTraceChannel"), TEXT("invalid argument"));
 			return nullptr;
@@ -2122,7 +2122,7 @@ struct FMethods_GameplayStatics
 		}
 		Py_ssize_t Len_Arg1 = PySequence_Size(PyArg1);
 		int32 ElementCount_Arg1 = 0;
-		if (UPyUtil::ValidateContainerLenValue(Len_Arg1, ElementCount_Arg1, TEXT("GeneratedWrapper")) != 0)
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg1, ElementCount_Arg1, TEXT("Array")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::FindNearestActor"), TEXT("invalid argument"));
 			return nullptr;
@@ -2266,7 +2266,7 @@ struct FMethods_GameplayStatics
 		}
 		Py_ssize_t Len_Arg0 = PySequence_Size(InArg);
 		int32 ElementCount_Arg0 = 0;
-		if (UPyUtil::ValidateContainerLenValue(Len_Arg0, ElementCount_Arg0, TEXT("GeneratedWrapper")) != 0)
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg0, ElementCount_Arg0, TEXT("Array")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::GetActorArrayAverageLocation"), TEXT("invalid argument"));
 			return nullptr;
@@ -2310,7 +2310,7 @@ struct FMethods_GameplayStatics
 		}
 		Py_ssize_t Len_Arg0 = PySequence_Size(PyArg0);
 		int32 ElementCount_Arg0 = 0;
-		if (UPyUtil::ValidateContainerLenValue(Len_Arg0, ElementCount_Arg0, TEXT("GeneratedWrapper")) != 0)
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg0, ElementCount_Arg0, TEXT("Array")) != 0)
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::GetActorArrayBounds"), TEXT("invalid argument"));
 			return nullptr;
@@ -6469,11 +6469,6 @@ struct FMethods_GameplayStatics
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::SpawnObject"), TEXT("invalid argument"));
 			return nullptr;
 		}
-		if (Arg0 && Arg0->HasAnyClassFlags(CLASS_Abstract))
-		{
-			UPyUtil::SetPythonError(PyExc_Exception, TEXT("GameplayStatics::SpawnObject"), *FString::Printf(TEXT("Class '%s' is abstract"), *Arg0->GetName()));
-			return nullptr;
-		}
 
 		PyObject* PyArg1 = PyTuple_GetItem(InArgs, 1);
 		if (PyArg1 == nullptr)
@@ -6484,6 +6479,12 @@ struct FMethods_GameplayStatics
 		if (!UPyConversion::Nativize(PyArg1, Arg1))
 		{
 			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::SpawnObject"), TEXT("invalid argument"));
+			return nullptr;
+		}
+
+		if (Arg0 && Arg0->HasAnyClassFlags(CLASS_Abstract))
+		{
+			UPyUtil::SetPythonError(PyExc_Exception, TEXT("GameplayStatics::SpawnObject"), *FString::Printf(TEXT("Class '%s' is abstract"), *Arg0->GetName()));
 			return nullptr;
 		}
 

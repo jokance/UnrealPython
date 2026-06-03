@@ -21,11 +21,19 @@ struct FGetSets_Vector
 {
 	static PyObject* GetX(FUPyWrapperVector* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->X);
 	}
 
 	static int SetX(FUPyWrapperVector* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->X))
 		{
 			return 0;
@@ -36,11 +44,19 @@ struct FGetSets_Vector
 
 	static PyObject* GetY(FUPyWrapperVector* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->Y);
 	}
 
 	static int SetY(FUPyWrapperVector* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->Y))
 		{
 			return 0;
@@ -51,11 +67,19 @@ struct FGetSets_Vector
 
 	static PyObject* GetZ(FUPyWrapperVector* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->Z);
 	}
 
 	static int SetZ(FUPyWrapperVector* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->Z))
 		{
 			return 0;

@@ -9,8 +9,8 @@
     "ForceReflectionMethods": "对外部模块无法访问的方法，可以通过反射查找方式进行调用",
     "CommentEnd": "注释结束==========================",
 
-    "StubFilePath": "../../../../.idea/intellisense/pystubs/ue/__init__.pyi",
-    "GameExportPath": "Source/SampleGame/Public/UPy/Wrapper/AutoGen",
+    "StubFilePath": "",
+    "GameExportPath": "",
     "ExportToGameModules": ["AkAudio"],
 
     "AutoGenClasses": {
