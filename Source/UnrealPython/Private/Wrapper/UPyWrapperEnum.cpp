@@ -208,7 +208,6 @@ FString FUPyWrapperEnum::GetEnumEntryName(FUPyWrapperEnum* InSelf)
 		return FString();
 	}
 
-	FString DeprecatedEntryNameStr;
 	PyObject* Key = nullptr;
 	PyObject* Value = nullptr;
 	Py_ssize_t Pos = 0;
@@ -225,18 +224,10 @@ FString FUPyWrapperEnum::GetEnumEntryName(FUPyWrapperEnum* InSelf)
 			continue;
 		}
 
-		FString EntryNameStr = UPyUtil::PyObjectToUEString(Key);
-		if (!PyEnumDescr->DeprecationMessage.IsSet())
-		{
-			return EntryNameStr;
-		}
-		if (DeprecatedEntryNameStr.IsEmpty())
-		{
-			DeprecatedEntryNameStr = MoveTemp(EntryNameStr);
-		}
+		return UPyUtil::PyObjectToUEString(Key);
 	}
 
-	return DeprecatedEntryNameStr;
+	return FString();
 }
 
 int64 FUPyWrapperEnum::GetEnumEntryValue(FUPyWrapperEnum* InSelf)
@@ -269,20 +260,6 @@ FUPyWrapperEnum* FUPyWrapperEnum::AddEnumEntry(PyTypeObject* InType, const int64
 	return nullptr;
 }
 
-FUPyWrapperEnum* FUPyWrapperEnum::AddDeprecatedEnumEntry(PyTypeObject* InType, FUPyWrapperEnum* InEnumEntry, const char* InEnumEntryName, const char* InEnumEntryDoc)
-{
-	// if (!FPyWrapperEnumMetaData::IsEnumFinalized(InType))
-	{
-		FUPyWrapperEnumValueDescrObjectPtr PyEnumValueDescr = FUPyWrapperEnumValueDescrObjectPtr::StealReference(FUPyWrapperEnumValueDescrObject::NewDeprecated(InEnumEntry, InEnumEntryName, InEnumEntryDoc));
-		if (PyEnumValueDescr)
-		{
-			PyDict_SetItemString(InType->tp_dict, InEnumEntryName, (PyObject*)PyEnumValueDescr.GetPtr());
-			return PyEnumValueDescr->EnumEntry;
-		}
-	}
-	return nullptr;
-}
-
 // ==================== Wrapper EnumValueDescr Type BEGIN ====================
 static void Dealloc_EnumValueDescr(FUPyWrapperEnumValueDescrObject* InSelf)
 {
@@ -298,25 +275,6 @@ static PyObject* DescrGet_EnumValueDescr(FUPyWrapperEnumValueDescrObject* InSelf
 {
 	if (!FUPyWrapperEnum::ValidateInternalState(InSelf->EnumEntry))
 	{
-		return nullptr;
-	}
-
-	// Deprecated enums emit a warning
-	// {
-	// 	FString DeprecationMessage;
-	// 	if (FPyWrapperEnumMetaData::IsEnumDeprecated(InSelf->EnumEntry, &DeprecationMessage) &&
-	// 		UPyUtil::SetPythonWarning(PyExc_DeprecationWarning, InSelf->EnumEntry, *FString::Printf(TEXT("Enum '%s' is deprecated: %s"), UTF8_TO_TCHAR(Py_TYPE(InSelf->EnumEntry)->tp_name), *DeprecationMessage)) == -1
-	// 		)
-	// 	{
-	// 		// -1 from SetPythonWarning means the warning should be an exception
-	// 		return nullptr;
-	// 	}
-	// }
-
-	// Deprecated enum entries emit a warning
-	if (InSelf->DeprecationMessage.IsSet() && UPyUtil::SetPythonWarning(PyExc_DeprecationWarning, InSelf->EnumEntry, *InSelf->DeprecationMessage.GetValue()) == -1)
-	{
-		// -1 from SetPythonWarning means the warning should be an exception
 		return nullptr;
 	}
 

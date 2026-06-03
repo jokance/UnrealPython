@@ -54,9 +54,6 @@ struct FUPyWrapperEnum
 
 	/** Add the given enum entry on the given enum type (returns borrowed reference) */
 	static FUPyWrapperEnum* AddEnumEntry(PyTypeObject* InType, const int64 InEnumEntryValue, const char* InEnumEntryName, const char* InEnumEntryDoc);
-
-	/** Add the given deprecated enum entry on the given enum type (returns borrowed reference) */
-	static FUPyWrapperEnum* AddDeprecatedEnumEntry(PyTypeObject* InType, FUPyWrapperEnum* InEnumEntry, const char* InEnumEntryName, const char* InEnumEntryDoc);
 };
 
 typedef TUPyPtr<FUPyWrapperEnum> FUPyWrapperEnumPtr;
@@ -73,9 +70,6 @@ struct FUPyWrapperEnumValueDescrObject
 	/** The enum entry doc string (may be null) */
 	PyObject* EnumEntryDoc;
 
-	/** Set if this enum entry is deprecated and using it should emit a deprecation warning */
-	TOptional<FString> DeprecationMessage;
-
 	/** New an instance */
 	static FUPyWrapperEnumValueDescrObject* New(PyTypeObject* InEnumType, const int64 InEnumEntryValue, const char* InEnumEntryName, const char* InEnumEntryDoc)
 	{
@@ -84,7 +78,6 @@ struct FUPyWrapperEnumValueDescrObject
 		{
 			Self->EnumEntry = nullptr;
 			Self->EnumEntryDoc = nullptr;
-			new(&Self->DeprecationMessage) TOptional<FString>();
 
 			Self->EnumEntry = FUPyWrapperEnum::New(InEnumType, InEnumEntryValue);
 			if (!Self->EnumEntry)
@@ -102,31 +95,6 @@ struct FUPyWrapperEnumValueDescrObject
 		return Self;
 	}
 
-	/** New a deprecated instance */
-	static FUPyWrapperEnumValueDescrObject* NewDeprecated(FUPyWrapperEnum* InEnumEntry, const char* InEnumEntryName, const char* InEnumEntryDoc)
-	{
-		if (!InEnumEntry)
-		{
-			return nullptr;
-		}
-
-		FUPyWrapperEnumValueDescrObject* Self = (FUPyWrapperEnumValueDescrObject*)UPyWrapperEnumValueDescrType.tp_alloc(&UPyWrapperEnumValueDescrType, 0);
-		if (Self)
-		{
-			Self->EnumEntry = nullptr;
-			Self->EnumEntryDoc = nullptr;
-			new(&Self->DeprecationMessage) TOptional<FString>(FString::Printf(TEXT("Enum entry '%s.%s' is deprecated: Use '%s.%s'"),
-				UTF8_TO_TCHAR(Py_TYPE(InEnumEntry)->tp_name), UTF8_TO_TCHAR(InEnumEntryName),
-				UTF8_TO_TCHAR(Py_TYPE(InEnumEntry)->tp_name), *FUPyWrapperEnum::GetEnumEntryName(InEnumEntry)
-				));
-
-			Py_XINCREF(InEnumEntry);
-			Self->EnumEntry = InEnumEntry;
-			Self->EnumEntryDoc = InEnumEntryDoc ? PyUnicode_FromString(InEnumEntryDoc) : nullptr;
-		}
-		return Self;
-	}
-
 	/** Free this instance */
 	static void Free(FUPyWrapperEnumValueDescrObject* InSelf)
 	{
@@ -135,8 +103,6 @@ struct FUPyWrapperEnumValueDescrObject
 
 		Py_XDECREF(InSelf->EnumEntryDoc);
 		InSelf->EnumEntryDoc = nullptr;
-
-		InSelf->DeprecationMessage.~TOptional<FString>();
 
 		Py_TYPE(InSelf)->tp_free((PyObject*)InSelf);
 	}
