@@ -12,7 +12,7 @@
 PyTypeObject UPyWrapperEnumType = {
 	PyVarObject_HEAD_INIT(nullptr, 0)
 	"EnumBase", /* tp_name */
-	sizeof(FUPyWrapperEnum), /* tp_basicsize */
+	0, /* tp_basicsize */
 };
 
 PyTypeObject UPyWrapperEnumValueDescrType = {
@@ -35,20 +35,18 @@ PyTypeObject UPyWrapperEnumIteratorType = {
 
 FUPyWrapperEnum* FUPyWrapperEnum::New(PyTypeObject* InType)
 {
-	FUPyWrapperEnum* Self = (FUPyWrapperEnum*)FUPyWrapperBase::New(InType);
-	if (Self)
-	{
-		Self->EntryName = nullptr;
-		Self->EntryValue = nullptr;
-	}
-	return Self;
+	return New(InType, 0);
 }
 
-void FUPyWrapperEnum::Free(FUPyWrapperEnum* InSelf)
+FUPyWrapperEnum* FUPyWrapperEnum::New(PyTypeObject* InType, const int64 InEnumEntryValue)
 {
-	Deinit(InSelf);
+	FUPyObjectPtr PyValueArgs = FUPyObjectPtr::StealReference(Py_BuildValue("(L)", static_cast<long long>(InEnumEntryValue)));
+	if (!PyValueArgs)
+	{
+		return nullptr;
+	}
 
-	FUPyWrapperBase::Free(InSelf);
+	return (FUPyWrapperEnum*)PyLong_Type.tp_new(InType, PyValueArgs, nullptr);
 }
 
 int FUPyWrapperEnum::Init(FUPyWrapperEnum* InSelf)
@@ -59,37 +57,34 @@ int FUPyWrapperEnum::Init(FUPyWrapperEnum* InSelf)
 
 int FUPyWrapperEnum::Init(FUPyWrapperEnum* InSelf, const int64 InEnumEntryValue, const char* InEnumEntryName)
 {
-	// if (FPyWrapperEnumMetaData::IsEnumFinalized(InSelf))
-	// {
-	// 	UPyUtil::SetPythonError(PyExc_Exception, InSelf, TEXT("Cannot create instances of enum types"));
-	// 	return -1;
-	// }
+	(void)InEnumEntryName;
 
-	InSelf->EntryName = PyUnicode_FromString(InEnumEntryName);
-	InSelf->EntryValue = UPyConversion::Pythonize(InEnumEntryValue);
+	if (!InSelf || !PyLong_Check((PyObject*)InSelf))
+	{
+		UPyUtil::SetPythonError(PyExc_Exception, InSelf ? Py_TYPE(InSelf) : &UPyWrapperEnumType, TEXT("Internal Error - enum entry is not a PyLong instance!"));
+		return -1;
+	}
+
+	const int64 ActualValue = GetEnumEntryValue(InSelf);
+	if (ActualValue != InEnumEntryValue)
+	{
+		UPyUtil::SetPythonError(PyExc_Exception, Py_TYPE(InSelf), TEXT("Internal Error - enum entry value was not initialized correctly!"));
+		return -1;
+	}
 	return 0;
-}
-
-void FUPyWrapperEnum::Deinit(FUPyWrapperEnum* InSelf)
-{
-	Py_XDECREF(InSelf->EntryName);
-	InSelf->EntryName = nullptr;
-
-	Py_XDECREF(InSelf->EntryValue);
-	InSelf->EntryValue = nullptr;
 }
 
 bool FUPyWrapperEnum::ValidateInternalState(FUPyWrapperEnum* InSelf)
 {
-	if (!InSelf->EntryName)
+	if (!InSelf || !PyObject_TypeCheck((PyObject*)InSelf, &UPyWrapperEnumType))
 	{
-		UPyUtil::SetPythonError(PyExc_Exception, Py_TYPE(InSelf), TEXT("Internal Error - EntryName is null!"));
+		UPyUtil::SetPythonError(PyExc_Exception, InSelf ? Py_TYPE(InSelf) : &UPyWrapperEnumType, TEXT("Internal Error - object is not an enum entry!"));
 		return false;
 	}
 
-	if (!InSelf->EntryValue)
+	if (!PyLong_Check((PyObject*)InSelf))
 	{
-		UPyUtil::SetPythonError(PyExc_Exception, Py_TYPE(InSelf), TEXT("Internal Error - EntryValue is null!"));
+		UPyUtil::SetPythonError(PyExc_Exception, Py_TYPE(InSelf), TEXT("Internal Error - enum entry is not a PyLong instance!"));
 		return false;
 	}
 
@@ -208,20 +203,54 @@ FUPyWrapperEnum* FUPyWrapperEnum::CastPyObject(PyObject* InPyObject, const PyTyp
 
 FString FUPyWrapperEnum::GetEnumEntryName(FUPyWrapperEnum* InSelf)
 {
-	FString EnumEntryNameStr;
-	if (InSelf->EntryName)
+	if (!InSelf || !Py_TYPE(InSelf) || !Py_TYPE(InSelf)->tp_dict)
 	{
-		UPyConversion::Nativize(InSelf->EntryName, EnumEntryNameStr);
+		return FString();
 	}
-	return EnumEntryNameStr;
+
+	FString DeprecatedEntryNameStr;
+	PyObject* Key = nullptr;
+	PyObject* Value = nullptr;
+	Py_ssize_t Pos = 0;
+	while (PyDict_Next(Py_TYPE(InSelf)->tp_dict, &Pos, &Key, &Value))
+	{
+		if (Py_TYPE(Value) != &UPyWrapperEnumValueDescrType)
+		{
+			continue;
+		}
+
+		FUPyWrapperEnumValueDescrObject* PyEnumDescr = (FUPyWrapperEnumValueDescrObject*)Value;
+		if (PyEnumDescr->EnumEntry != InSelf)
+		{
+			continue;
+		}
+
+		FString EntryNameStr = UPyUtil::PyObjectToUEString(Key);
+		if (!PyEnumDescr->DeprecationMessage.IsSet())
+		{
+			return EntryNameStr;
+		}
+		if (DeprecatedEntryNameStr.IsEmpty())
+		{
+			DeprecatedEntryNameStr = MoveTemp(EntryNameStr);
+		}
+	}
+
+	return DeprecatedEntryNameStr;
 }
 
 int64 FUPyWrapperEnum::GetEnumEntryValue(FUPyWrapperEnum* InSelf)
 {
-	int64 EnumEntryValueNum = 0;
-	if (InSelf->EntryValue)
+	if (!InSelf)
 	{
-		UPyConversion::Nativize(InSelf->EntryValue, EnumEntryValueNum);
+		return 0;
+	}
+
+	const int64 EnumEntryValueNum = PyLong_AsLongLong((PyObject*)InSelf);
+	if (PyErr_Occurred())
+	{
+		PyErr_Clear();
+		return 0;
 	}
 	return EnumEntryValueNum;
 }
@@ -305,10 +334,9 @@ struct FGetSets_EnumValueDescr
 {
 	static PyObject* GetName(FUPyWrapperEnumValueDescrObject* InSelf, void* InClosure)
 	{
-		if (InSelf->EnumEntry && InSelf->EnumEntry->EntryName)
+		if (InSelf->EnumEntry)
 		{
-			Py_INCREF(InSelf->EnumEntry->EntryName);
-			return InSelf->EnumEntry->EntryName;
+			return PyUnicode_FromString(TCHAR_TO_UTF8(*FUPyWrapperEnum::GetEnumEntryName(InSelf->EnumEntry)));
 		}
 
 		Py_RETURN_NONE;
@@ -481,11 +509,6 @@ static PyObject* New_WrapperEnum(PyTypeObject* InType, PyObject* InArgs, PyObjec
 	return (PyObject*)FUPyWrapperEnum::New(InType);
 }
 
-static void Dealloc_WrapperEnum(FUPyWrapperEnum* InSelf)
-{
-	FUPyWrapperEnum::Free(InSelf);
-}
-
 static int Init_WrapperEnum(FUPyWrapperEnum* InSelf, PyObject* InArgs, PyObject* InKwds)
 {
 	return FUPyWrapperEnum::Init(InSelf);
@@ -501,45 +524,32 @@ static PyObject* Str_WrapperEnum(FUPyWrapperEnum* InSelf)
 	return PyUnicode_FromFormat("<%s.%s: %d>", Py_TYPE(InSelf)->tp_name, TCHAR_TO_UTF8(*FUPyWrapperEnum::GetEnumEntryName(InSelf)), FUPyWrapperEnum::GetEnumEntryValue(InSelf));
 }
 
-static PyObject* RichCmp_WrapperEnum(FUPyWrapperEnum* InSelf, PyObject* InOther, int InOp)
+struct FGetSets_WrapperEnum
 {
-	if (!FUPyWrapperEnum::ValidateInternalState(InSelf))
+	static PyObject* GetName(FUPyWrapperEnum* InSelf, void* InClosure)
 	{
-		return nullptr;
+		if (!FUPyWrapperEnum::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+
+		return PyUnicode_FromString(TCHAR_TO_UTF8(*FUPyWrapperEnum::GetEnumEntryName(InSelf)));
 	}
 
-	FUPyWrapperEnumPtr Other = FUPyWrapperEnumPtr::StealReference(FUPyWrapperEnum::CastPyObject(InOther, Py_TYPE(InSelf)));
-	if (!Other)
+	static PyObject* GetValue(FUPyWrapperEnum* InSelf, void* InClosure)
 	{
-		PyErr_Clear();
-		Py_INCREF(Py_NotImplemented);
-		return Py_NotImplemented;
+		if (!FUPyWrapperEnum::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+
+		return PyLong_FromLongLong(FUPyWrapperEnum::GetEnumEntryValue(InSelf));
 	}
+};
 
-	if (InOp != Py_EQ && InOp != Py_NE)
-	{
-		UPyUtil::SetPythonError(PyExc_TypeError, InSelf, TEXT("Only == and != comparison is supported"));
-		return nullptr;
-	}
-
-	// Compare the objects if both enums are the same type, otherwise compare the values (as cast must have returned a deprecated enum and the entry objects won't match)
-	const bool bIsIdentical = (Py_TYPE(InSelf) == Py_TYPE(Other.GetPtr())) ? InSelf->EntryValue == Other->EntryValue : FUPyWrapperEnum::GetEnumEntryValue(InSelf) == FUPyWrapperEnum::GetEnumEntryValue(Other);
-	return PyBool_FromLong(InOp == Py_EQ ? bIsIdentical : !bIsIdentical);
-}
-
-static Py_hash_t Hash_WrapperEnum(FUPyWrapperEnum* InSelf)
-{
-	if (!FUPyWrapperEnum::ValidateInternalState(InSelf))
-	{
-		return -1;
-	}
-
-	return PyObject_Hash(InSelf->EntryValue);
-}
-
-static PyMemberDef PyMembers[] = {
-	{ UPyCStrCast("name"), T_OBJECT, STRUCT_OFFSET(FUPyWrapperEnum, EntryName), READONLY, UPyCStrCast("The name of this enum entry") },
-	{ UPyCStrCast("value"), T_OBJECT, STRUCT_OFFSET(FUPyWrapperEnum, EntryValue), READONLY, UPyCStrCast("The numeric value of this enum entry") },
+static PyGetSetDef PyGetSets_WrapperEnum[] = {
+	{ UPyCStrCast("name"), (getter)&FGetSets_WrapperEnum::GetName, nullptr, UPyCStrCast("The name of this enum entry"), nullptr },
+	{ UPyCStrCast("value"), (getter)&FGetSets_WrapperEnum::GetValue, nullptr, UPyCStrCast("The numeric value of this enum entry"), nullptr },
 	{ nullptr, 0, 0, 0, nullptr }
 };
 
@@ -568,16 +578,13 @@ void InitializeUPyWrapperEnum(UPyGenUtil::FNativePythonModule& ModuleInfo)
 
 	PyTypeObject* PyType = &UPyWrapperEnumType;
 
-	PyType->tp_base = &UPyWrapperBaseType;
+	PyType->tp_base = &PyLong_Type;
 	PyType->tp_new = (newfunc)&New_WrapperEnum;
-	PyType->tp_dealloc = (destructor)&Dealloc_WrapperEnum;
 	PyType->tp_init = (initproc)&Init_WrapperEnum;
 	PyType->tp_str = (reprfunc)&Str_WrapperEnum;
 	PyType->tp_repr = (reprfunc)&Str_WrapperEnum;
-	PyType->tp_richcompare = (richcmpfunc)&RichCmp_WrapperEnum;
-	PyType->tp_hash = (hashfunc)&Hash_WrapperEnum;
 
-	PyType->tp_members = PyMembers;
+	PyType->tp_getset = PyGetSets_WrapperEnum;
 	PyType->tp_methods = PyMethods;
 
 	PyType->tp_flags = Py_TPFLAGS_DEFAULT | Py_TPFLAGS_BASETYPE;

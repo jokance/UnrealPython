@@ -1,9 +1,10 @@
 
 #pragma once
 
-#include "Wrapper/UPyWrapperBase.h"
+#include "UPyCommon.h"
 #include "UObject/Class.h"
 #include "Core/UPyPtr.h"
+#include "Utils/UPyGenUtil.h"
 #include "Utils/UPyUtil.h"
 #include "Core/UPyConversionResult.h"
 
@@ -19,28 +20,22 @@ extern PyTypeObject UPyWrapperEnumValueDescrType;
 void InitializeUPyWrapperEnum(UPyGenUtil::FNativePythonModule& ModuleInfo);
 
 /** Type for all Unreal exposed enum instances (an instance is created for each entry in the enum, before the enum type is locked for creating new instances) */
-struct FUPyWrapperEnum : public FUPyWrapperBase
+struct FUPyWrapperEnum
 {
-	/** Name of this enum entry */
-	PyObject* EntryName;
-
-	/** Value of this enum entry */
-	PyObject* EntryValue;
+	/** Common Python variable-sized object header; enum instances are PyLong subtypes. */
+	PyObject_VAR_HEAD
 
 	/** New this wrapper instance (called via tp_new for Python, or directly in C++) */
 	static FUPyWrapperEnum* New(PyTypeObject* InType);
 
-	/** Free this wrapper instance (called via tp_dealloc for Python) */
-	static void Free(FUPyWrapperEnum* InSelf);
+	/** New this wrapper instance with the given numeric value (called directly in C++) */
+	static FUPyWrapperEnum* New(PyTypeObject* InType, const int64 InEnumEntryValue);
 
 	/** Initialize this wrapper instance (called via tp_init for Python, or directly in C++) */
 	static int Init(FUPyWrapperEnum* InSelf);
 
 	/** Initialize this wrapper instance (called directly in C++) */
 	static int Init(FUPyWrapperEnum* InSelf, const int64 InEnumEntryValue, const char* InEnumEntryName);
-
-	/** Deinitialize this wrapper instance (called via Init and Free to restore the instance to its New state) */
-	static void Deinit(FUPyWrapperEnum* InSelf);
 
 	/** Called to validate the internal state of this wrapper instance prior to operating on it (should be called by all functions that expect to operate on an initialized type; will set an error state on failure) */
 	static bool ValidateInternalState(FUPyWrapperEnum* InSelf);
@@ -87,10 +82,22 @@ struct FUPyWrapperEnumValueDescrObject
 		FUPyWrapperEnumValueDescrObject* Self = (FUPyWrapperEnumValueDescrObject*)UPyWrapperEnumValueDescrType.tp_alloc(&UPyWrapperEnumValueDescrType, 0);
 		if (Self)
 		{
-			Self->EnumEntry = FUPyWrapperEnum::New(InEnumType);
-			FUPyWrapperEnum::Init(Self->EnumEntry, InEnumEntryValue, InEnumEntryName);
-			Self->EnumEntryDoc = InEnumEntryDoc ? PyUnicode_FromString(InEnumEntryDoc) : nullptr;
+			Self->EnumEntry = nullptr;
+			Self->EnumEntryDoc = nullptr;
 			new(&Self->DeprecationMessage) TOptional<FString>();
+
+			Self->EnumEntry = FUPyWrapperEnum::New(InEnumType, InEnumEntryValue);
+			if (!Self->EnumEntry)
+			{
+				Py_DECREF(Self);
+				return nullptr;
+			}
+			if (FUPyWrapperEnum::Init(Self->EnumEntry, InEnumEntryValue, InEnumEntryName) != 0)
+			{
+				Py_DECREF(Self);
+				return nullptr;
+			}
+			Self->EnumEntryDoc = InEnumEntryDoc ? PyUnicode_FromString(InEnumEntryDoc) : nullptr;
 		}
 		return Self;
 	}
@@ -98,16 +105,24 @@ struct FUPyWrapperEnumValueDescrObject
 	/** New a deprecated instance */
 	static FUPyWrapperEnumValueDescrObject* NewDeprecated(FUPyWrapperEnum* InEnumEntry, const char* InEnumEntryName, const char* InEnumEntryDoc)
 	{
+		if (!InEnumEntry)
+		{
+			return nullptr;
+		}
+
 		FUPyWrapperEnumValueDescrObject* Self = (FUPyWrapperEnumValueDescrObject*)UPyWrapperEnumValueDescrType.tp_alloc(&UPyWrapperEnumValueDescrType, 0);
 		if (Self)
 		{
+			Self->EnumEntry = nullptr;
+			Self->EnumEntryDoc = nullptr;
+			new(&Self->DeprecationMessage) TOptional<FString>(FString::Printf(TEXT("Enum entry '%s.%s' is deprecated: Use '%s.%s'"),
+				UTF8_TO_TCHAR(Py_TYPE(InEnumEntry)->tp_name), UTF8_TO_TCHAR(InEnumEntryName),
+				UTF8_TO_TCHAR(Py_TYPE(InEnumEntry)->tp_name), *FUPyWrapperEnum::GetEnumEntryName(InEnumEntry)
+				));
+
 			Py_XINCREF(InEnumEntry);
 			Self->EnumEntry = InEnumEntry;
 			Self->EnumEntryDoc = InEnumEntryDoc ? PyUnicode_FromString(InEnumEntryDoc) : nullptr;
-			new(&Self->DeprecationMessage) TOptional<FString>(FString::Printf(TEXT("Enum entry '%s.%s' is deprecated: Use '%s.%s'"), 
-				UTF8_TO_TCHAR(Py_TYPE(Self->EnumEntry)->tp_name), UTF8_TO_TCHAR(InEnumEntryName),
-				UTF8_TO_TCHAR(Py_TYPE(Self->EnumEntry)->tp_name), *UPyUtil::PyObjectToUEString(Self->EnumEntry->EntryName)
-				));
 		}
 		return Self;
 	}

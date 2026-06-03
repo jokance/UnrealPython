@@ -541,7 +541,7 @@ const PyTypeObject* FUPyWrapperTypeRegistry::GenerateWrappedEnumType(const UEnum
 	// GeneratedWrappedType->TypeDoc = PyGenUtil::TCHARToUTF8Buffer(*TypeDocString);
 	GeneratedWrappedType->ExtractEnumEntries(InEnum);
 
-	GeneratedWrappedType->PyType.tp_basicsize = sizeof(FUPyWrapperEnum);
+	GeneratedWrappedType->PyType.tp_basicsize = 0;
 	GeneratedWrappedType->PyType.tp_base = &UPyWrapperEnumType;
 	GeneratedWrappedType->PyType.tp_flags = Py_TPFLAGS_DEFAULT;
 
