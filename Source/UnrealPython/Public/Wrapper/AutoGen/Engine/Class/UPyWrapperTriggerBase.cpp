@@ -36,12 +36,12 @@ struct FGetSets_TriggerBase
 
 	static PyObject* GetCollisionComponent(FUPyWrapperTriggerBase* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_CollisionComponent(), "CollisionComponent");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_CollisionComponent(), "CollisionComponent");
 	}
 
 	static int SetCollisionComponent(FUPyWrapperTriggerBase* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_CollisionComponent(), "CollisionComponent");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_CollisionComponent(), "CollisionComponent");
 	}
 
 #if WITH_EDITOR
@@ -65,12 +65,12 @@ struct FGetSets_TriggerBase
 
 	static PyObject* GetSpriteComponent(FUPyWrapperTriggerBase* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_SpriteComponent(), "SpriteComponent");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_SpriteComponent(), "SpriteComponent");
 	}
 
 	static int SetSpriteComponent(FUPyWrapperTriggerBase* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_SpriteComponent(), "SpriteComponent");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_SpriteComponent(), "SpriteComponent");
 	}
 
 #endif
@@ -157,7 +157,7 @@ namespace UPyConversion
 	{
 		if (FUPyWrapperTriggerBase* PyTriggerBase = UPyIsTriggerBase(PyObj))
 		{
-			if (!FUPyWrapperObjectBase::ValidateInternalState(PyTriggerBase))
+			if (!FUPyWrapperObject::ValidateInternalState(PyTriggerBase))
 			{
 				return FUPyConversionResult::Failure();
 			}

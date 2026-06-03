@@ -14,7 +14,7 @@ extern PyTypeObject UPyWrapperTriggerBaseType;
 /** Initialize the UPyWrapperTriggerBaseType types and add them to the given Python module */
 void InitializeUPyWrapperTriggerBase(UPyGenUtil::FNativePythonModule& ModuleInfo);
 
-class FUPyWrapperTriggerBase: public FUPyWrapperObjectBase 
+class FUPyWrapperTriggerBase: public FUPyWrapperObject
 {
 public:
 

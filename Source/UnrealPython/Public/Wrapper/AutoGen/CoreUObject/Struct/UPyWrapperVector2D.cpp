@@ -21,7 +21,7 @@ struct FGetSets_Vector2D
 {
 	static PyObject* GetX(FUPyWrapperVector2D* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperVector2D::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -30,7 +30,7 @@ struct FGetSets_Vector2D
 
 	static int SetX(FUPyWrapperVector2D* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperVector2D::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}
@@ -44,7 +44,7 @@ struct FGetSets_Vector2D
 
 	static PyObject* GetY(FUPyWrapperVector2D* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperVector2D::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -53,7 +53,7 @@ struct FGetSets_Vector2D
 
 	static int SetY(FUPyWrapperVector2D* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperVector2D::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}

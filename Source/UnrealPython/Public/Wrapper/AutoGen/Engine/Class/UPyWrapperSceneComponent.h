@@ -14,7 +14,7 @@ extern PyTypeObject UPyWrapperSceneComponentType;
 /** Initialize the UPyWrapperSceneComponentType types and add them to the given Python module */
 void InitializeUPyWrapperSceneComponent(UPyGenUtil::FNativePythonModule& ModuleInfo);
 
-class FUPyWrapperSceneComponent: public FUPyWrapperObjectBase 
+class FUPyWrapperSceneComponent: public FUPyWrapperObject
 {
 public:
 

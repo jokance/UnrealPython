@@ -40,7 +40,7 @@ namespace UPyConversion
 	{
 		if ({CppType}* Py{TpName} = UPyIs{TpName}(PyObj))
 		{
-			if (!FUPyWrapperObjectBase::ValidateInternalState(Py{TpName}))
+			if (!FUPyWrapperObject::ValidateInternalState(Py{TpName}))
 			{
 				return FUPyConversionResult::Failure();
 			}

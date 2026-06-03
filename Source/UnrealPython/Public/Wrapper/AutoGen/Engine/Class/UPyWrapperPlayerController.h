@@ -14,7 +14,7 @@ extern PyTypeObject UPyWrapperPlayerControllerType;
 /** Initialize the UPyWrapperPlayerControllerType types and add them to the given Python module */
 void InitializeUPyWrapperPlayerController(UPyGenUtil::FNativePythonModule& ModuleInfo);
 
-class FUPyWrapperPlayerController: public FUPyWrapperObjectBase 
+class FUPyWrapperPlayerController: public FUPyWrapperObject
 {
 public:
 

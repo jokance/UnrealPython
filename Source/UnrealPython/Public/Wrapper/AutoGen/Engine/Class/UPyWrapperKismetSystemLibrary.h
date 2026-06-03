@@ -14,7 +14,7 @@ extern PyTypeObject UPyWrapperKismetSystemLibraryType;
 /** Initialize the UPyWrapperKismetSystemLibraryType types and add them to the given Python module */
 void InitializeUPyWrapperKismetSystemLibrary(UPyGenUtil::FNativePythonModule& ModuleInfo);
 
-class FUPyWrapperKismetSystemLibrary: public FUPyWrapperObjectBase 
+class FUPyWrapperKismetSystemLibrary: public FUPyWrapperObject
 {
 public:
 

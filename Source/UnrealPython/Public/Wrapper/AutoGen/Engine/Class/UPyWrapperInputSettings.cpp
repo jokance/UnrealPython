@@ -38,12 +38,12 @@ struct FGetSets_InputSettings
 
 	static PyObject* GetActionMappings(FUPyWrapperInputSettings* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ActionMappings(), "ActionMappings");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ActionMappings(), "ActionMappings");
 	}
 
 	static int SetActionMappings(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ActionMappings(), "ActionMappings");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ActionMappings(), "ActionMappings");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_AxisConfig()
@@ -71,7 +71,7 @@ struct FGetSets_InputSettings
 
 	static int SetAxisConfig(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_AxisConfig(), "AxisConfig");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_AxisConfig(), "AxisConfig");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_AxisMappings()
@@ -94,12 +94,12 @@ struct FGetSets_InputSettings
 
 	static PyObject* GetAxisMappings(FUPyWrapperInputSettings* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_AxisMappings(), "AxisMappings");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_AxisMappings(), "AxisMappings");
 	}
 
 	static int SetAxisMappings(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_AxisMappings(), "AxisMappings");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_AxisMappings(), "AxisMappings");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_ConsoleKeys()
@@ -127,7 +127,7 @@ struct FGetSets_InputSettings
 
 	static int SetConsoleKeys(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ConsoleKeys(), "ConsoleKeys");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ConsoleKeys(), "ConsoleKeys");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_DefaultInputComponentClass()
@@ -150,12 +150,12 @@ struct FGetSets_InputSettings
 
 	static PyObject* GetDefaultInputComponentClass(FUPyWrapperInputSettings* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_DefaultInputComponentClass(), "DefaultInputComponentClass");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_DefaultInputComponentClass(), "DefaultInputComponentClass");
 	}
 
 	static int SetDefaultInputComponentClass(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_DefaultInputComponentClass(), "DefaultInputComponentClass");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_DefaultInputComponentClass(), "DefaultInputComponentClass");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_DefaultPlayerInputClass()
@@ -178,12 +178,12 @@ struct FGetSets_InputSettings
 
 	static PyObject* GetDefaultPlayerInputClass(FUPyWrapperInputSettings* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_DefaultPlayerInputClass(), "DefaultPlayerInputClass");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_DefaultPlayerInputClass(), "DefaultPlayerInputClass");
 	}
 
 	static int SetDefaultPlayerInputClass(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_DefaultPlayerInputClass(), "DefaultPlayerInputClass");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_DefaultPlayerInputClass(), "DefaultPlayerInputClass");
 	}
 
 	static PyObject* GetDefaultTouchInterface(FUPyWrapperInputSettings* InSelf, void* InClosure)
@@ -251,12 +251,12 @@ struct FGetSets_InputSettings
 
 	static PyObject* GetDeprecatedActionAndAxisNames(FUPyWrapperInputSettings* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_DeprecatedActionAndAxisNames(), "DeprecatedActionAndAxisNames");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_DeprecatedActionAndAxisNames(), "DeprecatedActionAndAxisNames");
 	}
 
 	static int SetDeprecatedActionAndAxisNames(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_DeprecatedActionAndAxisNames(), "DeprecatedActionAndAxisNames");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_DeprecatedActionAndAxisNames(), "DeprecatedActionAndAxisNames");
 	}
 
 	static PyObject* GetDoubleClickTime(FUPyWrapperInputSettings* InSelf, void* InClosure)
@@ -299,7 +299,7 @@ struct FGetSets_InputSettings
 
 	static int SetExcludedAutocorrectCultures(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ExcludedAutocorrectCultures(), "ExcludedAutocorrectCultures");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ExcludedAutocorrectCultures(), "ExcludedAutocorrectCultures");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_ExcludedAutocorrectDeviceModels()
@@ -327,7 +327,7 @@ struct FGetSets_InputSettings
 
 	static int SetExcludedAutocorrectDeviceModels(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ExcludedAutocorrectDeviceModels(), "ExcludedAutocorrectDeviceModels");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ExcludedAutocorrectDeviceModels(), "ExcludedAutocorrectDeviceModels");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_ExcludedAutocorrectOS()
@@ -355,7 +355,7 @@ struct FGetSets_InputSettings
 
 	static int SetExcludedAutocorrectOS(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ExcludedAutocorrectOS(), "ExcludedAutocorrectOS");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ExcludedAutocorrectOS(), "ExcludedAutocorrectOS");
 	}
 
 	static PyObject* GetFOVScale(FUPyWrapperInputSettings* InSelf, void* InClosure)
@@ -408,12 +408,12 @@ struct FGetSets_InputSettings
 
 	static PyObject* GetSpeechMappings(FUPyWrapperInputSettings* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_SpeechMappings(), "SpeechMappings");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_SpeechMappings(), "SpeechMappings");
 	}
 
 	static int SetSpeechMappings(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_SpeechMappings(), "SpeechMappings");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_SpeechMappings(), "SpeechMappings");
 	}
 
 	static PyObject* GetbAltEnterTogglesFullscreen(FUPyWrapperInputSettings* InSelf, void* InClosure)
@@ -1043,7 +1043,7 @@ namespace UPyConversion
 	{
 		if (FUPyWrapperInputSettings* PyInputSettings = UPyIsInputSettings(PyObj))
 		{
-			if (!FUPyWrapperObjectBase::ValidateInternalState(PyInputSettings))
+			if (!FUPyWrapperObject::ValidateInternalState(PyInputSettings))
 			{
 				return FUPyConversionResult::Failure();
 			}

@@ -87124,6 +87124,11 @@ class BlueprintPlatformLibrary(BlueprintFunctionLibrary):
 class BlueprintSemanticCommandlet(Commandlet):
     ...
 
+class BlueprintSemanticImportMetadata(BlueprintExtension):
+    DocumentSignature: str
+    GraphSignature: str
+
+
 class BlueprintSetLibrary(BlueprintFunctionLibrary):
     @staticmethod
     def SetSetPropertyByName(Object: Object, PropertyName: str, Value: set[int]) -> None:

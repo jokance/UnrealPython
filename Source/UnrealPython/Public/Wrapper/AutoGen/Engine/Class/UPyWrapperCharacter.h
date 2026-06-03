@@ -14,7 +14,7 @@ extern PyTypeObject UPyWrapperCharacterType;
 /** Initialize the UPyWrapperCharacterType types and add them to the given Python module */
 void InitializeUPyWrapperCharacter(UPyGenUtil::FNativePythonModule& ModuleInfo);
 
-class FUPyWrapperCharacter: public FUPyWrapperObjectBase 
+class FUPyWrapperCharacter: public FUPyWrapperObject
 {
 public:
 

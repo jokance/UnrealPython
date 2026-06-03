@@ -14,7 +14,7 @@ extern PyTypeObject UPyWrapperPawnType;
 /** Initialize the UPyWrapperPawnType types and add them to the given Python module */
 void InitializeUPyWrapperPawn(UPyGenUtil::FNativePythonModule& ModuleInfo);
 
-class FUPyWrapperPawn: public FUPyWrapperObjectBase 
+class FUPyWrapperPawn: public FUPyWrapperObject
 {
 public:
 

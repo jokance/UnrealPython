@@ -14,7 +14,7 @@ extern PyTypeObject UPyWrapperListViewType;
 /** Initialize the UPyWrapperListViewType types and add them to the given Python module */
 void InitializeUPyWrapperListView(UPyGenUtil::FNativePythonModule& ModuleInfo);
 
-class FUPyWrapperListView: public FUPyWrapperObjectBase 
+class FUPyWrapperListView: public FUPyWrapperObject
 {
 public:
 

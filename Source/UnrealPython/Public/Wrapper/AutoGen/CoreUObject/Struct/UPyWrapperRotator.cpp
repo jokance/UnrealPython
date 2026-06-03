@@ -21,7 +21,7 @@ struct FGetSets_Rotator
 {
 	static PyObject* GetPitch(FUPyWrapperRotator* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperRotator::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -30,7 +30,7 @@ struct FGetSets_Rotator
 
 	static int SetPitch(FUPyWrapperRotator* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperRotator::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}
@@ -44,7 +44,7 @@ struct FGetSets_Rotator
 
 	static PyObject* GetRoll(FUPyWrapperRotator* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperRotator::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -53,7 +53,7 @@ struct FGetSets_Rotator
 
 	static int SetRoll(FUPyWrapperRotator* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperRotator::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}
@@ -67,7 +67,7 @@ struct FGetSets_Rotator
 
 	static PyObject* GetYaw(FUPyWrapperRotator* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperRotator::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -76,7 +76,7 @@ struct FGetSets_Rotator
 
 	static int SetYaw(FUPyWrapperRotator* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperRotator::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}

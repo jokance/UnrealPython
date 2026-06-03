@@ -11,7 +11,7 @@ extern PyTypeObject {PyType};
 /** Initialize the {PyType} types and add them to the given Python module */
 void {FunctionName}(UPyGenUtil::FNativePythonModule& ModuleInfo);
 
-class {CppType}: public FUPyWrapperObjectBase 
+class {CppType}: public FUPyWrapperObject
 {
 public:
 

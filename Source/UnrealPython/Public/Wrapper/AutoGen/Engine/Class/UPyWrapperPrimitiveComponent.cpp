@@ -190,12 +190,12 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetCustomPrimitiveData(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_CustomPrimitiveData(), "CustomPrimitiveData");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_CustomPrimitiveData(), "CustomPrimitiveData");
 	}
 
 	static int SetCustomPrimitiveData(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_CustomPrimitiveData(), "CustomPrimitiveData");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_CustomPrimitiveData(), "CustomPrimitiveData");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_CustomPrimitiveDataInternal()
@@ -218,12 +218,12 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetCustomPrimitiveDataInternal(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_CustomPrimitiveDataInternal(), "CustomPrimitiveDataInternal");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_CustomPrimitiveDataInternal(), "CustomPrimitiveDataInternal");
 	}
 
 	static int SetCustomPrimitiveDataInternal(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_CustomPrimitiveDataInternal(), "CustomPrimitiveDataInternal");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_CustomPrimitiveDataInternal(), "CustomPrimitiveDataInternal");
 	}
 
 	static PyObject* GetDepthPriorityGroup(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
@@ -261,12 +261,12 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetExcludeFromHLODLevels(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ExcludeFromHLODLevels(), "ExcludeFromHLODLevels");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ExcludeFromHLODLevels(), "ExcludeFromHLODLevels");
 	}
 
 	static int SetExcludeFromHLODLevels(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ExcludeFromHLODLevels(), "ExcludeFromHLODLevels");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ExcludeFromHLODLevels(), "ExcludeFromHLODLevels");
 	}
 
 	static PyObject* GetFirstPersonPrimitiveType(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
@@ -366,12 +366,12 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetLODParentPrimitive(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_LODParentPrimitive(), "LODParentPrimitive");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_LODParentPrimitive(), "LODParentPrimitive");
 	}
 
 	static int SetLODParentPrimitive(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_LODParentPrimitive(), "LODParentPrimitive");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_LODParentPrimitive(), "LODParentPrimitive");
 	}
 
 	static PyObject* GetLightingChannels(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
@@ -429,7 +429,7 @@ struct FGetSets_PrimitiveComponent
 
 	static int SetMoveIgnoreActors(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_MoveIgnoreActors(), "MoveIgnoreActors");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_MoveIgnoreActors(), "MoveIgnoreActors");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_MoveIgnoreComponents()
@@ -457,7 +457,7 @@ struct FGetSets_PrimitiveComponent
 
 	static int SetMoveIgnoreComponents(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_MoveIgnoreComponents(), "MoveIgnoreComponents");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_MoveIgnoreComponents(), "MoveIgnoreComponents");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnBeginCursorOver()
@@ -480,12 +480,12 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetOnBeginCursorOver(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnBeginCursorOver(), "OnBeginCursorOver");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnBeginCursorOver(), "OnBeginCursorOver");
 	}
 
 	static int SetOnBeginCursorOver(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnBeginCursorOver(), "OnBeginCursorOver");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnBeginCursorOver(), "OnBeginCursorOver");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnClicked()
@@ -508,12 +508,12 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetOnClicked(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnClicked(), "OnClicked");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnClicked(), "OnClicked");
 	}
 
 	static int SetOnClicked(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnClicked(), "OnClicked");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnClicked(), "OnClicked");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnComponentBeginOverlap()
@@ -536,12 +536,12 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetOnComponentBeginOverlap(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnComponentBeginOverlap(), "OnComponentBeginOverlap");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnComponentBeginOverlap(), "OnComponentBeginOverlap");
 	}
 
 	static int SetOnComponentBeginOverlap(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnComponentBeginOverlap(), "OnComponentBeginOverlap");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnComponentBeginOverlap(), "OnComponentBeginOverlap");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnComponentEndOverlap()
@@ -564,12 +564,12 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetOnComponentEndOverlap(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnComponentEndOverlap(), "OnComponentEndOverlap");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnComponentEndOverlap(), "OnComponentEndOverlap");
 	}
 
 	static int SetOnComponentEndOverlap(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnComponentEndOverlap(), "OnComponentEndOverlap");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnComponentEndOverlap(), "OnComponentEndOverlap");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnComponentHit()
@@ -592,12 +592,12 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetOnComponentHit(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnComponentHit(), "OnComponentHit");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnComponentHit(), "OnComponentHit");
 	}
 
 	static int SetOnComponentHit(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnComponentHit(), "OnComponentHit");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnComponentHit(), "OnComponentHit");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnComponentPhysicsStateChanged()
@@ -620,12 +620,12 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetOnComponentPhysicsStateChanged(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnComponentPhysicsStateChanged(), "OnComponentPhysicsStateChanged");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnComponentPhysicsStateChanged(), "OnComponentPhysicsStateChanged");
 	}
 
 	static int SetOnComponentPhysicsStateChanged(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnComponentPhysicsStateChanged(), "OnComponentPhysicsStateChanged");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnComponentPhysicsStateChanged(), "OnComponentPhysicsStateChanged");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnComponentSleep()
@@ -648,12 +648,12 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetOnComponentSleep(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnComponentSleep(), "OnComponentSleep");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnComponentSleep(), "OnComponentSleep");
 	}
 
 	static int SetOnComponentSleep(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnComponentSleep(), "OnComponentSleep");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnComponentSleep(), "OnComponentSleep");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnComponentWake()
@@ -676,12 +676,12 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetOnComponentWake(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnComponentWake(), "OnComponentWake");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnComponentWake(), "OnComponentWake");
 	}
 
 	static int SetOnComponentWake(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnComponentWake(), "OnComponentWake");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnComponentWake(), "OnComponentWake");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnEndCursorOver()
@@ -704,12 +704,12 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetOnEndCursorOver(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnEndCursorOver(), "OnEndCursorOver");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnEndCursorOver(), "OnEndCursorOver");
 	}
 
 	static int SetOnEndCursorOver(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnEndCursorOver(), "OnEndCursorOver");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnEndCursorOver(), "OnEndCursorOver");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnInputTouchBegin()
@@ -732,12 +732,12 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetOnInputTouchBegin(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnInputTouchBegin(), "OnInputTouchBegin");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnInputTouchBegin(), "OnInputTouchBegin");
 	}
 
 	static int SetOnInputTouchBegin(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnInputTouchBegin(), "OnInputTouchBegin");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnInputTouchBegin(), "OnInputTouchBegin");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnInputTouchEnd()
@@ -760,12 +760,12 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetOnInputTouchEnd(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnInputTouchEnd(), "OnInputTouchEnd");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnInputTouchEnd(), "OnInputTouchEnd");
 	}
 
 	static int SetOnInputTouchEnd(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnInputTouchEnd(), "OnInputTouchEnd");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnInputTouchEnd(), "OnInputTouchEnd");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnInputTouchEnter()
@@ -788,12 +788,12 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetOnInputTouchEnter(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnInputTouchEnter(), "OnInputTouchEnter");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnInputTouchEnter(), "OnInputTouchEnter");
 	}
 
 	static int SetOnInputTouchEnter(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnInputTouchEnter(), "OnInputTouchEnter");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnInputTouchEnter(), "OnInputTouchEnter");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnInputTouchLeave()
@@ -816,12 +816,12 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetOnInputTouchLeave(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnInputTouchLeave(), "OnInputTouchLeave");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnInputTouchLeave(), "OnInputTouchLeave");
 	}
 
 	static int SetOnInputTouchLeave(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnInputTouchLeave(), "OnInputTouchLeave");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnInputTouchLeave(), "OnInputTouchLeave");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnReleased()
@@ -844,12 +844,12 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetOnReleased(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnReleased(), "OnReleased");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnReleased(), "OnReleased");
 	}
 
 	static int SetOnReleased(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnReleased(), "OnReleased");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnReleased(), "OnReleased");
 	}
 
 	static PyObject* GetRayTracingGroupCullingPriority(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
@@ -907,7 +907,7 @@ struct FGetSets_PrimitiveComponent
 
 	static int SetRuntimeVirtualTextures(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_RuntimeVirtualTextures(), "RuntimeVirtualTextures");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_RuntimeVirtualTextures(), "RuntimeVirtualTextures");
 	}
 
 	static PyObject* GetShadowCacheInvalidationBehavior(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
@@ -1424,12 +1424,12 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbGenerateOverlapEvents(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bGenerateOverlapEvents(), "bGenerateOverlapEvents");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bGenerateOverlapEvents(), "bGenerateOverlapEvents");
 	}
 
 	static int SetbGenerateOverlapEvents(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bGenerateOverlapEvents(), "bGenerateOverlapEvents");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bGenerateOverlapEvents(), "bGenerateOverlapEvents");
 	}
 
 	static PyObject* GetbHasCustomNavigableGeometry(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
@@ -1467,12 +1467,12 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbHasNoStreamableTextures(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bHasNoStreamableTextures(), "bHasNoStreamableTextures");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bHasNoStreamableTextures(), "bHasNoStreamableTextures");
 	}
 
 	static int SetbHasNoStreamableTextures(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bHasNoStreamableTextures(), "bHasNoStreamableTextures");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bHasNoStreamableTextures(), "bHasNoStreamableTextures");
 	}
 
 	static PyObject* GetbHasPerInstanceHitProxies(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
@@ -1925,12 +1925,12 @@ struct FGetSets_PrimitiveComponent
 
 	static PyObject* GetbStaticWhenNotMoveable(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bStaticWhenNotMoveable(), "bStaticWhenNotMoveable");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bStaticWhenNotMoveable(), "bStaticWhenNotMoveable");
 	}
 
 	static int SetbStaticWhenNotMoveable(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bStaticWhenNotMoveable(), "bStaticWhenNotMoveable");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bStaticWhenNotMoveable(), "bStaticWhenNotMoveable");
 	}
 
 	static PyObject* GetbTraceComplexOnMove(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
@@ -6802,7 +6802,7 @@ namespace UPyConversion
 	{
 		if (FUPyWrapperPrimitiveComponent* PyPrimitiveComponent = UPyIsPrimitiveComponent(PyObj))
 		{
-			if (!FUPyWrapperObjectBase::ValidateInternalState(PyPrimitiveComponent))
+			if (!FUPyWrapperObject::ValidateInternalState(PyPrimitiveComponent))
 			{
 				return FUPyConversionResult::Failure();
 			}

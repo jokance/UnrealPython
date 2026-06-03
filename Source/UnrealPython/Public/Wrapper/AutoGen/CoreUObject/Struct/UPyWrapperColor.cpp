@@ -21,7 +21,7 @@ struct FGetSets_Color
 {
 	static PyObject* GetA(FUPyWrapperColor* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperColor::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -30,7 +30,7 @@ struct FGetSets_Color
 
 	static int SetA(FUPyWrapperColor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperColor::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}
@@ -44,7 +44,7 @@ struct FGetSets_Color
 
 	static PyObject* GetB(FUPyWrapperColor* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperColor::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -53,7 +53,7 @@ struct FGetSets_Color
 
 	static int SetB(FUPyWrapperColor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperColor::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}
@@ -67,7 +67,7 @@ struct FGetSets_Color
 
 	static PyObject* GetG(FUPyWrapperColor* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperColor::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -76,7 +76,7 @@ struct FGetSets_Color
 
 	static int SetG(FUPyWrapperColor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperColor::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}
@@ -90,7 +90,7 @@ struct FGetSets_Color
 
 	static PyObject* GetR(FUPyWrapperColor* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperColor::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -99,7 +99,7 @@ struct FGetSets_Color
 
 	static int SetR(FUPyWrapperColor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperColor::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}

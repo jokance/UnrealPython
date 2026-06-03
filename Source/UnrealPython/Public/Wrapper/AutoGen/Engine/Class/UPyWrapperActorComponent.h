@@ -14,7 +14,7 @@ extern PyTypeObject UPyWrapperActorComponentType;
 /** Initialize the UPyWrapperActorComponentType types and add them to the given Python module */
 void InitializeUPyWrapperActorComponent(UPyGenUtil::FNativePythonModule& ModuleInfo);
 
-class FUPyWrapperActorComponent: public FUPyWrapperObjectBase 
+class FUPyWrapperActorComponent: public FUPyWrapperObject
 {
 public:
 

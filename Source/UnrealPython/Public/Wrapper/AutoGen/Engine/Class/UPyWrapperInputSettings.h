@@ -14,7 +14,7 @@ extern PyTypeObject UPyWrapperInputSettingsType;
 /** Initialize the UPyWrapperInputSettingsType types and add them to the given Python module */
 void InitializeUPyWrapperInputSettings(UPyGenUtil::FNativePythonModule& ModuleInfo);
 
-class FUPyWrapperInputSettings: public FUPyWrapperObjectBase 
+class FUPyWrapperInputSettings: public FUPyWrapperObject
 {
 public:
 

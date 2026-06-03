@@ -87,7 +87,7 @@ struct FGetSets_StaticMeshComponent
 
 	static int SetLODData(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_LODData(), "LODData");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_LODData(), "LODData");
 	}
 
 	static PyObject* GetLightmassSettings(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
@@ -130,7 +130,7 @@ struct FGetSets_StaticMeshComponent
 
 	static int SetMaterialCacheTextures(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_MaterialCacheTextures(), "MaterialCacheTextures");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_MaterialCacheTextures(), "MaterialCacheTextures");
 	}
 
 	static PyObject* GetMaterialCacheTileCount(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
@@ -191,7 +191,7 @@ struct FGetSets_StaticMeshComponent
 
 	static int SetMaterialStreamingRelativeBoxes(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_MaterialStreamingRelativeBoxes(), "MaterialStreamingRelativeBoxes");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_MaterialStreamingRelativeBoxes(), "MaterialStreamingRelativeBoxes");
 	}
 
 #endif
@@ -388,12 +388,12 @@ struct FGetSets_StaticMeshComponent
 
 	static PyObject* GetStaticMesh(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_StaticMesh(), "StaticMesh");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_StaticMesh(), "StaticMesh");
 	}
 
 	static int SetStaticMesh(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_StaticMesh(), "StaticMesh");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_StaticMesh(), "StaticMesh");
 	}
 
 #if WITH_EDITOR
@@ -470,7 +470,7 @@ struct FGetSets_StaticMeshComponent
 
 	static int SetStreamingTextureData(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_StreamingTextureData(), "StreamingTextureData");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_StreamingTextureData(), "StreamingTextureData");
 	}
 
 	static PyObject* GetSubDivisionStepSize(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
@@ -1347,7 +1347,7 @@ namespace UPyConversion
 	{
 		if (FUPyWrapperStaticMeshComponent* PyStaticMeshComponent = UPyIsStaticMeshComponent(PyObj))
 		{
-			if (!FUPyWrapperObjectBase::ValidateInternalState(PyStaticMeshComponent))
+			if (!FUPyWrapperObject::ValidateInternalState(PyStaticMeshComponent))
 			{
 				return FUPyConversionResult::Failure();
 			}

@@ -93,12 +93,12 @@ struct FGetSets_SkeletalMeshComponent
 
 	static PyObject* GetAnimationMode(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_AnimationMode(), "AnimationMode");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_AnimationMode(), "AnimationMode");
 	}
 
 	static int SetAnimationMode(FUPyWrapperSkeletalMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_AnimationMode(), "AnimationMode");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_AnimationMode(), "AnimationMode");
 	}
 
 	static PyObject* GetBodySetup(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
@@ -151,12 +151,12 @@ struct FGetSets_SkeletalMeshComponent
 
 	static PyObject* GetCachedBoneSpaceTransforms(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_CachedBoneSpaceTransforms(), "CachedBoneSpaceTransforms");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_CachedBoneSpaceTransforms(), "CachedBoneSpaceTransforms");
 	}
 
 	static int SetCachedBoneSpaceTransforms(FUPyWrapperSkeletalMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_CachedBoneSpaceTransforms(), "CachedBoneSpaceTransforms");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_CachedBoneSpaceTransforms(), "CachedBoneSpaceTransforms");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_CachedComponentSpaceTransforms()
@@ -179,12 +179,12 @@ struct FGetSets_SkeletalMeshComponent
 
 	static PyObject* GetCachedComponentSpaceTransforms(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_CachedComponentSpaceTransforms(), "CachedComponentSpaceTransforms");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_CachedComponentSpaceTransforms(), "CachedComponentSpaceTransforms");
 	}
 
 	static int SetCachedComponentSpaceTransforms(FUPyWrapperSkeletalMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_CachedComponentSpaceTransforms(), "CachedComponentSpaceTransforms");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_CachedComponentSpaceTransforms(), "CachedComponentSpaceTransforms");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_CachedMeshCurveMetaDataVersion()
@@ -207,12 +207,12 @@ struct FGetSets_SkeletalMeshComponent
 
 	static PyObject* GetCachedMeshCurveMetaDataVersion(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_CachedMeshCurveMetaDataVersion(), "CachedMeshCurveMetaDataVersion");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_CachedMeshCurveMetaDataVersion(), "CachedMeshCurveMetaDataVersion");
 	}
 
 	static int SetCachedMeshCurveMetaDataVersion(FUPyWrapperSkeletalMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_CachedMeshCurveMetaDataVersion(), "CachedMeshCurveMetaDataVersion");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_CachedMeshCurveMetaDataVersion(), "CachedMeshCurveMetaDataVersion");
 	}
 
 	static PyObject* GetClothBlendWeight(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
@@ -280,12 +280,12 @@ struct FGetSets_SkeletalMeshComponent
 
 	static PyObject* GetClothTeleportMode(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ClothTeleportMode(), "ClothTeleportMode");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ClothTeleportMode(), "ClothTeleportMode");
 	}
 
 	static int SetClothTeleportMode(FUPyWrapperSkeletalMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ClothTeleportMode(), "ClothTeleportMode");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ClothTeleportMode(), "ClothTeleportMode");
 	}
 
 	static PyObject* GetClothVelocityScale(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
@@ -323,12 +323,12 @@ struct FGetSets_SkeletalMeshComponent
 
 	static PyObject* GetClothingSimulationInstances(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ClothingSimulationInstances(), "ClothingSimulationInstances");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ClothingSimulationInstances(), "ClothingSimulationInstances");
 	}
 
 	static int SetClothingSimulationInstances(FUPyWrapperSkeletalMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ClothingSimulationInstances(), "ClothingSimulationInstances");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ClothingSimulationInstances(), "ClothingSimulationInstances");
 	}
 
 #if WITH_EDITOR
@@ -352,12 +352,12 @@ struct FGetSets_SkeletalMeshComponent
 
 	static PyObject* GetDefaultAnimatingRigOverride(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_DefaultAnimatingRigOverride(), "DefaultAnimatingRigOverride");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_DefaultAnimatingRigOverride(), "DefaultAnimatingRigOverride");
 	}
 
 	static int SetDefaultAnimatingRigOverride(FUPyWrapperSkeletalMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_DefaultAnimatingRigOverride(), "DefaultAnimatingRigOverride");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_DefaultAnimatingRigOverride(), "DefaultAnimatingRigOverride");
 	}
 
 #endif
@@ -381,12 +381,12 @@ struct FGetSets_SkeletalMeshComponent
 
 	static PyObject* GetFilteredAnimCurves(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_FilteredAnimCurves(), "FilteredAnimCurves");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_FilteredAnimCurves(), "FilteredAnimCurves");
 	}
 
 	static int SetFilteredAnimCurves(FUPyWrapperSkeletalMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_FilteredAnimCurves(), "FilteredAnimCurves");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_FilteredAnimCurves(), "FilteredAnimCurves");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_GlobalAnimRateScale()
@@ -409,12 +409,12 @@ struct FGetSets_SkeletalMeshComponent
 
 	static PyObject* GetGlobalAnimRateScale(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_GlobalAnimRateScale(), "GlobalAnimRateScale");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_GlobalAnimRateScale(), "GlobalAnimRateScale");
 	}
 
 	static int SetGlobalAnimRateScale(FUPyWrapperSkeletalMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_GlobalAnimRateScale(), "GlobalAnimRateScale");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_GlobalAnimRateScale(), "GlobalAnimRateScale");
 	}
 
 	static PyObject* GetKinematicBonesUpdateType(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
@@ -452,12 +452,12 @@ struct FGetSets_SkeletalMeshComponent
 
 	static PyObject* GetLastPoseTickFrame(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_LastPoseTickFrame(), "LastPoseTickFrame");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_LastPoseTickFrame(), "LastPoseTickFrame");
 	}
 
 	static int SetLastPoseTickFrame(FUPyWrapperSkeletalMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_LastPoseTickFrame(), "LastPoseTickFrame");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_LastPoseTickFrame(), "LastPoseTickFrame");
 	}
 
 	static PyObject* GetLineCheckBoundsScale(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
@@ -495,12 +495,12 @@ struct FGetSets_SkeletalMeshComponent
 
 	static PyObject* GetLinkedInstances(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_LinkedInstances(), "LinkedInstances");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_LinkedInstances(), "LinkedInstances");
 	}
 
 	static int SetLinkedInstances(FUPyWrapperSkeletalMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_LinkedInstances(), "LinkedInstances");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_LinkedInstances(), "LinkedInstances");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_MorphTargetCurves()
@@ -523,12 +523,12 @@ struct FGetSets_SkeletalMeshComponent
 
 	static PyObject* GetMorphTargetCurves(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_MorphTargetCurves(), "MorphTargetCurves");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_MorphTargetCurves(), "MorphTargetCurves");
 	}
 
 	static int SetMorphTargetCurves(FUPyWrapperSkeletalMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_MorphTargetCurves(), "MorphTargetCurves");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_MorphTargetCurves(), "MorphTargetCurves");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnAnimInitialized()
@@ -551,12 +551,12 @@ struct FGetSets_SkeletalMeshComponent
 
 	static PyObject* GetOnAnimInitialized(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnAnimInitialized(), "OnAnimInitialized");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnAnimInitialized(), "OnAnimInitialized");
 	}
 
 	static int SetOnAnimInitialized(FUPyWrapperSkeletalMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnAnimInitialized(), "OnAnimInitialized");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnAnimInitialized(), "OnAnimInitialized");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnConstraintBroken()
@@ -579,12 +579,12 @@ struct FGetSets_SkeletalMeshComponent
 
 	static PyObject* GetOnConstraintBroken(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnConstraintBroken(), "OnConstraintBroken");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnConstraintBroken(), "OnConstraintBroken");
 	}
 
 	static int SetOnConstraintBroken(FUPyWrapperSkeletalMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnConstraintBroken(), "OnConstraintBroken");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnConstraintBroken(), "OnConstraintBroken");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnPlasticDeformation()
@@ -607,12 +607,12 @@ struct FGetSets_SkeletalMeshComponent
 
 	static PyObject* GetOnPlasticDeformation(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnPlasticDeformation(), "OnPlasticDeformation");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnPlasticDeformation(), "OnPlasticDeformation");
 	}
 
 	static int SetOnPlasticDeformation(FUPyWrapperSkeletalMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnPlasticDeformation(), "OnPlasticDeformation");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnPlasticDeformation(), "OnPlasticDeformation");
 	}
 
 	static PyObject* GetOverridePostProcessAnimBP(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
@@ -665,12 +665,12 @@ struct FGetSets_SkeletalMeshComponent
 
 	static PyObject* GetPostProcessAnimBPLODThreshold(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_PostProcessAnimBPLODThreshold(), "PostProcessAnimBPLODThreshold");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_PostProcessAnimBPLODThreshold(), "PostProcessAnimBPLODThreshold");
 	}
 
 	static int SetPostProcessAnimBPLODThreshold(FUPyWrapperSkeletalMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_PostProcessAnimBPLODThreshold(), "PostProcessAnimBPLODThreshold");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_PostProcessAnimBPLODThreshold(), "PostProcessAnimBPLODThreshold");
 	}
 
 	static PyObject* GetPostProcessAnimInstance(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
@@ -724,12 +724,12 @@ struct FGetSets_SkeletalMeshComponent
 
 	static PyObject* GetSkeletalMeshAsset(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_SkeletalMeshAsset(), "SkeletalMeshAsset");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_SkeletalMeshAsset(), "SkeletalMeshAsset");
 	}
 
 	static int SetSkeletalMeshAsset(FUPyWrapperSkeletalMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_SkeletalMeshAsset(), "SkeletalMeshAsset");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_SkeletalMeshAsset(), "SkeletalMeshAsset");
 	}
 
 #endif
@@ -753,12 +753,12 @@ struct FGetSets_SkeletalMeshComponent
 
 	static PyObject* GetTeleportDistanceThreshold(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_TeleportDistanceThreshold(), "TeleportDistanceThreshold");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_TeleportDistanceThreshold(), "TeleportDistanceThreshold");
 	}
 
 	static int SetTeleportDistanceThreshold(FUPyWrapperSkeletalMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_TeleportDistanceThreshold(), "TeleportDistanceThreshold");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_TeleportDistanceThreshold(), "TeleportDistanceThreshold");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_TeleportRotationThreshold()
@@ -781,12 +781,12 @@ struct FGetSets_SkeletalMeshComponent
 
 	static PyObject* GetTeleportRotationThreshold(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_TeleportRotationThreshold(), "TeleportRotationThreshold");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_TeleportRotationThreshold(), "TeleportRotationThreshold");
 	}
 
 	static int SetTeleportRotationThreshold(FUPyWrapperSkeletalMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_TeleportRotationThreshold(), "TeleportRotationThreshold");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_TeleportRotationThreshold(), "TeleportRotationThreshold");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_bAllowAnimCurveEvaluation()
@@ -809,12 +809,12 @@ struct FGetSets_SkeletalMeshComponent
 
 	static PyObject* GetbAllowAnimCurveEvaluation(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bAllowAnimCurveEvaluation(), "bAllowAnimCurveEvaluation");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bAllowAnimCurveEvaluation(), "bAllowAnimCurveEvaluation");
 	}
 
 	static int SetbAllowAnimCurveEvaluation(FUPyWrapperSkeletalMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bAllowAnimCurveEvaluation(), "bAllowAnimCurveEvaluation");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bAllowAnimCurveEvaluation(), "bAllowAnimCurveEvaluation");
 	}
 
 	static PyObject* GetbAllowClothActors(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
@@ -956,12 +956,12 @@ struct FGetSets_SkeletalMeshComponent
 
 	static PyObject* GetbDisablePostProcessBlueprint(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bDisablePostProcessBlueprint(), "bDisablePostProcessBlueprint");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bDisablePostProcessBlueprint(), "bDisablePostProcessBlueprint");
 	}
 
 	static int SetbDisablePostProcessBlueprint(FUPyWrapperSkeletalMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bDisablePostProcessBlueprint(), "bDisablePostProcessBlueprint");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bDisablePostProcessBlueprint(), "bDisablePostProcessBlueprint");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_bDisableRigidBodyAnimNode()
@@ -984,12 +984,12 @@ struct FGetSets_SkeletalMeshComponent
 
 	static PyObject* GetbDisableRigidBodyAnimNode(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bDisableRigidBodyAnimNode(), "bDisableRigidBodyAnimNode");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bDisableRigidBodyAnimNode(), "bDisableRigidBodyAnimNode");
 	}
 
 	static int SetbDisableRigidBodyAnimNode(FUPyWrapperSkeletalMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bDisableRigidBodyAnimNode(), "bDisableRigidBodyAnimNode");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bDisableRigidBodyAnimNode(), "bDisableRigidBodyAnimNode");
 	}
 
 	static PyObject* GetbEnableAnimation(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
@@ -1080,12 +1080,12 @@ struct FGetSets_SkeletalMeshComponent
 
 	static PyObject* GetbFilteredAnimCurvesIsAllowList(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bFilteredAnimCurvesIsAllowList(), "bFilteredAnimCurvesIsAllowList");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bFilteredAnimCurvesIsAllowList(), "bFilteredAnimCurvesIsAllowList");
 	}
 
 	static int SetbFilteredAnimCurvesIsAllowList(FUPyWrapperSkeletalMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bFilteredAnimCurvesIsAllowList(), "bFilteredAnimCurvesIsAllowList");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bFilteredAnimCurvesIsAllowList(), "bFilteredAnimCurvesIsAllowList");
 	}
 
 	static PyObject* GetbForceCollisionUpdate(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
@@ -1176,12 +1176,12 @@ struct FGetSets_SkeletalMeshComponent
 
 	static PyObject* GetbNeedsQueuedAnimEventsDispatched(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bNeedsQueuedAnimEventsDispatched(), "bNeedsQueuedAnimEventsDispatched");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bNeedsQueuedAnimEventsDispatched(), "bNeedsQueuedAnimEventsDispatched");
 	}
 
 	static int SetbNeedsQueuedAnimEventsDispatched(FUPyWrapperSkeletalMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bNeedsQueuedAnimEventsDispatched(), "bNeedsQueuedAnimEventsDispatched");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bNeedsQueuedAnimEventsDispatched(), "bNeedsQueuedAnimEventsDispatched");
 	}
 
 	static PyObject* GetbNoSkeletonUpdate(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
@@ -1256,12 +1256,12 @@ struct FGetSets_SkeletalMeshComponent
 
 	static PyObject* GetbOverrideDefaultAnimatingRig(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bOverrideDefaultAnimatingRig(), "bOverrideDefaultAnimatingRig");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bOverrideDefaultAnimatingRig(), "bOverrideDefaultAnimatingRig");
 	}
 
 	static int SetbOverrideDefaultAnimatingRig(FUPyWrapperSkeletalMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bOverrideDefaultAnimatingRig(), "bOverrideDefaultAnimatingRig");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bOverrideDefaultAnimatingRig(), "bOverrideDefaultAnimatingRig");
 	}
 
 #endif
@@ -1405,12 +1405,12 @@ struct FGetSets_SkeletalMeshComponent
 
 	static PyObject* GetbUpdateAnimationInEditor(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bUpdateAnimationInEditor(), "bUpdateAnimationInEditor");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bUpdateAnimationInEditor(), "bUpdateAnimationInEditor");
 	}
 
 	static int SetbUpdateAnimationInEditor(FUPyWrapperSkeletalMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bUpdateAnimationInEditor(), "bUpdateAnimationInEditor");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bUpdateAnimationInEditor(), "bUpdateAnimationInEditor");
 	}
 
 #endif
@@ -1435,12 +1435,12 @@ struct FGetSets_SkeletalMeshComponent
 
 	static PyObject* GetbUpdateClothInEditor(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bUpdateClothInEditor(), "bUpdateClothInEditor");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bUpdateClothInEditor(), "bUpdateClothInEditor");
 	}
 
 	static int SetbUpdateClothInEditor(FUPyWrapperSkeletalMeshComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bUpdateClothInEditor(), "bUpdateClothInEditor");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bUpdateClothInEditor(), "bUpdateClothInEditor");
 	}
 
 #endif
@@ -4983,7 +4983,7 @@ namespace UPyConversion
 	{
 		if (FUPyWrapperSkeletalMeshComponent* PySkeletalMeshComponent = UPyIsSkeletalMeshComponent(PyObj))
 		{
-			if (!FUPyWrapperObjectBase::ValidateInternalState(PySkeletalMeshComponent))
+			if (!FUPyWrapperObject::ValidateInternalState(PySkeletalMeshComponent))
 			{
 				return FUPyConversionResult::Failure();
 			}

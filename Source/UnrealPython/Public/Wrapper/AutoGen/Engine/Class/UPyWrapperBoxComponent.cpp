@@ -36,12 +36,12 @@ struct FGetSets_BoxComponent
 
 	static PyObject* GetBoxExtent(FUPyWrapperBoxComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_BoxExtent(), "BoxExtent");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_BoxExtent(), "BoxExtent");
 	}
 
 	static int SetBoxExtent(FUPyWrapperBoxComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_BoxExtent(), "BoxExtent");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_BoxExtent(), "BoxExtent");
 	}
 
 };
@@ -170,7 +170,7 @@ namespace UPyConversion
 	{
 		if (FUPyWrapperBoxComponent* PyBoxComponent = UPyIsBoxComponent(PyObj))
 		{
-			if (!FUPyWrapperObjectBase::ValidateInternalState(PyBoxComponent))
+			if (!FUPyWrapperObject::ValidateInternalState(PyBoxComponent))
 			{
 				return FUPyConversionResult::Failure();
 			}

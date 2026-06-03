@@ -21263,7 +21263,7 @@ namespace UPyConversion
 	{
 		if (FUPyWrapperKismetMathLibrary* PyKismetMathLibrary = UPyIsKismetMathLibrary(PyObj))
 		{
-			if (!FUPyWrapperObjectBase::ValidateInternalState(PyKismetMathLibrary))
+			if (!FUPyWrapperObject::ValidateInternalState(PyKismetMathLibrary))
 			{
 				return FUPyConversionResult::Failure();
 			}

@@ -14,7 +14,7 @@ extern PyTypeObject UPyWrapperSkeletalMeshComponentType;
 /** Initialize the UPyWrapperSkeletalMeshComponentType types and add them to the given Python module */
 void InitializeUPyWrapperSkeletalMeshComponent(UPyGenUtil::FNativePythonModule& ModuleInfo);
 
-class FUPyWrapperSkeletalMeshComponent: public FUPyWrapperObjectBase 
+class FUPyWrapperSkeletalMeshComponent: public FUPyWrapperObject
 {
 public:
 

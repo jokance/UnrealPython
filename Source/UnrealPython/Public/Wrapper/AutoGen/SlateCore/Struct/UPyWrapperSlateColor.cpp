@@ -40,7 +40,7 @@ struct FGetSets_SlateColor
 
 	static PyObject* GetColorUseRule(FUPyWrapperSlateColor* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperSlateColor::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -49,7 +49,7 @@ struct FGetSets_SlateColor
 
 	static int SetColorUseRule(FUPyWrapperSlateColor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperSlateColor::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}
@@ -76,7 +76,7 @@ struct FGetSets_SlateColor
 
 	static PyObject* GetSpecifiedColor(FUPyWrapperSlateColor* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperSlateColor::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -85,7 +85,7 @@ struct FGetSets_SlateColor
 
 	static int SetSpecifiedColor(FUPyWrapperSlateColor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperSlateColor::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}

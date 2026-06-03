@@ -14,7 +14,7 @@ extern PyTypeObject UPyWrapperGameViewportSubsystemType;
 /** Initialize the UPyWrapperGameViewportSubsystemType types and add them to the given Python module */
 void InitializeUPyWrapperGameViewportSubsystem(UPyGenUtil::FNativePythonModule& ModuleInfo);
 
-class FUPyWrapperGameViewportSubsystem: public FUPyWrapperObjectBase 
+class FUPyWrapperGameViewportSubsystem: public FUPyWrapperObject
 {
 public:
 

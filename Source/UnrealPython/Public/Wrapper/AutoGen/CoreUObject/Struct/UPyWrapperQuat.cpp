@@ -21,7 +21,7 @@ struct FGetSets_Quat
 {
 	static PyObject* GetW(FUPyWrapperQuat* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperQuat::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -30,7 +30,7 @@ struct FGetSets_Quat
 
 	static int SetW(FUPyWrapperQuat* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperQuat::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}
@@ -44,7 +44,7 @@ struct FGetSets_Quat
 
 	static PyObject* GetX(FUPyWrapperQuat* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperQuat::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -53,7 +53,7 @@ struct FGetSets_Quat
 
 	static int SetX(FUPyWrapperQuat* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperQuat::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}
@@ -67,7 +67,7 @@ struct FGetSets_Quat
 
 	static PyObject* GetY(FUPyWrapperQuat* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperQuat::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -76,7 +76,7 @@ struct FGetSets_Quat
 
 	static int SetY(FUPyWrapperQuat* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperQuat::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}
@@ -90,7 +90,7 @@ struct FGetSets_Quat
 
 	static PyObject* GetZ(FUPyWrapperQuat* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperQuat::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -99,7 +99,7 @@ struct FGetSets_Quat
 
 	static int SetZ(FUPyWrapperQuat* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperQuat::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}

@@ -14,7 +14,7 @@ extern PyTypeObject UPyWrapperPlayerCameraManagerType;
 /** Initialize the UPyWrapperPlayerCameraManagerType types and add them to the given Python module */
 void InitializeUPyWrapperPlayerCameraManager(UPyGenUtil::FNativePythonModule& ModuleInfo);
 
-class FUPyWrapperPlayerCameraManager: public FUPyWrapperObjectBase 
+class FUPyWrapperPlayerCameraManager: public FUPyWrapperObject
 {
 public:
 

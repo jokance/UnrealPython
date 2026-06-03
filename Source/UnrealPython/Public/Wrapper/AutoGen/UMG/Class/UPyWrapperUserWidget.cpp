@@ -55,12 +55,12 @@ struct FGetSets_UserWidget
 
 	static PyObject* GetAnimationCallbacks(FUPyWrapperUserWidget* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_AnimationCallbacks(), "AnimationCallbacks");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_AnimationCallbacks(), "AnimationCallbacks");
 	}
 
 	static int SetAnimationCallbacks(FUPyWrapperUserWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_AnimationCallbacks(), "AnimationCallbacks");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_AnimationCallbacks(), "AnimationCallbacks");
 	}
 
 	static PyObject* GetAnimationTickManager(FUPyWrapperUserWidget* InSelf, void* InClosure)
@@ -98,12 +98,12 @@ struct FGetSets_UserWidget
 
 	static PyObject* GetColorAndOpacityDelegate(FUPyWrapperUserWidget* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ColorAndOpacityDelegate(), "ColorAndOpacityDelegate");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ColorAndOpacityDelegate(), "ColorAndOpacityDelegate");
 	}
 
 	static int SetColorAndOpacityDelegate(FUPyWrapperUserWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ColorAndOpacityDelegate(), "ColorAndOpacityDelegate");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ColorAndOpacityDelegate(), "ColorAndOpacityDelegate");
 	}
 
 #if WITH_EDITOR
@@ -160,7 +160,7 @@ struct FGetSets_UserWidget
 
 	static PyObject* GetDesiredFocusWidget(FUPyWrapperUserWidget* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_DesiredFocusWidget(), "DesiredFocusWidget");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_DesiredFocusWidget(), "DesiredFocusWidget");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_Extensions()
@@ -183,12 +183,12 @@ struct FGetSets_UserWidget
 
 	static PyObject* GetExtensions(FUPyWrapperUserWidget* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_Extensions(), "Extensions");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_Extensions(), "Extensions");
 	}
 
 	static int SetExtensions(FUPyWrapperUserWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_Extensions(), "Extensions");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_Extensions(), "Extensions");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_ForegroundColorDelegate()
@@ -211,12 +211,12 @@ struct FGetSets_UserWidget
 
 	static PyObject* GetForegroundColorDelegate(FUPyWrapperUserWidget* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ForegroundColorDelegate(), "ForegroundColorDelegate");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ForegroundColorDelegate(), "ForegroundColorDelegate");
 	}
 
 	static int SetForegroundColorDelegate(FUPyWrapperUserWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ForegroundColorDelegate(), "ForegroundColorDelegate");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ForegroundColorDelegate(), "ForegroundColorDelegate");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_InputComponent()
@@ -239,12 +239,12 @@ struct FGetSets_UserWidget
 
 	static PyObject* GetInputComponent(FUPyWrapperUserWidget* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_InputComponent(), "InputComponent");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_InputComponent(), "InputComponent");
 	}
 
 	static int SetInputComponent(FUPyWrapperUserWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_InputComponent(), "InputComponent");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_InputComponent(), "InputComponent");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_NamedSlotBindings()
@@ -267,12 +267,12 @@ struct FGetSets_UserWidget
 
 	static PyObject* GetNamedSlotBindings(FUPyWrapperUserWidget* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_NamedSlotBindings(), "NamedSlotBindings");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_NamedSlotBindings(), "NamedSlotBindings");
 	}
 
 	static int SetNamedSlotBindings(FUPyWrapperUserWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_NamedSlotBindings(), "NamedSlotBindings");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_NamedSlotBindings(), "NamedSlotBindings");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnVisibilityChanged()
@@ -295,12 +295,12 @@ struct FGetSets_UserWidget
 
 	static PyObject* GetOnVisibilityChanged(FUPyWrapperUserWidget* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnVisibilityChanged(), "OnVisibilityChanged");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnVisibilityChanged(), "OnVisibilityChanged");
 	}
 
 	static int SetOnVisibilityChanged(FUPyWrapperUserWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnVisibilityChanged(), "OnVisibilityChanged");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnVisibilityChanged(), "OnVisibilityChanged");
 	}
 
 #if WITH_EDITOR
@@ -352,7 +352,7 @@ struct FGetSets_UserWidget
 
 	static int SetQueuedWidgetAnimationTransitions(FUPyWrapperUserWidget* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_QueuedWidgetAnimationTransitions(), "QueuedWidgetAnimationTransitions");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_QueuedWidgetAnimationTransitions(), "QueuedWidgetAnimationTransitions");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_TickFrequency()
@@ -375,7 +375,7 @@ struct FGetSets_UserWidget
 
 	static PyObject* GetTickFrequency(FUPyWrapperUserWidget* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_TickFrequency(), "TickFrequency");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_TickFrequency(), "TickFrequency");
 	}
 
 	static PyObject* GetWidgetTree(FUPyWrapperUserWidget* InSelf, void* InClosure)
@@ -3271,7 +3271,7 @@ namespace UPyConversion
 	{
 		if (FUPyWrapperUserWidget* PyUserWidget = UPyIsUserWidget(PyObj))
 		{
-			if (!FUPyWrapperObjectBase::ValidateInternalState(PyUserWidget))
+			if (!FUPyWrapperObject::ValidateInternalState(PyUserWidget))
 			{
 				return FUPyConversionResult::Failure();
 			}

@@ -72,12 +72,12 @@ struct FGetSets_GameModeBase
 
 	static PyObject* GetGameNetDriverReplicationSystem(FUPyWrapperGameModeBase* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_GameNetDriverReplicationSystem(), "GameNetDriverReplicationSystem");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_GameNetDriverReplicationSystem(), "GameNetDriverReplicationSystem");
 	}
 
 	static int SetGameNetDriverReplicationSystem(FUPyWrapperGameModeBase* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_GameNetDriverReplicationSystem(), "GameNetDriverReplicationSystem");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_GameNetDriverReplicationSystem(), "GameNetDriverReplicationSystem");
 	}
 
 	static PyObject* GetGameSession(FUPyWrapperGameModeBase* InSelf, void* InClosure)
@@ -280,12 +280,12 @@ struct FGetSets_GameModeBase
 
 	static PyObject* GetbPauseable(FUPyWrapperGameModeBase* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bPauseable(), "bPauseable");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bPauseable(), "bPauseable");
 	}
 
 	static int SetbPauseable(FUPyWrapperGameModeBase* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bPauseable(), "bPauseable");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bPauseable(), "bPauseable");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_bStartPlayersAsSpectators()
@@ -308,12 +308,12 @@ struct FGetSets_GameModeBase
 
 	static PyObject* GetbStartPlayersAsSpectators(FUPyWrapperGameModeBase* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bStartPlayersAsSpectators(), "bStartPlayersAsSpectators");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bStartPlayersAsSpectators(), "bStartPlayersAsSpectators");
 	}
 
 	static int SetbStartPlayersAsSpectators(FUPyWrapperGameModeBase* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bStartPlayersAsSpectators(), "bStartPlayersAsSpectators");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bStartPlayersAsSpectators(), "bStartPlayersAsSpectators");
 	}
 
 	static PyObject* GetbUseSeamlessTravel(FUPyWrapperGameModeBase* InSelf, void* InClosure)
@@ -1132,7 +1132,7 @@ namespace UPyConversion
 	{
 		if (FUPyWrapperGameModeBase* PyGameModeBase = UPyIsGameModeBase(PyObj))
 		{
-			if (!FUPyWrapperObjectBase::ValidateInternalState(PyGameModeBase))
+			if (!FUPyWrapperObject::ValidateInternalState(PyGameModeBase))
 			{
 				return FUPyConversionResult::Failure();
 			}

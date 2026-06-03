@@ -13825,7 +13825,7 @@ namespace UPyConversion
 	{
 		if (FUPyWrapperKismetSystemLibrary* PyKismetSystemLibrary = UPyIsKismetSystemLibrary(PyObj))
 		{
-			if (!FUPyWrapperObjectBase::ValidateInternalState(PyKismetSystemLibrary))
+			if (!FUPyWrapperObject::ValidateInternalState(PyKismetSystemLibrary))
 			{
 				return FUPyConversionResult::Failure();
 			}

@@ -14,7 +14,7 @@ extern PyTypeObject UPyWrapperGameModeBaseType;
 /** Initialize the UPyWrapperGameModeBaseType types and add them to the given Python module */
 void InitializeUPyWrapperGameModeBase(UPyGenUtil::FNativePythonModule& ModuleInfo);
 
-class FUPyWrapperGameModeBase: public FUPyWrapperObjectBase 
+class FUPyWrapperGameModeBase: public FUPyWrapperObject
 {
 public:
 

@@ -102,12 +102,12 @@ struct FGetSets_Pawn
 
 	static PyObject* GetControlInputVector(FUPyWrapperPawn* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ControlInputVector(), "ControlInputVector");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ControlInputVector(), "ControlInputVector");
 	}
 
 	static int SetControlInputVector(FUPyWrapperPawn* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ControlInputVector(), "ControlInputVector");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ControlInputVector(), "ControlInputVector");
 	}
 
 	static PyObject* GetController(FUPyWrapperPawn* InSelf, void* InClosure)
@@ -145,12 +145,12 @@ struct FGetSets_Pawn
 
 	static PyObject* GetLastControlInputVector(FUPyWrapperPawn* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_LastControlInputVector(), "LastControlInputVector");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_LastControlInputVector(), "LastControlInputVector");
 	}
 
 	static int SetLastControlInputVector(FUPyWrapperPawn* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_LastControlInputVector(), "LastControlInputVector");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_LastControlInputVector(), "LastControlInputVector");
 	}
 
 	static PyObject* GetLastHitBy(FUPyWrapperPawn* InSelf, void* InClosure)
@@ -188,7 +188,7 @@ struct FGetSets_Pawn
 
 	static PyObject* GetOverrideInputComponentClass(FUPyWrapperPawn* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OverrideInputComponentClass(), "OverrideInputComponentClass");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OverrideInputComponentClass(), "OverrideInputComponentClass");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_PlayerState()
@@ -211,12 +211,12 @@ struct FGetSets_Pawn
 
 	static PyObject* GetPlayerState(FUPyWrapperPawn* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_PlayerState(), "PlayerState");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_PlayerState(), "PlayerState");
 	}
 
 	static int SetPlayerState(FUPyWrapperPawn* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_PlayerState(), "PlayerState");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_PlayerState(), "PlayerState");
 	}
 
 	static PyObject* GetPreviousController(FUPyWrapperPawn* InSelf, void* InClosure)
@@ -254,12 +254,12 @@ struct FGetSets_Pawn
 
 	static PyObject* GetReceiveControllerChangedDelegate(FUPyWrapperPawn* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ReceiveControllerChangedDelegate(), "ReceiveControllerChangedDelegate");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ReceiveControllerChangedDelegate(), "ReceiveControllerChangedDelegate");
 	}
 
 	static int SetReceiveControllerChangedDelegate(FUPyWrapperPawn* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ReceiveControllerChangedDelegate(), "ReceiveControllerChangedDelegate");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ReceiveControllerChangedDelegate(), "ReceiveControllerChangedDelegate");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_ReceiveRestartedDelegate()
@@ -282,12 +282,12 @@ struct FGetSets_Pawn
 
 	static PyObject* GetReceiveRestartedDelegate(FUPyWrapperPawn* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ReceiveRestartedDelegate(), "ReceiveRestartedDelegate");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ReceiveRestartedDelegate(), "ReceiveRestartedDelegate");
 	}
 
 	static int SetReceiveRestartedDelegate(FUPyWrapperPawn* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ReceiveRestartedDelegate(), "ReceiveRestartedDelegate");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ReceiveRestartedDelegate(), "ReceiveRestartedDelegate");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_RemoteViewPitch16()
@@ -310,12 +310,12 @@ struct FGetSets_Pawn
 
 	static PyObject* GetRemoteViewPitch16(FUPyWrapperPawn* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_RemoteViewPitch16(), "RemoteViewPitch16");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_RemoteViewPitch16(), "RemoteViewPitch16");
 	}
 
 	static int SetRemoteViewPitch16(FUPyWrapperPawn* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_RemoteViewPitch16(), "RemoteViewPitch16");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_RemoteViewPitch16(), "RemoteViewPitch16");
 	}
 
 	static PyObject* GetbCanAffectNavigationGeneration(FUPyWrapperPawn* InSelf, void* InClosure)
@@ -355,12 +355,12 @@ struct FGetSets_Pawn
 
 	static PyObject* GetbIsLocalViewTarget(FUPyWrapperPawn* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bIsLocalViewTarget(), "bIsLocalViewTarget");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bIsLocalViewTarget(), "bIsLocalViewTarget");
 	}
 
 	static int SetbIsLocalViewTarget(FUPyWrapperPawn* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bIsLocalViewTarget(), "bIsLocalViewTarget");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bIsLocalViewTarget(), "bIsLocalViewTarget");
 	}
 
 	static PyObject* GetbUseControllerRotationPitch(FUPyWrapperPawn* InSelf, void* InClosure)
@@ -1021,7 +1021,7 @@ namespace UPyConversion
 	{
 		if (FUPyWrapperPawn* PyPawn = UPyIsPawn(PyObj))
 		{
-			if (!FUPyWrapperObjectBase::ValidateInternalState(PyPawn))
+			if (!FUPyWrapperObject::ValidateInternalState(PyPawn))
 			{
 				return FUPyConversionResult::Failure();
 			}

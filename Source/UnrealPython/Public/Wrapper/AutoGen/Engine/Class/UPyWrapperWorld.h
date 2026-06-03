@@ -14,7 +14,7 @@ extern PyTypeObject UPyWrapperWorldType;
 /** Initialize the UPyWrapperWorldType types and add them to the given Python module */
 void InitializeUPyWrapperWorld(UPyGenUtil::FNativePythonModule& ModuleInfo);
 
-class FUPyWrapperWorld: public FUPyWrapperObjectBase 
+class FUPyWrapperWorld: public FUPyWrapperObject
 {
 public:
 

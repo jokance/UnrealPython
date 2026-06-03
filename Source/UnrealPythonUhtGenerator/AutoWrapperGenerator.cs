@@ -2524,7 +2524,7 @@ internal static class AutoWrapperGenerator
 
 			helperBuilder.AppendLine($"\tstatic PyObject* {getterName}({cppType}* InSelf, void* InClosure)");
 			helperBuilder.AppendLine("\t{");
-			helperBuilder.AppendLine("\t\tif (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))");
+			helperBuilder.AppendLine($"\t\tif (!{cppType}::ValidateInternalState(InSelf))");
 			helperBuilder.AppendLine("\t\t{");
 			helperBuilder.AppendLine("\t\t\treturn nullptr;");
 			helperBuilder.AppendLine("\t\t}");
@@ -2538,7 +2538,7 @@ internal static class AutoWrapperGenerator
 			{
 				helperBuilder.AppendLine($"\tstatic int {setterName}({cppType}* InSelf, PyObject* InValue, void* InClosure)");
 				helperBuilder.AppendLine("\t{");
-				helperBuilder.AppendLine("\t\tif (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))");
+				helperBuilder.AppendLine($"\t\tif (!{cppType}::ValidateInternalState(InSelf))");
 				helperBuilder.AppendLine("\t\t{");
 				helperBuilder.AppendLine("\t\t\treturn -1;");
 				helperBuilder.AppendLine("\t\t}");
@@ -3692,11 +3692,11 @@ internal static class AutoWrapperGenerator
 				else
 				{
 					getterBody =
-						$"return FUPyWrapperObjectBase::GetPropertyValue(InSelf, {propertyDefName}(), \"{pythonAttrNameLiteral}\");";
+						$"return FUPyWrapperObject::GetPropertyValue(InSelf, {propertyDefName}(), \"{pythonAttrNameLiteral}\");";
 				}
 
 				setterBody =
-					$"return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, {propertyDefName}(), \"{pythonAttrNameLiteral}\");";
+					$"return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, {propertyDefName}(), \"{pythonAttrNameLiteral}\");";
 			}
 
 			helperBuilder.AppendLine($"\tstatic PyObject* {getterName}({cppType}* InSelf, void* InClosure)");

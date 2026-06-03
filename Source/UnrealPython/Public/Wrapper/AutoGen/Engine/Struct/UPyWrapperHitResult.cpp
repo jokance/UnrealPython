@@ -19,7 +19,7 @@ struct FGetSets_HitResult
 {
 	static PyObject* GetBoneName(FUPyWrapperHitResult* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperHitResult::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -28,7 +28,7 @@ struct FGetSets_HitResult
 
 	static int SetBoneName(FUPyWrapperHitResult* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperHitResult::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}
@@ -60,7 +60,7 @@ struct FGetSets_HitResult
 
 	static PyObject* GetComponent(FUPyWrapperHitResult* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperHitResult::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -69,7 +69,7 @@ struct FGetSets_HitResult
 
 	static int SetComponent(FUPyWrapperHitResult* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperHitResult::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}
@@ -78,7 +78,7 @@ struct FGetSets_HitResult
 
 	static PyObject* GetDistance(FUPyWrapperHitResult* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperHitResult::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -87,7 +87,7 @@ struct FGetSets_HitResult
 
 	static int SetDistance(FUPyWrapperHitResult* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperHitResult::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}
@@ -101,7 +101,7 @@ struct FGetSets_HitResult
 
 	static PyObject* GetElementIndex(FUPyWrapperHitResult* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperHitResult::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -110,7 +110,7 @@ struct FGetSets_HitResult
 
 	static int SetElementIndex(FUPyWrapperHitResult* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperHitResult::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}
@@ -124,7 +124,7 @@ struct FGetSets_HitResult
 
 	static PyObject* GetFaceIndex(FUPyWrapperHitResult* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperHitResult::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -133,7 +133,7 @@ struct FGetSets_HitResult
 
 	static int SetFaceIndex(FUPyWrapperHitResult* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperHitResult::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}
@@ -147,7 +147,7 @@ struct FGetSets_HitResult
 
 	static PyObject* GetHitObjectHandle(FUPyWrapperHitResult* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperHitResult::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -156,7 +156,7 @@ struct FGetSets_HitResult
 
 	static int SetHitObjectHandle(FUPyWrapperHitResult* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperHitResult::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}
@@ -170,7 +170,7 @@ struct FGetSets_HitResult
 
 	static PyObject* GetImpactNormal(FUPyWrapperHitResult* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperHitResult::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -179,7 +179,7 @@ struct FGetSets_HitResult
 
 	static int SetImpactNormal(FUPyWrapperHitResult* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperHitResult::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}
@@ -193,7 +193,7 @@ struct FGetSets_HitResult
 
 	static PyObject* GetImpactPoint(FUPyWrapperHitResult* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperHitResult::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -202,7 +202,7 @@ struct FGetSets_HitResult
 
 	static int SetImpactPoint(FUPyWrapperHitResult* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperHitResult::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}
@@ -216,7 +216,7 @@ struct FGetSets_HitResult
 
 	static PyObject* GetItem(FUPyWrapperHitResult* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperHitResult::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -225,7 +225,7 @@ struct FGetSets_HitResult
 
 	static int SetItem(FUPyWrapperHitResult* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperHitResult::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}
@@ -239,7 +239,7 @@ struct FGetSets_HitResult
 
 	static PyObject* GetLocation(FUPyWrapperHitResult* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperHitResult::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -248,7 +248,7 @@ struct FGetSets_HitResult
 
 	static int SetLocation(FUPyWrapperHitResult* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperHitResult::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}
@@ -262,7 +262,7 @@ struct FGetSets_HitResult
 
 	static PyObject* GetMyBoneName(FUPyWrapperHitResult* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperHitResult::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -271,7 +271,7 @@ struct FGetSets_HitResult
 
 	static int SetMyBoneName(FUPyWrapperHitResult* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperHitResult::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}
@@ -285,7 +285,7 @@ struct FGetSets_HitResult
 
 	static PyObject* GetMyItem(FUPyWrapperHitResult* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperHitResult::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -294,7 +294,7 @@ struct FGetSets_HitResult
 
 	static int SetMyItem(FUPyWrapperHitResult* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperHitResult::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}
@@ -308,7 +308,7 @@ struct FGetSets_HitResult
 
 	static PyObject* GetNormal(FUPyWrapperHitResult* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperHitResult::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -317,7 +317,7 @@ struct FGetSets_HitResult
 
 	static int SetNormal(FUPyWrapperHitResult* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperHitResult::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}
@@ -331,7 +331,7 @@ struct FGetSets_HitResult
 
 	static PyObject* GetPenetrationDepth(FUPyWrapperHitResult* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperHitResult::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -340,7 +340,7 @@ struct FGetSets_HitResult
 
 	static int SetPenetrationDepth(FUPyWrapperHitResult* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperHitResult::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}
@@ -372,7 +372,7 @@ struct FGetSets_HitResult
 
 	static PyObject* GetPhysMaterial(FUPyWrapperHitResult* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperHitResult::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -381,7 +381,7 @@ struct FGetSets_HitResult
 
 	static int SetPhysMaterial(FUPyWrapperHitResult* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperHitResult::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}
@@ -390,7 +390,7 @@ struct FGetSets_HitResult
 
 	static PyObject* GetTime(FUPyWrapperHitResult* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperHitResult::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -399,7 +399,7 @@ struct FGetSets_HitResult
 
 	static int SetTime(FUPyWrapperHitResult* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperHitResult::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}
@@ -413,7 +413,7 @@ struct FGetSets_HitResult
 
 	static PyObject* GetTraceEnd(FUPyWrapperHitResult* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperHitResult::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -422,7 +422,7 @@ struct FGetSets_HitResult
 
 	static int SetTraceEnd(FUPyWrapperHitResult* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperHitResult::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}
@@ -436,7 +436,7 @@ struct FGetSets_HitResult
 
 	static PyObject* GetTraceStart(FUPyWrapperHitResult* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperHitResult::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -445,7 +445,7 @@ struct FGetSets_HitResult
 
 	static int SetTraceStart(FUPyWrapperHitResult* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperHitResult::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}
@@ -459,7 +459,7 @@ struct FGetSets_HitResult
 
 	static PyObject* GetbBlockingHit(FUPyWrapperHitResult* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperHitResult::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -468,7 +468,7 @@ struct FGetSets_HitResult
 
 	static int SetbBlockingHit(FUPyWrapperHitResult* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperHitResult::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}
@@ -484,7 +484,7 @@ struct FGetSets_HitResult
 
 	static PyObject* GetbStartPenetrating(FUPyWrapperHitResult* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperHitResult::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -493,7 +493,7 @@ struct FGetSets_HitResult
 
 	static int SetbStartPenetrating(FUPyWrapperHitResult* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperHitResult::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}

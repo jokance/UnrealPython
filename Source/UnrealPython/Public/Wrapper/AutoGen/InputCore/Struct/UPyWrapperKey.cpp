@@ -38,7 +38,7 @@ struct FGetSets_Key
 
 	static PyObject* GetKeyName(FUPyWrapperKey* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperKey::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -47,7 +47,7 @@ struct FGetSets_Key
 
 	static int SetKeyName(FUPyWrapperKey* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperKey::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}

@@ -20,7 +20,7 @@ struct FGetSets_Box
 {
 	static PyObject* GetIsValid(FUPyWrapperBox* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperBox::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -29,7 +29,7 @@ struct FGetSets_Box
 
 	static int SetIsValid(FUPyWrapperBox* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperBox::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}
@@ -45,7 +45,7 @@ struct FGetSets_Box
 
 	static PyObject* GetMax(FUPyWrapperBox* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperBox::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -54,7 +54,7 @@ struct FGetSets_Box
 
 	static int SetMax(FUPyWrapperBox* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperBox::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}
@@ -68,7 +68,7 @@ struct FGetSets_Box
 
 	static PyObject* GetMin(FUPyWrapperBox* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperBox::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -77,7 +77,7 @@ struct FGetSets_Box
 
 	static int SetMin(FUPyWrapperBox* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperBox::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}

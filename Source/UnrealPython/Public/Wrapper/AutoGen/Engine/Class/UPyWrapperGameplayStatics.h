@@ -14,7 +14,7 @@ extern PyTypeObject UPyWrapperGameplayStaticsType;
 /** Initialize the UPyWrapperGameplayStaticsType types and add them to the given Python module */
 void InitializeUPyWrapperGameplayStatics(UPyGenUtil::FNativePythonModule& ModuleInfo);
 
-class FUPyWrapperGameplayStatics: public FUPyWrapperObjectBase 
+class FUPyWrapperGameplayStatics: public FUPyWrapperObject
 {
 public:
 

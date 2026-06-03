@@ -37,12 +37,12 @@ struct FGetSets_GameInstance
 
 	static PyObject* GetLocalPlayers(FUPyWrapperGameInstance* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_LocalPlayers(), "LocalPlayers");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_LocalPlayers(), "LocalPlayers");
 	}
 
 	static int SetLocalPlayers(FUPyWrapperGameInstance* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_LocalPlayers(), "LocalPlayers");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_LocalPlayers(), "LocalPlayers");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnInputDeviceConnectionChange()
@@ -65,12 +65,12 @@ struct FGetSets_GameInstance
 
 	static PyObject* GetOnInputDeviceConnectionChange(FUPyWrapperGameInstance* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnInputDeviceConnectionChange(), "OnInputDeviceConnectionChange");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnInputDeviceConnectionChange(), "OnInputDeviceConnectionChange");
 	}
 
 	static int SetOnInputDeviceConnectionChange(FUPyWrapperGameInstance* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnInputDeviceConnectionChange(), "OnInputDeviceConnectionChange");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnInputDeviceConnectionChange(), "OnInputDeviceConnectionChange");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnPawnControllerChangedDelegates()
@@ -93,12 +93,12 @@ struct FGetSets_GameInstance
 
 	static PyObject* GetOnPawnControllerChangedDelegates(FUPyWrapperGameInstance* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnPawnControllerChangedDelegates(), "OnPawnControllerChangedDelegates");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnPawnControllerChangedDelegates(), "OnPawnControllerChangedDelegates");
 	}
 
 	static int SetOnPawnControllerChangedDelegates(FUPyWrapperGameInstance* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnPawnControllerChangedDelegates(), "OnPawnControllerChangedDelegates");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnPawnControllerChangedDelegates(), "OnPawnControllerChangedDelegates");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnUserInputDevicePairingChange()
@@ -121,12 +121,12 @@ struct FGetSets_GameInstance
 
 	static PyObject* GetOnUserInputDevicePairingChange(FUPyWrapperGameInstance* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnUserInputDevicePairingChange(), "OnUserInputDevicePairingChange");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnUserInputDevicePairingChange(), "OnUserInputDevicePairingChange");
 	}
 
 	static int SetOnUserInputDevicePairingChange(FUPyWrapperGameInstance* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnUserInputDevicePairingChange(), "OnUserInputDevicePairingChange");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnUserInputDevicePairingChange(), "OnUserInputDevicePairingChange");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnlineSession()
@@ -149,12 +149,12 @@ struct FGetSets_GameInstance
 
 	static PyObject* GetOnlineSession(FUPyWrapperGameInstance* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnlineSession(), "OnlineSession");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnlineSession(), "OnlineSession");
 	}
 
 	static int SetOnlineSession(FUPyWrapperGameInstance* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnlineSession(), "OnlineSession");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnlineSession(), "OnlineSession");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_ReferencedObjects()
@@ -177,12 +177,12 @@ struct FGetSets_GameInstance
 
 	static PyObject* GetReferencedObjects(FUPyWrapperGameInstance* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ReferencedObjects(), "ReferencedObjects");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ReferencedObjects(), "ReferencedObjects");
 	}
 
 	static int SetReferencedObjects(FUPyWrapperGameInstance* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ReferencedObjects(), "ReferencedObjects");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ReferencedObjects(), "ReferencedObjects");
 	}
 
 };
@@ -370,7 +370,7 @@ namespace UPyConversion
 	{
 		if (FUPyWrapperGameInstance* PyGameInstance = UPyIsGameInstance(PyObj))
 		{
-			if (!FUPyWrapperObjectBase::ValidateInternalState(PyGameInstance))
+			if (!FUPyWrapperObject::ValidateInternalState(PyGameInstance))
 			{
 				return FUPyConversionResult::Failure();
 			}

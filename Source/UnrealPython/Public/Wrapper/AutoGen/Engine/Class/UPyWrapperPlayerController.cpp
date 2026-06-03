@@ -85,7 +85,7 @@ struct FGetSets_PlayerController
 
 	static int SetActiveForceFeedbackEffects(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ActiveForceFeedbackEffects(), "ActiveForceFeedbackEffects");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ActiveForceFeedbackEffects(), "ActiveForceFeedbackEffects");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_CachedConnectionPlayerId()
@@ -108,12 +108,12 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetCachedConnectionPlayerId(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_CachedConnectionPlayerId(), "CachedConnectionPlayerId");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_CachedConnectionPlayerId(), "CachedConnectionPlayerId");
 	}
 
 	static int SetCachedConnectionPlayerId(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_CachedConnectionPlayerId(), "CachedConnectionPlayerId");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_CachedConnectionPlayerId(), "CachedConnectionPlayerId");
 	}
 
 	static PyObject* GetCheatClass(FUPyWrapperPlayerController* InSelf, void* InClosure)
@@ -161,7 +161,7 @@ struct FGetSets_PlayerController
 
 	static int SetClickEventKeys(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ClickEventKeys(), "ClickEventKeys");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ClickEventKeys(), "ClickEventKeys");
 	}
 
 	static PyObject* GetClientCap(FUPyWrapperPlayerController* InSelf, void* InClosure)
@@ -199,12 +199,12 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetClientHandshakeId(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ClientHandshakeId(), "ClientHandshakeId");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ClientHandshakeId(), "ClientHandshakeId");
 	}
 
 	static int SetClientHandshakeId(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ClientHandshakeId(), "ClientHandshakeId");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ClientHandshakeId(), "ClientHandshakeId");
 	}
 
 	static PyObject* GetCurrentClickTraceChannel(FUPyWrapperPlayerController* InSelf, void* InClosure)
@@ -257,12 +257,12 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetCurrentTouchInterface(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_CurrentTouchInterface(), "CurrentTouchInterface");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_CurrentTouchInterface(), "CurrentTouchInterface");
 	}
 
 	static int SetCurrentTouchInterface(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_CurrentTouchInterface(), "CurrentTouchInterface");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_CurrentTouchInterface(), "CurrentTouchInterface");
 	}
 
 	static PyObject* GetDefaultClickTraceChannel(FUPyWrapperPlayerController* InSelf, void* InClosure)
@@ -335,7 +335,7 @@ struct FGetSets_PlayerController
 
 	static int SetHiddenActors(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_HiddenActors(), "HiddenActors");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_HiddenActors(), "HiddenActors");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_HiddenPrimitiveComponents()
@@ -363,7 +363,7 @@ struct FGetSets_PlayerController
 
 	static int SetHiddenPrimitiveComponents(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_HiddenPrimitiveComponents(), "HiddenPrimitiveComponents");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_HiddenPrimitiveComponents(), "HiddenPrimitiveComponents");
 	}
 
 	static PyObject* GetHitResultTraceDistance(FUPyWrapperPlayerController* InSelf, void* InClosure)
@@ -401,12 +401,12 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetInactiveStateInputComponent(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_InactiveStateInputComponent(), "InactiveStateInputComponent");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_InactiveStateInputComponent(), "InactiveStateInputComponent");
 	}
 
 	static int SetInactiveStateInputComponent(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_InactiveStateInputComponent(), "InactiveStateInputComponent");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_InactiveStateInputComponent(), "InactiveStateInputComponent");
 	}
 
 	static PyObject* GetLastCompletedSeamlessTravelCount(FUPyWrapperPlayerController* InSelf, void* InClosure)
@@ -534,7 +534,7 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetOverridePlayerInputClass(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OverridePlayerInputClass(), "OverridePlayerInputClass");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OverridePlayerInputClass(), "OverridePlayerInputClass");
 	}
 
 	static PyObject* GetPendingSwapConnection(FUPyWrapperPlayerController* InSelf, void* InClosure)
@@ -662,12 +662,12 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetSpawnLocation(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_SpawnLocation(), "SpawnLocation");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_SpawnLocation(), "SpawnLocation");
 	}
 
 	static int SetSpawnLocation(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_SpawnLocation(), "SpawnLocation");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_SpawnLocation(), "SpawnLocation");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_SpectatorPawn()
@@ -690,12 +690,12 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetSpectatorPawn(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_SpectatorPawn(), "SpectatorPawn");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_SpectatorPawn(), "SpectatorPawn");
 	}
 
 	static int SetSpectatorPawn(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_SpectatorPawn(), "SpectatorPawn");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_SpectatorPawn(), "SpectatorPawn");
 	}
 
 	static PyObject* GetStreamingSourceDebugColor(FUPyWrapperPlayerController* InSelf, void* InClosure)
@@ -753,7 +753,7 @@ struct FGetSets_PlayerController
 
 	static int SetStreamingSourceShapes(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_StreamingSourceShapes(), "StreamingSourceShapes");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_StreamingSourceShapes(), "StreamingSourceShapes");
 	}
 
 	static PyObject* GetTargetViewRotation(FUPyWrapperPlayerController* InSelf, void* InClosure)
@@ -927,12 +927,12 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetbIsLocalPlayerController(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bIsLocalPlayerController(), "bIsLocalPlayerController");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bIsLocalPlayerController(), "bIsLocalPlayerController");
 	}
 
 	static int SetbIsLocalPlayerController(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bIsLocalPlayerController(), "bIsLocalPlayerController");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bIsLocalPlayerController(), "bIsLocalPlayerController");
 	}
 
 	static PyObject* GetbPlayerIsWaiting(FUPyWrapperPlayerController* InSelf, void* InClosure)
@@ -972,12 +972,12 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetbShouldPerformFullTickWhenPaused(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bShouldPerformFullTickWhenPaused(), "bShouldPerformFullTickWhenPaused");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bShouldPerformFullTickWhenPaused(), "bShouldPerformFullTickWhenPaused");
 	}
 
 	static int SetbShouldPerformFullTickWhenPaused(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bShouldPerformFullTickWhenPaused(), "bShouldPerformFullTickWhenPaused");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bShouldPerformFullTickWhenPaused(), "bShouldPerformFullTickWhenPaused");
 	}
 
 	static PyObject* GetbShowMouseCursor(FUPyWrapperPlayerController* InSelf, void* InClosure)
@@ -5379,7 +5379,7 @@ namespace UPyConversion
 	{
 		if (FUPyWrapperPlayerController* PyPlayerController = UPyIsPlayerController(PyObj))
 		{
-			if (!FUPyWrapperObjectBase::ValidateInternalState(PyPlayerController))
+			if (!FUPyWrapperObject::ValidateInternalState(PyPlayerController))
 			{
 				return FUPyConversionResult::Failure();
 			}

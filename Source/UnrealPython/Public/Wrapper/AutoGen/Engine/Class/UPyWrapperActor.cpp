@@ -52,12 +52,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetActorGuid(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ActorGuid(), "ActorGuid");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ActorGuid(), "ActorGuid");
 	}
 
 	static int SetActorGuid(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ActorGuid(), "ActorGuid");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ActorGuid(), "ActorGuid");
 	}
 
 #endif
@@ -82,12 +82,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetActorInstanceGuid(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ActorInstanceGuid(), "ActorInstanceGuid");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ActorInstanceGuid(), "ActorInstanceGuid");
 	}
 
 	static int SetActorInstanceGuid(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ActorInstanceGuid(), "ActorInstanceGuid");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ActorInstanceGuid(), "ActorInstanceGuid");
 	}
 
 #endif
@@ -112,12 +112,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetActorLabel(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ActorLabel(), "ActorLabel");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ActorLabel(), "ActorLabel");
 	}
 
 	static int SetActorLabel(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ActorLabel(), "ActorLabel");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ActorLabel(), "ActorLabel");
 	}
 
 #endif
@@ -141,12 +141,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetAttachmentReplication(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_AttachmentReplication(), "AttachmentReplication");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_AttachmentReplication(), "AttachmentReplication");
 	}
 
 	static int SetAttachmentReplication(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_AttachmentReplication(), "AttachmentReplication");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_AttachmentReplication(), "AttachmentReplication");
 	}
 
 	static PyObject* GetAutoReceiveInput(FUPyWrapperActor* InSelf, void* InClosure)
@@ -189,7 +189,7 @@ struct FGetSets_Actor
 
 	static int SetBlueprintCreatedComponents(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_BlueprintCreatedComponents(), "BlueprintCreatedComponents");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_BlueprintCreatedComponents(), "BlueprintCreatedComponents");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_Children()
@@ -217,7 +217,7 @@ struct FGetSets_Actor
 
 	static int SetChildren(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_Children(), "Children");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_Children(), "Children");
 	}
 
 #if WITH_EDITOR
@@ -241,12 +241,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetContentBundleGuid(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ContentBundleGuid(), "ContentBundleGuid");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ContentBundleGuid(), "ContentBundleGuid");
 	}
 
 	static int SetContentBundleGuid(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ContentBundleGuid(), "ContentBundleGuid");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ContentBundleGuid(), "ContentBundleGuid");
 	}
 
 #endif
@@ -286,12 +286,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetDataLayerAssets(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_DataLayerAssets(), "DataLayerAssets");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_DataLayerAssets(), "DataLayerAssets");
 	}
 
 	static int SetDataLayerAssets(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_DataLayerAssets(), "DataLayerAssets");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_DataLayerAssets(), "DataLayerAssets");
 	}
 
 #endif
@@ -316,12 +316,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetDataLayers(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_DataLayers(), "DataLayers");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_DataLayers(), "DataLayers");
 	}
 
 	static int SetDataLayers(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_DataLayers(), "DataLayers");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_DataLayers(), "DataLayers");
 	}
 
 #endif
@@ -345,12 +345,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetDefaultUpdateOverlapsMethodDuringLevelStreaming(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_DefaultUpdateOverlapsMethodDuringLevelStreaming(), "DefaultUpdateOverlapsMethodDuringLevelStreaming");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_DefaultUpdateOverlapsMethodDuringLevelStreaming(), "DefaultUpdateOverlapsMethodDuringLevelStreaming");
 	}
 
 	static int SetDefaultUpdateOverlapsMethodDuringLevelStreaming(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_DefaultUpdateOverlapsMethodDuringLevelStreaming(), "DefaultUpdateOverlapsMethodDuringLevelStreaming");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_DefaultUpdateOverlapsMethodDuringLevelStreaming(), "DefaultUpdateOverlapsMethodDuringLevelStreaming");
 	}
 
 #if WITH_EDITOR
@@ -374,12 +374,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetExternalDataLayerAsset(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ExternalDataLayerAsset(), "ExternalDataLayerAsset");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ExternalDataLayerAsset(), "ExternalDataLayerAsset");
 	}
 
 	static int SetExternalDataLayerAsset(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ExternalDataLayerAsset(), "ExternalDataLayerAsset");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ExternalDataLayerAsset(), "ExternalDataLayerAsset");
 	}
 
 #endif
@@ -404,12 +404,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetFolderGuid(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_FolderGuid(), "FolderGuid");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_FolderGuid(), "FolderGuid");
 	}
 
 	static int SetFolderGuid(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_FolderGuid(), "FolderGuid");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_FolderGuid(), "FolderGuid");
 	}
 
 #endif
@@ -434,12 +434,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetFolderPath(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_FolderPath(), "FolderPath");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_FolderPath(), "FolderPath");
 	}
 
 	static int SetFolderPath(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_FolderPath(), "FolderPath");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_FolderPath(), "FolderPath");
 	}
 
 #endif
@@ -480,12 +480,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetHLODLayer(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_HLODLayer(), "HLODLayer");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_HLODLayer(), "HLODLayer");
 	}
 
 	static int SetHLODLayer(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_HLODLayer(), "HLODLayer");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_HLODLayer(), "HLODLayer");
 	}
 
 #if WITH_EDITOR
@@ -570,12 +570,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetInstanceComponents(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_InstanceComponents(), "InstanceComponents");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_InstanceComponents(), "InstanceComponents");
 	}
 
 	static int SetInstanceComponents(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_InstanceComponents(), "InstanceComponents");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_InstanceComponents(), "InstanceComponents");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_Instigator()
@@ -598,12 +598,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetInstigator(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_Instigator(), "Instigator");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_Instigator(), "Instigator");
 	}
 
 	static int SetInstigator(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_Instigator(), "Instigator");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_Instigator(), "Instigator");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_Layers()
@@ -631,7 +631,7 @@ struct FGetSets_Actor
 
 	static int SetLayers(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_Layers(), "Layers");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_Layers(), "Layers");
 	}
 
 #if WITH_EDITOR
@@ -655,12 +655,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetLevelInstanceFlags(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_LevelInstanceFlags(), "LevelInstanceFlags");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_LevelInstanceFlags(), "LevelInstanceFlags");
 	}
 
 	static int SetLevelInstanceFlags(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_LevelInstanceFlags(), "LevelInstanceFlags");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_LevelInstanceFlags(), "LevelInstanceFlags");
 	}
 
 #endif
@@ -685,12 +685,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetLevelInstanceType(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_LevelInstanceType(), "LevelInstanceType");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_LevelInstanceType(), "LevelInstanceType");
 	}
 
 	static int SetLevelInstanceType(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_LevelInstanceType(), "LevelInstanceType");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_LevelInstanceType(), "LevelInstanceType");
 	}
 
 #endif
@@ -719,12 +719,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetNetDriverName(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_NetDriverName(), "NetDriverName");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_NetDriverName(), "NetDriverName");
 	}
 
 	static int SetNetDriverName(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_NetDriverName(), "NetDriverName");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_NetDriverName(), "NetDriverName");
 	}
 
 	static PyObject* GetNetPriority(FUPyWrapperActor* InSelf, void* InClosure)
@@ -768,12 +768,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetObjectsDetachedFromExternalPackage(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ObjectsDetachedFromExternalPackage(), "ObjectsDetachedFromExternalPackage");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ObjectsDetachedFromExternalPackage(), "ObjectsDetachedFromExternalPackage");
 	}
 
 	static int SetObjectsDetachedFromExternalPackage(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ObjectsDetachedFromExternalPackage(), "ObjectsDetachedFromExternalPackage");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ObjectsDetachedFromExternalPackage(), "ObjectsDetachedFromExternalPackage");
 	}
 
 #endif
@@ -797,12 +797,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetOnActorBeginOverlap(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnActorBeginOverlap(), "OnActorBeginOverlap");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnActorBeginOverlap(), "OnActorBeginOverlap");
 	}
 
 	static int SetOnActorBeginOverlap(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnActorBeginOverlap(), "OnActorBeginOverlap");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnActorBeginOverlap(), "OnActorBeginOverlap");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnActorEndOverlap()
@@ -825,12 +825,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetOnActorEndOverlap(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnActorEndOverlap(), "OnActorEndOverlap");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnActorEndOverlap(), "OnActorEndOverlap");
 	}
 
 	static int SetOnActorEndOverlap(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnActorEndOverlap(), "OnActorEndOverlap");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnActorEndOverlap(), "OnActorEndOverlap");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnActorHit()
@@ -853,12 +853,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetOnActorHit(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnActorHit(), "OnActorHit");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnActorHit(), "OnActorHit");
 	}
 
 	static int SetOnActorHit(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnActorHit(), "OnActorHit");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnActorHit(), "OnActorHit");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnBeginCursorOver()
@@ -881,12 +881,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetOnBeginCursorOver(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnBeginCursorOver(), "OnBeginCursorOver");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnBeginCursorOver(), "OnBeginCursorOver");
 	}
 
 	static int SetOnBeginCursorOver(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnBeginCursorOver(), "OnBeginCursorOver");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnBeginCursorOver(), "OnBeginCursorOver");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnClicked()
@@ -909,12 +909,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetOnClicked(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnClicked(), "OnClicked");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnClicked(), "OnClicked");
 	}
 
 	static int SetOnClicked(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnClicked(), "OnClicked");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnClicked(), "OnClicked");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnDestroyed()
@@ -937,12 +937,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetOnDestroyed(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnDestroyed(), "OnDestroyed");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnDestroyed(), "OnDestroyed");
 	}
 
 	static int SetOnDestroyed(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnDestroyed(), "OnDestroyed");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnDestroyed(), "OnDestroyed");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnEndCursorOver()
@@ -965,12 +965,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetOnEndCursorOver(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnEndCursorOver(), "OnEndCursorOver");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnEndCursorOver(), "OnEndCursorOver");
 	}
 
 	static int SetOnEndCursorOver(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnEndCursorOver(), "OnEndCursorOver");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnEndCursorOver(), "OnEndCursorOver");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnEndPlay()
@@ -993,12 +993,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetOnEndPlay(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnEndPlay(), "OnEndPlay");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnEndPlay(), "OnEndPlay");
 	}
 
 	static int SetOnEndPlay(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnEndPlay(), "OnEndPlay");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnEndPlay(), "OnEndPlay");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnInputTouchBegin()
@@ -1021,12 +1021,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetOnInputTouchBegin(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnInputTouchBegin(), "OnInputTouchBegin");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnInputTouchBegin(), "OnInputTouchBegin");
 	}
 
 	static int SetOnInputTouchBegin(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnInputTouchBegin(), "OnInputTouchBegin");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnInputTouchBegin(), "OnInputTouchBegin");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnInputTouchEnd()
@@ -1049,12 +1049,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetOnInputTouchEnd(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnInputTouchEnd(), "OnInputTouchEnd");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnInputTouchEnd(), "OnInputTouchEnd");
 	}
 
 	static int SetOnInputTouchEnd(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnInputTouchEnd(), "OnInputTouchEnd");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnInputTouchEnd(), "OnInputTouchEnd");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnInputTouchEnter()
@@ -1077,12 +1077,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetOnInputTouchEnter(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnInputTouchEnter(), "OnInputTouchEnter");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnInputTouchEnter(), "OnInputTouchEnter");
 	}
 
 	static int SetOnInputTouchEnter(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnInputTouchEnter(), "OnInputTouchEnter");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnInputTouchEnter(), "OnInputTouchEnter");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnInputTouchLeave()
@@ -1105,12 +1105,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetOnInputTouchLeave(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnInputTouchLeave(), "OnInputTouchLeave");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnInputTouchLeave(), "OnInputTouchLeave");
 	}
 
 	static int SetOnInputTouchLeave(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnInputTouchLeave(), "OnInputTouchLeave");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnInputTouchLeave(), "OnInputTouchLeave");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnReleased()
@@ -1133,12 +1133,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetOnReleased(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnReleased(), "OnReleased");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnReleased(), "OnReleased");
 	}
 
 	static int SetOnReleased(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnReleased(), "OnReleased");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnReleased(), "OnReleased");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnTakeAnyDamage()
@@ -1161,12 +1161,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetOnTakeAnyDamage(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnTakeAnyDamage(), "OnTakeAnyDamage");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnTakeAnyDamage(), "OnTakeAnyDamage");
 	}
 
 	static int SetOnTakeAnyDamage(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnTakeAnyDamage(), "OnTakeAnyDamage");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnTakeAnyDamage(), "OnTakeAnyDamage");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnTakePointDamage()
@@ -1189,12 +1189,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetOnTakePointDamage(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnTakePointDamage(), "OnTakePointDamage");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnTakePointDamage(), "OnTakePointDamage");
 	}
 
 	static int SetOnTakePointDamage(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnTakePointDamage(), "OnTakePointDamage");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnTakePointDamage(), "OnTakePointDamage");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnTakeRadialDamage()
@@ -1217,12 +1217,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetOnTakeRadialDamage(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnTakeRadialDamage(), "OnTakeRadialDamage");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnTakeRadialDamage(), "OnTakeRadialDamage");
 	}
 
 	static int SetOnTakeRadialDamage(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnTakeRadialDamage(), "OnTakeRadialDamage");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnTakeRadialDamage(), "OnTakeRadialDamage");
 	}
 
 	static PyObject* GetOwner(FUPyWrapperActor* InSelf, void* InClosure)
@@ -1260,12 +1260,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetParentComponent(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ParentComponent(), "ParentComponent");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ParentComponent(), "ParentComponent");
 	}
 
 	static int SetParentComponent(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ParentComponent(), "ParentComponent");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ParentComponent(), "ParentComponent");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_PhysicsReplicationMode()
@@ -1288,7 +1288,7 @@ struct FGetSets_Actor
 
 	static PyObject* GetPhysicsReplicationMode(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_PhysicsReplicationMode(), "PhysicsReplicationMode");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_PhysicsReplicationMode(), "PhysicsReplicationMode");
 	}
 
 #if WITH_EDITOR
@@ -1312,12 +1312,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetPivotOffset(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_PivotOffset(), "PivotOffset");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_PivotOffset(), "PivotOffset");
 	}
 
 	static int SetPivotOffset(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_PivotOffset(), "PivotOffset");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_PivotOffset(), "PivotOffset");
 	}
 
 #endif
@@ -1346,12 +1346,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetRayTracingGroupId(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_RayTracingGroupId(), "RayTracingGroupId");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_RayTracingGroupId(), "RayTracingGroupId");
 	}
 
 	static int SetRayTracingGroupId(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_RayTracingGroupId(), "RayTracingGroupId");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_RayTracingGroupId(), "RayTracingGroupId");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_RemoteRole()
@@ -1374,12 +1374,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetRemoteRole(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_RemoteRole(), "RemoteRole");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_RemoteRole(), "RemoteRole");
 	}
 
 	static int SetRemoteRole(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_RemoteRole(), "RemoteRole");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_RemoteRole(), "RemoteRole");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_ReplicatedMovement()
@@ -1402,7 +1402,7 @@ struct FGetSets_Actor
 
 	static PyObject* GetReplicatedMovement(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ReplicatedMovement(), "ReplicatedMovement");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ReplicatedMovement(), "ReplicatedMovement");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_Role()
@@ -1425,12 +1425,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetRole(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_Role(), "Role");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_Role(), "Role");
 	}
 
 	static int SetRole(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_Role(), "Role");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_Role(), "Role");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_RootComponent()
@@ -1453,12 +1453,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetRootComponent(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_RootComponent(), "RootComponent");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_RootComponent(), "RootComponent");
 	}
 
 	static int SetRootComponent(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_RootComponent(), "RootComponent");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_RootComponent(), "RootComponent");
 	}
 
 #if WITH_EDITOR
@@ -1482,12 +1482,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetRuntimeGrid(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_RuntimeGrid(), "RuntimeGrid");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_RuntimeGrid(), "RuntimeGrid");
 	}
 
 	static int SetRuntimeGrid(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_RuntimeGrid(), "RuntimeGrid");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_RuntimeGrid(), "RuntimeGrid");
 	}
 
 #endif
@@ -1548,7 +1548,7 @@ struct FGetSets_Actor
 
 	static int SetTags(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_Tags(), "Tags");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_Tags(), "Tags");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_UpdateOverlapsMethodDuringLevelStreaming()
@@ -1571,12 +1571,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetUpdateOverlapsMethodDuringLevelStreaming(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_UpdateOverlapsMethodDuringLevelStreaming(), "UpdateOverlapsMethodDuringLevelStreaming");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_UpdateOverlapsMethodDuringLevelStreaming(), "UpdateOverlapsMethodDuringLevelStreaming");
 	}
 
 	static int SetUpdateOverlapsMethodDuringLevelStreaming(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_UpdateOverlapsMethodDuringLevelStreaming(), "UpdateOverlapsMethodDuringLevelStreaming");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_UpdateOverlapsMethodDuringLevelStreaming(), "UpdateOverlapsMethodDuringLevelStreaming");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_bActorEnableCollision()
@@ -1599,12 +1599,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetbActorEnableCollision(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bActorEnableCollision(), "bActorEnableCollision");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bActorEnableCollision(), "bActorEnableCollision");
 	}
 
 	static int SetbActorEnableCollision(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bActorEnableCollision(), "bActorEnableCollision");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bActorEnableCollision(), "bActorEnableCollision");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_bActorIsBeingDestroyed()
@@ -1627,12 +1627,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetbActorIsBeingDestroyed(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bActorIsBeingDestroyed(), "bActorIsBeingDestroyed");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bActorIsBeingDestroyed(), "bActorIsBeingDestroyed");
 	}
 
 	static int SetbActorIsBeingDestroyed(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bActorIsBeingDestroyed(), "bActorIsBeingDestroyed");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bActorIsBeingDestroyed(), "bActorIsBeingDestroyed");
 	}
 
 #if WITH_EDITOR
@@ -1656,12 +1656,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetbActorLabelEditable(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bActorLabelEditable(), "bActorLabelEditable");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bActorLabelEditable(), "bActorLabelEditable");
 	}
 
 	static int SetbActorLabelEditable(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bActorLabelEditable(), "bActorLabelEditable");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bActorLabelEditable(), "bActorLabelEditable");
 	}
 
 #endif
@@ -1685,12 +1685,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetbAllowReceiveTickEventOnDedicatedServer(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bAllowReceiveTickEventOnDedicatedServer(), "bAllowReceiveTickEventOnDedicatedServer");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bAllowReceiveTickEventOnDedicatedServer(), "bAllowReceiveTickEventOnDedicatedServer");
 	}
 
 	static int SetbAllowReceiveTickEventOnDedicatedServer(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bAllowReceiveTickEventOnDedicatedServer(), "bAllowReceiveTickEventOnDedicatedServer");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bAllowReceiveTickEventOnDedicatedServer(), "bAllowReceiveTickEventOnDedicatedServer");
 	}
 
 	static PyObject* GetbAllowTickBeforeBeginPlay(FUPyWrapperActor* InSelf, void* InClosure)
@@ -1723,12 +1723,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetbAsyncPhysicsTickEnabled(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bAsyncPhysicsTickEnabled(), "bAsyncPhysicsTickEnabled");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bAsyncPhysicsTickEnabled(), "bAsyncPhysicsTickEnabled");
 	}
 
 	static int SetbAsyncPhysicsTickEnabled(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bAsyncPhysicsTickEnabled(), "bAsyncPhysicsTickEnabled");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bAsyncPhysicsTickEnabled(), "bAsyncPhysicsTickEnabled");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_bAutoDestroyWhenFinished()
@@ -1751,12 +1751,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetbAutoDestroyWhenFinished(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bAutoDestroyWhenFinished(), "bAutoDestroyWhenFinished");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bAutoDestroyWhenFinished(), "bAutoDestroyWhenFinished");
 	}
 
 	static int SetbAutoDestroyWhenFinished(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bAutoDestroyWhenFinished(), "bAutoDestroyWhenFinished");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bAutoDestroyWhenFinished(), "bAutoDestroyWhenFinished");
 	}
 
 	static PyObject* GetbBlockInput(FUPyWrapperActor* InSelf, void* InClosure)
@@ -1784,7 +1784,7 @@ struct FGetSets_Actor
 
 	static PyObject* GetbCallPreReplication(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bCallPreReplication(), "bCallPreReplication");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bCallPreReplication(), "bCallPreReplication");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_bCallPreReplicationForReplay()
@@ -1807,7 +1807,7 @@ struct FGetSets_Actor
 
 	static PyObject* GetbCallPreReplicationForReplay(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bCallPreReplicationForReplay(), "bCallPreReplicationForReplay");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bCallPreReplicationForReplay(), "bCallPreReplicationForReplay");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_bCanBeDamaged()
@@ -1830,12 +1830,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetbCanBeDamaged(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bCanBeDamaged(), "bCanBeDamaged");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bCanBeDamaged(), "bCanBeDamaged");
 	}
 
 	static int SetbCanBeDamaged(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bCanBeDamaged(), "bCanBeDamaged");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bCanBeDamaged(), "bCanBeDamaged");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_bCanBeInCluster()
@@ -1858,12 +1858,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetbCanBeInCluster(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bCanBeInCluster(), "bCanBeInCluster");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bCanBeInCluster(), "bCanBeInCluster");
 	}
 
 	static int SetbCanBeInCluster(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bCanBeInCluster(), "bCanBeInCluster");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bCanBeInCluster(), "bCanBeInCluster");
 	}
 
 #if WITH_EDITOR
@@ -1887,12 +1887,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetbCanPlayFromHere(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bCanPlayFromHere(), "bCanPlayFromHere");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bCanPlayFromHere(), "bCanPlayFromHere");
 	}
 
 	static int SetbCanPlayFromHere(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bCanPlayFromHere(), "bCanPlayFromHere");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bCanPlayFromHere(), "bCanPlayFromHere");
 	}
 
 #endif
@@ -1934,12 +1934,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetbEditable(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bEditable(), "bEditable");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bEditable(), "bEditable");
 	}
 
 	static int SetbEditable(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bEditable(), "bEditable");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bEditable(), "bEditable");
 	}
 
 #endif
@@ -2015,12 +2015,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetbForceExternalActorLevelReferenceForPIE(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bForceExternalActorLevelReferenceForPIE(), "bForceExternalActorLevelReferenceForPIE");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bForceExternalActorLevelReferenceForPIE(), "bForceExternalActorLevelReferenceForPIE");
 	}
 
 	static int SetbForceExternalActorLevelReferenceForPIE(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bForceExternalActorLevelReferenceForPIE(), "bForceExternalActorLevelReferenceForPIE");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bForceExternalActorLevelReferenceForPIE(), "bForceExternalActorLevelReferenceForPIE");
 	}
 
 #endif
@@ -2044,12 +2044,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetbForceNetAddressable(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bForceNetAddressable(), "bForceNetAddressable");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bForceNetAddressable(), "bForceNetAddressable");
 	}
 
 	static int SetbForceNetAddressable(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bForceNetAddressable(), "bForceNetAddressable");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bForceNetAddressable(), "bForceNetAddressable");
 	}
 
 	static PyObject* GetbGenerateOverlapEventsDuringLevelStreaming(FUPyWrapperActor* InSelf, void* InClosure)
@@ -2089,12 +2089,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetbHidden(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bHidden(), "bHidden");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bHidden(), "bHidden");
 	}
 
 	static int SetbHidden(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bHidden(), "bHidden");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bHidden(), "bHidden");
 	}
 
 #if WITH_EDITOR
@@ -2175,12 +2175,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetbHiddenEdTemporary(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bHiddenEdTemporary(), "bHiddenEdTemporary");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bHiddenEdTemporary(), "bHiddenEdTemporary");
 	}
 
 	static int SetbHiddenEdTemporary(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bHiddenEdTemporary(), "bHiddenEdTemporary");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bHiddenEdTemporary(), "bHiddenEdTemporary");
 	}
 
 #endif
@@ -2296,12 +2296,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetbIsSpatiallyLoaded(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bIsSpatiallyLoaded(), "bIsSpatiallyLoaded");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bIsSpatiallyLoaded(), "bIsSpatiallyLoaded");
 	}
 
 	static int SetbIsSpatiallyLoaded(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bIsSpatiallyLoaded(), "bIsSpatiallyLoaded");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bIsSpatiallyLoaded(), "bIsSpatiallyLoaded");
 	}
 
 #endif
@@ -2326,12 +2326,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetbListedInSceneOutliner(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bListedInSceneOutliner(), "bListedInSceneOutliner");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bListedInSceneOutliner(), "bListedInSceneOutliner");
 	}
 
 	static int SetbListedInSceneOutliner(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bListedInSceneOutliner(), "bListedInSceneOutliner");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bListedInSceneOutliner(), "bListedInSceneOutliner");
 	}
 
 #endif
@@ -2356,12 +2356,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetbLockLocation(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bLockLocation(), "bLockLocation");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bLockLocation(), "bLockLocation");
 	}
 
 	static int SetbLockLocation(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bLockLocation(), "bLockLocation");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bLockLocation(), "bLockLocation");
 	}
 
 #endif
@@ -2386,12 +2386,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetbMigratingAsset(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bMigratingAsset(), "bMigratingAsset");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bMigratingAsset(), "bMigratingAsset");
 	}
 
 	static int SetbMigratingAsset(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bMigratingAsset(), "bMigratingAsset");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bMigratingAsset(), "bMigratingAsset");
 	}
 
 #endif
@@ -2460,7 +2460,7 @@ struct FGetSets_Actor
 
 	static PyObject* GetbOptimizeBPComponentData(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bOptimizeBPComponentData(), "bOptimizeBPComponentData");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bOptimizeBPComponentData(), "bOptimizeBPComponentData");
 	}
 
 #endif
@@ -2523,7 +2523,7 @@ struct FGetSets_Actor
 
 	static PyObject* GetbReplicateMovement(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bReplicateMovement(), "bReplicateMovement");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bReplicateMovement(), "bReplicateMovement");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_bReplicateUsingRegisteredSubObjectList()
@@ -2546,7 +2546,7 @@ struct FGetSets_Actor
 
 	static PyObject* GetbReplicateUsingRegisteredSubObjectList(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bReplicateUsingRegisteredSubObjectList(), "bReplicateUsingRegisteredSubObjectList");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bReplicateUsingRegisteredSubObjectList(), "bReplicateUsingRegisteredSubObjectList");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_bReplicates()
@@ -2569,7 +2569,7 @@ struct FGetSets_Actor
 
 	static PyObject* GetbReplicates(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bReplicates(), "bReplicates");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bReplicates(), "bReplicates");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_bTearOff()
@@ -2592,12 +2592,12 @@ struct FGetSets_Actor
 
 	static PyObject* GetbTearOff(FUPyWrapperActor* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bTearOff(), "bTearOff");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bTearOff(), "bTearOff");
 	}
 
 	static int SetbTearOff(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bTearOff(), "bTearOff");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bTearOff(), "bTearOff");
 	}
 
 };
@@ -6500,7 +6500,7 @@ namespace UPyConversion
 	{
 		if (FUPyWrapperActor* PyActor = UPyIsActor(PyObj))
 		{
-			if (!FUPyWrapperObjectBase::ValidateInternalState(PyActor))
+			if (!FUPyWrapperObject::ValidateInternalState(PyActor))
 			{
 				return FUPyConversionResult::Failure();
 			}

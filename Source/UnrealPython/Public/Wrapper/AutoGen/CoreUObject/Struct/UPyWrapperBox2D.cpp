@@ -20,7 +20,7 @@ struct FGetSets_Box2D
 {
 	static PyObject* GetMax(FUPyWrapperBox2D* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperBox2D::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -29,7 +29,7 @@ struct FGetSets_Box2D
 
 	static int SetMax(FUPyWrapperBox2D* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperBox2D::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}
@@ -43,7 +43,7 @@ struct FGetSets_Box2D
 
 	static PyObject* GetMin(FUPyWrapperBox2D* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperBox2D::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -52,7 +52,7 @@ struct FGetSets_Box2D
 
 	static int SetMin(FUPyWrapperBox2D* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperBox2D::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}
@@ -66,7 +66,7 @@ struct FGetSets_Box2D
 
 	static PyObject* GetbIsValid(FUPyWrapperBox2D* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperBox2D::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -75,7 +75,7 @@ struct FGetSets_Box2D
 
 	static int SetbIsValid(FUPyWrapperBox2D* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperBox2D::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}

@@ -55,12 +55,12 @@ struct FGetSets_ParticleSystemComponent
 
 	static PyObject* GetAutoAttachParent(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_AutoAttachParent(), "AutoAttachParent");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_AutoAttachParent(), "AutoAttachParent");
 	}
 
 	static int SetAutoAttachParent(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_AutoAttachParent(), "AutoAttachParent");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_AutoAttachParent(), "AutoAttachParent");
 	}
 
 	static PyObject* GetAutoAttachRotationRule(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
@@ -182,7 +182,7 @@ struct FGetSets_ParticleSystemComponent
 
 	static int SetEmitterMaterials(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_EmitterMaterials(), "EmitterMaterials");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_EmitterMaterials(), "EmitterMaterials");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_InstanceParameters()
@@ -210,7 +210,7 @@ struct FGetSets_ParticleSystemComponent
 
 	static int SetInstanceParameters(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_InstanceParameters(), "InstanceParameters");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_InstanceParameters(), "InstanceParameters");
 	}
 
 	static PyObject* GetLODMethod(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
@@ -278,12 +278,12 @@ struct FGetSets_ParticleSystemComponent
 
 	static PyObject* GetOnParticleBurst(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnParticleBurst(), "OnParticleBurst");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnParticleBurst(), "OnParticleBurst");
 	}
 
 	static int SetOnParticleBurst(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnParticleBurst(), "OnParticleBurst");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnParticleBurst(), "OnParticleBurst");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnParticleCollide()
@@ -306,12 +306,12 @@ struct FGetSets_ParticleSystemComponent
 
 	static PyObject* GetOnParticleCollide(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnParticleCollide(), "OnParticleCollide");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnParticleCollide(), "OnParticleCollide");
 	}
 
 	static int SetOnParticleCollide(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnParticleCollide(), "OnParticleCollide");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnParticleCollide(), "OnParticleCollide");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnParticleDeath()
@@ -334,12 +334,12 @@ struct FGetSets_ParticleSystemComponent
 
 	static PyObject* GetOnParticleDeath(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnParticleDeath(), "OnParticleDeath");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnParticleDeath(), "OnParticleDeath");
 	}
 
 	static int SetOnParticleDeath(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnParticleDeath(), "OnParticleDeath");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnParticleDeath(), "OnParticleDeath");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnParticleSpawn()
@@ -362,12 +362,12 @@ struct FGetSets_ParticleSystemComponent
 
 	static PyObject* GetOnParticleSpawn(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnParticleSpawn(), "OnParticleSpawn");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnParticleSpawn(), "OnParticleSpawn");
 	}
 
 	static int SetOnParticleSpawn(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnParticleSpawn(), "OnParticleSpawn");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnParticleSpawn(), "OnParticleSpawn");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnSystemFinished()
@@ -390,12 +390,12 @@ struct FGetSets_ParticleSystemComponent
 
 	static PyObject* GetOnSystemFinished(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnSystemFinished(), "OnSystemFinished");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnSystemFinished(), "OnSystemFinished");
 	}
 
 	static int SetOnSystemFinished(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnSystemFinished(), "OnSystemFinished");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnSystemFinished(), "OnSystemFinished");
 	}
 
 	static PyObject* GetPartSysVelocity(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
@@ -438,7 +438,7 @@ struct FGetSets_ParticleSystemComponent
 
 	static int SetReplayClips(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ReplayClips(), "ReplayClips");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ReplayClips(), "ReplayClips");
 	}
 
 	static PyObject* GetRequiredSignificance(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
@@ -496,7 +496,7 @@ struct FGetSets_ParticleSystemComponent
 
 	static int SetSkelMeshComponents(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_SkelMeshComponents(), "SkelMeshComponents");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_SkelMeshComponents(), "SkelMeshComponents");
 	}
 
 	static PyObject* GetTemplate(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
@@ -1771,7 +1771,7 @@ namespace UPyConversion
 	{
 		if (FUPyWrapperParticleSystemComponent* PyParticleSystemComponent = UPyIsParticleSystemComponent(PyObj))
 		{
-			if (!FUPyWrapperObjectBase::ValidateInternalState(PyParticleSystemComponent))
+			if (!FUPyWrapperObject::ValidateInternalState(PyParticleSystemComponent))
 			{
 				return FUPyConversionResult::Failure();
 			}

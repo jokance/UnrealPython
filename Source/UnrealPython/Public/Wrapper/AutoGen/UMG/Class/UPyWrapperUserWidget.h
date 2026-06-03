@@ -14,7 +14,7 @@ extern PyTypeObject UPyWrapperUserWidgetType;
 /** Initialize the UPyWrapperUserWidgetType types and add them to the given Python module */
 void InitializeUPyWrapperUserWidget(UPyGenUtil::FNativePythonModule& ModuleInfo);
 
-class FUPyWrapperUserWidget: public FUPyWrapperObjectBase 
+class FUPyWrapperUserWidget: public FUPyWrapperObject
 {
 public:
 

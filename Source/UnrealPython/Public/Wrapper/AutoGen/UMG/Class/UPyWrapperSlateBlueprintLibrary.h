@@ -14,7 +14,7 @@ extern PyTypeObject UPyWrapperSlateBlueprintLibraryType;
 /** Initialize the UPyWrapperSlateBlueprintLibraryType types and add them to the given Python module */
 void InitializeUPyWrapperSlateBlueprintLibrary(UPyGenUtil::FNativePythonModule& ModuleInfo);
 
-class FUPyWrapperSlateBlueprintLibrary: public FUPyWrapperObjectBase 
+class FUPyWrapperSlateBlueprintLibrary: public FUPyWrapperObject
 {
 public:
 

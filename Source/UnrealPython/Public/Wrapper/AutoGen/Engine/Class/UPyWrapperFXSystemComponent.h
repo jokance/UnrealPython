@@ -14,7 +14,7 @@ extern PyTypeObject UPyWrapperFXSystemComponentType;
 /** Initialize the UPyWrapperFXSystemComponentType types and add them to the given Python module */
 void InitializeUPyWrapperFXSystemComponent(UPyGenUtil::FNativePythonModule& ModuleInfo);
 
-class FUPyWrapperFXSystemComponent: public FUPyWrapperObjectBase 
+class FUPyWrapperFXSystemComponent: public FUPyWrapperObject
 {
 public:
 

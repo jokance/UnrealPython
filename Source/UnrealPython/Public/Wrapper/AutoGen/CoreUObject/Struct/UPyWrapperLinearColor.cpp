@@ -21,7 +21,7 @@ struct FGetSets_LinearColor
 {
 	static PyObject* GetA(FUPyWrapperLinearColor* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperLinearColor::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -30,7 +30,7 @@ struct FGetSets_LinearColor
 
 	static int SetA(FUPyWrapperLinearColor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperLinearColor::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}
@@ -44,7 +44,7 @@ struct FGetSets_LinearColor
 
 	static PyObject* GetB(FUPyWrapperLinearColor* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperLinearColor::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -53,7 +53,7 @@ struct FGetSets_LinearColor
 
 	static int SetB(FUPyWrapperLinearColor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperLinearColor::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}
@@ -67,7 +67,7 @@ struct FGetSets_LinearColor
 
 	static PyObject* GetG(FUPyWrapperLinearColor* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperLinearColor::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -76,7 +76,7 @@ struct FGetSets_LinearColor
 
 	static int SetG(FUPyWrapperLinearColor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperLinearColor::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}
@@ -90,7 +90,7 @@ struct FGetSets_LinearColor
 
 	static PyObject* GetR(FUPyWrapperLinearColor* InSelf, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperLinearColor::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
@@ -99,7 +99,7 @@ struct FGetSets_LinearColor
 
 	static int SetR(FUPyWrapperLinearColor* InSelf, PyObject* InValue, void* InClosure)
 	{
-		if (!FUPyWrapperObjectBase::ValidateInternalState(InSelf))
+		if (!FUPyWrapperLinearColor::ValidateInternalState(InSelf))
 		{
 			return -1;
 		}

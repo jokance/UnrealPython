@@ -41,12 +41,12 @@ struct FGetSets_Character
 
 	static PyObject* GetAnimRootMotionTranslationScale(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_AnimRootMotionTranslationScale(), "AnimRootMotionTranslationScale");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_AnimRootMotionTranslationScale(), "AnimRootMotionTranslationScale");
 	}
 
 	static int SetAnimRootMotionTranslationScale(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_AnimRootMotionTranslationScale(), "AnimRootMotionTranslationScale");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_AnimRootMotionTranslationScale(), "AnimRootMotionTranslationScale");
 	}
 
 #if WITH_EDITOR
@@ -70,12 +70,12 @@ struct FGetSets_Character
 
 	static PyObject* GetArrowComponent(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ArrowComponent(), "ArrowComponent");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ArrowComponent(), "ArrowComponent");
 	}
 
 	static int SetArrowComponent(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ArrowComponent(), "ArrowComponent");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ArrowComponent(), "ArrowComponent");
 	}
 
 #endif
@@ -99,12 +99,12 @@ struct FGetSets_Character
 
 	static PyObject* GetBaseRotationOffset(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_BaseRotationOffset(), "BaseRotationOffset");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_BaseRotationOffset(), "BaseRotationOffset");
 	}
 
 	static int SetBaseRotationOffset(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_BaseRotationOffset(), "BaseRotationOffset");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_BaseRotationOffset(), "BaseRotationOffset");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_BaseTranslationOffset()
@@ -127,12 +127,12 @@ struct FGetSets_Character
 
 	static PyObject* GetBaseTranslationOffset(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_BaseTranslationOffset(), "BaseTranslationOffset");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_BaseTranslationOffset(), "BaseTranslationOffset");
 	}
 
 	static int SetBaseTranslationOffset(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_BaseTranslationOffset(), "BaseTranslationOffset");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_BaseTranslationOffset(), "BaseTranslationOffset");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_BasedMovement()
@@ -155,12 +155,12 @@ struct FGetSets_Character
 
 	static PyObject* GetBasedMovement(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_BasedMovement(), "BasedMovement");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_BasedMovement(), "BasedMovement");
 	}
 
 	static int SetBasedMovement(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_BasedMovement(), "BasedMovement");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_BasedMovement(), "BasedMovement");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_CapsuleComponent()
@@ -183,12 +183,12 @@ struct FGetSets_Character
 
 	static PyObject* GetCapsuleComponent(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_CapsuleComponent(), "CapsuleComponent");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_CapsuleComponent(), "CapsuleComponent");
 	}
 
 	static int SetCapsuleComponent(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_CapsuleComponent(), "CapsuleComponent");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_CapsuleComponent(), "CapsuleComponent");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_CharacterMovement()
@@ -211,12 +211,12 @@ struct FGetSets_Character
 
 	static PyObject* GetCharacterMovement(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_CharacterMovement(), "CharacterMovement");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_CharacterMovement(), "CharacterMovement");
 	}
 
 	static int SetCharacterMovement(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_CharacterMovement(), "CharacterMovement");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_CharacterMovement(), "CharacterMovement");
 	}
 
 	static PyObject* GetClientRootMotionParams(FUPyWrapperCharacter* InSelf, void* InClosure)
@@ -359,12 +359,12 @@ struct FGetSets_Character
 
 	static PyObject* GetLandedDelegate(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_LandedDelegate(), "LandedDelegate");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_LandedDelegate(), "LandedDelegate");
 	}
 
 	static int SetLandedDelegate(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_LandedDelegate(), "LandedDelegate");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_LandedDelegate(), "LandedDelegate");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_Mesh()
@@ -387,12 +387,12 @@ struct FGetSets_Character
 
 	static PyObject* GetMesh(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_Mesh(), "Mesh");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_Mesh(), "Mesh");
 	}
 
 	static int SetMesh(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_Mesh(), "Mesh");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_Mesh(), "Mesh");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_MovementModeChangedDelegate()
@@ -415,12 +415,12 @@ struct FGetSets_Character
 
 	static PyObject* GetMovementModeChangedDelegate(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_MovementModeChangedDelegate(), "MovementModeChangedDelegate");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_MovementModeChangedDelegate(), "MovementModeChangedDelegate");
 	}
 
 	static int SetMovementModeChangedDelegate(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_MovementModeChangedDelegate(), "MovementModeChangedDelegate");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_MovementModeChangedDelegate(), "MovementModeChangedDelegate");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnCharacterMovementUpdated()
@@ -443,12 +443,12 @@ struct FGetSets_Character
 
 	static PyObject* GetOnCharacterMovementUpdated(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnCharacterMovementUpdated(), "OnCharacterMovementUpdated");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnCharacterMovementUpdated(), "OnCharacterMovementUpdated");
 	}
 
 	static int SetOnCharacterMovementUpdated(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnCharacterMovementUpdated(), "OnCharacterMovementUpdated");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnCharacterMovementUpdated(), "OnCharacterMovementUpdated");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnReachedJumpApex()
@@ -471,12 +471,12 @@ struct FGetSets_Character
 
 	static PyObject* GetOnReachedJumpApex(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnReachedJumpApex(), "OnReachedJumpApex");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnReachedJumpApex(), "OnReachedJumpApex");
 	}
 
 	static int SetOnReachedJumpApex(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnReachedJumpApex(), "OnReachedJumpApex");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnReachedJumpApex(), "OnReachedJumpApex");
 	}
 
 	static PyObject* GetProxyJumpForceStartedTime(FUPyWrapperCharacter* InSelf, void* InClosure)
@@ -529,12 +529,12 @@ struct FGetSets_Character
 
 	static PyObject* GetReplayLastTransformUpdateTimeStamp(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ReplayLastTransformUpdateTimeStamp(), "ReplayLastTransformUpdateTimeStamp");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ReplayLastTransformUpdateTimeStamp(), "ReplayLastTransformUpdateTimeStamp");
 	}
 
 	static int SetReplayLastTransformUpdateTimeStamp(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ReplayLastTransformUpdateTimeStamp(), "ReplayLastTransformUpdateTimeStamp");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ReplayLastTransformUpdateTimeStamp(), "ReplayLastTransformUpdateTimeStamp");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_ReplicatedBasedMovement()
@@ -557,12 +557,12 @@ struct FGetSets_Character
 
 	static PyObject* GetReplicatedBasedMovement(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ReplicatedBasedMovement(), "ReplicatedBasedMovement");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ReplicatedBasedMovement(), "ReplicatedBasedMovement");
 	}
 
 	static int SetReplicatedBasedMovement(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ReplicatedBasedMovement(), "ReplicatedBasedMovement");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ReplicatedBasedMovement(), "ReplicatedBasedMovement");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_ReplicatedGravityDirection()
@@ -585,12 +585,12 @@ struct FGetSets_Character
 
 	static PyObject* GetReplicatedGravityDirection(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ReplicatedGravityDirection(), "ReplicatedGravityDirection");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ReplicatedGravityDirection(), "ReplicatedGravityDirection");
 	}
 
 	static int SetReplicatedGravityDirection(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ReplicatedGravityDirection(), "ReplicatedGravityDirection");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ReplicatedGravityDirection(), "ReplicatedGravityDirection");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_ReplicatedMovementMode()
@@ -613,12 +613,12 @@ struct FGetSets_Character
 
 	static PyObject* GetReplicatedMovementMode(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ReplicatedMovementMode(), "ReplicatedMovementMode");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ReplicatedMovementMode(), "ReplicatedMovementMode");
 	}
 
 	static int SetReplicatedMovementMode(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ReplicatedMovementMode(), "ReplicatedMovementMode");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ReplicatedMovementMode(), "ReplicatedMovementMode");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_ReplicatedServerLastTransformUpdateTimeStamp()
@@ -641,12 +641,12 @@ struct FGetSets_Character
 
 	static PyObject* GetReplicatedServerLastTransformUpdateTimeStamp(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ReplicatedServerLastTransformUpdateTimeStamp(), "ReplicatedServerLastTransformUpdateTimeStamp");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ReplicatedServerLastTransformUpdateTimeStamp(), "ReplicatedServerLastTransformUpdateTimeStamp");
 	}
 
 	static int SetReplicatedServerLastTransformUpdateTimeStamp(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ReplicatedServerLastTransformUpdateTimeStamp(), "ReplicatedServerLastTransformUpdateTimeStamp");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ReplicatedServerLastTransformUpdateTimeStamp(), "ReplicatedServerLastTransformUpdateTimeStamp");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_RootMotionRepMoves()
@@ -674,7 +674,7 @@ struct FGetSets_Character
 
 	static int SetRootMotionRepMoves(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_RootMotionRepMoves(), "RootMotionRepMoves");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_RootMotionRepMoves(), "RootMotionRepMoves");
 	}
 
 	static PyObject* GetSavedRootMotion(FUPyWrapperCharacter* InSelf, void* InClosure)
@@ -797,12 +797,12 @@ struct FGetSets_Character
 
 	static PyObject* GetbInBaseReplication(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_bInBaseReplication(), "bInBaseReplication");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bInBaseReplication(), "bInBaseReplication");
 	}
 
 	static int SetbInBaseReplication(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_bInBaseReplication(), "bInBaseReplication");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bInBaseReplication(), "bInBaseReplication");
 	}
 
 	static PyObject* GetbIsCrouched(FUPyWrapperCharacter* InSelf, void* InClosure)
@@ -1795,7 +1795,7 @@ namespace UPyConversion
 	{
 		if (FUPyWrapperCharacter* PyCharacter = UPyIsCharacter(PyObj))
 		{
-			if (!FUPyWrapperObjectBase::ValidateInternalState(PyCharacter))
+			if (!FUPyWrapperObject::ValidateInternalState(PyCharacter))
 			{
 				return FUPyConversionResult::Failure();
 			}

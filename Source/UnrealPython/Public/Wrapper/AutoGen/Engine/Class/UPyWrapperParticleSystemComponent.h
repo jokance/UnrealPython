@@ -14,7 +14,7 @@ extern PyTypeObject UPyWrapperParticleSystemComponentType;
 /** Initialize the UPyWrapperParticleSystemComponentType types and add them to the given Python module */
 void InitializeUPyWrapperParticleSystemComponent(UPyGenUtil::FNativePythonModule& ModuleInfo);
 
-class FUPyWrapperParticleSystemComponent: public FUPyWrapperObjectBase 
+class FUPyWrapperParticleSystemComponent: public FUPyWrapperObject
 {
 public:
 

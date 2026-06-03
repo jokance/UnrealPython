@@ -43,12 +43,12 @@ struct FGetSets_PlayerCameraManager
 
 	static PyObject* GetAnimCameraActor(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_AnimCameraActor(), "AnimCameraActor");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_AnimCameraActor(), "AnimCameraActor");
 	}
 
 	static int SetAnimCameraActor(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_AnimCameraActor(), "AnimCameraActor");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_AnimCameraActor(), "AnimCameraActor");
 	}
 
 	static PyObject* GetAutoPlaneShift(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
@@ -86,12 +86,12 @@ struct FGetSets_PlayerCameraManager
 
 	static PyObject* GetCachedCameraShakeMod(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_CachedCameraShakeMod(), "CachedCameraShakeMod");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_CachedCameraShakeMod(), "CachedCameraShakeMod");
 	}
 
 	static int SetCachedCameraShakeMod(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_CachedCameraShakeMod(), "CachedCameraShakeMod");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_CachedCameraShakeMod(), "CachedCameraShakeMod");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_CameraCachePrivate()
@@ -114,12 +114,12 @@ struct FGetSets_PlayerCameraManager
 
 	static PyObject* GetCameraCachePrivate(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_CameraCachePrivate(), "CameraCachePrivate");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_CameraCachePrivate(), "CameraCachePrivate");
 	}
 
 	static int SetCameraCachePrivate(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_CameraCachePrivate(), "CameraCachePrivate");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_CameraCachePrivate(), "CameraCachePrivate");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_CameraLensEffects()
@@ -142,12 +142,12 @@ struct FGetSets_PlayerCameraManager
 
 	static PyObject* GetCameraLensEffects(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_CameraLensEffects(), "CameraLensEffects");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_CameraLensEffects(), "CameraLensEffects");
 	}
 
 	static int SetCameraLensEffects(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_CameraLensEffects(), "CameraLensEffects");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_CameraLensEffects(), "CameraLensEffects");
 	}
 
 	static PyObject* GetDefaultAspectRatio(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
@@ -268,12 +268,12 @@ struct FGetSets_PlayerCameraManager
 
 	static PyObject* GetLastFrameCameraCachePrivate(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_LastFrameCameraCachePrivate(), "LastFrameCameraCachePrivate");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_LastFrameCameraCachePrivate(), "LastFrameCameraCachePrivate");
 	}
 
 	static int SetLastFrameCameraCachePrivate(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_LastFrameCameraCachePrivate(), "LastFrameCameraCachePrivate");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_LastFrameCameraCachePrivate(), "LastFrameCameraCachePrivate");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_ModifierList()
@@ -296,12 +296,12 @@ struct FGetSets_PlayerCameraManager
 
 	static PyObject* GetModifierList(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ModifierList(), "ModifierList");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ModifierList(), "ModifierList");
 	}
 
 	static int SetModifierList(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ModifierList(), "ModifierList");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ModifierList(), "ModifierList");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnAudioFadeChangeEvent()
@@ -324,12 +324,12 @@ struct FGetSets_PlayerCameraManager
 
 	static PyObject* GetOnAudioFadeChangeEvent(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_OnAudioFadeChangeEvent(), "OnAudioFadeChangeEvent");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnAudioFadeChangeEvent(), "OnAudioFadeChangeEvent");
 	}
 
 	static int SetOnAudioFadeChangeEvent(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnAudioFadeChangeEvent(), "OnAudioFadeChangeEvent");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnAudioFadeChangeEvent(), "OnAudioFadeChangeEvent");
 	}
 
 	static PyObject* GetPCOwner(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
@@ -382,12 +382,12 @@ struct FGetSets_PlayerCameraManager
 
 	static PyObject* GetPostProcessBlendCache(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_PostProcessBlendCache(), "PostProcessBlendCache");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_PostProcessBlendCache(), "PostProcessBlendCache");
 	}
 
 	static int SetPostProcessBlendCache(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_PostProcessBlendCache(), "PostProcessBlendCache");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_PostProcessBlendCache(), "PostProcessBlendCache");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_ServerUpdateCameraTimeout()
@@ -410,12 +410,12 @@ struct FGetSets_PlayerCameraManager
 
 	static PyObject* GetServerUpdateCameraTimeout(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_ServerUpdateCameraTimeout(), "ServerUpdateCameraTimeout");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ServerUpdateCameraTimeout(), "ServerUpdateCameraTimeout");
 	}
 
 	static int SetServerUpdateCameraTimeout(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_ServerUpdateCameraTimeout(), "ServerUpdateCameraTimeout");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ServerUpdateCameraTimeout(), "ServerUpdateCameraTimeout");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_TransformComponent()
@@ -438,12 +438,12 @@ struct FGetSets_PlayerCameraManager
 
 	static PyObject* GetTransformComponent(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::GetPropertyValue(InSelf, GetPropertyDef_TransformComponent(), "TransformComponent");
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_TransformComponent(), "TransformComponent");
 	}
 
 	static int SetTransformComponent(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
-		return FUPyWrapperObjectBase::SetPropertyValue(InSelf, InValue, GetPropertyDef_TransformComponent(), "TransformComponent");
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_TransformComponent(), "TransformComponent");
 	}
 
 	static PyObject* GetViewPitchMax(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
@@ -1542,7 +1542,7 @@ namespace UPyConversion
 	{
 		if (FUPyWrapperPlayerCameraManager* PyPlayerCameraManager = UPyIsPlayerCameraManager(PyObj))
 		{
-			if (!FUPyWrapperObjectBase::ValidateInternalState(PyPlayerCameraManager))
+			if (!FUPyWrapperObject::ValidateInternalState(PyPlayerCameraManager))
 			{
 				return FUPyConversionResult::Failure();
 			}

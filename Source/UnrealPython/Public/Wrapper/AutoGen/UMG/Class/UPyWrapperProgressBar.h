@@ -14,7 +14,7 @@ extern PyTypeObject UPyWrapperProgressBarType;
 /** Initialize the UPyWrapperProgressBarType types and add them to the given Python module */
 void InitializeUPyWrapperProgressBar(UPyGenUtil::FNativePythonModule& ModuleInfo);
 
-class FUPyWrapperProgressBar: public FUPyWrapperObjectBase 
+class FUPyWrapperProgressBar: public FUPyWrapperObject
 {
 public:
 
