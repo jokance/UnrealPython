@@ -383,12 +383,12 @@ C:\Users\Nien\.gradle\wrapper\dists\gradle-8.7-all
 ```text
 Saved/AndroidTest/SampleGame-x64.apk
 Saved/AndroidTest/main.1.com.YourCompany.SampleGame.obb
-Saved/AndroidTest/Install_YourGame-x64.bat
-Saved/AndroidTest/Uninstall_YourGame-x64.bat
+Saved/AndroidTest/Install_SampleGame-x64.bat
+Saved/AndroidTest/Uninstall_SampleGame-x64.bat
 Saved/AndroidTest/win-x64/UnrealAndroidFileTool.exe
 ```
 
-`Install_YourGame-x64.bat` 不只是安装 APK，还会通过 `UnrealAndroidFileTool.exe` 推送 OBB。手工测试时优先使用这个脚本，避免只装 APK 导致运行时找不到 pak/obb 数据。
+`Install_SampleGame-x64.bat` 不只是安装 APK，还会通过 `UnrealAndroidFileTool.exe` 推送 OBB。手工测试时优先使用这个脚本，避免只装 APK 导致运行时找不到 pak/obb 数据。
 
 ### Android 模拟器安装与启动验证
 
@@ -403,7 +403,7 @@ $adb=Join-Path ([Environment]::GetEnvironmentVariable('ANDROID_HOME','User')) 'p
 
 ```powershell
 cd D:\Projects\SampleGame\Saved\AndroidTest
-.\Install_YourGame-x64.bat emulator-5554
+.\Install_SampleGame-x64.bat emulator-5554
 ```
 
 启动并抓取关键日志：
@@ -452,7 +452,7 @@ signal 11
 如果包能启动但 Python 初始化失败，优先检查：
 
 - 是否只安装了 APK，漏推 OBB。
-- `Install_YourGame-x64.bat` 或 arm64 安装脚本是否成功推送 `main.<StoreVersion>.<PackageName>.obb`。
+- `Install_SampleGame-x64.bat` 或 arm64 安装脚本是否成功推送 `main.<StoreVersion>.<PackageName>.obb`。
 - 打包日志里是否包含 `Plugins/UnrealPython/ThirdParty/python314/android/<host>/lib/python3.14`。
 - 运行日志里是否出现 `Added packaged Android Python stdlib path`。
 - 项目 Android ABI 是否和运行设备一致，例如模拟器需要 `x86_64-linux-android`，真机通常需要 `aarch64-linux-android`。
