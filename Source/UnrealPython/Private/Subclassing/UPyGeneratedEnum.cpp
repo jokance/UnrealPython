@@ -196,7 +196,7 @@ private:
 		// todo(hzn): meta data
 		for (const TSharedPtr<UUPyGeneratedEnum::FEnumValueDef>& EnumValueDef : NewEnum->EnumValueDefs)
 		{
-			FUPyWrapperEnum* PyEnumEntry = FUPyWrapperEnum::AddEnumEntry(PyType, EnumValueDef->Value, TCHAR_TO_UTF8(*EnumValueDef->Name), TCHAR_TO_UTF8(*EnumValueDef->DocString));
+			FUPyWrapperEnum* PyEnumEntry = FUPyWrapperEnum::AddEnumEntry(PyType, EnumValueDef->Value, TCHAR_TO_UTF8(*EnumValueDef->Name));
 			// if (PyEnumEntry)
 			// {
 			// 	NewEnum->PyMetaData.EnumEntries.Add(PyEnumEntry);

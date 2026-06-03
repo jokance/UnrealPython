@@ -15,12 +15,6 @@ PyTypeObject UPyWrapperEnumType = {
 	0, /* tp_basicsize */
 };
 
-PyTypeObject UPyWrapperEnumValueDescrType = {
-	PyVarObject_HEAD_INIT(nullptr, 0)
-	"_EnumEntry", /* tp_name */
-	sizeof(FUPyWrapperEnumValueDescrObject), /* tp_basicsize */
-};
-
 PyTypeObject UPyWrapperEnumMetaclassType = {
 	PyVarObject_HEAD_INIT(nullptr, 0)
 	"_EnumType", /* tp_name */
@@ -181,10 +175,9 @@ FUPyWrapperEnum* FUPyWrapperEnum::CastPyObject(PyObject* InPyObject, const PyTyp
 
 			while (PyDict_Next(InType->tp_dict, &Pos, &Key, &Value))
 			{
-				if (Py_TYPE(Value) == &UPyWrapperEnumValueDescrType)
+				if (PyObject_TypeCheck(Value, (PyTypeObject*)InType) && PyObject_TypeCheck(Value, &UPyWrapperEnumType))
 				{
-					FUPyWrapperEnumValueDescrObject* PyEnumDescr = (FUPyWrapperEnumValueDescrObject*)Value;
-					FUPyWrapperEnum* PyEnumEntry = PyEnumDescr->EnumEntry;
+					FUPyWrapperEnum* PyEnumEntry = (FUPyWrapperEnum*)Value;
 					const int64 EnumEntryVal = FUPyWrapperEnum::GetEnumEntryValue(PyEnumEntry);
 					if (EnumEntryVal == OtherVal)
 					{
@@ -213,13 +206,7 @@ FString FUPyWrapperEnum::GetEnumEntryName(FUPyWrapperEnum* InSelf)
 	Py_ssize_t Pos = 0;
 	while (PyDict_Next(Py_TYPE(InSelf)->tp_dict, &Pos, &Key, &Value))
 	{
-		if (Py_TYPE(Value) != &UPyWrapperEnumValueDescrType)
-		{
-			continue;
-		}
-
-		FUPyWrapperEnumValueDescrObject* PyEnumDescr = (FUPyWrapperEnumValueDescrObject*)Value;
-		if (PyEnumDescr->EnumEntry != InSelf)
+		if (Value != (PyObject*)InSelf)
 		{
 			continue;
 		}
@@ -246,96 +233,21 @@ int64 FUPyWrapperEnum::GetEnumEntryValue(FUPyWrapperEnum* InSelf)
 	return EnumEntryValueNum;
 }
 
-FUPyWrapperEnum* FUPyWrapperEnum::AddEnumEntry(PyTypeObject* InType, const int64 InEnumEntryValue, const char* InEnumEntryName, const char* InEnumEntryDoc)
+FUPyWrapperEnum* FUPyWrapperEnum::AddEnumEntry(PyTypeObject* InType, const int64 InEnumEntryValue, const char* InEnumEntryName)
 {
 	// if (!FPyWrapperEnumMetaData::IsEnumFinalized(InType))
 	{
-		FUPyWrapperEnumValueDescrObjectPtr PyEnumValueDescr = FUPyWrapperEnumValueDescrObjectPtr::StealReference(FUPyWrapperEnumValueDescrObject::New(InType, InEnumEntryValue, InEnumEntryName, InEnumEntryDoc));
-		if (PyEnumValueDescr)
+		FUPyWrapperEnumPtr PyEnumEntry = FUPyWrapperEnumPtr::StealReference(FUPyWrapperEnum::New(InType, InEnumEntryValue));
+		if (PyEnumEntry && FUPyWrapperEnum::Init(PyEnumEntry, InEnumEntryValue, InEnumEntryName) == 0)
 		{
-			PyDict_SetItemString(InType->tp_dict, InEnumEntryName, (PyObject*)PyEnumValueDescr.GetPtr());
-			return PyEnumValueDescr->EnumEntry;
+			if (PyDict_SetItemString(InType->tp_dict, InEnumEntryName, (PyObject*)PyEnumEntry.GetPtr()) == 0)
+			{
+				return PyEnumEntry.GetPtr();
+			}
 		}
 	}
 	return nullptr;
 }
-
-// ==================== Wrapper EnumValueDescr Type BEGIN ====================
-static void Dealloc_EnumValueDescr(FUPyWrapperEnumValueDescrObject* InSelf)
-{
-	FUPyWrapperEnumValueDescrObject::Free(InSelf);
-}
-
-static PyObject* Str_EnumValueDescr(FUPyWrapperEnumValueDescrObject* InSelf)
-{
-	return PyUnicode_FromString("<built-in enum value>");
-}
-
-static PyObject* DescrGet_EnumValueDescr(FUPyWrapperEnumValueDescrObject* InSelf, PyObject* InObj, PyObject* InType)
-{
-	if (!FUPyWrapperEnum::ValidateInternalState(InSelf->EnumEntry))
-	{
-		return nullptr;
-	}
-
-	Py_INCREF(InSelf->EnumEntry);
-	return (PyObject*)InSelf->EnumEntry;
-}
-
-static int DescrSet_EnumValueDescr(FUPyWrapperEnumValueDescrObject* InSelf, PyObject* InObj, PyObject* InValue)
-{
-	PyErr_SetString(PyExc_Exception, "Enum values are read-only");
-	return -1;
-}
-
-struct FGetSets_EnumValueDescr
-{
-	static PyObject* GetName(FUPyWrapperEnumValueDescrObject* InSelf, void* InClosure)
-	{
-		if (InSelf->EnumEntry)
-		{
-			return PyUnicode_FromString(TCHAR_TO_UTF8(*FUPyWrapperEnum::GetEnumEntryName(InSelf->EnumEntry)));
-		}
-
-		Py_RETURN_NONE;
-	}
-
-	static PyObject* GetDoc(FUPyWrapperEnumValueDescrObject* InSelf, void* InClosure)
-	{
-		if (InSelf->EnumEntryDoc)
-		{
-			Py_INCREF(InSelf->EnumEntryDoc);
-			return InSelf->EnumEntryDoc;
-		}
-
-		Py_RETURN_NONE;
-	}
-};
-
-static PyGetSetDef PyGetSets_EnumValueDescr[] = {
-	{ UPyCStrCast("__name__"), (getter)&FGetSets_EnumValueDescr::GetName, nullptr, nullptr, nullptr },
-	{ UPyCStrCast("__doc__"), (getter)&FGetSets_EnumValueDescr::GetDoc, nullptr, nullptr, nullptr },
-	{ nullptr, nullptr, nullptr, nullptr, nullptr }
-};
-
-PyTypeObject* InitializeUPyWrapperEnumValueDescrType()
-{
-	PyTypeObject* PyType = &UPyWrapperEnumValueDescrType;
-
-	PyType->tp_dealloc = (destructor)&Dealloc_EnumValueDescr;
-	PyType->tp_str = (reprfunc)&Str_EnumValueDescr;
-	PyType->tp_repr = (reprfunc)&Str_EnumValueDescr;
-	PyType->tp_descr_get = (descrgetfunc)&DescrGet_EnumValueDescr;
-	PyType->tp_descr_set = (descrsetfunc)&DescrSet_EnumValueDescr;
-	PyType->tp_getattro = (getattrofunc)&PyObject_GenericGetAttr;
-
-	PyType->tp_getset = PyGetSets_EnumValueDescr;
-
-	PyType->tp_flags = Py_TPFLAGS_DEFAULT;
-
-	return PyType;
-}
-// ==================== Wrapper EnumValueDescr Type END ====================
 
 // ==================== Wrapper EnumMetaclass Type BEGIN ====================
 struct FFuncs_EnumMetaclass
@@ -522,17 +434,11 @@ static PyMethodDef PyMethods[] = {
 
 void InitializeUPyWrapperEnum(UPyGenUtil::FNativePythonModule& ModuleInfo)
 {
-	InitializeUPyWrapperEnumValueDescrType();
 	InitializeUPyWrapperEnumMetaclassType();
 	InitializeUPyWrapperEnumIteratorType();
 
 	PyType_Ready(&UPyWrapperEnumIteratorType);
 	PyType_Ready(&UPyWrapperEnumMetaclassType);
-
-	if (PyType_Ready(&UPyWrapperEnumValueDescrType) == 0)
-	{
-		ModuleInfo.AddType(&UPyWrapperEnumValueDescrType, true);
-	}
 
 	PyTypeObject* PyType = &UPyWrapperEnumType;
 

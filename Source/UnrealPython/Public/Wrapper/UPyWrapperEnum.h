@@ -13,9 +13,6 @@ class UObjectRedirector;
 /** Python type for FUPyWrapperEnum */
 extern PyTypeObject UPyWrapperEnumType;
 
-/** Python type for FUPyWrapperEnumValueDescrObject */
-extern PyTypeObject UPyWrapperEnumValueDescrType;
-
 /** Initialize the PyWrapperEnum types and add them to the given Python module */
 void InitializeUPyWrapperEnum(UPyGenUtil::FNativePythonModule& ModuleInfo);
 
@@ -53,62 +50,10 @@ struct FUPyWrapperEnum
 	static int64 GetEnumEntryValue(FUPyWrapperEnum* InSelf);
 
 	/** Add the given enum entry on the given enum type (returns borrowed reference) */
-	static FUPyWrapperEnum* AddEnumEntry(PyTypeObject* InType, const int64 InEnumEntryValue, const char* InEnumEntryName, const char* InEnumEntryDoc);
+	static FUPyWrapperEnum* AddEnumEntry(PyTypeObject* InType, const int64 InEnumEntryValue, const char* InEnumEntryName);
 };
 
 typedef TUPyPtr<FUPyWrapperEnum> FUPyWrapperEnumPtr;
-
-/** Python object for the descriptor of an enum value */
-struct FUPyWrapperEnumValueDescrObject
-{
-	/** Common Python Object */
-	PyObject_HEAD
-
-	/** The enum entry */
-	FUPyWrapperEnum* EnumEntry;
-
-	/** The enum entry doc string (may be null) */
-	PyObject* EnumEntryDoc;
-
-	/** New an instance */
-	static FUPyWrapperEnumValueDescrObject* New(PyTypeObject* InEnumType, const int64 InEnumEntryValue, const char* InEnumEntryName, const char* InEnumEntryDoc)
-	{
-		FUPyWrapperEnumValueDescrObject* Self = (FUPyWrapperEnumValueDescrObject*)UPyWrapperEnumValueDescrType.tp_alloc(&UPyWrapperEnumValueDescrType, 0);
-		if (Self)
-		{
-			Self->EnumEntry = nullptr;
-			Self->EnumEntryDoc = nullptr;
-
-			Self->EnumEntry = FUPyWrapperEnum::New(InEnumType, InEnumEntryValue);
-			if (!Self->EnumEntry)
-			{
-				Py_DECREF(Self);
-				return nullptr;
-			}
-			if (FUPyWrapperEnum::Init(Self->EnumEntry, InEnumEntryValue, InEnumEntryName) != 0)
-			{
-				Py_DECREF(Self);
-				return nullptr;
-			}
-			Self->EnumEntryDoc = InEnumEntryDoc ? PyUnicode_FromString(InEnumEntryDoc) : nullptr;
-		}
-		return Self;
-	}
-
-	/** Free this instance */
-	static void Free(FUPyWrapperEnumValueDescrObject* InSelf)
-	{
-		Py_XDECREF(InSelf->EnumEntry);
-		InSelf->EnumEntry = nullptr;
-
-		Py_XDECREF(InSelf->EnumEntryDoc);
-		InSelf->EnumEntryDoc = nullptr;
-
-		Py_TYPE(InSelf)->tp_free((PyObject*)InSelf);
-	}
-};
-
-typedef TUPyPtr<FUPyWrapperEnumValueDescrObject> FUPyWrapperEnumValueDescrObjectPtr;
 
 typedef TArrayView<FUPyWrapperEnum* const> FPyWrapperEnumArrayView;
 

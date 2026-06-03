@@ -11,7 +11,7 @@ void FUPyGeneratedWrappedEnumType::Finalize_PostReady()
 	FUPyScopedGIL GIL;
 	for (const FGeneratedWrappedEnumEntry& EnumEntry : EnumEntries)
 	{
-		FUPyWrapperEnum* PyEnumEntry = FUPyWrapperEnum::AddEnumEntry(&PyType, EnumEntry.EntryValue, EnumEntry.EntryName.GetData(), EnumEntry.EntryDoc.GetData());
+		FUPyWrapperEnum* PyEnumEntry = FUPyWrapperEnum::AddEnumEntry(&PyType, EnumEntry.EntryValue, EnumEntry.EntryName.GetData());
 		if (PyEnumEntry)
 		{
 			PyEnumEntries.Add(PyEnumEntry);
@@ -37,6 +37,7 @@ void FUPyGeneratedWrappedEnumType::Reset_CleansePyType()
 void FUPyGeneratedWrappedEnumType::Reset_CleanseSelf()
 {
 	EnumEntries.Reset();
+	PyEnumEntries.Reset();
 
 	FGeneratedWrappedType::Reset_CleanseSelf();
 }

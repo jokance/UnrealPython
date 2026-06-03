@@ -809,10 +809,9 @@ FUPyConversionResult PythonizeEnumEntry(const int64 Val, const UEnum* EnumType, 
 
 		while (PyDict_Next(PyEnumType->tp_dict, &Pos, &Key, &Value))
 		{
-			if (Py_TYPE(Value) == &UPyWrapperEnumValueDescrType)
+			if (PyObject_TypeCheck(Value, (PyTypeObject*)PyEnumType) && PyObject_TypeCheck(Value, &UPyWrapperEnumType))
 			{
-				FUPyWrapperEnumValueDescrObject* PyEnumDescr = (FUPyWrapperEnumValueDescrObject*)Value;
-				FUPyWrapperEnum* PyEnumEntry = PyEnumDescr->EnumEntry;
+				FUPyWrapperEnum* PyEnumEntry = (FUPyWrapperEnum*)Value;
 				const int64 EnumEntryVal = FUPyWrapperEnum::GetEnumEntryValue(PyEnumEntry);
 				if (EnumEntryVal == Val)
 				{

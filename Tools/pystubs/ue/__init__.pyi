@@ -390,9 +390,6 @@ class StructBase:
 class ValueDef:
     ...
 
-class _EnumEntry:
-    ...
-
 class _ObjectBase:
 
     def AddPythonOwned(self) -> None:
