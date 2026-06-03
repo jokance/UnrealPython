@@ -803,23 +803,11 @@ FUPyConversionResult PythonizeEnumEntry(const int64 Val, const UEnum* EnumType, 
 	}
 	else if (PyEnumType)
 	{
-		PyObject* Key;
-		PyObject* Value;
-		Py_ssize_t Pos = 0;
-
-		while (PyDict_Next(PyEnumType->tp_dict, &Pos, &Key, &Value))
+		if (FUPyWrapperEnum* PyEnumEntry = FUPyWrapperEnum::FindEnumEntryByValue(PyEnumType, Val))
 		{
-			if (PyObject_TypeCheck(Value, (PyTypeObject*)PyEnumType) && PyObject_TypeCheck(Value, &UPyWrapperEnumType))
-			{
-				FUPyWrapperEnum* PyEnumEntry = (FUPyWrapperEnum*)Value;
-				const int64 EnumEntryVal = FUPyWrapperEnum::GetEnumEntryValue(PyEnumEntry);
-				if (EnumEntryVal == Val)
-				{
-					Py_INCREF(PyEnumEntry);
-					OutPyObj = (PyObject*)PyEnumEntry;
-					return FUPyConversionResult::Success();
-				}
-			}
+			Py_INCREF(PyEnumEntry);
+			OutPyObj = (PyObject*)PyEnumEntry;
+			return FUPyConversionResult::Success();
 		}
 	}
 

@@ -49,6 +49,15 @@ struct FUPyWrapperEnum
 	/** Get the value of the enum entry as an int */
 	static int64 GetEnumEntryValue(FUPyWrapperEnum* InSelf);
 
+	/** Test whether the given Python object is an entry belonging to the given enum type */
+	static bool IsEnumEntryForType(PyObject* InPyObject, const PyTypeObject* InType);
+
+	/** Find an enum entry on the given enum type using its numeric value (returns borrowed reference) */
+	static FUPyWrapperEnum* FindEnumEntryByValue(const PyTypeObject* InType, const int64 InEnumEntryValue);
+
+	/** Append enum entries from the given enum type into the given array (returns the number of entries added) */
+	static int32 AppendEnumEntries(PyTypeObject* InType, TArray<FUPyWrapperEnum*>& OutEnumEntries);
+
 	/** Add the given enum entry on the given enum type (returns borrowed reference) */
 	static FUPyWrapperEnum* AddEnumEntry(PyTypeObject* InType, const int64 InEnumEntryValue, const char* InEnumEntryName);
 };
@@ -66,6 +75,9 @@ struct FUPyWrapperEnumIterator
 	/** Array being iterated over */
 	FPyWrapperEnumArrayView IterArray;
 
+	/** Strong references used when entries are collected from the enum type dictionary */
+	TArray<FUPyWrapperEnum*> OwnedIterArray;
+
 	/** Current iteration index */
 	int32 IterIndex;
 
@@ -76,6 +88,7 @@ struct FUPyWrapperEnumIterator
 		if (Self)
 		{
 			new(&Self->IterArray) FPyWrapperEnumArrayView();
+			new(&Self->OwnedIterArray) TArray<FUPyWrapperEnum*>();
 			Self->IterIndex = 0;
 		}
 		return Self;
@@ -86,6 +99,7 @@ struct FUPyWrapperEnumIterator
 	{
 		Deinit(InSelf);
 
+		InSelf->OwnedIterArray.~TArray<FUPyWrapperEnum*>();
 		InSelf->IterArray.~FPyWrapperEnumArrayView();
 		Py_TYPE(InSelf)->tp_free((PyObject*)InSelf);
 	}
@@ -101,9 +115,31 @@ struct FUPyWrapperEnumIterator
 		return 0;
 	}
 
+	/** Initialize this iterator instance with entries collected from the given enum type */
+	static int Init(FUPyWrapperEnumIterator* InSelf, PyTypeObject* InEnumType)
+	{
+		Deinit(InSelf);
+
+		FUPyWrapperEnum::AppendEnumEntries(InEnumType, InSelf->OwnedIterArray);
+		for (FUPyWrapperEnum* EnumEntry : InSelf->OwnedIterArray)
+		{
+			Py_INCREF(EnumEntry);
+		}
+
+		InSelf->IterArray = InSelf->OwnedIterArray;
+		InSelf->IterIndex = 0;
+
+		return 0;
+	}
+
 	/** Deinitialize this iterator instance (called via Init and Free to restore the instance to its New state) */
 	static void Deinit(FUPyWrapperEnumIterator* InSelf)
 	{
+		for (FUPyWrapperEnum* EnumEntry : InSelf->OwnedIterArray)
+		{
+			Py_XDECREF(EnumEntry);
+		}
+		InSelf->OwnedIterArray.Reset();
 		InSelf->IterArray = FPyWrapperEnumArrayView();
 		InSelf->IterIndex = 0;
 	}

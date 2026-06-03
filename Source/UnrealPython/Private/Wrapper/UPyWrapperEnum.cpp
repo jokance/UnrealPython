@@ -110,7 +110,7 @@ FUPyWrapperEnum* FUPyWrapperEnum::CastPyObject(PyObject* InPyObject, const PyTyp
 {
 	SetOptionalUPyConversionResult(FUPyConversionResult::Failure(), OutCastResult);
 
-	if (PyObject_TypeCheck(InPyObject, (PyTypeObject*)InType) && (InType == &UPyWrapperEnumType || PyObject_TypeCheck(InPyObject, &UPyWrapperEnumType)))
+	if (InType && PyObject_TypeCheck(InPyObject, (PyTypeObject*)InType) && (InType == &UPyWrapperEnumType || PyObject_TypeCheck(InPyObject, &UPyWrapperEnumType)))
 	{
 		FUPyWrapperEnum* Self = (FUPyWrapperEnum*)InPyObject;
 		if (!ValidateInternalState(Self))
@@ -124,8 +124,8 @@ FUPyWrapperEnum* FUPyWrapperEnum::CastPyObject(PyObject* InPyObject, const PyTyp
 		return Self;
 	}
 
-	// Allow casting from a different enum type using the same UEnum (for deprecation)
-	const UEnum* RequiredEnum = FUPyWrapperTypeRegistry::Get().FindEnum(InType);
+	// Allow casting from an alias enum type using the same UEnum.
+	const UEnum* RequiredEnum = InType ? FUPyWrapperTypeRegistry::Get().FindEnum(InType) : nullptr;
 
 	if (PyObject_TypeCheck(InPyObject, &UPyWrapperEnumType))
 	{
@@ -148,7 +148,7 @@ FUPyWrapperEnum* FUPyWrapperEnum::CastPyObject(PyObject* InPyObject, const PyTyp
 
 	// Allow coerced casting from a numeric value
 	int64 OtherVal = 0;
-	if (UPyConversion::Nativize(InPyObject, OtherVal))
+	if (InType && UPyConversion::Nativize(InPyObject, OtherVal))
 	{
 		TSharedPtr<UPyGenUtil::FGeneratedWrappedType> WrappedType = FUPyWrapperTypeRegistry::Get().GetGeneratedWrappedType(RequiredEnum);
 		TSharedPtr<FUPyGeneratedWrappedEnumType> WrappedEnumType = StaticCastSharedPtr<FUPyGeneratedWrappedEnumType>(WrappedType);
@@ -167,27 +167,12 @@ FUPyWrapperEnum* FUPyWrapperEnum::CastPyObject(PyObject* InPyObject, const PyTyp
 				}
 			}
 		}
-		else if (InType)
+		else if (FUPyWrapperEnum* PyEnumEntry = FindEnumEntryByValue(InType, OtherVal))
 		{
-			PyObject* Key;
-			PyObject* Value;
-			Py_ssize_t Pos = 0;
+			SetOptionalUPyConversionResult(FUPyConversionResult::SuccessWithCoercion(), OutCastResult);
 
-			while (PyDict_Next(InType->tp_dict, &Pos, &Key, &Value))
-			{
-				if (PyObject_TypeCheck(Value, (PyTypeObject*)InType) && PyObject_TypeCheck(Value, &UPyWrapperEnumType))
-				{
-					FUPyWrapperEnum* PyEnumEntry = (FUPyWrapperEnum*)Value;
-					const int64 EnumEntryVal = FUPyWrapperEnum::GetEnumEntryValue(PyEnumEntry);
-					if (EnumEntryVal == OtherVal)
-					{
-						SetOptionalUPyConversionResult(FUPyConversionResult::SuccessWithCoercion(), OutCastResult);
-
-						Py_INCREF(PyEnumEntry);
-						return (FUPyWrapperEnum*)PyEnumEntry;
-					}
-				}
-			}
+			Py_INCREF(PyEnumEntry);
+			return PyEnumEntry;
 		}
 	}
 
@@ -233,6 +218,60 @@ int64 FUPyWrapperEnum::GetEnumEntryValue(FUPyWrapperEnum* InSelf)
 	return EnumEntryValueNum;
 }
 
+bool FUPyWrapperEnum::IsEnumEntryForType(PyObject* InPyObject, const PyTypeObject* InType)
+{
+	return InPyObject && InType && PyObject_TypeCheck(InPyObject, (PyTypeObject*)InType) && PyObject_TypeCheck(InPyObject, &UPyWrapperEnumType);
+}
+
+FUPyWrapperEnum* FUPyWrapperEnum::FindEnumEntryByValue(const PyTypeObject* InType, const int64 InEnumEntryValue)
+{
+	if (!InType || !InType->tp_dict)
+	{
+		return nullptr;
+	}
+
+	PyObject* Key = nullptr;
+	PyObject* Value = nullptr;
+	Py_ssize_t Pos = 0;
+	while (PyDict_Next(InType->tp_dict, &Pos, &Key, &Value))
+	{
+		if (!IsEnumEntryForType(Value, InType))
+		{
+			continue;
+		}
+
+		FUPyWrapperEnum* PyEnumEntry = (FUPyWrapperEnum*)Value;
+		if (GetEnumEntryValue(PyEnumEntry) == InEnumEntryValue)
+		{
+			return PyEnumEntry;
+		}
+	}
+
+	return nullptr;
+}
+
+int32 FUPyWrapperEnum::AppendEnumEntries(PyTypeObject* InType, TArray<FUPyWrapperEnum*>& OutEnumEntries)
+{
+	if (!InType || !InType->tp_dict)
+	{
+		return 0;
+	}
+
+	const int32 InitialNum = OutEnumEntries.Num();
+	PyObject* Key = nullptr;
+	PyObject* Value = nullptr;
+	Py_ssize_t Pos = 0;
+	while (PyDict_Next(InType->tp_dict, &Pos, &Key, &Value))
+	{
+		if (IsEnumEntryForType(Value, InType))
+		{
+			OutEnumEntries.Add((FUPyWrapperEnum*)Value);
+		}
+	}
+
+	return OutEnumEntries.Num() - InitialNum;
+}
+
 FUPyWrapperEnum* FUPyWrapperEnum::AddEnumEntry(PyTypeObject* InType, const int64 InEnumEntryValue, const char* InEnumEntryName)
 {
 	// if (!FPyWrapperEnumMetaData::IsEnumFinalized(InType))
@@ -267,7 +306,10 @@ struct FFuncs_EnumMetaclass
 		}
 
 		FPyWrapperEnumIteratorPtr NewIter = FPyWrapperEnumIteratorPtr::StealReference(FUPyWrapperEnumIterator::New(&UPyWrapperEnumIteratorType));
-		if (FUPyWrapperEnumIterator::Init(NewIter, EnumEntriesArray) != 0)
+		const int InitResult = WrappedEnumType
+			? FUPyWrapperEnumIterator::Init(NewIter, EnumEntriesArray)
+			: FUPyWrapperEnumIterator::Init(NewIter, InSelf);
+		if (InitResult != 0)
 		{
 			return nullptr;
 		}
@@ -280,11 +322,16 @@ struct FSequenceFuncs_EnumMetaclass
 {
 	static Py_ssize_t Len(PyTypeObject* InSelf)
 	{
-		// if (const FPyWrapperEnumMetaData* EnumMetaData = FPyWrapperEnumMetaData::GetMetaData(InSelf))
-		// {
-		// 	return EnumMetaData->EnumEntries.Num();
-		// }
-		return 0;
+		const UEnum* RequiredEnum = FUPyWrapperTypeRegistry::Get().FindEnum(InSelf);
+		TSharedPtr<UPyGenUtil::FGeneratedWrappedType> WrappedType = FUPyWrapperTypeRegistry::Get().GetGeneratedWrappedType(RequiredEnum);
+		TSharedPtr<FUPyGeneratedWrappedEnumType> WrappedEnumType = StaticCastSharedPtr<FUPyGeneratedWrappedEnumType>(WrappedType);
+		if (WrappedEnumType)
+		{
+			return WrappedEnumType->PyEnumEntries.Num();
+		}
+
+		TArray<FUPyWrapperEnum*> EnumEntries;
+		return FUPyWrapperEnum::AppendEnumEntries(InSelf, EnumEntries);
 	}
 };
 
@@ -342,7 +389,9 @@ struct FFuncs_EnumIterator
 			EnumEntriesArray = WrappedEnumType->PyEnumEntries;
 		}
 
-		return FUPyWrapperEnumIterator::Init(InSelf, EnumEntriesArray);
+		return WrappedEnumType
+			? FUPyWrapperEnumIterator::Init(InSelf, EnumEntriesArray)
+			: FUPyWrapperEnumIterator::Init(InSelf, Py_TYPE(PyObj));
 	}
 
 	static FUPyWrapperEnumIterator* GetIter(FUPyWrapperEnumIterator* InSelf)
