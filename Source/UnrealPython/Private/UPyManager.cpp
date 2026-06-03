@@ -7,7 +7,6 @@
 #include "Core/UPyGIL.h"
 #include "Wrapper/UPyWrapperObjectBase.h"
 #include "Wrapper/UPyWrapperTypeFactory.h"
-#include "HAL/PlatformFileManager.h"
 
 UUPyManager* UUPyManager::Get()
 {
@@ -25,8 +24,6 @@ void UUPyManager::Initialize()
 #if WITH_EDITOR
 	FCoreUObjectDelegates::OnObjectsReplaced.AddUObject(this, &UUPyManager::OnObjectsReplaced);
 #endif
-
-	CheckPyScript();
 
 	if (!FUPyVirtualMachine::Get().InitializePython())
 	{
@@ -186,132 +183,4 @@ bool UUPyManager::Tick(float DeltaTime)
 	FUPyScopedGIL GIL;
 	PyRun_SimpleString("import ue_site; ue_site.on_tick()");
 	return true;
-}
-
-void UUPyManager::CheckPyScript()
-{
-#if !WITH_EDITOR
-#if PLATFORM_IOS || PLATFORM_WINDOWS || PLATFORM_ANDROID
-	UE_LOG(LogUnrealPython, Log, TEXT("Skipping CheckPyScript copy; Python scripts are loaded from staged package content."));
-#else
-	UE_LOG(LogTemp, Warning, TEXT("begin CheckPyScript"));
-	CopyAllAssetsToExternal("Scripts");
-	CopyAllAssetsToExternal("Settings");
-	UE_LOG(LogTemp, Warning, TEXT("end CheckPyScript"));
-#endif
-#endif
-}
-
-void UUPyManager::CopyAllAssetsToExternal(const FString& InDirectory)
-{
-	//extern FString GExternalFilePath;
-
-	FString SourceDirectory = FPaths::ProjectContentDir() / InDirectory;
-	//FString DestDirectory = GExternalFilePath / InDirectory;
-	FString DestDirectory = IFileManager::Get().ConvertToAbsolutePathForExternalAppForWrite(*SourceDirectory);
-
-	FPaths::NormalizeDirectoryName(DestDirectory);
-	FPaths::NormalizeDirectoryName(SourceDirectory);
-
-	UE_LOG(LogTemp, Warning, TEXT("CopyAllAssetsToExternal source: %s,dest:%s"), *SourceDirectory, *DestDirectory);
-
-	bool bOverwqriteAllExisting = true;
-
-	IPlatformFile& TmpPlatformFile = FPlatformFileManager::Get().GetPlatformFile();
-
-	if (!TmpPlatformFile.DirectoryExists(*SourceDirectory))
-	{
-		UE_LOG(LogTemp, Warning, TEXT("CopyAllAssetsToExternal fail DirectoryExists, %s"), *SourceDirectory);
-		return;
-	}
-
-	if (TmpPlatformFile.DirectoryExists(*DestDirectory))
-	{
-		//UE_LOG(LogTemp, Warning, TEXT("CopyAllAssetsToExternal fail DirectoryExists, %s"), *DestDirectory);
-		//return;
-	}
-
-	if (!TmpPlatformFile.CreateDirectoryTree(*DestDirectory))
-	{
-		UE_LOG(LogTemp, Warning, TEXT("CopyAllAssetsToExternal CreateDirectory fail, %s"), *DestDirectory);
-		return;
-	}
-
-	// Copy all files and directories
-	struct FCopyFilesAndDirs : public IPlatformFile::FDirectoryVisitor
-	{
-		IPlatformFile& PlatformFile;
-		bool bOverwrite;
-		FString SourcePathHead;
-		FString DestPathHead;
-
-		FCopyFilesAndDirs(IPlatformFile& InPlatformFile, bool bInOverwrite)
-			: PlatformFile(InPlatformFile)
-			, bOverwrite(bInOverwrite)
-		{
-			SourcePathHead = FApp::GetProjectName() / FString(TEXT("Content"));
-			//DestPathHead = GExternalFilePath;
-			DestPathHead = IFileManager::Get().ConvertToAbsolutePathForExternalAppForWrite(*SourcePathHead);
-		}
-
-		virtual bool Visit(const TCHAR* FilenameOrDirectory, bool bIsDirectory)
-		{
-			FString NewName(FilenameOrDirectory);
-//			while (NewName.StartsWith(TEXT("../")))
-//			{
-//				NewName = NewName.RightChop(3);
-//			}
-			// change the root
-			FString _SourcePathHead = FPaths::ProjectContentDir();
-			// DestPathHead = GExternalFilePath;
-			FString _DestPathHead = IFileManager::Get().ConvertToAbsolutePathForExternalAppForWrite(*_SourcePathHead);
-			// replace insternal path to external path, SourcePathHead such as G114/Content
-			NewName = NewName.Replace(*_SourcePathHead, *_DestPathHead);
-
-			///UE_LOG(LogTemp, Log, TEXT("FCopyFilesAndDirs SourceRoot: %s  ,DestRoot: %s,file:%s"), *SourcePathHead, *DestPathHead, FilenameOrDirectory);
-			UE_LOG(LogTemp, Log, TEXT("FCopyFilesAndDirs NewName: %s  ,FilenameOrDirectory: %s"), *NewName,  FilenameOrDirectory);
-
-			if (bIsDirectory)
-			{
-				// create new directory structure
-				if (!PlatformFile.CreateDirectoryTree(*NewName) && !PlatformFile.DirectoryExists(*NewName))
-				{
-					UE_LOG(LogTemp, Warning, TEXT("CreateDirectoryTree fail, %s"), *NewName);
-					// return false;
-				}
-				else
-				{
-					UE_LOG(LogTemp, Warning, TEXT("CreateDirectoryTree success, %s"), *NewName);
-				}
-			}
-			else
-			{
-				// Delete destination file if it exists and we are overwriting
-				//if (PlatformFile.FileExists(*NewName) && bOverwrite)
-				//{
-				//	PlatformFile.DeleteFile(*NewName);
-				//}
-
-				PlatformFile.CreateDirectoryTree(*FPaths::GetPath(NewName));
-				// Copy file from source
-				if (!PlatformFile.CopyFile(*NewName, FilenameOrDirectory))
-				{
-
-					// Not all files could be copied
-					UE_LOG(LogTemp, Warning, TEXT("CopyFile fail, %s  , %s"), *NewName, FilenameOrDirectory);
-
-					// return false;
-				}
-				// UE_LOG(LogTemp,Log , TEXT("CopyFile success, %s  , %s"), *NewName, FilenameOrDirectory);
-			}
-			return true; // continue searching
-		}
-	};
-
-	// copy files and directories visitor
-	FCopyFilesAndDirs CopyFilesAndDirs(TmpPlatformFile, true);
-
-	// create all files subdirectories and files in subdirectories!
-	TmpPlatformFile.IterateDirectoryRecursively(*SourceDirectory, CopyFilesAndDirs);
-
 }

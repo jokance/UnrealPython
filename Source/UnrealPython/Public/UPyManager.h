@@ -38,10 +38,6 @@ public:
 	bool Tick(float DeltaTime);
 	void RegisterTicker();
 	void UnregisterTicker();
-	void CheckPyScript();
-	void CopyAllAssetsToExternal(const FString& InDirectory);
-
-
 
 private:
 	FTSTicker::FDelegateHandle TickerHandle;

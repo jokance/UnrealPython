@@ -62,7 +62,7 @@ UE 内置插件使用项目设置里的 `AdditionalPaths`、启动脚本、pip s
 - 默认加入 `Content/Scripts`
 - 可通过 `Game.ini` 的 `[UnrealPython] ScriptPath` 覆盖脚本目录
 - 可通过 `UUPySettings::AdditionalPaths` 追加项目相对路径
-- 非编辑器下 `UUPyManager::CheckPyScript` 会把 `Content/Scripts` 和 `Content/Settings` 复制到外部可读写路径
+- 非编辑器下不再复制 `Content/Scripts` 和 `Content/Settings` 到外部可读写路径，脚本和配置需要通过 stage/package 进入包体
 
 这样修改的原因是打包后内容路径和编辑器路径不同，移动平台尤其不能假设 Python 可以直接读取项目源目录。本插件把脚本路径约束到项目内容和插件运行时目录，便于 Cook/Package 后运行。
 

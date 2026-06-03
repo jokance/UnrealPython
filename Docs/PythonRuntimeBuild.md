@@ -52,7 +52,7 @@ LogUnrealPython: Added bundled Windows Python path: .../python314.zip
 Content/Scripts
 ```
 
-打包时需要作为 Non-UFS 文件 staged，这样包体运行时可以按文件系统路径读取脚本，而不是依赖 `CheckPyScript` 把脚本复制到外部目录。
+打包时需要作为 Non-UFS 文件 staged，这样包体运行时可以按文件系统路径读取脚本。
 
 推荐在项目 `Config/DefaultGame.ini` 中配置：
 
@@ -68,7 +68,7 @@ ScriptPath=Content/Scripts
 
 - `DirectoriesToAlwaysStageAsNonUFS=(Path="Scripts")` 对应项目 `Content/Scripts`。
 - `[UnrealPython] ScriptPath=Content/Scripts` 保持编辑器和包体使用同一套脚本目录约定。
-- `UUPyManager::CheckPyScript` 在 Windows 包体中会跳过复制，日志为 `Skipping CheckPyScript copy; Python scripts are loaded from staged package content.`。
+- 运行时不再复制项目脚本；脚本目录必须在 stage/package 阶段进入包体。
 
 ### Windows 打包流程
 
@@ -113,7 +113,6 @@ Content/Scripts
 启动包体后重点检查日志：
 
 ```text
-LogUnrealPython: Skipping CheckPyScript copy; Python scripts are loaded from staged package content.
 LogUnrealPython: Added bundled Windows Python path: .../python314.zip
 LogUnrealPython: Python VM init success!
 ```
@@ -277,7 +276,7 @@ Android 链接逻辑在 `Source/UnrealPython/UnrealPython.Build.cs`：
 
 Android cook 会以 commandlet 方式加载插件。当前插件在 commandlet 下跳过 Python VM 初始化，避免 Windows cook 阶段因为没有 Win64 标准库 `encodings` 而失败；`StartupModule()` 和 `ShutdownModule()` 都需要保持这个对称跳过逻辑。
 
-Android 包体运行时不调用 `CheckPyScript` 复制脚本。`Content/Scripts`、`_android_support.py` 和 host stdlib 都应该在 stage/package 阶段进入 APK/OBB。运行时通过 Java `GameActivity.getObbDirs()` 获取设备实际 OBB 目录，找不到数组时回退到 `getObbDir()`，避免写死 `/storage/emulated/0`。
+Android 包体运行时不复制脚本。`Content/Scripts`、`_android_support.py` 和 host stdlib 都应该在 stage/package 阶段进入 APK/OBB。运行时通过 Java `GameActivity.getObbDirs()` 获取设备实际 OBB 目录，找不到数组时回退到 `getObbDir()`，避免写死 `/storage/emulated/0`。
 
 ### Android 工程内验证
 
@@ -423,7 +422,6 @@ Start-Sleep -Seconds 20
 ```text
 Mounted main OBB: /storage/emulated/0/Android/obb/com.YourCompany.SampleGame/main.1.com.YourCompany.SampleGame.obb
 LogPluginManager: Mounting Project plugin UnrealPython
-LogUnrealPython: Skipping CheckPyScript copy; Python scripts are loaded from staged package content.
 LogUnrealPython: Added packaged Android OBB script path: .../Content/Scripts
 LogUnrealPython: Added packaged Android Python support path: .../Plugins/UnrealPython/ThirdParty/python314/android
 LogUnrealPython: Added packaged Android Python stdlib path: .../Plugins/UnrealPython/ThirdParty/python314/android/x86_64-linux-android/lib/python3.14
