@@ -38,9 +38,7 @@ void UUPyManager::Initialize()
 
 	FUPyVirtualMachine::Get().SaveThread();
 
-#if WITH_EDITOR
 	RegisterTicker();
-#endif
 }
 
 void UUPyManager::Shutdown()
@@ -55,6 +53,8 @@ void UUPyManager::Shutdown()
 	{
 		return;
 	}
+
+	UnregisterTicker();
 
 	FUPyVirtualMachine::Get().RestoreThread();
 
