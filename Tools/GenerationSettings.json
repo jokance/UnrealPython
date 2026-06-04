@@ -73,6 +73,7 @@
         "InputSettings": {},
         "FXSystemComponent": {},
         "ParticleSystemComponent": {},
+        "EngineTypes": {},
 
         "Widget": {
             "ExcludeProperties": [
