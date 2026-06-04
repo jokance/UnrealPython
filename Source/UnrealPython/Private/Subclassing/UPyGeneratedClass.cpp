@@ -329,6 +329,14 @@ public:
 		}
 
 		NewClass->AddCppProperty(Prop);
+		if (InPyPropDef->bReplicated)
+		{
+			UUPyGeneratedClass::FReplicationDef& ReplicationDef = NewClass->ReplicationDefs.AddDefaulted_GetRef();
+			ReplicationDef.PropertyName = PropName;
+			ReplicationDef.ReplicationCondition = InPyPropDef->ReplicationCondition;
+			ReplicationDef.RepNotifyCondition = InPyPropDef->RepNotifyCondition;
+			ReplicationDef.bPushBased = InPyPropDef->bPushBased;
+		}
 
 		// Resolve any getter/setter function names
 		const FName GetterFuncName = *InPyPropDef->GetterFuncName; // FPyWrapperObjectMetaData::ResolveFunctionName(PyType->tp_base, *InPyPropDef->GetterFuncName);
@@ -721,6 +729,7 @@ public:
 		check(OldClass);
 
 		NewClass->PropertyDefs.Reserve(OldClass->PropertyDefs.Num());
+		NewClass->ReplicationDefs = OldClass->ReplicationDefs;
 		for (const TSharedPtr<UPyGenUtil::FPropertyDef>& OldPropDef : OldClass->PropertyDefs)
 		{
 			const FProperty* OldProp = OldPropDef->GeneratedWrappedGetSet.Prop.Prop;
@@ -956,6 +965,7 @@ void UUPyGeneratedClass::ReleasePythonResources()
 	}
 
 	PropertyDefs.Reset();
+	ReplicationDefs.Reset();
 	FunctionDefs.Reset();
 	// PyMetaData = FPyWrapperObjectMetaData();
 }
@@ -972,6 +982,55 @@ bool UUPyGeneratedClass::IsFunctionImplementedInScript(FName InFunctionName) con
 {
 	UFunction* Function = FindFunctionByName(InFunctionName);
 	return Function && Function->GetOuter() && Function->GetOuter()->IsA(UUPyGeneratedClass::StaticClass());
+}
+
+void UUPyGeneratedClass::GetLifetimeBlueprintReplicationList(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	for (const FReplicationDef& ReplicationDef : ReplicationDefs)
+	{
+		FProperty* Prop = FindPropertyByName(ReplicationDef.PropertyName);
+		if (Prop && Prop->HasAnyPropertyFlags(CPF_Net))
+		{
+			FLifetimeProperty* ExistingLifetimeProp = OutLifetimeProps.FindByPredicate([Prop](const FLifetimeProperty& InLifetimeProp)
+			{
+				return InLifetimeProp.RepIndex == Prop->RepIndex;
+			});
+			if (ExistingLifetimeProp)
+			{
+				ExistingLifetimeProp->Condition = ReplicationDef.ReplicationCondition;
+				ExistingLifetimeProp->RepNotifyCondition = ReplicationDef.RepNotifyCondition;
+				ExistingLifetimeProp->bIsPushBased = ReplicationDef.bPushBased;
+			}
+			else
+			{
+				OutLifetimeProps.Add(FLifetimeProperty(Prop->RepIndex, ReplicationDef.ReplicationCondition, ReplicationDef.RepNotifyCondition, ReplicationDef.bPushBased));
+			}
+		}
+	}
+
+	if (const UUPyGeneratedClass* SuperPyClass = Cast<UUPyGeneratedClass>(GetSuperStruct()))
+	{
+		SuperPyClass->GetLifetimeBlueprintReplicationList(OutLifetimeProps);
+	}
+}
+
+bool UUPyGeneratedClass::GetGeneratedPropertyReplicationInfo(FName InPropertyName, ELifetimeCondition& OutReplicationCondition, ELifetimeRepNotifyCondition& OutRepNotifyCondition, bool& bOutPushBased) const
+{
+	if (const FReplicationDef* ReplicationDef = ReplicationDefs.FindByPredicate([InPropertyName](const FReplicationDef& InReplicationDef)
+	{
+		return InReplicationDef.PropertyName == InPropertyName;
+	}))
+	{
+		OutReplicationCondition = ReplicationDef->ReplicationCondition;
+		OutRepNotifyCondition = ReplicationDef->RepNotifyCondition;
+		bOutPushBased = ReplicationDef->bPushBased;
+		return true;
+	}
+
+	OutReplicationCondition = COND_None;
+	OutRepNotifyCondition = REPNOTIFY_OnChanged;
+	bOutPushBased = false;
+	return false;
 }
 
 UUPyGeneratedClass* UUPyGeneratedClass::GenerateClass(PyTypeObject* InPyType)

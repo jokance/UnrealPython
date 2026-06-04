@@ -88,6 +88,94 @@ namespace UPyCoreUtil
 		return true;
 	}
 
+	bool ConvertOptionalLifetimeCondition(PyObject* InObj, ELifetimeCondition& OutCondition, const TCHAR* InErrorCtxt)
+	{
+		OutCondition = COND_None;
+		if (!InObj || InObj == Py_None)
+		{
+			return true;
+		}
+		if (!PyUnicode_Check(InObj))
+		{
+			UPyUtil::SetPythonError(PyExc_TypeError, InErrorCtxt, TEXT("Failed to convert parameter 'ReplicationCondition' (expected 'None' or 'str')"));
+			return false;
+		}
+
+		const FString ConditionName = UPyUtil::PyObjectToUEString(InObj);
+		static const TMap<FString, ELifetimeCondition> Conditions = {
+			{ TEXT("None"), COND_None },
+			{ TEXT("COND_None"), COND_None },
+			{ TEXT("InitialOnly"), COND_InitialOnly },
+			{ TEXT("COND_InitialOnly"), COND_InitialOnly },
+			{ TEXT("OwnerOnly"), COND_OwnerOnly },
+			{ TEXT("COND_OwnerOnly"), COND_OwnerOnly },
+			{ TEXT("SkipOwner"), COND_SkipOwner },
+			{ TEXT("COND_SkipOwner"), COND_SkipOwner },
+			{ TEXT("SimulatedOnly"), COND_SimulatedOnly },
+			{ TEXT("COND_SimulatedOnly"), COND_SimulatedOnly },
+			{ TEXT("AutonomousOnly"), COND_AutonomousOnly },
+			{ TEXT("COND_AutonomousOnly"), COND_AutonomousOnly },
+			{ TEXT("SimulatedOrPhysics"), COND_SimulatedOrPhysics },
+			{ TEXT("COND_SimulatedOrPhysics"), COND_SimulatedOrPhysics },
+			{ TEXT("InitialOrOwner"), COND_InitialOrOwner },
+			{ TEXT("COND_InitialOrOwner"), COND_InitialOrOwner },
+			{ TEXT("Custom"), COND_Custom },
+			{ TEXT("COND_Custom"), COND_Custom },
+			{ TEXT("ReplayOrOwner"), COND_ReplayOrOwner },
+			{ TEXT("COND_ReplayOrOwner"), COND_ReplayOrOwner },
+			{ TEXT("ReplayOnly"), COND_ReplayOnly },
+			{ TEXT("COND_ReplayOnly"), COND_ReplayOnly },
+			{ TEXT("SimulatedOnlyNoReplay"), COND_SimulatedOnlyNoReplay },
+			{ TEXT("COND_SimulatedOnlyNoReplay"), COND_SimulatedOnlyNoReplay },
+			{ TEXT("SimulatedOrPhysicsNoReplay"), COND_SimulatedOrPhysicsNoReplay },
+			{ TEXT("COND_SimulatedOrPhysicsNoReplay"), COND_SimulatedOrPhysicsNoReplay },
+			{ TEXT("SkipReplay"), COND_SkipReplay },
+			{ TEXT("COND_SkipReplay"), COND_SkipReplay },
+			{ TEXT("Dynamic"), COND_Dynamic },
+			{ TEXT("COND_Dynamic"), COND_Dynamic },
+			{ TEXT("Never"), COND_Never },
+			{ TEXT("COND_Never"), COND_Never },
+		};
+
+		if (const ELifetimeCondition* FoundCondition = Conditions.Find(ConditionName))
+		{
+			OutCondition = *FoundCondition;
+			return true;
+		}
+
+		UPyUtil::SetPythonError(PyExc_ValueError, InErrorCtxt, *FString::Printf(TEXT("Unknown ReplicationCondition '%s'"), *ConditionName));
+		return false;
+	}
+
+	bool ConvertOptionalRepNotifyCondition(PyObject* InObj, ELifetimeRepNotifyCondition& OutCondition, const TCHAR* InErrorCtxt)
+	{
+		OutCondition = REPNOTIFY_OnChanged;
+		if (!InObj || InObj == Py_None)
+		{
+			return true;
+		}
+		if (!PyUnicode_Check(InObj))
+		{
+			UPyUtil::SetPythonError(PyExc_TypeError, InErrorCtxt, TEXT("Failed to convert parameter 'RepNotifyCondition' (expected 'None' or 'str')"));
+			return false;
+		}
+
+		const FString ConditionName = UPyUtil::PyObjectToUEString(InObj);
+		if (ConditionName == TEXT("OnChanged") || ConditionName == TEXT("REPNOTIFY_OnChanged"))
+		{
+			OutCondition = REPNOTIFY_OnChanged;
+			return true;
+		}
+		if (ConditionName == TEXT("Always") || ConditionName == TEXT("REPNOTIFY_Always"))
+		{
+			OutCondition = REPNOTIFY_Always;
+			return true;
+		}
+
+		UPyUtil::SetPythonError(PyExc_ValueError, InErrorCtxt, *FString::Printf(TEXT("Unknown RepNotifyCondition '%s'"), *ConditionName));
+		return false;
+	}
+
 	void ApplyMetaData(PyObject* InMetaData, const TFunctionRef<void(const FString&, const FString&)>& InPredicate)
 	{
 		if (PyDict_Check(InMetaData))
@@ -367,6 +455,9 @@ FUPyFPropertyDef* FUPyFPropertyDef::New(PyTypeObject* InType)
 		new(&Self->RepNotifyFuncName) FString();
 		Self->bReplicated = false;
 		Self->bRepNotify = false;
+		Self->ReplicationCondition = COND_None;
+		Self->RepNotifyCondition = REPNOTIFY_OnChanged;
+		Self->bPushBased = false;
 	}
 	return Self;
 }
@@ -381,7 +472,7 @@ void FUPyFPropertyDef::Free(FUPyFPropertyDef* InSelf)
 	Py_TYPE(InSelf)->tp_free((PyObject*)InSelf);
 }
 
-int FUPyFPropertyDef::Init(FUPyFPropertyDef* InSelf, PyObject* InPropType, PyObject* InMetaData, FString InGetterFuncName, FString InSetterFuncName, bool bInReplicated, FString InRepNotifyFuncName, bool bInRepNotify)
+int FUPyFPropertyDef::Init(FUPyFPropertyDef* InSelf, PyObject* InPropType, PyObject* InMetaData, FString InGetterFuncName, FString InSetterFuncName, bool bInReplicated, FString InRepNotifyFuncName, bool bInRepNotify, ELifetimeCondition InReplicationCondition, ELifetimeRepNotifyCondition InRepNotifyCondition, bool bInPushBased)
 {
 	Deinit(InSelf);
 
@@ -396,6 +487,9 @@ int FUPyFPropertyDef::Init(FUPyFPropertyDef* InSelf, PyObject* InPropType, PyObj
 	InSelf->bReplicated = bInReplicated || bInRepNotify;
 	InSelf->RepNotifyFuncName = MoveTemp(InRepNotifyFuncName);
 	InSelf->bRepNotify = bInRepNotify;
+	InSelf->ReplicationCondition = InReplicationCondition;
+	InSelf->RepNotifyCondition = InRepNotifyCondition;
+	InSelf->bPushBased = bInPushBased;
 
 	return 0;
 }
@@ -408,9 +502,12 @@ int FUPyFPropertyDef::PyInit(FUPyFPropertyDef* InSelf, PyObject* InArgs, PyObjec
 	PyObject* PyPropSetterObj = nullptr;
 	PyObject* PyPropReplicatedObj = nullptr;
 	PyObject* PyPropRepNotifyObj = nullptr;
+	PyObject* PyPropReplicationConditionObj = nullptr;
+	PyObject* PyPropRepNotifyConditionObj = nullptr;
+	PyObject* PyPropPushBasedObj = nullptr;
 
-	static const char *ArgsKwdList[] = { "Type", "Meta", "Getter", "Setter", "Replicated", "RepNotify", nullptr };
-	if (!PyArg_ParseTupleAndKeywords(InArgs, InKwds, "O|OOOOO:call", (char**)ArgsKwdList, &PyPropTypeObj, &PyMetaObj, &PyPropGetterObj, &PyPropSetterObj, &PyPropReplicatedObj, &PyPropRepNotifyObj))
+	static const char *ArgsKwdList[] = { "Type", "Meta", "Getter", "Setter", "Replicated", "RepNotify", "ReplicationCondition", "RepNotifyCondition", "PushBased", nullptr };
+	if (!PyArg_ParseTupleAndKeywords(InArgs, InKwds, "O|OOOOOOOO:call", (char**)ArgsKwdList, &PyPropTypeObj, &PyMetaObj, &PyPropGetterObj, &PyPropSetterObj, &PyPropReplicatedObj, &PyPropRepNotifyObj, &PyPropReplicationConditionObj, &PyPropRepNotifyConditionObj, &PyPropPushBasedObj))
 	{
 		return -1;
 	}
@@ -466,7 +563,35 @@ int FUPyFPropertyDef::PyInit(FUPyFPropertyDef* InSelf, PyObject* InArgs, PyObjec
 		}
 	}
 
-	return Init(InSelf, PyPropTypeObj, PyMetaObj, MoveTemp(PropGetter), MoveTemp(PropSetter), bPropReplicated, MoveTemp(PropRepNotifyFuncName), bPropRepNotify);
+	ELifetimeCondition ReplicationCondition = COND_None;
+	if (!UPyCoreUtil::ConvertOptionalLifetimeCondition(PyPropReplicationConditionObj, ReplicationCondition, *ErrorCtxt))
+	{
+		return -1;
+	}
+
+	ELifetimeRepNotifyCondition RepNotifyCondition = REPNOTIFY_OnChanged;
+	if (!UPyCoreUtil::ConvertOptionalRepNotifyCondition(PyPropRepNotifyConditionObj, RepNotifyCondition, *ErrorCtxt))
+	{
+		return -1;
+	}
+	if (PyPropRepNotifyConditionObj && PyPropRepNotifyConditionObj != Py_None && !bPropRepNotify)
+	{
+		UPyUtil::SetPythonError(PyExc_ValueError, *ErrorCtxt, TEXT("Parameter 'RepNotifyCondition' requires 'RepNotify'"));
+		return -1;
+	}
+
+	bool bPropPushBased = false;
+	if (PyPropPushBasedObj && PyPropPushBasedObj != Py_None && !UPyConversion::Nativize(PyPropPushBasedObj, bPropPushBased))
+	{
+		UPyUtil::SetPythonError(PyExc_TypeError, *ErrorCtxt, TEXT("Failed to convert parameter 'PushBased' to a bool (expected 'None' or 'bool')"));
+		return -1;
+	}
+	if ((PyPropReplicationConditionObj && PyPropReplicationConditionObj != Py_None) || bPropPushBased)
+	{
+		bPropReplicated = true;
+	}
+
+	return Init(InSelf, PyPropTypeObj, PyMetaObj, MoveTemp(PropGetter), MoveTemp(PropSetter), bPropReplicated, MoveTemp(PropRepNotifyFuncName), bPropRepNotify, ReplicationCondition, RepNotifyCondition, bPropPushBased);
 }
 
 void FUPyFPropertyDef::Deinit(FUPyFPropertyDef* InSelf)
@@ -482,6 +607,9 @@ void FUPyFPropertyDef::Deinit(FUPyFPropertyDef* InSelf)
 	InSelf->RepNotifyFuncName.Reset();
 	InSelf->bReplicated = false;
 	InSelf->bRepNotify = false;
+	InSelf->ReplicationCondition = COND_None;
+	InSelf->RepNotifyCondition = REPNOTIFY_OnChanged;
+	InSelf->bPushBased = false;
 }
 
 void FUPyFPropertyDef::ApplyMetaData(FUPyFPropertyDef* InSelf, FProperty* InProp)

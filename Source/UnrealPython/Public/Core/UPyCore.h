@@ -1,6 +1,8 @@
 
 #pragma once
 
+#include "UObject/CoreNetTypes.h"
+
 #include "UPyCommon.h"
 #include "Core/UPyPtr.h"
 #include "Wrapper/UPyWrapperBasic.h"
@@ -298,6 +300,15 @@ struct FUPyFPropertyDef
 	/** Whether this property should be marked with a RepNotify function */
 	bool bRepNotify;
 
+	/** Lifetime replication condition to use for this property */
+	ELifetimeCondition ReplicationCondition;
+
+	/** RepNotify condition to use for this property */
+	ELifetimeRepNotifyCondition RepNotifyCondition;
+
+	/** Whether this property should use push model replication */
+	bool bPushBased;
+
 	/** New this instance (called via tp_new for Python, or directly in C++) */
 	static FUPyFPropertyDef* New(PyTypeObject* InType);
 
@@ -305,7 +316,7 @@ struct FUPyFPropertyDef
 	static void Free(FUPyFPropertyDef* InSelf);
 
 	/** Initialize this instance (called via tp_init for Python, or directly in C++) */
-	static int Init(FUPyFPropertyDef* InSelf, PyObject* InPropType, PyObject* InMetaData, FString InGetterFuncName, FString InSetterFuncName, bool bInReplicated, FString InRepNotifyFuncName, bool bInRepNotify);
+	static int Init(FUPyFPropertyDef* InSelf, PyObject* InPropType, PyObject* InMetaData, FString InGetterFuncName, FString InSetterFuncName, bool bInReplicated, FString InRepNotifyFuncName, bool bInRepNotify, ELifetimeCondition InReplicationCondition, ELifetimeRepNotifyCondition InRepNotifyCondition, bool bInPushBased);
 
 	static int PyInit(FUPyFPropertyDef* InSelf, PyObject* InArgs, PyObject* InKwds);
 	

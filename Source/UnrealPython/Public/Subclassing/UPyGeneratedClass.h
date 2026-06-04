@@ -4,6 +4,7 @@
 #include "Wrapper/UPyWrapperBase.h"
 #include "Utils/UPyUtil.h"
 #include "DynamicTypes/UPyGeneratedWrappedType.h"
+#include "Engine/BlueprintGeneratedClass.h"
 #include "UPyGeneratedClass.generated.h"
 
 extern PyTypeObject UPyUClassDecoratorType;
@@ -17,7 +18,7 @@ PyObject* PyCallGenerateFunction(PyObject* InSelf, PyObject* InArgs, PyObject* I
 
 /** An Unreal class that was generated from a Python type */
 UCLASS(Transient)
-class UUPyGeneratedClass final : public UClass, public IUPythonResourceOwner
+class UUPyGeneratedClass final : public UBlueprintGeneratedClass, public IUPythonResourceOwner
 {
 	GENERATED_BODY()
 
@@ -34,6 +35,9 @@ public:
 	//~ UClass interface
 	virtual void PostInitInstance(UObject* InObj, FObjectInstancingGraph* InstanceGraph) override;
 
+	//~ UBlueprintGeneratedClass interface
+	virtual void GetLifetimeBlueprintReplicationList(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
 	//~ IPythonResourceOwner interface
 	virtual void ReleasePythonResources() override;
 
@@ -41,6 +45,8 @@ public:
 	void UnregisterGeneratedType();
 
 	virtual bool IsFunctionImplementedInScript(FName InFunctionName) const override;
+
+	bool GetGeneratedPropertyReplicationInfo(FName InPropertyName, ELifetimeCondition& OutReplicationCondition, ELifetimeRepNotifyCondition& OutRepNotifyCondition, bool& bOutPushBased) const;
 
 	/** Generate an Unreal class from the given Python type */
 	static UUPyGeneratedClass* GenerateClass(PyTypeObject* InPyType);
@@ -63,6 +69,17 @@ private:
 
 	/** Array of properties generated for this class */
 	TArray<TSharedPtr<UPyGenUtil::FPropertyDef>> PropertyDefs;
+
+	struct FReplicationDef
+	{
+		FName PropertyName;
+		ELifetimeCondition ReplicationCondition = COND_None;
+		ELifetimeRepNotifyCondition RepNotifyCondition = REPNOTIFY_OnChanged;
+		bool bPushBased = false;
+	};
+
+	/** Array of replication settings generated for this class */
+	TArray<FReplicationDef> ReplicationDefs;
 
 	/** Array of functions generated for this class */
 	TArray<TSharedPtr<UPyGenUtil::FFunctionDef>> FunctionDefs;

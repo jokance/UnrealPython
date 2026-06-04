@@ -774,6 +774,104 @@ PyObject* CallGetPropertyRepNotifyName(PyObject* InSelf, PyObject* InArgs)
 	return UPyConversion::Pythonize(Property->RepNotifyFunc.ToString());
 }
 
+PyObject* CallGetPropertyReplicationInfo(PyObject* InSelf, PyObject* InArgs)
+{
+	PyObject* PyClassObj = nullptr;
+	PyObject* PyNameObj = nullptr;
+	if (!PyArg_ParseTuple(InArgs, "OO:GetPropertyReplicationInfo", &PyClassObj, &PyNameObj))
+	{
+		return nullptr;
+	}
+
+	UClass* Class = nullptr;
+	if (!UPyConversion::NativizeClass(PyClassObj, Class, nullptr))
+	{
+		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("GetPropertyReplicationInfo"), *FString::Printf(TEXT("First parameter must be a 'Class' not '%s'"), *UPyUtil::GetFriendlyTypename(PyClassObj)));
+		return nullptr;
+	}
+
+	const FString PropertyName = UPyUtil::PyObjectToUEString(PyNameObj);
+	const UUPyGeneratedClass* GeneratedClass = Cast<UUPyGeneratedClass>(Class);
+	if (!GeneratedClass)
+	{
+		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("GetPropertyReplicationInfo"), *FString::Printf(TEXT("Class '%s' is not a generated Python class"), *Class->GetName()));
+		return nullptr;
+	}
+
+	ELifetimeCondition ReplicationCondition = COND_None;
+	ELifetimeRepNotifyCondition RepNotifyCondition = REPNOTIFY_OnChanged;
+	bool bPushBased = false;
+	if (!GeneratedClass->GetGeneratedPropertyReplicationInfo(*PropertyName, ReplicationCondition, RepNotifyCondition, bPushBased))
+	{
+		UPyUtil::SetPythonError(PyExc_AttributeError, TEXT("GetPropertyReplicationInfo"), *FString::Printf(TEXT("Class '%s' has no generated replication info for property '%s'"), *Class->GetName(), *PropertyName));
+		return nullptr;
+	}
+
+	PyObject* PyInfo = PyDict_New();
+	FUPyObjectPtr PyReplicationCondition = FUPyObjectPtr::StealReference(PyLong_FromLong((long)ReplicationCondition));
+	FUPyObjectPtr PyRepNotifyCondition = FUPyObjectPtr::StealReference(PyLong_FromLong((long)RepNotifyCondition));
+	FUPyObjectPtr PyPushBased = FUPyObjectPtr::StealReference(PyBool_FromLong(bPushBased ? 1 : 0));
+	PyDict_SetItemString(PyInfo, "ReplicationCondition", PyReplicationCondition);
+	PyDict_SetItemString(PyInfo, "RepNotifyCondition", PyRepNotifyCondition);
+	PyDict_SetItemString(PyInfo, "PushBased", PyPushBased);
+	return PyInfo;
+}
+
+PyObject* CallGetPropertyLifetimeReplicationInfo(PyObject* InSelf, PyObject* InArgs)
+{
+	PyObject* PyClassObj = nullptr;
+	PyObject* PyNameObj = nullptr;
+	if (!PyArg_ParseTuple(InArgs, "OO:GetPropertyLifetimeReplicationInfo", &PyClassObj, &PyNameObj))
+	{
+		return nullptr;
+	}
+
+	UClass* Class = nullptr;
+	if (!UPyConversion::NativizeClass(PyClassObj, Class, nullptr))
+	{
+		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("GetPropertyLifetimeReplicationInfo"), *FString::Printf(TEXT("First parameter must be a 'Class' not '%s'"), *UPyUtil::GetFriendlyTypename(PyClassObj)));
+		return nullptr;
+	}
+
+	const FString PropertyName = UPyUtil::PyObjectToUEString(PyNameObj);
+	const FProperty* Property = Class->FindPropertyByName(*PropertyName);
+	if (!Property)
+	{
+		UPyUtil::SetPythonError(PyExc_AttributeError, TEXT("GetPropertyLifetimeReplicationInfo"), *FString::Printf(TEXT("Class '%s' has no property '%s'"), *Class->GetName(), *PropertyName));
+		return nullptr;
+	}
+
+	UObject* DefaultObject = Class->GetDefaultObject();
+	if (!DefaultObject)
+	{
+		UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GetPropertyLifetimeReplicationInfo"), *FString::Printf(TEXT("Class '%s' has no default object"), *Class->GetName()));
+		return nullptr;
+	}
+
+	Class->SetUpRuntimeReplicationData();
+
+	TArray<FLifetimeProperty> LifetimeProps;
+	DefaultObject->GetLifetimeReplicatedProps(LifetimeProps);
+	const FLifetimeProperty* LifetimeProp = LifetimeProps.FindByPredicate([Property](const FLifetimeProperty& InLifetimeProp)
+	{
+		return InLifetimeProp.RepIndex == Property->RepIndex;
+	});
+	if (!LifetimeProp)
+	{
+		UPyUtil::SetPythonError(PyExc_AttributeError, TEXT("GetPropertyLifetimeReplicationInfo"), *FString::Printf(TEXT("Class '%s' has no lifetime replication entry for property '%s'"), *Class->GetName(), *PropertyName));
+		return nullptr;
+	}
+
+	PyObject* PyInfo = PyDict_New();
+	FUPyObjectPtr PyReplicationCondition = FUPyObjectPtr::StealReference(PyLong_FromLong((long)LifetimeProp->Condition));
+	FUPyObjectPtr PyRepNotifyCondition = FUPyObjectPtr::StealReference(PyLong_FromLong((long)LifetimeProp->RepNotifyCondition));
+	FUPyObjectPtr PyPushBased = FUPyObjectPtr::StealReference(PyBool_FromLong(LifetimeProp->bIsPushBased ? 1 : 0));
+	PyDict_SetItemString(PyInfo, "ReplicationCondition", PyReplicationCondition);
+	PyDict_SetItemString(PyInfo, "RepNotifyCondition", PyRepNotifyCondition);
+	PyDict_SetItemString(PyInfo, "PushBased", PyPushBased);
+	return PyInfo;
+}
+
 PyObject* CallConvertAbsolutePathApp(PyObject* InSelf, PyObject* InArgs)
 {
 	PyObject* PyObj = nullptr;
@@ -826,7 +924,7 @@ PyMethodDef UEPyMethodDefs[] = {
 	{ "ustruct", UPyCFunctionCast(&CallGenerateStruct), METH_VARARGS | METH_KEYWORDS, UPyDoc_STR("ustruct() -> None -- generate an Unreal struct for the given Python type") },
 	{ "uenum", UPyCFunctionCast(&CallGenerateEnum), METH_VARARGS | METH_KEYWORDS, UPyDoc_STR("uenum() -> None -- generate an Unreal enum for the given Python type") },
 	{ "uvalue", UPyCFunctionCast(&CallGenerateValue), METH_VARARGS | METH_KEYWORDS, UPyDoc_STR("uvalue(Val: int, Meta: Optional[dict[str, Any]]=None) -> ValueDef -- generate an Unreal const value form Python") },
-	{ "uproperty", UPyCFunctionCast(&CallGenerateProperty), METH_VARARGS | METH_KEYWORDS, UPyDoc_STR("uproperty(Type: type, Meta: Optional[dict[str, Any]]=None, Getter: Optional[str]=None, Setter: Optional[str]=None, Replicated: Optional[bool]=None, RepNotify: Optional[Union[bool, str]]=None) -> PropertyDef -- generate an Unreal FProperty field form Python") },
+	{ "uproperty", UPyCFunctionCast(&CallGenerateProperty), METH_VARARGS | METH_KEYWORDS, UPyDoc_STR("uproperty(Type: type, Meta: Optional[dict[str, Any]]=None, Getter: Optional[str]=None, Setter: Optional[str]=None, Replicated: Optional[bool]=None, RepNotify: Optional[Union[bool, str]]=None, ReplicationCondition: Optional[str]=None, RepNotifyCondition: Optional[str]=None, PushBased: Optional[bool]=None) -> PropertyDef -- generate an Unreal FProperty field form Python") },
 	{ "ufunction", UPyCFunctionCast(&CallGenerateFunction), METH_VARARGS | METH_KEYWORDS, UPyDoc_STR("ufunction(Meta: Optional[dict[str, Any]]=None, Ret: Optional[type]=None, Params: Optional[list[type]]=None, Override: Optional[bool]=None, Static: Optional[bool]=None, Pure: Optional[bool]=None, Getter: Optional[bool]=None, Setter: Optional[bool]=None, Server: Optional[bool]=None, Client: Optional[bool]=None, NetMulticast: Optional[bool]=None, Reliable: Optional[bool]=None, Unreliable: Optional[bool]=None) -> FunctionDef -- generate an Unreal FProperty field form Python") },
 	{ "FlushGeneratedTypeReinstancing", UPyCFunctionCast(&CallFlushGeneratedTypeReinstancing), METH_NOARGS, UPyDoc_STR("FlushGeneratedTypeReinstancing() -> None -- flush any pending reinstancing requests for Python generated types") },
 	{ "ReloadModule", UPyCFunctionCast(&CallReloadModule), METH_VARARGS, UPyDoc_STR("ReloadModule(module_or_name: Union[module, str]) -> module -- reload a Python module and flush pending generated type reinstancing") },
@@ -837,6 +935,8 @@ PyMethodDef UEPyMethodDefs[] = {
 	{ "GetFunctionFlags", UPyCFunctionCast(&CallGetFunctionFlags), METH_VARARGS, UPyDoc_STR("GetFunctionFlags(Type: Union[Class, type], Name: str) -> int -- get raw UFunction flags for a reflected function") },
 	{ "GetPropertyFlags", UPyCFunctionCast(&CallGetPropertyFlags), METH_VARARGS, UPyDoc_STR("GetPropertyFlags(Type: Union[Class, type], Name: str) -> int -- get raw FProperty flags for a reflected property") },
 	{ "GetPropertyRepNotifyName", UPyCFunctionCast(&CallGetPropertyRepNotifyName), METH_VARARGS, UPyDoc_STR("GetPropertyRepNotifyName(Type: Union[Class, type], Name: str) -> str -- get the reflected RepNotify function name for a property") },
+	{ "GetPropertyReplicationInfo", UPyCFunctionCast(&CallGetPropertyReplicationInfo), METH_VARARGS, UPyDoc_STR("GetPropertyReplicationInfo(Type: Union[Class, type], Name: str) -> dict -- get generated lifetime replication settings for a property") },
+	{ "GetPropertyLifetimeReplicationInfo", UPyCFunctionCast(&CallGetPropertyLifetimeReplicationInfo), METH_VARARGS, UPyDoc_STR("GetPropertyLifetimeReplicationInfo(Type: Union[Class, type], Name: str) -> dict -- get lifetime replication settings returned by the class default object's GetLifetimeReplicatedProps") },
 	// { "register_python_shutdown_callback", UPyCFunctionCast(&RegisterPythonShutdownCallback), METH_VARARGS, "register_python_shutdown_callback(callable: Callable[[], None]) -> object -- register the given callable (with no input arguments) as a callback to execute immediately before Python shutdown"},
 	// { "unregister_python_shutdown_callback", UPyCFunctionCast(&UnregisterPythonShutdownCallback), METH_VARARGS, "unregister_python_shutdown_callback(handle: object) -> None -- unregister the given handle from a previous call to register_python_shutdown_callback"},
 	// { "NSLOCTEXT", UPyCFunctionCast(&CreateLocalizedText), METH_VARARGS, "NSLOCTEXT(ns: str, key: str, source: str) -> Text -- create a localized Text from the given namespace, key, and source string" },
