@@ -156,7 +156,7 @@ void UUPyGameInstance::OnStart()
 
 bool UUPyGameInstance::Tick(float DeltaTime)
 {
-	if (!PyTickFunction)
+	if (IsEngineExitRequested())
 	{
 		return false;
 	}
