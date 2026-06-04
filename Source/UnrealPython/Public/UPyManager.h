@@ -3,9 +3,29 @@
 
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
+#include "UObject/GCObject.h"
 #include "UPyManager.generated.h"
 
 struct FUPyWrapperObjectBase;
+
+class UNREALPYTHON_API FUPyPythonOwnedObjectReferencer : public FGCObject
+{
+public:
+	void Add(UObject* Object);
+	void Remove(UObject* Object);
+	bool Contains(UObject* Object) const;
+	void Reset();
+#if WITH_EDITOR
+	void OnObjectsReplaced(const TMap<UObject*, UObject*>& ReplacementMap);
+#endif
+
+	// FGCObject interface
+	virtual void AddReferencedObjects(FReferenceCollector& Collector) override;
+	virtual FString GetReferencerName() const override;
+
+private:
+	TSet<TObjectPtr<UObject>> Objects;
+};
 
 UCLASS()
 class UNREALPYTHON_API UUPyManager : public UObject, public FUObjectArray::FUObjectDeleteListener
@@ -42,6 +62,5 @@ public:
 private:
 	FTSTicker::FDelegateHandle TickerHandle;
 
-	UPROPERTY()
-	TSet<TObjectPtr<UObject>> PythonOwnedObjects;
+	FUPyPythonOwnedObjectReferencer PythonOwnedObjects;
 };

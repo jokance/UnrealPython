@@ -8,6 +8,55 @@
 #include "Wrapper/UPyWrapperObjectBase.h"
 #include "Wrapper/UPyWrapperTypeFactory.h"
 
+void FUPyPythonOwnedObjectReferencer::Add(UObject* Object)
+{
+	if (Object)
+	{
+		Objects.Add(Object);
+	}
+}
+
+void FUPyPythonOwnedObjectReferencer::Remove(UObject* Object)
+{
+	if (Object)
+	{
+		Objects.Remove(Object);
+	}
+}
+
+bool FUPyPythonOwnedObjectReferencer::Contains(UObject* Object) const
+{
+	return Object && Objects.Contains(Object);
+}
+
+void FUPyPythonOwnedObjectReferencer::Reset()
+{
+	Objects.Reset();
+}
+
+#if WITH_EDITOR
+void FUPyPythonOwnedObjectReferencer::OnObjectsReplaced(const TMap<UObject*, UObject*>& ReplacementMap)
+{
+	for (const TPair<UObject*, UObject*>& ReplacementPair : ReplacementMap)
+	{
+		if (Objects.Remove(ReplacementPair.Key) > 0 && ReplacementPair.Value)
+		{
+			Objects.Add(ReplacementPair.Value);
+		}
+	}
+}
+#endif
+
+void FUPyPythonOwnedObjectReferencer::AddReferencedObjects(FReferenceCollector& Collector)
+{
+	Collector.AddReferencedObjects(Objects);
+}
+
+FString FUPyPythonOwnedObjectReferencer::GetReferencerName() const
+{
+	return TEXT("FUPyPythonOwnedObjectReferencer");
+}
+
 UUPyManager* UUPyManager::Get()
 {
 	static UUPyManager* PyManagerInst = nullptr;
@@ -152,6 +201,7 @@ void UUPyManager::NotifyUObjectDeleted(const UObjectBase* ObjectBase, int32 Inde
 #if WITH_EDITOR
 void UUPyManager::OnObjectsReplaced(const TMap<UObject*, UObject*>& ReplacementMap)
 {
+	PythonOwnedObjects.OnObjectsReplaced(ReplacementMap);
 	FUPyWrapperObjectFactory::Get().OnObjectsReplaced(ReplacementMap);
 }
 #endif
