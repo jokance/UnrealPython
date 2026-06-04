@@ -293,7 +293,7 @@ def on_shutdown():
 
 ### Generated Type 支持矩阵
 
-运行时生成 `uclass`、`ustruct`、`uenum`、`uproperty`、`ufunction` 的当前支持范围见 [Docs/GeneratedTypeSupportMatrix.md](Docs/GeneratedTypeSupportMatrix.md)。
+运行时生成 `uclass`、`ustruct`、`uenum`、`uproperty`、`ufunction` 的使用说明见 [Docs/Subclassing.md](Docs/Subclassing.md)，当前支持范围见 [Docs/GeneratedTypeSupportMatrix.md](Docs/GeneratedTypeSupportMatrix.md)。
 
 ### Reload / 热更新
 

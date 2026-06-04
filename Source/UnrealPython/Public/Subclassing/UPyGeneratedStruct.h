@@ -11,6 +11,15 @@ void InitializeUPyUStructDecorator(UPyGenUtil::FNativePythonModule& ModuleInfo);
 
 PyObject* PyCallGenerateStruct(PyObject* InSelf, PyObject* InArgs, PyObject* InKwds);
 
+struct FUPyUStructDefinitionOptions
+{
+	PyObject* MetaData = nullptr;
+	bool bHasBlueprintType = false;
+	bool bBlueprintType = true;
+	bool bHasNotBlueprintType = false;
+	bool bNotBlueprintType = false;
+};
+
 /** An Unreal struct that was generated from a Python type */
 UCLASS()
 class UUPyGeneratedStruct final : public UScriptStruct, public IUPythonResourceOwner
@@ -37,7 +46,7 @@ public:
 	void UnregisterGeneratedType();
 
 	/** Generate an Unreal struct from the given Python type */
-	static UUPyGeneratedStruct* GenerateStruct(PyTypeObject* InPyType);
+	static UUPyGeneratedStruct* GenerateStruct(PyTypeObject* InPyType, const FUPyUStructDefinitionOptions* InOptions = nullptr);
 
 private:
 	/** Python type this struct was generated from */
@@ -61,7 +70,9 @@ struct FUPyUStructDecorator
 {
 	/** Common Python Object */
 	PyObject_HEAD
-	
+
+	FUPyUStructDefinitionOptions Options;
+
 	static FUPyUStructDecorator* New(PyTypeObject* InType, PyObject* InArgs, PyObject* InKwds);
 	
 	static void Dealloc(FUPyUStructDecorator* InSelf);

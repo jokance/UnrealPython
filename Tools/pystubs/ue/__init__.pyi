@@ -85,7 +85,19 @@ def LogWarning(msg: str) -> None:
 def NewObject(Type: Union[Class, type], Outer: Optional[Object]=None, Name: str="", BaseType: Optional[Object]=None) -> Object:
     ...
 
-def uclass() -> None:
+def GetClassFlags(Class_: Union[Class, type]) -> int:
+    ...
+
+def GetStructFromType(Type: type) -> Struct:
+    ...
+
+def GetTypeMetaData(Type: type, Key: str) -> str:
+    ...
+
+def HasTypeMetaData(Type: type, Key: str) -> bool:
+    ...
+
+def uclass(Meta: Optional[dict[str, Any]]=None, BlueprintType: Optional[bool]=None, NotBlueprintType: Optional[bool]=None, Blueprintable: Optional[bool]=None, NotBlueprintable: Optional[bool]=None, Abstract: Optional[bool]=None) -> None:
     ...
 
 def uenum() -> None:
@@ -97,7 +109,7 @@ def ufunction(Meta: Optional[dict[str, Any]]=None, Ret: Optional[type]=None, Par
 def uproperty(Type: type, Meta: Optional[dict[str, Any]]=None, Getter: Optional[str]=None, Setter: Optional[str]=None) -> PropertyDef:
     ...
 
-def ustruct() -> None:
+def ustruct(Meta: Optional[dict[str, Any]]=None, BlueprintType: Optional[bool]=None, NotBlueprintType: Optional[bool]=None) -> None:
     ...
 
 def uvalue(Val: int, Meta: Optional[dict[str, Any]]=None) -> ValueDef:
@@ -152151,5 +152163,3 @@ class PhysicsAssetEditorSkeletalMeshComponent(DebugSkelMeshComponent):
     BoneUnselectedDrawState: PhysicsAssetEditorDrawState
     BoneNoCollisionDrawState: PhysicsAssetEditorDrawState
     BoneMaterialHit: MaterialInterface
-
-

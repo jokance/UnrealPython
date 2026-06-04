@@ -5,11 +5,11 @@
 ## 装饰器入口
 
 ```python
-@ue.uclass()
+@ue.uclass(Meta={"DisplayName": "My Runtime Object"}, Blueprintable=True)
 class MyObject(ue.Object):
     pass
 
-@ue.ustruct()
+@ue.ustruct(Meta={"DisplayName": "My Runtime Struct"})
 class MyStruct(ue.StructBase):
     pass
 
@@ -19,6 +19,27 @@ class MyEnum(ue.EnumBase):
 ```
 
 `_post_init(self)` 是可选的。只有类型自身显式定义 `_post_init` 时才会调用；继承自 wrapper 基类的 `_post_init` 不会被当作用户初始化函数。
+
+`ue.uclass` 当前支持参数：
+
+| 参数 | 作用 |
+| --- | --- |
+| `Meta={...}` | 写入生成 `UClass` metadata。key/value 会转为字符串。 |
+| `BlueprintType=True/False` | 控制是否写入 `BlueprintType` metadata；默认保持旧行为，即 `True`。 |
+| `NotBlueprintType=True` | 写入 `NotBlueprintType` metadata；不能和 `BlueprintType=True` 同时使用。 |
+| `Blueprintable=True/False` | 写入 `Blueprintable` 或 `NotBlueprintable` metadata，供编辑器侧和工具读取。 |
+| `NotBlueprintable=True` | 写入 `NotBlueprintable` metadata；不能和 `Blueprintable=True` 同时使用。 |
+| `Abstract=True/False` | 设置或清除 `CLASS_Abstract` class flag。 |
+
+`ue.ustruct` 当前支持参数：
+
+| 参数 | 作用 |
+| --- | --- |
+| `Meta={...}` | 写入生成 `UScriptStruct` metadata。key/value 会转为字符串。 |
+| `BlueprintType=True/False` | 控制是否写入 `BlueprintType` metadata；默认保持旧行为，即 `True`。 |
+| `NotBlueprintType=True` | 写入 `NotBlueprintType` metadata；不能和 `BlueprintType=True` 同时使用。 |
+
+`Blueprintable` 是 class 语义，不支持在 `ue.ustruct` 上使用。`Abstract` 会设置实际 class flag；`Blueprintable` / `NotBlueprintable` 当前作为 metadata 保存，不等价于完整 UHT/Blueprint asset 生产流程。
 
 ## `ue.uproperty(Type)` 支持
 
@@ -118,6 +139,7 @@ def MulticastDo(self):
 当前项目包含以下 smoke test：
 
 - `Content/Scripts/upy_test/upy_generated_post_init_optional_repro.py`
+- `Content/Scripts/upy_test/upy_generated_decorator_options_repro.py`
 - `Content/Scripts/upy_test/upy_generated_type_matrix_repro.py`
 - `Content/Scripts/upy_test/upy_generated_actor_runtime_repro.py`
 - `Content/Scripts/upy_test/upy_generated_actor_regen_repro.py`

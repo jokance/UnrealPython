@@ -16,6 +16,21 @@ void InitializeUPyUFunctionDecorator(UPyGenUtil::FNativePythonModule& ModuleInfo
 PyObject* PyCallGenerateClass(PyObject* InSelf, PyObject* InArgs, PyObject* InKwds);
 PyObject* PyCallGenerateFunction(PyObject* InSelf, PyObject* InArgs, PyObject* InKwds);
 
+struct FUPyUClassDefinitionOptions
+{
+	PyObject* MetaData = nullptr;
+	bool bHasBlueprintType = false;
+	bool bBlueprintType = true;
+	bool bHasNotBlueprintType = false;
+	bool bNotBlueprintType = false;
+	bool bHasBlueprintable = false;
+	bool bBlueprintable = false;
+	bool bHasNotBlueprintable = false;
+	bool bNotBlueprintable = false;
+	bool bHasAbstract = false;
+	bool bAbstract = false;
+};
+
 /** An Unreal class that was generated from a Python type */
 UCLASS(Transient)
 class UUPyGeneratedClass final : public UBlueprintGeneratedClass, public IUPythonResourceOwner
@@ -49,7 +64,7 @@ public:
 	bool GetGeneratedPropertyReplicationInfo(FName InPropertyName, ELifetimeCondition& OutReplicationCondition, ELifetimeRepNotifyCondition& OutRepNotifyCondition, bool& bOutPushBased) const;
 
 	/** Generate an Unreal class from the given Python type */
-	static UUPyGeneratedClass* GenerateClass(PyTypeObject* InPyType);
+	static UUPyGeneratedClass* GenerateClass(PyTypeObject* InPyType, const FUPyUClassDefinitionOptions* InOptions = nullptr);
 
 	/** Generate an Unreal class for all child classes of the old parent using the new parent class as their base (also update the Python types) */
 	static bool ReparentDerivedClasses(UUPyGeneratedClass* InOldParent, UUPyGeneratedClass* InNewParent);
@@ -97,7 +112,9 @@ struct FUPyUClassDecorator
 {
 	/** Common Python Object */
 	PyObject_HEAD
-	
+
+	FUPyUClassDefinitionOptions Options;
+
 	static FUPyUClassDecorator* New(PyTypeObject* InType, PyObject* InArgs, PyObject* InKwds);
 	
 	static void Dealloc(FUPyUClassDecorator* InSelf);

@@ -5,6 +5,41 @@
 #include "Wrapper/UPyWrapperTypeRegistry.h"
 #include "Wrapper/UPyWrapperTypeFactory.h"
 
+namespace
+{
+	void ApplyPythonMetaData(PyObject* InMetaData, UStruct* InStruct)
+	{
+		if (InMetaData && PyDict_Check(InMetaData))
+		{
+			PyObject* MetaDataKey = nullptr;
+			PyObject* MetaDataValue = nullptr;
+			Py_ssize_t MetaDataIndex = 0;
+			while (PyDict_Next(InMetaData, &MetaDataIndex, &MetaDataKey, &MetaDataValue))
+			{
+				const FString MetaDataKeyStr = UPyUtil::PyObjectToUEString(MetaDataKey);
+				const FString MetaDataValueStr = UPyUtil::PyObjectToUEString(MetaDataValue);
+				InStruct->SetMetaData(*MetaDataKeyStr, *MetaDataValueStr);
+			}
+		}
+	}
+
+	bool ConvertOptionalBool(PyObject* InObj, bool& OutValue, bool& bOutHasValue, const TCHAR* InErrorCtxt, const TCHAR* InParameterName)
+	{
+		bOutHasValue = false;
+		if (!InObj || InObj == Py_None)
+		{
+			return true;
+		}
+		if (!UPyConversion::Nativize(InObj, OutValue))
+		{
+			UPyUtil::SetPythonError(PyExc_TypeError, InErrorCtxt, *FString::Printf(TEXT("Failed to convert parameter '%s' to a bool (expected 'None' or 'bool')"), InParameterName));
+			return false;
+		}
+		bOutHasValue = true;
+		return true;
+	}
+}
+
 PyTypeObject UPyUStructDecoratorType = {
 	PyVarObject_HEAD_INIT(nullptr, 0)
 	"UPyUStructDecorator", /* tp_name */
@@ -50,7 +85,8 @@ PyObject* PyCallGenerateStruct(PyObject* InSelf, PyObject* InArgs, PyObject* InK
 
 	// We only need to generate structs for types that are not already registered.
 	const bool bNeedsGeneration = !FUPyWrapperTypeRegistry::Get().FindStruct(PyType);
-	if (bNeedsGeneration && !UUPyGeneratedStruct::GenerateStruct(PyType))
+	const FUPyUStructDefinitionOptions* DefinitionOptions = PyObject_TypeCheck(InSelf, &UPyUStructDecoratorType) ? &((FUPyUStructDecorator*)InSelf)->Options : nullptr;
+	if (bNeedsGeneration && !UUPyGeneratedStruct::GenerateStruct(PyType, DefinitionOptions))
 	{
 		UPyUtil::SetPythonError(PyExc_Exception, TEXT("GenerateStruct "), *FString::Printf(TEXT("Failed to generate an Unreal struct for the Python type '%s'"), *UPyUtil::GetFriendlyTypename(PyType)));
 		return nullptr;
@@ -69,9 +105,10 @@ PyObject* PyCallGenerateStruct(PyObject* InSelf, PyObject* InArgs, PyObject* InK
 class FUPythonGeneratedStructBuilder
 {
 public:
-	FUPythonGeneratedStructBuilder(UScriptStruct* InSuperStruct, PyTypeObject* InPyType)
+	FUPythonGeneratedStructBuilder(UScriptStruct* InSuperStruct, PyTypeObject* InPyType, const FUPyUStructDefinitionOptions* InOptions = nullptr)
 		: StructName()
 		, PyType(InPyType)
+		, Options(InOptions)
 		, OldStruct(nullptr)
 		, NewStruct(nullptr)
 	{
@@ -84,10 +121,7 @@ public:
 		// Create a new struct with a temporary name; we will rename it as part of Finalize
 		const FString NewStructName = MakeUniqueObjectName(StructOuter, UUPyGeneratedStruct::StaticClass(), *FString::Printf(TEXT("%s_NEWINST"), *StructName)).ToString();
 		NewStruct = NewObject<UUPyGeneratedStruct>(StructOuter, *NewStructName, RF_Public | RF_Transient);
-#if WITH_METADATA
-		NewStruct->SetMetaData(TEXT("DisplayName"), *UPyUtil::GetGeneratedTypeDisplayName(PyType));
-		NewStruct->SetMetaData(TEXT("BlueprintType"), TEXT("true"));
-#endif
+		ApplyDefinitionOptions();
 		NewStruct->SetSuperStruct(InSuperStruct);
 	}
 
@@ -146,6 +180,7 @@ public:
 			NewStruct->StructRedirector->DestinationObject = NewStruct;
 		}
 		NewStruct->Rename(*StructName, nullptr, REN_DontCreateRedirectors);
+		ApplyDefinitionOptions();
 
 		// Finalize the struct
 		NewStruct->Bind();
@@ -221,6 +256,26 @@ public:
 	}
 
 private:
+	void ApplyDefinitionOptions()
+	{
+		const bool bBlueprintType = Options && Options->bHasBlueprintType ? Options->bBlueprintType : true;
+		const bool bNotBlueprintType = Options && Options->bHasNotBlueprintType && Options->bNotBlueprintType;
+
+		NewStruct->SetMetaData(TEXT("DisplayName"), *UPyUtil::GetGeneratedTypeDisplayName(PyType));
+		if (bBlueprintType && !bNotBlueprintType)
+		{
+			NewStruct->SetMetaData(TEXT("BlueprintType"), TEXT("true"));
+		}
+		else
+		{
+			NewStruct->SetMetaData(TEXT("NotBlueprintType"), TEXT("true"));
+		}
+		if (Options)
+		{
+			ApplyPythonMetaData(Options->MetaData, NewStruct);
+		}
+	}
+
 	bool RegisterDescriptors()
 	{
 		for (const TSharedPtr<UPyGenUtil::FPropertyDef>& PropDef : NewStruct->PropertyDefs)
@@ -254,6 +309,7 @@ private:
 
 	FString StructName;
 	PyTypeObject* PyType;
+	const FUPyUStructDefinitionOptions* Options;
 	UUPyGeneratedStruct* OldStruct;
 	UUPyGeneratedStruct* NewStruct;
 };
@@ -346,7 +402,7 @@ void UUPyGeneratedStruct::UnregisterGeneratedType()
 	}
 }
 
-UUPyGeneratedStruct* UUPyGeneratedStruct::GenerateStruct(PyTypeObject* InPyType)
+UUPyGeneratedStruct* UUPyGeneratedStruct::GenerateStruct(PyTypeObject* InPyType, const FUPyUStructDefinitionOptions* InOptions)
 {
 	// Get the correct super struct from the parent type in Python
 	const UScriptStruct* SuperStruct = nullptr;
@@ -361,7 +417,7 @@ UUPyGeneratedStruct* UUPyGeneratedStruct::GenerateStruct(PyTypeObject* InPyType)
 	}
 
 	// Builder used to generate the struct
-	FUPythonGeneratedStructBuilder PythonStructBuilder((UScriptStruct*)SuperStruct, InPyType);
+	FUPythonGeneratedStructBuilder PythonStructBuilder((UScriptStruct*)SuperStruct, InPyType, InOptions);
 
 	// Add the fields to this struct
 	{
@@ -410,6 +466,14 @@ UUPyGeneratedStruct* UUPyGeneratedStruct::GenerateStruct(PyTypeObject* InPyType)
 FUPyUStructDecorator* FUPyUStructDecorator::New(PyTypeObject* InType, PyObject* InArgs, PyObject* InKwds)
 {
 	FUPyUStructDecorator* Self = (FUPyUStructDecorator*)InType->tp_alloc(InType, 0);
+	if (Self)
+	{
+		Self->Options.MetaData = nullptr;
+		Self->Options.bHasBlueprintType = false;
+		Self->Options.bBlueprintType = true;
+		Self->Options.bHasNotBlueprintType = false;
+		Self->Options.bNotBlueprintType = false;
+	}
 	return Self;
 }
 
@@ -422,11 +486,54 @@ void FUPyUStructDecorator::Dealloc(FUPyUStructDecorator* InSelf)
 int FUPyUStructDecorator::Init(FUPyUStructDecorator* InSelf, PyObject* InArgs, PyObject* InKwds)
 {
 	Deinit(InSelf);
+
+	PyObject* PyMetaObj = nullptr;
+	PyObject* PyBlueprintTypeObj = nullptr;
+	PyObject* PyNotBlueprintTypeObj = nullptr;
+
+	static const char *ArgsKwdList[] = { "Meta", "BlueprintType", "NotBlueprintType", nullptr };
+	if (!PyArg_ParseTupleAndKeywords(InArgs, InKwds, "|OOO:call", (char**)ArgsKwdList, &PyMetaObj, &PyBlueprintTypeObj, &PyNotBlueprintTypeObj))
+	{
+		return -1;
+	}
+
+	if (!PyMetaObj)
+	{
+		PyMetaObj = Py_None;
+	}
+	if (PyMetaObj != Py_None && !PyDict_Check(PyMetaObj))
+	{
+		UPyUtil::SetPythonError(PyExc_TypeError, InSelf, TEXT("Failed to convert parameter 'Meta' (expected 'None' or 'dict')"));
+		return -1;
+	}
+
+	const FString ErrorCtxt = UPyUtil::GetErrorContext(InSelf);
+	if (!ConvertOptionalBool(PyBlueprintTypeObj, InSelf->Options.bBlueprintType, InSelf->Options.bHasBlueprintType, *ErrorCtxt, TEXT("BlueprintType"))
+		|| !ConvertOptionalBool(PyNotBlueprintTypeObj, InSelf->Options.bNotBlueprintType, InSelf->Options.bHasNotBlueprintType, *ErrorCtxt, TEXT("NotBlueprintType")))
+	{
+		return -1;
+	}
+
+	if (InSelf->Options.bHasBlueprintType && InSelf->Options.bBlueprintType && InSelf->Options.bHasNotBlueprintType && InSelf->Options.bNotBlueprintType)
+	{
+		UPyUtil::SetPythonError(PyExc_ValueError, *ErrorCtxt, TEXT("Parameters 'BlueprintType=True' and 'NotBlueprintType=True' cannot be combined"));
+		return -1;
+	}
+
+	Py_INCREF(PyMetaObj);
+	InSelf->Options.MetaData = PyMetaObj;
+
 	return 0;
 }
 
 void FUPyUStructDecorator::Deinit(FUPyUStructDecorator* InSelf)
 {
+	Py_XDECREF(InSelf->Options.MetaData);
+	InSelf->Options.MetaData = nullptr;
+	InSelf->Options.bHasBlueprintType = false;
+	InSelf->Options.bBlueprintType = true;
+	InSelf->Options.bHasNotBlueprintType = false;
+	InSelf->Options.bNotBlueprintType = false;
 }
 
 PyObject* FUPyUStructDecorator::Call(FUPyUStructDecorator* InSelf, PyObject* InArgs, PyObject* InKwds)

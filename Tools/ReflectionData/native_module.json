@@ -84,12 +84,12 @@
 			},
 			{
 				"MethodName": "uclass",
-				"MethodDoc": "uclass() -> None -- generate an Unreal class for the given Python type",
+				"MethodDoc": "uclass(Meta: Optional[dict[str, Any]]=None, BlueprintType: Optional[bool]=None, NotBlueprintType: Optional[bool]=None, Blueprintable: Optional[bool]=None, NotBlueprintable: Optional[bool]=None, Abstract: Optional[bool]=None) -> None -- generate an Unreal class for the given Python type",
 				"PyMethodFlags": 3
 			},
 			{
 				"MethodName": "ustruct",
-				"MethodDoc": "ustruct() -> None -- generate an Unreal struct for the given Python type",
+				"MethodDoc": "ustruct(Meta: Optional[dict[str, Any]]=None, BlueprintType: Optional[bool]=None, NotBlueprintType: Optional[bool]=None) -> None -- generate an Unreal struct for the given Python type",
 				"PyMethodFlags": 3
 			},
 			{
@@ -104,12 +104,12 @@
 			},
 			{
 				"MethodName": "uproperty",
-				"MethodDoc": "uproperty(Type: type, Meta: Optional[dict[str, Any]]=None, Getter: Optional[str]=None, Setter: Optional[str]=None) -> PropertyDef -- generate an Unreal FProperty field form Python",
+				"MethodDoc": "uproperty(Type: type, Meta: Optional[dict[str, Any]]=None, Getter: Optional[str]=None, Setter: Optional[str]=None, Replicated: Optional[bool]=None, RepNotify: Optional[Union[bool, str]]=None, ReplicationCondition: Optional[str]=None, RepNotifyCondition: Optional[str]=None, PushBased: Optional[bool]=None) -> PropertyDef -- generate an Unreal FProperty field form Python",
 				"PyMethodFlags": 3
 			},
 			{
 				"MethodName": "ufunction",
-				"MethodDoc": "ufunction(Meta: Optional[dict[str, Any]]=None, Ret: Optional[type]=None, Params: Optional[list[type]]=None, Override: Optional[bool]=None, Static: Optional[bool]=None, Pure: Optional[bool]=None, Getter: Optional[bool]=None, Setter: Optional[bool]=None) -> FunctionDef -- generate an Unreal FProperty field form Python",
+				"MethodDoc": "ufunction(Meta: Optional[dict[str, Any]]=None, Ret: Optional[type]=None, Params: Optional[list[type]]=None, Override: Optional[bool]=None, Static: Optional[bool]=None, Pure: Optional[bool]=None, Getter: Optional[bool]=None, Setter: Optional[bool]=None, Server: Optional[bool]=None, Client: Optional[bool]=None, NetMulticast: Optional[bool]=None, Reliable: Optional[bool]=None, Unreliable: Optional[bool]=None) -> FunctionDef -- generate an Unreal FProperty field form Python",
 				"PyMethodFlags": 3
 			},
 			{
@@ -123,6 +123,11 @@
 				"PyMethodFlags": 4
 			},
 			{
+				"MethodName": "GetClassFlags",
+				"MethodDoc": "GetClassFlags(Class_: Union[Class, type]) -> int -- get the class flags for a reflected Unreal class",
+				"PyMethodFlags": 1
+			},
+			{
 				"MethodName": "GetTypeFromClass",
 				"MethodDoc": "GetTypeFromClass(Class_: Class) -> type -- get the best matching Python type for the given Unreal class",
 				"PyMethodFlags": 1
@@ -130,6 +135,21 @@
 			{
 				"MethodName": "GetTypeFromStruct",
 				"MethodDoc": "GetTypeFromStruct(Struct_: Struct) -> type -- get the best matching Python type for the given Unreal struct",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "GetStructFromType",
+				"MethodDoc": "GetStructFromType(Type: type) -> Struct -- get the reflected Unreal struct for the given Python type",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "HasTypeMetaData",
+				"MethodDoc": "HasTypeMetaData(Type: type, Key: str) -> bool -- test reflected metadata on a generated Python type",
+				"PyMethodFlags": 1
+			},
+			{
+				"MethodName": "GetTypeMetaData",
+				"MethodDoc": "GetTypeMetaData(Type: type, Key: str) -> str -- get reflected metadata from a generated Python type",
 				"PyMethodFlags": 1
 			},
 			{

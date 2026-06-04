@@ -8,6 +8,41 @@
 #include "BlueprintActionDatabase.h"
 #endif
 
+namespace
+{
+	void ApplyPythonMetaData(PyObject* InMetaData, UStruct* InStruct)
+	{
+		if (InMetaData && PyDict_Check(InMetaData))
+		{
+			PyObject* MetaDataKey = nullptr;
+			PyObject* MetaDataValue = nullptr;
+			Py_ssize_t MetaDataIndex = 0;
+			while (PyDict_Next(InMetaData, &MetaDataIndex, &MetaDataKey, &MetaDataValue))
+			{
+				const FString MetaDataKeyStr = UPyUtil::PyObjectToUEString(MetaDataKey);
+				const FString MetaDataValueStr = UPyUtil::PyObjectToUEString(MetaDataValue);
+				InStruct->SetMetaData(*MetaDataKeyStr, *MetaDataValueStr);
+			}
+		}
+	}
+
+	bool ConvertOptionalBool(PyObject* InObj, bool& OutValue, bool& bOutHasValue, const TCHAR* InErrorCtxt, const TCHAR* InParameterName)
+	{
+		bOutHasValue = false;
+		if (!InObj || InObj == Py_None)
+		{
+			return true;
+		}
+		if (!UPyConversion::Nativize(InObj, OutValue))
+		{
+			UPyUtil::SetPythonError(PyExc_TypeError, InErrorCtxt, *FString::Printf(TEXT("Failed to convert parameter '%s' to a bool (expected 'None' or 'bool')"), InParameterName));
+			return false;
+		}
+		bOutHasValue = true;
+		return true;
+	}
+}
+
 PyTypeObject UPyUClassDecoratorType = {
 	PyVarObject_HEAD_INIT(nullptr, 0)
 	"UPyUClassDecorator", /* tp_name */
@@ -74,7 +109,8 @@ PyObject* PyCallGenerateClass(PyObject* InSelf, PyObject* InArgs, PyObject* InKw
 
 	// We only need to generate classes for types that are not already registered.
 	const bool bNeedsGeneration = !FUPyWrapperTypeRegistry::Get().FindClass(PyType);
-	if (bNeedsGeneration && !UUPyGeneratedClass::GenerateClass(PyType))
+	const FUPyUClassDefinitionOptions* DefinitionOptions = PyObject_TypeCheck(InSelf, &UPyUClassDecoratorType) ? &((FUPyUClassDecorator*)InSelf)->Options : nullptr;
+	if (bNeedsGeneration && !UUPyGeneratedClass::GenerateClass(PyType, DefinitionOptions))
 	{
 		UPyUtil::SetPythonError(PyExc_Exception, TEXT("GenerateClass"), *FString::Printf(TEXT("Failed to generate an Unreal class for the Python type '%s'"), *UPyUtil::GetFriendlyTypename(PyType)));
 		return nullptr;
@@ -107,9 +143,10 @@ PyObject* PyCallGenerateFunction(PyObject* InSelf, PyObject* InArgs, PyObject* I
 class FUPythonGeneratedClassBuilder
 {
 public:
-	FUPythonGeneratedClassBuilder(UClass* InSuperClass, PyTypeObject* InPyType)
+	FUPythonGeneratedClassBuilder(UClass* InSuperClass, PyTypeObject* InPyType, const FUPyUClassDefinitionOptions* InOptions = nullptr)
 		: ClassName()
 		, PyType(InPyType)
+		, Options(InOptions)
 		, OldClass(nullptr)
 		, NewClass(nullptr)
 	{
@@ -122,16 +159,14 @@ public:
 		// Create a new class with a temporary name; we will rename it as part of Finalize
 		const FString NewClassName = MakeUniqueObjectName(ClassOuter, UUPyGeneratedClass::StaticClass(), *FString::Printf(TEXT("%s_NEWINST"), *ClassName)).ToString();
 		NewClass = NewObject<UUPyGeneratedClass>(ClassOuter, *NewClassName, RF_Public | RF_Transient);
-#if WITH_METADATA
-		NewClass->SetMetaData(TEXT("DisplayName"), *UPyUtil::GetGeneratedTypeDisplayName(PyType));
-		NewClass->SetMetaData(TEXT("BlueprintType"), TEXT("true"));
-#endif
+		ApplyDefinitionOptions();
 		NewClass->SetSuperStruct(InSuperClass);
 	}
 
 	FUPythonGeneratedClassBuilder(UUPyGeneratedClass* InOldClass, UClass* InSuperClass)
 		: ClassName(InOldClass->GetName())
 		, PyType(InOldClass->PyType)
+		, Options(nullptr)
 		, OldClass(InOldClass)
 		, NewClass(nullptr)
 	{
@@ -209,6 +244,8 @@ public:
 		NewClass->StaticLink(true);
 		NewClass->AssembleReferenceTokenStream();
 		Py_END_ALLOW_THREADS
+
+		ApplyDefinitionOptions();
 
 		// Add the object meta-data to the type
 		// todo(hzn): meta data
@@ -827,6 +864,47 @@ public:
 	}
 
 private:
+	void ApplyDefinitionOptions()
+	{
+		const bool bBlueprintType = Options && Options->bHasBlueprintType ? Options->bBlueprintType : true;
+		const bool bNotBlueprintType = Options && Options->bHasNotBlueprintType && Options->bNotBlueprintType;
+		const bool bNotBlueprintable = Options && Options->bHasNotBlueprintable && Options->bNotBlueprintable;
+
+		NewClass->SetMetaData(TEXT("DisplayName"), *UPyUtil::GetGeneratedTypeDisplayName(PyType));
+		if (bBlueprintType && !bNotBlueprintType)
+		{
+			NewClass->SetMetaData(TEXT("BlueprintType"), TEXT("true"));
+		}
+		else
+		{
+			NewClass->SetMetaData(TEXT("NotBlueprintType"), TEXT("true"));
+		}
+		if (Options && Options->bHasBlueprintable)
+		{
+			NewClass->SetMetaData(Options->bBlueprintable ? TEXT("Blueprintable") : TEXT("NotBlueprintable"), TEXT("true"));
+		}
+		if (bNotBlueprintable)
+		{
+			NewClass->SetMetaData(TEXT("NotBlueprintable"), TEXT("true"));
+		}
+		if (Options)
+		{
+			ApplyPythonMetaData(Options->MetaData, NewClass);
+		}
+
+		if (Options && Options->bHasAbstract)
+		{
+			if (Options->bAbstract)
+			{
+				NewClass->ClassFlags |= CLASS_Abstract;
+			}
+			else
+			{
+				NewClass->ClassFlags &= ~CLASS_Abstract;
+			}
+		}
+	}
+
 	bool RegisterDescriptors()
 	{
 		for (const TSharedPtr<UPyGenUtil::FPropertyDef>& PropDef : NewClass->PropertyDefs)
@@ -883,6 +961,7 @@ private:
 
 	FString ClassName;
 	PyTypeObject* PyType;
+	const FUPyUClassDefinitionOptions* Options;
 	UUPyGeneratedClass* OldClass;
 	UUPyGeneratedClass* NewClass;
 };
@@ -1035,7 +1114,7 @@ bool UUPyGeneratedClass::GetGeneratedPropertyReplicationInfo(FName InPropertyNam
 	return false;
 }
 
-UUPyGeneratedClass* UUPyGeneratedClass::GenerateClass(PyTypeObject* InPyType)
+UUPyGeneratedClass* UUPyGeneratedClass::GenerateClass(PyTypeObject* InPyType, const FUPyUClassDefinitionOptions* InOptions)
 {
 	// Get the correct super class from the parent type in Python
 	UClass* SuperClass = (UClass*)FUPyWrapperTypeRegistry::Get().FindClass(InPyType->tp_base);
@@ -1046,7 +1125,7 @@ UUPyGeneratedClass* UUPyGeneratedClass::GenerateClass(PyTypeObject* InPyType)
 	}
 
 	// Builder used to generate the class
-	FUPythonGeneratedClassBuilder PythonClassBuilder(SuperClass, InPyType);
+	FUPythonGeneratedClassBuilder PythonClassBuilder(SuperClass, InPyType, InOptions);
 
 	// Add the functions to this class
 	// We have to process these first as properties may reference them as get/set functions
@@ -1207,6 +1286,20 @@ DEFINE_FUNCTION(UUPyGeneratedClass::CallPythonFunction)
 FUPyUClassDecorator* FUPyUClassDecorator::New(PyTypeObject* InType, PyObject* InArgs, PyObject* InKwds)
 {
 	FUPyUClassDecorator* Self = (FUPyUClassDecorator*)InType->tp_alloc(InType, 0);
+	if (Self)
+	{
+		Self->Options.MetaData = nullptr;
+		Self->Options.bHasBlueprintType = false;
+		Self->Options.bBlueprintType = true;
+		Self->Options.bHasNotBlueprintType = false;
+		Self->Options.bNotBlueprintType = false;
+		Self->Options.bHasBlueprintable = false;
+		Self->Options.bBlueprintable = false;
+		Self->Options.bHasNotBlueprintable = false;
+		Self->Options.bNotBlueprintable = false;
+		Self->Options.bHasAbstract = false;
+		Self->Options.bAbstract = false;
+	}
 	return Self;
 }
 
@@ -1219,11 +1312,71 @@ void FUPyUClassDecorator::Dealloc(FUPyUClassDecorator* InSelf)
 int FUPyUClassDecorator::Init(FUPyUClassDecorator* InSelf, PyObject* InArgs, PyObject* InKwds)
 {
 	Deinit(InSelf);
+
+	PyObject* PyMetaObj = nullptr;
+	PyObject* PyBlueprintTypeObj = nullptr;
+	PyObject* PyNotBlueprintTypeObj = nullptr;
+	PyObject* PyBlueprintableObj = nullptr;
+	PyObject* PyNotBlueprintableObj = nullptr;
+	PyObject* PyAbstractObj = nullptr;
+
+	static const char *ArgsKwdList[] = { "Meta", "BlueprintType", "NotBlueprintType", "Blueprintable", "NotBlueprintable", "Abstract", nullptr };
+	if (!PyArg_ParseTupleAndKeywords(InArgs, InKwds, "|OOOOOO:call", (char**)ArgsKwdList, &PyMetaObj, &PyBlueprintTypeObj, &PyNotBlueprintTypeObj, &PyBlueprintableObj, &PyNotBlueprintableObj, &PyAbstractObj))
+	{
+		return -1;
+	}
+
+	if (!PyMetaObj)
+	{
+		PyMetaObj = Py_None;
+	}
+	if (PyMetaObj != Py_None && !PyDict_Check(PyMetaObj))
+	{
+		UPyUtil::SetPythonError(PyExc_TypeError, InSelf, TEXT("Failed to convert parameter 'Meta' (expected 'None' or 'dict')"));
+		return -1;
+	}
+
+	const FString ErrorCtxt = UPyUtil::GetErrorContext(InSelf);
+	if (!ConvertOptionalBool(PyBlueprintTypeObj, InSelf->Options.bBlueprintType, InSelf->Options.bHasBlueprintType, *ErrorCtxt, TEXT("BlueprintType"))
+		|| !ConvertOptionalBool(PyNotBlueprintTypeObj, InSelf->Options.bNotBlueprintType, InSelf->Options.bHasNotBlueprintType, *ErrorCtxt, TEXT("NotBlueprintType"))
+		|| !ConvertOptionalBool(PyBlueprintableObj, InSelf->Options.bBlueprintable, InSelf->Options.bHasBlueprintable, *ErrorCtxt, TEXT("Blueprintable"))
+		|| !ConvertOptionalBool(PyNotBlueprintableObj, InSelf->Options.bNotBlueprintable, InSelf->Options.bHasNotBlueprintable, *ErrorCtxt, TEXT("NotBlueprintable"))
+		|| !ConvertOptionalBool(PyAbstractObj, InSelf->Options.bAbstract, InSelf->Options.bHasAbstract, *ErrorCtxt, TEXT("Abstract")))
+	{
+		return -1;
+	}
+
+	if (InSelf->Options.bHasBlueprintType && InSelf->Options.bBlueprintType && InSelf->Options.bHasNotBlueprintType && InSelf->Options.bNotBlueprintType)
+	{
+		UPyUtil::SetPythonError(PyExc_ValueError, *ErrorCtxt, TEXT("Parameters 'BlueprintType=True' and 'NotBlueprintType=True' cannot be combined"));
+		return -1;
+	}
+	if (InSelf->Options.bHasBlueprintable && InSelf->Options.bBlueprintable && InSelf->Options.bHasNotBlueprintable && InSelf->Options.bNotBlueprintable)
+	{
+		UPyUtil::SetPythonError(PyExc_ValueError, *ErrorCtxt, TEXT("Parameters 'Blueprintable=True' and 'NotBlueprintable=True' cannot be combined"));
+		return -1;
+	}
+
+	Py_INCREF(PyMetaObj);
+	InSelf->Options.MetaData = PyMetaObj;
+
 	return 0;
 }
 
 void FUPyUClassDecorator::Deinit(FUPyUClassDecorator* InSelf)
 {
+	Py_XDECREF(InSelf->Options.MetaData);
+	InSelf->Options.MetaData = nullptr;
+	InSelf->Options.bHasBlueprintType = false;
+	InSelf->Options.bBlueprintType = true;
+	InSelf->Options.bHasNotBlueprintType = false;
+	InSelf->Options.bNotBlueprintType = false;
+	InSelf->Options.bHasBlueprintable = false;
+	InSelf->Options.bBlueprintable = false;
+	InSelf->Options.bHasNotBlueprintable = false;
+	InSelf->Options.bNotBlueprintable = false;
+	InSelf->Options.bHasAbstract = false;
+	InSelf->Options.bAbstract = false;
 }
 
 PyObject* FUPyUClassDecorator::Call(FUPyUClassDecorator* InSelf, PyObject* InArgs, PyObject* InKwds)

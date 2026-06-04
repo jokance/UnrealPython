@@ -486,8 +486,11 @@ PyObject* CallGenerateClass(PyObject* InSelf, PyObject* InArgs, PyObject* InKwds
 	FUPyUClassDecorator* PyClassDecorator = FUPyUClassDecorator::New(&UPyUClassDecoratorType, InArgs, InKwds);
 	if (PyClassDecorator)
 	{
-		PyClassDecorator->Init(PyClassDecorator, InArgs, InKwds);
-		return (PyObject*)PyClassDecorator;
+		if (PyClassDecorator->Init(PyClassDecorator, InArgs, InKwds) == 0)
+		{
+			return (PyObject*)PyClassDecorator;
+		}
+		Py_CLEAR(PyClassDecorator);
 	}
 	return nullptr;
 }
@@ -497,8 +500,11 @@ PyObject* CallGenerateStruct(PyObject* InSelf, PyObject* InArgs, PyObject* InKwd
 	FUPyUStructDecorator* PyStructDecorator = FUPyUStructDecorator::New(&UPyUStructDecoratorType, InArgs, InKwds);
 	if (PyStructDecorator)
 	{
-		PyStructDecorator->Init(PyStructDecorator, InArgs, InKwds);
-		return (PyObject*)PyStructDecorator;
+		if (PyStructDecorator->Init(PyStructDecorator, InArgs, InKwds) == 0)
+		{
+			return (PyObject*)PyStructDecorator;
+		}
+		Py_CLEAR(PyStructDecorator);
 	}
 	return nullptr;
 }
@@ -666,6 +672,106 @@ PyObject* CallGetTypeFromStruct(PyObject* InSelf, PyObject* InArgs)
 	return (PyObject*)PyType;
 }
 
+PyObject* CallGetStructFromType(PyObject* InSelf, PyObject* InArgs)
+{
+	PyObject* PyObj = nullptr;
+	if (!PyArg_ParseTuple(InArgs, "O:GetStructFromType", &PyObj))
+	{
+		return nullptr;
+	}
+	if (!PyType_Check(PyObj))
+	{
+		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("GetStructFromType"), *FString::Printf(TEXT("Parameter must be a 'type' not '%s'"), *UPyUtil::GetFriendlyTypename(PyObj)));
+		return nullptr;
+	}
+
+	const UScriptStruct* Struct = FUPyWrapperTypeRegistry::Get().FindStruct((PyTypeObject*)PyObj);
+	if (!Struct)
+	{
+		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("GetStructFromType"), *FString::Printf(TEXT("Type '%s' does not have a reflected Unreal struct"), *UPyUtil::GetFriendlyTypename(PyObj)));
+		return nullptr;
+	}
+
+	PyObject* PyStruct = UPyConversion::Pythonize(Struct);
+	if (!PyStruct && !PyErr_Occurred())
+	{
+		UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GetStructFromType"), *FString::Printf(TEXT("Failed to pythonize reflected struct '%s'"), *Struct->GetName()));
+	}
+	return PyStruct;
+}
+
+const UField* ResolveGeneratedFieldFromType(PyObject* PyObj, const TCHAR* InFuncName)
+{
+	if (!PyType_Check(PyObj))
+	{
+		UPyUtil::SetPythonError(PyExc_TypeError, InFuncName, *FString::Printf(TEXT("First parameter must be a 'type' not '%s'"), *UPyUtil::GetFriendlyTypename(PyObj)));
+		return nullptr;
+	}
+
+	PyTypeObject* PyType = (PyTypeObject*)PyObj;
+	if (const UClass* Class = FUPyWrapperTypeRegistry::Get().FindClass(PyType))
+	{
+		return Class;
+	}
+	if (const UScriptStruct* Struct = FUPyWrapperTypeRegistry::Get().FindStruct(PyType))
+	{
+		return Struct;
+	}
+	if (const UEnum* Enum = FUPyWrapperTypeRegistry::Get().FindEnum(PyType))
+	{
+		return Enum;
+	}
+
+	UPyUtil::SetPythonError(PyExc_TypeError, InFuncName, *FString::Printf(TEXT("Type '%s' does not have a reflected Unreal field"), *UPyUtil::GetFriendlyTypename(PyObj)));
+	return nullptr;
+}
+
+PyObject* CallHasTypeMetaData(PyObject* InSelf, PyObject* InArgs)
+{
+	PyObject* PyTypeObj = nullptr;
+	PyObject* PyKeyObj = nullptr;
+	if (!PyArg_ParseTuple(InArgs, "OO:HasTypeMetaData", &PyTypeObj, &PyKeyObj))
+	{
+		return nullptr;
+	}
+
+	const UField* Field = ResolveGeneratedFieldFromType(PyTypeObj, TEXT("HasTypeMetaData"));
+	if (!Field)
+	{
+		return nullptr;
+	}
+
+	const FString Key = UPyUtil::PyObjectToUEString(PyKeyObj);
+	if (const UStruct* Struct = Cast<UStruct>(Field))
+	{
+		return PyBool_FromLong(Struct->HasMetaData(*Key) ? 1 : 0);
+	}
+	return PyBool_FromLong(Field->HasMetaData(*Key) ? 1 : 0);
+}
+
+PyObject* CallGetTypeMetaData(PyObject* InSelf, PyObject* InArgs)
+{
+	PyObject* PyTypeObj = nullptr;
+	PyObject* PyKeyObj = nullptr;
+	if (!PyArg_ParseTuple(InArgs, "OO:GetTypeMetaData", &PyTypeObj, &PyKeyObj))
+	{
+		return nullptr;
+	}
+
+	const UField* Field = ResolveGeneratedFieldFromType(PyTypeObj, TEXT("GetTypeMetaData"));
+	if (!Field)
+	{
+		return nullptr;
+	}
+
+	const FString Key = UPyUtil::PyObjectToUEString(PyKeyObj);
+	if (const UStruct* Struct = Cast<UStruct>(Field))
+	{
+		return UPyConversion::Pythonize(Struct->GetMetaData(*Key));
+	}
+	return UPyConversion::Pythonize(Field->GetMetaData(*Key));
+}
+
 PyObject* CallGetTypeFromEnum(PyObject* InSelf, PyObject* InArgs)
 {
 	PyObject* PyObj = nullptr;
@@ -718,6 +824,24 @@ PyObject* CallGetFunctionFlags(PyObject* InSelf, PyObject* InArgs)
 	}
 
 	return PyLong_FromUnsignedLongLong((unsigned long long)Function->FunctionFlags);
+}
+
+PyObject* CallGetClassFlags(PyObject* InSelf, PyObject* InArgs)
+{
+	PyObject* PyClassObj = nullptr;
+	if (!PyArg_ParseTuple(InArgs, "O:GetClassFlags", &PyClassObj))
+	{
+		return nullptr;
+	}
+
+	UClass* Class = nullptr;
+	if (!UPyConversion::NativizeClass(PyClassObj, Class, nullptr))
+	{
+		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("GetClassFlags"), *FString::Printf(TEXT("Parameter must be a 'Class' not '%s'"), *UPyUtil::GetFriendlyTypename(PyClassObj)));
+		return nullptr;
+	}
+
+	return PyLong_FromUnsignedLongLong((unsigned long long)Class->ClassFlags);
 }
 
 PyObject* CallGetPropertyFlags(PyObject* InSelf, PyObject* InArgs)
@@ -920,8 +1044,8 @@ PyMethodDef UEPyMethodDefs[] = {
 	{ "LoadPackage", UPyCFunctionCast(&CallLoadPackage), METH_VARARGS, UPyDoc_STR("LoadPackage(Name: str) -> Optional[Package] -- load an Unreal package with the given name") },
 	{ "GetDefaultObject", UPyCFunctionCast(&CallGetDefaultObject), METH_VARARGS, UPyDoc_STR("GetDefaultObject(Type: Union[Class, type]) -> Object | None -- get the Unreal class default object (CDO) of the given type") },
 	// { "purge_object_references", UPyCFunctionCast(&PurgeObjectReferences), METH_VARARGS | METH_KEYWORDS, "purge_object_references(obj: Object, include_inners: bool = True) -> None -- purge all references to the given Unreal object from any living Python objects" },
-	{ "uclass", UPyCFunctionCast(&CallGenerateClass), METH_VARARGS | METH_KEYWORDS, UPyDoc_STR("uclass() -> None -- generate an Unreal class for the given Python type") },
-	{ "ustruct", UPyCFunctionCast(&CallGenerateStruct), METH_VARARGS | METH_KEYWORDS, UPyDoc_STR("ustruct() -> None -- generate an Unreal struct for the given Python type") },
+	{ "uclass", UPyCFunctionCast(&CallGenerateClass), METH_VARARGS | METH_KEYWORDS, UPyDoc_STR("uclass(Meta: Optional[dict[str, Any]]=None, BlueprintType: Optional[bool]=None, NotBlueprintType: Optional[bool]=None, Blueprintable: Optional[bool]=None, NotBlueprintable: Optional[bool]=None, Abstract: Optional[bool]=None) -> None -- generate an Unreal class for the given Python type") },
+	{ "ustruct", UPyCFunctionCast(&CallGenerateStruct), METH_VARARGS | METH_KEYWORDS, UPyDoc_STR("ustruct(Meta: Optional[dict[str, Any]]=None, BlueprintType: Optional[bool]=None, NotBlueprintType: Optional[bool]=None) -> None -- generate an Unreal struct for the given Python type") },
 	{ "uenum", UPyCFunctionCast(&CallGenerateEnum), METH_VARARGS | METH_KEYWORDS, UPyDoc_STR("uenum() -> None -- generate an Unreal enum for the given Python type") },
 	{ "uvalue", UPyCFunctionCast(&CallGenerateValue), METH_VARARGS | METH_KEYWORDS, UPyDoc_STR("uvalue(Val: int, Meta: Optional[dict[str, Any]]=None) -> ValueDef -- generate an Unreal const value form Python") },
 	{ "uproperty", UPyCFunctionCast(&CallGenerateProperty), METH_VARARGS | METH_KEYWORDS, UPyDoc_STR("uproperty(Type: type, Meta: Optional[dict[str, Any]]=None, Getter: Optional[str]=None, Setter: Optional[str]=None, Replicated: Optional[bool]=None, RepNotify: Optional[Union[bool, str]]=None, ReplicationCondition: Optional[str]=None, RepNotifyCondition: Optional[str]=None, PushBased: Optional[bool]=None) -> PropertyDef -- generate an Unreal FProperty field form Python") },
@@ -929,8 +1053,12 @@ PyMethodDef UEPyMethodDefs[] = {
 	{ "FlushGeneratedTypeReinstancing", UPyCFunctionCast(&CallFlushGeneratedTypeReinstancing), METH_NOARGS, UPyDoc_STR("FlushGeneratedTypeReinstancing() -> None -- flush any pending reinstancing requests for Python generated types") },
 	{ "ReloadModule", UPyCFunctionCast(&CallReloadModule), METH_VARARGS, UPyDoc_STR("ReloadModule(module_or_name: Union[module, str]) -> module -- reload a Python module and flush pending generated type reinstancing") },
 	{ "CollectGarbage", UPyCFunctionCast(&CallCollectGarbage), METH_NOARGS, UPyDoc_STR("CollectGarbage() -> None -- run Unreal garbage collection") },
+	{ "GetClassFlags", UPyCFunctionCast(&CallGetClassFlags), METH_VARARGS, UPyDoc_STR("GetClassFlags(Class_: Union[Class, type]) -> int -- get the class flags for a reflected Unreal class") },
 	{ "GetTypeFromClass", UPyCFunctionCast(&CallGetTypeFromClass), METH_VARARGS, UPyDoc_STR("GetTypeFromClass(Class_: Class) -> type -- get the best matching Python type for the given Unreal class") },
 	{ "GetTypeFromStruct", UPyCFunctionCast(&CallGetTypeFromStruct), METH_VARARGS, UPyDoc_STR("GetTypeFromStruct(Struct_: Struct) -> type -- get the best matching Python type for the given Unreal struct") },
+	{ "GetStructFromType", UPyCFunctionCast(&CallGetStructFromType), METH_VARARGS, UPyDoc_STR("GetStructFromType(Type: type) -> Struct -- get the reflected Unreal struct for the given Python type") },
+	{ "HasTypeMetaData", UPyCFunctionCast(&CallHasTypeMetaData), METH_VARARGS, UPyDoc_STR("HasTypeMetaData(Type: type, Key: str) -> bool -- test reflected metadata on a generated Python type") },
+	{ "GetTypeMetaData", UPyCFunctionCast(&CallGetTypeMetaData), METH_VARARGS, UPyDoc_STR("GetTypeMetaData(Type: type, Key: str) -> str -- get reflected metadata from a generated Python type") },
 	{ "GetTypeFromEnum", UPyCFunctionCast(&CallGetTypeFromEnum), METH_VARARGS, UPyDoc_STR("GetTypeFromEnum(Enum_: Enum) -> type -- get the best matching Python type for the given Unreal enum") },
 	{ "GetFunctionFlags", UPyCFunctionCast(&CallGetFunctionFlags), METH_VARARGS, UPyDoc_STR("GetFunctionFlags(Type: Union[Class, type], Name: str) -> int -- get raw UFunction flags for a reflected function") },
 	{ "GetPropertyFlags", UPyCFunctionCast(&CallGetPropertyFlags), METH_VARARGS, UPyDoc_STR("GetPropertyFlags(Type: Union[Class, type], Name: str) -> int -- get raw FProperty flags for a reflected property") },
