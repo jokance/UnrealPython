@@ -111,6 +111,8 @@ def MulticastDo(self):
 
 `Server`、`Client`、`NetMulticast` 三者只能选一个；`Reliable` 和 `Unreliable` 不能同时使用，也不能脱离网络目标单独使用。RPC 调度语义仍依赖 Actor ownership、NetDriver、连接状态等 UE 网络条件。
 
+在 Editor `-game` listen server/client 实测中，`ue.uclass()` 生成 Actor 已验证可跨进程复制 Actor、复制 `RepNotify` 属性，并执行 `NetMulticast` RPC。Python 调 Unreal net function 时不会套用 editor script execution guard，避免 `AActor::GetFunctionCallspace()` 被强制短路为本地调用。
+
 ## 已验证路径
 
 当前项目包含以下 smoke test：
@@ -123,6 +125,7 @@ def MulticastDo(self):
 - `Content/Scripts/upy_test/upy_world_netmode_repro.py`
 - `Content/Scripts/upy_test/upy_reload_workflow_repro.py`
 - `Content/Scripts/upy_test/upy_network_semantics_repro.py`
+- `Content/Scripts/upy_test/upy_network_runtime_repro.py`
 
 这些测试已在 Editor 中以 `-DisablePython` 禁用 UE 内置 Python 后运行通过。
 
@@ -132,4 +135,4 @@ def MulticastDo(self):
 - `ue.Array`、`ue.Set`、`ue.Map` 只能作为带子类型的实例使用。
 - `Name` / `Text` 的显式 generated property 类型当前没有单独 wrapper type 入口；字符串属性使用 `str`。
 - 复杂 delegate、nested container、soft object/class path 等类型需要按具体 wrapper/转换路径单独验证后再进入支持矩阵。
-- 网络语义扩展当前覆盖 `Replicated=True`、RepNotify metadata、lifetime condition、RepNotify condition、PushBased、RPC target、reliability。真实复制/RPC 仍依赖 Actor ownership、NetDriver、连接状态等 UE 网络条件；主动 dirty 标记 API 和多 world 行为 smoke 还未补齐。
+- 网络语义扩展当前覆盖 `Replicated=True`、RepNotify metadata、lifetime condition、RepNotify condition、PushBased、RPC target、reliability，并已验证 listen server/client 下的 Actor replication、RepNotify 和 `NetMulticast` RPC。单播 `Server` / `Client` RPC 仍需按 Actor ownership、NetDriver、连接状态等 UE 网络条件单独验证；主动 dirty 标记 API 和多 world 行为 smoke 还未补齐。

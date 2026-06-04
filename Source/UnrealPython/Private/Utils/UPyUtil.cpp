@@ -616,10 +616,19 @@ bool InvokeFunctionCall(UObject* InObj, const UFunction* InFunc, void* InBasePar
 		}
 	});
 
-	FEditorScriptExecutionGuard ScriptGuard;
-	Py_BEGIN_ALLOW_THREADS
-	InObj->ProcessEvent((UFunction*)InFunc, InBaseParamsAddr);
-	Py_END_ALLOW_THREADS
+	if (InFunc->HasAnyFunctionFlags(FUNC_Net))
+	{
+		Py_BEGIN_ALLOW_THREADS
+		InObj->ProcessEvent((UFunction*)InFunc, InBaseParamsAddr);
+		Py_END_ALLOW_THREADS
+	}
+	else
+	{
+		FEditorScriptExecutionGuard ScriptGuard;
+		Py_BEGIN_ALLOW_THREADS
+		InObj->ProcessEvent((UFunction*)InFunc, InBaseParamsAddr);
+		Py_END_ALLOW_THREADS
+	}
 
 	return !bThrewException;
 }

@@ -223,6 +223,8 @@ public:
 		Py_BEGIN_ALLOW_THREADS
 		if (UObject* NewClassCDO = NewClass->GetDefaultObject())
 		{
+			NewClass->UpdateCustomPropertyListForPostConstruction();
+
 			if (NewClass->ClassRedirector)
 			{
 				// If the class has a redirector, then we also need to redirect the CDO
