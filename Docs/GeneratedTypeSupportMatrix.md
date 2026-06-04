@@ -42,6 +42,8 @@ class MyEnum(ue.EnumBase):
 
 容器必须传实例，例如 `ue.Array(int)`；不能直接传 `ue.Array`、`ue.Set`、`ue.Map`。
 
+`ue.uproperty(..., Replicated=True)` 会把生成的 `FProperty` 标记为 `CPF_Net`。当前只覆盖反射 flag；实际属性复制生命周期和 RepNotify 还需要后续扩展。
+
 ## `ue.ufunction(Params=[...], Ret=...)` 支持
 
 `Params` 和 `Ret` 复用 `uproperty` 的类型系统。常用可用组合：
@@ -64,6 +66,24 @@ def ReceiveTick(self, delta_seconds):
     pass
 ```
 
+网络 RPC 反射 flags 可通过 `Server=True`、`Client=True`、`NetMulticast=True`、`Reliable=True`、`Unreliable=True` 指定：
+
+```python
+@ue.ufunction(Server=True, Reliable=True)
+def ServerDo(self):
+    pass
+
+@ue.ufunction(Client=True, Unreliable=True)
+def ClientDo(self):
+    pass
+
+@ue.ufunction(NetMulticast=True, Reliable=True)
+def MulticastDo(self):
+    pass
+```
+
+`Server`、`Client`、`NetMulticast` 三者只能选一个；`Reliable` 和 `Unreliable` 不能同时使用，也不能脱离网络目标单独使用。当前只覆盖 `UFunction` 反射 flags；完整 RPC 调度语义仍依赖 Actor ownership、NetDriver、连接状态等 UE 网络条件。
+
 ## 已验证路径
 
 当前项目包含以下 smoke test：
@@ -74,6 +94,8 @@ def ReceiveTick(self, delta_seconds):
 - `Content/Scripts/upy_test/upy_generated_actor_regen_repro.py`
 - `Content/Scripts/upy_test/upy_generated_actor_event_repro.py`
 - `Content/Scripts/upy_test/upy_world_netmode_repro.py`
+- `Content/Scripts/upy_test/upy_reload_workflow_repro.py`
+- `Content/Scripts/upy_test/upy_network_semantics_repro.py`
 
 这些测试已在 Editor 中以 `-DisablePython` 禁用 UE 内置 Python 后运行通过。
 
@@ -83,3 +105,4 @@ def ReceiveTick(self, delta_seconds):
 - `ue.Array`、`ue.Set`、`ue.Map` 只能作为带子类型的实例使用。
 - `Name` / `Text` 的显式 generated property 类型当前没有单独 wrapper type 入口；字符串属性使用 `str`。
 - 复杂 delegate、nested container、soft object/class path 等类型需要按具体 wrapper/转换路径单独验证后再进入支持矩阵。
+- 网络语义扩展当前是反射 flag 层：`Replicated=True`、RPC target、reliability 可被生成并验证；RepNotify、GetLifetimeReplicatedProps 等复制生命周期还未生成。

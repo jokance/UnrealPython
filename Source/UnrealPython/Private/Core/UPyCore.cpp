@@ -364,6 +364,7 @@ FUPyFPropertyDef* FUPyFPropertyDef::New(PyTypeObject* InType)
 		Self->MetaData = nullptr;
 		new(&Self->GetterFuncName) FString();
 		new(&Self->SetterFuncName) FString();
+		Self->bReplicated = false;
 	}
 	return Self;
 }
@@ -377,7 +378,7 @@ void FUPyFPropertyDef::Free(FUPyFPropertyDef* InSelf)
 	Py_TYPE(InSelf)->tp_free((PyObject*)InSelf);
 }
 
-int FUPyFPropertyDef::Init(FUPyFPropertyDef* InSelf, PyObject* InPropType, PyObject* InMetaData, FString InGetterFuncName, FString InSetterFuncName)
+int FUPyFPropertyDef::Init(FUPyFPropertyDef* InSelf, PyObject* InPropType, PyObject* InMetaData, FString InGetterFuncName, FString InSetterFuncName, bool bInReplicated)
 {
 	Deinit(InSelf);
 
@@ -389,6 +390,7 @@ int FUPyFPropertyDef::Init(FUPyFPropertyDef* InSelf, PyObject* InPropType, PyObj
 
 	InSelf->GetterFuncName = MoveTemp(InGetterFuncName);
 	InSelf->SetterFuncName = MoveTemp(InSetterFuncName);
+	InSelf->bReplicated = bInReplicated;
 
 	return 0;
 }
@@ -399,9 +401,10 @@ int FUPyFPropertyDef::PyInit(FUPyFPropertyDef* InSelf, PyObject* InArgs, PyObjec
 	PyObject* PyMetaObj = nullptr;
 	PyObject* PyPropGetterObj = nullptr;
 	PyObject* PyPropSetterObj = nullptr;
+	PyObject* PyPropReplicatedObj = nullptr;
 
-	static const char *ArgsKwdList[] = { "Type", "Meta", "Getter", "Setter", nullptr };
-	if (!PyArg_ParseTupleAndKeywords(InArgs, InKwds, "O|OOO:call", (char**)ArgsKwdList, &PyPropTypeObj, &PyMetaObj, &PyPropGetterObj, &PyPropSetterObj))
+	static const char *ArgsKwdList[] = { "Type", "Meta", "Getter", "Setter", "Replicated", nullptr };
+	if (!PyArg_ParseTupleAndKeywords(InArgs, InKwds, "O|OOOO:call", (char**)ArgsKwdList, &PyPropTypeObj, &PyMetaObj, &PyPropGetterObj, &PyPropSetterObj, &PyPropReplicatedObj))
 	{
 		return -1;
 	}
@@ -425,7 +428,14 @@ int FUPyFPropertyDef::PyInit(FUPyFPropertyDef* InSelf, PyObject* InArgs, PyObjec
 		return -1;
 	}
 
-	return Init(InSelf, PyPropTypeObj, PyMetaObj, MoveTemp(PropGetter), MoveTemp(PropSetter));
+	bool bPropReplicated = false;
+	if (PyPropReplicatedObj && PyPropReplicatedObj != Py_None && !UPyConversion::Nativize(PyPropReplicatedObj, bPropReplicated))
+	{
+		UPyUtil::SetPythonError(PyExc_TypeError, *ErrorCtxt, TEXT("Failed to convert parameter 'Replicated' to a bool (expected 'None' or 'bool')"));
+		return -1;
+	}
+
+	return Init(InSelf, PyPropTypeObj, PyMetaObj, MoveTemp(PropGetter), MoveTemp(PropSetter), bPropReplicated);
 }
 
 void FUPyFPropertyDef::Deinit(FUPyFPropertyDef* InSelf)
@@ -438,10 +448,16 @@ void FUPyFPropertyDef::Deinit(FUPyFPropertyDef* InSelf)
 
 	InSelf->GetterFuncName.Reset();
 	InSelf->SetterFuncName.Reset();
+	InSelf->bReplicated = false;
 }
 
 void FUPyFPropertyDef::ApplyMetaData(FUPyFPropertyDef* InSelf, FProperty* InProp)
 {
+	if (InSelf->bReplicated)
+	{
+		InProp->PropertyFlags |= CPF_Net;
+	}
+
 #if WITH_EDITOR
 	UPyCoreUtil::ApplyMetaData(InSelf->MetaData, [InProp](const FString& InMetaDataKey, const FString& InMetaDataValue)
 	{
@@ -503,9 +519,14 @@ int FUPyUFunctionDef::PyInit(FUPyUFunctionDef* InSelf, PyObject* InArgs, PyObjec
 	PyObject* PyFuncPureObj = nullptr;
 	PyObject* PyFuncGetterObj = nullptr;
 	PyObject* PyFuncSetterObj = nullptr;
+	PyObject* PyFuncServerObj = nullptr;
+	PyObject* PyFuncClientObj = nullptr;
+	PyObject* PyFuncNetMulticastObj = nullptr;
+	PyObject* PyFuncReliableObj = nullptr;
+	PyObject* PyFuncUnreliableObj = nullptr;
 
-	static const char *ArgsKwdList[] = { "Func", "Meta", "Ret", "Params", "Override", "Static", "Pure", "Getter", "Setter", nullptr };
-	if (!PyArg_ParseTupleAndKeywords(InArgs, InKwds, "O|OOOOOOOO:call", (char**)ArgsKwdList, &PyFuncObj, &PyMetaObj, &PyFuncRetTypeObj, &PyFuncParamTypesObj, &PyFuncOverrideObj, &PyFuncStaticObj, &PyFuncPureObj, &PyFuncGetterObj, &PyFuncSetterObj))
+	static const char *ArgsKwdList[] = { "Func", "Meta", "Ret", "Params", "Override", "Static", "Pure", "Getter", "Setter", "Server", "Client", "NetMulticast", "Reliable", "Unreliable", nullptr };
+	if (!PyArg_ParseTupleAndKeywords(InArgs, InKwds, "O|OOOOOOOOOOOOO:call", (char**)ArgsKwdList, &PyFuncObj, &PyMetaObj, &PyFuncRetTypeObj, &PyFuncParamTypesObj, &PyFuncOverrideObj, &PyFuncStaticObj, &PyFuncPureObj, &PyFuncGetterObj, &PyFuncSetterObj, &PyFuncServerObj, &PyFuncClientObj, &PyFuncNetMulticastObj, &PyFuncReliableObj, &PyFuncUnreliableObj))
 	{
 		return -1;
 	}
@@ -545,6 +566,26 @@ int FUPyUFunctionDef::PyInit(FUPyUFunctionDef* InSelf, PyObject* InArgs, PyObjec
 		return -1;
 	}
 	if (!UPyCoreUtil::ConvertOptionalFunctionFlag(PyFuncSetterObj, FuncFlags, EUPyUFunctionDefFlags::Setter, EUPyUFunctionDefFlags::None, *ErrorCtxt, TEXT("Failed to convert parameter 'setter' to a flag (expected 'None' or 'bool')")))
+	{
+		return -1;
+	}
+	if (!UPyCoreUtil::ConvertOptionalFunctionFlag(PyFuncServerObj, FuncFlags, EUPyUFunctionDefFlags::Server, EUPyUFunctionDefFlags::None, *ErrorCtxt, TEXT("Failed to convert parameter 'Server' to a flag (expected 'None' or 'bool')")))
+	{
+		return -1;
+	}
+	if (!UPyCoreUtil::ConvertOptionalFunctionFlag(PyFuncClientObj, FuncFlags, EUPyUFunctionDefFlags::Client, EUPyUFunctionDefFlags::None, *ErrorCtxt, TEXT("Failed to convert parameter 'Client' to a flag (expected 'None' or 'bool')")))
+	{
+		return -1;
+	}
+	if (!UPyCoreUtil::ConvertOptionalFunctionFlag(PyFuncNetMulticastObj, FuncFlags, EUPyUFunctionDefFlags::NetMulticast, EUPyUFunctionDefFlags::None, *ErrorCtxt, TEXT("Failed to convert parameter 'NetMulticast' to a flag (expected 'None' or 'bool')")))
+	{
+		return -1;
+	}
+	if (!UPyCoreUtil::ConvertOptionalFunctionFlag(PyFuncReliableObj, FuncFlags, EUPyUFunctionDefFlags::Reliable, EUPyUFunctionDefFlags::None, *ErrorCtxt, TEXT("Failed to convert parameter 'Reliable' to a flag (expected 'None' or 'bool')")))
+	{
+		return -1;
+	}
+	if (!UPyCoreUtil::ConvertOptionalFunctionFlag(PyFuncUnreliableObj, FuncFlags, EUPyUFunctionDefFlags::Unreliable, EUPyUFunctionDefFlags::None, *ErrorCtxt, TEXT("Failed to convert parameter 'Unreliable' to a flag (expected 'None' or 'bool')")))
 	{
 		return -1;
 	}

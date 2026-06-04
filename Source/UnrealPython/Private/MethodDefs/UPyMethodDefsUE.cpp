@@ -693,6 +693,60 @@ PyObject* CallGetTypeFromEnum(PyObject* InSelf, PyObject* InArgs)
 	return (PyObject*)PyType;
 }
 
+PyObject* CallGetFunctionFlags(PyObject* InSelf, PyObject* InArgs)
+{
+	PyObject* PyClassObj = nullptr;
+	PyObject* PyNameObj = nullptr;
+	if (!PyArg_ParseTuple(InArgs, "OO:GetFunctionFlags", &PyClassObj, &PyNameObj))
+	{
+		return nullptr;
+	}
+
+	UClass* Class = nullptr;
+	if (!UPyConversion::NativizeClass(PyClassObj, Class, nullptr))
+	{
+		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("GetFunctionFlags"), *FString::Printf(TEXT("First parameter must be a 'Class' not '%s'"), *UPyUtil::GetFriendlyTypename(PyClassObj)));
+		return nullptr;
+	}
+
+	const FString FunctionName = UPyUtil::PyObjectToUEString(PyNameObj);
+	const UFunction* Function = Class->FindFunctionByName(*FunctionName);
+	if (!Function)
+	{
+		UPyUtil::SetPythonError(PyExc_AttributeError, TEXT("GetFunctionFlags"), *FString::Printf(TEXT("Class '%s' has no function '%s'"), *Class->GetName(), *FunctionName));
+		return nullptr;
+	}
+
+	return PyLong_FromUnsignedLongLong((unsigned long long)Function->FunctionFlags);
+}
+
+PyObject* CallGetPropertyFlags(PyObject* InSelf, PyObject* InArgs)
+{
+	PyObject* PyClassObj = nullptr;
+	PyObject* PyNameObj = nullptr;
+	if (!PyArg_ParseTuple(InArgs, "OO:GetPropertyFlags", &PyClassObj, &PyNameObj))
+	{
+		return nullptr;
+	}
+
+	UClass* Class = nullptr;
+	if (!UPyConversion::NativizeClass(PyClassObj, Class, nullptr))
+	{
+		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("GetPropertyFlags"), *FString::Printf(TEXT("First parameter must be a 'Class' not '%s'"), *UPyUtil::GetFriendlyTypename(PyClassObj)));
+		return nullptr;
+	}
+
+	const FString PropertyName = UPyUtil::PyObjectToUEString(PyNameObj);
+	const FProperty* Property = Class->FindPropertyByName(*PropertyName);
+	if (!Property)
+	{
+		UPyUtil::SetPythonError(PyExc_AttributeError, TEXT("GetPropertyFlags"), *FString::Printf(TEXT("Class '%s' has no property '%s'"), *Class->GetName(), *PropertyName));
+		return nullptr;
+	}
+
+	return PyLong_FromUnsignedLongLong((unsigned long long)Property->PropertyFlags);
+}
+
 PyObject* CallConvertAbsolutePathApp(PyObject* InSelf, PyObject* InArgs)
 {
 	PyObject* PyObj = nullptr;
@@ -745,14 +799,16 @@ PyMethodDef UEPyMethodDefs[] = {
 	{ "ustruct", UPyCFunctionCast(&CallGenerateStruct), METH_VARARGS | METH_KEYWORDS, UPyDoc_STR("ustruct() -> None -- generate an Unreal struct for the given Python type") },
 	{ "uenum", UPyCFunctionCast(&CallGenerateEnum), METH_VARARGS | METH_KEYWORDS, UPyDoc_STR("uenum() -> None -- generate an Unreal enum for the given Python type") },
 	{ "uvalue", UPyCFunctionCast(&CallGenerateValue), METH_VARARGS | METH_KEYWORDS, UPyDoc_STR("uvalue(Val: int, Meta: Optional[dict[str, Any]]=None) -> ValueDef -- generate an Unreal const value form Python") },
-	{ "uproperty", UPyCFunctionCast(&CallGenerateProperty), METH_VARARGS | METH_KEYWORDS, UPyDoc_STR("uproperty(Type: type, Meta: Optional[dict[str, Any]]=None, Getter: Optional[str]=None, Setter: Optional[str]=None) -> PropertyDef -- generate an Unreal FProperty field form Python") },
-	{ "ufunction", UPyCFunctionCast(&CallGenerateFunction), METH_VARARGS | METH_KEYWORDS, UPyDoc_STR("ufunction(Meta: Optional[dict[str, Any]]=None, Ret: Optional[type]=None, Params: Optional[list[type]]=None, Override: Optional[bool]=None, Static: Optional[bool]=None, Pure: Optional[bool]=None, Getter: Optional[bool]=None, Setter: Optional[bool]=None) -> FunctionDef -- generate an Unreal FProperty field form Python") },
+	{ "uproperty", UPyCFunctionCast(&CallGenerateProperty), METH_VARARGS | METH_KEYWORDS, UPyDoc_STR("uproperty(Type: type, Meta: Optional[dict[str, Any]]=None, Getter: Optional[str]=None, Setter: Optional[str]=None, Replicated: Optional[bool]=None) -> PropertyDef -- generate an Unreal FProperty field form Python") },
+	{ "ufunction", UPyCFunctionCast(&CallGenerateFunction), METH_VARARGS | METH_KEYWORDS, UPyDoc_STR("ufunction(Meta: Optional[dict[str, Any]]=None, Ret: Optional[type]=None, Params: Optional[list[type]]=None, Override: Optional[bool]=None, Static: Optional[bool]=None, Pure: Optional[bool]=None, Getter: Optional[bool]=None, Setter: Optional[bool]=None, Server: Optional[bool]=None, Client: Optional[bool]=None, NetMulticast: Optional[bool]=None, Reliable: Optional[bool]=None, Unreliable: Optional[bool]=None) -> FunctionDef -- generate an Unreal FProperty field form Python") },
 	{ "FlushGeneratedTypeReinstancing", UPyCFunctionCast(&CallFlushGeneratedTypeReinstancing), METH_NOARGS, UPyDoc_STR("FlushGeneratedTypeReinstancing() -> None -- flush any pending reinstancing requests for Python generated types") },
 	{ "ReloadModule", UPyCFunctionCast(&CallReloadModule), METH_VARARGS, UPyDoc_STR("ReloadModule(module_or_name: Union[module, str]) -> module -- reload a Python module and flush pending generated type reinstancing") },
 	{ "CollectGarbage", UPyCFunctionCast(&CallCollectGarbage), METH_NOARGS, UPyDoc_STR("CollectGarbage() -> None -- run Unreal garbage collection") },
 	{ "GetTypeFromClass", UPyCFunctionCast(&CallGetTypeFromClass), METH_VARARGS, UPyDoc_STR("GetTypeFromClass(Class_: Class) -> type -- get the best matching Python type for the given Unreal class") },
 	{ "GetTypeFromStruct", UPyCFunctionCast(&CallGetTypeFromStruct), METH_VARARGS, UPyDoc_STR("GetTypeFromStruct(Struct_: Struct) -> type -- get the best matching Python type for the given Unreal struct") },
 	{ "GetTypeFromEnum", UPyCFunctionCast(&CallGetTypeFromEnum), METH_VARARGS, UPyDoc_STR("GetTypeFromEnum(Enum_: Enum) -> type -- get the best matching Python type for the given Unreal enum") },
+	{ "GetFunctionFlags", UPyCFunctionCast(&CallGetFunctionFlags), METH_VARARGS, UPyDoc_STR("GetFunctionFlags(Type: Union[Class, type], Name: str) -> int -- get raw UFunction flags for a reflected function") },
+	{ "GetPropertyFlags", UPyCFunctionCast(&CallGetPropertyFlags), METH_VARARGS, UPyDoc_STR("GetPropertyFlags(Type: Union[Class, type], Name: str) -> int -- get raw FProperty flags for a reflected property") },
 	// { "register_python_shutdown_callback", UPyCFunctionCast(&RegisterPythonShutdownCallback), METH_VARARGS, "register_python_shutdown_callback(callable: Callable[[], None]) -> object -- register the given callable (with no input arguments) as a callback to execute immediately before Python shutdown"},
 	// { "unregister_python_shutdown_callback", UPyCFunctionCast(&UnregisterPythonShutdownCallback), METH_VARARGS, "unregister_python_shutdown_callback(handle: object) -> None -- unregister the given handle from a previous call to register_python_shutdown_callback"},
 	// { "NSLOCTEXT", UPyCFunctionCast(&CreateLocalizedText), METH_VARARGS, "NSLOCTEXT(ns: str, key: str, source: str) -> Text -- create a localized Text from the given namespace, key, and source string" },

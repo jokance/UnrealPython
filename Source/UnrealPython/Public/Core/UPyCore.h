@@ -289,6 +289,9 @@ struct FUPyFPropertyDef
 	/** Setter function to use with this property */
 	FString SetterFuncName;
 
+	/** Whether this property should be marked for network replication */
+	bool bReplicated;
+
 	/** New this instance (called via tp_new for Python, or directly in C++) */
 	static FUPyFPropertyDef* New(PyTypeObject* InType);
 
@@ -296,7 +299,7 @@ struct FUPyFPropertyDef
 	static void Free(FUPyFPropertyDef* InSelf);
 
 	/** Initialize this instance (called via tp_init for Python, or directly in C++) */
-	static int Init(FUPyFPropertyDef* InSelf, PyObject* InPropType, PyObject* InMetaData, FString InGetterFuncName, FString InSetterFuncName);
+	static int Init(FUPyFPropertyDef* InSelf, PyObject* InPropType, PyObject* InMetaData, FString InGetterFuncName, FString InSetterFuncName, bool bInReplicated);
 
 	static int PyInit(FUPyFPropertyDef* InSelf, PyObject* InArgs, PyObject* InKwds);
 	
@@ -308,7 +311,7 @@ struct FUPyFPropertyDef
 };
 
 /** Flags used to define the attributes of a UFunction field from Python */
-enum class EUPyUFunctionDefFlags : uint8
+enum class EUPyUFunctionDefFlags : uint16
 {
 	None = 0,
 	Override = 1<<0,
@@ -317,6 +320,11 @@ enum class EUPyUFunctionDefFlags : uint8
 	Impure = 1<<3,
 	Getter = 1<<4,
 	Setter = 1<<5,
+	Server = 1<<6,
+	Client = 1<<7,
+	NetMulticast = 1<<8,
+	Reliable = 1<<9,
+	Unreliable = 1<<10,
 };
 ENUM_CLASS_FLAGS(EUPyUFunctionDefFlags);
 

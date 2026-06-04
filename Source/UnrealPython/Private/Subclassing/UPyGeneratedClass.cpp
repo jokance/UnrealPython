@@ -360,6 +360,25 @@ public:
 				return false;
 			}
 		}
+		const int32 NetTargetCount =
+			(EnumHasAllFlags(InPyFuncDef->FuncFlags, EUPyUFunctionDefFlags::Server) ? 1 : 0) +
+			(EnumHasAllFlags(InPyFuncDef->FuncFlags, EUPyUFunctionDefFlags::Client) ? 1 : 0) +
+			(EnumHasAllFlags(InPyFuncDef->FuncFlags, EUPyUFunctionDefFlags::NetMulticast) ? 1 : 0);
+		if (NetTargetCount > 1)
+		{
+			UPyUtil::SetPythonError(PyExc_Exception, PyType, *FString::Printf(TEXT("Method '%s' can only specify one of 'Server', 'Client', or 'NetMulticast'"), *InFieldName));
+			return false;
+		}
+		if (EnumHasAllFlags(InPyFuncDef->FuncFlags, EUPyUFunctionDefFlags::Reliable) && EnumHasAllFlags(InPyFuncDef->FuncFlags, EUPyUFunctionDefFlags::Unreliable))
+		{
+			UPyUtil::SetPythonError(PyExc_Exception, PyType, *FString::Printf(TEXT("Method '%s' cannot specify both 'Reliable' and 'Unreliable'"), *InFieldName));
+			return false;
+		}
+		if (NetTargetCount == 0 && EnumHasAnyFlags(InPyFuncDef->FuncFlags, EUPyUFunctionDefFlags::Reliable | EUPyUFunctionDefFlags::Unreliable))
+		{
+			UPyUtil::SetPythonError(PyExc_Exception, PyType, *FString::Printf(TEXT("Method '%s' cannot specify 'Reliable' or 'Unreliable' without 'Server', 'Client', or 'NetMulticast'"), *InFieldName));
+			return false;
+		}
 
 		// Resolve the function name to match any previously exported functions from the parent type
 		const FName FuncName = *InFieldName; // FPyWrapperObjectMetaData::ResolveFunctionName(PyType->tp_base, *InFieldName);
@@ -424,6 +443,26 @@ public:
 		if (EnumHasAllFlags(InPyFuncDef->FuncFlags, EUPyUFunctionDefFlags::Impure))
 		{
 			Func->FunctionFlags &= ~FUNC_BlueprintPure;
+		}
+		if (EnumHasAllFlags(InPyFuncDef->FuncFlags, EUPyUFunctionDefFlags::Server))
+		{
+			Func->FunctionFlags |= (FUNC_Net | FUNC_NetServer);
+		}
+		if (EnumHasAllFlags(InPyFuncDef->FuncFlags, EUPyUFunctionDefFlags::Client))
+		{
+			Func->FunctionFlags |= (FUNC_Net | FUNC_NetClient);
+		}
+		if (EnumHasAllFlags(InPyFuncDef->FuncFlags, EUPyUFunctionDefFlags::NetMulticast))
+		{
+			Func->FunctionFlags |= (FUNC_Net | FUNC_NetMulticast);
+		}
+		if (EnumHasAllFlags(InPyFuncDef->FuncFlags, EUPyUFunctionDefFlags::Reliable))
+		{
+			Func->FunctionFlags |= FUNC_NetReliable;
+		}
+		if (EnumHasAllFlags(InPyFuncDef->FuncFlags, EUPyUFunctionDefFlags::Unreliable))
+		{
+			Func->FunctionFlags &= ~FUNC_NetReliable;
 		}
 #if WITH_EDITOR
 		if (EnumHasAllFlags(InPyFuncDef->FuncFlags, EUPyUFunctionDefFlags::Getter))
