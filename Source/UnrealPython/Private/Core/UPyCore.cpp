@@ -364,7 +364,9 @@ FUPyFPropertyDef* FUPyFPropertyDef::New(PyTypeObject* InType)
 		Self->MetaData = nullptr;
 		new(&Self->GetterFuncName) FString();
 		new(&Self->SetterFuncName) FString();
+		new(&Self->RepNotifyFuncName) FString();
 		Self->bReplicated = false;
+		Self->bRepNotify = false;
 	}
 	return Self;
 }
@@ -375,10 +377,11 @@ void FUPyFPropertyDef::Free(FUPyFPropertyDef* InSelf)
 
 	InSelf->GetterFuncName.~FString();
 	InSelf->SetterFuncName.~FString();
+	InSelf->RepNotifyFuncName.~FString();
 	Py_TYPE(InSelf)->tp_free((PyObject*)InSelf);
 }
 
-int FUPyFPropertyDef::Init(FUPyFPropertyDef* InSelf, PyObject* InPropType, PyObject* InMetaData, FString InGetterFuncName, FString InSetterFuncName, bool bInReplicated)
+int FUPyFPropertyDef::Init(FUPyFPropertyDef* InSelf, PyObject* InPropType, PyObject* InMetaData, FString InGetterFuncName, FString InSetterFuncName, bool bInReplicated, FString InRepNotifyFuncName, bool bInRepNotify)
 {
 	Deinit(InSelf);
 
@@ -390,7 +393,9 @@ int FUPyFPropertyDef::Init(FUPyFPropertyDef* InSelf, PyObject* InPropType, PyObj
 
 	InSelf->GetterFuncName = MoveTemp(InGetterFuncName);
 	InSelf->SetterFuncName = MoveTemp(InSetterFuncName);
-	InSelf->bReplicated = bInReplicated;
+	InSelf->bReplicated = bInReplicated || bInRepNotify;
+	InSelf->RepNotifyFuncName = MoveTemp(InRepNotifyFuncName);
+	InSelf->bRepNotify = bInRepNotify;
 
 	return 0;
 }
@@ -402,9 +407,10 @@ int FUPyFPropertyDef::PyInit(FUPyFPropertyDef* InSelf, PyObject* InArgs, PyObjec
 	PyObject* PyPropGetterObj = nullptr;
 	PyObject* PyPropSetterObj = nullptr;
 	PyObject* PyPropReplicatedObj = nullptr;
+	PyObject* PyPropRepNotifyObj = nullptr;
 
-	static const char *ArgsKwdList[] = { "Type", "Meta", "Getter", "Setter", "Replicated", nullptr };
-	if (!PyArg_ParseTupleAndKeywords(InArgs, InKwds, "O|OOOO:call", (char**)ArgsKwdList, &PyPropTypeObj, &PyMetaObj, &PyPropGetterObj, &PyPropSetterObj, &PyPropReplicatedObj))
+	static const char *ArgsKwdList[] = { "Type", "Meta", "Getter", "Setter", "Replicated", "RepNotify", nullptr };
+	if (!PyArg_ParseTupleAndKeywords(InArgs, InKwds, "O|OOOOO:call", (char**)ArgsKwdList, &PyPropTypeObj, &PyMetaObj, &PyPropGetterObj, &PyPropSetterObj, &PyPropReplicatedObj, &PyPropRepNotifyObj))
 	{
 		return -1;
 	}
@@ -435,7 +441,32 @@ int FUPyFPropertyDef::PyInit(FUPyFPropertyDef* InSelf, PyObject* InArgs, PyObjec
 		return -1;
 	}
 
-	return Init(InSelf, PyPropTypeObj, PyMetaObj, MoveTemp(PropGetter), MoveTemp(PropSetter), bPropReplicated);
+	bool bPropRepNotify = false;
+	FString PropRepNotifyFuncName;
+	if (PyPropRepNotifyObj && PyPropRepNotifyObj != Py_None)
+	{
+		if (PyUnicode_Check(PyPropRepNotifyObj))
+		{
+			PropRepNotifyFuncName = UPyUtil::PyObjectToUEString(PyPropRepNotifyObj);
+			if (PropRepNotifyFuncName.IsEmpty())
+			{
+				UPyUtil::SetPythonError(PyExc_ValueError, *ErrorCtxt, TEXT("Parameter 'RepNotify' cannot be an empty string"));
+				return -1;
+			}
+			bPropRepNotify = true;
+		}
+		else if (PyBool_Check(PyPropRepNotifyObj))
+		{
+			bPropRepNotify = PyObject_IsTrue(PyPropRepNotifyObj) == 1;
+		}
+		else
+		{
+			UPyUtil::SetPythonError(PyExc_TypeError, *ErrorCtxt, TEXT("Failed to convert parameter 'RepNotify' (expected 'None', 'bool', or 'str')"));
+			return -1;
+		}
+	}
+
+	return Init(InSelf, PyPropTypeObj, PyMetaObj, MoveTemp(PropGetter), MoveTemp(PropSetter), bPropReplicated, MoveTemp(PropRepNotifyFuncName), bPropRepNotify);
 }
 
 void FUPyFPropertyDef::Deinit(FUPyFPropertyDef* InSelf)
@@ -448,7 +479,9 @@ void FUPyFPropertyDef::Deinit(FUPyFPropertyDef* InSelf)
 
 	InSelf->GetterFuncName.Reset();
 	InSelf->SetterFuncName.Reset();
+	InSelf->RepNotifyFuncName.Reset();
 	InSelf->bReplicated = false;
+	InSelf->bRepNotify = false;
 }
 
 void FUPyFPropertyDef::ApplyMetaData(FUPyFPropertyDef* InSelf, FProperty* InProp)
@@ -456,6 +489,10 @@ void FUPyFPropertyDef::ApplyMetaData(FUPyFPropertyDef* InSelf, FProperty* InProp
 	if (InSelf->bReplicated)
 	{
 		InProp->PropertyFlags |= CPF_Net;
+	}
+	if (InSelf->bRepNotify)
+	{
+		InProp->PropertyFlags |= CPF_RepNotify;
 	}
 
 #if WITH_EDITOR

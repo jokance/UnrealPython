@@ -292,6 +292,12 @@ struct FUPyFPropertyDef
 	/** Whether this property should be marked for network replication */
 	bool bReplicated;
 
+	/** Optional RepNotify function to call when this property is replicated */
+	FString RepNotifyFuncName;
+
+	/** Whether this property should be marked with a RepNotify function */
+	bool bRepNotify;
+
 	/** New this instance (called via tp_new for Python, or directly in C++) */
 	static FUPyFPropertyDef* New(PyTypeObject* InType);
 
@@ -299,7 +305,7 @@ struct FUPyFPropertyDef
 	static void Free(FUPyFPropertyDef* InSelf);
 
 	/** Initialize this instance (called via tp_init for Python, or directly in C++) */
-	static int Init(FUPyFPropertyDef* InSelf, PyObject* InPropType, PyObject* InMetaData, FString InGetterFuncName, FString InSetterFuncName, bool bInReplicated);
+	static int Init(FUPyFPropertyDef* InSelf, PyObject* InPropType, PyObject* InMetaData, FString InGetterFuncName, FString InSetterFuncName, bool bInReplicated, FString InRepNotifyFuncName, bool bInRepNotify);
 
 	static int PyInit(FUPyFPropertyDef* InSelf, PyObject* InArgs, PyObject* InKwds);
 	

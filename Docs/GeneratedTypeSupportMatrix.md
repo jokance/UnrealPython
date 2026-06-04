@@ -42,7 +42,26 @@ class MyEnum(ue.EnumBase):
 
 容器必须传实例，例如 `ue.Array(int)`；不能直接传 `ue.Array`、`ue.Set`、`ue.Map`。
 
-`ue.uproperty(..., Replicated=True)` 会把生成的 `FProperty` 标记为 `CPF_Net`。当前只覆盖反射 flag；实际属性复制生命周期和 RepNotify 还需要后续扩展。
+`ue.uproperty(..., Replicated=True)` 会把生成 class property 标记为 `CPF_Net`，进入 UE replication 的 `ClassReps`。`Replicated` / `RepNotify` 只支持 `ue.uclass()` 生成的 class property，不支持 `ue.ustruct()` property。
+
+RepNotify 可传 `True` 使用默认函数名 `OnRep_<PropertyName>`，也可传字符串指定函数名：
+
+```python
+@ue.uclass()
+class MyActor(ue.Actor):
+    Count = ue.uproperty(int, RepNotify=True)
+    Label = ue.uproperty(str, RepNotify="OnRepLabel")
+
+    @ue.ufunction()
+    def OnRep_Count(self):
+        pass
+
+    @ue.ufunction(Params=[str])
+    def OnRepLabel(self, old_value):
+        pass
+```
+
+`RepNotify` 会隐式打开 `Replicated`。RepNotify 函数必须存在、不能是 static、不能有返回值，参数最多一个；单参数形式用于接收 old value，参数类型必须与属性类型一致。当前 `RepNotifyCondition` 仍使用 UE 默认的 `REPNOTIFY_OnChanged`。
 
 ## `ue.ufunction(Params=[...], Ret=...)` 支持
 
@@ -82,7 +101,7 @@ def MulticastDo(self):
     pass
 ```
 
-`Server`、`Client`、`NetMulticast` 三者只能选一个；`Reliable` 和 `Unreliable` 不能同时使用，也不能脱离网络目标单独使用。当前只覆盖 `UFunction` 反射 flags；完整 RPC 调度语义仍依赖 Actor ownership、NetDriver、连接状态等 UE 网络条件。
+`Server`、`Client`、`NetMulticast` 三者只能选一个；`Reliable` 和 `Unreliable` 不能同时使用，也不能脱离网络目标单独使用。RPC 调度语义仍依赖 Actor ownership、NetDriver、连接状态等 UE 网络条件。
 
 ## 已验证路径
 
@@ -105,4 +124,4 @@ def MulticastDo(self):
 - `ue.Array`、`ue.Set`、`ue.Map` 只能作为带子类型的实例使用。
 - `Name` / `Text` 的显式 generated property 类型当前没有单独 wrapper type 入口；字符串属性使用 `str`。
 - 复杂 delegate、nested container、soft object/class path 等类型需要按具体 wrapper/转换路径单独验证后再进入支持矩阵。
-- 网络语义扩展当前是反射 flag 层：`Replicated=True`、RPC target、reliability 可被生成并验证；RepNotify、GetLifetimeReplicatedProps 等复制生命周期还未生成。
+- 网络语义扩展当前覆盖 `Replicated=True`、RepNotify metadata、RPC target、reliability。自定义 lifetime condition、push model 配置、`REPNOTIFY_Always`、主动 dirty 标记等复制策略还未暴露。

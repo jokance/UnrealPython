@@ -191,6 +191,11 @@ public:
 			UPyUtil::SetPythonError(PyExc_Exception, PyType, *FString::Printf(TEXT("Struct property '%s' (%s) has a getter or setter, which is not supported on structs"), *InFieldName, *UPyUtil::GetFriendlyTypename(InPyPropDef->PropType)));
 			return false;
 		}
+		if (InPyPropDef->bReplicated || InPyPropDef->bRepNotify)
+		{
+			UPyUtil::SetPythonError(PyExc_Exception, PyType, *FString::Printf(TEXT("Struct property '%s' (%s) cannot use 'Replicated' or 'RepNotify'; network replication is only supported on generated classes"), *InFieldName, *UPyUtil::GetFriendlyTypename(InPyPropDef->PropType)));
+			return false;
+		}
 
 		// Create the property from its definition
 		FProperty* Prop = UPyUtil::CreateProperty(InPyPropDef->PropType, 1, NewStruct, PropName);

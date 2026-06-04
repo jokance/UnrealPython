@@ -281,6 +281,53 @@ public:
 		}
 		Prop->PropertyFlags |= (CPF_Edit | CPF_BlueprintVisible);
 		FUPyFPropertyDef::ApplyMetaData(InPyPropDef, Prop);
+
+		if (InPyPropDef->bRepNotify)
+		{
+			const FString RepNotifyFuncNameStr = InPyPropDef->RepNotifyFuncName.IsEmpty() ? FString::Printf(TEXT("OnRep_%s"), *InFieldName) : InPyPropDef->RepNotifyFuncName;
+			const FName RepNotifyFuncName = *RepNotifyFuncNameStr;
+			UFunction* RepNotifyFunc = NewClass->FindFunctionByName(RepNotifyFuncName);
+			if (!RepNotifyFunc)
+			{
+				UPyUtil::SetPythonError(PyExc_Exception, PyType, *FString::Printf(TEXT("Property '%s' specified RepNotify function '%s', but no method with that name was found"), *InFieldName, *RepNotifyFuncNameStr));
+				return false;
+			}
+			if (RepNotifyFunc->HasAnyFunctionFlags(FUNC_Static))
+			{
+				UPyUtil::SetPythonError(PyExc_Exception, PyType, *FString::Printf(TEXT("Property '%s' specified RepNotify function '%s', but RepNotify methods cannot be static"), *InFieldName, *RepNotifyFuncNameStr));
+				return false;
+			}
+			if (RepNotifyFunc->GetReturnProperty())
+			{
+				UPyUtil::SetPythonError(PyExc_Exception, PyType, *FString::Printf(TEXT("Property '%s' specified RepNotify function '%s', but RepNotify methods cannot return a value"), *InFieldName, *RepNotifyFuncNameStr));
+				return false;
+			}
+
+			const FProperty* RepNotifyParamProp = nullptr;
+			int32 RepNotifyParamCount = 0;
+			for (TFieldIterator<FProperty> ParamIt(RepNotifyFunc); ParamIt; ++ParamIt)
+			{
+				const FProperty* ParamProp = *ParamIt;
+				if (ParamProp->HasAnyPropertyFlags(CPF_Parm) && !ParamProp->HasAnyPropertyFlags(CPF_ReturnParm))
+				{
+					RepNotifyParamProp = ParamProp;
+					++RepNotifyParamCount;
+				}
+			}
+			if (RepNotifyParamCount > 1)
+			{
+				UPyUtil::SetPythonError(PyExc_Exception, PyType, *FString::Printf(TEXT("Property '%s' specified RepNotify function '%s', but RepNotify methods can have at most one parameter"), *InFieldName, *RepNotifyFuncNameStr));
+				return false;
+			}
+			if (RepNotifyParamProp && !RepNotifyParamProp->SameType(Prop))
+			{
+				UPyUtil::SetPythonError(PyExc_Exception, PyType, *FString::Printf(TEXT("Property '%s' specified RepNotify function '%s', but its parameter type '%s' does not match the property type '%s'"), *InFieldName, *RepNotifyFuncNameStr, *RepNotifyParamProp->GetClass()->GetName(), *Prop->GetClass()->GetName()));
+				return false;
+			}
+
+			Prop->RepNotifyFunc = RepNotifyFuncName;
+		}
+
 		NewClass->AddCppProperty(Prop);
 
 		// Resolve any getter/setter function names
