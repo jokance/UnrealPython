@@ -562,6 +562,59 @@ PyObject* CallFlushGeneratedTypeReinstancing(PyObject* InSelf)
 	Py_RETURN_NONE;
 }
 
+PyObject* CallReloadModule(PyObject* InSelf, PyObject* InArgs)
+{
+	PyObject* PyModuleOrName = nullptr;
+	if (!PyArg_ParseTuple(InArgs, "O:ReloadModule", &PyModuleOrName))
+	{
+		return nullptr;
+	}
+
+	FUPyObjectPtr PyModule;
+	if (PyUnicode_Check(PyModuleOrName))
+	{
+		const FString ModuleName = UPyUtil::PyObjectToUEString(PyModuleOrName);
+		PyModule = FUPyObjectPtr::StealReference(PyImport_ImportModule(TCHAR_TO_UTF8(*ModuleName)));
+		if (!PyModule)
+		{
+			return nullptr;
+		}
+	}
+	else if (PyModule_Check(PyModuleOrName))
+	{
+		PyModule = FUPyObjectPtr::NewReference(PyModuleOrName);
+	}
+	else
+	{
+		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("ReloadModule"), *FString::Printf(TEXT("Parameter must be a module or module name string, not '%s'"), *UPyUtil::GetFriendlyTypename(PyModuleOrName)));
+		return nullptr;
+	}
+
+	FUPyObjectPtr PyImportLib = FUPyObjectPtr::StealReference(PyImport_ImportModule("importlib"));
+	if (!PyImportLib)
+	{
+		return nullptr;
+	}
+
+	FUPyObjectPtr PyReloadFunc = FUPyObjectPtr::StealReference(PyObject_GetAttrString(PyImportLib, "reload"));
+	if (!PyReloadFunc)
+	{
+		return nullptr;
+	}
+
+	FUPyObjectPtr PyReloadedModule = FUPyObjectPtr::StealReference(PyObject_CallFunctionObjArgs(PyReloadFunc.GetPtr(), PyModule.GetPtr(), nullptr));
+	if (!PyReloadedModule)
+	{
+		return nullptr;
+	}
+
+	Py_BEGIN_ALLOW_THREADS
+	FUPyWrapperTypeReinstancer::Get().ProcessPending();
+	Py_END_ALLOW_THREADS
+
+	return PyReloadedModule.Release();
+}
+
 PyObject* CallCollectGarbage(PyObject* InSelf)
 {
 	Py_BEGIN_ALLOW_THREADS
@@ -695,6 +748,7 @@ PyMethodDef UEPyMethodDefs[] = {
 	{ "uproperty", UPyCFunctionCast(&CallGenerateProperty), METH_VARARGS | METH_KEYWORDS, UPyDoc_STR("uproperty(Type: type, Meta: Optional[dict[str, Any]]=None, Getter: Optional[str]=None, Setter: Optional[str]=None) -> PropertyDef -- generate an Unreal FProperty field form Python") },
 	{ "ufunction", UPyCFunctionCast(&CallGenerateFunction), METH_VARARGS | METH_KEYWORDS, UPyDoc_STR("ufunction(Meta: Optional[dict[str, Any]]=None, Ret: Optional[type]=None, Params: Optional[list[type]]=None, Override: Optional[bool]=None, Static: Optional[bool]=None, Pure: Optional[bool]=None, Getter: Optional[bool]=None, Setter: Optional[bool]=None) -> FunctionDef -- generate an Unreal FProperty field form Python") },
 	{ "FlushGeneratedTypeReinstancing", UPyCFunctionCast(&CallFlushGeneratedTypeReinstancing), METH_NOARGS, UPyDoc_STR("FlushGeneratedTypeReinstancing() -> None -- flush any pending reinstancing requests for Python generated types") },
+	{ "ReloadModule", UPyCFunctionCast(&CallReloadModule), METH_VARARGS, UPyDoc_STR("ReloadModule(module_or_name: Union[module, str]) -> module -- reload a Python module and flush pending generated type reinstancing") },
 	{ "CollectGarbage", UPyCFunctionCast(&CallCollectGarbage), METH_NOARGS, UPyDoc_STR("CollectGarbage() -> None -- run Unreal garbage collection") },
 	{ "GetTypeFromClass", UPyCFunctionCast(&CallGetTypeFromClass), METH_VARARGS, UPyDoc_STR("GetTypeFromClass(Class_: Class) -> type -- get the best matching Python type for the given Unreal class") },
 	{ "GetTypeFromStruct", UPyCFunctionCast(&CallGetTypeFromStruct), METH_VARARGS, UPyDoc_STR("GetTypeFromStruct(Struct_: Struct) -> type -- get the best matching Python type for the given Unreal struct") },
