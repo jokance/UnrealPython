@@ -231,14 +231,13 @@ FUTF8Buffer TCHARToUTF8Buffer(const TCHAR* InStr)
 
 PyObject* GetPostInitFunc(PyTypeObject* InPyType)
 {
-	FUPyObjectPtr PostInitFunc = FUPyObjectPtr::StealReference(PyObject_GetAttrString((PyObject*)InPyType, PostInitFuncName));
-	if (!PostInitFunc)
+	FUPyObjectPtr PostInitFunc;
+	if (PyObject* PostInitFuncObj = InPyType->tp_dict ? PyDict_GetItemString(InPyType->tp_dict, PostInitFuncName) : nullptr)
 	{
-		if (PyErr_ExceptionMatches(PyExc_AttributeError))
-		{
-			PyErr_Clear();
-			return nullptr;
-		}
+		PostInitFunc = FUPyObjectPtr::NewReference(PostInitFuncObj);
+	}
+	else
+	{
 		return nullptr;
 	}
 
