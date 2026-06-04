@@ -48,11 +48,18 @@ PyObject* PyCallGenerateStruct(PyObject* InSelf, PyObject* InArgs, PyObject* InK
 		return nullptr;
 	}
 
-	// We only need to generate structs for types without meta-data, as any types with meta-data have already been generated
-	if (!FUPyWrapperTypeRegistry::Get().FindStruct(PyType) && !UUPyGeneratedStruct::GenerateStruct(PyType))
+	// We only need to generate structs for types that are not already registered.
+	const bool bNeedsGeneration = !FUPyWrapperTypeRegistry::Get().FindStruct(PyType);
+	if (bNeedsGeneration && !UUPyGeneratedStruct::GenerateStruct(PyType))
 	{
 		UPyUtil::SetPythonError(PyExc_Exception, TEXT("GenerateStruct "), *FString::Printf(TEXT("Failed to generate an Unreal struct for the Python type '%s'"), *UPyUtil::GetFriendlyTypename(PyType)));
 		return nullptr;
+	}
+	if (bNeedsGeneration)
+	{
+		Py_BEGIN_ALLOW_THREADS
+		FUPyWrapperTypeReinstancer::Get().ProcessPending();
+		Py_END_ALLOW_THREADS
 	}
 
 	Py_INCREF(PyType);
@@ -89,12 +96,10 @@ public:
 		// If NewStruct is still set at this point, if means Finalize wasn't called and we should destroy the partially built struct
 		if (NewStruct)
 		{
+			NewStruct->PrepareCppStructOps();
 			NewStruct->ClearFlags(RF_Public | RF_Standalone);
+			NewStruct->MarkAsGarbage();
 			NewStruct = nullptr;
-
-			Py_BEGIN_ALLOW_THREADS
-			CollectGarbage(GARBAGE_COLLECTION_KEEPFLAGS);
-			Py_END_ALLOW_THREADS
 		}
 	}
 
@@ -102,10 +107,6 @@ public:
 	{
 		// Set the post-init function
 		NewStruct->PyPostInitFunction = InPyPostInitFunction;
-		if (!NewStruct->PyPostInitFunction)
-		{
-			return nullptr;
-		}
 
 		// Replace the definitions with real descriptors
 		if (!RegisterDescriptors())
@@ -391,8 +392,14 @@ UUPyGeneratedStruct* UUPyGeneratedStruct::GenerateStruct(PyTypeObject* InPyType)
 		}
 	}
 
-	// Finalize the struct with its post-init function
-	return PythonStructBuilder.Finalize(FUPyObjectPtr::StealReference(UPyGenUtil::GetPostInitFunc(InPyType)));
+	FUPyObjectPtr PyPostInitFunction = FUPyObjectPtr::StealReference(UPyGenUtil::GetPostInitFunc(InPyType));
+	if (PyErr_Occurred())
+	{
+		return nullptr;
+	}
+
+	// Finalize the struct with its optional post-init function
+	return PythonStructBuilder.Finalize(MoveTemp(PyPostInitFunction));
 }
 
 FUPyUStructDecorator* FUPyUStructDecorator::New(PyTypeObject* InType, PyObject* InArgs, PyObject* InKwds)

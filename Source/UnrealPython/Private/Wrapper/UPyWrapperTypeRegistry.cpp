@@ -772,12 +772,12 @@ void FUPyWrapperTypeReinstancer::ProcessPending()
 
 		Reload->Reinstance();
 
-		ClassesToReinstance.Reset();
-		StructsToReinstance.Reset();
-
 		CollectGarbage(GARBAGE_COLLECTION_KEEPFLAGS);
 	}
 #endif
+
+	ClassesToReinstance.Reset();
+	StructsToReinstance.Reset();
 }
 
 void FUPyWrapperTypeReinstancer::AddReferencedObjects(FReferenceCollector& InCollector)

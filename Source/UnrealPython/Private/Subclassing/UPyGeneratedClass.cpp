@@ -72,11 +72,18 @@ PyObject* PyCallGenerateClass(PyObject* InSelf, PyObject* InArgs, PyObject* InKw
 		return nullptr;
 	}
 
-	// We only need to generate classes for types without meta-data, as any types with meta-data have already been generated
-	if (!FUPyWrapperTypeRegistry::Get().FindClass(PyType) && !UUPyGeneratedClass::GenerateClass(PyType))
+	// We only need to generate classes for types that are not already registered.
+	const bool bNeedsGeneration = !FUPyWrapperTypeRegistry::Get().FindClass(PyType);
+	if (bNeedsGeneration && !UUPyGeneratedClass::GenerateClass(PyType))
 	{
 		UPyUtil::SetPythonError(PyExc_Exception, TEXT("GenerateClass"), *FString::Printf(TEXT("Failed to generate an Unreal class for the Python type '%s'"), *UPyUtil::GetFriendlyTypename(PyType)));
 		return nullptr;
+	}
+	if (bNeedsGeneration)
+	{
+		Py_BEGIN_ALLOW_THREADS
+		FUPyWrapperTypeReinstancer::Get().ProcessPending();
+		Py_END_ALLOW_THREADS
 	}
 
 	Py_INCREF(PyType);
@@ -150,10 +157,6 @@ public:
 			NewClass->ClearFlags(RF_Public | RF_Standalone);
 			NewClass->MarkAsGarbage();
 			NewClass = nullptr;
-
-			Py_BEGIN_ALLOW_THREADS
-			CollectGarbage(GARBAGE_COLLECTION_KEEPFLAGS);
-			Py_END_ALLOW_THREADS
 		}
 	}
 
@@ -161,10 +164,6 @@ public:
 	{
 		// Set the post-init function
 		NewClass->PyPostInitFunction = InPyPostInitFunction;
-		if (!NewClass->PyPostInitFunction)
-		{
-			return nullptr;
-		}
 
 		// Replace the definitions with real descriptors
 		if (!RegisterDescriptors())
@@ -950,8 +949,14 @@ UUPyGeneratedClass* UUPyGeneratedClass::GenerateClass(PyTypeObject* InPyType)
 		}
 	}
 
-	// Finalize the class with its post-init function
-	return PythonClassBuilder.Finalize(FUPyObjectPtr::StealReference(UPyGenUtil::GetPostInitFunc(InPyType)));
+	FUPyObjectPtr PyPostInitFunction = FUPyObjectPtr::StealReference(UPyGenUtil::GetPostInitFunc(InPyType));
+	if (PyErr_Occurred())
+	{
+		return nullptr;
+	}
+
+	// Finalize the class with its optional post-init function
+	return PythonClassBuilder.Finalize(MoveTemp(PyPostInitFunction));
 }
 
 bool UUPyGeneratedClass::ReparentDerivedClasses(UUPyGeneratedClass* InOldParent, UUPyGeneratedClass* InNewParent)

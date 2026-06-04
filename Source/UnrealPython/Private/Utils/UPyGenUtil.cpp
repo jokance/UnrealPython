@@ -234,7 +234,11 @@ PyObject* GetPostInitFunc(PyTypeObject* InPyType)
 	FUPyObjectPtr PostInitFunc = FUPyObjectPtr::StealReference(PyObject_GetAttrString((PyObject*)InPyType, PostInitFuncName));
 	if (!PostInitFunc)
 	{
-		UPyUtil::SetPythonError(PyExc_TypeError, InPyType, *FString::Printf(TEXT("Python type has no '%s' function"), UTF8_TO_TCHAR(PostInitFuncName)));
+		if (PyErr_ExceptionMatches(PyExc_AttributeError))
+		{
+			PyErr_Clear();
+			return nullptr;
+		}
 		return nullptr;
 	}
 
