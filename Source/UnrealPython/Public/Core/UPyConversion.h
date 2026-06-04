@@ -3,6 +3,7 @@
 
 #include "UPyCommon.h"
 #include "AssetRegistry/ARFilter.h"
+#include "Core/UPyPtr.h"
 #include "Core/UPyConversionResult.h"
 #include "UObject/Class.h"
 #include "Runtime/Launch/Resources/Version.h"
@@ -272,6 +273,107 @@ namespace UPyConversion
 		PyObject* Obj = nullptr;
 		Pythonize(Val, Obj, SetErrorState);
 		return Obj;
+	}
+
+	/** Conversion for TArray values used by C++ template call helpers. */
+	template <typename ElementType>
+	FUPyConversionResult Nativize(PyObject* PyObj, TArray<ElementType>& OutVal, const ESetErrorState SetErrorState = ESetErrorState::Yes)
+	{
+		if (PyUnicode_Check(PyObj) || PyBytes_Check(PyObj))
+		{
+			if (SetErrorState == ESetErrorState::Yes)
+			{
+				PyErr_SetString(PyExc_TypeError, "Cannot nativize string/bytes as TArray");
+			}
+			else
+			{
+				PyErr_Clear();
+			}
+			return FUPyConversionResult::Failure();
+		}
+
+		FUPyObjectPtr PySequence = FUPyObjectPtr::StealReference(PySequence_Fast(PyObj, "Cannot nativize object as TArray"));
+		if (!PySequence)
+		{
+			if (SetErrorState == ESetErrorState::No)
+			{
+				PyErr_Clear();
+			}
+			return FUPyConversionResult::Failure();
+		}
+
+		const Py_ssize_t SequenceSize = PySequence_Fast_GET_SIZE(PySequence.Get());
+		if (SequenceSize > TNumericLimits<int32>::Max())
+		{
+			if (SetErrorState == ESetErrorState::Yes)
+			{
+				PyErr_SetString(PyExc_OverflowError, "Cannot nativize Python sequence larger than int32 max as TArray");
+			}
+			else
+			{
+				PyErr_Clear();
+			}
+			return FUPyConversionResult::Failure();
+		}
+
+		TArray<ElementType> TempVal;
+		TempVal.Reserve(static_cast<int32>(SequenceSize));
+
+		FUPyConversionResult ArrayResult = FUPyConversionResult::Success();
+		PyObject** SequenceItems = PySequence_Fast_ITEMS(PySequence.Get());
+		for (Py_ssize_t SequenceIndex = 0; SequenceIndex < SequenceSize; ++SequenceIndex)
+		{
+			ElementType Element = ElementType();
+			const FUPyConversionResult ElementResult = Nativize(SequenceItems[SequenceIndex], Element, SetErrorState);
+			if (!ElementResult)
+			{
+				return FUPyConversionResult::Failure();
+			}
+
+			if (ElementResult.GetState() == EUPyConversionResultState::SuccessWithCoercion)
+			{
+				ArrayResult = FUPyConversionResult::SuccessWithCoercion();
+			}
+			TempVal.Add(MoveTemp(Element));
+		}
+
+		OutVal = MoveTemp(TempVal);
+		return ArrayResult;
+	}
+
+	template <typename ElementType>
+	FUPyConversionResult Pythonize(const TArray<ElementType>& Val, PyObject*& OutPyObj, const ESetErrorState SetErrorState = ESetErrorState::Yes)
+	{
+		FUPyObjectPtr PyList = FUPyObjectPtr::StealReference(PyList_New(Val.Num()));
+		if (!PyList)
+		{
+			if (SetErrorState == ESetErrorState::No)
+			{
+				PyErr_Clear();
+			}
+			return FUPyConversionResult::Failure();
+		}
+
+		FUPyConversionResult ArrayResult = FUPyConversionResult::Success();
+		for (int32 ElementIndex = 0; ElementIndex < Val.Num(); ++ElementIndex)
+		{
+			PyObject* PyItem = nullptr;
+			const FUPyConversionResult ElementResult = Pythonize(Val[ElementIndex], PyItem, SetErrorState);
+			if (!ElementResult)
+			{
+				Py_XDECREF(PyItem);
+				return FUPyConversionResult::Failure();
+			}
+
+			if (ElementResult.GetState() == EUPyConversionResultState::SuccessWithCoercion)
+			{
+				ArrayResult = FUPyConversionResult::SuccessWithCoercion();
+			}
+			PyList_SetItem(PyList, ElementIndex, PyItem);
+		}
+
+		OutPyObj = PyList.Release();
+		return ArrayResult;
 	}
 
 	/** Conversion for known struct types */

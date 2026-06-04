@@ -1,6 +1,7 @@
 
 #include "UPyTest.h"
 #include "UPyCommon.h"
+#include "Helper/UPyBlueprintLibrary.h"
 
 #include UE_INLINE_GENERATED_CPP_BY_NAME(UPyTest)
 
@@ -376,6 +377,34 @@ UObject* UUPyTestObject::CheckObjectParam(UObject* Value) const
 TArray<int32> UUPyTestObject::CheckArrayParam(const TArray<int32>& Value) const
 {
 	return Value;
+}
+
+bool UUPyTestObject::CheckBlueprintLibraryArrayCall() const
+{
+	const FString ModuleName = TEXT("upy_test.upy_blueprint_library_array_target");
+
+	const TArray<int32> IntInput = {1, 2, 3};
+	const TArray<int32> IntExpected = {2, 4, 6};
+	const TArray<int32> IntTemplateResult = UUPyBlueprintLibrary::CallPythonMethod<TArray<int32>>(ModuleName, TEXT("double_ints"), IntInput);
+	const TArray<int32> IntBlueprintResult = UUPyBlueprintLibrary::CallPythonMethod_IntArray_RetIntArray(ModuleName, TEXT("double_ints"), IntInput);
+
+	const TArray<FString> StrInput = {TEXT("red"), TEXT("blue")};
+	const TArray<FString> StrExpected = {TEXT("red!"), TEXT("blue!")};
+	const TArray<FString> StrTemplateResult = UUPyBlueprintLibrary::CallPythonMethod<TArray<FString>>(ModuleName, TEXT("suffix_strings"), StrInput);
+	const TArray<FString> StrBlueprintResult = UUPyBlueprintLibrary::CallPythonMethod_StrArray_RetStrArray(ModuleName, TEXT("suffix_strings"), StrInput);
+
+	const TArray<FString> IntToStrExpected = {TEXT("n=1"), TEXT("n=2"), TEXT("n=3")};
+	const TArray<FString> IntToStrResult = UUPyBlueprintLibrary::CallPythonMethod_IntArray_RetStrArray(ModuleName, TEXT("ints_to_strings"), IntInput);
+
+	const TArray<int32> StrToIntExpected = {3, 4};
+	const TArray<int32> StrToIntResult = UUPyBlueprintLibrary::CallPythonMethod_StrArray_RetIntArray(ModuleName, TEXT("strings_to_lengths"), StrInput);
+
+	return IntTemplateResult == IntExpected
+		&& IntBlueprintResult == IntExpected
+		&& StrTemplateResult == StrExpected
+		&& StrBlueprintResult == StrExpected
+		&& IntToStrResult == IntToStrExpected
+		&& StrToIntResult == StrToIntExpected;
 }
 
 TSet<FString> UUPyTestObject::CheckSetParam(const TSet<FString>& Value) const

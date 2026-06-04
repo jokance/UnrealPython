@@ -23,6 +23,18 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "UnrealPython")
 	static int32 CallPythonMethod_Int_RetInt(const FString& ModuleName, const FString& MethodName, int32 Arg);
 
+	UFUNCTION(BlueprintCallable, Category = "UnrealPython")
+	static TArray<int32> CallPythonMethod_IntArray_RetIntArray(const FString& ModuleName, const FString& MethodName, const TArray<int32>& Arg);
+
+	UFUNCTION(BlueprintCallable, Category = "UnrealPython")
+	static TArray<FString> CallPythonMethod_StrArray_RetStrArray(const FString& ModuleName, const FString& MethodName, const TArray<FString>& Arg);
+
+	UFUNCTION(BlueprintCallable, Category = "UnrealPython")
+	static TArray<FString> CallPythonMethod_IntArray_RetStrArray(const FString& ModuleName, const FString& MethodName, const TArray<int32>& Arg);
+
+	UFUNCTION(BlueprintCallable, Category = "UnrealPython")
+	static TArray<int32> CallPythonMethod_StrArray_RetIntArray(const FString& ModuleName, const FString& MethodName, const TArray<FString>& Arg);
+
 	/**
 	 * Variadic Template version for C++ usage.
 	 */

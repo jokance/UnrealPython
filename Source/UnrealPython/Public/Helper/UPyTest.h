@@ -424,6 +424,9 @@ public:
 	TArray<int32> CheckArrayParam(const TArray<int32>& Value) const;
 
 	UFUNCTION(BlueprintCallable, Category = "Python|Internal")
+	bool CheckBlueprintLibraryArrayCall() const;
+
+	UFUNCTION(BlueprintCallable, Category = "Python|Internal")
 	TSet<FString> CheckSetParam(const TSet<FString>& Value) const;
 
 	UFUNCTION(BlueprintCallable, Category = "Python|Internal")

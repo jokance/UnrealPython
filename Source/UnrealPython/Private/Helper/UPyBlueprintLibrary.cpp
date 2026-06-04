@@ -51,3 +51,23 @@ int32 UUPyBlueprintLibrary::CallPythonMethod_Int_RetInt(const FString& ModuleNam
 {
 	return CallPythonMethod<int32>(ModuleName, MethodName, Arg);
 }
+
+TArray<int32> UUPyBlueprintLibrary::CallPythonMethod_IntArray_RetIntArray(const FString& ModuleName, const FString& MethodName, const TArray<int32>& Arg)
+{
+	return CallPythonMethod<TArray<int32>>(ModuleName, MethodName, Arg);
+}
+
+TArray<FString> UUPyBlueprintLibrary::CallPythonMethod_StrArray_RetStrArray(const FString& ModuleName, const FString& MethodName, const TArray<FString>& Arg)
+{
+	return CallPythonMethod<TArray<FString>>(ModuleName, MethodName, Arg);
+}
+
+TArray<FString> UUPyBlueprintLibrary::CallPythonMethod_IntArray_RetStrArray(const FString& ModuleName, const FString& MethodName, const TArray<int32>& Arg)
+{
+	return CallPythonMethod<TArray<FString>>(ModuleName, MethodName, Arg);
+}
+
+TArray<int32> UUPyBlueprintLibrary::CallPythonMethod_StrArray_RetIntArray(const FString& ModuleName, const FString& MethodName, const TArray<FString>& Arg)
+{
+	return CallPythonMethod<TArray<int32>>(ModuleName, MethodName, Arg);
+}
