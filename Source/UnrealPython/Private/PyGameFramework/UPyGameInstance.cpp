@@ -6,6 +6,8 @@
 UUPyGameInstance::UUPyGameInstance(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 	, GameInstanceModuleName(TEXT("game_instance"))
+	, GameInstanceProviderFunctionName(TEXT("get_game_instance"))
+	, GameInstanceObjectName(TEXT("game_instance"))
 	, bIsInitialized(false)
 {
 }
@@ -76,39 +78,47 @@ FUPyObjectPtr UUPyGameInstance::ResolveCallbackTarget()
 		return FUPyObjectPtr();
 	}
 
-	if (PyObject_HasAttrString(GameInstanceModule, "get_game_instance"))
+	if (!GameInstanceProviderFunctionName.IsEmpty())
 	{
-		FUPyObjectPtr PyGetter = FUPyObjectPtr::StealReference(PyObject_GetAttrString(GameInstanceModule, "get_game_instance"));
-		if (PyGetter && PyCallable_Check(PyGetter))
+		const FTCHARToUTF8 ProviderFunctionName(*GameInstanceProviderFunctionName);
+		if (PyObject_HasAttrString(GameInstanceModule, ProviderFunctionName.Get()))
 		{
-			FUPyObjectPtr PyObject = FUPyObjectPtr::StealReference(PyObject_CallObject(PyGetter, nullptr));
-			if (!PyObject)
+			FUPyObjectPtr PyGetter = FUPyObjectPtr::StealReference(PyObject_GetAttrString(GameInstanceModule, ProviderFunctionName.Get()));
+			if (PyGetter && PyCallable_Check(PyGetter))
 			{
-				if (PyErr_Occurred())
+				FUPyObjectPtr PyObject = FUPyObjectPtr::StealReference(PyObject_CallObject(PyGetter, nullptr));
+				if (!PyObject)
 				{
-					PyErr_Print();
+					if (PyErr_Occurred())
+					{
+						PyErr_Print();
+					}
+					UE_LOG(LogUnrealPython, Error, TEXT("Failed to call Python function '%s.%s'."), *GameInstanceModuleName, *GameInstanceProviderFunctionName);
+					return FUPyObjectPtr();
 				}
-				UE_LOG(LogUnrealPython, Error, TEXT("Failed to call Python function '%s.get_game_instance'."), *GameInstanceModuleName);
-				return FUPyObjectPtr();
-			}
 
-			if (PyObject != Py_None)
-			{
-				return PyObject;
+				if (PyObject != Py_None)
+				{
+					return PyObject;
+				}
 			}
-		}
-		else if (PyGetter)
-		{
-			UE_LOG(LogUnrealPython, Warning, TEXT("Python attribute '%s.get_game_instance' is not callable."), *GameInstanceModuleName);
+			else if (PyGetter)
+			{
+				UE_LOG(LogUnrealPython, Warning, TEXT("Python attribute '%s.%s' is not callable."), *GameInstanceModuleName, *GameInstanceProviderFunctionName);
+			}
 		}
 	}
 
-	if (PyObject_HasAttrString(GameInstanceModule, "game_instance"))
+	if (!GameInstanceObjectName.IsEmpty())
 	{
-		FUPyObjectPtr PyObject = FUPyObjectPtr::StealReference(PyObject_GetAttrString(GameInstanceModule, "game_instance"));
-		if (PyObject && PyObject != Py_None)
+		const FTCHARToUTF8 ObjectName(*GameInstanceObjectName);
+		if (PyObject_HasAttrString(GameInstanceModule, ObjectName.Get()))
 		{
-			return PyObject;
+			FUPyObjectPtr PyObject = FUPyObjectPtr::StealReference(PyObject_GetAttrString(GameInstanceModule, ObjectName.Get()));
+			if (PyObject && PyObject != Py_None)
+			{
+				return PyObject;
+			}
 		}
 	}
 

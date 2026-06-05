@@ -24,6 +24,14 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Python")
 	FString GameInstanceModuleName;
 
+	/** Optional provider function on the Python module that returns the callback target object */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Python")
+	FString GameInstanceProviderFunctionName;
+
+	/** Optional object attribute on the Python module used as the callback target */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Python")
+	FString GameInstanceObjectName;
+
 	void CallModuleFunction(const char* FunctionName, PyObject* PyArgs = nullptr);
 
 private:
