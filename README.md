@@ -107,7 +107,6 @@ Engine.Python.IsEnabledByDefault=0
    - 在 Details 面板中找到 **Python** 分类。
    - 设置 **Game Instance Module Name** 为你想要加载的 Python 模块名称（默认 `game_instance`，无需 `.py` 后缀）。
    - **Game Instance Provider Function Name** 默认 `get_game_instance`，用于从模块获取回调对象。
-   - **Game Instance Object Name** 默认 `game_instance`，用于直接从模块读取回调对象。
 
 3. **编写 Python 脚本**:
    在你配置的 Python 路径下创建一个 Python 文件（例如 `game_instance.py`），并提供 provider 函数返回业务对象。`UUPyGameInstance` 会优先调用该对象上的生命周期方法：
@@ -134,7 +133,7 @@ Engine.Python.IsEnabledByDefault=0
        return _game_instance
    ```
 
-   查找顺序为：配置的 provider 函数、配置的对象属性、模块级函数。默认兼容 `get_game_instance()`、`game_instance` 以及旧的模块级 `init`、`on_start`、`tick`、`shutdown` 函数。
+   查找顺序为：配置的 provider 函数、模块级函数。默认兼容 `get_game_instance()` 以及旧的模块级 `init`、`on_start`、`tick`、`shutdown` 函数。
 
 4. **手动触发垃圾回收**:
    - 在游戏运行时，可以通过控制台命令 `PyGC` 手动触发 Python 垃圾回收。
