@@ -27,15 +27,17 @@ protected:
 	void CallModuleFunction(const char* FunctionName, PyObject* PyArgs = nullptr);
 
 private:
+	bool EnsureModuleLoaded();
+	FUPyObjectPtr ResolveCallbackTarget();
+	FUPyObjectPtr GetCallableAttribute(PyObject* Target, const char* FunctionName, bool bWarnIfNotCallable = true);
+	bool HasModuleFunction(const char* FunctionName);
 	void CleanupModule();
-	FUPyObjectPtr CacheModuleFunction(const char* FunctionName);
 
 	bool Tick(float DeltaTime);
 	void RegisterTicker();
 	void UnregisterTicker();
 
 	FUPyObjectPtr GameInstanceModule;
-	FUPyObjectPtr PyTickFunction;
 	FTSTicker::FDelegateHandle TickerHandle;
 
 	bool bIsInitialized;

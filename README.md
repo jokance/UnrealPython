@@ -108,24 +108,31 @@ Engine.Python.IsEnabledByDefault=0
    - 设置 **Game Instance Module Name** 为你想要加载的 Python 模块名称（默认 `game_instance`，无需 `.py` 后缀）。
 
 3. **编写 Python 脚本**:
-   在你配置的 Python 路径下创建一个 Python 文件（例如 `game_instance.py`），并实现以下生命周期函数：
+   在你配置的 Python 路径下创建一个 Python 文件（例如 `game_instance.py`），并提供 `get_game_instance()` 返回业务对象。`UUPyGameInstance` 会优先调用该对象上的生命周期方法：
 
    ```python
-   import ue
+   class MyGameInstance:
+       def init(self, game_instance):
+           print("Python GameInstance: Init")
 
-   def init():
-       print("Python GameInstance: Init")
+       def on_start(self):
+           print("Python GameInstance: OnStart")
 
-   def on_start():
-       print("Python GameInstance: OnStart")
+       def tick(self, delta_time):
+           pass
 
-   def tick(delta_time):
-       # print(f"Python GameInstance: Tick {delta_time}")
-       pass
+       def shutdown(self):
+           print("Python GameInstance: Shutdown")
 
-   def shutdown():
-       print("Python GameInstance: Shutdown")
+
+   _game_instance = MyGameInstance()
+
+
+   def get_game_instance():
+       return _game_instance
    ```
+
+   兼容旧写法：如果模块没有 `get_game_instance()` 或 `game_instance` 对象，`UUPyGameInstance` 会回退调用模块级 `init`、`on_start`、`tick`、`shutdown` 函数。
 
 4. **手动触发垃圾回收**:
    - 在游戏运行时，可以通过控制台命令 `PyGC` 手动触发 Python 垃圾回收。
