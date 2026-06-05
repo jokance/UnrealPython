@@ -6,6 +6,7 @@
 #include "Wrapper/UPyWrapperTypeFactory.h"
 #include "Utils/UPyUtil.h"
 #include "WorldPartition/DataLayer/DataLayerManager.h"
+#include "Helper/UPyRuntimeScriptExportHelperLibrary.h"
 #include "GameFramework/WorldSettings.h"
 
 
@@ -1213,6 +1214,26 @@ struct FMethods_World
 		return UPyConversion::Pythonize(Result);
 	}
 
+	static PyObject* CallGetNetMode(FUPyWrapperWorld* InSelf, PyObject* Py_UNUSED(InUnused))
+	{
+		if (!InSelf->ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		const auto Result = UUPyRuntimeScriptExportHelperLibrary::World_GetNetMode(InSelf->ValuePtr());
+		return UPyConversion::Pythonize(Result);
+	}
+
+	static PyObject* CallGetNetModeName(FUPyWrapperWorld* InSelf, PyObject* Py_UNUSED(InUnused))
+	{
+		if (!InSelf->ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		const auto Result = UUPyRuntimeScriptExportHelperLibrary::World_GetNetModeName(InSelf->ValuePtr());
+		return UPyConversion::Pythonize(Result);
+	}
+
 	static PyObject* CallHandleTimelineScrubbed(FUPyWrapperWorld* InSelf, PyObject* Py_UNUSED(InUnused))
 	{
 		if (!InSelf->ValidateInternalState(InSelf))
@@ -1233,46 +1254,15 @@ struct FMethods_World
 		return UPyConversion::Pythonize(Result);
 	}
 
-	static PyObject* CallGetNetMode(FUPyWrapperWorld* InSelf, PyObject* Py_UNUSED(InUnused))
-	{
-		if (!InSelf->ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::Pythonize((int64)InSelf->ValuePtr()->GetNetMode());
-	}
-
-	static PyObject* CallGetNetModeName(FUPyWrapperWorld* InSelf, PyObject* Py_UNUSED(InUnused))
-	{
-		if (!InSelf->ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-
-		switch (InSelf->ValuePtr()->GetNetMode())
-		{
-		case NM_Standalone:
-			return UPyConversion::Pythonize(FString(TEXT("Standalone")));
-		case NM_DedicatedServer:
-			return UPyConversion::Pythonize(FString(TEXT("DedicatedServer")));
-		case NM_ListenServer:
-			return UPyConversion::Pythonize(FString(TEXT("ListenServer")));
-		case NM_Client:
-			return UPyConversion::Pythonize(FString(TEXT("Client")));
-		default:
-			return UPyConversion::Pythonize(FString(TEXT("Unknown")));
-		}
-	}
-
 };
 
 
 static PyMethodDef FUPyWrapperWorldPyMethodDefs[] = {
 	{ "GetDataLayerManager", UPyCFunctionCast(&FMethods_World::CallGetDataLayerManager), METH_NOARGS, nullptr },
-	{ "HandleTimelineScrubbed", UPyCFunctionCast(&FMethods_World::CallHandleTimelineScrubbed), METH_NOARGS, nullptr },
-	{ "K2_GetWorldSettings", UPyCFunctionCast(&FMethods_World::CallK2_GetWorldSettings), METH_NOARGS, nullptr },
 	{ "GetNetMode", UPyCFunctionCast(&FMethods_World::CallGetNetMode), METH_NOARGS, nullptr },
 	{ "GetNetModeName", UPyCFunctionCast(&FMethods_World::CallGetNetModeName), METH_NOARGS, nullptr },
+	{ "HandleTimelineScrubbed", UPyCFunctionCast(&FMethods_World::CallHandleTimelineScrubbed), METH_NOARGS, nullptr },
+	{ "K2_GetWorldSettings", UPyCFunctionCast(&FMethods_World::CallK2_GetWorldSettings), METH_NOARGS, nullptr },
 	{ nullptr }
 };
 

@@ -20,6 +20,7 @@
 #include "Wrapper/AutoGen/Engine/Class/UPyWrapperInputSettings.h"
 #include "Wrapper/AutoGen/Engine/Class/UPyWrapperFXSystemComponent.h"
 #include "Wrapper/AutoGen/Engine/Class/UPyWrapperParticleSystemComponent.h"
+#include "Wrapper/AutoGen/Engine/Class/UPyWrapperEngineTypes.h"
 #include "Wrapper/AutoGen/Engine/Class/UPyWrapperTriggerBase.h"
 #include "Wrapper/AutoGen/Engine/Class/UPyWrapperSphereComponent.h"
 #include "Wrapper/AutoGen/Engine/Class/UPyWrapperBoxComponent.h"
@@ -46,6 +47,7 @@ void InitializeEngineModuleWrapperTypes(UPyGenUtil::FNativePythonModule& ModuleI
 	InitializeUPyWrapperInputSettings(ModuleInfo);
 	InitializeUPyWrapperFXSystemComponent(ModuleInfo);
 	InitializeUPyWrapperParticleSystemComponent(ModuleInfo);
+	InitializeUPyWrapperEngineTypes(ModuleInfo);
 	InitializeUPyWrapperTriggerBase(ModuleInfo);
 	InitializeUPyWrapperSphereComponent(ModuleInfo);
 	InitializeUPyWrapperBoxComponent(ModuleInfo);

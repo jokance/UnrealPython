@@ -10,6 +10,7 @@ class UUserWidget;
 class UGameViewportSubsystem;
 class UEditableText;
 class UAkAudioEvent;
+class UWorld;
 
 UCLASS()
 class UUPyRuntimeScriptExportHelperLibrary: public UBlueprintFunctionLibrary
@@ -79,4 +80,14 @@ public:
 
 	UFUNCTION(BlueprintPure, meta=(UPyScriptMethod = "LocalToAbsolute", UPyUseHelperMethod))
 	static FVector2D Geometry_LocalToAbsolute(const FGeometry& Host, const FVector2D& LocalCoordinate);
+
+	// ============================================
+	// UWorld exposed for scripting
+	// ============================================
+
+	UFUNCTION(BlueprintPure, meta=(UPyScriptMethod = "GetNetMode", UPyUseHelperMethod))
+	static int32 World_GetNetMode(UWorld* Host);
+
+	UFUNCTION(BlueprintPure, meta=(UPyScriptMethod = "GetNetModeName", UPyUseHelperMethod))
+	static FString World_GetNetModeName(UWorld* Host);
 };

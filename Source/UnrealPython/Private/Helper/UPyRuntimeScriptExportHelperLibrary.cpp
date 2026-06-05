@@ -3,6 +3,7 @@
 #include "Blueprint/UserWidget.h"
 #include "Blueprint/GameViewportSubsystem.h"
 #include "Components/EditableText.h"
+#include "Engine/World.h"
 #include "Styling/SlateColor.h"
 
 void UUPyRuntimeScriptExportHelperLibrary::Transform_SetRotation(FTransform& Host, const FRotator& InRot)
@@ -89,4 +90,31 @@ FVector2D UUPyRuntimeScriptExportHelperLibrary::Geometry_AbsoluteToLocal(const F
 FVector2D UUPyRuntimeScriptExportHelperLibrary::Geometry_LocalToAbsolute(const FGeometry& Host, const FVector2D& LocalCoordinate)
 {
 	return Host.LocalToAbsolute(LocalCoordinate);
+}
+
+int32 UUPyRuntimeScriptExportHelperLibrary::World_GetNetMode(UWorld* Host)
+{
+	return Host ? static_cast<int32>(Host->GetNetMode()) : static_cast<int32>(NM_MAX);
+}
+
+FString UUPyRuntimeScriptExportHelperLibrary::World_GetNetModeName(UWorld* Host)
+{
+	if (!Host)
+	{
+		return TEXT("Unknown");
+	}
+
+	switch (Host->GetNetMode())
+	{
+	case NM_Standalone:
+		return TEXT("Standalone");
+	case NM_DedicatedServer:
+		return TEXT("DedicatedServer");
+	case NM_ListenServer:
+		return TEXT("ListenServer");
+	case NM_Client:
+		return TEXT("Client");
+	default:
+		return TEXT("Unknown");
+	}
 }

@@ -28,6 +28,9 @@ def FindPackage(Name: str) -> Optional[Package]:
 def FlushGeneratedTypeReinstancing() -> None:
     ...
 
+def GetClassFlags(Class_: Union[Class, type]) -> int:
+    ...
+
 def GetContentDir() -> str:
     ...
 
@@ -37,6 +40,9 @@ def GetDefaultObject(Type: Union[Class, type]) -> Object | None:
 def GetGameSavedDir() -> str:
     ...
 
+def GetStructFromType(Type: type) -> Struct:
+    ...
+
 def GetTypeFromClass(Class_: Class) -> type:
     ...
 
@@ -44,6 +50,12 @@ def GetTypeFromEnum(Enum_: Enum) -> type:
     ...
 
 def GetTypeFromStruct(Struct_: Struct) -> type:
+    ...
+
+def GetTypeMetaData(Type: type, Key: str) -> str:
+    ...
+
+def HasTypeMetaData(Type: type, Key: str) -> bool:
     ...
 
 def IsEditor() -> bool:
@@ -85,28 +97,16 @@ def LogWarning(msg: str) -> None:
 def NewObject(Type: Union[Class, type], Outer: Optional[Object]=None, Name: str="", BaseType: Optional[Object]=None) -> Object:
     ...
 
-def GetClassFlags(Class_: Union[Class, type]) -> int:
-    ...
-
-def GetStructFromType(Type: type) -> Struct:
-    ...
-
-def GetTypeMetaData(Type: type, Key: str) -> str:
-    ...
-
-def HasTypeMetaData(Type: type, Key: str) -> bool:
-    ...
-
 def uclass(Meta: Optional[dict[str, Any]]=None, BlueprintType: Optional[bool]=None, NotBlueprintType: Optional[bool]=None, Blueprintable: Optional[bool]=None, NotBlueprintable: Optional[bool]=None, Abstract: Optional[bool]=None) -> None:
     ...
 
 def uenum() -> None:
     ...
 
-def ufunction(Meta: Optional[dict[str, Any]]=None, Ret: Optional[type]=None, Params: Optional[list[type]]=None, Override: Optional[bool]=None, Static: Optional[bool]=None, Pure: Optional[bool]=None, Getter: Optional[bool]=None, Setter: Optional[bool]=None) -> FunctionDef:
+def ufunction(Meta: Optional[dict[str, Any]]=None, Ret: Optional[type]=None, Params: Optional[list[type]]=None, Override: Optional[bool]=None, Static: Optional[bool]=None, Pure: Optional[bool]=None, Getter: Optional[bool]=None, Setter: Optional[bool]=None, Server: Optional[bool]=None, Client: Optional[bool]=None, NetMulticast: Optional[bool]=None, Reliable: Optional[bool]=None, Unreliable: Optional[bool]=None) -> FunctionDef:
     ...
 
-def uproperty(Type: type, Meta: Optional[dict[str, Any]]=None, Getter: Optional[str]=None, Setter: Optional[str]=None) -> PropertyDef:
+def uproperty(Type: type, Meta: Optional[dict[str, Any]]=None, Getter: Optional[str]=None, Setter: Optional[str]=None, Replicated: Optional[bool]=None, RepNotify: Optional[Union[bool, str]]=None, ReplicationCondition: Optional[str]=None, RepNotifyCondition: Optional[str]=None, PushBased: Optional[bool]=None) -> PropertyDef:
     ...
 
 def ustruct(Meta: Optional[dict[str, Any]]=None, BlueprintType: Optional[bool]=None, NotBlueprintType: Optional[bool]=None) -> None:
@@ -34414,6 +34414,16 @@ class PBIKWorkData(StructBase):
     BoneSettingToSolverBoneIndex: list[int]
     SolverBoneToElementIndex: list[int]
     Solver: PBIKSolver
+
+
+class PGFWorldContext(StructBase):
+    WorldContextObject: Object
+    World: World
+    GameInstance: GameInstance
+    NetMode: int
+    NetModeName: str
+    bIsGameWorld: bool
+    bIsPlayInEditor: bool
 
 
 class PIEAndroidDeviceProperties(StructBase):
@@ -81375,8 +81385,7 @@ class UPyCallableForDelegate(Object, UPythonResourceOwner):
 
 
 class UPyManager(Object):
-    PythonOwnedObjects: set[Object]
-
+    ...
 
 class UPyTestChildInterface(UPyTestInterface):
     ...
@@ -81425,6 +81434,9 @@ class UPyTestObject(Object, UPyTestChildInterface, UPyTestOtherInterface):
         ...
 
     def CheckArrayParam(self, Value: list[int]) -> list[int]:
+        ...
+
+    def CheckBlueprintLibraryArrayCall(self) -> bool:
         ...
 
     def CheckBoolParam(self, bValue: bool) -> bool:
@@ -82277,6 +82289,12 @@ class World(Object):
     PSCPool: WorldPSCPool
 
     def GetDataLayerManager(self) -> DataLayerManager:
+        ...
+
+    def GetNetMode(self) -> int:
+        ...
+
+    def GetNetModeName(self) -> str:
         ...
 
     def HandleTimelineScrubbed(self) -> None:
@@ -110716,6 +110734,36 @@ class OutlinerVisibilityHeaderFactory(EditorDataStorageFactory):
 class OutlinerVisibilityWidgetFactory(EditorDataStorageFactory):
     ...
 
+class PGFBlueprintLibrary(BlueprintFunctionLibrary):
+    @staticmethod
+    def GetNetModeName(Context: PGFWorldContext) -> str:
+        ...
+
+    @staticmethod
+    def HotReloadPythonRuntime() -> None:
+        ...
+
+    @staticmethod
+    def IsClient(Context: PGFWorldContext) -> bool:
+        ...
+
+    @staticmethod
+    def IsServer(Context: PGFWorldContext) -> bool:
+        ...
+
+    @staticmethod
+    def MakeWorldContext(WorldContextObject: Object) -> PGFWorldContext:
+        ...
+
+    @staticmethod
+    def ReloadPythonModule(ModuleName: str) -> None:
+        ...
+
+    @staticmethod
+    def ReloadPythonPackage(PackageName: str, EntryModuleName: str) -> None:
+        ...
+
+
 class PackFactory(Factory):
     ...
 
@@ -116555,11 +116603,27 @@ class UObjectLabelWidgetFactory(EditorDataStorageFactory):
 
 class UPyBlueprintLibrary(BlueprintFunctionLibrary):
     @staticmethod
+    def CallPythonMethod_IntArray_RetIntArray(ModuleName: str, MethodName: str, Arg: list[int]) -> list[int]:
+        ...
+
+    @staticmethod
+    def CallPythonMethod_IntArray_RetStrArray(ModuleName: str, MethodName: str, Arg: list[int]) -> list[str]:
+        ...
+
+    @staticmethod
     def CallPythonMethod_Int_RetInt(ModuleName: str, MethodName: str, Arg: int) -> int:
         ...
 
     @staticmethod
     def CallPythonMethod_Int_RetStr(ModuleName: str, MethodName: str, Arg: int) -> str:
+        ...
+
+    @staticmethod
+    def CallPythonMethod_StrArray_RetIntArray(ModuleName: str, MethodName: str, Arg: list[str]) -> list[int]:
+        ...
+
+    @staticmethod
+    def CallPythonMethod_StrArray_RetStrArray(ModuleName: str, MethodName: str, Arg: list[str]) -> list[str]:
         ...
 
     @staticmethod
@@ -116594,6 +116658,14 @@ class UPyRuntimeScriptExportHelperLibrary(BlueprintFunctionLibrary):
 
     @staticmethod
     def GetLocalSize(Host: Geometry) -> Vector2D:
+        ...
+
+    @staticmethod
+    def GetNetMode(Host: World) -> int:
+        ...
+
+    @staticmethod
+    def GetNetModeName(Host: World) -> str:
         ...
 
     @staticmethod
@@ -128979,6 +129051,14 @@ class OverlaySlot(PanelSlot):
         ...
 
 
+class PGFGameInstanceSubsystem(GameInstanceSubsystem):
+    def GetWorldContext(self) -> PGFWorldContext:
+        ...
+
+    def IsInitialized(self) -> bool:
+        ...
+
+
 class PackedLevelActor(LevelInstance):
     PackedVersion: str
     PackedHash: int
@@ -134082,6 +134162,7 @@ class UMGEditorProjectSettings(WidgetEditingProjectSettings):
 
 class UPyGameInstance(PlatformGameInstance):
     GameInstanceModuleName: str
+    GameInstanceProviderFunctionName: str
 
     def PyGC(self) -> None:
         ...
@@ -143260,6 +143341,24 @@ class Overlay(PanelWidget):
         ...
 
 
+class PGFGameInstance(UPyGameInstance):
+    PythonReloadRoot: str
+    PythonEntryModuleName: str
+    bConfigurePythonRuntimeOnInit: bool
+
+    def ConfigurePythonRuntime(self) -> None:
+        ...
+
+    def HotReloadPythonRuntime(self) -> None:
+        ...
+
+    def OnPythonGameplayInit(self) -> None:
+        ...
+
+    def OnPythonGameplayShutdown(self) -> None:
+        ...
+
+
 class PanelExtensionSubsystem(EditorSubsystem):
     ...
 
@@ -145780,9 +145879,6 @@ class UInt32Property(NumericProperty):
     ...
 
 class UInt64Property(NumericProperty):
-    ...
-
-class UPyGeneratedClass(Class, UPythonResourceOwner):
     ...
 
 class UPyGeneratedStruct(ScriptStruct, UPythonResourceOwner):
@@ -150290,6 +150386,9 @@ class TriangleSetComponent(MeshComponent):
     Bounds: BoxSphereBounds
     bBoundsDirty: bool
 
+
+class UPyGeneratedClass(BlueprintGeneratedClass, UPythonResourceOwner):
+    ...
 
 class UVEditorUISubsystem(AssetEditorUISubsystem):
     ...
