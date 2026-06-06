@@ -35,6 +35,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "UnrealPython")
 	static TArray<int32> CallPythonMethod_StrArray_RetIntArray(const FString& ModuleName, const FString& MethodName, const TArray<FString>& Arg);
 
+	UFUNCTION(BlueprintCallable, Category = "UnrealPython")
+	static bool CallLoadedPythonMethod(const FString& ModuleName, const FString& MethodName);
+
 	/**
 	 * Variadic Template version for C++ usage.
 	 */
