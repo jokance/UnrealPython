@@ -205,8 +205,12 @@ void UUPyGameInstance::Shutdown()
 	UnregisterTicker();
 
 	CallGameInstanceFunction("shutdown");
+	if (!IsEngineExitRequested())
+	{
+		CallGameInstanceFunction("after_shutdown");
+	}
 	CleanupModule();
-	
+
 	Super::Shutdown();
 }
 

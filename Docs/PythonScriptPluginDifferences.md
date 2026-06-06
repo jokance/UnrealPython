@@ -322,7 +322,7 @@ UE 内置插件覆盖面更偏编辑器脚本，包含 `PyEditor`、`PySlate`、
 
 本插件覆盖面更偏游戏运行时，源码中新增或强化了：
 
-- `PyGameFramework/UPyGameInstance`：从可配置的 Python factory 函数创建每个 UE GameInstance 对应的 Python 对象，并调用对象的 `init`、`on_start`、`tick`、`shutdown`
+- `PyGameFramework/UPyGameInstance`：从可配置的 Python factory 函数创建每个 UE GameInstance 对应的 Python 对象，并调用对象的 `init`、`on_start`、`tick`、`shutdown`、`after_shutdown`
 - `PyGameFramework/UPyTimerManager`
 - `Helper/UPyBlueprintLibrary`：Blueprint/C++ 调 Python 函数
 - UMG、InputCore、Engine、CoreUObject 的一批自动生成 wrapper
