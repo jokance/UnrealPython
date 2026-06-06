@@ -133,7 +133,7 @@ Engine.Python.IsEnabledByDefault=0
        return MyGameInstance()
    ```
 
-   `after_shutdown()` 是可选接口，会在 `shutdown()` 返回之后、Python GameInstance 对象释放之前调用。引擎退出流程中不会调用该接口。
+   `after_shutdown()` 是可选接口，会在 `shutdown()` 返回之后、Python GameInstance 对象释放之前调用。
 
 4. **手动触发垃圾回收**:
    - 在游戏运行时，可以通过控制台命令 `PyGC` 手动触发 Python 垃圾回收。
