@@ -143344,19 +143344,6 @@ class Overlay(PanelWidget):
 class PGFGameInstance(UPyGameInstance):
     PythonReloadRoot: str
     PythonEntryModuleName: str
-    bConfigurePythonRuntimeOnInit: bool
-
-    def ConfigurePythonRuntime(self) -> None:
-        ...
-
-    def HotReloadPythonRuntime(self) -> None:
-        ...
-
-    def OnPythonGameplayInit(self) -> None:
-        ...
-
-    def OnPythonGameplayShutdown(self) -> None:
-        ...
 
 
 class PanelExtensionSubsystem(EditorSubsystem):
