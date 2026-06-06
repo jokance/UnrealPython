@@ -210,10 +210,10 @@ void UUPyGameInstance::Shutdown()
 	UnregisterTicker();
 
 	CallGameInstanceFunction("shutdown");
+	Super::Shutdown();
+
 	CallAfterShutdown();
 	CleanupModule();
-
-	Super::Shutdown();
 }
 
 void UUPyGameInstance::OnStart()
