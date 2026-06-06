@@ -126,7 +126,7 @@ Engine.Python.IsEnabledByDefault=0
            print("Python GameInstance: Shutdown")
 
 
-   def create_game_instance(unreal_game_instance):
+   def create_game_instance(ue_game_instance):
        return MyGameInstance()
    ```
 
