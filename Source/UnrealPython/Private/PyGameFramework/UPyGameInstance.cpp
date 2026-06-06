@@ -13,19 +13,14 @@ UUPyGameInstance::UUPyGameInstance(const FObjectInitializer& ObjectInitializer)
 
 void UUPyGameInstance::CallGameInstanceFunction(const char* FunctionName, PyObject* PyArgs)
 {
-	CallPythonObjectFunction(GameInstanceObject.GetPtr(), FunctionName, PyArgs);
-}
-
-void UUPyGameInstance::CallPythonObjectFunction(PyObject* Target, const char* FunctionName, PyObject* PyArgs)
-{
 	FUPyScopedGIL GIL;
 
-	if (!Target)
+	if (!GameInstanceObject)
 	{
 		return;
 	}
 
-	FUPyObjectPtr PyFunc = GetCallableAttribute(Target, FunctionName);
+	FUPyObjectPtr PyFunc = GetCallableAttribute(GameInstanceObject, FunctionName);
 	if (!PyFunc)
 	{
 		return;
@@ -175,11 +170,6 @@ void UUPyGameInstance::CleanupModule()
 	}
 }
 
-void UUPyGameInstance::CallAfterShutdown(PyObject* PythonGameInstanceModule)
-{
-	CallPythonObjectFunction(PythonGameInstanceModule, "after_shutdown");
-}
-
 void UUPyGameInstance::Init()
 {
 	Super::Init();
@@ -214,27 +204,10 @@ void UUPyGameInstance::Shutdown()
 	
 	UnregisterTicker();
 
-	FUPyObjectPtr AfterShutdownModule;
-	if (Py_IsInitialized() && GameInstanceModule)
-	{
-		FUPyScopedGIL GIL;
-		AfterShutdownModule = GameInstanceModule;
-	}
-
 	CallGameInstanceFunction("shutdown");
-	Super::Shutdown();
 	CleanupModule();
-
-	if (Py_IsInitialized() && AfterShutdownModule)
-	{
-		FUPyScopedGIL GIL;
-		CallAfterShutdown(AfterShutdownModule.GetPtr());
-		AfterShutdownModule.Reset();
-	}
-	else if (AfterShutdownModule)
-	{
-		AfterShutdownModule.Release();
-	}
+	
+	Super::Shutdown();
 }
 
 void UUPyGameInstance::OnStart()

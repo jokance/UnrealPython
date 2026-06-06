@@ -29,8 +29,6 @@ protected:
 	FString GameInstanceFactoryFunctionName;
 
 	void CallGameInstanceFunction(const char* FunctionName, PyObject* PyArgs = nullptr);
-	void CallPythonObjectFunction(PyObject* Target, const char* FunctionName, PyObject* PyArgs = nullptr);
-	virtual void CallAfterShutdown(PyObject* PythonGameInstanceModule);
 
 private:
 	bool EnsureModuleLoaded();
