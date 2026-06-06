@@ -106,10 +106,10 @@ Engine.Python.IsEnabledByDefault=0
    - 打开你创建的 Game Instance Blueprint。
    - 在 Details 面板中找到 **Python** 分类。
    - 设置 **Game Instance Module Name** 为你想要加载的 Python 模块名称（默认 `game_instance`，无需 `.py` 后缀）。
-   - **Game Instance Provider Function Name** 默认 `get_game_instance`，用于从模块获取回调对象。
+   - **Game Instance Factory Function Name** 默认 `create_game_instance`，用于为当前 UE GameInstance 创建 Python 回调对象。
 
 3. **编写 Python 脚本**:
-   在你配置的 Python 路径下创建一个 Python 文件（例如 `game_instance.py`），并提供 provider 函数返回业务对象。`UUPyGameInstance` 会优先调用该对象上的生命周期方法：
+   在你配置的 Python 路径下创建一个 Python 文件（例如 `game_instance.py`），并提供 factory 函数创建业务对象。每个 `UUPyGameInstance` 会持有自己的 Python 对象，并调用该对象上的生命周期方法：
 
    ```python
    class MyGameInstance:
@@ -126,14 +126,9 @@ Engine.Python.IsEnabledByDefault=0
            print("Python GameInstance: Shutdown")
 
 
-   _game_instance = MyGameInstance()
-
-
-   def get_game_instance():
-       return _game_instance
+   def create_game_instance(unreal_game_instance):
+       return MyGameInstance()
    ```
-
-   查找顺序为：配置的 provider 函数、模块级函数。默认兼容 `get_game_instance()` 以及旧的模块级 `init`、`on_start`、`tick`、`shutdown` 函数。
 
 4. **手动触发垃圾回收**:
    - 在游戏运行时，可以通过控制台命令 `PyGC` 手动触发 Python 垃圾回收。

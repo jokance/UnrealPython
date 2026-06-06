@@ -134162,7 +134162,7 @@ class UMGEditorProjectSettings(WidgetEditingProjectSettings):
 
 class UPyGameInstance(PlatformGameInstance):
     GameInstanceModuleName: str
-    GameInstanceProviderFunctionName: str
+    GameInstanceFactoryFunctionName: str
 
     def PyGC(self) -> None:
         ...

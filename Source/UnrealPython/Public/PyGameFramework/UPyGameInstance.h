@@ -20,21 +20,21 @@ public:
 	void PyGC();
 
 protected:
-	/** The name of the Python module to load for game instance callbacks (init, shutdown, on_start, tick) */
+	/** The name of the Python module that creates the Python GameInstance object */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Python")
 	FString GameInstanceModuleName;
 
-	/** Optional provider function on the Python module that returns the callback target object */
+	/** The factory function on the Python module that creates the callback target object */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Python")
-	FString GameInstanceProviderFunctionName;
+	FString GameInstanceFactoryFunctionName;
 
-	void CallModuleFunction(const char* FunctionName, PyObject* PyArgs = nullptr);
+	void CallGameInstanceFunction(const char* FunctionName, PyObject* PyArgs = nullptr);
 
 private:
 	bool EnsureModuleLoaded();
-	FUPyObjectPtr ResolveCallbackTarget();
+	bool CreateGameInstanceObject();
 	FUPyObjectPtr GetCallableAttribute(PyObject* Target, const char* FunctionName, bool bWarnIfNotCallable = true);
-	bool HasModuleFunction(const char* FunctionName);
+	bool HasGameInstanceFunction(const char* FunctionName);
 	void CleanupModule();
 
 	bool Tick(float DeltaTime);
@@ -42,6 +42,7 @@ private:
 	void UnregisterTicker();
 
 	FUPyObjectPtr GameInstanceModule;
+	FUPyObjectPtr GameInstanceObject;
 	FTSTicker::FDelegateHandle TickerHandle;
 
 	bool bIsInitialized;

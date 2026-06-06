@@ -6,27 +6,21 @@
 UUPyGameInstance::UUPyGameInstance(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 	, GameInstanceModuleName(TEXT("game_instance"))
-	, GameInstanceProviderFunctionName(TEXT("get_game_instance"))
+	, GameInstanceFactoryFunctionName(TEXT("create_game_instance"))
 	, bIsInitialized(false)
 {
 }
 
-void UUPyGameInstance::CallModuleFunction(const char* FunctionName, PyObject* PyArgs)
+void UUPyGameInstance::CallGameInstanceFunction(const char* FunctionName, PyObject* PyArgs)
 {
 	FUPyScopedGIL GIL;
 
-	if (!EnsureModuleLoaded())
+	if (!GameInstanceObject)
 	{
 		return;
 	}
 
-	FUPyObjectPtr CallbackTarget = ResolveCallbackTarget();
-	if (!CallbackTarget)
-	{
-		return;
-	}
-
-	FUPyObjectPtr PyFunc = GetCallableAttribute(CallbackTarget, FunctionName);
+	FUPyObjectPtr PyFunc = GetCallableAttribute(GameInstanceObject, FunctionName);
 	if (!PyFunc)
 	{
 		return;
@@ -39,7 +33,7 @@ void UUPyGameInstance::CallModuleFunction(const char* FunctionName, PyObject* Py
 		{
 			PyErr_Print();
 		}
-		UE_LOG(LogUnrealPython, Error, TEXT("Failed to call Python function '%s.%s'."), *GameInstanceModuleName, UTF8_TO_TCHAR(FunctionName));
+		UE_LOG(LogUnrealPython, Error, TEXT("Failed to call Python GameInstance function '%s.%s'."), *GameInstanceModuleName, UTF8_TO_TCHAR(FunctionName));
 	}
 }
 
@@ -70,45 +64,68 @@ bool UUPyGameInstance::EnsureModuleLoaded()
 	return true;
 }
 
-FUPyObjectPtr UUPyGameInstance::ResolveCallbackTarget()
+bool UUPyGameInstance::CreateGameInstanceObject()
 {
-	if (!GameInstanceModule)
+	if (GameInstanceObject)
 	{
-		return FUPyObjectPtr();
+		return true;
 	}
 
-	if (!GameInstanceProviderFunctionName.IsEmpty())
+	if (!EnsureModuleLoaded())
 	{
-		const FTCHARToUTF8 ProviderFunctionName(*GameInstanceProviderFunctionName);
-		if (PyObject_HasAttrString(GameInstanceModule, ProviderFunctionName.Get()))
+		return false;
+	}
+
+	if (GameInstanceFactoryFunctionName.IsEmpty())
+	{
+		UE_LOG(LogUnrealPython, Error, TEXT("GameInstanceFactoryFunctionName is empty for Python module '%s'."), *GameInstanceModuleName);
+		return false;
+	}
+
+	FUPyObjectPtr PyFactory = GetCallableAttribute(GameInstanceModule, TCHAR_TO_UTF8(*GameInstanceFactoryFunctionName));
+	if (!PyFactory)
+	{
+		return false;
+	}
+
+	PyObject* PySelf = UPyConversion::PythonizeObject(this);
+	if (!PySelf)
+	{
+		UE_LOG(LogUnrealPython, Error, TEXT("Failed to pythonize game instance for '%s.%s'."), *GameInstanceModuleName, *GameInstanceFactoryFunctionName);
+		return false;
+	}
+
+	FUPyObjectPtr PyArgs = FUPyObjectPtr::StealReference(PyTuple_Pack(1, PySelf));
+	Py_DECREF(PySelf);
+	if (!PyArgs)
+	{
+		if (PyErr_Occurred())
 		{
-			FUPyObjectPtr PyGetter = FUPyObjectPtr::StealReference(PyObject_GetAttrString(GameInstanceModule, ProviderFunctionName.Get()));
-			if (PyGetter && PyCallable_Check(PyGetter))
-			{
-				FUPyObjectPtr PyObject = FUPyObjectPtr::StealReference(PyObject_CallObject(PyGetter, nullptr));
-				if (!PyObject)
-				{
-					if (PyErr_Occurred())
-					{
-						PyErr_Print();
-					}
-					UE_LOG(LogUnrealPython, Error, TEXT("Failed to call Python function '%s.%s'."), *GameInstanceModuleName, *GameInstanceProviderFunctionName);
-					return FUPyObjectPtr();
-				}
-
-				if (PyObject != Py_None)
-				{
-					return PyObject;
-				}
-			}
-			else if (PyGetter)
-			{
-				UE_LOG(LogUnrealPython, Warning, TEXT("Python attribute '%s.%s' is not callable."), *GameInstanceModuleName, *GameInstanceProviderFunctionName);
-			}
+			PyErr_Print();
 		}
+		UE_LOG(LogUnrealPython, Error, TEXT("Failed to create arguments for Python function '%s.%s'."), *GameInstanceModuleName, *GameInstanceFactoryFunctionName);
+		return false;
 	}
 
-	return FUPyObjectPtr::NewReference(GameInstanceModule);
+	GameInstanceObject = FUPyObjectPtr::StealReference(PyObject_CallObject(PyFactory, PyArgs));
+	if (!GameInstanceObject)
+	{
+		if (PyErr_Occurred())
+		{
+			PyErr_Print();
+		}
+		UE_LOG(LogUnrealPython, Error, TEXT("Failed to call Python function '%s.%s'."), *GameInstanceModuleName, *GameInstanceFactoryFunctionName);
+		return false;
+	}
+
+	if (GameInstanceObject == Py_None)
+	{
+		UE_LOG(LogUnrealPython, Error, TEXT("Python function '%s.%s' returned None."), *GameInstanceModuleName, *GameInstanceFactoryFunctionName);
+		GameInstanceObject.Reset();
+		return false;
+	}
+
+	return true;
 }
 
 FUPyObjectPtr UUPyGameInstance::GetCallableAttribute(PyObject* Target, const char* FunctionName, bool bWarnIfNotCallable)
@@ -132,21 +149,15 @@ FUPyObjectPtr UUPyGameInstance::GetCallableAttribute(PyObject* Target, const cha
 	return FUPyObjectPtr();
 }
 
-bool UUPyGameInstance::HasModuleFunction(const char* FunctionName)
+bool UUPyGameInstance::HasGameInstanceFunction(const char* FunctionName)
 {
 	FUPyScopedGIL GIL;
-	if (!EnsureModuleLoaded())
+	if (!GameInstanceObject)
 	{
 		return false;
 	}
 
-	FUPyObjectPtr CallbackTarget = ResolveCallbackTarget();
-	if (!CallbackTarget)
-	{
-		return false;
-	}
-
-	return static_cast<bool>(GetCallableAttribute(CallbackTarget, FunctionName, false));
+	return static_cast<bool>(GetCallableAttribute(GameInstanceObject, FunctionName, false));
 }
 
 void UUPyGameInstance::CleanupModule()
@@ -154,6 +165,7 @@ void UUPyGameInstance::CleanupModule()
 	if (Py_IsInitialized())
 	{
 		FUPyScopedGIL GIL;
+		GameInstanceObject.Reset();
 		GameInstanceModule.Reset();
 	}
 }
@@ -163,25 +175,26 @@ void UUPyGameInstance::Init()
 	Super::Init();
 	
 	bIsInitialized = true;
-	
+
 	FUPyScopedGIL GIL;
-	
-	// Create args tuple with self as parameter
-	PyObject* PySelf = UPyConversion::PythonizeObject(this);
-	if (PySelf)
+
+	if (CreateGameInstanceObject())
 	{
+		PyObject* PySelf = UPyConversion::PythonizeObject(this);
+		if (!PySelf)
+		{
+			UE_LOG(LogUnrealPython, Error, TEXT("Failed to pythonize game instance for init callback."));
+			return;
+		}
+
 		FUPyObjectPtr PyArgs = FUPyObjectPtr::StealReference(PyTuple_Pack(1, PySelf));
 		Py_DECREF(PySelf);
-		CallModuleFunction("init", PyArgs);
-	}
-	else
-	{
-		UE_LOG(LogUnrealPython, Error, TEXT("Failed to pythonize game instance for init callback."));
-	}
-	
-	if (HasModuleFunction("tick"))
-	{
-		RegisterTicker();
+		CallGameInstanceFunction("init", PyArgs);
+
+		if (HasGameInstanceFunction("tick"))
+		{
+			RegisterTicker();
+		}
 	}
 }
 
@@ -190,8 +203,8 @@ void UUPyGameInstance::Shutdown()
 	bIsInitialized = false;
 	
 	UnregisterTicker();
-	
-	CallModuleFunction("shutdown");
+
+	CallGameInstanceFunction("shutdown");
 	CleanupModule();
 	
 	Super::Shutdown();
@@ -200,8 +213,8 @@ void UUPyGameInstance::Shutdown()
 void UUPyGameInstance::OnStart()
 {
 	Super::OnStart();
-	
-	CallModuleFunction("on_start");
+
+	CallGameInstanceFunction("on_start");
 }
 
 bool UUPyGameInstance::Tick(float DeltaTime)
@@ -218,9 +231,9 @@ bool UUPyGameInstance::Tick(float DeltaTime)
 	{
 		FUPyObjectPtr PyArgs = FUPyObjectPtr::StealReference(PyTuple_Pack(1, PyDeltaTime));
 		Py_DECREF(PyDeltaTime);
-		CallModuleFunction("tick", PyArgs);
+		CallGameInstanceFunction("tick", PyArgs);
 	}
-	
+
 	return true;
 }
 
