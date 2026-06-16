@@ -17,6 +17,36 @@
 
 namespace
 {
+FString GetBundledPythonVersionName()
+{
+	return FString(UTF8_TO_TCHAR(UPY_PYTHON_VERSION));
+}
+
+FString GetPythonStdLibVersionName()
+{
+	return FString(UTF8_TO_TCHAR(UPY_PYTHON_STDLIB_VERSION));
+}
+
+FString GetBundledPythonZipFileName()
+{
+	return GetBundledPythonVersionName() + TEXT(".zip");
+}
+
+#if PLATFORM_WINDOWS
+bool AddPythonZipPathIfExists(PyConfig& PythonConfig, const FString& PythonZipPath)
+{
+	if (!FPaths::FileExists(PythonZipPath))
+	{
+		return false;
+	}
+
+	const FString FullPythonZipPath = FPaths::ConvertRelativePathToFull(PythonZipPath);
+	PyWideStringList_Append(&PythonConfig.module_search_paths, TCHAR_TO_WCHAR(*FullPythonZipPath));
+	UE_LOG(LogUnrealPython, Log, TEXT("Added bundled Windows Python path: %s"), *FullPythonZipPath);
+	return true;
+}
+#endif
+
 #if PLATFORM_IOS
 FString GetFileSystemPathFromCFURL(CFURLRef URL)
 {
@@ -232,13 +262,13 @@ void AddAndroidObbScriptPaths(PyConfig& PythonConfig)
 			PyWideStringList_Append(&PythonConfig.module_search_paths, TCHAR_TO_WCHAR(*ObbScriptPath));
 			UE_LOG(LogUnrealPython, Log, TEXT("Added packaged Android OBB script path: %s"), *ObbScriptPath);
 
-			const FString ObbAndroidPythonPath = ObbPath / FApp::GetProjectName() / TEXT("Plugins/UnrealPython/ThirdParty/python314/android");
+			const FString ObbAndroidPythonPath = ObbPath / FApp::GetProjectName() / TEXT("Plugins/UnrealPython/ThirdParty") / GetBundledPythonVersionName() / TEXT("android");
 			PyWideStringList_Append(&PythonConfig.module_search_paths, TCHAR_TO_WCHAR(*ObbAndroidPythonPath));
 			UE_LOG(LogUnrealPython, Log, TEXT("Added packaged Android Python support path: %s"), *ObbAndroidPythonPath);
 
 			if (!AndroidPythonHost.IsEmpty())
 			{
-				const FString ObbPythonStdLibPath = ObbAndroidPythonPath / AndroidPythonHost / TEXT("lib/python3.14");
+				const FString ObbPythonStdLibPath = ObbAndroidPythonPath / AndroidPythonHost / TEXT("lib") / GetPythonStdLibVersionName();
 				PyWideStringList_Append(&PythonConfig.module_search_paths, TCHAR_TO_WCHAR(*ObbPythonStdLibPath));
 				UE_LOG(LogUnrealPython, Log, TEXT("Added packaged Android Python stdlib path: %s"), *ObbPythonStdLibPath);
 			}
@@ -363,10 +393,10 @@ void FUPyVirtualMachine::ConfigureSearchPaths(PyConfig& PythonConfig)
 	{
 		const FString PluginBaseDir = Plugin->GetBaseDir();
 		const TArray<FString> BundledPythonPaths = {
-			FPaths::Combine(PluginBaseDir, TEXT("ThirdParty/python314/Mac/lib/python3.14")),
-			FPaths::Combine(PluginBaseDir, TEXT("ThirdParty/python314/Mac/lib/python3.14/lib-dynload")),
-			FPaths::Combine(PluginBaseDir, TEXT("Binaries/Mac/python3.14")),
-			FPaths::Combine(PluginBaseDir, TEXT("Binaries/Mac/python3.14/lib-dynload"))
+			FPaths::Combine(PluginBaseDir, TEXT("ThirdParty"), GetBundledPythonVersionName(), TEXT("Mac/lib"), GetPythonStdLibVersionName()),
+			FPaths::Combine(PluginBaseDir, TEXT("ThirdParty"), GetBundledPythonVersionName(), TEXT("Mac/lib"), GetPythonStdLibVersionName(), TEXT("lib-dynload")),
+			FPaths::Combine(PluginBaseDir, TEXT("Binaries/Mac"), GetPythonStdLibVersionName()),
+			FPaths::Combine(PluginBaseDir, TEXT("Binaries/Mac"), GetPythonStdLibVersionName(), TEXT("lib-dynload"))
 		};
 
 		for (const FString& BundledPythonPath : BundledPythonPaths)
@@ -380,11 +410,27 @@ void FUPyVirtualMachine::ConfigureSearchPaths(PyConfig& PythonConfig)
 #endif
 
 #if PLATFORM_WINDOWS
-	const FString WindowsPythonZipPath = FPaths::Combine(FPlatformProcess::BaseDir(), TEXT("python314.zip"));
-	if (FPaths::FileExists(WindowsPythonZipPath))
+	TArray<FString> WindowsPythonZipPathCandidates = {
+		FPaths::Combine(FPlatformProcess::BaseDir(), GetBundledPythonZipFileName()),
+		FPaths::Combine(FPaths::ProjectDir(), TEXT("Binaries/Win64"), GetBundledPythonZipFileName())
+	};
+
+	if (TSharedPtr<IPlugin> Plugin = IPluginManager::Get().FindPlugin(TEXT("UnrealPython")))
 	{
-		PyWideStringList_Append(&PythonConfig.module_search_paths, TCHAR_TO_WCHAR(*FPaths::ConvertRelativePathToFull(WindowsPythonZipPath)));
-		UE_LOG(LogUnrealPython, Log, TEXT("Added bundled Windows Python path: %s"), *WindowsPythonZipPath);
+		const FString PluginBaseDir = Plugin->GetBaseDir();
+		WindowsPythonZipPathCandidates.Add(FPaths::Combine(PluginBaseDir, TEXT("Binaries/Win64"), GetBundledPythonZipFileName()));
+		WindowsPythonZipPathCandidates.Add(FPaths::Combine(PluginBaseDir, TEXT("ThirdParty"), GetBundledPythonVersionName(), TEXT("Win64"), GetBundledPythonZipFileName()));
+	}
+
+	bool bAddedWindowsPythonZipPath = false;
+	for (const FString& WindowsPythonZipPath : WindowsPythonZipPathCandidates)
+	{
+		bAddedWindowsPythonZipPath |= AddPythonZipPathIfExists(PythonConfig, WindowsPythonZipPath);
+	}
+
+	if (!bAddedWindowsPythonZipPath)
+	{
+		UE_LOG(LogUnrealPython, Warning, TEXT("Bundled Windows Python standard library was not found; expected %s beside the editor/game executable or in the UnrealPython plugin runtime directories."), *GetBundledPythonZipFileName());
 	}
 #endif
 
@@ -409,7 +455,7 @@ void FUPyVirtualMachine::ConfigureSearchPaths(PyConfig& PythonConfig)
 
 	if (!IOSPythonHome.IsEmpty())
 	{
-		const FString IOSStdLibPath = FPaths::Combine(IOSPythonHome, TEXT("lib/python3.14"));
+		const FString IOSStdLibPath = FPaths::Combine(IOSPythonHome, TEXT("lib"), GetPythonStdLibVersionName());
 		const TArray<FString> BundledPythonPaths = {
 			IOSStdLibPath,
 			FPaths::Combine(IOSStdLibPath, TEXT("lib-dynload"))

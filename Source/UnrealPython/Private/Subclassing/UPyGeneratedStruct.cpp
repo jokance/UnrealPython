@@ -9,6 +9,7 @@ namespace
 {
 	void ApplyPythonMetaData(PyObject* InMetaData, UStruct* InStruct)
 	{
+#if WITH_METADATA
 		if (InMetaData && PyDict_Check(InMetaData))
 		{
 			PyObject* MetaDataKey = nullptr;
@@ -21,6 +22,7 @@ namespace
 				InStruct->SetMetaData(*MetaDataKeyStr, *MetaDataValueStr);
 			}
 		}
+#endif
 	}
 
 	bool ConvertOptionalBool(PyObject* InObj, bool& OutValue, bool& bOutHasValue, const TCHAR* InErrorCtxt, const TCHAR* InParameterName)
@@ -261,6 +263,7 @@ private:
 		const bool bBlueprintType = Options && Options->bHasBlueprintType ? Options->bBlueprintType : true;
 		const bool bNotBlueprintType = Options && Options->bHasNotBlueprintType && Options->bNotBlueprintType;
 
+#if WITH_METADATA
 		NewStruct->SetMetaData(TEXT("DisplayName"), *UPyUtil::GetGeneratedTypeDisplayName(PyType));
 		if (bBlueprintType && !bNotBlueprintType)
 		{
@@ -274,6 +277,7 @@ private:
 		{
 			ApplyPythonMetaData(Options->MetaData, NewStruct);
 		}
+#endif
 	}
 
 	bool RegisterDescriptors()

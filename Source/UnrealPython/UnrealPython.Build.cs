@@ -6,6 +6,7 @@ using UnrealBuildTool;
 public class UnrealPython : ModuleRules
 {
 	private const string PythonVersion = "python314";
+	private const string PythonStdLibVersion = "python3.14";
 
 	public UnrealPython(ReadOnlyTargetRules Target) : base(Target)
 	{
@@ -13,7 +14,9 @@ public class UnrealPython : ModuleRules
 
 		PublicDefinitions.AddRange([
 			"_Py_USE_GCC_BUILTIN_ATOMICS=0",
-			"__STDC_VERSION__=201112L"
+			"__STDC_VERSION__=201112L",
+			$"UPY_PYTHON_VERSION=\"{PythonVersion}\"",
+			$"UPY_PYTHON_STDLIB_VERSION=\"{PythonStdLibVersion}\""
 		]);
 
 		PublicDependencyModuleNames.AddRange(
@@ -104,7 +107,7 @@ public class UnrealPython : ModuleRules
 		}
 
 		PublicIncludePaths.Add(Path.Combine(AndroidPythonPath, "include"));
-		PublicIncludePaths.Add(Path.Combine(AndroidPythonPath, "include", "python3.14"));
+		PublicIncludePaths.Add(Path.Combine(AndroidPythonPath, "include", PythonStdLibVersion));
 
 		AddAndroidPythonLibrary(AndroidPythonPath, "libUnrealPython3.14.a");
 		AddAndroidPythonLibrary(AndroidPythonPath, "libUnrealPythonSSL.a");
@@ -116,7 +119,7 @@ public class UnrealPython : ModuleRules
 		AddAndroidPythonLibrary(AndroidPythonPath, "libmpdec.a");
 
 		string AndroidSupportModule = Path.Combine(ThirdPartyPath, PythonVersion, "android", "_android_support.py");
-		string AndroidStdLibDir = Path.Combine(AndroidPythonPath, "lib", "python3.14");
+		string AndroidStdLibDir = Path.Combine(AndroidPythonPath, "lib", PythonStdLibVersion);
 		if (!File.Exists(AndroidSupportModule))
 		{
 			throw new BuildException($"Missing UnrealPython Android Python support module: {AndroidSupportModule}");
@@ -166,8 +169,8 @@ public class UnrealPython : ModuleRules
 	{
 		string MacPythonPath = Path.Combine(ThirdPartyPath, PythonVersion, "Mac");
 		string MacLibPath = Path.Combine(MacPythonPath, "lib");
-		string PythonDylibPath = Path.Combine(MacLibPath, "libpython3.14.dylib");
-		string PythonStdLibPath = Path.Combine(MacLibPath, "python3.14");
+		string PythonDylibPath = Path.Combine(MacLibPath, $"lib{PythonStdLibVersion}.dylib");
+		string PythonStdLibPath = Path.Combine(MacLibPath, PythonStdLibVersion);
 
 		PublicIncludePaths.Add(Path.Combine(MacPythonPath, "include"));
 		PublicAdditionalLibraries.Add(PythonDylibPath);
@@ -175,7 +178,7 @@ public class UnrealPython : ModuleRules
 		PublicFrameworks.Add("CoreFoundation");
 
 		string RuntimeOutputDir = Target.bBuildEditor ? "$(BinaryOutputDir)" : "$(TargetOutputDir)";
-		RuntimeDependencies.Add(Path.Combine(RuntimeOutputDir, "libpython3.14.dylib"), PythonDylibPath);
+		RuntimeDependencies.Add(Path.Combine(RuntimeOutputDir, $"lib{PythonStdLibVersion}.dylib"), PythonDylibPath);
 
 		foreach (string RuntimeFile in Directory.EnumerateFiles(PythonStdLibPath, "*", SearchOption.AllDirectories))
 		{
@@ -186,7 +189,7 @@ public class UnrealPython : ModuleRules
 			}
 
 			string RelativePath = Path.GetRelativePath(PythonStdLibPath, RuntimeFile);
-			RuntimeDependencies.Add(Path.Combine(RuntimeOutputDir, "python3.14", RelativePath), RuntimeFile);
+			RuntimeDependencies.Add(Path.Combine(RuntimeOutputDir, PythonStdLibVersion, RelativePath), RuntimeFile);
 		}
 	}
 

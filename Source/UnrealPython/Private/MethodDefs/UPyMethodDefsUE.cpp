@@ -742,11 +742,15 @@ PyObject* CallHasTypeMetaData(PyObject* InSelf, PyObject* InArgs)
 	}
 
 	const FString Key = UPyUtil::PyObjectToUEString(PyKeyObj);
+#if WITH_METADATA
 	if (const UStruct* Struct = Cast<UStruct>(Field))
 	{
 		return PyBool_FromLong(Struct->HasMetaData(*Key) ? 1 : 0);
 	}
 	return PyBool_FromLong(Field->HasMetaData(*Key) ? 1 : 0);
+#else
+	return PyBool_FromLong(0);
+#endif
 }
 
 PyObject* CallGetTypeMetaData(PyObject* InSelf, PyObject* InArgs)
@@ -765,11 +769,15 @@ PyObject* CallGetTypeMetaData(PyObject* InSelf, PyObject* InArgs)
 	}
 
 	const FString Key = UPyUtil::PyObjectToUEString(PyKeyObj);
+#if WITH_METADATA
 	if (const UStruct* Struct = Cast<UStruct>(Field))
 	{
 		return UPyConversion::Pythonize(Struct->GetMetaData(*Key));
 	}
 	return UPyConversion::Pythonize(Field->GetMetaData(*Key));
+#else
+	return UPyConversion::Pythonize(FString());
+#endif
 }
 
 PyObject* CallGetTypeFromEnum(PyObject* InSelf, PyObject* InArgs)
