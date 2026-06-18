@@ -1,5 +1,9 @@
-
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Security.Cryptography;
+using System.Linq;
 using EpicGames.Core;
 using UnrealBuildTool;
 
@@ -101,6 +105,7 @@ public class UnrealPython : ModuleRules
 	{
 		string AndroidHost = GetAndroidPythonHost(Target);
 		string AndroidPythonPath = Path.Combine(ThirdPartyPath, PythonVersion, "android", AndroidHost);
+		string PluginRoot = Path.GetFullPath(Path.Combine(ModuleDirectory, "..", ".."));
 		if (!Directory.Exists(AndroidPythonPath))
 		{
 			throw new BuildException($"Missing UnrealPython Android Python runtime for {AndroidHost}: {AndroidPythonPath}");
@@ -129,8 +134,12 @@ public class UnrealPython : ModuleRules
 			throw new BuildException($"Missing UnrealPython Android Python stdlib directory for {AndroidHost}: {AndroidStdLibDir}");
 		}
 
-		RuntimeDependencies.Add(AndroidSupportModule, StagedFileType.NonUFS);
-		RuntimeDependencies.Add(Path.Combine(AndroidStdLibDir, "..."), StagedFileType.NonUFS);
+		// CPython's Android bootstrap files must be readable from a real filesystem.
+		// Store them in an APK asset zip and extract them before Py_Initialize instead of staging loose NonUFS files into OBB data.
+		string BootstrapArchive = BuildAndroidBootstrapArchive(Target, PluginRoot, AndroidHost, AndroidSupportModule, AndroidStdLibDir);
+		string BootstrapVersion = GetFileSha256(BootstrapArchive);
+		PublicDefinitions.Add($"UPY_PYTHON_BOOTSTRAP_VERSION=\"{BootstrapVersion}\"");
+		AdditionalPropertiesForReceipt.Add("AndroidPlugin", Path.Combine(PluginRoot, "UnrealPython_UPL.xml"));
 	}
 
 	private string GetAndroidPythonHost(ReadOnlyTargetRules Target)
@@ -163,6 +172,125 @@ public class UnrealPython : ModuleRules
 		}
 
 		PublicAdditionalLibraries.Add(LibraryPath);
+	}
+
+	private string BuildAndroidBootstrapArchive(ReadOnlyTargetRules Target, string PluginRoot, string AndroidHost, string AndroidSupportModule, string AndroidStdLibDir)
+	{
+		string OutputDir = Path.Combine(PluginRoot, "Intermediate", "Android");
+		Directory.CreateDirectory(OutputDir);
+
+		string OutputArchive = Path.Combine(OutputDir, "unrealpython_bootstrap.zip");
+		if (File.Exists(OutputArchive))
+		{
+			File.Delete(OutputArchive);
+		}
+
+		string StagingDir = Path.Combine(OutputDir, "BootstrapStaging");
+		if (Directory.Exists(StagingDir))
+		{
+			Directory.Delete(StagingDir, true);
+		}
+		Directory.CreateDirectory(StagingDir);
+
+		HashSet<string> Entries = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+		CopyFileToBootstrap(StagingDir, AndroidSupportModule, Path.Combine("android", Path.GetFileName(AndroidSupportModule)), Entries);
+		CopyDirectoryToBootstrap(StagingDir, AndroidStdLibDir, Path.Combine("android", AndroidHost, "lib", PythonStdLibVersion), Entries);
+
+		string ProjectDirectory = Target.ProjectFile?.Directory.FullName;
+		if (!String.IsNullOrEmpty(ProjectDirectory))
+		{
+			string ProjectScriptsDir = Path.Combine(ProjectDirectory, "Content", "Scripts");
+			if (Directory.Exists(ProjectScriptsDir))
+			{
+				CopyDirectoryToBootstrap(StagingDir, ProjectScriptsDir, Path.Combine("Content", "Scripts"), Entries);
+			}
+		}
+
+		CreateZipFromDirectory(StagingDir, OutputArchive);
+		return OutputArchive;
+	}
+
+	private static void CopyDirectoryToBootstrap(string StagingDir, string SourceDirectory, string EntryRoot, HashSet<string> Entries)
+	{
+		foreach (string SourceFile in Directory.EnumerateFiles(SourceDirectory, "*", SearchOption.AllDirectories))
+		{
+			FileAttributes Attributes = File.GetAttributes(SourceFile);
+			if ((Attributes & FileAttributes.ReparsePoint) != 0)
+			{
+				continue;
+			}
+
+			string FileName = Path.GetFileName(SourceFile);
+			if (FileName.EndsWith(".pyc", StringComparison.OrdinalIgnoreCase) || FileName.EndsWith(".pyo", StringComparison.OrdinalIgnoreCase))
+			{
+				continue;
+			}
+
+			string RelativePath = Path.GetRelativePath(SourceDirectory, SourceFile);
+			if (RelativePath.Split(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar).Contains("__pycache__"))
+			{
+				continue;
+			}
+
+			CopyFileToBootstrap(StagingDir, SourceFile, Path.Combine(EntryRoot, RelativePath), Entries);
+		}
+	}
+
+	private static void CopyFileToBootstrap(string StagingDir, string SourceFile, string EntryPath, HashSet<string> Entries)
+	{
+		string NormalizedEntryPath = EntryPath.Replace('\\', '/');
+		if (!Entries.Add(NormalizedEntryPath))
+		{
+			return;
+		}
+
+		string DestinationFile = Path.Combine(StagingDir, NormalizedEntryPath.Replace('/', Path.DirectorySeparatorChar));
+		string DestinationDirectory = Path.GetDirectoryName(DestinationFile);
+		if (!String.IsNullOrEmpty(DestinationDirectory))
+		{
+			Directory.CreateDirectory(DestinationDirectory);
+		}
+
+		File.Copy(SourceFile, DestinationFile, true);
+	}
+
+	private static void CreateZipFromDirectory(string SourceDirectory, string OutputArchive)
+	{
+		ProcessStartInfo StartInfo = new ProcessStartInfo("tar.exe")
+		{
+			UseShellExecute = false,
+			CreateNoWindow = true,
+			RedirectStandardOutput = true,
+			RedirectStandardError = true
+		};
+		StartInfo.ArgumentList.Add("-a");
+		StartInfo.ArgumentList.Add("-cf");
+		StartInfo.ArgumentList.Add(OutputArchive);
+		StartInfo.ArgumentList.Add("-C");
+		StartInfo.ArgumentList.Add(SourceDirectory);
+		StartInfo.ArgumentList.Add(".");
+
+		using Process ArchiveProcess = Process.Start(StartInfo);
+		if (ArchiveProcess == null)
+		{
+			throw new BuildException("Failed to start tar.exe for UnrealPython Android bootstrap archive creation.");
+		}
+
+		string StandardOutput = ArchiveProcess.StandardOutput.ReadToEnd();
+		string StandardError = ArchiveProcess.StandardError.ReadToEnd();
+		ArchiveProcess.WaitForExit();
+
+		if (ArchiveProcess.ExitCode != 0 || !File.Exists(OutputArchive))
+		{
+			throw new BuildException($"Failed to create UnrealPython Android bootstrap archive: {StandardOutput}\n{StandardError}");
+		}
+	}
+
+	private static string GetFileSha256(string FilePath)
+	{
+		using FileStream Stream = File.OpenRead(FilePath);
+		byte[] Hash = SHA256.HashData(Stream);
+		return Convert.ToHexString(Hash).ToLowerInvariant();
 	}
 
 	private void ConfigureMacPython(ReadOnlyTargetRules Target, string ThirdPartyPath)

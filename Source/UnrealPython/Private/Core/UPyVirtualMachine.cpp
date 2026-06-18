@@ -245,6 +245,119 @@ FString GetAndroidPythonHost()
 #endif
 }
 
+FString GetAndroidPythonBootstrapRoot()
+{
+	const FString BootstrapRoot = FPaths::Combine(FPaths::ProjectSavedDir(), TEXT("UnrealPythonBootstrap"));
+	return IFileManager::Get().ConvertToAbsolutePathForExternalAppForWrite(*BootstrapRoot);
+}
+
+FString GetAndroidPythonBootstrapVersion()
+{
+#ifdef UPY_PYTHON_BOOTSTRAP_VERSION
+	return FString(UTF8_TO_TCHAR(UPY_PYTHON_BOOTSTRAP_VERSION));
+#else
+	return TEXT("unknown");
+#endif
+}
+
+bool ExtractAndroidPythonBootstrap(const FString& DestinationPath)
+{
+#if USE_ANDROID_JNI
+	JNIEnv* Env = AndroidJavaEnv::GetJavaEnv();
+	jobject Activity = AndroidJavaEnv::GetGameActivityThis();
+	if (Env == nullptr || Activity == nullptr)
+	{
+		UE_LOG(LogUnrealPython, Warning, TEXT("Unable to extract UnrealPython bootstrap: Android activity is unavailable"));
+		return false;
+	}
+
+	jclass ActivityClass = Env->GetObjectClass(Activity);
+	if (ActivityClass == nullptr || AndroidJavaEnv::CheckJavaException())
+	{
+		UE_LOG(LogUnrealPython, Warning, TEXT("Unable to extract UnrealPython bootstrap: GameActivity class is unavailable"));
+		return false;
+	}
+
+	jmethodID ExtractMethod = Env->GetMethodID(ActivityClass, "AndroidThunkJava_ExtractUnrealPythonBootstrap", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Z");
+	Env->DeleteLocalRef(ActivityClass);
+	if (ExtractMethod == nullptr || AndroidJavaEnv::CheckJavaException())
+	{
+		UE_LOG(LogUnrealPython, Warning, TEXT("Unable to extract UnrealPython bootstrap: Java extraction method was not found"));
+		return false;
+	}
+
+	const FString BootstrapVersion = GetAndroidPythonBootstrapVersion();
+	jstring AssetNameString = Env->NewStringUTF("unrealpython_bootstrap.zip");
+	jstring DestinationPathString = Env->NewStringUTF(TCHAR_TO_UTF8(*DestinationPath));
+	jstring VersionString = Env->NewStringUTF(TCHAR_TO_UTF8(*BootstrapVersion));
+
+	const bool bExtracted = Env->CallBooleanMethod(Activity, ExtractMethod, AssetNameString, DestinationPathString, VersionString) == JNI_TRUE;
+	const bool bHadException = AndroidJavaEnv::CheckJavaException();
+
+	Env->DeleteLocalRef(AssetNameString);
+	Env->DeleteLocalRef(DestinationPathString);
+	Env->DeleteLocalRef(VersionString);
+
+	if (bHadException || !bExtracted)
+	{
+		UE_LOG(LogUnrealPython, Warning, TEXT("Failed to extract UnrealPython bootstrap to: %s"), *DestinationPath);
+		return false;
+	}
+
+	UE_LOG(LogUnrealPython, Log, TEXT("Extracted UnrealPython bootstrap to: %s"), *DestinationPath);
+	return true;
+#else
+	return false;
+#endif
+}
+
+void AddAndroidBootstrapPathIfExists(PyConfig& PythonConfig, const FString& Path, const TCHAR* Description)
+{
+	if (!FPaths::DirectoryExists(Path))
+	{
+		UE_LOG(LogUnrealPython, Warning, TEXT("Android Python bootstrap %s was not found: %s"), Description, *Path);
+		return;
+	}
+
+	PyWideStringList_Append(&PythonConfig.module_search_paths, TCHAR_TO_WCHAR(*Path));
+	UE_LOG(LogUnrealPython, Log, TEXT("Added Android Python bootstrap %s: %s"), Description, *Path);
+}
+
+void AddAndroidBootstrapSearchPaths(PyConfig& PythonConfig)
+{
+	const FString AndroidPythonHost = GetAndroidPythonHost();
+	if (AndroidPythonHost.IsEmpty())
+	{
+		UE_LOG(LogUnrealPython, Warning, TEXT("Unable to use Android Python bootstrap: unsupported Android architecture"));
+		return;
+	}
+
+	const FString BootstrapRoot = GetAndroidPythonBootstrapRoot();
+	if (!ExtractAndroidPythonBootstrap(BootstrapRoot))
+	{
+		return;
+	}
+
+	const FString AndroidSupportPath = BootstrapRoot / TEXT("android");
+	const FString AndroidPythonHome = AndroidSupportPath / AndroidPythonHost;
+	const FString StdLibPath = AndroidPythonHome / TEXT("lib") / GetPythonStdLibVersionName();
+	const FString ScriptPath = BootstrapRoot / TEXT("Content/Scripts");
+
+	if (FPaths::DirectoryExists(StdLibPath))
+	{
+		PyConfig_SetString(&PythonConfig, &PythonConfig.home, TCHAR_TO_WCHAR(*AndroidPythonHome));
+		PyConfig_SetString(&PythonConfig, &PythonConfig.prefix, TCHAR_TO_WCHAR(*AndroidPythonHome));
+		PyConfig_SetString(&PythonConfig, &PythonConfig.exec_prefix, TCHAR_TO_WCHAR(*AndroidPythonHome));
+		PyConfig_SetString(&PythonConfig, &PythonConfig.base_prefix, TCHAR_TO_WCHAR(*AndroidPythonHome));
+		PyConfig_SetString(&PythonConfig, &PythonConfig.base_exec_prefix, TCHAR_TO_WCHAR(*AndroidPythonHome));
+		PyConfig_SetString(&PythonConfig, &PythonConfig.stdlib_dir, TCHAR_TO_WCHAR(*StdLibPath));
+	}
+
+	AddAndroidBootstrapPathIfExists(PythonConfig, AndroidSupportPath, TEXT("support path"));
+	AddAndroidBootstrapPathIfExists(PythonConfig, StdLibPath, TEXT("stdlib path"));
+	AddAndroidBootstrapPathIfExists(PythonConfig, ScriptPath, TEXT("script path"));
+}
+
 void AddAndroidObbScriptPaths(PyConfig& PythonConfig)
 {
 	const FString PackageName = GetAndroidPackageName();
@@ -492,6 +605,7 @@ void FUPyVirtualMachine::ConfigureSearchPaths(PyConfig& PythonConfig)
 #endif
 
 #if PLATFORM_ANDROID
+	AddAndroidBootstrapSearchPaths(PythonConfig);
 	AddAndroidObbScriptPaths(PythonConfig);
 #endif
 

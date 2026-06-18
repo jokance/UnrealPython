@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root xmlns:android="http://schemas.android.com/apk/res/android">
+	<gradleCopies>
+		<copyFile src="$S(PluginDir)/Intermediate/Android/unrealpython_bootstrap.zip" dst="$S(BuildDir)/gradle/app/src/main/assets/unrealpython_bootstrap.zip" force="true" />
+	</gradleCopies>
+
+	<gameActivityImportAdditions>
+		<insert><![CDATA[
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
+		]]></insert>
+	</gameActivityImportAdditions>
+
+	<gameActivityClassAdditions>
+		<insert><![CDATA[
+	public boolean AndroidThunkJava_ExtractUnrealPythonBootstrap(String assetName, String destinationPath, String version)
+	{
+		File destinationDir = new File(destinationPath);
+		File versionFile = new File(destinationDir, ".unrealpython_bootstrap_version");
+
+		try
+		{
+			if (versionFile.exists())
+			{
+				String currentVersion = UnrealPythonReadTextFile(versionFile).trim();
+				if (version.equals(currentVersion))
+				{
+					Log.debug("UnrealPython bootstrap is already extracted: " + destinationPath);
+					return true;
+				}
+			}
+
+			UnrealPythonDeleteRecursive(destinationDir);
+			if (!destinationDir.mkdirs() && !destinationDir.exists())
+			{
+				Log.error("Failed to create UnrealPython bootstrap directory: " + destinationPath);
+				return false;
+			}
+
+			File canonicalDestination = destinationDir.getCanonicalFile();
+			String canonicalRoot = canonicalDestination.getPath() + File.separator;
+
+			try (InputStream assetStream = getAssets().open(assetName);
+				ZipInputStream zipStream = new ZipInputStream(assetStream))
+			{
+				byte[] buffer = new byte[65536];
+				ZipEntry entry;
+				while ((entry = zipStream.getNextEntry()) != null)
+				{
+					File outputFile = new File(canonicalDestination, entry.getName());
+					File canonicalOutputFile = outputFile.getCanonicalFile();
+					String canonicalOutputPath = canonicalOutputFile.getPath();
+					if (!canonicalOutputPath.equals(canonicalDestination.getPath()) && !canonicalOutputPath.startsWith(canonicalRoot))
+					{
+						throw new IOException("Blocked invalid UnrealPython bootstrap entry: " + entry.getName());
+					}
+
+					if (entry.isDirectory())
+					{
+						if (!canonicalOutputFile.mkdirs() && !canonicalOutputFile.exists())
+						{
+							throw new IOException("Failed to create UnrealPython bootstrap directory: " + canonicalOutputPath);
+						}
+					}
+					else
+					{
+						File parent = canonicalOutputFile.getParentFile();
+						if (parent != null && !parent.mkdirs() && !parent.exists())
+						{
+							throw new IOException("Failed to create UnrealPython bootstrap parent directory: " + parent.getPath());
+						}
+
+						try (FileOutputStream outputStream = new FileOutputStream(canonicalOutputFile))
+						{
+							int bytesRead;
+							while ((bytesRead = zipStream.read(buffer)) > 0)
+							{
+								outputStream.write(buffer, 0, bytesRead);
+							}
+						}
+					}
+
+					zipStream.closeEntry();
+				}
+			}
+
+			UnrealPythonWriteTextFile(versionFile, version);
+			Log.debug("Extracted UnrealPython bootstrap to: " + destinationPath);
+			return true;
+		}
+		catch (Exception exception)
+		{
+			Log.error("Failed to extract UnrealPython bootstrap: " + exception.getMessage());
+			exception.printStackTrace();
+			return false;
+		}
+	}
+
+	private void UnrealPythonDeleteRecursive(File file)
+	{
+		if (file == null || !file.exists())
+		{
+			return;
+		}
+
+		if (file.isDirectory())
+		{
+			File[] children = file.listFiles();
+			if (children != null)
+			{
+				for (File child : children)
+				{
+					UnrealPythonDeleteRecursive(child);
+				}
+			}
+		}
+
+		if (!file.delete() && file.exists())
+		{
+			Log.debug("Failed to delete UnrealPython bootstrap path: " + file.getPath());
+		}
+	}
+
+	private String UnrealPythonReadTextFile(File file) throws IOException
+	{
+		try (FileInputStream inputStream = new FileInputStream(file))
+		{
+			byte[] bytes = new byte[(int)file.length()];
+			int offset = 0;
+			while (offset < bytes.length)
+			{
+				int bytesRead = inputStream.read(bytes, offset, bytes.length - offset);
+				if (bytesRead <= 0)
+				{
+					break;
+				}
+				offset += bytesRead;
+			}
+
+			return new String(bytes, 0, offset, StandardCharsets.UTF_8);
+		}
+	}
+
+	private void UnrealPythonWriteTextFile(File file, String text) throws IOException
+	{
+		try (FileOutputStream outputStream = new FileOutputStream(file))
+		{
+			outputStream.write(text.getBytes(StandardCharsets.UTF_8));
+		}
+	}
+		]]></insert>
+	</gameActivityClassAdditions>
+</root>

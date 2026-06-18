@@ -7,7 +7,7 @@
 
 namespace
 {
-	void ApplyPythonMetaData(PyObject* InMetaData, UStruct* InStruct)
+	void ApplyStructPythonMetaData(PyObject* InMetaData, UStruct* InStruct)
 	{
 #if WITH_METADATA
 		if (InMetaData && PyDict_Check(InMetaData))
@@ -25,7 +25,7 @@ namespace
 #endif
 	}
 
-	bool ConvertOptionalBool(PyObject* InObj, bool& OutValue, bool& bOutHasValue, const TCHAR* InErrorCtxt, const TCHAR* InParameterName)
+	bool ConvertStructOptionalBool(PyObject* InObj, bool& OutValue, bool& bOutHasValue, const TCHAR* InErrorCtxt, const TCHAR* InParameterName)
 	{
 		bOutHasValue = false;
 		if (!InObj || InObj == Py_None)
@@ -275,7 +275,7 @@ private:
 		}
 		if (Options)
 		{
-			ApplyPythonMetaData(Options->MetaData, NewStruct);
+			ApplyStructPythonMetaData(Options->MetaData, NewStruct);
 		}
 #endif
 	}
@@ -512,8 +512,8 @@ int FUPyUStructDecorator::Init(FUPyUStructDecorator* InSelf, PyObject* InArgs, P
 	}
 
 	const FString ErrorCtxt = UPyUtil::GetErrorContext(InSelf);
-	if (!ConvertOptionalBool(PyBlueprintTypeObj, InSelf->Options.bBlueprintType, InSelf->Options.bHasBlueprintType, *ErrorCtxt, TEXT("BlueprintType"))
-		|| !ConvertOptionalBool(PyNotBlueprintTypeObj, InSelf->Options.bNotBlueprintType, InSelf->Options.bHasNotBlueprintType, *ErrorCtxt, TEXT("NotBlueprintType")))
+	if (!ConvertStructOptionalBool(PyBlueprintTypeObj, InSelf->Options.bBlueprintType, InSelf->Options.bHasBlueprintType, *ErrorCtxt, TEXT("BlueprintType"))
+		|| !ConvertStructOptionalBool(PyNotBlueprintTypeObj, InSelf->Options.bNotBlueprintType, InSelf->Options.bHasNotBlueprintType, *ErrorCtxt, TEXT("NotBlueprintType")))
 	{
 		return -1;
 	}
