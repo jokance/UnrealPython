@@ -1165,7 +1165,8 @@ struct FNumberFuncs_WrapperSet
 			return nullptr;
 		}
 
-		Py_RETURN_NONE;
+		Py_INCREF(InSelf);
+		return (PyObject*)InSelf;
 	}
 
 	static PyObject* And(PyObject* InLHS, PyObject* InRHS)
@@ -1188,7 +1189,8 @@ struct FNumberFuncs_WrapperSet
 			return nullptr;
 		}
 
-		Py_RETURN_NONE;
+		Py_INCREF(InSelf);
+		return (PyObject*)InSelf;
 	}
 
 	static PyObject* Xor(PyObject* InLHS, PyObject* InRHS)
@@ -1211,7 +1213,8 @@ struct FNumberFuncs_WrapperSet
 			return nullptr;
 		}
 
-		Py_RETURN_NONE;
+		Py_INCREF(InSelf);
+		return (PyObject*)InSelf;
 	}
 
 	static PyObject* Or(PyObject* InLHS, PyObject* InRHS)
@@ -1234,7 +1237,8 @@ struct FNumberFuncs_WrapperSet
 			return nullptr;
 		}
 
-		Py_RETURN_NONE;
+		Py_INCREF(InSelf);
+		return (PyObject*)InSelf;
 	}
 };
 
