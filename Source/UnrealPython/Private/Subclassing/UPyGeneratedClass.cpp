@@ -1463,5 +1463,28 @@ int FUPyUFunctionDecorator::GCClear(FUPyUFunctionDecorator* InSelf)
 
 PyObject* FUPyUFunctionDecorator::Call(FUPyUFunctionDecorator* InSelf, PyObject* InArgs, PyObject* InKwds)
 {
-	return PyCallGenerateFunction((PyObject*)InSelf, InArgs, InSelf->CacheKwds);
+	const Py_ssize_t NumCallArgs = InArgs ? PyTuple_GET_SIZE(InArgs) : 0;
+	const Py_ssize_t NumCachedArgs = InSelf->CacheArgs ? PyTuple_GET_SIZE(InSelf->CacheArgs) : 0;
+
+	FUPyObjectPtr CombinedArgs = FUPyObjectPtr::StealReference(PyTuple_New(NumCallArgs + NumCachedArgs));
+	if (!CombinedArgs)
+	{
+		return nullptr;
+	}
+
+	Py_ssize_t ArgIndex = 0;
+	for (Py_ssize_t CallArgIndex = 0; CallArgIndex < NumCallArgs; ++CallArgIndex)
+	{
+		PyObject* Arg = PyTuple_GET_ITEM(InArgs, CallArgIndex);
+		Py_INCREF(Arg);
+		PyTuple_SET_ITEM(CombinedArgs, ArgIndex++, Arg);
+	}
+	for (Py_ssize_t CachedArgIndex = 0; CachedArgIndex < NumCachedArgs; ++CachedArgIndex)
+	{
+		PyObject* Arg = PyTuple_GET_ITEM(InSelf->CacheArgs, CachedArgIndex);
+		Py_INCREF(Arg);
+		PyTuple_SET_ITEM(CombinedArgs, ArgIndex++, Arg);
+	}
+
+	return PyCallGenerateFunction((PyObject*)InSelf, CombinedArgs, InSelf->CacheKwds);
 }
