@@ -60,11 +60,15 @@ PyTypeObject UPyUFunctionDecoratorType = {
 void InitializeUPyUClassDecorator(UPyGenUtil::FNativePythonModule& ModuleInfo)
 {
 	PyTypeObject* PyType = &UPyUClassDecoratorType;
-	PyType->tp_flags = Py_TPFLAGS_DEFAULT;
+	PyType->tp_flags = Py_TPFLAGS_DEFAULT | Py_TPFLAGS_HAVE_GC;
 	PyType->tp_new = (newfunc)FUPyUClassDecorator::New;
 	PyType->tp_dealloc = (destructor)FUPyUClassDecorator::Dealloc;
 	PyType->tp_init = (initproc)FUPyUClassDecorator::Init;
 	PyType->tp_call = (ternaryfunc)FUPyUClassDecorator::Call;
+	PyType->tp_traverse = (traverseproc)FUPyUClassDecorator::GCTraverse;
+	PyType->tp_clear = (inquiry)FUPyUClassDecorator::GCClear;
+	PyType->tp_alloc = PyType_GenericAlloc;
+	PyType->tp_free = PyObject_GC_Del;
 
 	if (PyType_Ready(PyType) == 0)
 	{
@@ -75,11 +79,15 @@ void InitializeUPyUClassDecorator(UPyGenUtil::FNativePythonModule& ModuleInfo)
 void InitializeUPyUFunctionDecorator(UPyGenUtil::FNativePythonModule& ModuleInfo)
 {
 	PyTypeObject* PyType = &UPyUFunctionDecoratorType;
-	PyType->tp_flags = Py_TPFLAGS_DEFAULT;
+	PyType->tp_flags = Py_TPFLAGS_DEFAULT | Py_TPFLAGS_HAVE_GC;
 	PyType->tp_new = (newfunc)FUPyUFunctionDecorator::New;
 	PyType->tp_dealloc = (destructor)FUPyUFunctionDecorator::Dealloc;
 	PyType->tp_init = (initproc)FUPyUFunctionDecorator::Init;
 	PyType->tp_call = (ternaryfunc)FUPyUFunctionDecorator::Call;
+	PyType->tp_traverse = (traverseproc)FUPyUFunctionDecorator::GCTraverse;
+	PyType->tp_clear = (inquiry)FUPyUFunctionDecorator::GCClear;
+	PyType->tp_alloc = PyType_GenericAlloc;
+	PyType->tp_free = PyObject_GC_Del;
 
 	if (PyType_Ready(PyType) == 0)
 	{
@@ -1309,6 +1317,7 @@ FUPyUClassDecorator* FUPyUClassDecorator::New(PyTypeObject* InType, PyObject* In
 
 void FUPyUClassDecorator::Dealloc(FUPyUClassDecorator* InSelf)
 {
+	PyObject_GC_UnTrack(InSelf);
 	Deinit(InSelf);
 	Py_TYPE(InSelf)->tp_free((PyObject*)InSelf);
 }
@@ -1369,8 +1378,7 @@ int FUPyUClassDecorator::Init(FUPyUClassDecorator* InSelf, PyObject* InArgs, PyO
 
 void FUPyUClassDecorator::Deinit(FUPyUClassDecorator* InSelf)
 {
-	Py_XDECREF(InSelf->Options.MetaData);
-	InSelf->Options.MetaData = nullptr;
+	GCClear(InSelf);
 	InSelf->Options.bHasBlueprintType = false;
 	InSelf->Options.bBlueprintType = true;
 	InSelf->Options.bHasNotBlueprintType = false;
@@ -1381,6 +1389,21 @@ void FUPyUClassDecorator::Deinit(FUPyUClassDecorator* InSelf)
 	InSelf->Options.bNotBlueprintable = false;
 	InSelf->Options.bHasAbstract = false;
 	InSelf->Options.bAbstract = false;
+}
+
+int FUPyUClassDecorator::GCTraverse(FUPyUClassDecorator* InSelf, visitproc InVisit, void* InArg)
+{
+	visitproc visit = InVisit;
+	void* arg = InArg;
+
+	Py_VISIT(InSelf->Options.MetaData);
+	return 0;
+}
+
+int FUPyUClassDecorator::GCClear(FUPyUClassDecorator* InSelf)
+{
+	Py_CLEAR(InSelf->Options.MetaData);
+	return 0;
 }
 
 PyObject* FUPyUClassDecorator::Call(FUPyUClassDecorator* InSelf, PyObject* InArgs, PyObject* InKwds)
@@ -1401,6 +1424,7 @@ FUPyUFunctionDecorator* FUPyUFunctionDecorator::New(PyTypeObject* InType, PyObje
 
 void FUPyUFunctionDecorator::Dealloc(FUPyUFunctionDecorator* InSelf)
 {
+	PyObject_GC_UnTrack(InSelf);
 	Deinit(InSelf);
 	Py_TYPE(InSelf)->tp_free((PyObject*)InSelf);
 }
@@ -1417,11 +1441,24 @@ int FUPyUFunctionDecorator::Init(FUPyUFunctionDecorator* InSelf, PyObject* InArg
 
 void FUPyUFunctionDecorator::Deinit(FUPyUFunctionDecorator* InSelf)
 {
-	Py_XDECREF(InSelf->CacheArgs);
-	InSelf->CacheArgs = nullptr;
+	GCClear(InSelf);
+}
 
-	Py_XDECREF(InSelf->CacheKwds);
-	InSelf->CacheKwds = nullptr;
+int FUPyUFunctionDecorator::GCTraverse(FUPyUFunctionDecorator* InSelf, visitproc InVisit, void* InArg)
+{
+	visitproc visit = InVisit;
+	void* arg = InArg;
+
+	Py_VISIT(InSelf->CacheArgs);
+	Py_VISIT(InSelf->CacheKwds);
+	return 0;
+}
+
+int FUPyUFunctionDecorator::GCClear(FUPyUFunctionDecorator* InSelf)
+{
+	Py_CLEAR(InSelf->CacheArgs);
+	Py_CLEAR(InSelf->CacheKwds);
+	return 0;
 }
 
 PyObject* FUPyUFunctionDecorator::Call(FUPyUFunctionDecorator* InSelf, PyObject* InArgs, PyObject* InKwds)

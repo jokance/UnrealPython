@@ -385,6 +385,7 @@ FUPyUValueDef* FUPyUValueDef::New(PyTypeObject* InType)
 
 void FUPyUValueDef::Free(FUPyUValueDef* InSelf)
 {
+	PyObject_GC_UnTrack(InSelf);
 	Deinit(InSelf);
 	Py_TYPE(InSelf)->tp_free((PyObject*)InSelf);
 }
@@ -429,11 +430,24 @@ int FUPyUValueDef::PyInit(FUPyUValueDef* InSelf, PyObject* InArgs, PyObject* InK
 
 void FUPyUValueDef::Deinit(FUPyUValueDef* InSelf)
 {
-	Py_XDECREF(InSelf->Value);
-	InSelf->Value = nullptr;
+	GCClear(InSelf);
+}
 
-	Py_XDECREF(InSelf->MetaData);
-	InSelf->MetaData = nullptr;
+int FUPyUValueDef::GCTraverse(FUPyUValueDef* InSelf, visitproc InVisit, void* InArg)
+{
+	visitproc visit = InVisit;
+	void* arg = InArg;
+
+	Py_VISIT(InSelf->Value);
+	Py_VISIT(InSelf->MetaData);
+	return 0;
+}
+
+int FUPyUValueDef::GCClear(FUPyUValueDef* InSelf)
+{
+	Py_CLEAR(InSelf->Value);
+	Py_CLEAR(InSelf->MetaData);
+	return 0;
 }
 
 void FUPyUValueDef::ApplyMetaData(FUPyUValueDef* InSelf, const TFunctionRef<void(const FString&, const FString&)>& InPredicate)
@@ -464,6 +478,7 @@ FUPyFPropertyDef* FUPyFPropertyDef::New(PyTypeObject* InType)
 
 void FUPyFPropertyDef::Free(FUPyFPropertyDef* InSelf)
 {
+	PyObject_GC_UnTrack(InSelf);
 	Deinit(InSelf);
 
 	InSelf->GetterFuncName.~FString();
@@ -596,11 +611,7 @@ int FUPyFPropertyDef::PyInit(FUPyFPropertyDef* InSelf, PyObject* InArgs, PyObjec
 
 void FUPyFPropertyDef::Deinit(FUPyFPropertyDef* InSelf)
 {
-	Py_XDECREF(InSelf->PropType);
-	InSelf->PropType = nullptr;
-
-	Py_XDECREF(InSelf->MetaData);
-	InSelf->MetaData = nullptr;
+	GCClear(InSelf);
 
 	InSelf->GetterFuncName.Reset();
 	InSelf->SetterFuncName.Reset();
@@ -610,6 +621,23 @@ void FUPyFPropertyDef::Deinit(FUPyFPropertyDef* InSelf)
 	InSelf->ReplicationCondition = COND_None;
 	InSelf->RepNotifyCondition = REPNOTIFY_OnChanged;
 	InSelf->bPushBased = false;
+}
+
+int FUPyFPropertyDef::GCTraverse(FUPyFPropertyDef* InSelf, visitproc InVisit, void* InArg)
+{
+	visitproc visit = InVisit;
+	void* arg = InArg;
+
+	Py_VISIT(InSelf->PropType);
+	Py_VISIT(InSelf->MetaData);
+	return 0;
+}
+
+int FUPyFPropertyDef::GCClear(FUPyFPropertyDef* InSelf)
+{
+	Py_CLEAR(InSelf->PropType);
+	Py_CLEAR(InSelf->MetaData);
+	return 0;
 }
 
 void FUPyFPropertyDef::ApplyMetaData(FUPyFPropertyDef* InSelf, FProperty* InProp)
@@ -647,6 +675,7 @@ FUPyUFunctionDef* FUPyUFunctionDef::New(PyTypeObject* InType)
 
 void FUPyUFunctionDef::Free(FUPyUFunctionDef* InSelf)
 {
+	PyObject_GC_UnTrack(InSelf);
 	Deinit(InSelf);
 
 	Py_TYPE(InSelf)->tp_free((PyObject*)InSelf);
@@ -760,19 +789,30 @@ int FUPyUFunctionDef::PyInit(FUPyUFunctionDef* InSelf, PyObject* InArgs, PyObjec
 
 void FUPyUFunctionDef::Deinit(FUPyUFunctionDef* InSelf)
 {
-	Py_XDECREF(InSelf->Func);
-	InSelf->Func = nullptr;
-
-	Py_XDECREF(InSelf->FuncRetType);
-	InSelf->FuncRetType = nullptr;
-
-	Py_XDECREF(InSelf->FuncParamTypes);
-	InSelf->FuncParamTypes = nullptr;
-
-	Py_XDECREF(InSelf->MetaData);
-	InSelf->MetaData = nullptr;
+	GCClear(InSelf);
 
 	InSelf->FuncFlags = EUPyUFunctionDefFlags::None;
+}
+
+int FUPyUFunctionDef::GCTraverse(FUPyUFunctionDef* InSelf, visitproc InVisit, void* InArg)
+{
+	visitproc visit = InVisit;
+	void* arg = InArg;
+
+	Py_VISIT(InSelf->Func);
+	Py_VISIT(InSelf->FuncRetType);
+	Py_VISIT(InSelf->FuncParamTypes);
+	Py_VISIT(InSelf->MetaData);
+	return 0;
+}
+
+int FUPyUFunctionDef::GCClear(FUPyUFunctionDef* InSelf)
+{
+	Py_CLEAR(InSelf->Func);
+	Py_CLEAR(InSelf->FuncRetType);
+	Py_CLEAR(InSelf->FuncParamTypes);
+	Py_CLEAR(InSelf->MetaData);
+	return 0;
 }
 
 void FUPyUFunctionDef::ApplyMetaData(FUPyUFunctionDef* InSelf, UFunction* InFunc)
@@ -1164,6 +1204,16 @@ void InitializeUPyUValueDef(UPyGenUtil::FNativePythonModule& ModuleInfo)
 		{
 			return FUPyUValueDef::PyInit(InSelf, InArgs, InKwds);
 		}
+
+		static int Traverse(FUPyUValueDef* InSelf, visitproc InVisit, void* InArg)
+		{
+			return FUPyUValueDef::GCTraverse(InSelf, InVisit, InArg);
+		}
+
+		static int Clear(FUPyUValueDef* InSelf)
+		{
+			return FUPyUValueDef::GCClear(InSelf);
+		}
 	};
 
 	PyTypeObject* PyType = &UPyUValueDefType;
@@ -1171,8 +1221,12 @@ void InitializeUPyUValueDef(UPyGenUtil::FNativePythonModule& ModuleInfo)
 	PyType->tp_new = (newfunc)&FFuncs::New;
 	PyType->tp_dealloc = (destructor)&FFuncs::Dealloc;
 	PyType->tp_init = (initproc)&FFuncs::Init;
+	PyType->tp_traverse = (traverseproc)&FFuncs::Traverse;
+	PyType->tp_clear = (inquiry)&FFuncs::Clear;
+	PyType->tp_alloc = PyType_GenericAlloc;
+	PyType->tp_free = PyObject_GC_Del;
 
-	PyType->tp_flags = Py_TPFLAGS_DEFAULT;
+	PyType->tp_flags = Py_TPFLAGS_DEFAULT | Py_TPFLAGS_HAVE_GC;
 	PyType->tp_doc = "Type used to define constant values from Python";
 
 	if (PyType_Ready(PyType) == 0)
@@ -1199,6 +1253,16 @@ void InitializeUPyFPropertyDef(UPyGenUtil::FNativePythonModule& ModuleInfo)
 		{
 			return FUPyFPropertyDef::PyInit(InSelf, InArgs, InKwds);
 		}
+
+		static int Traverse(FUPyFPropertyDef* InSelf, visitproc InVisit, void* InArg)
+		{
+			return FUPyFPropertyDef::GCTraverse(InSelf, InVisit, InArg);
+		}
+
+		static int Clear(FUPyFPropertyDef* InSelf)
+		{
+			return FUPyFPropertyDef::GCClear(InSelf);
+		}
 	};
 
 	PyTypeObject* PyType = &UPyFPropertyDefType;
@@ -1206,8 +1270,12 @@ void InitializeUPyFPropertyDef(UPyGenUtil::FNativePythonModule& ModuleInfo)
 	PyType->tp_new = (newfunc)&FFuncs::New;
 	PyType->tp_dealloc = (destructor)&FFuncs::Dealloc;
 	PyType->tp_init = (initproc)&FFuncs::Init;
+	PyType->tp_traverse = (traverseproc)&FFuncs::Traverse;
+	PyType->tp_clear = (inquiry)&FFuncs::Clear;
+	PyType->tp_alloc = PyType_GenericAlloc;
+	PyType->tp_free = PyObject_GC_Del;
 
-	PyType->tp_flags = Py_TPFLAGS_DEFAULT;
+	PyType->tp_flags = Py_TPFLAGS_DEFAULT | Py_TPFLAGS_HAVE_GC;
 	PyType->tp_doc = "Type used to define FProperty fields from Python";
 
 	if (PyType_Ready(PyType) == 0)
@@ -1235,6 +1303,16 @@ void InitializeUPyUFunctionDef(UPyGenUtil::FNativePythonModule& ModuleInfo)
 		{
 			return FUPyUFunctionDef::PyInit(InSelf, InArgs, InKwds);
 		}
+
+		static int Traverse(FUPyUFunctionDef* InSelf, visitproc InVisit, void* InArg)
+		{
+			return FUPyUFunctionDef::GCTraverse(InSelf, InVisit, InArg);
+		}
+
+		static int Clear(FUPyUFunctionDef* InSelf)
+		{
+			return FUPyUFunctionDef::GCClear(InSelf);
+		}
 	};
 
 	PyTypeObject* PyType = &UPyUFunctionDefType;
@@ -1242,8 +1320,12 @@ void InitializeUPyUFunctionDef(UPyGenUtil::FNativePythonModule& ModuleInfo)
 	PyType->tp_new = (newfunc)&FFuncs::New;
 	PyType->tp_dealloc = (destructor)&FFuncs::Dealloc;
 	PyType->tp_init = (initproc)&FFuncs::Init;
+	PyType->tp_traverse = (traverseproc)&FFuncs::Traverse;
+	PyType->tp_clear = (inquiry)&FFuncs::Clear;
+	PyType->tp_alloc = PyType_GenericAlloc;
+	PyType->tp_free = PyObject_GC_Del;
 
-	PyType->tp_flags = Py_TPFLAGS_DEFAULT;
+	PyType->tp_flags = Py_TPFLAGS_DEFAULT | Py_TPFLAGS_HAVE_GC;
 	PyType->tp_doc = "Type used to define UFunction fields from Python";
 
 	if (PyType_Ready(PyType) == 0)

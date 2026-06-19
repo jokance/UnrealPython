@@ -122,7 +122,11 @@ struct FUPyUClassDecorator
 	static int Init(FUPyUClassDecorator* InSelf, PyObject* InArgs, PyObject* InKwds);
 	
 	static void Deinit(FUPyUClassDecorator* InSelf);
-	
+
+	static int GCTraverse(FUPyUClassDecorator* InSelf, visitproc InVisit, void* InArg);
+
+	static int GCClear(FUPyUClassDecorator* InSelf);
+
 	static PyObject* Call(FUPyUClassDecorator* InSelf, PyObject* InArgs, PyObject* InKwds);
 };
 
@@ -141,6 +145,10 @@ struct FUPyUFunctionDecorator
 	static int Init(FUPyUFunctionDecorator* InSelf, PyObject* InArgs, PyObject* InKwds);
 	
 	static void Deinit(FUPyUFunctionDecorator* InSelf);
-	
+
+	static int GCTraverse(FUPyUFunctionDecorator* InSelf, visitproc InVisit, void* InArg);
+
+	static int GCClear(FUPyUFunctionDecorator* InSelf);
+
 	static PyObject* Call(FUPyUFunctionDecorator* InSelf, PyObject* InArgs, PyObject* InKwds);
 };

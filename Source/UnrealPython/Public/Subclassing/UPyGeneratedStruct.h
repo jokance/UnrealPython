@@ -80,6 +80,10 @@ struct FUPyUStructDecorator
 	static int Init(FUPyUStructDecorator* InSelf, PyObject* InArgs, PyObject* InKwds);
 	
 	static void Deinit(FUPyUStructDecorator* InSelf);
-	
+
+	static int GCTraverse(FUPyUStructDecorator* InSelf, visitproc InVisit, void* InArg);
+
+	static int GCClear(FUPyUStructDecorator* InSelf);
+
 	static PyObject* Call(FUPyUStructDecorator* InSelf, PyObject* InArgs, PyObject* InKwds);
 };

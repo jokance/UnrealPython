@@ -269,6 +269,12 @@ struct FUPyUValueDef
 	/** Deinitialize this instance (called via Init and Free to restore the instance to its New state) */
 	static void Deinit(FUPyUValueDef* InSelf);
 
+	/** Visit Python references owned by this instance for cyclic GC */
+	static int GCTraverse(FUPyUValueDef* InSelf, visitproc InVisit, void* InArg);
+
+	/** Clear Python references owned by this instance for cyclic GC */
+	static int GCClear(FUPyUValueDef* InSelf);
+
 	/** Apply the meta-data on this instance via the given predicate */
 	static void ApplyMetaData(FUPyUValueDef* InSelf, const TFunctionRef<void(const FString&, const FString&)>& InPredicate);
 };
@@ -322,6 +328,12 @@ struct FUPyFPropertyDef
 	
 	/** Deinitialize this instance (called via Init and Free to restore the instance to its New state) */
 	static void Deinit(FUPyFPropertyDef* InSelf);
+
+	/** Visit Python references owned by this instance for cyclic GC */
+	static int GCTraverse(FUPyFPropertyDef* InSelf, visitproc InVisit, void* InArg);
+
+	/** Clear Python references owned by this instance for cyclic GC */
+	static int GCClear(FUPyFPropertyDef* InSelf);
 
 	/** Apply the meta-data on this instance to the given property */
 	static void ApplyMetaData(FUPyFPropertyDef* InSelf, FProperty* InProp);
@@ -379,6 +391,12 @@ struct FUPyUFunctionDef
 	
 	/** Deinitialize this instance (called via Init and Free to restore the instance to its New state) */
 	static void Deinit(FUPyUFunctionDef* InSelf);
+
+	/** Visit Python references owned by this instance for cyclic GC */
+	static int GCTraverse(FUPyUFunctionDef* InSelf, visitproc InVisit, void* InArg);
+
+	/** Clear Python references owned by this instance for cyclic GC */
+	static int GCClear(FUPyUFunctionDef* InSelf);
 
 	/** Apply the meta-data on this instance to the given function */
 	static void ApplyMetaData(FUPyUFunctionDef* InSelf, UFunction* InFunc);
