@@ -1114,7 +1114,8 @@ struct FSequenceFuncs_WrapperArray
 		{
 			return nullptr;
 		}
-		Py_RETURN_NONE;
+		Py_INCREF(InSelf);
+		return (PyObject*)InSelf;
 	}
 
 	static PyObject* Repeat(FUPyWrapperArray* InSelf, Py_ssize_t InMultiplier)
@@ -1129,7 +1130,8 @@ struct FSequenceFuncs_WrapperArray
 			return nullptr;
 		}
 
-		Py_RETURN_NONE;
+		Py_INCREF(InSelf);
+		return (PyObject*)InSelf;
 	}
 
 	static PyObject* GetSlice(FUPyWrapperArray* InSelf, Py_ssize_t InSliceStart, Py_ssize_t InSliceStop)
