@@ -55,7 +55,7 @@ FUPyWrapperFieldPath* FUPyWrapperFieldPath::CastPyObject(PyObject* InPyObject, P
 
 	{
 		FFieldPath InitValue;
-		if (UPyConversion::Nativize(InPyObject, InitValue))
+		if (UPyConversion::Nativize(InPyObject, InitValue, UPyConversion::ESetErrorState::No))
 		{
 			FUPyWrapperFieldPathPtr NewFiedPath = FUPyWrapperFieldPathPtr::StealReference(FUPyWrapperFieldPath::New(InType));
 			if (NewFiedPath)
@@ -72,7 +72,7 @@ FUPyWrapperFieldPath* FUPyWrapperFieldPath::CastPyObject(PyObject* InPyObject, P
 
 	{
 		FString InitPath;
-		if (UPyConversion::Nativize(InPyObject, InitPath))
+		if (UPyConversion::Nativize(InPyObject, InitPath, UPyConversion::ESetErrorState::No))
 		{
 			FUPyWrapperFieldPathPtr NewFiedPath = FUPyWrapperFieldPathPtr::StealReference(FUPyWrapperFieldPath::New(InType));
 			if (NewFiedPath)
@@ -104,7 +104,7 @@ struct FFuncs_WrapperFieldPath
 
 		FFieldPath InitValue;
 		FString StrValue;
-		if (PyObj && UPyConversion::Nativize(PyObj, StrValue)) // Init from a string.
+		if (PyObj && UPyConversion::Nativize(PyObj, StrValue, UPyConversion::ESetErrorState::No)) // Init from a string.
 		{
 			InitValue.Generate(*StrValue);
 		}

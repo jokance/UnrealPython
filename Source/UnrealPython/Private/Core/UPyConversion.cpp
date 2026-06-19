@@ -442,7 +442,7 @@ FUPyConversionResult Pythonize(const char* Val, PyObject*& OutPyObj, const ESetE
 FUPyConversionResult Nativize(PyObject* PyObj, FString& OutVal, const ESetErrorState SetErrorState)
 {
 	const char* TempChar;
-	if (Nativize(PyObj, TempChar))
+	if (Nativize(PyObj, TempChar, SetErrorState))
 	{
 		OutVal = UTF8_TO_TCHAR(TempChar);
 		return FUPyConversionResult::Success();
