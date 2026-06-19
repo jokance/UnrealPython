@@ -429,6 +429,12 @@ int FUPyWrapperFixedArray::SetItem(FUPyWrapperFixedArray* InSelf, Py_ssize_t InI
 		return ValidateIndexResult;
 	}
 
+	if (!InValue)
+	{
+		UPyUtil::SetPythonError(PyExc_TypeError, InSelf, TEXT("Cannot delete elements from a fixed array"));
+		return -1;
+	}
+
 	if (!UPyConversion::NativizeProperty_Direct(InValue, InSelf->ArrayProp, GetItemPtr(InSelf, ResolvedIndex)))
 	{
 		UPyUtil::SetPythonError(PyExc_TypeError, InSelf, *FString::Printf(TEXT("Failed to convert property '%s' (%s) at index %zd"), *InSelf->ArrayProp->GetName(), *InSelf->ArrayProp->GetClass()->GetName(), ResolvedIndex));

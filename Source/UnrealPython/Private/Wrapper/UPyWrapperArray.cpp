@@ -15,6 +15,11 @@ extern PyTypeObject UPyWrapperArrayIteratorType;
 
 namespace
 {
+	bool IsSameArrayInstance(const FUPyWrapperArray* InLhs, const FUPyWrapperArray* InRhs)
+	{
+		return InLhs == InRhs || (InLhs && InRhs && InLhs->ArrayInstance == InRhs->ArrayInstance && InLhs->ArrayProp.Get() == InRhs->ArrayProp.Get());
+	}
+
 	Py_ssize_t ResolveContainerBoundParam(const Py_ssize_t InIndex, const Py_ssize_t InLen)
 	{
 		const Py_ssize_t ResolvedIndex = UPyUtil::ResolveContainerIndexParam(InIndex, InLen);
@@ -472,6 +477,12 @@ int FUPyWrapperArray::SetItem(FUPyWrapperArray* InSelf, Py_ssize_t InIndex, PyOb
 	if (ValidateIndexResult != 0)
 	{
 		return ValidateIndexResult;
+	}
+
+	if (!InValue)
+	{
+		SelfScriptArrayHelper.RemoveValues(ResolvedIndex);
+		return 0;
 	}
 
 	if (!UPyConversion::NativizeProperty(InValue, InSelf->ArrayProp->Inner, SelfScriptArrayHelper.GetRawPtr(ResolvedIndex)))
@@ -1177,6 +1188,15 @@ struct FSequenceFuncs_WrapperArray
 				UPyUtil::SetPythonError(PyExc_TypeError, InSelf, *FString::Printf(TEXT("Cannot assign type '%s' to type '%s' during a slice"), *UPyUtil::GetFriendlyTypename(InSelf), *UPyUtil::GetFriendlyTypename(InValue)));
 				return -1;
 			}
+
+			if (IsSameArrayInstance(InSelf, Value.GetPtr()))
+			{
+				Value = FUPyWrapperArrayPtr::StealReference(FUPyWrapperArrayFactory::Get().CreateInstance(Value->ArrayInstance, Value->ArrayProp, FUPyWrapperOwnerContext(), EUPyConversionMethod::Copy));
+				if (!Value)
+				{
+					return -1;
+				}
+			}
 		}
 
 		SelfScriptArrayHelper.RemoveValues((int32)ResolvedSliceStart, (int32)SliceLen);
@@ -1208,7 +1228,7 @@ struct FMappingFuncs_WrapperArray
 
 		// Array types support numeric and slice based indexing
 		int32 Index = 0;
-		if (UPyConversion::Nativize(InIndexer, Index))
+		if (UPyConversion::Nativize(InIndexer, Index, UPyConversion::ESetErrorState::No))
 		{
 			return FUPyWrapperArray::GetItem(InSelf, (Py_ssize_t)Index);
 		}
@@ -1247,7 +1267,7 @@ struct FMappingFuncs_WrapperArray
 
 		// Array types support numeric and slice based indexing
 		int32 Index = 0;
-		if (UPyConversion::Nativize(InIndexer, Index))
+		if (UPyConversion::Nativize(InIndexer, Index, UPyConversion::ESetErrorState::No))
 		{
 			return FUPyWrapperArray::SetItem(InSelf, (Py_ssize_t)Index, InValue);
 		}
