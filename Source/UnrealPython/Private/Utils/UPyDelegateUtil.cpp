@@ -8,25 +8,31 @@ namespace UPyDelegateUtil
 {
 
 /**
- * Tests for callable equality
- * ob_type->tp_call is the function pointer that will be called, so they need to be the same.
- * If the callable is a method, check that the self parameter is also the same.
- * 
+ * Tests for callable identity.
+ * Bound method objects are recreated on access, so compare their function and self.
+ *
  * Lhs & Rhs need to be callables!
  */
 bool AreCallablesEqual(PyObject* Lhs, PyObject* Rhs)
 {
 	check(PyCallable_Check(Lhs) && PyCallable_Check(Rhs));
 
-	bool bAreCallablesEqual = (Lhs->ob_type == Rhs->ob_type); // Must be of the same type
-	bAreCallablesEqual = bAreCallablesEqual && (Lhs->ob_type->tp_call == Rhs->ob_type->tp_call); // Must be calling the same function/method
-
-	if (bAreCallablesEqual && PyMethod_Check(Lhs))
+	if (Lhs == Rhs)
 	{
-		bAreCallablesEqual = (PyMethod_Self(Lhs) == PyMethod_Self(Rhs)); // Must have the same self
+		return true;
 	}
 
-	return bAreCallablesEqual;
+	if (PyMethod_Check(Lhs) && PyMethod_Check(Rhs))
+	{
+		return PyMethod_GET_FUNCTION(Lhs) == PyMethod_GET_FUNCTION(Rhs) && PyMethod_GET_SELF(Lhs) == PyMethod_GET_SELF(Rhs);
+	}
+
+	if (PyCFunction_Check(Lhs) && PyCFunction_Check(Rhs))
+	{
+		return PyCFunction_GET_FUNCTION(Lhs) == PyCFunction_GET_FUNCTION(Rhs) && PyCFunction_GET_SELF(Lhs) == PyCFunction_GET_SELF(Rhs);
+	}
+
+	return false;
 }
 
 bool PythonArgsToDelegate_ObjectAndName(PyObject* InArgs, const UFunction* InDelegateSignature, FScriptDelegate& OutDelegate, const TCHAR* InFuncCtxt, const TCHAR* InErrorCtxt)
