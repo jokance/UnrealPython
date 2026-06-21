@@ -36,11 +36,19 @@ struct FGetSets_BoxComponent
 
 	static PyObject* GetBoxExtent(FUPyWrapperBoxComponent* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperBoxComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_BoxExtent(), "BoxExtent");
 	}
 
 	static int SetBoxExtent(FUPyWrapperBoxComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperBoxComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_BoxExtent(), "BoxExtent");
 	}
 

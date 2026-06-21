@@ -43,21 +43,37 @@ struct FGetSets_PlayerCameraManager
 
 	static PyObject* GetAnimCameraActor(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_AnimCameraActor(), "AnimCameraActor");
 	}
 
 	static int SetAnimCameraActor(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_AnimCameraActor(), "AnimCameraActor");
 	}
 
 	static PyObject* GetAutoPlaneShift(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->AutoPlaneShift);
 	}
 
 	static int SetAutoPlaneShift(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->AutoPlaneShift))
 		{
 			return 0;
@@ -86,11 +102,19 @@ struct FGetSets_PlayerCameraManager
 
 	static PyObject* GetCachedCameraShakeMod(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_CachedCameraShakeMod(), "CachedCameraShakeMod");
 	}
 
 	static int SetCachedCameraShakeMod(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_CachedCameraShakeMod(), "CachedCameraShakeMod");
 	}
 
@@ -114,11 +138,19 @@ struct FGetSets_PlayerCameraManager
 
 	static PyObject* GetCameraCachePrivate(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_CameraCachePrivate(), "CameraCachePrivate");
 	}
 
 	static int SetCameraCachePrivate(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_CameraCachePrivate(), "CameraCachePrivate");
 	}
 
@@ -142,21 +174,37 @@ struct FGetSets_PlayerCameraManager
 
 	static PyObject* GetCameraLensEffects(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_CameraLensEffects(), "CameraLensEffects");
 	}
 
 	static int SetCameraLensEffects(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_CameraLensEffects(), "CameraLensEffects");
 	}
 
 	static PyObject* GetDefaultAspectRatio(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->DefaultAspectRatio);
 	}
 
 	static int SetDefaultAspectRatio(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->DefaultAspectRatio))
 		{
 			return 0;
@@ -167,11 +215,19 @@ struct FGetSets_PlayerCameraManager
 
 	static PyObject* GetDefaultFOV(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->DefaultFOV);
 	}
 
 	static int SetDefaultFOV(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->DefaultFOV))
 		{
 			return 0;
@@ -200,16 +256,28 @@ struct FGetSets_PlayerCameraManager
 
 	static PyObject* GetDefaultModifiers(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->DefaultModifiers, CastField<FArrayProperty>(GetPropertyDef_DefaultModifiers().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static PyObject* GetDefaultOrthoWidth(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->DefaultOrthoWidth);
 	}
 
 	static int SetDefaultOrthoWidth(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->DefaultOrthoWidth))
 		{
 			return 0;
@@ -220,11 +288,19 @@ struct FGetSets_PlayerCameraManager
 
 	static PyObject* GetFreeCamDistance(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->FreeCamDistance);
 	}
 
 	static int SetFreeCamDistance(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->FreeCamDistance))
 		{
 			return 0;
@@ -235,11 +311,19 @@ struct FGetSets_PlayerCameraManager
 
 	static PyObject* GetFreeCamOffset(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FVector>::Get(), (void*)&InSelf->ValuePtr()->FreeCamOffset, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetFreeCamOffset(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->FreeCamOffset))
 		{
 			return 0;
@@ -268,11 +352,19 @@ struct FGetSets_PlayerCameraManager
 
 	static PyObject* GetLastFrameCameraCachePrivate(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_LastFrameCameraCachePrivate(), "LastFrameCameraCachePrivate");
 	}
 
 	static int SetLastFrameCameraCachePrivate(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_LastFrameCameraCachePrivate(), "LastFrameCameraCachePrivate");
 	}
 
@@ -296,11 +388,19 @@ struct FGetSets_PlayerCameraManager
 
 	static PyObject* GetModifierList(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ModifierList(), "ModifierList");
 	}
 
 	static int SetModifierList(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ModifierList(), "ModifierList");
 	}
 
@@ -324,21 +424,37 @@ struct FGetSets_PlayerCameraManager
 
 	static PyObject* GetOnAudioFadeChangeEvent(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnAudioFadeChangeEvent(), "OnAudioFadeChangeEvent");
 	}
 
 	static int SetOnAudioFadeChangeEvent(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnAudioFadeChangeEvent(), "OnAudioFadeChangeEvent");
 	}
 
 	static PyObject* GetPCOwner(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->PCOwner);
 	}
 
 	static int SetPCOwner(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->PCOwner))
 		{
 			return 0;
@@ -349,11 +465,19 @@ struct FGetSets_PlayerCameraManager
 
 	static PyObject* GetPendingViewTarget(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FTViewTarget>::Get(), (void*)&InSelf->ValuePtr()->PendingViewTarget, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetPendingViewTarget(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->PendingViewTarget))
 		{
 			return 0;
@@ -382,11 +506,19 @@ struct FGetSets_PlayerCameraManager
 
 	static PyObject* GetPostProcessBlendCache(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_PostProcessBlendCache(), "PostProcessBlendCache");
 	}
 
 	static int SetPostProcessBlendCache(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_PostProcessBlendCache(), "PostProcessBlendCache");
 	}
 
@@ -410,11 +542,19 @@ struct FGetSets_PlayerCameraManager
 
 	static PyObject* GetServerUpdateCameraTimeout(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ServerUpdateCameraTimeout(), "ServerUpdateCameraTimeout");
 	}
 
 	static int SetServerUpdateCameraTimeout(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ServerUpdateCameraTimeout(), "ServerUpdateCameraTimeout");
 	}
 
@@ -438,21 +578,37 @@ struct FGetSets_PlayerCameraManager
 
 	static PyObject* GetTransformComponent(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_TransformComponent(), "TransformComponent");
 	}
 
 	static int SetTransformComponent(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_TransformComponent(), "TransformComponent");
 	}
 
 	static PyObject* GetViewPitchMax(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->ViewPitchMax);
 	}
 
 	static int SetViewPitchMax(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->ViewPitchMax))
 		{
 			return 0;
@@ -463,11 +619,19 @@ struct FGetSets_PlayerCameraManager
 
 	static PyObject* GetViewPitchMin(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->ViewPitchMin);
 	}
 
 	static int SetViewPitchMin(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->ViewPitchMin))
 		{
 			return 0;
@@ -478,11 +642,19 @@ struct FGetSets_PlayerCameraManager
 
 	static PyObject* GetViewRollMax(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->ViewRollMax);
 	}
 
 	static int SetViewRollMax(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->ViewRollMax))
 		{
 			return 0;
@@ -493,11 +665,19 @@ struct FGetSets_PlayerCameraManager
 
 	static PyObject* GetViewRollMin(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->ViewRollMin);
 	}
 
 	static int SetViewRollMin(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->ViewRollMin))
 		{
 			return 0;
@@ -508,11 +688,19 @@ struct FGetSets_PlayerCameraManager
 
 	static PyObject* GetViewTarget(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FTViewTarget>::Get(), (void*)&InSelf->ValuePtr()->ViewTarget, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetViewTarget(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->ViewTarget))
 		{
 			return 0;
@@ -523,11 +711,19 @@ struct FGetSets_PlayerCameraManager
 
 	static PyObject* GetViewTargetOffset(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FVector>::Get(), (void*)&InSelf->ValuePtr()->ViewTargetOffset, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetViewTargetOffset(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->ViewTargetOffset))
 		{
 			return 0;
@@ -538,11 +734,19 @@ struct FGetSets_PlayerCameraManager
 
 	static PyObject* GetViewYawMax(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->ViewYawMax);
 	}
 
 	static int SetViewYawMax(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->ViewYawMax))
 		{
 			return 0;
@@ -553,11 +757,19 @@ struct FGetSets_PlayerCameraManager
 
 	static PyObject* GetViewYawMin(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->ViewYawMin);
 	}
 
 	static int SetViewYawMin(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->ViewYawMin))
 		{
 			return 0;
@@ -568,11 +780,19 @@ struct FGetSets_PlayerCameraManager
 
 	static PyObject* GetbAutoCalculateOrthoPlanes(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bAutoCalculateOrthoPlanes);
 	}
 
 	static int SetbAutoCalculateOrthoPlanes(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -585,11 +805,19 @@ struct FGetSets_PlayerCameraManager
 
 	static PyObject* GetbClientSimulatingViewTarget(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bClientSimulatingViewTarget);
 	}
 
 	static int SetbClientSimulatingViewTarget(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -602,11 +830,19 @@ struct FGetSets_PlayerCameraManager
 
 	static PyObject* GetbDefaultConstrainAspectRatio(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bDefaultConstrainAspectRatio);
 	}
 
 	static int SetbDefaultConstrainAspectRatio(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -619,11 +855,19 @@ struct FGetSets_PlayerCameraManager
 
 	static PyObject* GetbGameCameraCutThisFrame(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bGameCameraCutThisFrame);
 	}
 
 	static int SetbGameCameraCutThisFrame(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -636,11 +880,19 @@ struct FGetSets_PlayerCameraManager
 
 	static PyObject* GetbIsOrthographic(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bIsOrthographic);
 	}
 
 	static int SetbIsOrthographic(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -653,11 +905,19 @@ struct FGetSets_PlayerCameraManager
 
 	static PyObject* GetbUpdateOrthoPlanes(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bUpdateOrthoPlanes);
 	}
 
 	static int SetbUpdateOrthoPlanes(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -670,11 +930,19 @@ struct FGetSets_PlayerCameraManager
 
 	static PyObject* GetbUseCameraHeightAsViewTarget(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bUseCameraHeightAsViewTarget);
 	}
 
 	static int SetbUseCameraHeightAsViewTarget(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -687,11 +955,19 @@ struct FGetSets_PlayerCameraManager
 
 	static PyObject* GetbUseClientSideCameraUpdates(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bUseClientSideCameraUpdates);
 	}
 
 	static int SetbUseClientSideCameraUpdates(FUPyWrapperPlayerCameraManager* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerCameraManager::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{

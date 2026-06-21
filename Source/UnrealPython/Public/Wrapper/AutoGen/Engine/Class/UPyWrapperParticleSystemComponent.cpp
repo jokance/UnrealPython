@@ -22,11 +22,19 @@ struct FGetSets_ParticleSystemComponent
 {
 	static PyObject* GetAutoAttachLocationRule(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->AutoAttachLocationRule, StaticEnum<EAttachmentRule>());
 	}
 
 	static int SetAutoAttachLocationRule(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<EAttachmentRule>(), InSelf->ValuePtr()->AutoAttachLocationRule))
 		{
 			return 0;
@@ -55,21 +63,37 @@ struct FGetSets_ParticleSystemComponent
 
 	static PyObject* GetAutoAttachParent(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_AutoAttachParent(), "AutoAttachParent");
 	}
 
 	static int SetAutoAttachParent(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_AutoAttachParent(), "AutoAttachParent");
 	}
 
 	static PyObject* GetAutoAttachRotationRule(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->AutoAttachRotationRule, StaticEnum<EAttachmentRule>());
 	}
 
 	static int SetAutoAttachRotationRule(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<EAttachmentRule>(), InSelf->ValuePtr()->AutoAttachRotationRule))
 		{
 			return 0;
@@ -80,11 +104,19 @@ struct FGetSets_ParticleSystemComponent
 
 	static PyObject* GetAutoAttachScaleRule(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->AutoAttachScaleRule, StaticEnum<EAttachmentRule>());
 	}
 
 	static int SetAutoAttachScaleRule(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<EAttachmentRule>(), InSelf->ValuePtr()->AutoAttachScaleRule))
 		{
 			return 0;
@@ -95,11 +127,19 @@ struct FGetSets_ParticleSystemComponent
 
 	static PyObject* GetAutoAttachSocketName(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->AutoAttachSocketName);
 	}
 
 	static int SetAutoAttachSocketName(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->AutoAttachSocketName))
 		{
 			return 0;
@@ -110,11 +150,19 @@ struct FGetSets_ParticleSystemComponent
 
 	static PyObject* GetCustomTimeDilation(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->CustomTimeDilation);
 	}
 
 	static int SetCustomTimeDilation(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->CustomTimeDilation))
 		{
 			return 0;
@@ -126,11 +174,19 @@ struct FGetSets_ParticleSystemComponent
 #if WITH_EDITOR
 	static PyObject* GetEditorDetailMode(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->EditorDetailMode);
 	}
 
 	static int SetEditorDetailMode(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->EditorDetailMode))
 		{
 			return 0;
@@ -143,11 +199,19 @@ struct FGetSets_ParticleSystemComponent
 #if WITH_EDITOR
 	static PyObject* GetEditorLODLevel(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->EditorLODLevel);
 	}
 
 	static int SetEditorLODLevel(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->EditorLODLevel))
 		{
 			return 0;
@@ -177,11 +241,19 @@ struct FGetSets_ParticleSystemComponent
 
 	static PyObject* GetEmitterMaterials(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->EmitterMaterials, CastField<FArrayProperty>(GetPropertyDef_EmitterMaterials().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetEmitterMaterials(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_EmitterMaterials(), "EmitterMaterials");
 	}
 
@@ -205,21 +277,37 @@ struct FGetSets_ParticleSystemComponent
 
 	static PyObject* GetInstanceParameters(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->InstanceParameters, CastField<FArrayProperty>(GetPropertyDef_InstanceParameters().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetInstanceParameters(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_InstanceParameters(), "InstanceParameters");
 	}
 
 	static PyObject* GetLODMethod(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->LODMethod, StaticEnum<ParticleSystemLODMethod>());
 	}
 
 	static int SetLODMethod(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<ParticleSystemLODMethod>(), InSelf->ValuePtr()->LODMethod))
 		{
 			return 0;
@@ -230,11 +318,19 @@ struct FGetSets_ParticleSystemComponent
 
 	static PyObject* GetMaxTimeBeforeForceUpdateTransform(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->MaxTimeBeforeForceUpdateTransform);
 	}
 
 	static int SetMaxTimeBeforeForceUpdateTransform(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->MaxTimeBeforeForceUpdateTransform))
 		{
 			return 0;
@@ -245,11 +341,19 @@ struct FGetSets_ParticleSystemComponent
 
 	static PyObject* GetOldPosition(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FVector>::Get(), (void*)&InSelf->ValuePtr()->OldPosition, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetOldPosition(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->OldPosition))
 		{
 			return 0;
@@ -278,11 +382,19 @@ struct FGetSets_ParticleSystemComponent
 
 	static PyObject* GetOnParticleBurst(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnParticleBurst(), "OnParticleBurst");
 	}
 
 	static int SetOnParticleBurst(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnParticleBurst(), "OnParticleBurst");
 	}
 
@@ -306,11 +418,19 @@ struct FGetSets_ParticleSystemComponent
 
 	static PyObject* GetOnParticleCollide(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnParticleCollide(), "OnParticleCollide");
 	}
 
 	static int SetOnParticleCollide(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnParticleCollide(), "OnParticleCollide");
 	}
 
@@ -334,11 +454,19 @@ struct FGetSets_ParticleSystemComponent
 
 	static PyObject* GetOnParticleDeath(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnParticleDeath(), "OnParticleDeath");
 	}
 
 	static int SetOnParticleDeath(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnParticleDeath(), "OnParticleDeath");
 	}
 
@@ -362,11 +490,19 @@ struct FGetSets_ParticleSystemComponent
 
 	static PyObject* GetOnParticleSpawn(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnParticleSpawn(), "OnParticleSpawn");
 	}
 
 	static int SetOnParticleSpawn(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnParticleSpawn(), "OnParticleSpawn");
 	}
 
@@ -390,21 +526,37 @@ struct FGetSets_ParticleSystemComponent
 
 	static PyObject* GetOnSystemFinished(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnSystemFinished(), "OnSystemFinished");
 	}
 
 	static int SetOnSystemFinished(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnSystemFinished(), "OnSystemFinished");
 	}
 
 	static PyObject* GetPartSysVelocity(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FVector>::Get(), (void*)&InSelf->ValuePtr()->PartSysVelocity, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetPartSysVelocity(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->PartSysVelocity))
 		{
 			return 0;
@@ -433,21 +585,37 @@ struct FGetSets_ParticleSystemComponent
 
 	static PyObject* GetReplayClips(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->ReplayClips, CastField<FArrayProperty>(GetPropertyDef_ReplayClips().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetReplayClips(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ReplayClips(), "ReplayClips");
 	}
 
 	static PyObject* GetRequiredSignificance(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->RequiredSignificance, StaticEnum<EParticleSignificanceLevel>());
 	}
 
 	static int SetRequiredSignificance(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<EParticleSignificanceLevel>(), InSelf->ValuePtr()->RequiredSignificance))
 		{
 			return 0;
@@ -458,11 +626,19 @@ struct FGetSets_ParticleSystemComponent
 
 	static PyObject* GetSecondsBeforeInactive(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->SecondsBeforeInactive);
 	}
 
 	static int SetSecondsBeforeInactive(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->SecondsBeforeInactive))
 		{
 			return 0;
@@ -491,21 +667,37 @@ struct FGetSets_ParticleSystemComponent
 
 	static PyObject* GetSkelMeshComponents(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->SkelMeshComponents, CastField<FArrayProperty>(GetPropertyDef_SkelMeshComponents().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetSkelMeshComponents(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_SkelMeshComponents(), "SkelMeshComponents");
 	}
 
 	static PyObject* GetTemplate(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->Template);
 	}
 
 	static int SetTemplate(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->Template))
 		{
 			return 0;
@@ -516,11 +708,19 @@ struct FGetSets_ParticleSystemComponent
 
 	static PyObject* GetWarmupTickRate(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->WarmupTickRate);
 	}
 
 	static int SetWarmupTickRate(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->WarmupTickRate))
 		{
 			return 0;
@@ -531,11 +731,19 @@ struct FGetSets_ParticleSystemComponent
 
 	static PyObject* GetWarmupTime(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->WarmupTime);
 	}
 
 	static int SetWarmupTime(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->WarmupTime))
 		{
 			return 0;
@@ -546,11 +754,19 @@ struct FGetSets_ParticleSystemComponent
 
 	static PyObject* GetbAllowRecycling(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bAllowRecycling);
 	}
 
 	static int SetbAllowRecycling(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -563,11 +779,19 @@ struct FGetSets_ParticleSystemComponent
 
 	static PyObject* GetbAutoAttachWeldSimulatedBodies(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bAutoAttachWeldSimulatedBodies);
 	}
 
 	static int SetbAutoAttachWeldSimulatedBodies(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -580,11 +804,19 @@ struct FGetSets_ParticleSystemComponent
 
 	static PyObject* GetbAutoManageAttachment(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bAutoManageAttachment);
 	}
 
 	static int SetbAutoManageAttachment(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -597,11 +829,19 @@ struct FGetSets_ParticleSystemComponent
 
 	static PyObject* GetbOldPositionValid(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bOldPositionValid);
 	}
 
 	static int SetbOldPositionValid(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -614,11 +854,19 @@ struct FGetSets_ParticleSystemComponent
 
 	static PyObject* GetbOverrideLODMethod(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bOverrideLODMethod);
 	}
 
 	static int SetbOverrideLODMethod(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -631,11 +879,19 @@ struct FGetSets_ParticleSystemComponent
 
 	static PyObject* GetbResetOnDetach(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bResetOnDetach);
 	}
 
 	static int SetbResetOnDetach(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -648,11 +904,19 @@ struct FGetSets_ParticleSystemComponent
 
 	static PyObject* GetbSkipUpdateDynamicDataDuringTick(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bSkipUpdateDynamicDataDuringTick);
 	}
 
 	static int SetbSkipUpdateDynamicDataDuringTick(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -665,11 +929,19 @@ struct FGetSets_ParticleSystemComponent
 
 	static PyObject* GetbUpdateOnDedicatedServer(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bUpdateOnDedicatedServer);
 	}
 
 	static int SetbUpdateOnDedicatedServer(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -682,11 +954,19 @@ struct FGetSets_ParticleSystemComponent
 
 	static PyObject* GetbWarmingUp(FUPyWrapperParticleSystemComponent* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bWarmingUp);
 	}
 
 	static int SetbWarmingUp(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperParticleSystemComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{

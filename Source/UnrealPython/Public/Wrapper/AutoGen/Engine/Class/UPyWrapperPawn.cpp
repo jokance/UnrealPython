@@ -24,11 +24,19 @@ struct FGetSets_Pawn
 {
 	static PyObject* GetAIControllerClass(FUPyWrapperPawn* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPawn::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->AIControllerClass);
 	}
 
 	static int SetAIControllerClass(FUPyWrapperPawn* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPawn::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->AIControllerClass))
 		{
 			return 0;
@@ -39,11 +47,19 @@ struct FGetSets_Pawn
 
 	static PyObject* GetAutoPossessAI(FUPyWrapperPawn* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPawn::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->AutoPossessAI, StaticEnum<EAutoPossessAI>());
 	}
 
 	static int SetAutoPossessAI(FUPyWrapperPawn* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPawn::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<EAutoPossessAI>(), InSelf->ValuePtr()->AutoPossessAI))
 		{
 			return 0;
@@ -54,11 +70,19 @@ struct FGetSets_Pawn
 
 	static PyObject* GetAutoPossessPlayer(FUPyWrapperPawn* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPawn::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->AutoPossessPlayer, StaticEnum<EAutoReceiveInput::Type>());
 	}
 
 	static int SetAutoPossessPlayer(FUPyWrapperPawn* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPawn::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<EAutoReceiveInput::Type>(), InSelf->ValuePtr()->AutoPossessPlayer))
 		{
 			return 0;
@@ -69,11 +93,19 @@ struct FGetSets_Pawn
 
 	static PyObject* GetBaseEyeHeight(FUPyWrapperPawn* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPawn::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->BaseEyeHeight);
 	}
 
 	static int SetBaseEyeHeight(FUPyWrapperPawn* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPawn::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->BaseEyeHeight))
 		{
 			return 0;
@@ -102,21 +134,37 @@ struct FGetSets_Pawn
 
 	static PyObject* GetControlInputVector(FUPyWrapperPawn* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPawn::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ControlInputVector(), "ControlInputVector");
 	}
 
 	static int SetControlInputVector(FUPyWrapperPawn* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPawn::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ControlInputVector(), "ControlInputVector");
 	}
 
 	static PyObject* GetController(FUPyWrapperPawn* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPawn::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->Controller);
 	}
 
 	static int SetController(FUPyWrapperPawn* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPawn::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->Controller))
 		{
 			return 0;
@@ -145,21 +193,37 @@ struct FGetSets_Pawn
 
 	static PyObject* GetLastControlInputVector(FUPyWrapperPawn* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPawn::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_LastControlInputVector(), "LastControlInputVector");
 	}
 
 	static int SetLastControlInputVector(FUPyWrapperPawn* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPawn::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_LastControlInputVector(), "LastControlInputVector");
 	}
 
 	static PyObject* GetLastHitBy(FUPyWrapperPawn* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPawn::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->LastHitBy);
 	}
 
 	static int SetLastHitBy(FUPyWrapperPawn* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPawn::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->LastHitBy))
 		{
 			return 0;
@@ -188,6 +252,10 @@ struct FGetSets_Pawn
 
 	static PyObject* GetOverrideInputComponentClass(FUPyWrapperPawn* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPawn::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OverrideInputComponentClass(), "OverrideInputComponentClass");
 	}
 
@@ -211,21 +279,37 @@ struct FGetSets_Pawn
 
 	static PyObject* GetPlayerState(FUPyWrapperPawn* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPawn::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_PlayerState(), "PlayerState");
 	}
 
 	static int SetPlayerState(FUPyWrapperPawn* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPawn::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_PlayerState(), "PlayerState");
 	}
 
 	static PyObject* GetPreviousController(FUPyWrapperPawn* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPawn::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->PreviousController);
 	}
 
 	static int SetPreviousController(FUPyWrapperPawn* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPawn::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->PreviousController))
 		{
 			return 0;
@@ -254,11 +338,19 @@ struct FGetSets_Pawn
 
 	static PyObject* GetReceiveControllerChangedDelegate(FUPyWrapperPawn* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPawn::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ReceiveControllerChangedDelegate(), "ReceiveControllerChangedDelegate");
 	}
 
 	static int SetReceiveControllerChangedDelegate(FUPyWrapperPawn* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPawn::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ReceiveControllerChangedDelegate(), "ReceiveControllerChangedDelegate");
 	}
 
@@ -282,11 +374,19 @@ struct FGetSets_Pawn
 
 	static PyObject* GetReceiveRestartedDelegate(FUPyWrapperPawn* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPawn::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ReceiveRestartedDelegate(), "ReceiveRestartedDelegate");
 	}
 
 	static int SetReceiveRestartedDelegate(FUPyWrapperPawn* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPawn::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ReceiveRestartedDelegate(), "ReceiveRestartedDelegate");
 	}
 
@@ -310,21 +410,37 @@ struct FGetSets_Pawn
 
 	static PyObject* GetRemoteViewPitch16(FUPyWrapperPawn* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPawn::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_RemoteViewPitch16(), "RemoteViewPitch16");
 	}
 
 	static int SetRemoteViewPitch16(FUPyWrapperPawn* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPawn::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_RemoteViewPitch16(), "RemoteViewPitch16");
 	}
 
 	static PyObject* GetbCanAffectNavigationGeneration(FUPyWrapperPawn* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPawn::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bCanAffectNavigationGeneration);
 	}
 
 	static int SetbCanAffectNavigationGeneration(FUPyWrapperPawn* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPawn::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -355,21 +471,37 @@ struct FGetSets_Pawn
 
 	static PyObject* GetbIsLocalViewTarget(FUPyWrapperPawn* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPawn::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bIsLocalViewTarget(), "bIsLocalViewTarget");
 	}
 
 	static int SetbIsLocalViewTarget(FUPyWrapperPawn* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPawn::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bIsLocalViewTarget(), "bIsLocalViewTarget");
 	}
 
 	static PyObject* GetbUseControllerRotationPitch(FUPyWrapperPawn* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPawn::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bUseControllerRotationPitch);
 	}
 
 	static int SetbUseControllerRotationPitch(FUPyWrapperPawn* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPawn::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -382,11 +514,19 @@ struct FGetSets_Pawn
 
 	static PyObject* GetbUseControllerRotationRoll(FUPyWrapperPawn* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPawn::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bUseControllerRotationRoll);
 	}
 
 	static int SetbUseControllerRotationRoll(FUPyWrapperPawn* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPawn::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -399,11 +539,19 @@ struct FGetSets_Pawn
 
 	static PyObject* GetbUseControllerRotationYaw(FUPyWrapperPawn* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPawn::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bUseControllerRotationYaw);
 	}
 
 	static int SetbUseControllerRotationYaw(FUPyWrapperPawn* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPawn::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{

@@ -35,11 +35,19 @@ struct FGetSets_SphereComponent
 
 	static PyObject* GetSphereRadius(FUPyWrapperSphereComponent* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperSphereComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_SphereRadius(), "SphereRadius");
 	}
 
 	static int SetSphereRadius(FUPyWrapperSphereComponent* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperSphereComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_SphereRadius(), "SphereRadius");
 	}
 

@@ -37,11 +37,19 @@ struct FGetSets_ListViewBase
 
 	static PyObject* GetAllowOverscroll(FUPyWrapperListViewBase* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_AllowOverscroll(), "AllowOverscroll");
 	}
 
 	static int SetAllowOverscroll(FUPyWrapperListViewBase* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_AllowOverscroll(), "AllowOverscroll");
 	}
 
@@ -65,11 +73,19 @@ struct FGetSets_ListViewBase
 
 	static PyObject* GetBP_OnEntriesGenerated(FUPyWrapperListViewBase* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_BP_OnEntriesGenerated(), "BP_OnEntriesGenerated");
 	}
 
 	static int SetBP_OnEntriesGenerated(FUPyWrapperListViewBase* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_BP_OnEntriesGenerated(), "BP_OnEntriesGenerated");
 	}
 
@@ -93,11 +109,19 @@ struct FGetSets_ListViewBase
 
 	static PyObject* GetBP_OnEntryGenerated(FUPyWrapperListViewBase* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_BP_OnEntryGenerated(), "BP_OnEntryGenerated");
 	}
 
 	static int SetBP_OnEntryGenerated(FUPyWrapperListViewBase* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_BP_OnEntryGenerated(), "BP_OnEntryGenerated");
 	}
 
@@ -121,11 +145,19 @@ struct FGetSets_ListViewBase
 
 	static PyObject* GetBP_OnEntryReleased(FUPyWrapperListViewBase* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_BP_OnEntryReleased(), "BP_OnEntryReleased");
 	}
 
 	static int SetBP_OnEntryReleased(FUPyWrapperListViewBase* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_BP_OnEntryReleased(), "BP_OnEntryReleased");
 	}
 
@@ -149,11 +181,19 @@ struct FGetSets_ListViewBase
 
 	static PyObject* GetDragDropOperationClass(FUPyWrapperListViewBase* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_DragDropOperationClass(), "DragDropOperationClass");
 	}
 
 	static int SetDragDropOperationClass(FUPyWrapperListViewBase* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_DragDropOperationClass(), "DragDropOperationClass");
 	}
 
@@ -177,11 +217,19 @@ struct FGetSets_ListViewBase
 
 	static PyObject* GetDragDropVisualEntryClass(FUPyWrapperListViewBase* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_DragDropVisualEntryClass(), "DragDropVisualEntryClass");
 	}
 
 	static int SetDragDropVisualEntryClass(FUPyWrapperListViewBase* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_DragDropVisualEntryClass(), "DragDropVisualEntryClass");
 	}
 
@@ -205,11 +253,19 @@ struct FGetSets_ListViewBase
 
 	static PyObject* GetDragDropVisualOffset(FUPyWrapperListViewBase* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_DragDropVisualOffset(), "DragDropVisualOffset");
 	}
 
 	static int SetDragDropVisualOffset(FUPyWrapperListViewBase* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_DragDropVisualOffset(), "DragDropVisualOffset");
 	}
 
@@ -233,11 +289,19 @@ struct FGetSets_ListViewBase
 
 	static PyObject* GetDragDropVisualPivot(FUPyWrapperListViewBase* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_DragDropVisualPivot(), "DragDropVisualPivot");
 	}
 
 	static int SetDragDropVisualPivot(FUPyWrapperListViewBase* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_DragDropVisualPivot(), "DragDropVisualPivot");
 	}
 
@@ -261,11 +325,19 @@ struct FGetSets_ListViewBase
 
 	static PyObject* GetDragVisualWidget(FUPyWrapperListViewBase* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_DragVisualWidget(), "DragVisualWidget");
 	}
 
 	static int SetDragVisualWidget(FUPyWrapperListViewBase* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_DragVisualWidget(), "DragVisualWidget");
 	}
 
@@ -289,11 +361,19 @@ struct FGetSets_ListViewBase
 
 	static PyObject* GetEntryWidgetClass(FUPyWrapperListViewBase* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_EntryWidgetClass(), "EntryWidgetClass");
 	}
 
 	static int SetEntryWidgetClass(FUPyWrapperListViewBase* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_EntryWidgetClass(), "EntryWidgetClass");
 	}
 
@@ -317,11 +397,19 @@ struct FGetSets_ListViewBase
 
 	static PyObject* GetEntryWidgetPool(FUPyWrapperListViewBase* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_EntryWidgetPool(), "EntryWidgetPool");
 	}
 
 	static int SetEntryWidgetPool(FUPyWrapperListViewBase* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_EntryWidgetPool(), "EntryWidgetPool");
 	}
 
@@ -345,11 +433,19 @@ struct FGetSets_ListViewBase
 
 	static PyObject* GetFixedLineScrollOffset(FUPyWrapperListViewBase* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_FixedLineScrollOffset(), "FixedLineScrollOffset");
 	}
 
 	static int SetFixedLineScrollOffset(FUPyWrapperListViewBase* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_FixedLineScrollOffset(), "FixedLineScrollOffset");
 	}
 
@@ -374,11 +470,19 @@ struct FGetSets_ListViewBase
 
 	static PyObject* GetNumDesignerPreviewEntries(FUPyWrapperListViewBase* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_NumDesignerPreviewEntries(), "NumDesignerPreviewEntries");
 	}
 
 	static int SetNumDesignerPreviewEntries(FUPyWrapperListViewBase* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_NumDesignerPreviewEntries(), "NumDesignerPreviewEntries");
 	}
 
@@ -403,11 +507,19 @@ struct FGetSets_ListViewBase
 
 	static PyObject* GetScrollingAnimationInterpolationSpeed(FUPyWrapperListViewBase* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ScrollingAnimationInterpolationSpeed(), "ScrollingAnimationInterpolationSpeed");
 	}
 
 	static int SetScrollingAnimationInterpolationSpeed(FUPyWrapperListViewBase* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ScrollingAnimationInterpolationSpeed(), "ScrollingAnimationInterpolationSpeed");
 	}
 
@@ -431,11 +543,19 @@ struct FGetSets_ListViewBase
 
 	static PyObject* GetWheelScrollMultiplier(FUPyWrapperListViewBase* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_WheelScrollMultiplier(), "WheelScrollMultiplier");
 	}
 
 	static int SetWheelScrollMultiplier(FUPyWrapperListViewBase* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_WheelScrollMultiplier(), "WheelScrollMultiplier");
 	}
 
@@ -459,11 +579,19 @@ struct FGetSets_ListViewBase
 
 	static PyObject* GetbAllowDragDrop(FUPyWrapperListViewBase* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bAllowDragDrop(), "bAllowDragDrop");
 	}
 
 	static int SetbAllowDragDrop(FUPyWrapperListViewBase* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bAllowDragDrop(), "bAllowDragDrop");
 	}
 
@@ -487,11 +615,19 @@ struct FGetSets_ListViewBase
 
 	static PyObject* GetbAllowDragging(FUPyWrapperListViewBase* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bAllowDragging(), "bAllowDragging");
 	}
 
 	static int SetbAllowDragging(FUPyWrapperListViewBase* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bAllowDragging(), "bAllowDragging");
 	}
 
@@ -515,11 +651,19 @@ struct FGetSets_ListViewBase
 
 	static PyObject* GetbAllowKeepPreselectedItems(FUPyWrapperListViewBase* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bAllowKeepPreselectedItems(), "bAllowKeepPreselectedItems");
 	}
 
 	static int SetbAllowKeepPreselectedItems(FUPyWrapperListViewBase* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bAllowKeepPreselectedItems(), "bAllowKeepPreselectedItems");
 	}
 
@@ -543,11 +687,19 @@ struct FGetSets_ListViewBase
 
 	static PyObject* GetbEnableFixedLineOffset(FUPyWrapperListViewBase* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bEnableFixedLineOffset(), "bEnableFixedLineOffset");
 	}
 
 	static int SetbEnableFixedLineOffset(FUPyWrapperListViewBase* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bEnableFixedLineOffset(), "bEnableFixedLineOffset");
 	}
 
@@ -571,11 +723,19 @@ struct FGetSets_ListViewBase
 
 	static PyObject* GetbEnableRightClickScrolling(FUPyWrapperListViewBase* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bEnableRightClickScrolling(), "bEnableRightClickScrolling");
 	}
 
 	static int SetbEnableRightClickScrolling(FUPyWrapperListViewBase* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bEnableRightClickScrolling(), "bEnableRightClickScrolling");
 	}
 
@@ -599,11 +759,19 @@ struct FGetSets_ListViewBase
 
 	static PyObject* GetbEnableScrollAnimation(FUPyWrapperListViewBase* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bEnableScrollAnimation(), "bEnableScrollAnimation");
 	}
 
 	static int SetbEnableScrollAnimation(FUPyWrapperListViewBase* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bEnableScrollAnimation(), "bEnableScrollAnimation");
 	}
 
@@ -627,11 +795,19 @@ struct FGetSets_ListViewBase
 
 	static PyObject* GetbEnableTouchScrolling(FUPyWrapperListViewBase* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bEnableTouchScrolling(), "bEnableTouchScrolling");
 	}
 
 	static int SetbEnableTouchScrolling(FUPyWrapperListViewBase* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bEnableTouchScrolling(), "bEnableTouchScrolling");
 	}
 
@@ -655,11 +831,19 @@ struct FGetSets_ListViewBase
 
 	static PyObject* GetbInEnableTouchAnimatedScrolling(FUPyWrapperListViewBase* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bInEnableTouchAnimatedScrolling(), "bInEnableTouchAnimatedScrolling");
 	}
 
 	static int SetbInEnableTouchAnimatedScrolling(FUPyWrapperListViewBase* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bInEnableTouchAnimatedScrolling(), "bInEnableTouchAnimatedScrolling");
 	}
 
@@ -683,11 +867,19 @@ struct FGetSets_ListViewBase
 
 	static PyObject* GetbIsDragging(FUPyWrapperListViewBase* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bIsDragging(), "bIsDragging");
 	}
 
 	static int SetbIsDragging(FUPyWrapperListViewBase* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bIsDragging(), "bIsDragging");
 	}
 
@@ -711,6 +903,10 @@ struct FGetSets_ListViewBase
 
 	static PyObject* GetbIsGamepadScrollingEnabled(FUPyWrapperListViewBase* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bIsGamepadScrollingEnabled(), "bIsGamepadScrollingEnabled");
 	}
 
@@ -734,6 +930,10 @@ struct FGetSets_ListViewBase
 
 	static PyObject* GetbIsPointerScrollingEnabled(FUPyWrapperListViewBase* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bIsPointerScrollingEnabled(), "bIsPointerScrollingEnabled");
 	}
 
@@ -757,11 +957,19 @@ struct FGetSets_ListViewBase
 
 	static PyObject* GetbSelectItemOnNavigation(FUPyWrapperListViewBase* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bSelectItemOnNavigation(), "bSelectItemOnNavigation");
 	}
 
 	static int SetbSelectItemOnNavigation(FUPyWrapperListViewBase* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperListViewBase::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bSelectItemOnNavigation(), "bSelectItemOnNavigation");
 	}
 

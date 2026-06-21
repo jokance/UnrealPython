@@ -47,11 +47,19 @@ struct FGetSets_PlayerController
 {
 	static PyObject* GetAcknowledgedPawn(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->AcknowledgedPawn);
 	}
 
 	static int SetAcknowledgedPawn(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->AcknowledgedPawn))
 		{
 			return 0;
@@ -80,11 +88,19 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetActiveForceFeedbackEffects(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->ActiveForceFeedbackEffects, CastField<FArrayProperty>(GetPropertyDef_ActiveForceFeedbackEffects().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetActiveForceFeedbackEffects(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ActiveForceFeedbackEffects(), "ActiveForceFeedbackEffects");
 	}
 
@@ -108,26 +124,46 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetCachedConnectionPlayerId(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_CachedConnectionPlayerId(), "CachedConnectionPlayerId");
 	}
 
 	static int SetCachedConnectionPlayerId(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_CachedConnectionPlayerId(), "CachedConnectionPlayerId");
 	}
 
 	static PyObject* GetCheatClass(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->CheatClass);
 	}
 
 	static PyObject* GetCheatManager(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->CheatManager);
 	}
 
 	static int SetCheatManager(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->CheatManager))
 		{
 			return 0;
@@ -156,21 +192,37 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetClickEventKeys(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->ClickEventKeys, CastField<FArrayProperty>(GetPropertyDef_ClickEventKeys().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetClickEventKeys(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ClickEventKeys(), "ClickEventKeys");
 	}
 
 	static PyObject* GetClientCap(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->ClientCap);
 	}
 
 	static int SetClientCap(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->ClientCap))
 		{
 			return 0;
@@ -199,21 +251,37 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetClientHandshakeId(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ClientHandshakeId(), "ClientHandshakeId");
 	}
 
 	static int SetClientHandshakeId(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ClientHandshakeId(), "ClientHandshakeId");
 	}
 
 	static PyObject* GetCurrentClickTraceChannel(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->CurrentClickTraceChannel, StaticEnum<ECollisionChannel>());
 	}
 
 	static int SetCurrentClickTraceChannel(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<ECollisionChannel>(), InSelf->ValuePtr()->CurrentClickTraceChannel))
 		{
 			return 0;
@@ -224,11 +292,19 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetCurrentMouseCursor(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->CurrentMouseCursor, StaticEnum<EMouseCursor::Type>());
 	}
 
 	static int SetCurrentMouseCursor(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<EMouseCursor::Type>(), InSelf->ValuePtr()->CurrentMouseCursor))
 		{
 			return 0;
@@ -257,21 +333,37 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetCurrentTouchInterface(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_CurrentTouchInterface(), "CurrentTouchInterface");
 	}
 
 	static int SetCurrentTouchInterface(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_CurrentTouchInterface(), "CurrentTouchInterface");
 	}
 
 	static PyObject* GetDefaultClickTraceChannel(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->DefaultClickTraceChannel, StaticEnum<ECollisionChannel>());
 	}
 
 	static int SetDefaultClickTraceChannel(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<ECollisionChannel>(), InSelf->ValuePtr()->DefaultClickTraceChannel))
 		{
 			return 0;
@@ -282,11 +374,19 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetDefaultMouseCursor(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->DefaultMouseCursor, StaticEnum<EMouseCursor::Type>());
 	}
 
 	static int SetDefaultMouseCursor(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<EMouseCursor::Type>(), InSelf->ValuePtr()->DefaultMouseCursor))
 		{
 			return 0;
@@ -297,11 +397,19 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetForceFeedbackScale(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->ForceFeedbackScale);
 	}
 
 	static int SetForceFeedbackScale(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->ForceFeedbackScale))
 		{
 			return 0;
@@ -330,11 +438,19 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetHiddenActors(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->HiddenActors, CastField<FArrayProperty>(GetPropertyDef_HiddenActors().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetHiddenActors(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_HiddenActors(), "HiddenActors");
 	}
 
@@ -358,21 +474,37 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetHiddenPrimitiveComponents(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->HiddenPrimitiveComponents, CastField<FArrayProperty>(GetPropertyDef_HiddenPrimitiveComponents().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetHiddenPrimitiveComponents(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_HiddenPrimitiveComponents(), "HiddenPrimitiveComponents");
 	}
 
 	static PyObject* GetHitResultTraceDistance(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->HitResultTraceDistance);
 	}
 
 	static int SetHitResultTraceDistance(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->HitResultTraceDistance))
 		{
 			return 0;
@@ -401,21 +533,37 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetInactiveStateInputComponent(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_InactiveStateInputComponent(), "InactiveStateInputComponent");
 	}
 
 	static int SetInactiveStateInputComponent(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_InactiveStateInputComponent(), "InactiveStateInputComponent");
 	}
 
 	static PyObject* GetLastCompletedSeamlessTravelCount(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->LastCompletedSeamlessTravelCount);
 	}
 
 	static int SetLastCompletedSeamlessTravelCount(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->LastCompletedSeamlessTravelCount))
 		{
 			return 0;
@@ -426,11 +574,19 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetLastSpectatorStateSynchTime(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->LastSpectatorStateSynchTime);
 	}
 
 	static int SetLastSpectatorStateSynchTime(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->LastSpectatorStateSynchTime))
 		{
 			return 0;
@@ -441,11 +597,19 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetLastSpectatorSyncLocation(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FVector>::Get(), (void*)&InSelf->ValuePtr()->LastSpectatorSyncLocation, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetLastSpectatorSyncLocation(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->LastSpectatorSyncLocation))
 		{
 			return 0;
@@ -456,11 +620,19 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetLastSpectatorSyncRotation(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FRotator>::Get(), (void*)&InSelf->ValuePtr()->LastSpectatorSyncRotation, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetLastSpectatorSyncRotation(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->LastSpectatorSyncRotation))
 		{
 			return 0;
@@ -471,11 +643,19 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetMyHUD(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->MyHUD);
 	}
 
 	static int SetMyHUD(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->MyHUD))
 		{
 			return 0;
@@ -486,11 +666,19 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetNetConnection(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->NetConnection);
 	}
 
 	static int SetNetConnection(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->NetConnection))
 		{
 			return 0;
@@ -501,11 +689,19 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetNetPlayerIndex(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->NetPlayerIndex);
 	}
 
 	static int SetNetPlayerIndex(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->NetPlayerIndex))
 		{
 			return 0;
@@ -534,16 +730,28 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetOverridePlayerInputClass(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OverridePlayerInputClass(), "OverridePlayerInputClass");
 	}
 
 	static PyObject* GetPendingSwapConnection(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->PendingSwapConnection);
 	}
 
 	static int SetPendingSwapConnection(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->PendingSwapConnection))
 		{
 			return 0;
@@ -554,11 +762,19 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetPlayer(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->Player);
 	}
 
 	static int SetPlayer(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->Player))
 		{
 			return 0;
@@ -569,11 +785,19 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetPlayerCameraManager(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->PlayerCameraManager);
 	}
 
 	static int SetPlayerCameraManager(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->PlayerCameraManager))
 		{
 			return 0;
@@ -584,11 +808,19 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetPlayerCameraManagerClass(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->PlayerCameraManagerClass);
 	}
 
 	static int SetPlayerCameraManagerClass(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->PlayerCameraManagerClass))
 		{
 			return 0;
@@ -599,11 +831,19 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetPlayerInput(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->PlayerInput);
 	}
 
 	static int SetPlayerInput(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->PlayerInput))
 		{
 			return 0;
@@ -614,11 +854,19 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetSeamlessTravelCount(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->SeamlessTravelCount);
 	}
 
 	static int SetSeamlessTravelCount(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->SeamlessTravelCount))
 		{
 			return 0;
@@ -629,11 +877,19 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetSmoothTargetViewRotationSpeed(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->SmoothTargetViewRotationSpeed);
 	}
 
 	static int SetSmoothTargetViewRotationSpeed(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->SmoothTargetViewRotationSpeed))
 		{
 			return 0;
@@ -662,11 +918,19 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetSpawnLocation(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_SpawnLocation(), "SpawnLocation");
 	}
 
 	static int SetSpawnLocation(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_SpawnLocation(), "SpawnLocation");
 	}
 
@@ -690,21 +954,37 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetSpectatorPawn(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_SpectatorPawn(), "SpectatorPawn");
 	}
 
 	static int SetSpectatorPawn(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_SpectatorPawn(), "SpectatorPawn");
 	}
 
 	static PyObject* GetStreamingSourceDebugColor(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FColor>::Get(), (void*)&InSelf->ValuePtr()->StreamingSourceDebugColor, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetStreamingSourceDebugColor(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->StreamingSourceDebugColor))
 		{
 			return 0;
@@ -715,11 +995,19 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetStreamingSourcePriority(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->StreamingSourcePriority, StaticEnum<EStreamingSourcePriority>());
 	}
 
 	static int SetStreamingSourcePriority(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<EStreamingSourcePriority>(), InSelf->ValuePtr()->StreamingSourcePriority))
 		{
 			return 0;
@@ -748,21 +1036,37 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetStreamingSourceShapes(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->StreamingSourceShapes, CastField<FArrayProperty>(GetPropertyDef_StreamingSourceShapes().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetStreamingSourceShapes(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_StreamingSourceShapes(), "StreamingSourceShapes");
 	}
 
 	static PyObject* GetTargetViewRotation(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FRotator>::Get(), (void*)&InSelf->ValuePtr()->TargetViewRotation, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
 	}
 
 	static int SetTargetViewRotation(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->TargetViewRotation))
 		{
 			return 0;
@@ -773,11 +1077,19 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetbAutoManageActiveCameraTarget(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bAutoManageActiveCameraTarget);
 	}
 
 	static int SetbAutoManageActiveCameraTarget(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -790,11 +1102,19 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetbEnableClickEvents(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bEnableClickEvents);
 	}
 
 	static int SetbEnableClickEvents(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -807,11 +1127,19 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetbEnableMotionControls(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bEnableMotionControls);
 	}
 
 	static int SetbEnableMotionControls(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -824,11 +1152,19 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetbEnableMouseOverEvents(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bEnableMouseOverEvents);
 	}
 
 	static int SetbEnableMouseOverEvents(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -841,11 +1177,19 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetbEnableStreamingSource(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bEnableStreamingSource);
 	}
 
 	static int SetbEnableStreamingSource(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -858,11 +1202,19 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetbEnableTouchEvents(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bEnableTouchEvents);
 	}
 
 	static int SetbEnableTouchEvents(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -875,11 +1227,19 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetbEnableTouchOverEvents(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bEnableTouchOverEvents);
 	}
 
 	static int SetbEnableTouchOverEvents(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -892,11 +1252,19 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetbForceFeedbackEnabled(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bForceFeedbackEnabled);
 	}
 
 	static int SetbForceFeedbackEnabled(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -927,21 +1295,37 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetbIsLocalPlayerController(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bIsLocalPlayerController(), "bIsLocalPlayerController");
 	}
 
 	static int SetbIsLocalPlayerController(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bIsLocalPlayerController(), "bIsLocalPlayerController");
 	}
 
 	static PyObject* GetbPlayerIsWaiting(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bPlayerIsWaiting);
 	}
 
 	static int SetbPlayerIsWaiting(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -972,21 +1356,37 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetbShouldPerformFullTickWhenPaused(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bShouldPerformFullTickWhenPaused(), "bShouldPerformFullTickWhenPaused");
 	}
 
 	static int SetbShouldPerformFullTickWhenPaused(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bShouldPerformFullTickWhenPaused(), "bShouldPerformFullTickWhenPaused");
 	}
 
 	static PyObject* GetbShowMouseCursor(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bShowMouseCursor);
 	}
 
 	static int SetbShowMouseCursor(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -999,11 +1399,19 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetbStreamingSourceShouldActivate(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bStreamingSourceShouldActivate);
 	}
 
 	static int SetbStreamingSourceShouldActivate(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
@@ -1016,11 +1424,19 @@ struct FGetSets_PlayerController
 
 	static PyObject* GetbStreamingSourceShouldBlockOnSlowStreaming(FUPyWrapperPlayerController* InSelf, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
 		return UPyConversion::Pythonize(InSelf->ValuePtr()->bStreamingSourceShouldBlockOnSlowStreaming);
 	}
 
 	static int SetbStreamingSourceShouldBlockOnSlowStreaming(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
 	{
+		if (!FUPyWrapperPlayerController::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
 		bool bTemp = false;
 		if (UPyConversion::Nativize(InValue, bTemp))
 		{
