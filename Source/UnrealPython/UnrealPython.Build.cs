@@ -349,6 +349,12 @@ public class UnrealPython : ModuleRules
 			return true;
 		}
 
+		if (Target.Architectures.ToString().Contains("iossimulator", StringComparison.OrdinalIgnoreCase) ||
+			Environment.CommandLine.Contains("iossimulator", StringComparison.OrdinalIgnoreCase))
+		{
+			return true;
+		}
+
 		if (Target.IntermediateEnvironment == UnrealIntermediateEnvironment.GenerateProjectFiles)
 		{
 			ConfigHierarchy PlatformEngineConfig = ConfigCache.ReadHierarchy(ConfigHierarchyType.Engine, Target.ProjectFile?.Directory, UnrealTargetPlatform.IOS);
