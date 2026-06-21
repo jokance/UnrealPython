@@ -1,12 +1,14 @@
-# UnrealPython 快速入门
+[英文](TUTORIAL_UnrealPython_Beginner.md) [中文](TUTORIAL_UnrealPython_Beginner.zh.md)
 
-下面的代码片段可以复制到使用该插件的项目脚本目录中。默认脚本目录是：
+# UnrealPython Quick Start
+
+The following snippets can be copied into the project script directory of a project that uses this plugin. The default script directory is:
 
 ```text
 Content/Scripts
 ```
 
-项目脚本目录建议保留一个最小 `ue_site.py`，用于承接插件级生命周期回调：
+It is recommended to keep a minimal `ue_site.py` in the project script directory for plugin-level lifecycle callbacks:
 
 ```python
 def on_init():
@@ -21,11 +23,11 @@ def on_shutdown():
     pass
 ```
 
-## 1. 主入口 game_instance.py
+## 1. Main entry point: game_instance.py
 
-`UUPyGameInstance` 默认加载模块 `game_instance`，调用工厂函数 `create_game_instance(unreal_game_instance)`，然后把生命周期转发给返回的 Python 对象。
+`UUPyGameInstance` loads the `game_instance` module by default, calls the factory function `create_game_instance(unreal_game_instance)`, and forwards lifecycle events to the returned Python object.
 
-新项目可把下面内容保存为：
+For a new project, save the following content as:
 
 ```text
 Content/Scripts/game_instance.py
@@ -65,13 +67,13 @@ def create_game_instance(unreal_game_instance):
     return MyGameInstance()
 ```
 
-配置位置：
+Configuration:
 
-- Game Instance Class 继承 `UUPyGameInstance`，或使用继承自它的 Blueprint/C++ 类。
-- Python 模块名：`game_instance`。
-- Factory 函数名：`create_game_instance`。
+- Game Instance Class should inherit from `UUPyGameInstance`, or use a Blueprint/C++ class derived from it.
+- Python module name: `game_instance`.
+- Factory function name: `create_game_instance`.
 
-生命周期顺序：
+Lifecycle order:
 
 ```text
 create_game_instance(unreal_game_instance)
@@ -81,11 +83,11 @@ tick(delta_time)
 shutdown()
 ```
 
-只有返回对象上存在 `tick` 方法时，`UUPyGameInstance` 才会注册每帧 ticker。`create_game_instance()` 不能返回 `None`。
+`UUPyGameInstance` registers a per-frame ticker only when the returned object has a `tick` method. `create_game_instance()` cannot return `None`.
 
-修改脚本后，最稳妥的验证方式是停止 PIE 后重新开始；如果模块已经被当前 Python VM 导入过，重启 Editor 可以确保重新导入全部脚本。
+After changing scripts, the most reliable verification flow is to stop PIE and start it again. If the module has already been imported by the current Python VM, restart the editor to ensure all scripts are imported from scratch.
 
-## 2. 日志
+## 2. Logging
 
 ```python
 import ue
@@ -95,9 +97,9 @@ ue.LogWarning("warning")
 ue.LogError("error")
 ```
 
-`sys.stdout` 会重定向到 `ue.Log`，`sys.stderr` 会重定向到 `ue.LogError`，所以普通 `print()` 也会进 Unreal 日志。
+`sys.stdout` is redirected to `ue.Log`, and `sys.stderr` is redirected to `ue.LogError`, so regular `print()` output also goes to the Unreal log.
 
-## 3. 常用值类型
+## 3. Common value types
 
 ```python
 location = ue.Vector(100.0, 0.0, 120.0)
@@ -106,9 +108,9 @@ scale = ue.Vector(1.0, 1.0, 1.0)
 transform = ue.Transform(rotation, location, scale)
 ```
 
-值类型 wrapper 可以作为函数参数、属性值和返回值参与 Unreal 反射调用。给 `Transform` 赋值时，通常按 `Rotator, Location, Scale` 的顺序构造。
+Value type wrappers can be used as function parameters, property values, and return values in Unreal reflection calls. When assigning a `Transform`, construct it in the usual `Rotator, Location, Scale` order.
 
-也可以写成工具函数：
+You can also write a helper:
 
 ```python
 def make_transform(x=0.0, y=0.0, z=120.0):
@@ -118,7 +120,7 @@ def make_transform(x=0.0, y=0.0, z=120.0):
     return ue.Transform(rotation, location, scale)
 ```
 
-## 4. 容器
+## 4. Containers
 
 ```python
 numbers = ue.Array(int)
@@ -133,21 +135,21 @@ scores = ue.Map(str, int)
 scores["kills"] = 2
 ```
 
-注意：
+Notes:
 
-- 容器类型必须传元素类型，例如 `ue.Array(int)`、`ue.Set(str)`、`ue.Map(str, int)`。
-- 不要把 `ue.Array`、`ue.Set`、`ue.Map` 这些类型本身当作 property 类型。
-- `Map` 支持类似 dict 的读写，也可以用 `Items()` 遍历。
-- 容器 wrapper 是 Unreal 容器，不是普通 Python list/set/dict；传给反射函数时会按目标 Unreal 类型转换。
+- Container types must be passed element types, such as `ue.Array(int)`, `ue.Set(str)`, and `ue.Map(str, int)`.
+- Do not use the `ue.Array`, `ue.Set`, or `ue.Map` type objects themselves as property types.
+- `Map` supports dict-like reads and writes, and can also be iterated with `Items()`.
+- Container wrappers are Unreal containers, not normal Python list/set/dict objects. When passed to reflection functions, they are converted according to the target Unreal type.
 
-## 5. World Context 和 Actor 查询
+## 5. World Context and Actor queries
 
 ```python
 world = unreal_game_instance.GetWorld()
 ue.Log(world.GetName())
 ```
 
-很多 `GameplayStatics` / `KismetSystemLibrary` API 参数名虽然叫 World Context，但可以直接传 `unreal_game_instance`：
+Many `GameplayStatics` / `KismetSystemLibrary` APIs have a parameter named World Context, but you can pass `unreal_game_instance` directly:
 
 ```python
 actors = ue.GameplayStatics.GetAllActorsOfClass(unreal_game_instance, ue.Actor)
@@ -155,12 +157,11 @@ for actor in actors[:10]:
     ue.Log("[actor] %s" % actor.GetName())
 ```
 
-不要为了游戏运行时逻辑遍历所有 World 来猜上下文。主入口已经给了准确的 `unreal_game_instance`。
+Do not iterate all Worlds to guess the context for runtime game logic. The main entry point already provides the correct `unreal_game_instance`.
 
+## 6. Generated Type and UObject instances
 
-## 6. Generated Type 和 UObject 实例
-
-`ue.uenum()`、`ue.ustruct()`、`ue.uclass()` 可以在 Python 里生成 transient reflected type。下面例子先定义 enum、struct 和 UObject 类型：
+`ue.uenum()`, `ue.ustruct()`, and `ue.uclass()` can generate transient reflected types in Python. The example below defines an enum, a struct, and a UObject type:
 
 ```python
 @ue.uenum()
@@ -186,7 +187,7 @@ class MyData(ue.Object):
         return value * 2
 ```
 
-然后创建这个 UObject 类型的运行时实例：
+Then create a runtime instance of this UObject type:
 
 ```python
 obj = ue.NewObject(Type=MyData, Name="MyDataRuntime")
@@ -202,9 +203,9 @@ obj.Stats = stats
 result = obj.CallMethod("Double", (21,))
 ```
 
-`AddPythonOwned()` 用于让 Python 持有运行时创建的 UObject，避免对象过早被 Unreal GC 清理。生命周期结束后可调用 `RemovePythonOwned()`。Generated Type 的完整规则见 [GeneratedType.md](GeneratedType.md)。
+`AddPythonOwned()` lets Python hold a runtime-created UObject and prevents it from being collected too early by Unreal GC. Call `RemovePythonOwned()` when the lifetime ends. See [GeneratedType.md](GeneratedType.md) for the full Generated Type rules.
 
-## 7. 反射 Actor 并生成
+## 7. Reflect an Actor and spawn it
 
 ```python
 class MyActor(ue.Actor):
@@ -219,7 +220,7 @@ class MyActor(ue.Actor):
 actor_class = ue.uclass()(MyActor)
 ```
 
-下面片段适合放在 `MyGameInstance` 的方法里：
+The following snippet is suitable inside a `MyGameInstance` method:
 
 ```python
 world_context = self.unreal_game_instance
@@ -229,15 +230,15 @@ actor = ue.GameplayStatics.BeginDeferredActorSpawnFromClass(world_context, actor
 actor = ue.GameplayStatics.FinishSpawningActor(actor, transform)
 ```
 
-`ue.uclass()` 生成的是 transient reflected type，不是可保存的 Blueprint asset。类定义变更后，如果当前 Python VM 已经导入过模块，重新开始 PIE 或重启 Editor 再验证最稳。
+`ue.uclass()` generates a transient reflected type, not a saved Blueprint asset. After changing the class definition, if the current Python VM has already imported the module, restart PIE or the editor for the cleanest verification.
 
-## 8. 生命周期和清理
+## 8. Lifecycle and cleanup
 
-Python 变量只是持有 Unreal 对象 wrapper，不等于延长 Unreal 对象本身的生命周期。运行时创建的 UObject、生成出来的 Actor，以及从场景中查到的 Actor，清理方式略有不同。
+A Python variable holds an Unreal object wrapper; it does not necessarily extend the lifetime of the Unreal object itself. Runtime-created UObjects, generated Actors, and Actors found in a level have slightly different cleanup rules.
 
-### Python 创建的 UObject
+### UObjects created from Python
 
-`ue.NewObject()` 创建的是 Unreal UObject。对象如果只被 Python 局部变量引用，离开作用域后很容易丢失管理入口；如果对象还需要在后续 tick 或回调里使用，创建后建议加入 Python owned 集合：
+`ue.NewObject()` creates an Unreal UObject. If the object is referenced only by a Python local variable, you can easily lose the management entry point after the scope exits. If the object will be used later in ticks or callbacks, add it to the Python-owned set after creation:
 
 ```python
 obj = ue.NewObject(Type=MyData, Name="RuntimeData")
@@ -246,7 +247,7 @@ obj.AddPythonOwned()
 self.runtime_data = obj
 ```
 
-生命周期结束时，把它从 Python owned 集合移除，并清掉自己的引用：
+When the lifetime ends, remove it from the Python-owned set and clear your own reference:
 
 ```python
 if self.runtime_data:
@@ -254,11 +255,11 @@ if self.runtime_data:
     self.runtime_data = None
 ```
 
-`AddPythonOwned()` 适合“这个 UObject 是 Python 运行时创建，并且需要由 Python 保留一段时间”的场景。临时对象不一定需要加入；加入之后记得在 `shutdown()` 或不再使用时移除。
+`AddPythonOwned()` is for the case where a UObject is created by Python at runtime and Python needs to keep it for some time. Temporary objects do not always need to be added. If you add one, remember to remove it in `shutdown()` or when it is no longer used.
 
-### 场景里的 Actor
+### Actors in the scene
 
-Actor 的生命周期由 World 管理。Python 持有 Actor wrapper 不代表 Actor 还活着；Actor 被关卡卸载、被游戏逻辑销毁或 PIE 结束后，wrapper 仍可能留在 Python 变量里。
+Actor lifetime is managed by the World. Holding an Actor wrapper in Python does not mean the Actor is still alive. After a level unload, game-logic destroy, or PIE end, a wrapper may still remain in a Python variable.
 
 ```python
 if self.spawned_actor and self.spawned_actor.IsValid():
@@ -267,21 +268,21 @@ if self.spawned_actor and self.spawned_actor.IsValid():
 self.spawned_actor = None
 ```
 
-访问缓存的 Actor 前先判断有效性：
+Check validity before accessing a cached Actor:
 
 ```python
 if self.spawned_actor and self.spawned_actor.IsValid():
     self.spawned_actor.CallMethod("AddHits", (1,))
 ```
 
-经验规则：
+Rules of thumb:
 
-- `UObject`：Python 创建且要长期保留时，用 `AddPythonOwned()`；结束时 `RemovePythonOwned()` 并清掉引用。
-- `Actor`：用 `K2_DestroyActor()` 请求销毁；销毁后清掉 Python 引用。
-- 缓存的 UObject/Actor：使用前先判断对象还是否有效；Actor 至少要检查 `IsValid()`。
-- `shutdown()` 里不要再启动新异步逻辑，也不要继续访问已经清理掉的 World/Actor。
+- `UObject`: when Python creates it and needs to keep it, use `AddPythonOwned()`; when done, call `RemovePythonOwned()` and clear references.
+- `Actor`: use `K2_DestroyActor()` to request destruction; clear the Python reference afterwards.
+- Cached UObject/Actor: check whether the object is still valid before use; for Actors, at least check `IsValid()`.
+- In `shutdown()`, do not start new asynchronous work or keep accessing Worlds/Actors that have already been cleaned up.
 
-## 9. Actor 操作
+## 9. Actor operations
 
 ```python
 actor.GetName()
@@ -291,43 +292,43 @@ actor.K2_DestroyActor()
 actor.CallMethod("AddHits", (3,))
 ```
 
-`CallMethod()` 可以调用 Python、Blueprint 或 C++ 暴露给反射的方法，参数用 tuple 传入。单参数也要写成 `(3,)`。
+`CallMethod()` can call Python, Blueprint, or C++ methods exposed to reflection. Pass arguments as a tuple. A single argument still needs tuple syntax, such as `(3,)`.
 
-Destroy 后的 Actor wrapper 可能仍被 Python 变量持有，访问前先判断：
+An Actor wrapper may still be held by a Python variable after destruction. Check before access:
 
 ```python
 if actor and actor.IsValid():
     actor.K2_DestroyActor()
 ```
 
-## 10. 加载 Blueprint 类
+## 10. Loading Blueprint classes
 
 ```python
 enemy_class = ue.LoadClass("/Game/Blueprints/BP_Enemy.BP_Enemy_C")
 ```
 
-路径拿不准时，在 Content Browser 里右键资源复制引用，再确认它是类路径而不是资源对象路径。Blueprint Actor 类路径通常以 `_C` 结尾。
+If you are unsure about the path, right-click the asset in the Content Browser, copy the reference, and confirm that it is a class path rather than an asset object path. Blueprint Actor class paths usually end with `_C`.
 
-常见区别：
+Common distinction:
 
 ```python
 asset = ue.LoadAsset("/Game/Blueprints/BP_Enemy.BP_Enemy")
 klass = ue.LoadClass("/Game/Blueprints/BP_Enemy.BP_Enemy_C")
 ```
 
-生成 Actor 时需要 class，通常用 `LoadClass()`。
+Spawning an Actor requires a class, so `LoadClass()` is usually the correct API.
 
-## 11. 控制台命令
+## 11. Console commands
 
 ```python
 ue.KismetSystemLibrary.ExecuteConsoleCommand(unreal_game_instance, "stat fps", None)
 ```
 
-## 12. 一次跑通
+## 12. Run-through demo
 
-下面片段适合放在 `init()` 或 `on_start()` 中，因为它需要 `unreal_game_instance`：
+The following snippet is suitable in `init()` or `on_start()` because it needs `unreal_game_instance`.
 
-使用前请把第 3、6、7 节里的 `make_transform`、`MyData`、`MyActor` 定义放在同一个模块中，或改成你自己的类型。
+Before using it, put the `make_transform`, `MyData`, and `MyActor` definitions from sections 3, 6, and 7 in the same module, or replace them with your own types.
 
 ```python
 ue.Log("[demo] hello")
@@ -354,7 +355,7 @@ ue.Log("[demo] spawned actor: %s" % actor.GetName())
 ue.KismetSystemLibrary.ExecuteConsoleCommand(unreal_game_instance, "stat fps", None)
 ```
 
-清理生成的 Actor：
+Clean up the generated Actor:
 
 ```python
 if actor and actor.IsValid():

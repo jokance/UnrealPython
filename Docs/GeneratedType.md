@@ -1,10 +1,12 @@
-# Python Generated Type 使用说明
+[英文](GeneratedType.md) [中文](GeneratedType.zh.md)
 
-本文集中说明 UnrealPython 的运行时生成类型的写法，包括 `ue.uclass()`、`ue.ustruct()`、`ue.uenum()`、`ue.uvalue()`、`ue.uproperty()`、`ue.ufunction()`、初始化、反射查询和网络语义。
+# Python Generated Type Guide
 
-Generated Type 是由 Python class 生成的 transient reflected type：`ue.uclass()` 生成 `UClass`，`ue.ustruct()` 生成 `UScriptStruct`，`ue.uenum()` 生成 `UEnum`。它们不是编辑器生产级 Blueprint asset 替代；`Blueprintable` 当前只是 metadata 语义标记，不表示编辑器已经可以基于 Python 类创建可保存的 Blueprint 子类。
+This document explains how to define UnrealPython runtime generated types, including `ue.uclass()`, `ue.ustruct()`, `ue.uenum()`, `ue.uvalue()`, `ue.uproperty()`, `ue.ufunction()`, initialization, reflection helpers, and network semantics.
 
-## 基本入口
+A Generated Type is a transient reflected type generated from a Python class: `ue.uclass()` generates a `UClass`, `ue.ustruct()` generates a `UScriptStruct`, and `ue.uenum()` generates a `UEnum`. These are not production Blueprint asset replacements. `Blueprintable` is currently only a metadata marker; it does not mean the editor can create a saved Blueprint subclass from a Python class.
+
+## Basic entry points
 
 ```python
 import ue
@@ -26,13 +28,13 @@ class MyState(ue.EnumBase):
     Running = ue.uvalue(1)
 ```
 
-`ue.uclass()` 用于生成 `UClass`，Python 类必须继承 UObject wrapper 类型，例如 `ue.Object`、`ue.Actor`、`ue.ActorComponent`。
+`ue.uclass()` generates a `UClass`. The Python class must inherit from a UObject wrapper type, such as `ue.Object`, `ue.Actor`, or `ue.ActorComponent`.
 
-`ue.ustruct()` 用于生成 `UScriptStruct`，Python 类必须继承 `ue.StructBase` 或已生成的 struct wrapper 类型。
+`ue.ustruct()` generates a `UScriptStruct`. The Python class must inherit from `ue.StructBase` or an already generated struct wrapper type.
 
-`ue.uenum()` 用于生成 `UEnum`，Python 类必须继承 `ue.EnumBase`，枚举值用 `ue.uvalue()` 定义。
+`ue.uenum()` generates a `UEnum`. The Python class must inherit from `ue.EnumBase`; enum entries are defined with `ue.uvalue()`.
 
-## uclass 参数
+## uclass parameters
 
 ```python
 @ue.uclass(
@@ -47,22 +49,22 @@ class RuntimeActor(ue.Actor):
     pass
 ```
 
-| 参数 | 说明 |
+| Parameter | Description |
 | --- | --- |
-| `Meta={...}` | 写入生成 `UClass` metadata。key/value 会转为字符串。 |
-| `BlueprintType=True/False` | 控制是否写入 `BlueprintType` metadata。默认是 `True`，保持旧行为。 |
-| `NotBlueprintType=True` | 写入 `NotBlueprintType` metadata。不能和 `BlueprintType=True` 同时使用。 |
-| `Blueprintable=True/False` | 写入 `Blueprintable` 或 `NotBlueprintable` metadata，供反射、调试和后续 editor 工具读取。 |
-| `NotBlueprintable=True` | 写入 `NotBlueprintable` metadata。不能和 `Blueprintable=True` 同时使用。 |
-| `Abstract=True/False` | 设置或清除实际 `CLASS_Abstract` class flag。 |
+| `Meta={...}` | Writes metadata to the generated `UClass`. Keys and values are converted to strings. |
+| `BlueprintType=True/False` | Controls whether `BlueprintType` metadata is written. The default is `True` to preserve old behavior. |
+| `NotBlueprintType=True` | Writes `NotBlueprintType` metadata. It cannot be used together with `BlueprintType=True`. |
+| `Blueprintable=True/False` | Writes `Blueprintable` or `NotBlueprintable` metadata for reflection, debugging, and future editor tools. |
+| `NotBlueprintable=True` | Writes `NotBlueprintable` metadata. It cannot be used together with `Blueprintable=True`. |
+| `Abstract=True/False` | Sets or clears the actual `CLASS_Abstract` class flag. |
 
-`Meta` 必须是 `dict` 或 `None`，key/value 都会转成字符串写入 metadata。布尔参数都接受 `None` 或 `bool`。
+`Meta` must be a `dict` or `None`; all keys and values are converted to strings before being written as metadata. Boolean parameters accept only `None` or `bool`.
 
-`BlueprintType` 表示这个 class 可作为 Blueprint 变量、参数、返回值等类型语义使用。
+`BlueprintType` means the class can be used semantically as a Blueprint variable, parameter, return value, and similar type position.
 
-`Blueprintable` 表示这个 class 声明自己可作为 Blueprint 父类的语义，但当前插件没有完整接入 Blueprint asset 创建、保存、编译和恢复流程，所以不能据此认为编辑器可以新建 Blueprint 继承 Python 类。
+`Blueprintable` means the class declares that it can be used semantically as a Blueprint parent class. The plugin is not currently integrated with the full Blueprint asset creation, saving, compiling, and restore flow, so this does not imply that the editor can create a Blueprint subclass from a Python class.
 
-## ustruct 参数
+## ustruct parameters
 
 ```python
 @ue.ustruct(
@@ -74,17 +76,17 @@ class RuntimeData(ue.StructBase):
     Count = ue.uproperty(int)
 ```
 
-| 参数 | 说明 |
+| Parameter | Description |
 | --- | --- |
-| `Meta={...}` | 写入生成 `UScriptStruct` metadata。key/value 会转为字符串。 |
-| `BlueprintType=True/False` | 控制是否写入 `BlueprintType` metadata。默认是 `True`，保持旧行为。 |
-| `NotBlueprintType=True` | 写入 `NotBlueprintType` metadata。不能和 `BlueprintType=True` 同时使用。 |
+| `Meta={...}` | Writes metadata to the generated `UScriptStruct`. Keys and values are converted to strings. |
+| `BlueprintType=True/False` | Controls whether `BlueprintType` metadata is written. The default is `True` to preserve old behavior. |
+| `NotBlueprintType=True` | Writes `NotBlueprintType` metadata. It cannot be used together with `BlueprintType=True`. |
 
-`Meta` 必须是 `dict` 或 `None`。`BlueprintType` 和 `NotBlueprintType` 不能同时为 `True`。
+`Meta` must be a `dict` or `None`. `BlueprintType` and `NotBlueprintType` cannot both be `True`.
 
-`Blueprintable` 和 `Abstract` 是 class 语义，不支持在 `ue.ustruct()` 上使用。
+`Blueprintable` and `Abstract` are class semantics and are not supported on `ue.ustruct()`.
 
-## uenum 和 uvalue
+## uenum and uvalue
 
 ```python
 @ue.uenum()
@@ -93,9 +95,9 @@ class DamageType(ue.EnumBase):
     Ice = ue.uvalue(1, Meta={"DisplayName": "Ice"})
 ```
 
-`ue.uvalue(Val, Meta=None)` 用于定义 enum entry。`Val` 不能是 `None`；`Meta` 会写到对应枚举值 metadata。生成时 enum entry 会按数值排序后写入 `UEnum`。
+`ue.uvalue(Val, Meta=None)` defines an enum entry. `Val` cannot be `None`; `Meta` is written to the metadata for that enum value. During generation, entries are sorted by numeric value before being written to the `UEnum`.
 
-`ue.uvalue()` 只能用于 `ue.uenum()` 类型；`ue.uclass()` 和 `ue.ustruct()` 不支持 enum value。
+`ue.uvalue()` can only be used in `ue.uenum()` types. `ue.uclass()` and `ue.ustruct()` do not support enum values.
 
 ## uproperty
 
@@ -108,7 +110,7 @@ class MyActor(ue.Actor):
     Scores = ue.uproperty(ue.Map(str, int))
 ```
 
-完整参数：
+Full parameter list:
 
 ```python
 ue.uproperty(
@@ -124,21 +126,21 @@ ue.uproperty(
 )
 ```
 
-`ue.uproperty()` 返回 property definition，只有作为 `ue.uclass()` 或 `ue.ustruct()` 的 class attribute 时才会参与生成。生成后的属性默认带 `Edit` 和 `BlueprintVisible` flags，并应用 `Meta` 字典。
+`ue.uproperty()` returns a property definition. It participates in generation only when used as a class attribute of a `ue.uclass()` or `ue.ustruct()` type. Generated properties receive `Edit` and `BlueprintVisible` flags by default, and apply the `Meta` dictionary.
 
-常用类型：
+Common types:
 
-| Python type 表达式 | UE property |
+| Python type expression | UE property |
 | --- | --- |
 | `bool` | `FBoolProperty` |
 | `int` | `FIntProperty` |
 | `float` | `FFloatProperty` |
 | `str` | `FStrProperty` |
-| `ue.Object` 或 UObject wrapper 子类 | `FObjectProperty` |
-| `ue.Actor` 等 UObject 派生类型 | `FObjectProperty`，subclass 为对应 `UClass` |
-| `ue.Vector`、`ue.Transform` 等 struct wrapper 子类 | `FStructProperty` |
-| `@ue.ustruct()` 生成类型 | `FStructProperty` |
-| `@ue.uenum()` 生成类型 | `FByteProperty` 或 `FEnumProperty`，取决于 enum form |
+| `ue.Object` or a UObject wrapper subclass | `FObjectProperty` |
+| `ue.Actor` or another UObject-derived type | `FObjectProperty`, with the corresponding `UClass` as subclass |
+| `ue.Vector`, `ue.Transform`, or another struct wrapper subclass | `FStructProperty` |
+| Type generated by `@ue.ustruct()` | `FStructProperty` |
+| Type generated by `@ue.uenum()` | `FByteProperty` or `FEnumProperty`, depending on enum form |
 | `ue.FieldPath` | `FFieldPathProperty` |
 | `ue.Array(T)` | `FArrayProperty` |
 | `ue.Set(T)` | `FSetProperty` |
@@ -146,7 +148,7 @@ ue.uproperty(
 | delegate wrapper type | `FDelegateProperty` |
 | multicast delegate wrapper type | `FMulticastDelegateProperty` |
 
-容器类型必须传实例，例如 `ue.Array(int)`，不能直接传 `ue.Array`、`ue.Set`、`ue.Map`。
+Container types must be passed as instances, such as `ue.Array(int)`. Do not pass `ue.Array`, `ue.Set`, or `ue.Map` directly.
 
 ### Getter / Setter
 
@@ -164,15 +166,15 @@ class MyObject(ue.Object):
         pass
 ```
 
-`Getter` / `Setter` 是 property metadata 连接。函数侧也可以用 `Getter=True`、`Setter=True` 标记函数语义。
+`Getter` / `Setter` are property metadata links. Functions can also be marked with `Getter=True` or `Setter=True`.
 
-当属性绑定 getter 或 setter 时，生成器还会额外暴露一个带下划线前缀的内部属性，例如 `Value` 会同时生成 `_Value`。`Value` 走 getter/setter；`_Value` 直接读写底层 reflected property，方便 getter/setter 自己访问存储值。
+When a property is bound to a getter or setter, the generator also exposes an internal property with an underscore prefix. For example, `Value` also generates `_Value`. `Value` goes through the getter/setter; `_Value` reads and writes the underlying reflected property directly, which lets getter/setter implementations access their stored value.
 
-`Getter=True` 的函数必须是 `Pure=True`，不能同时设置 `Setter=True`。`Static=True` 不能和 `Getter=True` 或 `Setter=True` 同时使用。
+A `Getter=True` function must be `Pure=True` and cannot also set `Setter=True`. `Static=True` cannot be used together with `Getter=True` or `Setter=True`.
 
 ### Replication / RepNotify
 
-Replication 参数只支持 `ue.uclass()` 生成的 class property，不支持 `ue.ustruct()` property。
+Replication parameters are supported only for `ue.uclass()` generated class properties. They are not supported for `ue.ustruct()` properties.
 
 ```python
 @ue.uclass()
@@ -195,15 +197,15 @@ class RepActor(ue.Actor):
         pass
 ```
 
-`RepNotify=True` 使用默认函数名 `OnRep_<PropertyName>`。`RepNotify="FuncName"` 使用显式函数名。
+`RepNotify=True` uses the default function name `OnRep_<PropertyName>`. `RepNotify="FuncName"` uses an explicit function name.
 
-RepNotify 函数必须存在、不能是 static、不能有返回值，参数最多一个；单参数形式用于接收 old value，参数类型必须与属性类型一致。
+The RepNotify function must exist, must not be static, must have no return value, and can take at most one parameter. The single-parameter form receives the old value; the parameter type must match the property type.
 
-`ReplicationCondition` 支持 `None`、`InitialOnly`、`OwnerOnly`、`SkipOwner`、`SimulatedOnly`、`AutonomousOnly`、`SimulatedOrPhysics`、`InitialOrOwner`、`Custom`、`ReplayOrOwner`、`ReplayOnly`、`SimulatedOnlyNoReplay`、`SimulatedOrPhysicsNoReplay`、`SkipReplay`、`Dynamic`、`Never`，也接受 `COND_` 前缀。
+`ReplicationCondition` supports `None`, `InitialOnly`, `OwnerOnly`, `SkipOwner`, `SimulatedOnly`, `AutonomousOnly`, `SimulatedOrPhysics`, `InitialOrOwner`, `Custom`, `ReplayOrOwner`, `ReplayOnly`, `SimulatedOnlyNoReplay`, `SimulatedOrPhysicsNoReplay`, `SkipReplay`, `Dynamic`, and `Never`; it also accepts the `COND_` prefix.
 
-`RepNotifyCondition` 支持 `OnChanged`、`Always`，也接受 `REPNOTIFY_` 前缀。
+`RepNotifyCondition` supports `OnChanged` and `Always`; it also accepts the `REPNOTIFY_` prefix.
 
-`RepNotify`、`ReplicationCondition`、`PushBased` 会隐式打开 `Replicated`。`RepNotifyCondition` 必须和 `RepNotify` 一起使用。
+`RepNotify`, `ReplicationCondition`, and `PushBased` implicitly enable `Replicated`. `RepNotifyCondition` must be used together with `RepNotify`.
 
 ## ufunction
 
@@ -215,7 +217,7 @@ class MyObject(ue.Object):
         return count > 0 and len(name) > 0
 ```
 
-完整参数：
+Full parameter list:
 
 ```python
 @ue.ufunction(
@@ -235,17 +237,17 @@ class MyObject(ue.Object):
 )
 ```
 
-`Params` 和 `Ret` 复用 `ue.uproperty()` 的类型系统。
+`Params` and `Ret` reuse the same type system as `ue.uproperty()`.
 
-普通实例方法需要保留 Python 的 `self` 参数，`Params` 只填写 `self` 之后的参数类型；`Static=True` 函数不需要 `self`。非 override 函数要求 Python 参数数量和 `Params` 数量一致。
+Regular instance methods must keep the Python `self` parameter. `Params` should list only the parameter types after `self`. Functions with `Static=True` do not need `self`. For non-override functions, the number of Python parameters must match the number of entries in `Params`.
 
-函数参数默认值会被转换成对应 property 默认值并写入 `CPP_Default_<ParamName>` metadata；函数 docstring 会写入 `ToolTip` metadata。
+Function parameter defaults are converted to matching property default values and written as `CPP_Default_<ParamName>` metadata. The function docstring is written as `ToolTip` metadata.
 
-`Ret=T` 生成普通返回值。`Ret=(T1, T2, ...)` 会生成一个 `bool ReturnValue` 和多个 out params：Python 返回 `None` 表示 `ReturnValue=False`；返回单个值或 tuple 会表示 `ReturnValue=True` 并写入 out params。多个 out params 时必须返回长度匹配的 tuple。
+`Ret=T` generates a regular return value. `Ret=(T1, T2, ...)` generates a `bool ReturnValue` plus multiple out params. Returning `None` from Python means `ReturnValue=False`; returning a single value or tuple means `ReturnValue=True` and writes the out params. When there are multiple out params, the returned tuple length must match.
 
 ### Override Blueprint Event
 
-Override UE Blueprint event 时不要传 `Params` 或 `Ret`，只传 `Override=True`。
+When overriding a UE Blueprint event, do not pass `Params` or `Ret`; pass only `Override=True`.
 
 ```python
 @ue.uclass()
@@ -259,7 +261,7 @@ class TickActor(ue.Actor):
         pass
 ```
 
-`Override=True` 只能覆盖父类里已有的 Blueprint event。override 函数不能同时设置 `Static=True`、`Getter=True`、`Setter=True`、`Params` 或 `Ret`。
+`Override=True` can only override a Blueprint event that already exists in the parent class. Override functions cannot also set `Static=True`, `Getter=True`, `Setter=True`, `Params`, or `Ret`.
 
 ### Static / Pure
 
@@ -271,7 +273,7 @@ class MathLibrary(ue.Object):
         return a + b
 ```
 
-`Pure=True` 写入 Blueprint pure 语义；`Static=True` 写入 static function flag。
+`Pure=True` writes Blueprint pure semantics; `Static=True` writes the static function flag.
 
 ### RPC
 
@@ -291,15 +293,15 @@ class NetActor(ue.Actor):
         pass
 ```
 
-`Server`、`Client`、`NetMulticast` 三者只能选一个。
+Only one of `Server`, `Client`, and `NetMulticast` can be selected.
 
-`Reliable` 和 `Unreliable` 不能同时使用，也不能脱离网络目标单独使用。
+`Reliable` and `Unreliable` cannot both be used, and neither can be used without a network target.
 
-RPC 是否实际远程发送仍依赖 UE 网络规则，例如 Actor ownership、NetDriver、连接状态、World 和 NetMode。
+Whether an RPC is actually sent remotely still depends on UE networking rules, such as Actor ownership, NetDriver, connection state, World, and NetMode.
 
-## 初始化
+## Initialization
 
-`_post_init(self)` 是可选的。只有类型自身显式定义 `_post_init` 时才会调用；继承自 wrapper 基类的 `_post_init` 不会被当作用户初始化函数。`_post_init` 必须可调用。
+`_post_init(self)` is optional. It is called only when the type itself explicitly defines `_post_init`; an inherited `_post_init` from a wrapper base class is not treated as user initialization. `_post_init` must be callable.
 
 ```python
 @ue.uclass()
@@ -310,9 +312,9 @@ class MyObject(ue.Object):
         self.Value = 10
 ```
 
-`uclass` 的 `_post_init` 对应 UObject `PostInitInstance` 之后的 Python 回调。`ustruct` 的 `_post_init` 会在 struct 实例初始化时调用。
+For `uclass`, `_post_init` is the Python callback after UObject `PostInitInstance`. For `ustruct`, `_post_init` is called when the struct instance is initialized.
 
-## 创建对象和使用 struct
+## Creating objects and using structs
 
 ```python
 obj = ue.NewObject(Type=MyObject, Name="MyRuntimeObject")
@@ -323,9 +325,9 @@ data.Count = 7
 obj.SomeStructProperty = data
 ```
 
-需要让 Python 长期持有 UObject 时，可以调用 `AddPythonOwned()`，避免对象被 UE GC 回收。生命周期结束后可调用 `RemovePythonOwned()`。
+When Python needs to hold a UObject for a long time, call `AddPythonOwned()` to prevent the object from being collected by UE GC. Call `RemovePythonOwned()` when the lifetime ends.
 
-## 反射辅助
+## Reflection helpers
 
 ```python
 cls = MyActor.StaticClass()
@@ -335,32 +337,32 @@ if ue.HasTypeMetaData(MyActor, "BlueprintType"):
     display_name = ue.GetTypeMetaData(MyActor, "DisplayName")
 ```
 
-当前常用 helper：
+Common helpers:
 
-| 函数 | 说明 |
+| Function | Description |
 | --- | --- |
-| `Type.StaticClass()` | 获取 class 对应 `UClass`。 |
-| `ue.GetClassFlags(TypeOrClass)` | 获取 `UClass::ClassFlags`。 |
-| `ue.GetFunctionFlags(TypeOrClass, Name)` | 获取 `UFunction::FunctionFlags`。 |
-| `ue.GetPropertyFlags(TypeOrClass, Name)` | 获取 `FProperty::PropertyFlags`。 |
-| `ue.HasTypeMetaData(Type, Key)` | 判断生成 Python 类型对应的 reflected field 是否有 metadata。 |
-| `ue.GetTypeMetaData(Type, Key)` | 读取生成 Python 类型对应的 reflected field metadata。 |
-| `ue.GetTypeFromClass(Class)` | 从 `UClass` 找回 Python type。 |
-| `ue.GetTypeFromStruct(Struct)` | 从 `UScriptStruct` 找回 Python type。 |
-| `ue.GetStructFromType(Type)` | 从 Python struct type 找到对应 `UScriptStruct`。 |
-| `ue.GetTypeFromEnum(Enum)` | 从 `UEnum` 找回 Python type。 |
-| `ue.GetPropertyRepNotifyName(TypeOrClass, Name)` | 获取 property 上记录的 RepNotify 函数名。 |
-| `ue.GetPropertyReplicationInfo(TypeOrClass, Name)` | 获取 Generated Class 记录的复制配置，返回 `ReplicationCondition`、`RepNotifyCondition`、`PushBased`。 |
-| `ue.GetPropertyLifetimeReplicationInfo(TypeOrClass, Name)` | 从 CDO 的 lifetime replication 数据中查询最终复制配置。 |
+| `Type.StaticClass()` | Gets the `UClass` for a class type. |
+| `ue.GetClassFlags(TypeOrClass)` | Gets `UClass::ClassFlags`. |
+| `ue.GetFunctionFlags(TypeOrClass, Name)` | Gets `UFunction::FunctionFlags`. |
+| `ue.GetPropertyFlags(TypeOrClass, Name)` | Gets `FProperty::PropertyFlags`. |
+| `ue.HasTypeMetaData(Type, Key)` | Checks whether the reflected field for a generated Python type has metadata. |
+| `ue.GetTypeMetaData(Type, Key)` | Reads metadata from the reflected field for a generated Python type. |
+| `ue.GetTypeFromClass(Class)` | Gets the Python type from a `UClass`. |
+| `ue.GetTypeFromStruct(Struct)` | Gets the Python type from a `UScriptStruct`. |
+| `ue.GetStructFromType(Type)` | Gets the `UScriptStruct` for a Python struct type. |
+| `ue.GetTypeFromEnum(Enum)` | Gets the Python type from a `UEnum`. |
+| `ue.GetPropertyRepNotifyName(TypeOrClass, Name)` | Gets the RepNotify function name recorded on a property. |
+| `ue.GetPropertyReplicationInfo(TypeOrClass, Name)` | Gets generated class replication settings and returns `ReplicationCondition`, `RepNotifyCondition`, and `PushBased`. |
+| `ue.GetPropertyLifetimeReplicationInfo(TypeOrClass, Name)` | Queries the final replication configuration from the CDO lifetime replication data. |
 
-## 当前限制
+## Current limitations
 
-- 生成类型是 runtime transient type，不是可保存的 Blueprint asset。
-- `Blueprintable=True` 当前只是 metadata 语义标记，不能让编辑器直接新建 Blueprint 继承 Python 类。
-- `ue.ustruct()` 不支持函数，只支持 property。
-- `ue.ustruct()` property 不支持 replication 参数。
-- `ue.uclass()` 和 `ue.ustruct()` 的 property 不能覆盖父类型中已有同名 property。
-- `ue.uclass()` 的 method 覆盖父类型方法时必须显式使用 `Override=True`，且只能覆盖 Blueprint event。
-- `ue.Array`、`ue.Set`、`ue.Map` 必须传带子类型的实例，且不支持直接嵌套容器。
-- `Name` / `Text` 当前没有单独 generated property 类型入口；字符串属性使用 `str`。
-- 复杂 delegate、nested container、soft object/class path 等类型需要按具体 wrapper/转换路径单独验证。
+- Generated types are runtime transient types, not saved Blueprint assets.
+- `Blueprintable=True` is currently only a metadata marker and does not let the editor directly create a Blueprint subclass from a Python class.
+- `ue.ustruct()` does not support functions, only properties.
+- `ue.ustruct()` properties do not support replication parameters.
+- `ue.uclass()` and `ue.ustruct()` properties cannot override properties with the same name from a parent type.
+- A `ue.uclass()` method that overrides a parent method must explicitly use `Override=True`, and can only override Blueprint events.
+- `ue.Array`, `ue.Set`, and `ue.Map` must be passed as typed instances, and nested containers are not supported directly.
+- `Name` / `Text` currently do not have separate generated property type entry points; string properties use `str`.
+- Complex delegate, nested container, soft object/class path, and similar types should be verified against their specific wrapper/conversion paths.

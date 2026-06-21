@@ -1,266 +1,221 @@
-# UnrealPython 与 UE PythonScriptPlugin 源码差异
+[英文](PythonScriptPluginDifferences.md) [中文](PythonScriptPluginDifferences.zh.md)
 
-本文对比对象：
+# Source Differences Between UnrealPython and UE PythonScriptPlugin
 
-- 本插件：`Plugins/UnrealPython`
-- UE 内置插件：`Engine/Plugins/Experimental/PythonScriptPlugin`，当前工作区路径为 `UnrealEngine/Engine/Plugins/Experimental/PythonScriptPlugin`
+This document compares:
 
-结论先行：`UnrealPython` 不是对 `PythonScriptPlugin` 的小幅改名，而是保留了部分 CPython 嵌入、GIL、UObject/UStruct/UEnum 包装、类型转换等思路后，面向运行时游戏脚本重新组织的一套实现。UE 内置插件主要服务编辑器自动化；本插件目标是在打包游戏中可用，并提供可静态生成、可裁剪、可补全的 Python 绑定。
+- This plugin: `Plugins/UnrealPython`
+- UE built-in plugin: `Engine/Plugins/Experimental/PythonScriptPlugin`; the current workspace path is `UnrealEngine/Engine/Plugins/Experimental/PythonScriptPlugin`
 
-## 1. 插件定位和加载阶段
+Conclusion first: `UnrealPython` is not a lightly renamed copy of `PythonScriptPlugin`. It keeps some ideas around CPython embedding, the GIL, UObject/UStruct/UEnum wrappers, and type conversion, but reorganizes them for runtime game scripting. UE's built-in plugin mainly serves editor automation. This plugin is designed to work in packaged games and to provide Python bindings that can be statically generated, trimmed, and completed by IDEs.
 
-UE 内置 `PythonScriptPlugin.uplugin` 的主模块是 `UncookedOnly`，并带有 `PythonScriptPluginPreload` 早期预加载模块。它的描述也是 `Python integration for the Unreal Editor`，默认不启用，主要面向 Editor/Program。
+## 1. Plugin positioning and loading phase
 
-`UnrealPython.uplugin` 改为：
+The main module in UE's built-in `PythonScriptPlugin.uplugin` is `UncookedOnly`, with an early preload module named `PythonScriptPluginPreload`. Its description is `Python integration for the Unreal Editor`; it is disabled by default and primarily targets Editor/Program use.
 
-- `UnrealPython`：`Runtime` 模块，`LoadingPhase=Default`
-- `UnrealPythonEditor`：单独的 `Editor` 模块
-- 不再保留 `PythonScriptPluginPreload`
+`UnrealPython.uplugin` changes this to:
 
-这样修改的原因是目标场景变了：本插件需要在游戏运行时初始化 Python，而不是只在编辑器或命令行工具中执行 Python 自动化任务。编辑器菜单、代码生成等功能拆到 `UnrealPythonEditor`，避免运行时模块直接依赖大量编辑器功能。
+- `UnrealPython`: `Runtime` module, `LoadingPhase=Default`
+- `UnrealPythonEditor`: separate `Editor` module
+- No `PythonScriptPluginPreload`
 
-## 2. Python 运行时来源
+The target scenario changed: this plugin needs to initialize Python at game runtime, not only run Python automation in the editor or command-line tools. Editor menus and code generation are moved to `UnrealPythonEditor` so the runtime module does not directly depend on large editor systems.
 
-UE 内置插件通过 `Python3` 引擎模块接入 UE 自带 Python。它还包含 `Content/Python` 下的 pip 安装辅助、远程执行脚本、测试脚本等编辑器配套资源。
+## 2. Python runtime source
 
-本插件在 `Source/UnrealPython/UnrealPython.Build.cs` 中不依赖 `Python3` 模块，而是直接接入 `ThirdParty/python314`：
+UE's built-in plugin uses UE's bundled Python through the engine `Python3` module. It also contains editor support resources under `Content/Python`, such as pip helpers, remote execution scripts, and test scripts.
 
-- Win64 链接 `python314.lib`，拷贝 `python314.dll`
-- Android 链接 `libpython3.14.a` 以及 OpenSSL、bz2、ffi、lzma、zstd、mpdec 等静态库
-- Mac 链接并拷贝 `libpython3.14.dylib` 和裁剪后的 `python3.14` 标准库
-- iOS 链接 `Python.xcframework`，把 `Runtime/IOSDevice` 或 `Runtime/IOSSimulator` 下的 `python` 与 `Frameworks` 打进 app bundle
+This plugin does not depend on the `Python3` module in `Source/UnrealPython/UnrealPython.Build.cs`. Instead, it directly integrates `ThirdParty/python314`:
 
-这样修改是为了避免和 UE 自带 Python 的 ABI、符号、`sys.path`、版本生命周期耦合。本插件当前目标是 Python 3.14，而 UE 自带插件随引擎版本绑定；如果混用，尤其在打包平台上很容易出现动态库、标准库路径或扩展模块加载冲突。`Docs/PythonRuntimeBuild.md` 已单独记录了 Python 3.14 运行时的构建与打包细节。
+- Win64 links `python314.lib` and copies `python314.dll`.
+- Android links `libpython3.14.a` plus static dependencies such as OpenSSL, bz2, ffi, lzma, zstd, and mpdec.
+- Mac links and copies `libpython3.14.dylib` and a trimmed `python3.14` standard library.
+- iOS links `Python.xcframework` and packages the `python` and `Frameworks` directories from `Runtime/IOSDevice` or `Runtime/IOSSimulator` into the app bundle.
 
-## 3. 初始化流程
+This avoids coupling to UE's built-in Python ABI, symbols, `sys.path`, and version lifecycle. The plugin currently targets Python 3.14, while UE's built-in plugin is tied to the engine version. Mixing them, especially on packaged platforms, easily causes dynamic library, standard library path, or extension module conflicts. `Docs/PythonRuntimeBuild.md` records the Python 3.14 runtime build and packaging details separately.
 
-UE 内置插件的初始化集中在 `FPythonScriptPlugin`：
+## 3. Initialization flow
 
-- 支持 `-EnablePython`、`-DisablePython`、`-ForceEnablePython`
-- 支持用户设置里的启用/禁用覆盖
-- 支持 commandlet 禁用列表
-- 注册 Python、PythonREPL 控制台执行器
-- 支持启动脚本、远程执行、pip install、Content Browser 集成、在线文档生成等
-- 初始化 `unreal` 模块，并维护编辑器脚本执行上下文
+UE's built-in plugin initializes through `FPythonScriptPlugin` and supports:
 
-本插件把初始化拆成更小的运行时组件：
+- `-EnablePython`, `-DisablePython`, `-ForceEnablePython`
+- enable/disable overrides from user settings
+- commandlet disable lists
+- Python and PythonREPL console executors
+- startup scripts, remote execution, pip install, Content Browser integration, online doc generation, and related editor features
+- the `unreal` module and editor script execution context
 
-- `FUPyVirtualMachine`：负责 `Py_PreInitialize`、`Py_InitializeFromConfig`、`sys.path`、`sys.argv`、GIL 主线程保存/恢复
-- `FUPyModuleInitializer`：负责创建 `ue` 模块、注册内置类型、注册自动生成类型
-- `UUPyManager`：作为 UObject 单例管理生命周期、UObject 删除监听、输出重定向、`ue_site` 生命周期回调
-- `FUnrealPythonModule`：模块入口，只负责启动/关闭 Manager；编辑器下再额外注册控制台执行器和 ToolMenus 命令处理器
+This plugin splits initialization into smaller runtime components:
 
-这样修改的原因是运行时插件需要确定性更强的生命周期：游戏启动时初始化，关闭时释放；不需要编辑器的启用策略、pip 安装任务、远程执行服务和文档命令。精简后也更容易在移动平台和打包环境中控制初始化路径。
+- `FUPyVirtualMachine`: handles `Py_PreInitialize`, `Py_InitializeFromConfig`, `sys.path`, `sys.argv`, and GIL main-thread save/restore.
+- `FUPyModuleInitializer`: creates the `ue` module, registers built-in types, and registers auto-generated types.
+- `UUPyManager`: a UObject singleton that manages lifecycle, UObject deletion notifications, output redirection, and `ue_site` lifecycle callbacks.
+- `FUnrealPythonModule`: module entry point that starts/stops the manager, and in editor builds additionally registers a console executor and ToolMenus command handler.
 
-## 4. `sys.path` 和脚本入口
+The runtime plugin needs a more deterministic lifecycle: initialize at game startup and release on shutdown. It does not need editor enablement policy, pip tasks, remote execution services, or documentation commands. The smaller flow also makes initialization paths easier to control on mobile and packaged platforms.
 
-UE 内置插件使用项目设置里的 `AdditionalPaths`、启动脚本、pip site-packages，以及引擎内置 Python 内容路径，主要围绕编辑器 Python 环境组织。
+## 4. `sys.path` and script entry
 
-本插件在 `UPyVirtualMachine::ConfigureSearchPaths` 中显式设置隔离模式下的搜索路径：
+UE's built-in plugin organizes the editor Python environment around project setting `AdditionalPaths`, startup scripts, pip site-packages, and engine Python content paths.
 
-- Mac/iOS 加入插件自带标准库路径
-- 默认加入 `Content/Scripts`
-- 可通过 `Game.ini` 的 `[UnrealPython] ScriptPath` 覆盖脚本目录
-- 可通过 `UUPySettings::AdditionalPaths` 追加项目相对路径
-- 非编辑器下不再复制 `Content/Scripts` 和 `Content/Settings` 到外部可读写路径，脚本和配置需要通过 stage/package 进入包体
+This plugin explicitly sets search paths in isolated mode in `UPyVirtualMachine::ConfigureSearchPaths`:
 
-这样修改的原因是打包后内容路径和编辑器路径不同，移动平台尤其不能假设 Python 可以直接读取项目源目录。本插件把脚本路径约束到项目内容和插件运行时目录，便于 Cook/Package 后运行。
+- Adds bundled standard library paths on Mac/iOS.
+- Adds `Content/Scripts` by default.
+- Lets `[UnrealPython] ScriptPath` in `Game.ini` override the script directory.
+- Lets `UUPySettings::AdditionalPaths` append project-relative paths.
+- In non-editor builds, no longer copies `Content/Scripts` or `Content/Settings` to an external writable path; scripts and configuration must enter the package through stage/package.
 
-## 5. Python 模块命名和暴露 API
+Packaged content paths differ from editor source paths, and mobile platforms especially cannot assume Python can read project source directories. This plugin constrains script paths to project content and plugin runtime directories so they can work after Cook/Package.
 
-UE 内置插件暴露的主模块名是 `unreal`。
+## 5. Python module name and exposed API
 
-本插件暴露的主模块名是 `ue`。`FUPyModuleInitializer` 创建了自定义模块类型 `UPyUEModule`，并重载 `tp_getattro`：当属性不在模块字典中时，会通过 `StaticFindAllObjects` 按名称查找 `UClass`、`UScriptStruct` 或 `UEnum`，再从 `FUPyWrapperTypeRegistry` 取对应 Python 类型并缓存到模块字典。
+UE's built-in plugin exposes the main module as `unreal`.
 
-这样修改带来的效果是：
+This plugin exposes the main module as `ue`. `FUPyModuleInitializer` creates a custom module type `UPyUEModule` and overrides `tp_getattro`: when an attribute is not in the module dictionary, it uses `StaticFindAllObjects` to find a `UClass`, `UScriptStruct`, or `UEnum` by name, then gets the matching Python type from `FUPyWrapperTypeRegistry` and caches it in the module dictionary.
 
-- `ue.Actor`、`ue.Vector` 等类型可以按需解析
-- 不必在模块初始化时一次性生成全部反射类型
-- 运行时脚本可以使用更短、更游戏侧的模块名
+The result:
 
-这也意味着本插件与 UE 内置 `unreal` API 不完全兼容；迁移脚本时不能只改 import 名，还要检查类型、函数、容器和生命周期语义。
+- Types such as `ue.Actor` and `ue.Vector` can be resolved on demand.
+- The plugin does not need to generate every reflected type at module initialization.
+- Runtime scripts can use a shorter module name that fits game-side scripting.
 
-## 6. 绑定生成策略
+This also means the plugin is not fully compatible with UE's built-in `unreal` API. Migration requires more than changing the import name; type, function, container, and lifecycle semantics also need review.
 
-这是两者最大的实现差异。
+## 6. Binding generation strategy
 
-UE 内置插件主要在运行时通过反射动态生成包装类型。源码中有 `PyWrapperTypeRegistry`、`PyGenUtil`、`PyWrapperObject/Struct/Enum`、Blueprint 类型生成、重实例化、编辑器对象清理等逻辑，重点是覆盖编辑器可见的反射对象和蓝图类型。
+This is the largest implementation difference.
 
-本插件保留了动态包装基础，但新增了一套 UHT 生成管线：
+UE's built-in plugin mainly generates wrapper types dynamically from reflection at runtime. Its source includes `PyWrapperTypeRegistry`, `PyGenUtil`, `PyWrapperObject/Struct/Enum`, Blueprint type generation, reinstancing, editor object cleanup, and related editor-oriented logic. The focus is broad coverage of editor-visible reflection objects and Blueprint types.
 
-- `Source/UnrealPythonUhtGenerator` 是 UHT exporter
-- 只有设置环境变量 `GENERATE_UNREAL_PYTHON` 时才执行生成
-- `UnrealPythonCodeGenerator` 导出反射 JSON 和 `.pyi`
-- `AutoWrapperGenerator` 根据 `Tools/GenerationSettings.json` 生成 C++ 包装代码
-- 生成代码落在 `Public/Wrapper/AutoGen`
-- `UPyAutoGenWrapper.h` 聚合初始化生成的类型
-- `FUPyWrapperTypeRegistry::RegisterAutoWrappedClassCreateFunc` / `RegisterAutoWrappedStructCreateFunc` 先登记创建函数，再统一创建静态类型
+This plugin keeps a dynamic wrapper foundation, but adds a UHT generation pipeline:
 
-这样修改的原因是运行时性能和可打包性。反射动态生成虽然灵活，但启动成本、编辑器依赖、平台行为都更难控制；静态生成的 C++ wrapper 可以提前编译，打包后不依赖编辑器生成逻辑，并且可以由 `GenerationSettings.json` 精确裁剪导出范围。`.pyi` 生成也改善了 IDE 补全和类型提示。
+- `Source/UnrealPythonUhtGenerator` is the UHT exporter.
+- Generation runs only when `GENERATE_UNREAL_PYTHON` is set.
+- `UnrealPythonCodeGenerator` exports reflection JSON and `.pyi` files.
+- `AutoWrapperGenerator` generates C++ wrapper code from `Tools/GenerationSettings.json`.
+- Generated code is written to `Public/Wrapper/AutoGen`.
+- `UPyAutoGenWrapper.h` aggregates generated type initialization.
+- `FUPyWrapperTypeRegistry::RegisterAutoWrappedClassCreateFunc` / `RegisterAutoWrappedStructCreateFunc` register creation functions before types are created in one pass.
 
-## 7. 类型 wrapper 体系差异
+The reason is runtime performance and packageability. Dynamic reflection generation is flexible, but startup cost, editor dependency, and platform behavior are harder to control. Static C++ wrappers are compiled ahead of time, do not depend on editor generation logic in packaged builds, and can be precisely trimmed by `GenerationSettings.json`. `.pyi` generation improves IDE completion and type hints.
 
-两边 wrapper 的基础思想相同：用一个 Python `PyTypeObject` 表示 UE 反射类型，用一个 Python wrapper instance 持有 UObject、UScriptStruct、容器或 delegate 的实际数据，然后通过 `PyGenUtil/UPyGenUtil` 保存属性、函数、操作符等调用元数据。
+## 7. Wrapper type system differences
 
-但本插件不是简单把 `PyWrapper*` 改名成 `UPyWrapper*`，而是在 wrapper 层做了几类关键改造。
+Both plugins share the same high-level wrapper idea: a Python `PyTypeObject` represents a UE reflected type, and a Python wrapper instance holds the actual UObject, UScriptStruct, container, or delegate data. `PyGenUtil` / `UPyGenUtil` stores metadata for properties, functions, operators, and call paths.
 
-### 7.1 文件和类型布局
+This plugin is not a simple `PyWrapper*` to `UPyWrapper*` rename. The wrapper layer was changed in several important ways.
 
-UE 内置插件的 wrapper 基本都放在 `PythonScriptPlugin/Private`，包括：
+### 7.1 File and type layout
 
-- `PyWrapperObject`
-- `PyWrapperStruct`
-- `PyWrapperEnum`
-- `PyWrapperArray`
-- `PyWrapperFixedArray`
-- `PyWrapperSet`
-- `PyWrapperMap`
-- `PyWrapperDelegate`
-- `PyWrapperFieldPath`
-- `PyWrapperName`
-- `PyWrapperText`
-- `PyWrapperMath`
-- `PyWrapperTypeRegistry`
+UE's built-in wrappers mostly live under `PythonScriptPlugin/Private`, including `PyWrapperObject`, `PyWrapperStruct`, `PyWrapperEnum`, `PyWrapperArray`, `PyWrapperFixedArray`, `PyWrapperSet`, `PyWrapperMap`, `PyWrapperDelegate`, `PyWrapperFieldPath`, `PyWrapperName`, `PyWrapperText`, `PyWrapperMath`, and `PyWrapperTypeRegistry`.
 
-本插件把 wrapper 拆到 `Public/Wrapper` 和 `Private/Wrapper`，并新增自动生成目录 `Public/Wrapper/AutoGen`。核心文件包括：
+This plugin splits wrappers into `Public/Wrapper` and `Private/Wrapper`, and adds `Public/Wrapper/AutoGen`. Core files include `UPyWrapperObjectBase`, `UPyWrapperObject`, `UPyWrapperStruct`, `UPyWrapperEnum`, container/delegate wrappers, `UPyWrapperTypeFactory`, `UPyWrapperTypeRegistry`, and generated `UPyWrapper*.cpp/.h` files.
 
-- `UPyWrapperObjectBase`
-- `UPyWrapperObject`
-- `UPyWrapperStruct`
-- `UPyWrapperEnum`
-- `UPyWrapperArray`
-- `UPyWrapperFixedArray`
-- `UPyWrapperSet`
-- `UPyWrapperMap`
-- `UPyWrapperDelegate`
-- `UPyWrapperFieldPath`
-- `UPyWrapperTypeFactory`
-- `UPyWrapperTypeRegistry`
-- `Wrapper/AutoGen/.../UPyWrapper*.cpp/.h`
+Generated C++ wrappers and game modules need to include wrapper APIs. UE's built-in plugin hides most implementation in Private, which suits internal dynamic generation. This plugin promotes stable wrapper interfaces to Public so UHT-generated code, project-module wrappers, and helper export libraries can reuse them.
 
-这样修改的原因是本插件的生成代码和游戏模块也需要复用 wrapper API。UE 内置插件把大部分实现藏在 Private 下，适合插件内部动态生成；本插件需要让 UHT 生成的 C++ wrapper、项目模块 wrapper、辅助导出库都能包含这些类型，所以把稳定的 wrapper 接口提升到 Public。
+### 7.2 Object wrapper split
 
-### 7.2 Object wrapper 拆分
+UE's built-in plugin uses `FPyWrapperObject` as both the UObject wrapper base and the concrete `PyWrapperObjectType` implementation.
 
-UE 内置插件用 `FPyWrapperObject` 同时承担 UObject wrapper 的基类和具体 `PyWrapperObjectType` 实现。
+This plugin splits it into two layers:
 
-本插件拆成两层：
+- `FUPyWrapperObjectBase`: stores `TObjectPtr<UObject> ObjectInstance` and implements generic property access, UFunction calls, getter/setter handling, and dynamic method calls.
+- `FUPyWrapperObject`: derives from `FUPyWrapperObjectBase` and acts as the default wrapper type for regular UObjects.
 
-- `FUPyWrapperObjectBase`：保存 `TObjectPtr<UObject> ObjectInstance`，实现属性读写、UFunction 调用、getter/setter、动态函数调用等通用逻辑
-- `FUPyWrapperObject`：继承 `FUPyWrapperObjectBase`，作为普通 UObject 的默认 wrapper type
+Auto-generated class wrappers need a clean object base. Generated wrappers for types such as `Actor`, `Widget`, and `GameInstance` can reuse `FUPyWrapperObjectBase`, while the default `UPyWrapperObjectType` remains the fallback UObject wrapper.
 
-这样修改的原因是自动生成 class wrapper 需要一个更清晰的对象基类。`Actor`、`Widget`、`GameInstance` 等生成类型都可以直接复用 `FUPyWrapperObjectBase` 的调用实现，而默认 `UPyWrapperObjectType` 只作为兜底 UObject wrapper 存在。这个拆分也方便后续生成专门的 class wrapper 时保持相同 instance 内存布局和通用调用路径。
+### 7.3 Static AutoGen wrappers
 
-### 7.3 静态 AutoGen wrapper
+UE's built-in `FPyWrapperTypeRegistry::GenerateWrappedClassType/StructType/EnumType` constructs `PyTypeObject`s at runtime, fills `tp_methods`, `tp_getset`, and metadata, and registers them in the module. It also supports Blueprint-generated types, reinstancing, deprecated aliases, and package reload workflows.
 
-UE 内置插件的 `FPyWrapperTypeRegistry::GenerateWrappedClassType/StructType/EnumType` 会在运行时构造 `PyTypeObject`、填充 `tp_methods`、`tp_getset`、meta-data，再注册到模块中。它支持蓝图生成类型、重实例化、弃用别名、包重载等编辑器场景。
+This plugin keeps dynamic paths such as `GenerateWrappedClassType/StructType/EnumType`, but the main path is static generation:
 
-本插件保留了 `GenerateWrappedClassType/StructType/EnumType` 这类动态路径，但核心路径转向静态生成：
+- UHT generates C++ types such as `UPyWrapperActor`, `UPyWrapperVector`, and `UPyWrapperUserWidget` according to `GenerationSettings.json`.
+- Each generated wrapper provides a creation function such as `DoInitWrapperActor`.
+- `InitializeUPyWrapperActor` registers creation functions through `RegisterAutoWrappedClassCreateFunc`.
+- `FUPyWrapperTypeRegistry::StartCreateAutoWrappedTypes` creates wrapper types in inheritance order.
 
-- UHT 根据 `GenerationSettings.json` 生成 `UPyWrapperActor`、`UPyWrapperVector`、`UPyWrapperUserWidget` 等 C++ 类型
-- 每个生成 wrapper 提供类似 `DoInitWrapperActor` 的创建函数
-- `InitializeUPyWrapperActor` 只向 `FUPyWrapperTypeRegistry` 注册 `RegisterAutoWrappedClassCreateFunc`
-- `FUPyWrapperTypeRegistry::StartCreateAutoWrappedTypes` 统一按继承关系创建 wrapper 类型
+This reduces runtime reflection scanning and dynamic assembly cost. Generated wrappers are normal C++ code, participate in compile-time checks, and can be trimmed precisely.
 
-这样修改的原因是减少运行时反射扫描和动态组装成本。生成出来的 wrapper 是普通 C++，能参与编译检查，也能按 `GenerationSettings.json` 精确裁剪导出范围。对移动端和打包游戏来说，这比运行时生成全部可见反射类型更可控。
+### 7.4 TypeRegistry keys and responsibilities
 
-### 7.4 TypeRegistry 的 key 和职责变化
+UE's built-in `FPyWrapperTypeRegistry` often uses `FSoftObjectPath` as a registration key because it must handle Blueprint assets, rename/reload, deprecated type names, and editor package state.
 
-UE 内置 `FPyWrapperTypeRegistry` 用 `FSoftObjectPath` 做很多注册 key，因为它要处理蓝图资产、重命名、重载、弃用类型名、包 reload 等编辑器状态。
-
-本插件 `FUPyWrapperTypeRegistry` 改为更多直接使用反射指针：
+This plugin's `FUPyWrapperTypeRegistry` uses reflection pointers more directly:
 
 - `TMap<const UClass*, const PyTypeObject*> PythonWrappedClasses`
 - `TMap<const UScriptStruct*, const PyTypeObject*> PythonWrappedStructs`
 - `TMap<const UEnum*, const PyTypeObject*> PythonWrappedEnums`
 - `TMap<const UFunction*, const PyTypeObject*> PythonWrappedDelegates`
-- 反向保存 `PyTypeObject* -> UClass/UScriptStruct/UEnum/UFunction`
-- 额外保存 `AutoWrappedClassCreateFuncs` 和 `AutoWrappedStructCreateFuncs`
+- reverse maps from `PyTypeObject*` to `UClass/UScriptStruct/UEnum/UFunction`
+- `AutoWrappedClassCreateFuncs` and `AutoWrappedStructCreateFuncs`
 
-这样修改的原因是运行时里类型集合更稳定，直接用 `UClass*`、`UScriptStruct*` 查找更简单、更快，也不需要承担完整编辑器资产路径重定向语义。需要按名称访问时，由 `ue` 模块的 `tp_getattro` 先找对象，再查 registry。
+Runtime type sets are more stable, so direct `UClass*` / `UScriptStruct*` lookup is simpler and faster. Name lookup is handled by the `ue` module first, then by the registry.
 
-### 7.5 wrapper factory 独立化
+### 7.5 Wrapper factory changes
 
-UE 内置插件也有完整的 wrapper factory 抽象，定义在 `PyWrapperTypeRegistry.h` 中：
+UE's built-in plugin has wrapper factory abstractions in `PyWrapperTypeRegistry.h`, including factories for object, struct, delegate, multicast delegate, name, text, array, fixed array, set, map, and field path wrappers.
 
-- `TPyWrapperTypeFactory`
-- `FPyWrapperObjectFactory`
-- `FPyWrapperStructFactory`
-- `FPyWrapperDelegateFactory`
-- `FPyWrapperMulticastDelegateFactory`
-- `FPyWrapperNameFactory`
-- `FPyWrapperTextFactory`
-- `FPyWrapperArrayFactory`
-- `FPyWrapperFixedArrayFactory`
-- `FPyWrapperSetFactory`
-- `FPyWrapperMapFactory`
-- `FPyWrapperFieldPathFactory`
+This plugin adapts that design for runtime use:
 
-本插件的差异不是“新增 factory”，而是对这套 factory 做了运行时化改造：
+- Factories are moved to the public header `UPyWrapperTypeFactory.h`.
+- `TUPyWrapperTypeFactory` simplifies `MappedInstances` from a `(WrapperKey, PyTypeObject*)` compound key to `UnrealType -> PythonType*`.
+- `FUPyWrapperObjectFactory` uses `FUPyWrapperObjectBase` as the Python type, matching the object wrapper split.
+- Dedicated `FName` and `FText` factories are removed; these types mainly follow string conversion semantics.
+- Multicast delegate factories include property address and `FMulticastDelegateProperty` parameters for runtime delegate binding.
+- `FUPyWrapperObjectFactory` tracks `MappedOwnedPyProps` to clean Python property wrappers owned by UObjects.
 
-- 把 factory 从 `PyWrapperTypeRegistry.h` 中拆到独立的 Public 头 `UPyWrapperTypeFactory.h`，供自动生成 wrapper 和游戏模块包含
-- `TUPyWrapperTypeFactory` 的 `MappedInstances` 从内置插件的 `(WrapperKey, PyTypeObject*)` 复合 key 简化为 `UnrealType -> PythonType*`
-- `FUPyWrapperObjectFactory` 的 Python 类型从 `FPyWrapperObject` 调整为 `FUPyWrapperObjectBase`，配合 Object wrapper 的基类拆分
-- 去掉 `FName`、`FText` 专用 factory，对应类型主要走字符串转换，不再作为独立 wrapper 类型维护
-- multicast delegate factory 增加属性地址和 `FMulticastDelegateProperty` 参数，服务运行时 delegate 绑定语义
-- `FUPyWrapperObjectFactory` 还维护 `MappedOwnedPyProps`，用于 UObject 拥有的 Python 属性 wrapper 清理
+The goal is clearer ownership and wrapper reuse at runtime. When a UObject is deleted, `UUPyManager::NotifyUObjectDeleted` can remove mappings and clean Python-owned properties so Python does not keep accessing destroyed objects.
 
-这样修改的原因是运行时需要更明确地管理 wrapper instance 的所有权和复用，同时让生成代码可以直接依赖 factory API。特别是 UObject 销毁时，`UUPyManager::NotifyUObjectDeleted` 会通过 factory 解除映射并清理对象拥有的 Python 属性，避免 Python 侧继续访问已销毁对象。
+### 7.6 Concrete wrapper behavior
 
-### 7.6 PyWrapper 具体实现差异
+UE's built-in plugin sets dedicated metadata on base wrapper types during initialization. For example, `InitializePyWrapperObject`, `InitializePyWrapperStruct`, and `InitializePyWrapperEnum` create static metadata after `PyType_Ready`, then call functions such as `FPyWrapperObjectMetaData::SetMetaData(&PyWrapperObjectType, &MetaData)`. That metadata stores reflected type pointers, Python property/function maps, deprecation information, and reference collection logic.
 
-除了 registry 和 factory，具体 wrapper 的实现也有不少差异，主要体现在生命周期、方法集合和代码组织上。
+This plugin keeps `FUPyWrapperBaseMetaData` and `_wrapper_meta_data` helpers, but base Object/Struct/Enum wrapper initialization generally no longer attaches dedicated metadata to the base type. Generated wrappers register directly with `FUPyWrapperTypeRegistry`, and property/function information is stored in generated descriptors such as `UPyGenUtil::FGeneratedWrappedProperty` and `FGeneratedWrappedFunction`.
 
-基础 wrapper 层面，UE 内置插件会在类型初始化时给基础 wrapper type 挂专用 metadata。例如 `InitializePyWrapperObject`、`InitializePyWrapperStruct`、`InitializePyWrapperEnum` 都会在 `PyType_Ready` 后创建静态 metadata，并调用 `FPyWrapperObjectMetaData::SetMetaData(&PyWrapperObjectType, &MetaData)` 这类函数。metadata 里保存 `UClass`、`UScriptStruct`、`UEnum`、Python 属性名/函数名映射、弃用信息和引用收集逻辑；后续 `GetClass`、`GetStruct`、`ResolvePropertyName`、`IsFunctionDeprecated` 等路径都依赖它。
+Instance tracking is also different. UE's built-in `FPyWrapperBase::New/Free` registers each wrapper with `FPyReferenceCollector` for editor Python and UObject GC integration. This plugin comments out that path and relies more on `UUPyManager`, wrapper factory mappings, UObject deletion notifications, and the Python-owned object set. It also does not keep the built-in plugin's `UPythonObjectHandle`, which stores arbitrary Python objects on Python-generated UPROPERTY values.
 
-本插件虽然保留了 `FUPyWrapperBaseMetaData` 和 `_wrapper_meta_data` helper，但具体 Object/Struct/Enum wrapper 初始化基本不再给基础 type 设置专用 metadata。`InitializeUPyWrapperObject` 只设置 `tp_base`、`tp_methods`、`tp_flags`，然后 `RegisterWrappedClassType(UObject::StaticClass(), PyType)`；自动生成的 `UPyWrapperActor` 等类型也是 `PyType_Ready` 后直接注册到 `FUPyWrapperTypeRegistry`，没有对应的 `FUPyWrapperObjectMetaData::SetMetaData` 路径。Struct/Enum/Delegate 里相关 metadata 访问或 `SetMetaData` 调用也大多被注释掉。
+Object wrapper organization changed:
 
-这样修改的核心原因是反射类型绑定信息从“挂在 Python type dict 上的 metadata 对象”迁移到了 `FUPyWrapperTypeRegistry` 和 AutoGen 描述符里：Class/Struct/Enum 通过 `PyTypeObject* -> UClass/UScriptStruct/UEnum` 反查，属性和函数通过生成代码里的 `UPyGenUtil::FGeneratedWrappedProperty`、`FGeneratedWrappedFunction` 保存。这样更适合静态生成和运行时裁剪，但也意味着本插件不再复用 UE 内置插件那套基于 `FPyWrapper*MetaData` 的继承解析、弃用提示和引用收集路径。
+- `UPyWrapperObjectBase.cpp`: object instance storage, property access, function calls, getter/setter handling, and validity checks.
+- `UPyWrapperObject.cpp`: thin default `Object` type.
+- `Subclassing/UPyGeneratedClass.cpp`: Python-generated UE class logic.
+- `MethodDefs/UPyMethodDefsObject.cpp`: object methods exposed to Python.
 
-instance 跟踪方式也不同。UE 内置 `FPyWrapperBase::New/Free` 会把每个 wrapper instance 注册到 `FPyReferenceCollector`，用于编辑器 Python 与 UObject GC 的统一引用收集；本插件的 `FUPyWrapperBase::New/Free` 中这部分调用被注释掉，生命周期更多交给 `UUPyManager`、wrapper factory 映射、UObject 删除监听和 Python-owned 对象集合管理。同时，UE 内置插件还有 `UPythonObjectHandle`，用于把任意 Python 对象挂到 Python generated type 的 UPROPERTY 上；本插件没有保留对应的 `UUPythonObjectHandle` 类型。
+The plugin also exposes runtime ownership/rooting helpers such as `AddPythonOwned`, `RemovePythonOwned`, `IsPythonOwned`, `AddToRoot`, and `RemoveFromRoot`. UE's built-in plugin is more editor-API oriented and commonly exposes snake_case methods such as `get_editor_property`, `set_editor_property`, and `call_method`.
 
-Object wrapper 层面，UE 内置插件把 UObject wrapper、对象方法和 `UPythonGeneratedClass` 的大量实现都放在 `PyWrapperObject.cpp` 里，`FPyWrapperObject` 同时是对象 wrapper 基类和默认对象类型。本插件把它拆开：
+Struct wrappers are narrower in the base layer. UE's built-in `PyWrapperStruct` exposes many dynamic helpers such as `cast`, `static_struct`, `copy`, `assign`, `to_tuple`, `get_editor_property`, `set_editor_property`, `export_text`, and `import_text`. This plugin's base `UPyWrapperStruct` mainly keeps `StaticStruct` and `_post_init`; properties, functions, and operators usually come from AutoGen wrapper code.
 
-- `UPyWrapperObjectBase.cpp`：保存对象实例并实现属性访问、函数调用、getter/setter、内部状态校验
-- `UPyWrapperObject.cpp`：只保留普通 `Object` 默认类型，实际文件很薄
-- `Subclassing/UPyGeneratedClass.cpp`：承接 Python 生成 UE class 的逻辑
-- `MethodDefs/UPyMethodDefsObject.cpp`：集中放置暴露给 Python 的对象方法
+Enum wrappers are also trimmed. UE's built-in `PyWrapperEnum` keeps methods such as `cast`, `static_enum`, and `get_display_name`, plus deprecated enum value warnings. This plugin mostly keeps enum entry names, values, iteration, and member access.
 
-这个拆分的直接影响是自动生成 wrapper 可以统一继承 `FUPyWrapperObjectBase`，而不必把默认 `Object` wrapper 当成所有 class wrapper 的实现载体。本插件还额外暴露了运行时所有权和根集相关方法，例如 `AddPythonOwned`、`RemovePythonOwned`、`IsPythonOwned`、`AddToRoot`、`RemoveFromRoot`；UE 内置插件更偏编辑器 API，常见方法是 `get_editor_property`、`set_editor_property`、`call_method` 这类 snake_case 命名。
+Container and delegate wrappers remain conceptually close to the built-in plugin, but method names and exposed sets differ:
 
-Struct wrapper 层面，UE 内置 `PyWrapperStruct` 提供了较完整的动态 struct 工具方法，例如 `cast`、`static_struct`、`copy`、`assign`、`to_tuple`、`get_editor_property`、`set_editor_property`、`export_text`、`import_text`。本插件基础 `UPyWrapperStruct` 暴露的方法更少，主要保留 `StaticStruct` 和 `_post_init`，具体属性、函数、操作符更多依赖 AutoGen wrapper 生成出来。`FUPyWrapperStruct` 也更强调 const 反射类型指针和 inline storage 配置，服务静态生成 struct wrapper。
+- Array methods are PascalCase: `Append`, `Count`, `Extend`, `Index`, `Insert`, `Pop`, `Clear`, `Remove`, `Reverse`, `Sort`, `Resize`.
+- Set methods are PascalCase: `Add`, `Discard`, `Remove`, `Pop`, `Clear`, `Difference`, `Update`, `IsDisJoint`, `IsSubset`, `IsSuperset`.
+- Map methods are PascalCase: `Copy`, `Clear`, `FromKeys`, `Get`, `SetDefault`, `Pop`, `PopItem`, `Update`, `Items`, `Keys`, `Values`.
+- Delegate methods are PascalCase: `BindFunction`, `Bind`, `Unbind`, `Execute`, `ExecuteIfBound`.
+- Multicast delegate methods are PascalCase: `AddFunction`, `Add`, `Remove`, `Contains`, `Broadcast`.
 
-Enum wrapper 层面，UE 内置 `PyWrapperEnum` 仍保留 `cast`、`static_enum`、`get_display_name` 等方法，并包含弃用 enum value 的 warning 路径。本插件的 `UPyWrapperEnum` 中这些方法表和弃用 warning 逻辑基本被注释掉，只保留 enum entry 的名称、值、迭代和成员访问能力。原因是本插件的 enum 主要作为运行时脚本常量和生成类型的一部分使用，不再承担编辑器文档化、弃用提示和动态转换的全部职责。
+The plugin does not aim for one-to-one compatibility with the built-in `unreal` module API. Migrating scripts usually requires container and delegate call-site updates, not only `import unreal` to `import ue`.
 
-容器 wrapper 层面，Array、Set、Map、Delegate、MulticastDelegate 的底层 storage 和迭代模型仍接近 UE 内置插件，但 Python 方法名和暴露范围明显不同：
+### 7.7 Struct wrappers and inline structs
 
-- Array 从 `append/count/extend/index/insert/pop/clear/remove/reverse/sort/resize` 改为 `Append/Count/Extend/Index/Insert/Pop/Clear/Remove/Reverse/Sort/Resize`
-- Set 从 `add/discard/remove/pop/clear/difference/update/isdisjoint/issubset/issuperset` 改为 `Add/Discard/Remove/Pop/Clear/Difference/Update/IsDisjoint/IsSubset/IsSuperset`
-- Map 从 `copy/clear/fromkeys/get/setdefault/pop/popitem/update/items/keys/values` 改为 `Copy/Clear/FromKeys/Get/SetDefault/Pop/PopItem/Update/Items/Keys/Values`
-- Delegate 从 `bind_function/bind_callable/unbind/execute/execute_if_bound` 改为 `BindFunction/Bind/Unbind/Execute/ExecuteIfBound`，部分 copy 或 delegate 专用方法被裁掉
-- MulticastDelegate 从 `add_function/add_callable/remove/contains/broadcast` 改为 `AddFunction/Add/Remove/Contains/Broadcast` 等 PascalCase 方法
+UE's built-in plugin supports regular struct wrappers and special handling for built-in math/name/text types through systems such as `PyWrapperMath`, `PyWrapperName`, and `PyWrapperText`.
 
-这说明本插件并不追求与 `unreal` 模块脚本 API 逐项兼容，而是把 wrapper API 调整为和生成出来的 UE 类型方法命名更一致。迁移 UE 内置 Python 脚本时，容器和 delegate 调用通常需要一起改名，不能只替换 `import unreal` 为 `import ue`。
+This plugin removes separate `UPyWrapperName`, `UPyWrapperText`, and `UPyWrapperMath` files. Instead:
 
-最后，代码组织也体现了目标差异。UE 内置 wrapper 文件往往同时包含类型对象、方法表、编辑器兼容逻辑和 generated type 支撑代码；本插件则把 instance 行为、方法定义、子类生成、类型注册和 AutoGen wrapper 拆开。这样做会增加文件数量，但更适合运行时裁剪、静态生成和平台打包，也降低了每个 wrapper 文件的职责重量。
+- `UPyConversion` maps `FName` and `FText` mainly to Python string semantics.
+- Generated wrappers such as `AutoGen/CoreUObject/Struct/UPyWrapperVector`, `UPyWrapperRotator`, and `UPyWrapperTransform` represent math types.
+- `GenerationSettings.json` `IsInline` controls whether small structs use inline storage to reduce heap allocation.
 
-### 7.7 Struct wrapper 与 inline struct
+After static generation, math types no longer need to be maintained in one handwritten `PyWrapperMath` file. Each exported struct can have its own generated code, properties, methods, operators, and constants.
 
-UE 内置插件支持普通 struct wrapper，也支持一些内建数学类型的专门处理，例如 `PyWrapperMath`、`PyWrapperName`、`PyWrapperText`。
+### 7.8 MethodDefs and wrapper decoupling
 
-本插件去掉了单独的 `UPyWrapperName`、`UPyWrapperText`、`UPyWrapperMath` 文件，转而主要通过：
+UE's built-in plugin often organizes Python methods directly inside wrapper type files, with editor compatibility logic mixed into core modules.
 
-- `UPyConversion` 直接把 `FName`、`FText` 映射为 Python 字符串语义
-- `AutoGen/CoreUObject/Struct/UPyWrapperVector`、`UPyWrapperRotator`、`UPyWrapperTransform` 等生成 wrapper 表达数学类型
-- `GenerationSettings.json` 的 `IsInline` 配置决定小型 struct 是否使用 inline storage，减少堆分配
-
-这样修改的原因是静态生成后，数学类型不再需要集中放在一个手写 `PyWrapperMath` 中维护。每个导出的 struct 都可以有自己的生成代码、属性、方法、操作符和常量，裁剪和补全也更直接。
-
-### 7.8 MethodDefs 和 wrapper 解耦
-
-UE 内置插件很多 Python 方法直接跟 wrapper 类型文件组织在一起，编辑器功能也混在核心模块中。
-
-本插件新增 `Private/MethodDefs` 目录，把 `ue` 模块函数、Object/Struct/Array/Map/Set/Delegate 等 Python 方法定义拆开：
+This plugin adds `Private/MethodDefs` and splits Python method definitions into files such as:
 
 - `UPyMethodDefsUE.cpp`
 - `UPyMethodDefsObject.cpp`
@@ -271,37 +226,37 @@ UE 内置插件很多 Python 方法直接跟 wrapper 类型文件组织在一起
 - `UPyMethodDefsDelegate.cpp`
 - `UPyMethodDefsMulticastDelegate.cpp`
 
-这样修改的原因是让 wrapper 的“实例内存和基础行为”与“暴露给 Python 的方法集合”分离。静态生成 wrapper 时可以复用基础 wrapper，同时按类型生成不同的 `PyMethodDef`、`PyGetSetDef` 和 operator slot。
+This separates wrapper instance storage/basic behavior from the method set exposed to Python. Static generated wrappers can reuse the base wrapper and generate different `PyMethodDef`, `PyGetSetDef`, and operator slots by type.
 
-### 7.9 Python 子类生成仍保留，但更偏运行时
+### 7.9 Python subclass generation remains, but is more runtime-oriented
 
-UE 内置插件有 `UPythonGeneratedClass/Struct/Enum`，用于把 Python 类型生成 UE 类型，服务编辑器脚本和蓝图相关场景。
+UE's built-in plugin has `UPythonGeneratedClass/Struct/Enum` for generating UE types from Python types, serving editor scripts and Blueprint-related workflows.
 
-本插件保留了类似能力，但改名并放到 `Subclassing`：
+This plugin keeps similar capability under `Subclassing`:
 
 - `UUPyGeneratedClass`
 - `UUPyGeneratedStruct`
 - `UUPyGeneratedEnum`
 
-这些类仍依赖 `UPyWrapperObjectBase`、`UPyWrapperStruct`、`UPyWrapperEnum` 判断 Python 类型并生成 UE 类型。差异在于，本插件的主要导出路径已经不是编辑器运行时动态生成反射 wrapper，而是“静态生成 UE 原生类型 wrapper + 必要时支持 Python 子类生成”。
+These still use `UPyWrapperObjectBase`, `UPyWrapperStruct`, and `UPyWrapperEnum` to inspect Python types and generate UE types. The difference is that the main export path is now "static wrappers for native UE types plus Python subclass generation when needed", rather than editor-time dynamic wrapper generation as the primary route.
 
-### 7.10 对脚本 API 的影响
+### 7.10 Script API impact
 
-wrapper 差异最终会反映到 Python 脚本行为：
+Wrapper differences show up in Python scripts:
 
-- 本插件暴露的是 `ue` 模块，不是 `unreal` 模块
-- 本插件默认只稳定暴露 `GenerationSettings.json` 选中的自动生成类型和少量动态查找类型
-- 数学类型、UMG、Engine 常用类的成员来自生成 wrapper 和 `UPyScript*` helper，不完全等同于 UE 内置插件的 `unreal.Vector`、`unreal.Object` 行为
-- `FName`、`FText` 更偏 Python 字符串转换，而不是单独 wrapper 类型
-- 对 UObject 生命周期更敏感，Python 持有对象需要关注 `AddPythonOwned`、`RemovePythonOwned`、`IsValid` 等运行时语义
+- The exposed module is `ue`, not `unreal`.
+- The stable default surface is the generated types selected by `GenerationSettings.json` plus a small number of dynamically found types.
+- Math types, UMG, Engine, and common CoreUObject members come from generated wrappers and `UPyScript*` helpers; they are not identical to UE's `unreal.Vector` or `unreal.Object` behavior.
+- `FName` and `FText` are closer to Python string conversion than independent wrapper types.
+- UObject lifetime matters more at runtime; Python-held objects should use `AddPythonOwned`, `RemovePythonOwned`, `IsValid`, and related helpers carefully.
 
-因此，迁移 UE 内置 Python 脚本时，wrapper 层是最容易出现不兼容的地方。不能只把 `import unreal` 改成 `import ue`，还要检查类型构造、属性名、方法名、操作符、容器返回值和对象生命周期。
+Therefore wrapper compatibility is one of the most likely migration pitfalls. Do not only replace `import unreal` with `import ue`; also check type construction, property names, method names, operators, container return values, and object lifetimes.
 
-## 8. 类型导出 Meta
+## 8. Type export metadata
 
-UE 内置插件使用 Epic 的脚本导出约定，例如 `ScriptMethod`、`ScriptConstant`、`ScriptOperator`、`ScriptName` 等。
+UE's built-in plugin uses Epic's script export metadata conventions, such as `ScriptMethod`, `ScriptConstant`, `ScriptOperator`, and `ScriptName`.
 
-本插件的 UHT 生成器额外使用 `UPy` 前缀的 Meta：
+This plugin's UHT generator uses additional `UPy`-prefixed metadata:
 
 - `UPyScriptMethod`
 - `UPyScriptMethodSelfReturn`
@@ -312,95 +267,93 @@ UE 内置插件使用 Epic 的脚本导出约定，例如 `ScriptMethod`、`Scri
 - `UPyScriptStatic`
 - `UPyUseHelperMethod`
 
-`UPyEditorScriptExportHelperLibrary` 里大量函数只用于编辑器期辅助生成；`UPyRuntimeScriptExportHelperLibrary` 里的 `UPyUseHelperMethod` 函数则是运行时实际会调用的实现。
+`UPyEditorScriptExportHelperLibrary` contains many editor-only helper functions used for generation. `UPyRuntimeScriptExportHelperLibrary` contains `UPyUseHelperMethod` implementations that are actually called at runtime.
 
-这样修改的原因是把本插件的导出语义和 UE 内置插件隔离，避免和引擎已有 Python 元数据混在一起。同时，`UPyUseHelperMethod` 明确区分“只用于生成元数据的辅助函数”和“运行时真正调用的 helper 函数”，这对打包很关键：前者可以放在 `WITH_EDITOR`，后者不能被裁掉。
+The prefix keeps this plugin's export semantics separate from the engine Python plugin's metadata. `UPyUseHelperMethod` also clearly distinguishes generation-only helper functions from runtime helper functions, which matters for packaging: runtime helpers cannot be compiled out under `WITH_EDITOR`.
 
-## 9. 包装类型覆盖范围
+## 9. Wrapper coverage
 
-UE 内置插件覆盖面更偏编辑器脚本，包含 `PyEditor`、`PySlate`、在线文档、命令菜单、Content Browser 文件脚本执行等。
+UE's built-in plugin has broader editor-script coverage, including `PyEditor`, `PySlate`, online docs, command menus, Content Browser Python file execution, and similar features.
 
-本插件覆盖面更偏游戏运行时，源码中新增或强化了：
+This plugin focuses on game runtime and adds or strengthens:
 
-- `PyGameFramework/UPyGameInstance`：从可配置的 Python factory 函数创建每个 UE GameInstance 对应的 Python 对象，并调用对象的 `init`、`on_start`、`tick`、`shutdown`
-- `PyGameFramework/UPyTimerManager`
-- `Helper/UPyBlueprintLibrary`：Blueprint/C++ 调 Python 函数
-- UMG、InputCore、Engine、CoreUObject 的一批自动生成 wrapper
-- `UPyRuntimeScriptExportHelperLibrary`：补充运行时常用但原生 API 不适合直接导出的函数
-- `UUPyManager` 中的 Python 拥有对象集合、UObject 删除监听、编辑器对象替换处理
+- `PyGameFramework/UPyGameInstance`: creates a Python object for each UE GameInstance from a configurable factory function and calls `init`, `on_start`, `tick`, and `shutdown`.
+- `PyGameFramework/UPyTimerManager`.
+- `Helper/UPyBlueprintLibrary`: Blueprint/C++ calls into Python functions.
+- Auto-generated wrappers for UMG, Slate, SlateCore, InputCore, Engine, CoreUObject, and related runtime types.
+- `UPyRuntimeScriptExportHelperLibrary`: runtime helpers for APIs that are common but not suitable for direct native export.
+- Python-owned object sets, UObject deletion listeners, and editor object replacement handling in `UUPyManager`.
 
-这样修改是为了让 Python 能直接参与游戏逻辑和 UI 逻辑，而不只是执行编辑器命令。`UPyGameInstance` 提供了一个简单、稳定的游戏侧入口，`BlueprintLibrary` 则降低蓝图和 C++ 调用 Python 的成本。
+The goal is to let Python participate directly in game logic and UI logic, not only execute editor commands. `UPyGameInstance` provides a simple game-side entry point, and `BlueprintLibrary` lowers the cost of calling Python from Blueprint or C++.
 
-## 10. 被移除或弱化的 UE 内置能力
+## 10. Removed or reduced built-in capabilities
 
-本插件没有保留或没有完整保留以下 UE 内置插件能力：
+This plugin does not keep, or does not fully keep, these built-in plugin capabilities:
 
-- `IPythonScriptPlugin` 公开接口
+- `IPythonScriptPlugin` public interface
 - `PythonScriptCommandlet`
 - `PythonOnlineDocsCommandlet`
-- `PipInstall` 及 pip requirements 管线
+- `PipInstall` and pip requirements pipeline
 - `PythonScriptRemoteExecution`
 - `EditorPythonScriptingLibrary`
-- Content Browser Python 文件集成
-- `debugpy_unreal.py`、`remote_execution.py`、测试脚本等内容资源
-- Python REPL 执行器的完整求值/返回值捕获逻辑
+- Content Browser Python file integration
+- content resources such as `debugpy_unreal.py`, `remote_execution.py`, and test scripts
+- full result capture/evaluation logic of the Python REPL executor
 
-这些能力被移除的原因主要是控制依赖和运行时体积。它们对编辑器自动化很有价值，但会引入 `Analytics`、`AssetRegistry`、`DesktopPlatform`、`Networking`、`ContentBrowser*`、`KismetCompiler`、pip 工具链等依赖；对游戏运行时插件来说，这些依赖会增加打包复杂度，也不适合移动平台。
+These features are valuable for editor automation, but they bring dependencies such as `Analytics`, `AssetRegistry`, `DesktopPlatform`, `Networking`, `ContentBrowser*`, `KismetCompiler`, and pip tooling. For a game runtime plugin, they increase packaging complexity and do not fit mobile platforms well.
 
-## 11. 编辑器功能改造
+## 11. Editor feature changes
 
-UE 内置插件的编辑器功能非常完整，包含菜单、控制台、REPL、文件执行、远程执行、Content Browser 集成、启动脚本进度提示等。
+UE's built-in plugin has a full editor feature set: menus, console, REPL, file execution, remote execution, Content Browser integration, startup script progress reporting, and more.
 
-本插件的 `UnrealPythonEditor` 目前只做一件核心事情：在 `LevelEditor.MainMenu.Tools` 下添加 `Unreal Python -> Generate Python`，调用 `FUPyCodeGenerator::GenerateAllCode()` 导出 `Tools/ReflectionData/native_module.json`。
+`UnrealPythonEditor` currently has one core job: add `Unreal Python -> Generate Python` under `LevelEditor.MainMenu.Tools`, and call `FUPyCodeGenerator::GenerateAllCode()` to export `Tools/ReflectionData/native_module.json`.
 
-运行时模块在编辑器下额外注册了 `UnrealPython` 控制台执行器和 ToolMenus 字符串命令处理器，但实现很轻量，直接 `PyRun_SimpleString`。
+In editor builds, the runtime module also registers an `UnrealPython` console executor and ToolMenus string command handler, but the implementation is lightweight and directly calls `PyRun_SimpleString`.
 
-这样修改的原因是编辑器只作为生成和调试入口存在，不再承担 Python 自动化平台的完整职责。
+The editor is treated as a generation and debugging entry point, not as a full Python automation platform.
 
-## 12. 运行时对象和 GC 处理
+## 12. Runtime objects and GC handling
 
-UE 内置插件有 `PyReferenceCollector`、编辑器对象清理、包重载、蓝图重实例化等复杂逻辑，以适应编辑器中对象频繁重载和蓝图热变更。
+UE's built-in plugin has `PyReferenceCollector`, editor object cleanup, package reload handling, Blueprint reinstancing, and other complex logic for an editor where objects and Blueprints reload frequently.
 
-本插件保留了对象包装和重实例化相关基础，但更强调运行时 UObject 生命周期：
+This plugin keeps the object wrapper and some reinstancing foundation, but emphasizes runtime UObject lifetime:
 
-- `UUPyManager` 注册 `GUObjectArray` 删除监听
-- UObject 删除时解除 Python wrapper 映射
-- `PythonOwnedObjects` 防止 Python 持有对象过早被 UE GC
+- `UUPyManager` registers with `GUObjectArray` deletion notifications.
+- When a UObject is deleted, Python wrapper mappings are removed.
+- `PythonOwnedObjects` prevents Python-held objects from being collected too early by UE GC.
 
-这样修改的原因是游戏运行时里对象销毁通常来自关卡、Actor、Widget 生命周期；Python wrapper 如果继续持有已销毁 UObject，会导致悬挂引用。运行时管理需要比编辑器命令执行更关注对象所有权。
+At game runtime, objects are often destroyed by level transitions, Actor/Widget lifecycles, or game logic. If a Python wrapper keeps referencing a destroyed UObject, it becomes a dangling reference. Runtime management therefore focuses strongly on object ownership.
 
-## 13. 其他容易漏掉的细节差异
+## 13. Additional implementation details that are easy to miss
 
-除了前面的主干差异，还有一些实现细节会直接影响调试、迁移和后续维护。
+Console executor registration moved. UE's built-in plugin registers two executors in the `PythonScriptPlugin` module: `Python` and `PythonREPL`. `Python` supports script/file execution; `PythonREPL` supports single-statement evaluation and result display. This plugin's `FUnrealPythonModule` is a runtime module, but console executor code is wrapped in `WITH_EDITOR`; it registers only one `UnrealPython` executor in editor builds. It has no REPL executor, file execution, completion, or captured evaluation result, and simply runs `PyRun_SimpleString` while holding the GIL.
 
-控制台执行器注册位置不同。UE 内置插件在 `PythonScriptPlugin` 模块里注册两个执行器：`Python` 和 `PythonREPL`。`Python` 支持脚本或文件执行，`PythonREPL` 支持单语句求值并显示结果。本插件的 `FUnrealPythonModule` 是运行时模块，但控制台执行器代码被 `WITH_EDITOR` 包住，只在编辑器构建里注册一个 `UnrealPython` executor；它没有 REPL executor，也没有文件路径执行、补全和求值结果捕获，执行时只是加 GIL 后 `PyRun_SimpleString`。因此它是“运行时模块中的编辑器控制台入口”，不是打包游戏里的通用控制台执行器。
+The `ue` module initialization order was rearranged. `FUPyModuleInitializer::InitializeModules` initializes `__main__`, creates the custom `ue` module, then registers core, wrapper, and AutoGen types. The built-in plugin initializes around the `unreal` module and has responsibilities split across `PyCore`, `PyEngine`, `PyEditor`, `PySlate`, and related systems. This plugin's `ue` module also writes `BUILD_SHIPPING` and `GIsEditor`, and lazily finds native `UClass/UScriptStruct/UEnum` through `tp_getattro`, explicitly skipping `BlueprintGeneratedClass`, `UserDefinedStruct`, and `UserDefinedEnum` types.
 
-`ue` 模块初始化顺序也被重排。`FUPyModuleInitializer::InitializeModules` 先初始化 `__main__`，再创建自定义类型的 `ue` 模块，然后注册 core/wrapper/AutoGen 类型。内置插件则围绕 `unreal` 模块初始化，并带有 `PyCore`、`PyEngine`、`PyEditor`、`PySlate` 等子模块职责。本插件的 `ue` 模块还会写入 `BUILD_SHIPPING` 和 `GIsEditor`，并通过 `tp_getattro` 懒查找 native `UClass/UScriptStruct/UEnum`；查找时显式跳过 BlueprintGeneratedClass/UserDefinedStruct/UserDefinedEnum 这类非 native 类型。
+The Python VM configuration is stricter. The built-in plugin's isolated mode, AdditionalPaths, StartupScripts, pip, remote execution, developer mode, and related settings come from `UPythonScriptPluginSettings` and user settings. This plugin's `FUPyVirtualMachine` currently hard-codes an isolated interpreter, `parse_argv=0`, `utf8_mode=1`, `use_environment=0`, and `module_search_paths_set=1`; it then manually adds plugin runtime paths, `Content/Scripts`, and `UUPySettings::AdditionalPaths`. It fills `sys.argv` from the raw UE command line but does not keep the built-in plugin's startup script queue.
 
-Python VM 配置更硬。UE 内置插件的隔离模式、AdditionalPaths、StartupScripts、pip、remote execution、developer mode 等都来自 `UPythonScriptPluginSettings` 和 user settings。本插件的 `FUPyVirtualMachine` 目前硬编码 isolated interpreter，`parse_argv=0`、`utf8_mode=1`、`use_environment=0`、`module_search_paths_set=1`，然后手动写入插件 Python 运行时路径、`Content/Scripts` 和 `UUPySettings::AdditionalPaths`。它还会用 UE 原始命令行填充 `sys.argv`，但没有保留 UE 内置的 startup scripts 队列。
+Settings are heavily trimmed. UE's built-in `UPythonScriptPluginSettings` is `config=Engine` and has per-user settings for enablement, developer mode, type hints, pip, remote execution, Content Browser integration, and more. This plugin's `UUPySettings` is `config=Game` and currently keeps only `AdditionalPaths`; the main script path is read separately from `[UnrealPython] ScriptPath` in `Game.ini`.
 
-配置对象被大幅裁剪。UE 内置 `UPythonScriptPluginSettings` 是 `config=Engine`，还有 per-user settings，包含启用开关、开发者模式、类型提示、pip、远程执行、Content Browser 集成等选项。本插件的 `UUPySettings` 是 `config=Game`，目前只保留 `AdditionalPaths`，脚本主路径则通过 `Game.ini` 的 `[UnrealPython] ScriptPath` 单独读取。这个取舍让项目打包配置更直接，但也移除了很多编辑器 Python 的开关。
+Output and lifecycle hooks changed. After initialization, this plugin replaces `sys.stdout` and `sys.stderr` with redirectors that call `ue.Log` and `ue.LogError`, then calls `ue_site.on_init()`. On shutdown it calls `ue_site.on_shutdown()`. In the editor ticker it calls `ue_site.on_tick()` every frame. The built-in plugin relies more on its execution context, log capture, startup scripts, and editor callbacks.
 
-输出和生命周期 hook 也换了。本插件初始化后用一段 Python 代码把 `sys.stdout`、`sys.stderr` 替换成调用 `ue.Log`、`ue.LogError` 的 redirector，然后固定调用 `ue_site.on_init()`；关闭时调用 `ue_site.on_shutdown()`；编辑器 ticker 中每帧调用 `ue_site.on_tick()`。UE 内置插件更依赖自身的执行上下文、日志捕获、启动脚本和编辑器回调；本插件则把游戏侧生命周期留给项目脚本里的 `ue_site`。
+Module function naming and coverage differ. This plugin's `ue` module functions use PascalCase, such as `Log`, `NewObject`, `FindObject`, `LoadObject`, `LoadClass`, `FindAsset`, `CollectGarbage`, `GetTypeFromClass`, and `GetContentDir`. The built-in `unreal` module exposes many snake_case functions and wrapper methods. This plugin keeps decorator entry points such as `uclass`, `ustruct`, `uenum`, `uproperty`, and `ufunction`, but does not preserve the built-in plugin's module loading, object reference cleanup, localized text helpers, shutdown callbacks, and related APIs as compatibility shims.
 
-模块函数命名和覆盖范围不一致。本插件 `ue` 模块方法是 PascalCase，例如 `Log`、`NewObject`、`FindObject`、`LoadObject`、`LoadClass`、`FindAsset`、`CollectGarbage`、`GetTypeFromClass`、`GetContentDir`。UE 内置 `unreal` 模块里很多函数和 wrapper 方法是 snake_case。本插件还保留了 `uclass/ustruct/uenum/uproperty/ufunction` 这类 Python 生成 UE 类型的 decorator 入口，但诸如 `reload`、`load_module`、`purge_object_references`、localized text helper、shutdown callback 等函数在方法表里已经注释掉。
+The type conversion layer has a different visibility and target. UE's built-in `PyConversion` is primarily a Private internal tool. This plugin puts `UPyConversion` in Public and adds project-needed `TBaseStructure` specializations such as `FVector2f`, `FVector3f`, `FVector4f`, `FTimespan`, and `FARFilter`. C++ game code, Blueprint helpers, and AutoGen wrappers can reuse it directly, but that also makes conversion APIs part of this plugin's public ABI.
 
-类型转换层虽然源自 UE 插件，但可见性和目标不同。UE 内置 `PyConversion` 主要是 Private 内部工具；本插件把 `UPyConversion` 放到 Public，并加入一些项目需要的 `TBaseStructure` 特化，例如 `FVector2f`、`FVector3f`、`FTimespan`、`FARFilter` 等。这样 C++ 游戏代码、Blueprint helper 和 AutoGen wrapper 都能直接复用转换层。代价是转换 API 已经成为本插件公共 ABI，后续修改要比 UE 内置 Private 工具更谨慎。
+C++/Blueprint calls into Python also differ. UE's built-in plugin exposes editor-script-oriented `PythonScriptLibrary`, K2 nodes, command execution, and file execution. This plugin adds `UUPyBlueprintLibrary`, with a small number of BlueprintCallable fixed-signature functions and a C++ variadic template `CallPythonMethod` that uses `UPyConversion` for parameters and return values. This is a bridge from game code to Python logic, not an editor scripting platform.
 
-C++/Blueprint 调 Python 的入口也不同。UE 内置插件提供的是面向编辑器脚本的 `PythonScriptLibrary`、K2 node、命令执行和文件执行能力。本插件新增 `UUPyBlueprintLibrary`，提供少量 BlueprintCallable 固定签名函数和一个 C++ variadic template `CallPythonMethod`，通过 `UPyConversion` 拼参数和转返回值。这个入口更像游戏代码调用 Python 逻辑的桥，而不是编辑器脚本平台。
+Build dependencies and docstring policy differ. This plugin does not depend on `Python3` and links `ThirdParty/python314` directly. Its runtime module also depends on game-side modules such as `UMG`, `InputCore`, `NetCore`, and `FieldNotification`, and defines `WITH_UPY_DOC_STRINGS=1` only in editor builds. UE's built-in plugin depends on `Python3`, `Analytics`, `Networking`, `Json`, `DesktopPlatform`, `ContentBrowser*`, `KismetCompiler`, and other editor automation modules.
 
-Build 依赖和 docstring 策略也有差异。本插件不依赖 `Python3`，直接链接 `ThirdParty/python314`；运行时模块额外依赖 `UMG`、`InputCore`、`NetCore`、`FieldNotification` 等游戏侧模块，并在 editor build 才定义 `WITH_UPY_DOC_STRINGS=1`。UE 内置插件依赖 `Python3`、`Analytics`、`Networking`、`Json`、`DesktopPlatform`、`ContentBrowser*`、`KismetCompiler` 等编辑器自动化相关模块。这个差异解释了为什么本插件能服务打包运行时，但缺少大量编辑器工具链能力。
+Taken together, these details show that the plugin is not only a trimmed UE plugin. Much of the state that lived in `FPythonScriptPlugin`, `FPyWrapper*MetaData`, and editor settings moved into `UUPyManager`, `FUPyVirtualMachine`, `FUPyModuleInitializer`, `FUPyWrapperTypeRegistry`, AutoGen descriptors, and project script `ue_site`.
 
-这些细节合起来说明：本插件不是只把 UE 插件“瘦身”，而是把很多原来挂在 `FPythonScriptPlugin`、`FPyWrapper*MetaData` 和编辑器设置里的状态，迁移到了 `UUPyManager`、`FUPyVirtualMachine`、`FUPyModuleInitializer`、`FUPyWrapperTypeRegistry`、AutoGen 描述符和项目脚本 `ue_site` 中。
+## 14. Documentation and maintenance advice
 
-## 14. 文档和维护建议
+For future maintenance, do not sync entire files directly from UE's built-in `PythonScriptPlugin`. The goals have diverged:
 
-后续维护本插件时，不建议直接从 UE 内置 `PythonScriptPlugin` 整文件同步。两边的目标已经分叉：
+- For CPython API, GIL, type conversion, and container wrapper fixes, the corresponding built-in plugin files are useful references.
+- For initialization, `.Build.cs`, UE module references, script paths, packaged resources, UHT generation, and `UPy` metadata, follow this plugin's current structure first.
+- Before porting a built-in plugin feature, decide whether it is an editor automation feature or a runtime scripting feature.
+- Prefer `Tools/GenerationSettings.json` and the UHT generation pipeline when adding exported types. Do not casually expand dynamic reflection generation scope.
+- `UPyUseHelperMethod` implementations must stay in runtime-compilable code and cannot live only under `WITH_EDITOR`.
 
-- 需要 CPython API、GIL、类型转换、容器包装修复时，可以参考 UE 内置插件对应文件
-- 涉及初始化、Build.cs、模块依赖、脚本路径、打包资源、UHT 生成、`UPy` Meta 时，应优先遵循本插件现有结构
-- 从 UE 内置插件移植功能前，需要先判断它是编辑器自动化能力还是运行时脚本能力
-- 新增导出类型优先通过 `Tools/GenerationSettings.json` 和 UHT 生成管线处理，不要随意扩大动态反射生成范围
-- `UPyUseHelperMethod` 的实现必须留在运行时可编译代码中，不能只放在 `WITH_EDITOR`
-
-简言之：UE 内置插件适合回答“编辑器里如何执行 Python”；本插件适合回答“打包游戏里如何嵌入 Python 并让 Python 调 UE 类型”。这个目标差异解释了大部分源码改动。
+In short: UE's built-in plugin answers "how to run Python in the editor"; this plugin answers "how to embed Python in a packaged game and let Python call UE types." That goal difference explains most of the source changes.
