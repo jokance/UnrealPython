@@ -4,7 +4,7 @@
 	"VersionName": "1.0",
 	"FriendlyName": "UnrealPython",
 	"Description": "Embeds Python in Unreal Engine for runtime scripting, Blueprint/C++ interop, and generated Python bindings.",
-	"Category": "Other",
+	"Category": "Python",
 	"CreatedBy": "",
 	"CreatedByURL": "",
 	"DocsURL": "",

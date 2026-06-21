@@ -6,6 +6,8 @@ UnrealPython is a plugin for embedding CPython into Unreal Engine at runtime. It
 
 **Python version**: 3.14.5 (the bundled runtime directory is `ThirdParty/python314`)
 
+**Supported Unreal Engine versions**: 5.7, 5.8
+
 **Runtime supported platforms**: Win64, Android, Mac, iOS
 
 **Editor tool supported platforms**: Win64, Mac
