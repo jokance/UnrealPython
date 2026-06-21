@@ -705,7 +705,7 @@ struct FMethods_LinearColor
 		}
 
 		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = 0.000100;
+		float Arg1 = 0.000100f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))
@@ -934,7 +934,7 @@ namespace UPyConversion
 
 		UPYCONVERSION_RETURN(FUPyConversionResult::Failure(), TEXT("NativizeStructInstance"), *FString::Printf(TEXT("Cannot nativize '%s' as 'FLinearColor'"), *UPyUtil::GetFriendlyTypename(PyObj)));
 	}
-	
+
 	FUPyConversionResult PythonizeStructInstance(const FLinearColor& InVal, PyObject*& OutPyObj, const ESetErrorState SetErrorState)
 	{
 		OutPyObj = FUPyWrapperLinearColor::CreateInstance(InVal, FUPyWrapperOwnerContext(), EUPyConversionMethod::Copy);

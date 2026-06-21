@@ -539,7 +539,7 @@ struct FMethods_ScrollBox
 		}
 
 		PyObject* PyArg3 = (PyArg2 && ArgCount > 3) ? PyTuple_GetItem(InArgs, 3) : nullptr;
-		float Arg3 = 0.000000;
+		float Arg3 = 0.000000f;
 		if (PyArg3 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg3, Arg3))

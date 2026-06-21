@@ -5,6 +5,7 @@
 #include "Wrapper/UPyWrapperTypeRegistry.h"
 #include "Wrapper/UPyWrapperTypeFactory.h"
 #include "Utils/UPyUtil.h"
+#include "Engine/EngineBaseTypes.h"
 #include "GameFramework/PlayerInput.h"
 #include "UObject/UnrealTypePrivate.h"
 #include "GameFramework/InputSettings.h"

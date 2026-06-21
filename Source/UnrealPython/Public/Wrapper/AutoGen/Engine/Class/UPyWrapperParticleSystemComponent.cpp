@@ -6,10 +6,11 @@
 #include "Wrapper/UPyWrapperTypeFactory.h"
 #include "Utils/UPyUtil.h"
 #include "Engine/EngineTypes.h"
+#include "Particles/ParticleSystem.h"
+#include "ParticleHelper.h"
 #include "Materials/MaterialInterface.h"
 #include "Materials/MaterialInstanceDynamic.h"
 #include "UObject/NoExportTypes.h"
-#include "Particles/ParticleSystem.h"
 
 
 PyTypeObject UPyWrapperParticleSystemComponentType = {

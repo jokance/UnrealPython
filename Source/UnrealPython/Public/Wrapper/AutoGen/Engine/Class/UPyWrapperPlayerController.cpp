@@ -5,9 +5,11 @@
 #include "Wrapper/UPyWrapperTypeRegistry.h"
 #include "Wrapper/UPyWrapperTypeFactory.h"
 #include "Utils/UPyUtil.h"
+#include "Engine/EngineTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "WorldPartition/WorldPartitionStreamingSource.h"
 #include "GameFramework/TouchInterface.h"
 #include "GameFramework/UpdateLevelVisibilityLevelInfo.h"
-#include "UObject/NoExportTypes.h"
 #include "GameFramework/Actor.h"
 #include "GameFramework/OnlineReplStructs.h"
 #include "GameFramework/ForceFeedbackEffect.h"
@@ -25,11 +27,9 @@
 #include "Engine/EngineBaseTypes.h"
 #include "InputCoreTypes.h"
 #include "GameFramework/HUD.h"
-#include "Engine/EngineTypes.h"
 #include "Engine/HitResult.h"
 #include "Components/InputComponent.h"
 #include "GameFramework/SpectatorPawn.h"
-#include "WorldPartition/WorldPartitionStreamingSource.h"
 #include "Engine/LatentActionManager.h"
 #include "Haptics/HapticFeedbackEffect_Base.h"
 #include "Engine/NetSerialization.h"
@@ -2736,7 +2736,7 @@ struct FMethods_PlayerController
 		}
 
 		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = 1.000000;
+		float Arg1 = 1.000000f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))
@@ -3137,14 +3137,14 @@ struct FMethods_PlayerController
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("PlayerController::ClientUnmutePlayers"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::NativizeStructInstance(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("PlayerController::ClientUnmutePlayers"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -3274,14 +3274,14 @@ struct FMethods_PlayerController
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("PlayerController::ClientUpdateMultipleLevelsStreamingStatus"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::NativizeStructInstance(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("PlayerController::ClientUpdateMultipleLevelsStreamingStatus"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -3542,14 +3542,14 @@ struct FMethods_PlayerController
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("PlayerController::GetHitResultUnderCursorForObjects"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("PlayerController::GetHitResultUnderCursorForObjects"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -3690,14 +3690,14 @@ struct FMethods_PlayerController
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("PlayerController::GetHitResultUnderFingerForObjects"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg1[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("PlayerController::GetHitResultUnderFingerForObjects"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -4337,7 +4337,7 @@ struct FMethods_PlayerController
 		}
 
 		PyObject* PyArg2 = (ArgCount > 2) ? PyTuple_GetItem(InArgs, 2) : nullptr;
-		float Arg2 = 1.000000;
+		float Arg2 = 1.000000f;
 		if (PyArg2 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg2, Arg2))
@@ -4844,14 +4844,14 @@ struct FMethods_PlayerController
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("PlayerController::ServerUpdateMultipleLevelsVisibility"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::NativizeStructInstance(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("PlayerController::ServerUpdateMultipleLevelsVisibility"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -5344,7 +5344,7 @@ struct FMethods_PlayerController
 		}
 
 		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = 0.000000;
+		float Arg1 = 0.000000f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))
@@ -5366,7 +5366,7 @@ struct FMethods_PlayerController
 		}
 
 		PyObject* PyArg3 = (PyArg2 && ArgCount > 3) ? PyTuple_GetItem(InArgs, 3) : nullptr;
-		float Arg3 = 0.000000;
+		float Arg3 = 0.000000f;
 		if (PyArg3 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg3, Arg3))

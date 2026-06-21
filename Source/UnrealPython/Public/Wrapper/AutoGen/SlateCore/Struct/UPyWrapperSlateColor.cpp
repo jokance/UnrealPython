@@ -7,8 +7,8 @@
 #include "Utils/UPyUtil.h"
 #include "Templates/SharedPointer.h"
 #include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
 #include "Styling/SlateColor.h"
+#include "UObject/NoExportTypes.h"
 #include "Styling/StyleColors.h"
 
 
@@ -392,7 +392,7 @@ namespace UPyConversion
 
 		UPYCONVERSION_RETURN(FUPyConversionResult::Failure(), TEXT("NativizeStructInstance"), *FString::Printf(TEXT("Cannot nativize '%s' as 'FSlateColor'"), *UPyUtil::GetFriendlyTypename(PyObj)));
 	}
-	
+
 	FUPyConversionResult PythonizeStructInstance(const FSlateColor& InVal, PyObject*& OutPyObj, const ESetErrorState SetErrorState)
 	{
 		OutPyObj = FUPyWrapperSlateColor::CreateInstance(InVal, FUPyWrapperOwnerContext(), EUPyConversionMethod::Copy);

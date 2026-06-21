@@ -5,12 +5,12 @@
 #include "Wrapper/UPyWrapperTypeRegistry.h"
 #include "Wrapper/UPyWrapperTypeFactory.h"
 #include "Utils/UPyUtil.h"
-#include "UObject/UnrealTypePrivate.h"
 #include "Components/SceneComponent.h"
+#include "Engine/EngineTypes.h"
+#include "UObject/UnrealTypePrivate.h"
 #include "UObject/NoExportTypes.h"
 #include "GameFramework/PhysicsVolume.h"
 #include "Engine/HitResult.h"
-#include "Engine/EngineTypes.h"
 
 
 PyTypeObject UPyWrapperSceneComponentType = {

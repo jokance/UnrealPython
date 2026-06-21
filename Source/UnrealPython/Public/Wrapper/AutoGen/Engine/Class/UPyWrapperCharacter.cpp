@@ -1915,7 +1915,7 @@ struct FMethods_Character
 		}
 
 		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = 1.000000;
+		float Arg1 = 1.000000f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))

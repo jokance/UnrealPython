@@ -5,11 +5,11 @@
 #include "Wrapper/UPyWrapperTypeRegistry.h"
 #include "Wrapper/UPyWrapperTypeFactory.h"
 #include "Utils/UPyUtil.h"
+#include "Blueprint/UserWidget.h"
 #include "UObject/Class.h"
 #include "Extensions/UserWidgetExtension.h"
 #include "Helper/UPyRuntimeScriptExportHelperLibrary.h"
 #include "Animation/WidgetAnimation.h"
-#include "Blueprint/UserWidget.h"
 #include "UObject/NoExportTypes.h"
 #include "Widgets/Layout/Anchors.h"
 #include "Camera/PlayerCameraManager.h"
@@ -2097,7 +2097,7 @@ struct FMethods_UserWidget
 		}
 
 		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = 0.000000;
+		float Arg1 = 0.000000f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))
@@ -2130,7 +2130,7 @@ struct FMethods_UserWidget
 		}
 
 		PyObject* PyArg4 = (PyArg3 && ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		float Arg4 = 1.000000;
+		float Arg4 = 1.000000f;
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg4, Arg4))
@@ -2175,7 +2175,7 @@ struct FMethods_UserWidget
 		}
 
 		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = 1.000000;
+		float Arg1 = 1.000000f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))
@@ -2220,7 +2220,7 @@ struct FMethods_UserWidget
 		}
 
 		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = 1.000000;
+		float Arg1 = 1.000000f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))
@@ -2265,7 +2265,7 @@ struct FMethods_UserWidget
 		}
 
 		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = 0.000000;
+		float Arg1 = 0.000000f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))
@@ -2276,7 +2276,7 @@ struct FMethods_UserWidget
 		}
 
 		PyObject* PyArg2 = (PyArg1 && ArgCount > 2) ? PyTuple_GetItem(InArgs, 2) : nullptr;
-		float Arg2 = 0.000000;
+		float Arg2 = 0.000000f;
 		if (PyArg2 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg2, Arg2))
@@ -2309,7 +2309,7 @@ struct FMethods_UserWidget
 		}
 
 		PyObject* PyArg5 = (PyArg4 && ArgCount > 5) ? PyTuple_GetItem(InArgs, 5) : nullptr;
-		float Arg5 = 1.000000;
+		float Arg5 = 1.000000f;
 		if (PyArg5 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg5, Arg5))
@@ -2388,7 +2388,7 @@ struct FMethods_UserWidget
 		}
 
 		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = 0.000000;
+		float Arg1 = 0.000000f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))
@@ -2421,7 +2421,7 @@ struct FMethods_UserWidget
 		}
 
 		PyObject* PyArg4 = (PyArg3 && ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		float Arg4 = 1.000000;
+		float Arg4 = 1.000000f;
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg4, Arg4))
@@ -2466,7 +2466,7 @@ struct FMethods_UserWidget
 		}
 
 		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = 1.000000;
+		float Arg1 = 1.000000f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))
@@ -2511,7 +2511,7 @@ struct FMethods_UserWidget
 		}
 
 		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = 1.000000;
+		float Arg1 = 1.000000f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))
@@ -2556,7 +2556,7 @@ struct FMethods_UserWidget
 		}
 
 		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = 0.000000;
+		float Arg1 = 0.000000f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))
@@ -2567,7 +2567,7 @@ struct FMethods_UserWidget
 		}
 
 		PyObject* PyArg2 = (PyArg1 && ArgCount > 2) ? PyTuple_GetItem(InArgs, 2) : nullptr;
-		float Arg2 = 0.000000;
+		float Arg2 = 0.000000f;
 		if (PyArg2 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg2, Arg2))
@@ -2600,7 +2600,7 @@ struct FMethods_UserWidget
 		}
 
 		PyObject* PyArg5 = (PyArg4 && ArgCount > 5) ? PyTuple_GetItem(InArgs, 5) : nullptr;
-		float Arg5 = 1.000000;
+		float Arg5 = 1.000000f;
 		if (PyArg5 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg5, Arg5))
@@ -3002,7 +3002,7 @@ struct FMethods_UserWidget
 		}
 
 		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = 1.000000;
+		float Arg1 = 1.000000f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))

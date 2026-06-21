@@ -756,14 +756,14 @@ struct FMethods_KismetMathLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetMathLibrary::AverageOfIntArray"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetMathLibrary::AverageOfIntArray"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -2651,7 +2651,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = 0.000000;
+		float Arg1 = 0.000000f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))
@@ -2954,7 +2954,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg2 = (ArgCount > 2) ? PyTuple_GetItem(InArgs, 2) : nullptr;
-		float Arg2 = 1.000000;
+		float Arg2 = 1.000000f;
 		if (PyArg2 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg2, Arg2))
@@ -3726,7 +3726,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		FVector Arg1 = FVector(1.000000,1.000000,1.000000);
+		FVector Arg1 = FVector(1.000000, 1.000000, 1.000000);
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg1, Arg1))
@@ -4343,7 +4343,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg2 = (ArgCount > 2) ? PyTuple_GetItem(InArgs, 2) : nullptr;
-		float Arg2 = 0.000100;
+		float Arg2 = 0.000100f;
 		if (PyArg2 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg2, Arg2))
@@ -4445,7 +4445,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg2 = (ArgCount > 2) ? PyTuple_GetItem(InArgs, 2) : nullptr;
-		float Arg2 = 0.000100;
+		float Arg2 = 0.000100f;
 		if (PyArg2 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg2, Arg2))
@@ -4487,7 +4487,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg2 = (ArgCount > 2) ? PyTuple_GetItem(InArgs, 2) : nullptr;
-		float Arg2 = 0.000100;
+		float Arg2 = 0.000100f;
 		if (PyArg2 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg2, Arg2))
@@ -4589,7 +4589,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg2 = (ArgCount > 2) ? PyTuple_GetItem(InArgs, 2) : nullptr;
-		float Arg2 = 0.000100;
+		float Arg2 = 0.000100f;
 		if (PyArg2 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg2, Arg2))
@@ -4631,7 +4631,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg2 = (ArgCount > 2) ? PyTuple_GetItem(InArgs, 2) : nullptr;
-		float Arg2 = 0.000100;
+		float Arg2 = 0.000100f;
 		if (PyArg2 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg2, Arg2))
@@ -4673,7 +4673,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg2 = (ArgCount > 2) ? PyTuple_GetItem(InArgs, 2) : nullptr;
-		float Arg2 = 0.000100;
+		float Arg2 = 0.000100f;
 		if (PyArg2 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg2, Arg2))
@@ -5652,7 +5652,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg6 = (ArgCount > 6) ? PyTuple_GetItem(InArgs, 6) : nullptr;
-		float Arg6 = 1.000000;
+		float Arg6 = 1.000000f;
 		if (PyArg6 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg6, Arg6))
@@ -5663,7 +5663,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg7 = (PyArg6 && ArgCount > 7) ? PyTuple_GetItem(InArgs, 7) : nullptr;
-		float Arg7 = 1.000000;
+		float Arg7 = 1.000000f;
 		if (PyArg7 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg7, Arg7))
@@ -5685,7 +5685,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg9 = (PyArg8 && ArgCount > 9) ? PyTuple_GetItem(InArgs, 9) : nullptr;
-		float Arg9 = -1.000000;
+		float Arg9 = -1.000000f;
 		if (PyArg9 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg9, Arg9))
@@ -5696,7 +5696,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg10 = (PyArg9 && ArgCount > 10) ? PyTuple_GetItem(InArgs, 10) : nullptr;
-		float Arg10 = 1.000000;
+		float Arg10 = 1.000000f;
 		if (PyArg10 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg10, Arg10))
@@ -6424,7 +6424,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg2 = (ArgCount > 2) ? PyTuple_GetItem(InArgs, 2) : nullptr;
-		float Arg2 = 0.000000;
+		float Arg2 = 0.000000f;
 		if (PyArg2 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg2, Arg2))
@@ -6642,14 +6642,14 @@ struct FMethods_KismetMathLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetMathLibrary::GetVectorArrayAverage"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::NativizeStructInstance(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetMathLibrary::GetVectorArrayAverage"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -7160,7 +7160,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg3 = (ArgCount > 3) ? PyTuple_GetItem(InArgs, 3) : nullptr;
-		float Arg3 = 1.000000;
+		float Arg3 = 1.000000f;
 		if (PyArg3 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg3, Arg3))
@@ -7620,7 +7620,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = 0.000100;
+		float Arg1 = 0.000100f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))
@@ -8602,7 +8602,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg2 = (ArgCount > 2) ? PyTuple_GetItem(InArgs, 2) : nullptr;
-		float Arg2 = 0.000100;
+		float Arg2 = 0.000100f;
 		if (PyArg2 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg2, Arg2))
@@ -8717,7 +8717,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg4 = (ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		float Arg4 = 1.000000;
+		float Arg4 = 1.000000f;
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg4, Arg4))
@@ -8843,7 +8843,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg4 = (ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		float Arg4 = 1.000000;
+		float Arg4 = 1.000000f;
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg4, Arg4))
@@ -9176,7 +9176,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg3 = (ArgCount > 3) ? PyTuple_GetItem(InArgs, 3) : nullptr;
-		float Arg3 = 1.000000;
+		float Arg3 = 1.000000f;
 		if (PyArg3 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg3, Arg3))
@@ -9395,7 +9395,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = 1.000000;
+		float Arg1 = 1.000000f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))
@@ -9406,7 +9406,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg2 = (PyArg1 && ArgCount > 2) ? PyTuple_GetItem(InArgs, 2) : nullptr;
-		float Arg2 = 0.000000;
+		float Arg2 = 0.000000f;
 		if (PyArg2 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg2, Arg2))
@@ -9448,7 +9448,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg2 = (ArgCount > 2) ? PyTuple_GetItem(InArgs, 2) : nullptr;
-		float Arg2 = 0.000000;
+		float Arg2 = 0.000000f;
 		if (PyArg2 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg2, Arg2))
@@ -9545,7 +9545,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = 200.000000;
+		float Arg1 = 200.000000f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))
@@ -10063,7 +10063,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg2 = (ArgCount > 2) ? PyTuple_GetItem(InArgs, 2) : nullptr;
-		FVector Arg2 = FVector(1.000000,1.000000,1.000000);
+		FVector Arg2 = FVector(1.000000, 1.000000, 1.000000);
 		if (PyArg2 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg2, Arg2))
@@ -10816,7 +10816,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = 0.000000;
+		float Arg1 = 0.000000f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))
@@ -10898,7 +10898,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = 0.000000;
+		float Arg1 = 0.000000f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))
@@ -11186,7 +11186,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = 0.000000;
+		float Arg1 = 0.000000f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))
@@ -11543,14 +11543,14 @@ struct FMethods_KismetMathLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetMathLibrary::MaxOfByteArray"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetMathLibrary::MaxOfByteArray"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -11598,14 +11598,14 @@ struct FMethods_KismetMathLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetMathLibrary::MaxOfFloatArray"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetMathLibrary::MaxOfFloatArray"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -11653,14 +11653,14 @@ struct FMethods_KismetMathLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetMathLibrary::MaxOfIntArray"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetMathLibrary::MaxOfIntArray"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -11708,14 +11708,14 @@ struct FMethods_KismetMathLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetMathLibrary::MedianOfIntArray"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetMathLibrary::MedianOfIntArray"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -11796,14 +11796,14 @@ struct FMethods_KismetMathLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetMathLibrary::MinAreaRectangle"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::NativizeStructInstance(Item, Arg1[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetMathLibrary::MinAreaRectangle"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -11910,14 +11910,14 @@ struct FMethods_KismetMathLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetMathLibrary::MinOfByteArray"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetMathLibrary::MinOfByteArray"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -11965,14 +11965,14 @@ struct FMethods_KismetMathLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetMathLibrary::MinOfFloatArray"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetMathLibrary::MinOfFloatArray"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -12020,14 +12020,14 @@ struct FMethods_KismetMathLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetMathLibrary::MinOfIntArray"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetMathLibrary::MinOfIntArray"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -12825,7 +12825,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg2 = (ArgCount > 2) ? PyTuple_GetItem(InArgs, 2) : nullptr;
-		float Arg2 = 0.000100;
+		float Arg2 = 0.000100f;
 		if (PyArg2 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg2, Arg2))
@@ -12836,7 +12836,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg3 = (PyArg2 && ArgCount > 3) ? PyTuple_GetItem(InArgs, 3) : nullptr;
-		float Arg3 = 0.000100;
+		float Arg3 = 0.000100f;
 		if (PyArg3 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg3, Arg3))
@@ -12847,7 +12847,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg4 = (PyArg3 && ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		float Arg4 = 0.000100;
+		float Arg4 = 0.000100f;
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg4, Arg4))
@@ -12916,7 +12916,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = 0.000100;
+		float Arg1 = 0.000100f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))
@@ -12959,7 +12959,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = 0.000000;
+		float Arg1 = 0.000000f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))
@@ -12989,7 +12989,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = 0.000000;
+		float Arg1 = 0.000000f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))
@@ -13476,7 +13476,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg2 = (ArgCount > 2) ? PyTuple_GetItem(InArgs, 2) : nullptr;
-		float Arg2 = 0.000100;
+		float Arg2 = 0.000100f;
 		if (PyArg2 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg2, Arg2))
@@ -13578,7 +13578,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg2 = (ArgCount > 2) ? PyTuple_GetItem(InArgs, 2) : nullptr;
-		float Arg2 = 0.000100;
+		float Arg2 = 0.000100f;
 		if (PyArg2 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg2, Arg2))
@@ -13620,7 +13620,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg2 = (ArgCount > 2) ? PyTuple_GetItem(InArgs, 2) : nullptr;
-		float Arg2 = 0.000100;
+		float Arg2 = 0.000100f;
 		if (PyArg2 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg2, Arg2))
@@ -13692,7 +13692,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg2 = (ArgCount > 2) ? PyTuple_GetItem(InArgs, 2) : nullptr;
-		float Arg2 = 0.000100;
+		float Arg2 = 0.000100f;
 		if (PyArg2 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg2, Arg2))
@@ -13734,7 +13734,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg2 = (ArgCount > 2) ? PyTuple_GetItem(InArgs, 2) : nullptr;
-		float Arg2 = 0.000100;
+		float Arg2 = 0.000100f;
 		if (PyArg2 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg2, Arg2))
@@ -13776,7 +13776,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg2 = (ArgCount > 2) ? PyTuple_GetItem(InArgs, 2) : nullptr;
-		float Arg2 = 0.000100;
+		float Arg2 = 0.000100f;
 		if (PyArg2 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg2, Arg2))
@@ -14057,20 +14057,20 @@ struct FMethods_KismetMathLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetMathLibrary::PointsAreCoplanar"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::NativizeStructInstance(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetMathLibrary::PointsAreCoplanar"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
 
 		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = 0.100000;
+		float Arg1 = 0.100000f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))
@@ -14475,7 +14475,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = 0.000100;
+		float Arg1 = 0.000100f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))
@@ -14570,7 +14570,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = 0.000100;
+		float Arg1 = 0.000100f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))
@@ -14600,7 +14600,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = 0.000100;
+		float Arg1 = 0.000100f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))
@@ -14979,7 +14979,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg6 = (ArgCount > 6) ? PyTuple_GetItem(InArgs, 6) : nullptr;
-		float Arg6 = 1.000000;
+		float Arg6 = 1.000000f;
 		if (PyArg6 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg6, Arg6))
@@ -14990,7 +14990,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg7 = (PyArg6 && ArgCount > 7) ? PyTuple_GetItem(InArgs, 7) : nullptr;
-		float Arg7 = 1.000000;
+		float Arg7 = 1.000000f;
 		if (PyArg7 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg7, Arg7))
@@ -15093,7 +15093,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg5 = (ArgCount > 5) ? PyTuple_GetItem(InArgs, 5) : nullptr;
-		float Arg5 = 2.000000;
+		float Arg5 = 2.000000f;
 		if (PyArg5 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg5, Arg5))
@@ -17654,7 +17654,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg4 = (ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		float Arg4 = 2.000000;
+		float Arg4 = 2.000000f;
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg4, Arg4))
@@ -18167,7 +18167,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg4 = (ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		float Arg4 = 2.000000;
+		float Arg4 = 2.000000f;
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg4, Arg4))
@@ -18695,7 +18695,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = 0.000100;
+		float Arg1 = 0.000100f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))
@@ -18738,7 +18738,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = 0.000100;
+		float Arg1 = 0.000100f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))
@@ -18824,7 +18824,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = 0.000100;
+		float Arg1 = 0.000100f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))
@@ -18867,7 +18867,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = 0.000000;
+		float Arg1 = 0.000000f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))
@@ -19081,7 +19081,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg6 = (ArgCount > 6) ? PyTuple_GetItem(InArgs, 6) : nullptr;
-		float Arg6 = 1.000000;
+		float Arg6 = 1.000000f;
 		if (PyArg6 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg6, Arg6))
@@ -19092,7 +19092,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg7 = (PyArg6 && ArgCount > 7) ? PyTuple_GetItem(InArgs, 7) : nullptr;
-		float Arg7 = 1.000000;
+		float Arg7 = 1.000000f;
 		if (PyArg7 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg7, Arg7))
@@ -19114,7 +19114,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg9 = (PyArg8 && ArgCount > 9) ? PyTuple_GetItem(InArgs, 9) : nullptr;
-		FVector Arg9 = FVector(-1.000000,-1.000000,-1.000000);
+		FVector Arg9 = FVector(-1.000000, -1.000000, -1.000000);
 		if (PyArg9 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg9, Arg9))
@@ -19125,7 +19125,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg10 = (PyArg9 && ArgCount > 10) ? PyTuple_GetItem(InArgs, 10) : nullptr;
-		FVector Arg10 = FVector(1.000000,1.000000,1.000000);
+		FVector Arg10 = FVector(1.000000, 1.000000, 1.000000);
 		if (PyArg10 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg10, Arg10))
@@ -19745,7 +19745,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = 0.000100;
+		float Arg1 = 0.000100f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))
@@ -19788,7 +19788,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = 0.000100;
+		float Arg1 = 0.000100f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))
@@ -19818,7 +19818,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = 0.000100;
+		float Arg1 = 0.000100f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))
@@ -19897,7 +19897,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = 0.000100;
+		float Arg1 = 0.000100f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))
@@ -19940,7 +19940,7 @@ struct FMethods_KismetMathLibrary
 		}
 
 		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = 0.000000;
+		float Arg1 = 0.000000f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))

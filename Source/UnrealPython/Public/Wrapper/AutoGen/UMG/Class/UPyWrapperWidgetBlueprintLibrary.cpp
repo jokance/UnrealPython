@@ -342,7 +342,7 @@ struct FMethods_WidgetBlueprintLibrary
 		}
 
 		PyObject* PyArg4 = (ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		FLinearColor Arg4 = FLinearColor(1.000000, 1.000000, 1.000000, 1.000000);
+		FLinearColor Arg4 = FLinearColor(1.000000f, 1.000000f, 1.000000f, 1.000000f);
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg4, Arg4))
@@ -396,7 +396,7 @@ struct FMethods_WidgetBlueprintLibrary
 		}
 
 		PyObject* PyArg3 = (ArgCount > 3) ? PyTuple_GetItem(InArgs, 3) : nullptr;
-		FLinearColor Arg3 = FLinearColor(1.000000, 1.000000, 1.000000, 1.000000);
+		FLinearColor Arg3 = FLinearColor(1.000000f, 1.000000f, 1.000000f, 1.000000f);
 		if (PyArg3 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg3, Arg3))
@@ -418,7 +418,7 @@ struct FMethods_WidgetBlueprintLibrary
 		}
 
 		PyObject* PyArg5 = (PyArg4 && ArgCount > 5) ? PyTuple_GetItem(InArgs, 5) : nullptr;
-		float Arg5 = 1.000000;
+		float Arg5 = 1.000000f;
 		if (PyArg5 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg5, Arg5))
@@ -486,7 +486,7 @@ struct FMethods_WidgetBlueprintLibrary
 		}
 
 		PyObject* PyArg2 = (ArgCount > 2) ? PyTuple_GetItem(InArgs, 2) : nullptr;
-		FLinearColor Arg2 = FLinearColor(1.000000, 1.000000, 1.000000, 1.000000);
+		FLinearColor Arg2 = FLinearColor(1.000000f, 1.000000f, 1.000000f, 1.000000f);
 		if (PyArg2 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg2, Arg2))
@@ -508,7 +508,7 @@ struct FMethods_WidgetBlueprintLibrary
 		}
 
 		PyObject* PyArg4 = (PyArg3 && ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		float Arg4 = 1.000000;
+		float Arg4 = 1.000000f;
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg4, Arg4))
@@ -586,7 +586,7 @@ struct FMethods_WidgetBlueprintLibrary
 		}
 
 		PyObject* PyArg5 = (ArgCount > 5) ? PyTuple_GetItem(InArgs, 5) : nullptr;
-		FLinearColor Arg5 = FLinearColor(1.000000, 1.000000, 1.000000, 1.000000);
+		FLinearColor Arg5 = FLinearColor(1.000000f, 1.000000f, 1.000000f, 1.000000f);
 		if (PyArg5 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg5, Arg5))
@@ -597,7 +597,7 @@ struct FMethods_WidgetBlueprintLibrary
 		}
 
 		PyObject* PyArg6 = (PyArg5 && ArgCount > 6) ? PyTuple_GetItem(InArgs, 6) : nullptr;
-		float Arg6 = 1.000000;
+		float Arg6 = 1.000000f;
 		if (PyArg6 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg6, Arg6))
@@ -663,7 +663,7 @@ struct FMethods_WidgetBlueprintLibrary
 		}
 
 		PyObject* PyArg4 = (ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		float Arg4 = 16.000000;
+		float Arg4 = 16.000000f;
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg4, Arg4))
@@ -685,7 +685,7 @@ struct FMethods_WidgetBlueprintLibrary
 		}
 
 		PyObject* PyArg6 = (PyArg5 && ArgCount > 6) ? PyTuple_GetItem(InArgs, 6) : nullptr;
-		FLinearColor Arg6 = FLinearColor(1.000000, 1.000000, 1.000000, 1.000000);
+		FLinearColor Arg6 = FLinearColor(1.000000f, 1.000000f, 1.000000f, 1.000000f);
 		if (PyArg6 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg6, Arg6))

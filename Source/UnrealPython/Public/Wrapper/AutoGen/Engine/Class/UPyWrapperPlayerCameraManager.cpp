@@ -1430,7 +1430,7 @@ struct FMethods_PlayerCameraManager
 		}
 
 		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = 1.000000;
+		float Arg1 = 1.000000f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))
@@ -1499,7 +1499,7 @@ struct FMethods_PlayerCameraManager
 		}
 
 		PyObject* PyArg2 = (ArgCount > 2) ? PyTuple_GetItem(InArgs, 2) : nullptr;
-		float Arg2 = 1.000000;
+		float Arg2 = 1.000000f;
 		if (PyArg2 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg2, Arg2))

@@ -5,6 +5,7 @@
 #include "Wrapper/UPyWrapperTypeRegistry.h"
 #include "Wrapper/UPyWrapperTypeFactory.h"
 #include "Utils/UPyUtil.h"
+#include "Engine/TextureDefines.h"
 #include "ImageCoreBP.h"
 
 

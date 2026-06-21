@@ -5,6 +5,7 @@
 #include "Wrapper/UPyWrapperTypeRegistry.h"
 #include "Wrapper/UPyWrapperTypeFactory.h"
 #include "Utils/UPyUtil.h"
+#include "Animation/AnimEnums.h"
 #include "Animation/AnimInstance.h"
 #include "Animation/AnimSequenceBase.h"
 #include "Animation/AnimCurveTypes.h"
@@ -18,7 +19,6 @@
 #include "AlphaBlend.h"
 #include "Animation/AnimStateMachineTypes.h"
 #include "Engine/EngineTypes.h"
-#include "Animation/AnimEnums.h"
 #include "Animation/PoseSnapshot.h"
 #include "GameFramework/Pawn.h"
 
@@ -2091,7 +2091,7 @@ struct FMethods_AnimInstance
 		}
 
 		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = 1.000000;
+		float Arg1 = 1.000000f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))
@@ -2113,7 +2113,7 @@ struct FMethods_AnimInstance
 		}
 
 		PyObject* PyArg3 = (PyArg2 && ArgCount > 3) ? PyTuple_GetItem(InArgs, 3) : nullptr;
-		float Arg3 = 0.000000;
+		float Arg3 = 0.000000f;
 		if (PyArg3 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg3, Arg3))
@@ -2170,7 +2170,7 @@ struct FMethods_AnimInstance
 		}
 
 		PyObject* PyArg2 = (ArgCount > 2) ? PyTuple_GetItem(InArgs, 2) : nullptr;
-		float Arg2 = 1.000000;
+		float Arg2 = 1.000000f;
 		if (PyArg2 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg2, Arg2))
@@ -2192,7 +2192,7 @@ struct FMethods_AnimInstance
 		}
 
 		PyObject* PyArg4 = (PyArg3 && ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		float Arg4 = 0.000000;
+		float Arg4 = 0.000000f;
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg4, Arg4))
@@ -2249,7 +2249,7 @@ struct FMethods_AnimInstance
 		}
 
 		PyObject* PyArg2 = (ArgCount > 2) ? PyTuple_GetItem(InArgs, 2) : nullptr;
-		float Arg2 = 1.000000;
+		float Arg2 = 1.000000f;
 		if (PyArg2 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg2, Arg2))
@@ -2271,7 +2271,7 @@ struct FMethods_AnimInstance
 		}
 
 		PyObject* PyArg4 = (PyArg3 && ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		float Arg4 = 0.000000;
+		float Arg4 = 0.000000f;
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg4, Arg4))
@@ -2379,7 +2379,7 @@ struct FMethods_AnimInstance
 		}
 
 		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = 1.000000;
+		float Arg1 = 1.000000f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))
@@ -2595,7 +2595,7 @@ struct FMethods_AnimInstance
 		}
 
 		PyObject* PyArg2 = (ArgCount > 2) ? PyTuple_GetItem(InArgs, 2) : nullptr;
-		float Arg2 = 0.250000;
+		float Arg2 = 0.250000f;
 		if (PyArg2 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg2, Arg2))
@@ -2606,7 +2606,7 @@ struct FMethods_AnimInstance
 		}
 
 		PyObject* PyArg3 = (PyArg2 && ArgCount > 3) ? PyTuple_GetItem(InArgs, 3) : nullptr;
-		float Arg3 = 0.250000;
+		float Arg3 = 0.250000f;
 		if (PyArg3 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg3, Arg3))
@@ -2617,7 +2617,7 @@ struct FMethods_AnimInstance
 		}
 
 		PyObject* PyArg4 = (PyArg3 && ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		float Arg4 = 1.000000;
+		float Arg4 = 1.000000f;
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg4, Arg4))
@@ -2639,7 +2639,7 @@ struct FMethods_AnimInstance
 		}
 
 		PyObject* PyArg6 = (PyArg5 && ArgCount > 6) ? PyTuple_GetItem(InArgs, 6) : nullptr;
-		float Arg6 = -1.000000;
+		float Arg6 = -1.000000f;
 		if (PyArg6 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg6, Arg6))
@@ -2650,7 +2650,7 @@ struct FMethods_AnimInstance
 		}
 
 		PyObject* PyArg7 = (PyArg6 && ArgCount > 7) ? PyTuple_GetItem(InArgs, 7) : nullptr;
-		float Arg7 = 0.000000;
+		float Arg7 = 0.000000f;
 		if (PyArg7 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg7, Arg7))
@@ -2720,7 +2720,7 @@ struct FMethods_AnimInstance
 		}
 
 		PyObject* PyArg4 = (ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		float Arg4 = 1.000000;
+		float Arg4 = 1.000000f;
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg4, Arg4))
@@ -2742,7 +2742,7 @@ struct FMethods_AnimInstance
 		}
 
 		PyObject* PyArg6 = (PyArg5 && ArgCount > 6) ? PyTuple_GetItem(InArgs, 6) : nullptr;
-		float Arg6 = -1.000000;
+		float Arg6 = -1.000000f;
 		if (PyArg6 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg6, Arg6))
@@ -2753,7 +2753,7 @@ struct FMethods_AnimInstance
 		}
 
 		PyObject* PyArg7 = (PyArg6 && ArgCount > 7) ? PyTuple_GetItem(InArgs, 7) : nullptr;
-		float Arg7 = 0.000000;
+		float Arg7 = 0.000000f;
 		if (PyArg7 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg7, Arg7))
@@ -2823,7 +2823,7 @@ struct FMethods_AnimInstance
 		}
 
 		PyObject* PyArg4 = (ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		float Arg4 = 1.000000;
+		float Arg4 = 1.000000f;
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg4, Arg4))
@@ -2845,7 +2845,7 @@ struct FMethods_AnimInstance
 		}
 
 		PyObject* PyArg6 = (PyArg5 && ArgCount > 6) ? PyTuple_GetItem(InArgs, 6) : nullptr;
-		float Arg6 = -1.000000;
+		float Arg6 = -1.000000f;
 		if (PyArg6 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg6, Arg6))
@@ -2856,7 +2856,7 @@ struct FMethods_AnimInstance
 		}
 
 		PyObject* PyArg7 = (PyArg6 && ArgCount > 7) ? PyTuple_GetItem(InArgs, 7) : nullptr;
-		float Arg7 = 0.000000;
+		float Arg7 = 0.000000f;
 		if (PyArg7 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg7, Arg7))
@@ -3244,7 +3244,7 @@ struct FMethods_AnimInstance
 		}
 		Py_ssize_t ArgCount = PyTuple_GET_SIZE(InArgs);
 		PyObject* PyArg0 = (ArgCount > 0) ? PyTuple_GetItem(InArgs, 0) : nullptr;
-		float Arg0 = 0.250000;
+		float Arg0 = 0.250000f;
 		if (PyArg0 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg0, Arg0))

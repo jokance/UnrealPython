@@ -5,15 +5,20 @@
 #include "Wrapper/UPyWrapperTypeRegistry.h"
 #include "Wrapper/UPyWrapperTypeFactory.h"
 #include "Utils/UPyUtil.h"
+#include "Components/PrimitiveComponent.h"
+#include "Engine/EngineTypes.h"
+#include "HLOD/HLODBatchingPolicy.h"
+#include "HitProxies.h"
+#include "SceneTypes.h"
+#include "VT/RuntimeVirtualTextureEnum.h"
+#include "AI/Navigation/NavRelevantInterface.h"
 #include "UObject/NoExportTypes.h"
 #include "Chaos/ChaosEngineInterface.h"
 #include "GameFramework/Pawn.h"
 #include "GameFramework/Actor.h"
-#include "Components/PrimitiveComponent.h"
 #include "Materials/MaterialInterface.h"
 #include "Materials/MaterialInstanceDynamic.h"
 #include "PhysicsEngine/BodyInstance.h"
-#include "Engine/EngineTypes.h"
 #include "UObject/UnrealTypePrivate.h"
 #include "UObject/Class.h"
 #include "HLOD/HLODLevelExclusion.h"
@@ -5272,7 +5277,7 @@ struct FMethods_PrimitiveComponent
 		}
 		Py_ssize_t ArgCount = PyTuple_GET_SIZE(InArgs);
 		PyObject* PyArg0 = (ArgCount > 0) ? PyTuple_GetItem(InArgs, 0) : nullptr;
-		float Arg0 = 1.000000;
+		float Arg0 = 1.000000f;
 		if (PyArg0 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg0, Arg0))
@@ -5480,7 +5485,7 @@ struct FMethods_PrimitiveComponent
 		}
 		Py_ssize_t ArgCount = PyTuple_GET_SIZE(InArgs);
 		PyObject* PyArg0 = (ArgCount > 0) ? PyTuple_GetItem(InArgs, 0) : nullptr;
-		float Arg0 = 1.000000;
+		float Arg0 = 1.000000f;
 		if (PyArg0 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg0, Arg0))
@@ -5861,14 +5866,14 @@ struct FMethods_PrimitiveComponent
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("PrimitiveComponent::SetCustomPrimitiveDataFloatArray"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg1[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("PrimitiveComponent::SetCustomPrimitiveDataFloatArray"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -6057,14 +6062,14 @@ struct FMethods_PrimitiveComponent
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("PrimitiveComponent::SetDefaultCustomPrimitiveDataFloatArray"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg1[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("PrimitiveComponent::SetDefaultCustomPrimitiveDataFloatArray"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -6236,14 +6241,14 @@ struct FMethods_PrimitiveComponent
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("PrimitiveComponent::SetExcludeForSpecificHLODLevels"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("PrimitiveComponent::SetExcludeForSpecificHLODLevels"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -6516,7 +6521,7 @@ struct FMethods_PrimitiveComponent
 		}
 
 		PyObject* PyArg1 = (PyArg0 && ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = 1.000000;
+		float Arg1 = 1.000000f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))
@@ -6560,7 +6565,7 @@ struct FMethods_PrimitiveComponent
 		}
 
 		PyObject* PyArg1 = (PyArg0 && ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = 1.000000;
+		float Arg1 = 1.000000f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))
@@ -6661,7 +6666,7 @@ struct FMethods_PrimitiveComponent
 		}
 
 		PyObject* PyArg1 = (PyArg0 && ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = -1.000000;
+		float Arg1 = -1.000000f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))
@@ -7443,7 +7448,7 @@ struct FMethods_PrimitiveComponent
 		}
 		Py_ssize_t ArgCount = PyTuple_GET_SIZE(InArgs);
 		PyObject* PyArg0 = (ArgCount > 0) ? PyTuple_GetItem(InArgs, 0) : nullptr;
-		float Arg0 = 0.200000;
+		float Arg0 = 0.200000f;
 		if (PyArg0 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg0, Arg0))

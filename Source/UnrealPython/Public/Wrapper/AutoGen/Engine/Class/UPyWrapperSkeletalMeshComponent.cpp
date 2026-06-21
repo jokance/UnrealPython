@@ -6,6 +6,7 @@
 #include "Wrapper/UPyWrapperTypeFactory.h"
 #include "Utils/UPyUtil.h"
 #include "Components/SkeletalMeshComponent.h"
+#include "ClothingSystemRuntimeTypes.h"
 #include "PhysicsEngine/PhysicsAsset.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/Class.h"
@@ -3810,7 +3811,7 @@ struct FMethods_SkeletalMeshComponent
 		}
 
 		PyObject* PyArg3 = (PyArg2 && ArgCount > 3) ? PyTuple_GetItem(InArgs, 3) : nullptr;
-		float Arg3 = 0.000000;
+		float Arg3 = 0.000000f;
 		if (PyArg3 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg3, Arg3))
@@ -3821,7 +3822,7 @@ struct FMethods_SkeletalMeshComponent
 		}
 
 		PyObject* PyArg4 = (PyArg3 && ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		float Arg4 = 1.000000;
+		float Arg4 = 1.000000f;
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg4, Arg4))
@@ -4515,14 +4516,14 @@ struct FMethods_SkeletalMeshComponent
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("SkeletalMeshComponent::SetAllowedAnimCurvesEvaluation"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("SkeletalMeshComponent::SetAllowedAnimCurvesEvaluation"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}

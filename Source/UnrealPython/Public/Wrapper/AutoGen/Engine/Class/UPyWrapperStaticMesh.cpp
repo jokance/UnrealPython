@@ -5,12 +5,12 @@
 #include "Wrapper/UPyWrapperTypeRegistry.h"
 #include "Wrapper/UPyWrapperTypeFactory.h"
 #include "Utils/UPyUtil.h"
+#include "Engine/StaticMesh.h"
 #include "Materials/MaterialInterface.h"
 #include "Engine/StaticMeshSocket.h"
 #include "StaticMeshDescription.h"
 #include "UObject/Object.h"
 #include "UObject/NoExportTypes.h"
-#include "Engine/StaticMesh.h"
 
 
 PyTypeObject UPyWrapperStaticMeshType = {

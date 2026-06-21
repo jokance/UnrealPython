@@ -5,6 +5,7 @@
 #include "Wrapper/UPyWrapperTypeRegistry.h"
 #include "Wrapper/UPyWrapperTypeFactory.h"
 #include "Utils/UPyUtil.h"
+#include "Engine/EngineTypes.h"
 #include "GameFramework/Actor.h"
 #include "Components/ActorComponent.h"
 #include "UObject/Class.h"
@@ -14,7 +15,6 @@
 #include "GameFramework/Pawn.h"
 #include "GameFramework/Controller.h"
 #include "Engine/Level.h"
-#include "Engine/EngineTypes.h"
 #include "Components/PrimitiveComponent.h"
 #include "Components/ChildActorComponent.h"
 #include "Engine/HitResult.h"
@@ -5785,7 +5785,7 @@ struct FMethods_Actor
 		}
 		Py_ssize_t ArgCount = PyTuple_GET_SIZE(InArgs);
 		PyObject* PyArg0 = (ArgCount > 0) ? PyTuple_GetItem(InArgs, 0) : nullptr;
-		float Arg0 = 1.000000;
+		float Arg0 = 1.000000f;
 		if (PyArg0 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg0, Arg0))
@@ -5819,7 +5819,7 @@ struct FMethods_Actor
 		}
 
 		PyObject* PyArg3 = (ArgCount > 3) ? PyTuple_GetItem(InArgs, 3) : nullptr;
-		float Arg3 = 0.000000;
+		float Arg3 = 0.000000f;
 		if (PyArg3 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg3, Arg3))
@@ -7065,7 +7065,7 @@ struct FMethods_Actor
 		}
 		Py_ssize_t ArgCount = PyTuple_GET_SIZE(InArgs);
 		PyObject* PyArg0 = (ArgCount > 0) ? PyTuple_GetItem(InArgs, 0) : nullptr;
-		float Arg0 = 0.200000;
+		float Arg0 = 0.200000f;
 		if (PyArg0 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg0, Arg0))

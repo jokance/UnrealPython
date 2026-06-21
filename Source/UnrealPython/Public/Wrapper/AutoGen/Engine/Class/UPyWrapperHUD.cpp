@@ -877,7 +877,7 @@ struct FMethods_HUD
 		}
 
 		PyObject* PyArg5 = (ArgCount > 5) ? PyTuple_GetItem(InArgs, 5) : nullptr;
-		float Arg5 = 0.000000;
+		float Arg5 = 0.000000f;
 		if (PyArg5 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg5, Arg5))
@@ -1007,7 +1007,7 @@ struct FMethods_HUD
 		}
 
 		PyObject* PyArg9 = (ArgCount > 9) ? PyTuple_GetItem(InArgs, 9) : nullptr;
-		float Arg9 = 1.000000;
+		float Arg9 = 1.000000f;
 		if (PyArg9 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg9, Arg9))
@@ -1029,7 +1029,7 @@ struct FMethods_HUD
 		}
 
 		PyObject* PyArg11 = (PyArg10 && ArgCount > 11) ? PyTuple_GetItem(InArgs, 11) : nullptr;
-		float Arg11 = 0.000000;
+		float Arg11 = 0.000000f;
 		if (PyArg11 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg11, Arg11))
@@ -1123,7 +1123,7 @@ struct FMethods_HUD
 		}
 
 		PyObject* PyArg5 = (ArgCount > 5) ? PyTuple_GetItem(InArgs, 5) : nullptr;
-		float Arg5 = 1.000000;
+		float Arg5 = 1.000000f;
 		if (PyArg5 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg5, Arg5))
@@ -1240,7 +1240,7 @@ struct FMethods_HUD
 		}
 
 		PyObject* PyArg7 = (ArgCount > 7) ? PyTuple_GetItem(InArgs, 7) : nullptr;
-		FLinearColor Arg7 = FLinearColor(1.000000, 1.000000, 1.000000, 1.000000);
+		FLinearColor Arg7 = FLinearColor(1.000000f, 1.000000f, 1.000000f, 1.000000f);
 		if (PyArg7 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg7, Arg7))
@@ -1251,7 +1251,7 @@ struct FMethods_HUD
 		}
 
 		PyObject* PyArg8 = (PyArg7 && ArgCount > 8) ? PyTuple_GetItem(InArgs, 8) : nullptr;
-		FLinearColor Arg8 = FLinearColor(1.000000, 1.000000, 1.000000, 1.000000);
+		FLinearColor Arg8 = FLinearColor(1.000000f, 1.000000f, 1.000000f, 1.000000f);
 		if (PyArg8 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg8, Arg8))
@@ -1262,7 +1262,7 @@ struct FMethods_HUD
 		}
 
 		PyObject* PyArg9 = (PyArg8 && ArgCount > 9) ? PyTuple_GetItem(InArgs, 9) : nullptr;
-		FLinearColor Arg9 = FLinearColor(1.000000, 1.000000, 1.000000, 1.000000);
+		FLinearColor Arg9 = FLinearColor(1.000000f, 1.000000f, 1.000000f, 1.000000f);
 		if (PyArg9 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg9, Arg9))
@@ -1413,7 +1413,7 @@ struct FMethods_HUD
 		}
 
 		PyObject* PyArg5 = (PyArg4 && ArgCount > 5) ? PyTuple_GetItem(InArgs, 5) : nullptr;
-		float Arg5 = 1.000000;
+		float Arg5 = 1.000000f;
 		if (PyArg5 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg5, Arg5))
@@ -1554,7 +1554,7 @@ struct FMethods_HUD
 		}
 
 		PyObject* PyArg9 = (ArgCount > 9) ? PyTuple_GetItem(InArgs, 9) : nullptr;
-		FLinearColor Arg9 = FLinearColor(1.000000, 1.000000, 1.000000, 1.000000);
+		FLinearColor Arg9 = FLinearColor(1.000000f, 1.000000f, 1.000000f, 1.000000f);
 		if (PyArg9 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg9, Arg9))
@@ -1576,7 +1576,7 @@ struct FMethods_HUD
 		}
 
 		PyObject* PyArg11 = (PyArg10 && ArgCount > 11) ? PyTuple_GetItem(InArgs, 11) : nullptr;
-		float Arg11 = 1.000000;
+		float Arg11 = 1.000000f;
 		if (PyArg11 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg11, Arg11))
@@ -1598,7 +1598,7 @@ struct FMethods_HUD
 		}
 
 		PyObject* PyArg13 = (PyArg12 && ArgCount > 13) ? PyTuple_GetItem(InArgs, 13) : nullptr;
-		float Arg13 = 0.000000;
+		float Arg13 = 0.000000f;
 		if (PyArg13 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg13, Arg13))
@@ -1668,7 +1668,7 @@ struct FMethods_HUD
 		}
 
 		PyObject* PyArg3 = (ArgCount > 3) ? PyTuple_GetItem(InArgs, 3) : nullptr;
-		float Arg3 = 1.000000;
+		float Arg3 = 1.000000f;
 		if (PyArg3 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg3, Arg3))
@@ -1820,7 +1820,7 @@ struct FMethods_HUD
 		}
 
 		PyObject* PyArg2 = (PyArg1 && ArgCount > 2) ? PyTuple_GetItem(InArgs, 2) : nullptr;
-		float Arg2 = 1.000000;
+		float Arg2 = 1.000000f;
 		if (PyArg2 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg2, Arg2))

@@ -175,14 +175,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxOverlapActors"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg3[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxOverlapActors"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -225,14 +225,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxOverlapActors"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg5[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxOverlapActors"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -338,14 +338,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxOverlapActorsWithOrientation"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg4[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxOverlapActorsWithOrientation"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -388,14 +388,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxOverlapActorsWithOrientation"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg6[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxOverlapActorsWithOrientation"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -489,14 +489,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxOverlapComponents"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg3[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxOverlapComponents"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -539,14 +539,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxOverlapComponents"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg5[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxOverlapComponents"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -652,14 +652,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxOverlapComponentsWithOrientation"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg4[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxOverlapComponentsWithOrientation"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -702,14 +702,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxOverlapComponentsWithOrientation"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg6[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxOverlapComponentsWithOrientation"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -852,14 +852,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxTraceMulti"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg7[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxTraceMulti"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -889,7 +889,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg10 = (ArgCount > 10) ? PyTuple_GetItem(InArgs, 10) : nullptr;
-		FLinearColor Arg10 = FLinearColor(1.000000, 0.000000, 0.000000, 1.000000);
+		FLinearColor Arg10 = FLinearColor(1.000000f, 0.000000f, 0.000000f, 1.000000f);
 		if (PyArg10 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg10, Arg10))
@@ -900,7 +900,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg11 = (PyArg10 && ArgCount > 11) ? PyTuple_GetItem(InArgs, 11) : nullptr;
-		FLinearColor Arg11 = FLinearColor(0.000000, 1.000000, 0.000000, 1.000000);
+		FLinearColor Arg11 = FLinearColor(0.000000f, 1.000000f, 0.000000f, 1.000000f);
 		if (PyArg11 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg11, Arg11))
@@ -911,7 +911,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg12 = (PyArg11 && ArgCount > 12) ? PyTuple_GetItem(InArgs, 12) : nullptr;
-		float Arg12 = 5.000000;
+		float Arg12 = 5.000000f;
 		if (PyArg12 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg12, Arg12))
@@ -1059,14 +1059,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxTraceMultiByProfile"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg7[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxTraceMultiByProfile"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -1096,7 +1096,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg10 = (ArgCount > 10) ? PyTuple_GetItem(InArgs, 10) : nullptr;
-		FLinearColor Arg10 = FLinearColor(1.000000, 0.000000, 0.000000, 1.000000);
+		FLinearColor Arg10 = FLinearColor(1.000000f, 0.000000f, 0.000000f, 1.000000f);
 		if (PyArg10 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg10, Arg10))
@@ -1107,7 +1107,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg11 = (PyArg10 && ArgCount > 11) ? PyTuple_GetItem(InArgs, 11) : nullptr;
-		FLinearColor Arg11 = FLinearColor(0.000000, 1.000000, 0.000000, 1.000000);
+		FLinearColor Arg11 = FLinearColor(0.000000f, 1.000000f, 0.000000f, 1.000000f);
 		if (PyArg11 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg11, Arg11))
@@ -1118,7 +1118,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg12 = (PyArg11 && ArgCount > 12) ? PyTuple_GetItem(InArgs, 12) : nullptr;
-		float Arg12 = 5.000000;
+		float Arg12 = 5.000000f;
 		if (PyArg12 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg12, Arg12))
@@ -1242,14 +1242,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxTraceMultiForObjects"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg5[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxTraceMultiForObjects"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -1292,14 +1292,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxTraceMultiForObjects"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg7[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxTraceMultiForObjects"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -1329,7 +1329,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg10 = (ArgCount > 10) ? PyTuple_GetItem(InArgs, 10) : nullptr;
-		FLinearColor Arg10 = FLinearColor(1.000000, 0.000000, 0.000000, 1.000000);
+		FLinearColor Arg10 = FLinearColor(1.000000f, 0.000000f, 0.000000f, 1.000000f);
 		if (PyArg10 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg10, Arg10))
@@ -1340,7 +1340,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg11 = (PyArg10 && ArgCount > 11) ? PyTuple_GetItem(InArgs, 11) : nullptr;
-		FLinearColor Arg11 = FLinearColor(0.000000, 1.000000, 0.000000, 1.000000);
+		FLinearColor Arg11 = FLinearColor(0.000000f, 1.000000f, 0.000000f, 1.000000f);
 		if (PyArg11 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg11, Arg11))
@@ -1351,7 +1351,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg12 = (PyArg11 && ArgCount > 12) ? PyTuple_GetItem(InArgs, 12) : nullptr;
-		float Arg12 = 5.000000;
+		float Arg12 = 5.000000f;
 		if (PyArg12 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg12, Arg12))
@@ -1499,14 +1499,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxTraceSingle"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg7[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxTraceSingle"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -1536,7 +1536,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg10 = (ArgCount > 10) ? PyTuple_GetItem(InArgs, 10) : nullptr;
-		FLinearColor Arg10 = FLinearColor(1.000000, 0.000000, 0.000000, 1.000000);
+		FLinearColor Arg10 = FLinearColor(1.000000f, 0.000000f, 0.000000f, 1.000000f);
 		if (PyArg10 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg10, Arg10))
@@ -1547,7 +1547,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg11 = (PyArg10 && ArgCount > 11) ? PyTuple_GetItem(InArgs, 11) : nullptr;
-		FLinearColor Arg11 = FLinearColor(0.000000, 1.000000, 0.000000, 1.000000);
+		FLinearColor Arg11 = FLinearColor(0.000000f, 1.000000f, 0.000000f, 1.000000f);
 		if (PyArg11 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg11, Arg11))
@@ -1558,7 +1558,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg12 = (PyArg11 && ArgCount > 12) ? PyTuple_GetItem(InArgs, 12) : nullptr;
-		float Arg12 = 5.000000;
+		float Arg12 = 5.000000f;
 		if (PyArg12 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg12, Arg12))
@@ -1700,14 +1700,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxTraceSingleByProfile"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg7[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxTraceSingleByProfile"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -1737,7 +1737,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg10 = (ArgCount > 10) ? PyTuple_GetItem(InArgs, 10) : nullptr;
-		FLinearColor Arg10 = FLinearColor(1.000000, 0.000000, 0.000000, 1.000000);
+		FLinearColor Arg10 = FLinearColor(1.000000f, 0.000000f, 0.000000f, 1.000000f);
 		if (PyArg10 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg10, Arg10))
@@ -1748,7 +1748,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg11 = (PyArg10 && ArgCount > 11) ? PyTuple_GetItem(InArgs, 11) : nullptr;
-		FLinearColor Arg11 = FLinearColor(0.000000, 1.000000, 0.000000, 1.000000);
+		FLinearColor Arg11 = FLinearColor(0.000000f, 1.000000f, 0.000000f, 1.000000f);
 		if (PyArg11 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg11, Arg11))
@@ -1759,7 +1759,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg12 = (PyArg11 && ArgCount > 12) ? PyTuple_GetItem(InArgs, 12) : nullptr;
-		float Arg12 = 5.000000;
+		float Arg12 = 5.000000f;
 		if (PyArg12 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg12, Arg12))
@@ -1877,14 +1877,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxTraceSingleForObjects"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg5[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxTraceSingleForObjects"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -1927,14 +1927,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxTraceSingleForObjects"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg7[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxTraceSingleForObjects"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -1964,7 +1964,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg10 = (ArgCount > 10) ? PyTuple_GetItem(InArgs, 10) : nullptr;
-		FLinearColor Arg10 = FLinearColor(1.000000, 0.000000, 0.000000, 1.000000);
+		FLinearColor Arg10 = FLinearColor(1.000000f, 0.000000f, 0.000000f, 1.000000f);
 		if (PyArg10 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg10, Arg10))
@@ -1975,7 +1975,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg11 = (PyArg10 && ArgCount > 11) ? PyTuple_GetItem(InArgs, 11) : nullptr;
-		FLinearColor Arg11 = FLinearColor(0.000000, 1.000000, 0.000000, 1.000000);
+		FLinearColor Arg11 = FLinearColor(0.000000f, 1.000000f, 0.000000f, 1.000000f);
 		if (PyArg11 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg11, Arg11))
@@ -1986,7 +1986,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg12 = (PyArg11 && ArgCount > 12) ? PyTuple_GetItem(InArgs, 12) : nullptr;
-		float Arg12 = 5.000000;
+		float Arg12 = 5.000000f;
 		if (PyArg12 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg12, Arg12))
@@ -2256,14 +2256,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleOverlapActors"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg4[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleOverlapActors"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -2306,14 +2306,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleOverlapActors"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg6[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleOverlapActors"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -2431,14 +2431,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleOverlapActorsWithOrientation"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg5[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleOverlapActorsWithOrientation"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -2481,14 +2481,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleOverlapActorsWithOrientation"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg7[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleOverlapActorsWithOrientation"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -2594,14 +2594,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleOverlapComponents"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg4[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleOverlapComponents"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -2644,14 +2644,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleOverlapComponents"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg6[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleOverlapComponents"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -2769,14 +2769,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleOverlapComponentsWithOrientation"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg5[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleOverlapComponentsWithOrientation"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -2819,14 +2819,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleOverlapComponentsWithOrientation"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg7[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleOverlapComponentsWithOrientation"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -2969,14 +2969,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleTraceMulti"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg7[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleTraceMulti"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -3006,7 +3006,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg10 = (ArgCount > 10) ? PyTuple_GetItem(InArgs, 10) : nullptr;
-		FLinearColor Arg10 = FLinearColor(1.000000, 0.000000, 0.000000, 1.000000);
+		FLinearColor Arg10 = FLinearColor(1.000000f, 0.000000f, 0.000000f, 1.000000f);
 		if (PyArg10 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg10, Arg10))
@@ -3017,7 +3017,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg11 = (PyArg10 && ArgCount > 11) ? PyTuple_GetItem(InArgs, 11) : nullptr;
-		FLinearColor Arg11 = FLinearColor(0.000000, 1.000000, 0.000000, 1.000000);
+		FLinearColor Arg11 = FLinearColor(0.000000f, 1.000000f, 0.000000f, 1.000000f);
 		if (PyArg11 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg11, Arg11))
@@ -3028,7 +3028,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg12 = (PyArg11 && ArgCount > 12) ? PyTuple_GetItem(InArgs, 12) : nullptr;
-		float Arg12 = 5.000000;
+		float Arg12 = 5.000000f;
 		if (PyArg12 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg12, Arg12))
@@ -3176,14 +3176,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleTraceMultiByProfile"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg7[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleTraceMultiByProfile"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -3213,7 +3213,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg10 = (ArgCount > 10) ? PyTuple_GetItem(InArgs, 10) : nullptr;
-		FLinearColor Arg10 = FLinearColor(1.000000, 0.000000, 0.000000, 1.000000);
+		FLinearColor Arg10 = FLinearColor(1.000000f, 0.000000f, 0.000000f, 1.000000f);
 		if (PyArg10 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg10, Arg10))
@@ -3224,7 +3224,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg11 = (PyArg10 && ArgCount > 11) ? PyTuple_GetItem(InArgs, 11) : nullptr;
-		FLinearColor Arg11 = FLinearColor(0.000000, 1.000000, 0.000000, 1.000000);
+		FLinearColor Arg11 = FLinearColor(0.000000f, 1.000000f, 0.000000f, 1.000000f);
 		if (PyArg11 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg11, Arg11))
@@ -3235,7 +3235,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg12 = (PyArg11 && ArgCount > 12) ? PyTuple_GetItem(InArgs, 12) : nullptr;
-		float Arg12 = 5.000000;
+		float Arg12 = 5.000000f;
 		if (PyArg12 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg12, Arg12))
@@ -3359,14 +3359,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleTraceMultiForObjects"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg5[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleTraceMultiForObjects"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -3409,14 +3409,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleTraceMultiForObjects"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg7[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleTraceMultiForObjects"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -3446,7 +3446,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg10 = (ArgCount > 10) ? PyTuple_GetItem(InArgs, 10) : nullptr;
-		FLinearColor Arg10 = FLinearColor(1.000000, 0.000000, 0.000000, 1.000000);
+		FLinearColor Arg10 = FLinearColor(1.000000f, 0.000000f, 0.000000f, 1.000000f);
 		if (PyArg10 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg10, Arg10))
@@ -3457,7 +3457,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg11 = (PyArg10 && ArgCount > 11) ? PyTuple_GetItem(InArgs, 11) : nullptr;
-		FLinearColor Arg11 = FLinearColor(0.000000, 1.000000, 0.000000, 1.000000);
+		FLinearColor Arg11 = FLinearColor(0.000000f, 1.000000f, 0.000000f, 1.000000f);
 		if (PyArg11 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg11, Arg11))
@@ -3468,7 +3468,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg12 = (PyArg11 && ArgCount > 12) ? PyTuple_GetItem(InArgs, 12) : nullptr;
-		float Arg12 = 5.000000;
+		float Arg12 = 5.000000f;
 		if (PyArg12 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg12, Arg12))
@@ -3616,14 +3616,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleTraceSingle"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg7[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleTraceSingle"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -3653,7 +3653,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg10 = (ArgCount > 10) ? PyTuple_GetItem(InArgs, 10) : nullptr;
-		FLinearColor Arg10 = FLinearColor(1.000000, 0.000000, 0.000000, 1.000000);
+		FLinearColor Arg10 = FLinearColor(1.000000f, 0.000000f, 0.000000f, 1.000000f);
 		if (PyArg10 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg10, Arg10))
@@ -3664,7 +3664,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg11 = (PyArg10 && ArgCount > 11) ? PyTuple_GetItem(InArgs, 11) : nullptr;
-		FLinearColor Arg11 = FLinearColor(0.000000, 1.000000, 0.000000, 1.000000);
+		FLinearColor Arg11 = FLinearColor(0.000000f, 1.000000f, 0.000000f, 1.000000f);
 		if (PyArg11 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg11, Arg11))
@@ -3675,7 +3675,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg12 = (PyArg11 && ArgCount > 12) ? PyTuple_GetItem(InArgs, 12) : nullptr;
-		float Arg12 = 5.000000;
+		float Arg12 = 5.000000f;
 		if (PyArg12 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg12, Arg12))
@@ -3817,14 +3817,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleTraceSingleByProfile"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg7[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleTraceSingleByProfile"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -3854,7 +3854,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg10 = (ArgCount > 10) ? PyTuple_GetItem(InArgs, 10) : nullptr;
-		FLinearColor Arg10 = FLinearColor(1.000000, 0.000000, 0.000000, 1.000000);
+		FLinearColor Arg10 = FLinearColor(1.000000f, 0.000000f, 0.000000f, 1.000000f);
 		if (PyArg10 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg10, Arg10))
@@ -3865,7 +3865,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg11 = (PyArg10 && ArgCount > 11) ? PyTuple_GetItem(InArgs, 11) : nullptr;
-		FLinearColor Arg11 = FLinearColor(0.000000, 1.000000, 0.000000, 1.000000);
+		FLinearColor Arg11 = FLinearColor(0.000000f, 1.000000f, 0.000000f, 1.000000f);
 		if (PyArg11 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg11, Arg11))
@@ -3876,7 +3876,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg12 = (PyArg11 && ArgCount > 12) ? PyTuple_GetItem(InArgs, 12) : nullptr;
-		float Arg12 = 5.000000;
+		float Arg12 = 5.000000f;
 		if (PyArg12 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg12, Arg12))
@@ -3994,14 +3994,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleTraceSingleForObjects"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg5[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleTraceSingleForObjects"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -4044,14 +4044,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleTraceSingleForObjects"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg7[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleTraceSingleForObjects"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -4081,7 +4081,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg10 = (ArgCount > 10) ? PyTuple_GetItem(InArgs, 10) : nullptr;
-		FLinearColor Arg10 = FLinearColor(1.000000, 0.000000, 0.000000, 1.000000);
+		FLinearColor Arg10 = FLinearColor(1.000000f, 0.000000f, 0.000000f, 1.000000f);
 		if (PyArg10 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg10, Arg10))
@@ -4092,7 +4092,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg11 = (PyArg10 && ArgCount > 11) ? PyTuple_GetItem(InArgs, 11) : nullptr;
-		FLinearColor Arg11 = FLinearColor(0.000000, 1.000000, 0.000000, 1.000000);
+		FLinearColor Arg11 = FLinearColor(0.000000f, 1.000000f, 0.000000f, 1.000000f);
 		if (PyArg11 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg11, Arg11))
@@ -4103,7 +4103,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg12 = (PyArg11 && ArgCount > 12) ? PyTuple_GetItem(InArgs, 12) : nullptr;
-		float Arg12 = 5.000000;
+		float Arg12 = 5.000000f;
 		if (PyArg12 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg12, Arg12))
@@ -4190,14 +4190,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::ComponentOverlapActors"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg2[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::ComponentOverlapActors"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -4240,14 +4240,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::ComponentOverlapActors"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg4[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::ComponentOverlapActors"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -4329,14 +4329,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::ComponentOverlapComponents"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg2[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::ComponentOverlapComponents"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -4379,14 +4379,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::ComponentOverlapComponents"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg4[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::ComponentOverlapComponents"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -4899,7 +4899,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg5 = (ArgCount > 5) ? PyTuple_GetItem(InArgs, 5) : nullptr;
-		float Arg5 = 0.000000;
+		float Arg5 = 0.000000f;
 		if (PyArg5 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg5, Arg5))
@@ -4910,7 +4910,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg6 = (PyArg5 && ArgCount > 6) ? PyTuple_GetItem(InArgs, 6) : nullptr;
-		float Arg6 = 0.000000;
+		float Arg6 = 0.000000f;
 		if (PyArg6 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg6, Arg6))
@@ -4999,7 +4999,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg5 = (ArgCount > 5) ? PyTuple_GetItem(InArgs, 5) : nullptr;
-		float Arg5 = 0.000000;
+		float Arg5 = 0.000000f;
 		if (PyArg5 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg5, Arg5))
@@ -5010,7 +5010,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg6 = (PyArg5 && ArgCount > 6) ? PyTuple_GetItem(InArgs, 6) : nullptr;
-		float Arg6 = 0.000000;
+		float Arg6 = 0.000000f;
 		if (PyArg6 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg6, Arg6))
@@ -5051,7 +5051,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		FLinearColor Arg1 = FLinearColor(1.000000, 1.000000, 1.000000, 1.000000);
+		FLinearColor Arg1 = FLinearColor(1.000000f, 1.000000f, 1.000000f, 1.000000f);
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg1, Arg1))
@@ -5062,7 +5062,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg2 = (PyArg1 && ArgCount > 2) ? PyTuple_GetItem(InArgs, 2) : nullptr;
-		float Arg2 = 0.000000;
+		float Arg2 = 0.000000f;
 		if (PyArg2 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg2, Arg2))
@@ -5140,7 +5140,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg5 = (ArgCount > 5) ? PyTuple_GetItem(InArgs, 5) : nullptr;
-		FLinearColor Arg5 = FLinearColor(1.000000, 1.000000, 1.000000, 1.000000);
+		FLinearColor Arg5 = FLinearColor(1.000000f, 1.000000f, 1.000000f, 1.000000f);
 		if (PyArg5 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg5, Arg5))
@@ -5151,7 +5151,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg6 = (PyArg5 && ArgCount > 6) ? PyTuple_GetItem(InArgs, 6) : nullptr;
-		float Arg6 = 0.000000;
+		float Arg6 = 0.000000f;
 		if (PyArg6 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg6, Arg6))
@@ -5162,7 +5162,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg7 = (PyArg6 && ArgCount > 7) ? PyTuple_GetItem(InArgs, 7) : nullptr;
-		float Arg7 = 0.000000;
+		float Arg7 = 0.000000f;
 		if (PyArg7 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg7, Arg7))
@@ -5238,7 +5238,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg4 = (PyArg3 && ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		FLinearColor Arg4 = FLinearColor(1.000000, 1.000000, 1.000000, 1.000000);
+		FLinearColor Arg4 = FLinearColor(1.000000f, 1.000000f, 1.000000f, 1.000000f);
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg4, Arg4))
@@ -5249,7 +5249,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg5 = (PyArg4 && ArgCount > 5) ? PyTuple_GetItem(InArgs, 5) : nullptr;
-		float Arg5 = 0.000000;
+		float Arg5 = 0.000000f;
 		if (PyArg5 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg5, Arg5))
@@ -5260,7 +5260,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg6 = (PyArg5 && ArgCount > 6) ? PyTuple_GetItem(InArgs, 6) : nullptr;
-		float Arg6 = 0.000000;
+		float Arg6 = 0.000000f;
 		if (PyArg6 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg6, Arg6))
@@ -5271,7 +5271,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg7 = (PyArg6 && ArgCount > 7) ? PyTuple_GetItem(InArgs, 7) : nullptr;
-		FVector Arg7 = FVector(0.000000,1.000000,0.000000);
+		FVector Arg7 = FVector(0.000000, 1.000000, 0.000000);
 		if (PyArg7 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg7, Arg7))
@@ -5282,7 +5282,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg8 = (PyArg7 && ArgCount > 8) ? PyTuple_GetItem(InArgs, 8) : nullptr;
-		FVector Arg8 = FVector(0.000000,0.000000,1.000000);
+		FVector Arg8 = FVector(0.000000, 0.000000, 1.000000);
 		if (PyArg8 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg8, Arg8))
@@ -5358,7 +5358,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg3 = (ArgCount > 3) ? PyTuple_GetItem(InArgs, 3) : nullptr;
-		float Arg3 = 100.000000;
+		float Arg3 = 100.000000f;
 		if (PyArg3 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg3, Arg3))
@@ -5369,7 +5369,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg4 = (PyArg3 && ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		float Arg4 = 45.000000;
+		float Arg4 = 45.000000f;
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg4, Arg4))
@@ -5380,7 +5380,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg5 = (PyArg4 && ArgCount > 5) ? PyTuple_GetItem(InArgs, 5) : nullptr;
-		float Arg5 = 45.000000;
+		float Arg5 = 45.000000f;
 		if (PyArg5 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg5, Arg5))
@@ -5402,7 +5402,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg7 = (PyArg6 && ArgCount > 7) ? PyTuple_GetItem(InArgs, 7) : nullptr;
-		FLinearColor Arg7 = FLinearColor(1.000000, 1.000000, 1.000000, 1.000000);
+		FLinearColor Arg7 = FLinearColor(1.000000f, 1.000000f, 1.000000f, 1.000000f);
 		if (PyArg7 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg7, Arg7))
@@ -5413,7 +5413,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg8 = (PyArg7 && ArgCount > 8) ? PyTuple_GetItem(InArgs, 8) : nullptr;
-		float Arg8 = 0.000000;
+		float Arg8 = 0.000000f;
 		if (PyArg8 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg8, Arg8))
@@ -5424,7 +5424,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg9 = (PyArg8 && ArgCount > 9) ? PyTuple_GetItem(InArgs, 9) : nullptr;
-		float Arg9 = 0.000000;
+		float Arg9 = 0.000000f;
 		if (PyArg9 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg9, Arg9))
@@ -5489,7 +5489,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg3 = (ArgCount > 3) ? PyTuple_GetItem(InArgs, 3) : nullptr;
-		float Arg3 = 1.000000;
+		float Arg3 = 1.000000f;
 		if (PyArg3 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg3, Arg3))
@@ -5500,7 +5500,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg4 = (PyArg3 && ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		float Arg4 = 0.000000;
+		float Arg4 = 0.000000f;
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg4, Arg4))
@@ -5511,7 +5511,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg5 = (PyArg4 && ArgCount > 5) ? PyTuple_GetItem(InArgs, 5) : nullptr;
-		float Arg5 = 0.000000;
+		float Arg5 = 0.000000f;
 		if (PyArg5 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg5, Arg5))
@@ -5576,7 +5576,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg3 = (ArgCount > 3) ? PyTuple_GetItem(InArgs, 3) : nullptr;
-		float Arg3 = 100.000000;
+		float Arg3 = 100.000000f;
 		if (PyArg3 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg3, Arg3))
@@ -5598,7 +5598,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg5 = (PyArg4 && ArgCount > 5) ? PyTuple_GetItem(InArgs, 5) : nullptr;
-		FLinearColor Arg5 = FLinearColor(1.000000, 1.000000, 1.000000, 1.000000);
+		FLinearColor Arg5 = FLinearColor(1.000000f, 1.000000f, 1.000000f, 1.000000f);
 		if (PyArg5 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg5, Arg5))
@@ -5609,7 +5609,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg6 = (PyArg5 && ArgCount > 6) ? PyTuple_GetItem(InArgs, 6) : nullptr;
-		float Arg6 = 0.000000;
+		float Arg6 = 0.000000f;
 		if (PyArg6 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg6, Arg6))
@@ -5620,7 +5620,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg7 = (PyArg6 && ArgCount > 7) ? PyTuple_GetItem(InArgs, 7) : nullptr;
-		float Arg7 = 0.000000;
+		float Arg7 = 0.000000f;
 		if (PyArg7 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg7, Arg7))
@@ -5697,7 +5697,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg4 = (ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		FLinearColor Arg4 = FLinearColor(1.000000, 1.000000, 1.000000, 1.000000);
+		FLinearColor Arg4 = FLinearColor(1.000000f, 1.000000f, 1.000000f, 1.000000f);
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg4, Arg4))
@@ -5708,7 +5708,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg5 = (PyArg4 && ArgCount > 5) ? PyTuple_GetItem(InArgs, 5) : nullptr;
-		float Arg5 = 0.000000;
+		float Arg5 = 0.000000f;
 		if (PyArg5 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg5, Arg5))
@@ -5774,7 +5774,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg4 = (ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		FLinearColor Arg4 = FLinearColor(1.000000, 1.000000, 1.000000, 1.000000);
+		FLinearColor Arg4 = FLinearColor(1.000000f, 1.000000f, 1.000000f, 1.000000f);
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg4, Arg4))
@@ -5785,7 +5785,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg5 = (PyArg4 && ArgCount > 5) ? PyTuple_GetItem(InArgs, 5) : nullptr;
-		float Arg5 = 0.000000;
+		float Arg5 = 0.000000f;
 		if (PyArg5 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg5, Arg5))
@@ -5827,7 +5827,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg2 = (ArgCount > 2) ? PyTuple_GetItem(InArgs, 2) : nullptr;
-		FLinearColor Arg2 = FLinearColor(1.000000, 1.000000, 1.000000, 1.000000);
+		FLinearColor Arg2 = FLinearColor(1.000000f, 1.000000f, 1.000000f, 1.000000f);
 		if (PyArg2 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg2, Arg2))
@@ -5838,7 +5838,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg3 = (PyArg2 && ArgCount > 3) ? PyTuple_GetItem(InArgs, 3) : nullptr;
-		float Arg3 = 0.000000;
+		float Arg3 = 0.000000f;
 		if (PyArg3 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg3, Arg3))
@@ -5849,7 +5849,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg4 = (PyArg3 && ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		float Arg4 = 0.000000;
+		float Arg4 = 0.000000f;
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg4, Arg4))
@@ -5915,7 +5915,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg4 = (ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		float Arg4 = 0.000000;
+		float Arg4 = 0.000000f;
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg4, Arg4))
@@ -5926,7 +5926,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg5 = (PyArg4 && ArgCount > 5) ? PyTuple_GetItem(InArgs, 5) : nullptr;
-		float Arg5 = 0.000000;
+		float Arg5 = 0.000000f;
 		if (PyArg5 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg5, Arg5))
@@ -6003,7 +6003,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg4 = (ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		FLinearColor Arg4 = FLinearColor(1.000000, 1.000000, 1.000000, 1.000000);
+		FLinearColor Arg4 = FLinearColor(1.000000f, 1.000000f, 1.000000f, 1.000000f);
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg4, Arg4))
@@ -6014,7 +6014,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg5 = (PyArg4 && ArgCount > 5) ? PyTuple_GetItem(InArgs, 5) : nullptr;
-		float Arg5 = 0.000000;
+		float Arg5 = 0.000000f;
 		if (PyArg5 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg5, Arg5))
@@ -6091,7 +6091,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg4 = (ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		float Arg4 = 0.000000;
+		float Arg4 = 0.000000f;
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg4, Arg4))
@@ -6144,7 +6144,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg2 = (ArgCount > 2) ? PyTuple_GetItem(InArgs, 2) : nullptr;
-		float Arg2 = 100.000000;
+		float Arg2 = 100.000000f;
 		if (PyArg2 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg2, Arg2))
@@ -6166,7 +6166,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg4 = (PyArg3 && ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		FLinearColor Arg4 = FLinearColor(1.000000, 1.000000, 1.000000, 1.000000);
+		FLinearColor Arg4 = FLinearColor(1.000000f, 1.000000f, 1.000000f, 1.000000f);
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg4, Arg4))
@@ -6177,7 +6177,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg5 = (PyArg4 && ArgCount > 5) ? PyTuple_GetItem(InArgs, 5) : nullptr;
-		float Arg5 = 0.000000;
+		float Arg5 = 0.000000f;
 		if (PyArg5 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg5, Arg5))
@@ -6188,7 +6188,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg6 = (PyArg5 && ArgCount > 6) ? PyTuple_GetItem(InArgs, 6) : nullptr;
-		float Arg6 = 0.000000;
+		float Arg6 = 0.000000f;
 		if (PyArg6 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg6, Arg6))
@@ -6264,7 +6264,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg4 = (PyArg3 && ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		FLinearColor Arg4 = FLinearColor(1.000000, 1.000000, 1.000000, 1.000000);
+		FLinearColor Arg4 = FLinearColor(1.000000f, 1.000000f, 1.000000f, 1.000000f);
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg4, Arg4))
@@ -6275,7 +6275,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg5 = (PyArg4 && ArgCount > 5) ? PyTuple_GetItem(InArgs, 5) : nullptr;
-		float Arg5 = 0.000000;
+		float Arg5 = 0.000000f;
 		if (PyArg5 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg5, Arg5))
@@ -6561,14 +6561,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::GetActorListFromComponentList"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::GetActorListFromComponentList"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -7187,14 +7187,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::GetPrimaryAssetsWithBundleState"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::GetPrimaryAssetsWithBundleState"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -7225,14 +7225,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::GetPrimaryAssetsWithBundleState"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg1[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::GetPrimaryAssetsWithBundleState"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -7263,14 +7263,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::GetPrimaryAssetsWithBundleState"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::NativizeStructInstance(Item, Arg2[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::GetPrimaryAssetsWithBundleState"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -8147,7 +8147,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg5 = (PyArg4 && ArgCount > 5) ? PyTuple_GetItem(InArgs, 5) : nullptr;
-		float Arg5 = 0.000000;
+		float Arg5 = 0.000000f;
 		if (PyArg5 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg5, Arg5))
@@ -8158,7 +8158,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg6 = (PyArg5 && ArgCount > 6) ? PyTuple_GetItem(InArgs, 6) : nullptr;
-		float Arg6 = 0.000000;
+		float Arg6 = 0.000000f;
 		if (PyArg6 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg6, Arg6))
@@ -8362,14 +8362,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LaunchExternalUrl"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LaunchExternalUrl"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -8492,14 +8492,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LineTraceMulti"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg5[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LineTraceMulti"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -8529,7 +8529,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg8 = (ArgCount > 8) ? PyTuple_GetItem(InArgs, 8) : nullptr;
-		FLinearColor Arg8 = FLinearColor(1.000000, 0.000000, 0.000000, 1.000000);
+		FLinearColor Arg8 = FLinearColor(1.000000f, 0.000000f, 0.000000f, 1.000000f);
 		if (PyArg8 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg8, Arg8))
@@ -8540,7 +8540,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg9 = (PyArg8 && ArgCount > 9) ? PyTuple_GetItem(InArgs, 9) : nullptr;
-		FLinearColor Arg9 = FLinearColor(0.000000, 1.000000, 0.000000, 1.000000);
+		FLinearColor Arg9 = FLinearColor(0.000000f, 1.000000f, 0.000000f, 1.000000f);
 		if (PyArg9 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg9, Arg9))
@@ -8551,7 +8551,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg10 = (PyArg9 && ArgCount > 10) ? PyTuple_GetItem(InArgs, 10) : nullptr;
-		float Arg10 = 5.000000;
+		float Arg10 = 5.000000f;
 		if (PyArg10 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg10, Arg10))
@@ -8675,14 +8675,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LineTraceMultiByProfile"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg5[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LineTraceMultiByProfile"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -8712,7 +8712,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg8 = (ArgCount > 8) ? PyTuple_GetItem(InArgs, 8) : nullptr;
-		FLinearColor Arg8 = FLinearColor(1.000000, 0.000000, 0.000000, 1.000000);
+		FLinearColor Arg8 = FLinearColor(1.000000f, 0.000000f, 0.000000f, 1.000000f);
 		if (PyArg8 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg8, Arg8))
@@ -8723,7 +8723,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg9 = (PyArg8 && ArgCount > 9) ? PyTuple_GetItem(InArgs, 9) : nullptr;
-		FLinearColor Arg9 = FLinearColor(0.000000, 1.000000, 0.000000, 1.000000);
+		FLinearColor Arg9 = FLinearColor(0.000000f, 1.000000f, 0.000000f, 1.000000f);
 		if (PyArg9 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg9, Arg9))
@@ -8734,7 +8734,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg10 = (PyArg9 && ArgCount > 10) ? PyTuple_GetItem(InArgs, 10) : nullptr;
-		float Arg10 = 5.000000;
+		float Arg10 = 5.000000f;
 		if (PyArg10 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg10, Arg10))
@@ -8834,14 +8834,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LineTraceMultiForObjects"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg3[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LineTraceMultiForObjects"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -8884,14 +8884,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LineTraceMultiForObjects"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg5[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LineTraceMultiForObjects"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -8921,7 +8921,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg8 = (ArgCount > 8) ? PyTuple_GetItem(InArgs, 8) : nullptr;
-		FLinearColor Arg8 = FLinearColor(1.000000, 0.000000, 0.000000, 1.000000);
+		FLinearColor Arg8 = FLinearColor(1.000000f, 0.000000f, 0.000000f, 1.000000f);
 		if (PyArg8 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg8, Arg8))
@@ -8932,7 +8932,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg9 = (PyArg8 && ArgCount > 9) ? PyTuple_GetItem(InArgs, 9) : nullptr;
-		FLinearColor Arg9 = FLinearColor(0.000000, 1.000000, 0.000000, 1.000000);
+		FLinearColor Arg9 = FLinearColor(0.000000f, 1.000000f, 0.000000f, 1.000000f);
 		if (PyArg9 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg9, Arg9))
@@ -8943,7 +8943,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg10 = (PyArg9 && ArgCount > 10) ? PyTuple_GetItem(InArgs, 10) : nullptr;
-		float Arg10 = 5.000000;
+		float Arg10 = 5.000000f;
 		if (PyArg10 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg10, Arg10))
@@ -9067,14 +9067,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LineTraceSingle"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg5[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LineTraceSingle"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -9104,7 +9104,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg8 = (ArgCount > 8) ? PyTuple_GetItem(InArgs, 8) : nullptr;
-		FLinearColor Arg8 = FLinearColor(1.000000, 0.000000, 0.000000, 1.000000);
+		FLinearColor Arg8 = FLinearColor(1.000000f, 0.000000f, 0.000000f, 1.000000f);
 		if (PyArg8 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg8, Arg8))
@@ -9115,7 +9115,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg9 = (PyArg8 && ArgCount > 9) ? PyTuple_GetItem(InArgs, 9) : nullptr;
-		FLinearColor Arg9 = FLinearColor(0.000000, 1.000000, 0.000000, 1.000000);
+		FLinearColor Arg9 = FLinearColor(0.000000f, 1.000000f, 0.000000f, 1.000000f);
 		if (PyArg9 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg9, Arg9))
@@ -9126,7 +9126,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg10 = (PyArg9 && ArgCount > 10) ? PyTuple_GetItem(InArgs, 10) : nullptr;
-		float Arg10 = 5.000000;
+		float Arg10 = 5.000000f;
 		if (PyArg10 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg10, Arg10))
@@ -9244,14 +9244,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LineTraceSingleByProfile"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg5[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LineTraceSingleByProfile"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -9281,7 +9281,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg8 = (ArgCount > 8) ? PyTuple_GetItem(InArgs, 8) : nullptr;
-		FLinearColor Arg8 = FLinearColor(1.000000, 0.000000, 0.000000, 1.000000);
+		FLinearColor Arg8 = FLinearColor(1.000000f, 0.000000f, 0.000000f, 1.000000f);
 		if (PyArg8 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg8, Arg8))
@@ -9292,7 +9292,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg9 = (PyArg8 && ArgCount > 9) ? PyTuple_GetItem(InArgs, 9) : nullptr;
-		FLinearColor Arg9 = FLinearColor(0.000000, 1.000000, 0.000000, 1.000000);
+		FLinearColor Arg9 = FLinearColor(0.000000f, 1.000000f, 0.000000f, 1.000000f);
 		if (PyArg9 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg9, Arg9))
@@ -9303,7 +9303,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg10 = (PyArg9 && ArgCount > 10) ? PyTuple_GetItem(InArgs, 10) : nullptr;
-		float Arg10 = 5.000000;
+		float Arg10 = 5.000000f;
 		if (PyArg10 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg10, Arg10))
@@ -9397,14 +9397,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LineTraceSingleForObjects"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg3[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LineTraceSingleForObjects"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -9447,14 +9447,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LineTraceSingleForObjects"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg5[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LineTraceSingleForObjects"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -9484,7 +9484,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg8 = (ArgCount > 8) ? PyTuple_GetItem(InArgs, 8) : nullptr;
-		FLinearColor Arg8 = FLinearColor(1.000000, 0.000000, 0.000000, 1.000000);
+		FLinearColor Arg8 = FLinearColor(1.000000f, 0.000000f, 0.000000f, 1.000000f);
 		if (PyArg8 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg8, Arg8))
@@ -9495,7 +9495,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg9 = (PyArg8 && ArgCount > 9) ? PyTuple_GetItem(InArgs, 9) : nullptr;
-		FLinearColor Arg9 = FLinearColor(0.000000, 1.000000, 0.000000, 1.000000);
+		FLinearColor Arg9 = FLinearColor(0.000000f, 1.000000f, 0.000000f, 1.000000f);
 		if (PyArg9 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg9, Arg9))
@@ -9506,7 +9506,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg10 = (PyArg9 && ArgCount > 10) ? PyTuple_GetItem(InArgs, 10) : nullptr;
-		float Arg10 = 5.000000;
+		float Arg10 = 5.000000f;
 		if (PyArg10 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg10, Arg10))
@@ -9650,14 +9650,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::MakeARFilter"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::MakeARFilter"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -9688,14 +9688,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::MakeARFilter"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg1[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::MakeARFilter"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -9726,14 +9726,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::MakeARFilter"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::NativizeStructInstance(Item, Arg2[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::MakeARFilter"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -9764,14 +9764,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::MakeARFilter"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::NativizeStructInstance(Item, Arg3[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::MakeARFilter"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -9803,7 +9803,7 @@ struct FMethods_KismetSystemLibrary
 				Py_DECREF(Iter_Arg4);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::MakeARFilter"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Arg4.Add(Val);
 			Py_DECREF(Item_Arg4);
@@ -9841,14 +9841,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::MakeARFilter"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg5[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::MakeARFilter"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -9880,7 +9880,7 @@ struct FMethods_KismetSystemLibrary
 				Py_DECREF(Iter_Arg6);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::MakeARFilter"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Arg6.Add(Val);
 			Py_DECREF(Item_Arg6);
@@ -10528,7 +10528,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg4 = (PyArg3 && ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		FLinearColor Arg4 = FLinearColor(0.000000, 0.660000, 1.000000, 1.000000);
+		FLinearColor Arg4 = FLinearColor(0.000000f, 0.660000f, 1.000000f, 1.000000f);
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg4, Arg4))
@@ -10539,7 +10539,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg5 = (PyArg4 && ArgCount > 5) ? PyTuple_GetItem(InArgs, 5) : nullptr;
-		float Arg5 = 2.000000;
+		float Arg5 = 2.000000f;
 		if (PyArg5 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg5, Arg5))
@@ -10613,7 +10613,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg4 = (PyArg3 && ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		FLinearColor Arg4 = FLinearColor(0.000000, 0.660000, 1.000000, 1.000000);
+		FLinearColor Arg4 = FLinearColor(0.000000f, 0.660000f, 1.000000f, 1.000000f);
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg4, Arg4))
@@ -10624,7 +10624,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg5 = (PyArg4 && ArgCount > 5) ? PyTuple_GetItem(InArgs, 5) : nullptr;
-		float Arg5 = 2.000000;
+		float Arg5 = 2.000000f;
 		if (PyArg5 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg5, Arg5))
@@ -11964,14 +11964,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereOverlapActors"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg3[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereOverlapActors"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -12014,14 +12014,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereOverlapActors"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg5[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereOverlapActors"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -12115,14 +12115,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereOverlapComponents"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg3[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereOverlapComponents"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -12165,14 +12165,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereOverlapComponents"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg5[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereOverlapComponents"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -12303,14 +12303,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereTraceMulti"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg6[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereTraceMulti"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -12340,7 +12340,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg9 = (ArgCount > 9) ? PyTuple_GetItem(InArgs, 9) : nullptr;
-		FLinearColor Arg9 = FLinearColor(1.000000, 0.000000, 0.000000, 1.000000);
+		FLinearColor Arg9 = FLinearColor(1.000000f, 0.000000f, 0.000000f, 1.000000f);
 		if (PyArg9 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg9, Arg9))
@@ -12351,7 +12351,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg10 = (PyArg9 && ArgCount > 10) ? PyTuple_GetItem(InArgs, 10) : nullptr;
-		FLinearColor Arg10 = FLinearColor(0.000000, 1.000000, 0.000000, 1.000000);
+		FLinearColor Arg10 = FLinearColor(0.000000f, 1.000000f, 0.000000f, 1.000000f);
 		if (PyArg10 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg10, Arg10))
@@ -12362,7 +12362,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg11 = (PyArg10 && ArgCount > 11) ? PyTuple_GetItem(InArgs, 11) : nullptr;
-		float Arg11 = 5.000000;
+		float Arg11 = 5.000000f;
 		if (PyArg11 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg11, Arg11))
@@ -12498,14 +12498,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereTraceMultiByProfile"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg6[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereTraceMultiByProfile"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -12535,7 +12535,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg9 = (ArgCount > 9) ? PyTuple_GetItem(InArgs, 9) : nullptr;
-		FLinearColor Arg9 = FLinearColor(1.000000, 0.000000, 0.000000, 1.000000);
+		FLinearColor Arg9 = FLinearColor(1.000000f, 0.000000f, 0.000000f, 1.000000f);
 		if (PyArg9 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg9, Arg9))
@@ -12546,7 +12546,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg10 = (PyArg9 && ArgCount > 10) ? PyTuple_GetItem(InArgs, 10) : nullptr;
-		FLinearColor Arg10 = FLinearColor(0.000000, 1.000000, 0.000000, 1.000000);
+		FLinearColor Arg10 = FLinearColor(0.000000f, 1.000000f, 0.000000f, 1.000000f);
 		if (PyArg10 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg10, Arg10))
@@ -12557,7 +12557,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg11 = (PyArg10 && ArgCount > 11) ? PyTuple_GetItem(InArgs, 11) : nullptr;
-		float Arg11 = 5.000000;
+		float Arg11 = 5.000000f;
 		if (PyArg11 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg11, Arg11))
@@ -12669,14 +12669,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereTraceMultiForObjects"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg4[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereTraceMultiForObjects"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -12719,14 +12719,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereTraceMultiForObjects"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg6[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereTraceMultiForObjects"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -12756,7 +12756,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg9 = (ArgCount > 9) ? PyTuple_GetItem(InArgs, 9) : nullptr;
-		FLinearColor Arg9 = FLinearColor(1.000000, 0.000000, 0.000000, 1.000000);
+		FLinearColor Arg9 = FLinearColor(1.000000f, 0.000000f, 0.000000f, 1.000000f);
 		if (PyArg9 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg9, Arg9))
@@ -12767,7 +12767,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg10 = (PyArg9 && ArgCount > 10) ? PyTuple_GetItem(InArgs, 10) : nullptr;
-		FLinearColor Arg10 = FLinearColor(0.000000, 1.000000, 0.000000, 1.000000);
+		FLinearColor Arg10 = FLinearColor(0.000000f, 1.000000f, 0.000000f, 1.000000f);
 		if (PyArg10 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg10, Arg10))
@@ -12778,7 +12778,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg11 = (PyArg10 && ArgCount > 11) ? PyTuple_GetItem(InArgs, 11) : nullptr;
-		float Arg11 = 5.000000;
+		float Arg11 = 5.000000f;
 		if (PyArg11 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg11, Arg11))
@@ -12914,14 +12914,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereTraceSingle"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg6[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereTraceSingle"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -12951,7 +12951,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg9 = (ArgCount > 9) ? PyTuple_GetItem(InArgs, 9) : nullptr;
-		FLinearColor Arg9 = FLinearColor(1.000000, 0.000000, 0.000000, 1.000000);
+		FLinearColor Arg9 = FLinearColor(1.000000f, 0.000000f, 0.000000f, 1.000000f);
 		if (PyArg9 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg9, Arg9))
@@ -12962,7 +12962,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg10 = (PyArg9 && ArgCount > 10) ? PyTuple_GetItem(InArgs, 10) : nullptr;
-		FLinearColor Arg10 = FLinearColor(0.000000, 1.000000, 0.000000, 1.000000);
+		FLinearColor Arg10 = FLinearColor(0.000000f, 1.000000f, 0.000000f, 1.000000f);
 		if (PyArg10 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg10, Arg10))
@@ -12973,7 +12973,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg11 = (PyArg10 && ArgCount > 11) ? PyTuple_GetItem(InArgs, 11) : nullptr;
-		float Arg11 = 5.000000;
+		float Arg11 = 5.000000f;
 		if (PyArg11 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg11, Arg11))
@@ -13103,14 +13103,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereTraceSingleByProfile"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg6[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereTraceSingleByProfile"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -13140,7 +13140,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg9 = (ArgCount > 9) ? PyTuple_GetItem(InArgs, 9) : nullptr;
-		FLinearColor Arg9 = FLinearColor(1.000000, 0.000000, 0.000000, 1.000000);
+		FLinearColor Arg9 = FLinearColor(1.000000f, 0.000000f, 0.000000f, 1.000000f);
 		if (PyArg9 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg9, Arg9))
@@ -13151,7 +13151,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg10 = (PyArg9 && ArgCount > 10) ? PyTuple_GetItem(InArgs, 10) : nullptr;
-		FLinearColor Arg10 = FLinearColor(0.000000, 1.000000, 0.000000, 1.000000);
+		FLinearColor Arg10 = FLinearColor(0.000000f, 1.000000f, 0.000000f, 1.000000f);
 		if (PyArg10 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg10, Arg10))
@@ -13162,7 +13162,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg11 = (PyArg10 && ArgCount > 11) ? PyTuple_GetItem(InArgs, 11) : nullptr;
-		float Arg11 = 5.000000;
+		float Arg11 = 5.000000f;
 		if (PyArg11 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg11, Arg11))
@@ -13268,14 +13268,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereTraceSingleForObjects"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg4[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereTraceSingleForObjects"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -13318,14 +13318,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereTraceSingleForObjects"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg6[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereTraceSingleForObjects"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -13355,7 +13355,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg9 = (ArgCount > 9) ? PyTuple_GetItem(InArgs, 9) : nullptr;
-		FLinearColor Arg9 = FLinearColor(1.000000, 0.000000, 0.000000, 1.000000);
+		FLinearColor Arg9 = FLinearColor(1.000000f, 0.000000f, 0.000000f, 1.000000f);
 		if (PyArg9 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg9, Arg9))
@@ -13366,7 +13366,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg10 = (PyArg9 && ArgCount > 10) ? PyTuple_GetItem(InArgs, 10) : nullptr;
-		FLinearColor Arg10 = FLinearColor(0.000000, 1.000000, 0.000000, 1.000000);
+		FLinearColor Arg10 = FLinearColor(0.000000f, 1.000000f, 0.000000f, 1.000000f);
 		if (PyArg10 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg10, Arg10))
@@ -13377,7 +13377,7 @@ struct FMethods_KismetSystemLibrary
 		}
 
 		PyObject* PyArg11 = (PyArg10 && ArgCount > 11) ? PyTuple_GetItem(InArgs, 11) : nullptr;
-		float Arg11 = 5.000000;
+		float Arg11 = 5.000000f;
 		if (PyArg11 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg11, Arg11))
@@ -13455,14 +13455,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::UnloadPrimaryAssetList"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::NativizeStructInstance(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::UnloadPrimaryAssetList"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}

@@ -5,8 +5,8 @@
 #include "Wrapper/UPyWrapperTypeRegistry.h"
 #include "Wrapper/UPyWrapperTypeFactory.h"
 #include "Utils/UPyUtil.h"
-#include "Styling/SlateTypes.h"
 #include "Types/SlateEnums.h"
+#include "Styling/SlateTypes.h"
 
 
 PyTypeObject UPyWrapperCheckBoxType = {

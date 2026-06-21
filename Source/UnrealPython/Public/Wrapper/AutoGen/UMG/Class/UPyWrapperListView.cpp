@@ -5,12 +5,14 @@
 #include "Wrapper/UPyWrapperTypeRegistry.h"
 #include "Wrapper/UPyWrapperTypeFactory.h"
 #include "Utils/UPyUtil.h"
+#include "Styling/SlateTypes.h"
+#include "Types/SlateEnums.h"
+#include "Widgets/Views/STableViewBase.h"
+#include "Framework/Views/ITypedTableView.h"
 #include "UObject/Object.h"
 #include "Layout/Margin.h"
 #include "GameFramework/Actor.h"
 #include "Engine/EngineTypes.h"
-#include "Widgets/Views/STableViewBase.h"
-#include "Framework/Views/ITypedTableView.h"
 
 
 PyTypeObject UPyWrapperListViewType = {
@@ -1491,14 +1493,14 @@ struct FMethods_ListView
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("ListView::BP_SetListItems"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("ListView::BP_SetListItems"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}

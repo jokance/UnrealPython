@@ -107,7 +107,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg3 = (ArgCount > 3) ? PyTuple_GetItem(InArgs, 3) : nullptr;
-		float Arg3 = 0.000000;
+		float Arg3 = 0.000000f;
 		if (PyArg3 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg3, Arg3))
@@ -118,7 +118,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg4 = (PyArg3 && ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		float Arg4 = 0.500000;
+		float Arg4 = 0.500000f;
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg4, Arg4))
@@ -129,7 +129,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg5 = (PyArg4 && ArgCount > 5) ? PyTuple_GetItem(InArgs, 5) : nullptr;
-		float Arg5 = 2.000000;
+		float Arg5 = 2.000000f;
 		if (PyArg5 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg5, Arg5))
@@ -401,14 +401,14 @@ struct FMethods_GameplayStatics
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::ApplyRadialDamage"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg5[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::ApplyRadialDamage"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -586,14 +586,14 @@ struct FMethods_GameplayStatics
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::ApplyRadialDamageWithFalloff"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg8[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::ApplyRadialDamageWithFalloff"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -1097,14 +1097,14 @@ struct FMethods_GameplayStatics
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::Blueprint_PredictProjectilePath_ByObjectType"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg5[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::Blueprint_PredictProjectilePath_ByObjectType"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -1147,14 +1147,14 @@ struct FMethods_GameplayStatics
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::Blueprint_PredictProjectilePath_ByObjectType"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg7[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::Blueprint_PredictProjectilePath_ByObjectType"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -1184,7 +1184,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg10 = (ArgCount > 10) ? PyTuple_GetItem(InArgs, 10) : nullptr;
-		float Arg10 = 15.000000;
+		float Arg10 = 15.000000f;
 		if (PyArg10 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg10, Arg10))
@@ -1195,7 +1195,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg11 = (PyArg10 && ArgCount > 11) ? PyTuple_GetItem(InArgs, 11) : nullptr;
-		float Arg11 = 2.000000;
+		float Arg11 = 2.000000f;
 		if (PyArg11 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg11, Arg11))
@@ -1206,7 +1206,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg12 = (PyArg11 && ArgCount > 12) ? PyTuple_GetItem(InArgs, 12) : nullptr;
-		float Arg12 = 0.000000;
+		float Arg12 = 0.000000f;
 		if (PyArg12 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg12, Arg12))
@@ -1360,14 +1360,14 @@ struct FMethods_GameplayStatics
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::Blueprint_PredictProjectilePath_ByTraceChannel"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg7[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::Blueprint_PredictProjectilePath_ByTraceChannel"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -1397,7 +1397,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg10 = (ArgCount > 10) ? PyTuple_GetItem(InArgs, 10) : nullptr;
-		float Arg10 = 15.000000;
+		float Arg10 = 15.000000f;
 		if (PyArg10 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg10, Arg10))
@@ -1408,7 +1408,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg11 = (PyArg10 && ArgCount > 11) ? PyTuple_GetItem(InArgs, 11) : nullptr;
-		float Arg11 = 2.000000;
+		float Arg11 = 2.000000f;
 		if (PyArg11 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg11, Arg11))
@@ -1419,7 +1419,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg12 = (PyArg11 && ArgCount > 12) ? PyTuple_GetItem(InArgs, 12) : nullptr;
-		float Arg12 = 0.000000;
+		float Arg12 = 0.000000f;
 		if (PyArg12 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg12, Arg12))
@@ -1583,7 +1583,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg3 = (ArgCount > 3) ? PyTuple_GetItem(InArgs, 3) : nullptr;
-		float Arg3 = 1.000000;
+		float Arg3 = 1.000000f;
 		if (PyArg3 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg3, Arg3))
@@ -1734,7 +1734,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg2 = (ArgCount > 2) ? PyTuple_GetItem(InArgs, 2) : nullptr;
-		float Arg2 = 1.000000;
+		float Arg2 = 1.000000f;
 		if (PyArg2 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg2, Arg2))
@@ -1745,7 +1745,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg3 = (PyArg2 && ArgCount > 3) ? PyTuple_GetItem(InArgs, 3) : nullptr;
-		float Arg3 = 1.000000;
+		float Arg3 = 1.000000f;
 		if (PyArg3 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg3, Arg3))
@@ -1756,7 +1756,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg4 = (PyArg3 && ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		float Arg4 = 0.000000;
+		float Arg4 = 0.000000f;
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg4, Arg4))
@@ -2135,14 +2135,14 @@ struct FMethods_GameplayStatics
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::FindNearestActor"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg1[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::FindNearestActor"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -2279,14 +2279,14 @@ struct FMethods_GameplayStatics
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::GetActorArrayAverageLocation"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::GetActorArrayAverageLocation"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -2323,14 +2323,14 @@ struct FMethods_GameplayStatics
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::GetActorArrayBounds"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			if (!UPyConversion::Nativize(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::GetActorArrayBounds"), TEXT("invalid argument"));
 				return nullptr;
-	
+
 			}
 			Py_DECREF(Item);
 		}
@@ -4069,7 +4069,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg3 = (ArgCount > 3) ? PyTuple_GetItem(InArgs, 3) : nullptr;
-		float Arg3 = 1.000000;
+		float Arg3 = 1.000000f;
 		if (PyArg3 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg3, Arg3))
@@ -4080,7 +4080,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg4 = (PyArg3 && ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		float Arg4 = 1.000000;
+		float Arg4 = 1.000000f;
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg4, Arg4))
@@ -4091,7 +4091,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg5 = (PyArg4 && ArgCount > 5) ? PyTuple_GetItem(InArgs, 5) : nullptr;
-		float Arg5 = 0.000000;
+		float Arg5 = 0.000000f;
 		if (PyArg5 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg5, Arg5))
@@ -4169,7 +4169,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg5 = (ArgCount > 5) ? PyTuple_GetItem(InArgs, 5) : nullptr;
-		float Arg5 = 1.000000;
+		float Arg5 = 1.000000f;
 		if (PyArg5 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg5, Arg5))
@@ -4180,7 +4180,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg6 = (PyArg5 && ArgCount > 6) ? PyTuple_GetItem(InArgs, 6) : nullptr;
-		float Arg6 = 1.000000;
+		float Arg6 = 1.000000f;
 		if (PyArg6 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg6, Arg6))
@@ -4191,7 +4191,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg7 = (PyArg6 && ArgCount > 7) ? PyTuple_GetItem(InArgs, 7) : nullptr;
-		float Arg7 = 0.000000;
+		float Arg7 = 0.000000f;
 		if (PyArg7 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg7, Arg7))
@@ -4244,7 +4244,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg2 = (ArgCount > 2) ? PyTuple_GetItem(InArgs, 2) : nullptr;
-		float Arg2 = 1.000000;
+		float Arg2 = 1.000000f;
 		if (PyArg2 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg2, Arg2))
@@ -4255,7 +4255,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg3 = (PyArg2 && ArgCount > 3) ? PyTuple_GetItem(InArgs, 3) : nullptr;
-		float Arg3 = 1.000000;
+		float Arg3 = 1.000000f;
 		if (PyArg3 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg3, Arg3))
@@ -4266,7 +4266,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg4 = (PyArg3 && ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		float Arg4 = 0.000000;
+		float Arg4 = 0.000000f;
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg4, Arg4))
@@ -4365,7 +4365,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg4 = (ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		float Arg4 = 1.000000;
+		float Arg4 = 1.000000f;
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg4, Arg4))
@@ -4376,7 +4376,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg5 = (PyArg4 && ArgCount > 5) ? PyTuple_GetItem(InArgs, 5) : nullptr;
-		float Arg5 = 1.000000;
+		float Arg5 = 1.000000f;
 		if (PyArg5 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg5, Arg5))
@@ -4387,7 +4387,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg6 = (PyArg5 && ArgCount > 6) ? PyTuple_GetItem(InArgs, 6) : nullptr;
-		float Arg6 = 0.000000;
+		float Arg6 = 0.000000f;
 		if (PyArg6 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg6, Arg6))
@@ -4509,7 +4509,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg5 = (ArgCount > 5) ? PyTuple_GetItem(InArgs, 5) : nullptr;
-		float Arg5 = 1.000000;
+		float Arg5 = 1.000000f;
 		if (PyArg5 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg5, Arg5))
@@ -4975,7 +4975,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
-		float Arg1 = 1.000000;
+		float Arg1 = 1.000000f;
 		if (PyArg1 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg1, Arg1))
@@ -4986,7 +4986,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg2 = (PyArg1 && ArgCount > 2) ? PyTuple_GetItem(InArgs, 2) : nullptr;
-		float Arg2 = 1.000000;
+		float Arg2 = 1.000000f;
 		if (PyArg2 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg2, Arg2))
@@ -4997,7 +4997,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg3 = (PyArg2 && ArgCount > 3) ? PyTuple_GetItem(InArgs, 3) : nullptr;
-		float Arg3 = 1.000000;
+		float Arg3 = 1.000000f;
 		if (PyArg3 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg3, Arg3))
@@ -5008,7 +5008,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg4 = (PyArg3 && ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		float Arg4 = 1.000000;
+		float Arg4 = 1.000000f;
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg4, Arg4))
@@ -5019,7 +5019,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg5 = (PyArg4 && ArgCount > 5) ? PyTuple_GetItem(InArgs, 5) : nullptr;
-		float Arg5 = 1.000000;
+		float Arg5 = 1.000000f;
 		if (PyArg5 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg5, Arg5))
@@ -5030,7 +5030,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg6 = (PyArg5 && ArgCount > 6) ? PyTuple_GetItem(InArgs, 6) : nullptr;
-		float Arg6 = 1.000000;
+		float Arg6 = 1.000000f;
 		if (PyArg6 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg6, Arg6))
@@ -5041,7 +5041,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg7 = (PyArg6 && ArgCount > 7) ? PyTuple_GetItem(InArgs, 7) : nullptr;
-		float Arg7 = 1.000000;
+		float Arg7 = 1.000000f;
 		if (PyArg7 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg7, Arg7))
@@ -5052,7 +5052,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg8 = (PyArg7 && ArgCount > 8) ? PyTuple_GetItem(InArgs, 8) : nullptr;
-		float Arg8 = 1.000000;
+		float Arg8 = 1.000000f;
 		if (PyArg8 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg8, Arg8))
@@ -5268,7 +5268,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg3 = (ArgCount > 3) ? PyTuple_GetItem(InArgs, 3) : nullptr;
-		float Arg3 = 0.000000;
+		float Arg3 = 0.000000f;
 		if (PyArg3 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg3, Arg3))
@@ -5322,7 +5322,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg3 = (ArgCount > 3) ? PyTuple_GetItem(InArgs, 3) : nullptr;
-		float Arg3 = 1.000000;
+		float Arg3 = 1.000000f;
 		if (PyArg3 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg3, Arg3))
@@ -5333,7 +5333,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg4 = (PyArg3 && ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		float Arg4 = 1.000000;
+		float Arg4 = 1.000000f;
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg4, Arg4))
@@ -5344,7 +5344,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg5 = (PyArg4 && ArgCount > 5) ? PyTuple_GetItem(InArgs, 5) : nullptr;
-		float Arg5 = 1.000000;
+		float Arg5 = 1.000000f;
 		if (PyArg5 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg5, Arg5))
@@ -5494,7 +5494,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg4 = (ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		FRotator Arg4 = FRotator(-90.000000,0.000000,0.000000);
+		FRotator Arg4 = FRotator(-90.000000, 0.000000, 0.000000);
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg4, Arg4))
@@ -5505,7 +5505,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg5 = (PyArg4 && ArgCount > 5) ? PyTuple_GetItem(InArgs, 5) : nullptr;
-		float Arg5 = 0.000000;
+		float Arg5 = 0.000000f;
 		if (PyArg5 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg5, Arg5))
@@ -5605,7 +5605,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg7 = (PyArg6 && ArgCount > 7) ? PyTuple_GetItem(InArgs, 7) : nullptr;
-		float Arg7 = 0.000000;
+		float Arg7 = 0.000000f;
 		if (PyArg7 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg7, Arg7))
@@ -5659,7 +5659,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg3 = (ArgCount > 3) ? PyTuple_GetItem(InArgs, 3) : nullptr;
-		float Arg3 = 1.000000;
+		float Arg3 = 1.000000f;
 		if (PyArg3 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg3, Arg3))
@@ -5670,7 +5670,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg4 = (PyArg3 && ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		float Arg4 = 1.000000;
+		float Arg4 = 1.000000f;
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg4, Arg4))
@@ -5681,7 +5681,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg5 = (PyArg4 && ArgCount > 5) ? PyTuple_GetItem(InArgs, 5) : nullptr;
-		float Arg5 = 0.000000;
+		float Arg5 = 0.000000f;
 		if (PyArg5 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg5, Arg5))
@@ -5770,7 +5770,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg5 = (ArgCount > 5) ? PyTuple_GetItem(InArgs, 5) : nullptr;
-		float Arg5 = 1.000000;
+		float Arg5 = 1.000000f;
 		if (PyArg5 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg5, Arg5))
@@ -5781,7 +5781,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg6 = (PyArg5 && ArgCount > 6) ? PyTuple_GetItem(InArgs, 6) : nullptr;
-		float Arg6 = 1.000000;
+		float Arg6 = 1.000000f;
 		if (PyArg6 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg6, Arg6))
@@ -5792,7 +5792,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg7 = (PyArg6 && ArgCount > 7) ? PyTuple_GetItem(InArgs, 7) : nullptr;
-		float Arg7 = 0.000000;
+		float Arg7 = 0.000000f;
 		if (PyArg7 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg7, Arg7))
@@ -5925,7 +5925,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg8 = (PyArg7 && ArgCount > 8) ? PyTuple_GetItem(InArgs, 8) : nullptr;
-		float Arg8 = 1.000000;
+		float Arg8 = 1.000000f;
 		if (PyArg8 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg8, Arg8))
@@ -5936,7 +5936,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg9 = (PyArg8 && ArgCount > 9) ? PyTuple_GetItem(InArgs, 9) : nullptr;
-		float Arg9 = 1.000000;
+		float Arg9 = 1.000000f;
 		if (PyArg9 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg9, Arg9))
@@ -5947,7 +5947,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg10 = (PyArg9 && ArgCount > 10) ? PyTuple_GetItem(InArgs, 10) : nullptr;
-		float Arg10 = 0.000000;
+		float Arg10 = 0.000000f;
 		if (PyArg10 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg10, Arg10))
@@ -6035,7 +6035,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg4 = (ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		FVector Arg4 = FVector(1.000000,1.000000,1.000000);
+		FVector Arg4 = FVector(1.000000, 1.000000, 1.000000);
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg4, Arg4))
@@ -6145,7 +6145,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg5 = (ArgCount > 5) ? PyTuple_GetItem(InArgs, 5) : nullptr;
-		FVector Arg5 = FVector(1.000000,1.000000,1.000000);
+		FVector Arg5 = FVector(1.000000, 1.000000, 1.000000);
 		if (PyArg5 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg5, Arg5))
@@ -6266,7 +6266,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg5 = (PyArg4 && ArgCount > 5) ? PyTuple_GetItem(InArgs, 5) : nullptr;
-		float Arg5 = 1.000000;
+		float Arg5 = 1.000000f;
 		if (PyArg5 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg5, Arg5))
@@ -6277,7 +6277,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg6 = (PyArg5 && ArgCount > 6) ? PyTuple_GetItem(InArgs, 6) : nullptr;
-		float Arg6 = 0.000000;
+		float Arg6 = 0.000000f;
 		if (PyArg6 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg6, Arg6))
@@ -6409,7 +6409,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg8 = (PyArg7 && ArgCount > 8) ? PyTuple_GetItem(InArgs, 8) : nullptr;
-		float Arg8 = 1.000000;
+		float Arg8 = 1.000000f;
 		if (PyArg8 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg8, Arg8))
@@ -6420,7 +6420,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg9 = (PyArg8 && ArgCount > 9) ? PyTuple_GetItem(InArgs, 9) : nullptr;
-		float Arg9 = 0.000000;
+		float Arg9 = 0.000000f;
 		if (PyArg9 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg9, Arg9))
@@ -6520,7 +6520,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg2 = (ArgCount > 2) ? PyTuple_GetItem(InArgs, 2) : nullptr;
-		float Arg2 = 1.000000;
+		float Arg2 = 1.000000f;
 		if (PyArg2 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg2, Arg2))
@@ -6531,7 +6531,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg3 = (PyArg2 && ArgCount > 3) ? PyTuple_GetItem(InArgs, 3) : nullptr;
-		float Arg3 = 1.000000;
+		float Arg3 = 1.000000f;
 		if (PyArg3 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg3, Arg3))
@@ -6542,7 +6542,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg4 = (PyArg3 && ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		float Arg4 = 0.000000;
+		float Arg4 = 0.000000f;
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg4, Arg4))
@@ -6641,7 +6641,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg4 = (ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		float Arg4 = 1.000000;
+		float Arg4 = 1.000000f;
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg4, Arg4))
@@ -6652,7 +6652,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg5 = (PyArg4 && ArgCount > 5) ? PyTuple_GetItem(InArgs, 5) : nullptr;
-		float Arg5 = 1.000000;
+		float Arg5 = 1.000000f;
 		if (PyArg5 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg5, Arg5))
@@ -6663,7 +6663,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg6 = (PyArg5 && ArgCount > 6) ? PyTuple_GetItem(InArgs, 6) : nullptr;
-		float Arg6 = 0.000000;
+		float Arg6 = 0.000000f;
 		if (PyArg6 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg6, Arg6))
@@ -6795,7 +6795,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg7 = (PyArg6 && ArgCount > 7) ? PyTuple_GetItem(InArgs, 7) : nullptr;
-		float Arg7 = 1.000000;
+		float Arg7 = 1.000000f;
 		if (PyArg7 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg7, Arg7))
@@ -6806,7 +6806,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg8 = (PyArg7 && ArgCount > 8) ? PyTuple_GetItem(InArgs, 8) : nullptr;
-		float Arg8 = 1.000000;
+		float Arg8 = 1.000000f;
 		if (PyArg8 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg8, Arg8))
@@ -6817,7 +6817,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg9 = (PyArg8 && ArgCount > 9) ? PyTuple_GetItem(InArgs, 9) : nullptr;
-		float Arg9 = 0.000000;
+		float Arg9 = 0.000000f;
 		if (PyArg9 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg9, Arg9))
@@ -6904,7 +6904,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg3 = (ArgCount > 3) ? PyTuple_GetItem(InArgs, 3) : nullptr;
-		float Arg3 = 0.000000;
+		float Arg3 = 0.000000f;
 		if (PyArg3 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg3, Arg3))
@@ -6915,7 +6915,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg4 = (PyArg3 && ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		float Arg4 = 0.500000;
+		float Arg4 = 0.500000f;
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg4, Arg4))
@@ -7029,7 +7029,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg7 = (PyArg6 && ArgCount > 7) ? PyTuple_GetItem(InArgs, 7) : nullptr;
-		float Arg7 = 3.000000;
+		float Arg7 = 3.000000f;
 		if (PyArg7 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg7, Arg7))
@@ -7040,7 +7040,7 @@ struct FMethods_GameplayStatics
 		}
 
 		PyObject* PyArg8 = (PyArg7 && ArgCount > 8) ? PyTuple_GetItem(InArgs, 8) : nullptr;
-		FLinearColor Arg8 = FLinearColor(1.000000, 0.000000, 0.000000, 1.000000);
+		FLinearColor Arg8 = FLinearColor(1.000000f, 0.000000f, 0.000000f, 1.000000f);
 		if (PyArg8 != nullptr)
 		{
 			if (!UPyConversion::NativizeStructInstance(PyArg8, Arg8))

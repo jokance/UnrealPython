@@ -5,6 +5,7 @@
 #include "Wrapper/UPyWrapperTypeRegistry.h"
 #include "Wrapper/UPyWrapperTypeFactory.h"
 #include "Utils/UPyUtil.h"
+#include "Blueprint/DragDropOperation.h"
 #include "Blueprint/UserWidget.h"
 #include "Components/SlateWrapperTypes.h"
 

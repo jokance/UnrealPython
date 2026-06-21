@@ -81,6 +81,78 @@ internal static class AutoWrapperGenerator
 		return null;
 	}
 
+	private static void AddHeaderForType(HashSet<string> headers, string? typeName)
+	{
+		if (String.IsNullOrEmpty(typeName))
+		{
+			return;
+		}
+
+		string? header = GetHeaderFileForType(typeName);
+		if (!String.IsNullOrEmpty(header))
+		{
+			headers.Add(header);
+		}
+	}
+
+	private static void AddBytePropertyEnumHeader(HashSet<string> headers, string typeName)
+	{
+		if (typeName.StartsWith("ByteProperty<") && typeName.EndsWith(">"))
+		{
+			string enumName = typeName.Substring(13, typeName.Length - 14);
+			string? resolvedEnum = ResolveNativeTypeName(enumName) ?? enumName;
+			AddHeaderForType(headers, resolvedEnum);
+		}
+	}
+
+	private static void AddHeadersForPropertyType(HashSet<string> headers, PropJsonInfo property)
+	{
+		if (String.IsNullOrEmpty(property.TypeName))
+		{
+			return;
+		}
+
+		AddHeaderForType(headers, property.TypeName);
+		if ((property.PropType.Equals("ArrayProperty", StringComparison.Ordinal) || property.PropType.Equals("SetProperty", StringComparison.Ordinal)))
+		{
+			AddBytePropertyEnumHeader(headers, property.TypeName);
+		}
+		else if (property.PropType.Equals("MapProperty", StringComparison.Ordinal))
+		{
+			string[] parts = property.TypeName.Split(new[] { "->" }, StringSplitOptions.None);
+			foreach (string part in parts)
+			{
+				AddBytePropertyEnumHeader(headers, part);
+			}
+		}
+	}
+
+	private static void AddEnumHeadersForPropertyType(HashSet<string> headers, PropJsonInfo property)
+	{
+		if (String.IsNullOrEmpty(property.TypeName))
+		{
+			return;
+		}
+
+		if (property.PropType.Equals("EnumProperty", StringComparison.Ordinal) || property.PropType.Equals("ByteProperty", StringComparison.Ordinal))
+		{
+			string? resolvedEnum = ResolveNativeTypeName(property.TypeName) ?? property.TypeName;
+			AddHeaderForType(headers, resolvedEnum);
+		}
+		else if (property.PropType.Equals("ArrayProperty", StringComparison.Ordinal) || property.PropType.Equals("SetProperty", StringComparison.Ordinal))
+		{
+			AddBytePropertyEnumHeader(headers, property.TypeName);
+		}
+		else if (property.PropType.Equals("MapProperty", StringComparison.Ordinal))
+		{
+			string[] parts = property.TypeName.Split(new[] { "->" }, StringSplitOptions.None);
+			foreach (string part in parts)
+			{
+				AddBytePropertyEnumHeader(headers, part);
+			}
+		}
+	}
+
 	private static string GetTemplateContent(string baseDirectory, string templateFileName)
 	{
 		string pluginRoot = ResolvePluginRootDirectory(baseDirectory);
@@ -1206,6 +1278,32 @@ internal static class AutoWrapperGenerator
 		return $"{nativeType}::{defaultValue}";
 	}
 
+	private static string FormatFloatDefaultValue(string? defaultValue)
+	{
+		if (String.IsNullOrWhiteSpace(defaultValue))
+		{
+			return "0.0f";
+		}
+
+		string value = defaultValue.Trim();
+		if (Regex.IsMatch(value, @"^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?[fF]$"))
+		{
+			return value;
+		}
+
+		if (Regex.IsMatch(value, @"^[+-]?\d+$"))
+		{
+			return $"{value}.0f";
+		}
+
+		if (Regex.IsMatch(value, @"^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?$"))
+		{
+			return $"{value}f";
+		}
+
+		return $"static_cast<float>({value})";
+	}
+
 	private static bool TryBuildOperatorArgumentConversion(string rawType, string rhsExpression, string errorContextLiteral, int paramIndex, PropJsonInfo param, string failureReturn, bool suppressErrors, out string conversionCode, out string argumentExpression)
 	{
 		string varName = $"Arg{paramIndex}";
@@ -1394,7 +1492,7 @@ internal static class AutoWrapperGenerator
 
 			case "FloatProperty":
 				conversionCode =
-					$"{indent}float {varName} = {(hasDefault ? param.DefaultValue : "0.0f")};\n" +
+					$"{indent}float {varName} = {FormatFloatDefaultValue(hasDefault ? param.DefaultValue : null)};\n" +
 					WrapNativize(
 						$"{indent}if (!UPyConversion::Nativize({rhsExpression}, {varName}))\n" +
 						$"{indent}{{\n" +
@@ -3915,6 +4013,10 @@ internal static class AutoWrapperGenerator
 			sourceIncludeBuilder.AppendLine("#include \"DynamicTypes/UPyConstant.h\"");
 		}
 		HashSet<string> extraHeaders = new(StringComparer.Ordinal);
+		foreach (PropJsonInfo property in structProperties)
+		{
+			AddEnumHeadersForPropertyType(extraHeaders, property);
+		}
 		foreach (MethodJsonInfo method in structMethods)
 		{
 			if (method.bUseHelperMethod && !String.IsNullOrEmpty(method.HostHelper) && method.HostHelper != rawType)
@@ -3935,14 +4037,7 @@ internal static class AutoWrapperGenerator
 
 			foreach (PropJsonInfo param in method.Params)
 			{
-				if (!String.IsNullOrEmpty(param.TypeName))
-				{
-					string? header = GetHeaderFileForType(param.TypeName);
-					if (!String.IsNullOrEmpty(header))
-					{
-						extraHeaders.Add(header);
-					}
-				}
+				AddHeadersForPropertyType(extraHeaders, param);
 			}
 		}
 		foreach (string header in extraHeaders)
@@ -4092,6 +4187,10 @@ internal static class AutoWrapperGenerator
 			sourceIncludeBuilder.AppendLine("#include \"DynamicTypes/UPyConstant.h\"");
 		}
 		HashSet<string> extraHeaders = new(StringComparer.Ordinal);
+		foreach (PropJsonInfo property in classProperties)
+		{
+			AddEnumHeadersForPropertyType(extraHeaders, property);
+		}
 		foreach (MethodJsonInfo method in classMethods)
 		{
 			if (method.bUseHelperMethod && !String.IsNullOrEmpty(method.HostHelper) && method.HostHelper != rawType)
@@ -4112,45 +4211,7 @@ internal static class AutoWrapperGenerator
 
 			foreach (PropJsonInfo param in method.Params)
 			{
-				if (!String.IsNullOrEmpty(param.TypeName))
-				{
-					string? header = GetHeaderFileForType(param.TypeName);
-					if (!String.IsNullOrEmpty(header))
-					{
-						extraHeaders.Add(header);
-					}
-				}
-
-				if ((param.PropType.Equals("ArrayProperty", StringComparison.Ordinal) || param.PropType.Equals("SetProperty", StringComparison.Ordinal)) && !String.IsNullOrEmpty(param.TypeName))
-				{
-					if (param.TypeName.StartsWith("ByteProperty<") && param.TypeName.EndsWith(">"))
-					{
-						string enumName = param.TypeName.Substring(13, param.TypeName.Length - 14);
-						string? resolvedEnum = ResolveNativeTypeName(enumName) ?? enumName;
-						string? header = GetHeaderFileForType(resolvedEnum);
-						if (!String.IsNullOrEmpty(header))
-						{
-							extraHeaders.Add(header);
-						}
-					}
-				}
-				else if (param.PropType.Equals("MapProperty", StringComparison.Ordinal) && !String.IsNullOrEmpty(param.TypeName))
-				{
-					string[] parts = param.TypeName.Split(new[] { "->" }, StringSplitOptions.None);
-					foreach (string part in parts)
-					{
-						if (part.StartsWith("ByteProperty<") && part.EndsWith(">"))
-						{
-							string enumName = part.Substring(13, part.Length - 14);
-							string? resolvedEnum = ResolveNativeTypeName(enumName) ?? enumName;
-							string? header = GetHeaderFileForType(resolvedEnum);
-							if (!String.IsNullOrEmpty(header))
-							{
-								extraHeaders.Add(header);
-							}
-						}
-					}
-				}
+				AddHeadersForPropertyType(extraHeaders, param);
 			}
 		}
 		foreach (string header in extraHeaders)
@@ -4988,6 +5049,18 @@ internal static class AutoWrapperGenerator
 		return args;
 	}
 
+	private static string FormatStructDefaultValuePart(string nativeType, string value)
+	{
+		return nativeType switch
+		{
+			"FLinearColor" => FormatFloatDefaultValue(value),
+			"FVector2f" => FormatFloatDefaultValue(value),
+			"FVector3f" => FormatFloatDefaultValue(value),
+			"FVector4f" => FormatFloatDefaultValue(value),
+			_ => value
+		};
+	}
+
 	private static string ParseStructDefaultValue(string nativeType, string defaultValue)
 	{
 		if (string.IsNullOrEmpty(defaultValue) || defaultValue == "()")
@@ -5007,11 +5080,11 @@ internal static class AutoWrapperGenerator
 				int eqIndex = part.IndexOf('=');
 				if (eqIndex > 0)
 				{
-					values.Add(part.Substring(eqIndex + 1).Trim());
+					values.Add(FormatStructDefaultValuePart(nativeType, part.Substring(eqIndex + 1).Trim()));
 				}
 				else
 				{
-					values.Add(part.Trim());
+					values.Add(FormatStructDefaultValuePart(nativeType, part.Trim()));
 				}
 			}
 
@@ -5024,7 +5097,10 @@ internal static class AutoWrapperGenerator
 		// Handle plain comma-separated values (e.g., 0.0,1.0,0.0)
 		if (defaultValue.Contains(",") && !defaultValue.Contains("(") && !defaultValue.Contains(")"))
 		{
-			return $" = {nativeType}({defaultValue})";
+			List<string> values = SplitArgs(defaultValue)
+				.Select(value => FormatStructDefaultValuePart(nativeType, value))
+				.ToList();
+			return $" = {nativeType}({string.Join(", ", values)})";
 		}
 
 		// Fallback: assign as-is

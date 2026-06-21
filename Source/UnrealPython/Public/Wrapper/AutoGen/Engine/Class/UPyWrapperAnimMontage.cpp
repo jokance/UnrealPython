@@ -5,8 +5,9 @@
 #include "Wrapper/UPyWrapperTypeRegistry.h"
 #include "Wrapper/UPyWrapperTypeFactory.h"
 #include "Utils/UPyUtil.h"
-#include "Animation/AnimSequenceBase.h"
 #include "Animation/AnimMontage.h"
+#include "Animation/AnimEnums.h"
+#include "Animation/AnimSequenceBase.h"
 #include "AlphaBlend.h"
 
 
@@ -647,7 +648,7 @@ struct FMethods_AnimMontage
 		}
 
 		PyObject* PyArg4 = (ArgCount > 4) ? PyTuple_GetItem(InArgs, 4) : nullptr;
-		float Arg4 = 1.000000;
+		float Arg4 = 1.000000f;
 		if (PyArg4 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg4, Arg4))
@@ -669,7 +670,7 @@ struct FMethods_AnimMontage
 		}
 
 		PyObject* PyArg6 = (PyArg5 && ArgCount > 6) ? PyTuple_GetItem(InArgs, 6) : nullptr;
-		float Arg6 = -1.000000;
+		float Arg6 = -1.000000f;
 		if (PyArg6 != nullptr)
 		{
 			if (!UPyConversion::Nativize(PyArg6, Arg6))

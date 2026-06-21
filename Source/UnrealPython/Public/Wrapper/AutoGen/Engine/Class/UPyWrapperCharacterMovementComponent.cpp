@@ -5,6 +5,7 @@
 #include "Wrapper/UPyWrapperTypeRegistry.h"
 #include "Wrapper/UPyWrapperTypeFactory.h"
 #include "Utils/UPyUtil.h"
+#include "Engine/EngineTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "Components/PrimitiveComponent.h"
 #include "GameFramework/Actor.h"
@@ -12,7 +13,6 @@
 #include "GameFramework/Character.h"
 #include "CharacterMovementComponentAsync.h"
 #include "AI/Navigation/NavigationAvoidanceTypes.h"
-#include "Engine/EngineTypes.h"
 
 
 PyTypeObject UPyWrapperCharacterMovementComponentType = {

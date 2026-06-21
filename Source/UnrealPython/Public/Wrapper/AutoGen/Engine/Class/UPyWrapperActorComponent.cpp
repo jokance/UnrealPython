@@ -5,6 +5,7 @@
 #include "Wrapper/UPyWrapperTypeRegistry.h"
 #include "Wrapper/UPyWrapperTypeFactory.h"
 #include "Utils/UPyUtil.h"
+#include "ComponentInstanceDataCache.h"
 #include "GameFramework/Actor.h"
 #include "Components/ActorComponent.h"
 #include "UObject/Object.h"

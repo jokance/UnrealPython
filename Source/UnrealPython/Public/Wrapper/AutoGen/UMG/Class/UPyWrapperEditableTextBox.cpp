@@ -5,6 +5,8 @@
 #include "Wrapper/UPyWrapperTypeRegistry.h"
 #include "Wrapper/UPyWrapperTypeFactory.h"
 #include "Utils/UPyUtil.h"
+#include "Components/SlateWrapperTypes.h"
+#include "Widgets/Text/ISlateEditableTextWidget.h"
 #include "UObject/NoExportTypes.h"
 #include "Framework/Text/TextLayout.h"
 #include "Styling/SlateTypes.h"

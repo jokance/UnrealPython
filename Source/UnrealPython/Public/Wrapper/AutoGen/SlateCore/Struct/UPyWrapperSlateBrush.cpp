@@ -7,6 +7,7 @@
 #include "Utils/UPyUtil.h"
 #include "Templates/SharedPointer.h"
 #include "UObject/NoExportTypes.h"
+#include "Styling/SlateBrush.h"
 
 
 PyTypeObject UPyWrapperSlateBrushType = {
