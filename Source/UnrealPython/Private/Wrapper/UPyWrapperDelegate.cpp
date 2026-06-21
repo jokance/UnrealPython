@@ -408,7 +408,7 @@ struct TUPyWrapperDelegateImpl
 		if (!InSelf->DelegateInstance)
 		{
 			// Allow null internal instance if we have a valid property (supports Sparse Delegates)
-			if (InSelf->DelegateProp)
+			if (InSelf->DelegateProp && InSelf->PropAddr)
 			{
 				return true;
 			}
@@ -420,6 +420,20 @@ struct TUPyWrapperDelegateImpl
 		return true;
 	}
 
+	static const DelegateType* ResolveDelegateInstance(WrapperType* InSelf)
+	{
+		typedef TPyDelegateInvocation<DelegateType> FDelegateInvocation;
+
+		const DelegateType* DelegateInstanceToUse = InSelf->DelegateInstance;
+		if (!DelegateInstanceToUse && InSelf->DelegateProp && InSelf->PropAddr)
+		{
+			// For Sparse Delegates, DelegateInstance holds the Handle Address, not the Delegate itself.
+			DelegateInstanceToUse = FDelegateInvocation::Resolve(InSelf->DelegateProp, InSelf->PropAddr);
+		}
+
+		return DelegateInstanceToUse;
+	}
+
 	static PyObject* CallDelegate(WrapperType* InSelf, PyObject* InArgs)
 	{
 		typedef TPyDelegateInvocation<DelegateType> FDelegateInvocation;
@@ -429,14 +443,7 @@ struct TUPyWrapperDelegateImpl
 			return nullptr;
 		}
 
-		const DelegateType* DelegateToCall = InSelf->DelegateInstance;
-		if (!DelegateToCall && InSelf->DelegateProp)
-		{
-			// Resolve the actual delegate to call.
-			// For Sparse Delegates, DelegateInstance holds the Handle Address, not the Delegate itself.
-			DelegateToCall = FDelegateInvocation::Resolve(InSelf->DelegateProp, InSelf->PropAddr);
-		}
-
+		const DelegateType* DelegateToCall = ResolveDelegateInstance(InSelf);
 		if (!FDelegateInvocation::CanCall(DelegateToCall))
 		{
 			UPyUtil::SetPythonError(PyExc_Exception, InSelf, TEXT("Cannot call an unbound delegate"));
@@ -741,7 +748,9 @@ struct FFuncs_WrapperDelegate
 			return nullptr;
 		}
 
-		return PyUnicode_FromFormat("<Delegate '%s' (%p) %s>", TCHAR_TO_UTF8(*UPyUtil::GetFriendlyTypename(InSelf)), InSelf->DelegateInstance, TCHAR_TO_UTF8(*InSelf->DelegateInstance->ToString<UObject>()));
+		const FScriptDelegate* DelegateInstanceToUse = FUPyWrapperDelegateImpl::ResolveDelegateInstance(InSelf);
+		const FString DelegateString = DelegateInstanceToUse ? DelegateInstanceToUse->ToString<UObject>() : TEXT("");
+		return PyUnicode_FromFormat("<Delegate '%s' (%p) %s>", TCHAR_TO_UTF8(*UPyUtil::GetFriendlyTypename(InSelf)), DelegateInstanceToUse, TCHAR_TO_UTF8(*DelegateString));
 	}
 
 	static PyObject* Call(FUPyWrapperDelegate* InSelf, PyObject* InArgs, PyObject* InKwds)
@@ -765,7 +774,8 @@ struct FNumberFuncs_WrapperDelegate
 			return -1;
 		}
 
-		return InSelf->DelegateInstance->IsBound() ? 1 : 0;
+		const FScriptDelegate* DelegateInstanceToUse = FUPyWrapperDelegateImpl::ResolveDelegateInstance(InSelf);
+		return DelegateInstanceToUse && DelegateInstanceToUse->IsBound() ? 1 : 0;
 	}
 };
 
@@ -844,7 +854,9 @@ struct FFuncs_WrapperMulticastDelegate
 			return nullptr;
 		}
 
-		return PyUnicode_FromFormat("<Multicast delegate '%s' (%p) %s>", TCHAR_TO_UTF8(*UPyUtil::GetFriendlyTypename(InSelf)), InSelf->DelegateInstance, TCHAR_TO_UTF8(*InSelf->DelegateInstance->ToString<UObject>()));
+		const FMulticastScriptDelegate* DelegateInstanceToUse = FPyWrapperMulticastDelegateImpl::ResolveDelegateInstance(InSelf);
+		const FString DelegateString = DelegateInstanceToUse ? DelegateInstanceToUse->ToString<UObject>() : TEXT("");
+		return PyUnicode_FromFormat("<Multicast delegate '%s' (%p) %s>", TCHAR_TO_UTF8(*UPyUtil::GetFriendlyTypename(InSelf)), DelegateInstanceToUse, TCHAR_TO_UTF8(*DelegateString));
 	}
 
 	static PyObject* Call(FUPyWrapperMulticastDelegate* InSelf, PyObject* InArgs, PyObject* InKwds)
@@ -868,7 +880,8 @@ struct FNumberFuncs_WrapperMulticastDelegate
 			return -1;
 		}
 
-		return InSelf->DelegateInstance->IsBound() ? 1 : 0;
+		const FMulticastScriptDelegate* DelegateInstanceToUse = FPyWrapperMulticastDelegateImpl::ResolveDelegateInstance(InSelf);
+		return DelegateInstanceToUse && DelegateInstanceToUse->IsBound() ? 1 : 0;
 	}
 };
 
