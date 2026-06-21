@@ -134164,9 +134164,6 @@ class UPyGameInstance(PlatformGameInstance):
     GameInstanceModuleName: str
     GameInstanceFactoryFunctionName: str
 
-    def PyGC(self) -> None:
-        ...
-
 
 class UPyGeneratedEnum(Enum, UPythonResourceOwner):
     ...

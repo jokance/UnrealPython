@@ -270,13 +270,40 @@ Android 链接逻辑在 `Source/UnrealPython/UnrealPython.Build.cs`：
 - 链接 `libUnrealPython3.14.a`
 - 链接 OpenSSL、bz2、ffi、lzma、zstd、mpdec 等 CPython 模块依赖的静态库
 - Android 上 UE 自带 OpenSSL 1.1.1 的库路径可能先于插件库路径出现，且最终 Android game `.so` 会把所有静态库链接进同一个二进制。插件使用 `libUnrealPython3.14.a`、`libUnrealPythonSSL.a` 和 `libUnrealPythonCrypto.a` 作为改写后的 Android 链接产物：OpenSSL 3 导出符号会加上 `UPY_OPENSSL3_` 前缀，Python 中 `_ssl/_hashopenssl` 对 OpenSSL 的引用也会同步改写，避免和 UE 自带 OpenSSL 冲突。
-- 把 `ThirdParty/python314/android/_android_support.py` 作为 Non-UFS runtime dependency staged 进包体。
-- 把当前 host 的 `ThirdParty/python314/android/<host>/lib/python3.14` 作为 Non-UFS runtime dependency staged 进包体。
+- 构建时生成 `Plugins/UnrealPython/Intermediate/Android/unrealpython_bootstrap.zip`，其中包含：
+  - `android/_android_support.py`
+  - `android/<host>/lib/python3.14`
+  - 项目 `Content/Scripts`
+- 用 bootstrap zip 的 SHA256 写入 `UPY_PYTHON_BOOTSTRAP_VERSION`。
+- 通过 `UnrealPython_UPL.xml` 把 `unrealpython_bootstrap.zip` 拷贝到 APK 的 `assets/unrealpython_bootstrap.zip`。
 - 如果 host 目录或任一必需库缺失，UBT 会直接抛出 `BuildException`
 
 Android cook 会以 commandlet 方式加载插件。当前插件在 commandlet 下跳过 Python VM 初始化，避免 Windows cook 阶段因为没有 Win64 标准库 `encodings` 而失败；`StartupModule()` 和 `ShutdownModule()` 都需要保持这个对称跳过逻辑。
 
-Android 包体运行时不复制脚本。`Content/Scripts`、`_android_support.py` 和 host stdlib 都应该在 stage/package 阶段进入 APK/OBB。运行时通过 Java `GameActivity.getObbDirs()` 获取设备实际 OBB 目录，找不到数组时回退到 `getObbDir()`，避免写死 `/storage/emulated/0`。
+Android 包体运行时会在 Python 初始化前通过 Java 从 APK assets 解压 `unrealpython_bootstrap.zip` 到：
+
+```text
+<ExternalFilesDir>/UnrealGame/<Project>/<Project>/Saved/UnrealPythonBootstrap
+```
+
+随后把以下路径加入 `PyConfig.module_search_paths`：
+
+```text
+.../UnrealPythonBootstrap/android
+.../UnrealPythonBootstrap/android/<host>/lib/python3.14
+.../UnrealPythonBootstrap/Content/Scripts
+```
+
+`Content/Scripts` 仍会被 UE 打进 pak/OBB 数据中，但 Android 上 Python 启动依赖的是 APK assets 里的 bootstrap zip，避免 CPython Android 初始化需要真实文件系统路径时直接读取 pak/OBB 失败。
+
+注意：`unrealpython_bootstrap.zip` 文件名在 arm64 和 x86_64 架构间共享。如果在同一工作区频繁切换 `-clientarchitecture=x64` 和 `-clientarchitecture=arm64`，必须确保 UBT 重新执行 `UnrealPython.Build.cs`。出现 arm64 真机日志仍解压出 `x86_64-linux-android` 时，先删除：
+
+```text
+Plugins/UnrealPython/Intermediate/Android/unrealpython_bootstrap.zip
+Plugins/UnrealPython/Intermediate/Android/BootstrapStaging
+```
+
+然后用显式 `-clientarchitecture=arm64` 重新打包。
 
 ### Android 工程内验证
 
@@ -338,7 +365,9 @@ powershell -ExecutionPolicy Bypass -File Scripts\verify_android_python_runtime.p
   -PluginDir 'D:\Projects\SampleGame\Plugins\UnrealPython'
 ```
 
-从 Windows 项目根目录执行完整 BuildCookRun：
+从 Windows 项目根目录执行完整 BuildCookRun。建议始终显式指定 `-clientarchitecture`，不要只依赖 `DefaultEngine.ini`，避免在 arm64 真机包和 x86_64 模拟器包之间切换时复用错误架构。
+
+真机 arm64 单 APK Development 包：
 
 ```powershell
 $env:ANDROID_HOME=[Environment]::GetEnvironmentVariable('ANDROID_HOME','User')
@@ -353,20 +382,37 @@ $env:NDK_ROOT=[Environment]::GetEnvironmentVariable('NDK_ROOT','User')
   -platform=Android `
   -cookflavor=ASTC `
   -clientconfig=Development `
+  -clientarchitecture=arm64 `
   -build `
   -cook `
   -stage `
   -pak `
   -package `
+  -forcepackagedata `
   -archive `
-  -archivedirectory='D:\Projects\SampleGame\Saved\AndroidTest' `
+  -archivedirectory='D:\Projects\SampleGame\Saved\AndroidDevelopmentInApk_arm64' `
   -utf8output
 ```
 
-`-pak` 包体会生成 APK 加 OBB。当前 Android Python stdlib 是 Non-UFS runtime dependency，打包日志应能看到类似路径进入 OBB：
+`-forcepackagedata` 会把 UE 生成的 OBB 数据作为 `assets/main.obb.png` 放入 APK，最终产物是单 APK。`UnrealPython_UPL.xml` 还会把 Python bootstrap 放入：
 
 ```text
-SampleGame/Plugins/UnrealPython/ThirdParty/python314/android/x86_64-linux-android/lib/python3.14/...
+assets/unrealpython_bootstrap.zip
+```
+
+静态检查 APK：
+
+```powershell
+tar -tf Saved\AndroidDevelopmentInApk_arm64\SampleGame-arm64.apk |
+  Select-String 'lib/(arm64-v8a|x86_64)/libUnreal\.so|assets/(main\.obb\.png|unrealpython_bootstrap\.zip)'
+```
+
+预期只包含 arm64：
+
+```text
+lib/arm64-v8a/libUnreal.so
+assets/main.obb.png
+assets/unrealpython_bootstrap.zip
 ```
 
 首次运行 Android Gradle wrapper 时会下载 `gradle-8.7-all.zip`，缓存位置为：
@@ -377,14 +423,34 @@ C:\Users\Nien\.gradle\wrapper\dists\gradle-8.7-all
 
 如果网络较慢，UAT 可能长时间停在 `:app:assembleDebug`。只要 `gradle-8.7-all.zip.part` 持续增长，就表示 wrapper 仍在下载，不是 UE cook 或链接失败。
 
-模拟器 x86_64 包的成功输出示例：
+模拟器 x86_64 APK+OBB 包使用：
+
+```powershell
+& 'D:\Games\UE_5.7\Engine\Build\BatchFiles\RunUAT.bat' BuildCookRun `
+  -project='D:\Projects\SampleGame\SampleGame.uproject' `
+  -noP4 `
+  -platform=Android `
+  -cookflavor=ASTC `
+  -clientconfig=Development `
+  -clientarchitecture=x64 `
+  -build `
+  -cook `
+  -stage `
+  -pak `
+  -package `
+  -archive `
+  -archivedirectory='D:\Projects\SampleGame\Saved\AndroidDevelopmentObb_x64' `
+  -utf8output
+```
+
+成功输出示例：
 
 ```text
-Saved/AndroidTest/SampleGame-x64.apk
-Saved/AndroidTest/main.1.com.YourCompany.SampleGame.obb
-Saved/AndroidTest/Install_SampleGame-x64.bat
-Saved/AndroidTest/Uninstall_SampleGame-x64.bat
-Saved/AndroidTest/win-x64/UnrealAndroidFileTool.exe
+Saved/AndroidDevelopmentObb_x64/SampleGame-x64.apk
+Saved/AndroidDevelopmentObb_x64/main.1.com.YourCompany.SampleGame.obb
+Saved/AndroidDevelopmentObb_x64/Install_SampleGame-x64.bat
+Saved/AndroidDevelopmentObb_x64/Uninstall_SampleGame-x64.bat
+Saved/AndroidDevelopmentObb_x64/win-x64/UnrealAndroidFileTool.exe
 ```
 
 `Install_SampleGame-x64.bat` 不只是安装 APK，还会通过 `UnrealAndroidFileTool.exe` 推送 OBB。手工测试时优先使用这个脚本，避免只装 APK 导致运行时找不到 pak/obb 数据。
@@ -422,9 +488,11 @@ Start-Sleep -Seconds 20
 ```text
 Mounted main OBB: /storage/emulated/0/Android/obb/com.YourCompany.SampleGame/main.1.com.YourCompany.SampleGame.obb
 LogPluginManager: Mounting Project plugin UnrealPython
-LogUnrealPython: Added packaged Android OBB script path: .../Content/Scripts
-LogUnrealPython: Added packaged Android Python support path: .../Plugins/UnrealPython/ThirdParty/python314/android
-LogUnrealPython: Added packaged Android Python stdlib path: .../Plugins/UnrealPython/ThirdParty/python314/android/x86_64-linux-android/lib/python3.14
+LogUnrealPython: Added packaged script path: .../Content/Scripts
+LogUnrealPython: Extracted UnrealPython bootstrap to: .../Saved/UnrealPythonBootstrap
+LogUnrealPython: Added Android Python bootstrap support path: .../UnrealPythonBootstrap/android
+LogUnrealPython: Added Android Python bootstrap stdlib path: .../UnrealPythonBootstrap/android/x86_64-linux-android/lib/python3.14
+LogUnrealPython: Added Android Python bootstrap script path: .../UnrealPythonBootstrap/Content/Scripts
 LogUnrealPython: Python VM init success!
 ```
 
@@ -451,8 +519,7 @@ signal 11
 
 - 是否只安装了 APK，漏推 OBB。
 - `Install_SampleGame-x64.bat` 或 arm64 安装脚本是否成功推送 `main.<StoreVersion>.<PackageName>.obb`。
-- 打包日志里是否包含 `Plugins/UnrealPython/ThirdParty/python314/android/<host>/lib/python3.14`。
-- 运行日志里是否出现 `Added packaged Android Python stdlib path`。
+- 运行日志里是否出现 `Added Android Python bootstrap stdlib path`。
 - 项目 Android ABI 是否和运行设备一致，例如模拟器需要 `x86_64-linux-android`，真机通常需要 `aarch64-linux-android`。
 
 ## Mac 运行时

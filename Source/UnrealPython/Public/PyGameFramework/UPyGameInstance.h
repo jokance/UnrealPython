@@ -16,9 +16,6 @@ public:
 	virtual void Shutdown() override;
 	virtual void OnStart() override;
 
-	UFUNCTION(Exec)
-	void PyGC();
-
 protected:
 	/** The name of the Python module that creates the Python GameInstance object */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Python")

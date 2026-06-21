@@ -366,7 +366,6 @@ UE 内置插件有 `PyReferenceCollector`、编辑器对象清理、包重载、
 - `UUPyManager` 注册 `GUObjectArray` 删除监听
 - UObject 删除时解除 Python wrapper 映射
 - `PythonOwnedObjects` 防止 Python 持有对象过早被 UE GC
-- `UPyGameInstance::PyGC` 提供手动触发 UE GC 的入口
 
 这样修改的原因是游戏运行时里对象销毁通常来自关卡、Actor、Widget 生命周期；Python wrapper 如果继续持有已销毁 UObject，会导致悬挂引用。运行时管理需要比编辑器命令执行更关注对象所有权。
 

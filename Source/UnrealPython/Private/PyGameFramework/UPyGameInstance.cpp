@@ -258,8 +258,3 @@ void UUPyGameInstance::UnregisterTicker()
 		TickerHandle.Reset();
 	}
 }
-
-void UUPyGameInstance::PyGC()
-{
-	CollectGarbage(GARBAGE_COLLECTION_KEEPFLAGS);
-}
