@@ -373,7 +373,7 @@ PyTypeObject InitializeUPyCFunctionWithClosureType()
 				return Py_NotImplemented;
 			}
 
-			if (PyObject_IsInstance(InOther, (PyObject*)&UPyCFunctionWithClosureType) != 1)
+			if (!PyObject_TypeCheck(InOther, &UPyCFunctionWithClosureType))
 			{
 				Py_INCREF(Py_NotImplemented);
 				return Py_NotImplemented;
