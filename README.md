@@ -116,9 +116,9 @@ Engine.Python.IsEnabledByDefault=0
 - `Tools/pystubs/ue/__init__.pyi`：IDE 补全和类型提示文件。
 - `Source/UnrealPython/Public/Wrapper/AutoGen`：静态 C++ wrapper。
 
-`Tools/GenerationSettings.json` 控制导出范围、排除列表、inline struct、`ExportToGameModules`、`GameExportPath` 和自定义 stub 输出路径。当前主要导出了 CoreUObject、Engine、InputCore、SlateCore、UMG 的常用类型，并支持把项目模块 wrapper 输出到 `Source/<GameModule>/Public/UPy/Wrapper/AutoGen`。
+`Tools/GenerationSettings.json` 控制静态 wrapper 导出范围、排除列表、inline struct、`ExportToGameModules`、`GameExportPath` 和自定义 stub 输出路径；详细字段说明见 [Docs/GenerationSettings.md](Docs/GenerationSettings.md)。当前主要导出了 CoreUObject、Engine、InputCore、SlateCore、UMG 的常用类型，并支持把项目模块 wrapper 输出到 `Source/<GameModule>/Public/UPy/Wrapper/AutoGen`。
 
-生成流程必须设置 `GENERATE_UNREAL_PYTHON=1`。推荐直接使用安装步骤里的 `Tools/GenPy.ps1` 或 `Tools/GenPy.sh`。如果需要控制 stub 注释输出，可以通过 `UNREAL_PYTHON_STUB_COMMENTS` 设置；默认会生成 `__init__.pyi` 和 `__init__no_comments.pyi`。
+生成流程必须设置 `GENERATE_UNREAL_PYTHON=1`。推荐直接使用安装步骤里的 `Tools/GenPy.ps1` 或 `Tools/GenPy.sh`。如果需要控制 stub 注释输出，可以通过 `UNREAL_PYTHON_STUB_COMMENTS` 设置；默认生成 `__init__.pyi`，设置为 `2` 时会同时生成 `__init__.pyi` 和 `__init__no_comments.pyi`。
 
 `Tools -> Unreal Python -> Generate Python` 菜单只导出 Native Python module 反射信息到 `Tools/ReflectionData/native_module.json`，它会被下一次 UHT 生成流程读取，用于补全 `ue` 模块上的 C API 函数。
 
@@ -292,7 +292,7 @@ static void Transform_SetRotation(FTransform& InTrans, const FRotator& InRot);
 
 这通常在模块的 `StartupModule` 和 `ShutdownModule` 中完成。
 
-如果 `Tools/GenerationSettings.json` 中把项目模块列入 `ExportToGameModules`，生成器会默认把项目模块 wrapper 输出到 `Source/<GameModule>/Public/UPy/Wrapper/AutoGen`，并在同目录生成 `UPyGameAutoGenWrapper.h` 聚合头。项目模块的 `.Build.cs` 需要依赖 `UnrealPython`，以便包含 `Utils/UPyGenUtil.h`、wrapper 类型和 `FUnrealPythonModule`。
+如果 `Tools/GenerationSettings.json` 中配置了项目模块类型，或通过 `ExportToGameModules` 指定要输出到项目侧的模块，生成器会默认把对应 wrapper 输出到 `Source/<GameModule>/Public/UPy/Wrapper/AutoGen`，并在同目录生成 `UPyGameAutoGenWrapper.h` 聚合头。项目模块的 `.Build.cs` 需要依赖 `UnrealPython`，以便包含 `Utils/UPyGenUtil.h`、wrapper 类型和 `FUnrealPythonModule`。
 
 **示例代码**:
 

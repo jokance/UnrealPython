@@ -870,6 +870,43 @@ class EAnchorStateEnum(IntEnum):
     Dataflow_AnchorState_NotAnchored = 1
     Dataflow_Max = 2
 
+class EAndroidAudio(IntEnum):
+    Default = 0
+    OGG = 1
+    ADPCM = 2
+
+class EAndroidDepthBufferPreference(IntEnum):
+    Default = 0
+    Bits16 = 16
+    Bits24 = 24
+    Bits32 = 32
+
+class EAndroidGraphicsDebugger(IntEnum):
+    NONE = 0
+    Mali = 1
+    Adreno = 2
+
+class EAndroidInstallLocation(IntEnum):
+    InternalOnly = 0
+    PreferExternal = 1
+    Auto = 2
+
+class EAndroidRoundedEdgeSafeZoneDirection(IntEnum):
+    NONE = 0
+    Horizontal = 1
+    Vertical = 2
+    Both = 3
+
+class EAndroidScreenOrientation(IntEnum):
+    Portrait = 0
+    ReversePortrait = 1
+    SensorPortrait = 2
+    Landscape = 3
+    ReverseLandscape = 4
+    SensorLandscape = 5
+    Sensor = 6
+    FullSensor = 7
+
 class EAngularConstraintMotion(IntEnum):
     ACM_Free = 0
     ACM_Limited = 1
@@ -3120,6 +3157,14 @@ class EComparisonTolerance(IntEnum):
     High = 3
     Custom = 4
 
+class ECompilerVersion(IntEnum):
+    Default = 0
+    VisualStudio2015 = 1
+    VisualStudio2017 = 2
+    VisualStudio2019 = 3
+    VisualStudio2022 = 4
+    VisualStudio2026 = 5
+
 class EComponentCreationMethod(IntEnum):
     Native = 0
     SimpleConstructionScript = 1
@@ -3758,11 +3803,6 @@ class EDataLayerType(IntEnum):
     Unknown = 2
     Size = 3
 
-class EDataSemanticTestEnum(IntEnum):
-    Common = 0
-    Rare = 1
-    Epic = 2
-
 class EDataSortTypeEnum(IntEnum):
     ChaosNiagara_DataSortType_NoSorting = 0
     ChaosNiagara_DataSortType_RandomShuffle = 1
@@ -4169,6 +4209,12 @@ class EDefaultBackBufferPixelFormat(IntEnum):
     DBBPF_FloatRGBA = 3
     DBBPF_A2B10G10R10 = 4
     DBBPF_MAX = 5
+
+class EDefaultGraphicsRHI(IntEnum):
+    DefaultGraphicsRHI_Default = 0
+    DefaultGraphicsRHI_DX11 = 1
+    DefaultGraphicsRHI_DX12 = 2
+    DefaultGraphicsRHI_Vulkan = 3
 
 class EDefaultLocationUnit(IntEnum):
     Micrometers = 0
@@ -5084,6 +5130,22 @@ class EFKChainTranslationMode(IntEnum):
 class EFOVScalingType(IntEnum):
     Standard = 0
     UE4_BackCompat = 1
+
+class EFabEnvironment(IntEnum):
+    Prod = 0
+    Gamedev = 1
+    Test = 2
+    CustomUrl = 3
+
+class EFabPreferredFormats(IntEnum):
+    GLTF = 0
+    FBX = 1
+
+class EFabPreferredQualityTier(IntEnum):
+    Low = 0
+    Medium = 1
+    High = 2
+    Raw = 3
 
 class EFaceTextureType(IntEnum):
     Basecolor = 0
@@ -6481,27 +6543,6 @@ class EIKRigGoalTransformSource(IntEnum):
     Bone = 1
     ActorComponent = 2
 
-class EIOSCloudKitSyncStrategy(IntEnum):
-    NONE = 0
-    OnlyAtGameStart = 1
-    Always = 2
-
-class EIOSLandscapeOrientation(IntEnum):
-    LandscapeLeft = 0
-    LandscapeRight = 1
-
-class EIOSMetalShaderStandard(IntEnum):
-    IOSMetalSLStandard_Minimum = 0
-    IOSMetalSLStandard_2_4 = 7
-    IOSMetalSLStandard_3_0 = 8
-    IOSMetalSLStandard_3_1 = 9
-
-class EIOSVersion(IntEnum):
-    IOS_Minimum = 15
-    IOS_15 = 15
-    IOS_16 = 16
-    IOS_17 = 17
-
 class EISMEditorToolActions(IntEnum):
     NoAction = 0
     ClearSelection = 1
@@ -7769,6 +7810,11 @@ class EListViewColumnType(IntEnum):
     BuiltIn = 0
     PropertyGenerated = 1
 
+class ELiveCodingStartupMode(IntEnum):
+    Automatic = 0
+    AutomaticButHidden = 1
+    Manual = 2
+
 class ELiveLinkCameraProjectionMode(IntEnum):
     Perspective = 0
     Orthographic = 1
@@ -7992,19 +8038,6 @@ class EMPMatchOutcome(IntEnum):
     Second = 7
     Third = 8
     Fourth = 9
-
-class EMacMetalShaderStandard(IntEnum):
-    MacMetalSLStandard_Minimum = 0
-    MacMetalSLStandard_2_2 = 5
-    MacMetalSLStandard_2_3 = 6
-    MacMetalSLStandard_2_4 = 7
-    MacMetalSLStandard_3_0 = 8
-
-class EMacTargetArchitecture(IntEnum):
-    MacTargetArchitectureIntel = 0
-    MacTargetArchitectureUniversal = 1
-    MacTargetArchitectureAppleSilicon = 2
-    MacTargetArchitectureHost = 3
 
 class EMainSectionMenu(IntEnum):
     NONE = 0
@@ -8678,6 +8711,12 @@ class EMatrixColumns(IntEnum):
     Third = 2
     Fourth = 3
 
+class EMaxAdContentRating(IntEnum):
+    MAX_AD_CONTENT_RATING_G = 0
+    MAX_AD_CONTENT_RATING_PG = 1
+    MAX_AD_CONTENT_RATING_T = 2
+    MAX_AD_CONTENT_RATING_MA = 2
+
 class EMaxConcurrentResolutionRule(IntEnum):
     PreventNew = 0
     StopOldest = 1
@@ -8801,6 +8840,37 @@ class EMegaLightsShadowMethod(IntEnum):
     Default = 0
     RayTracing = 1
     VirtualShadowMap = 2
+
+class EMegascanImportTier(IntEnum):
+    Invalid = -1
+    Raw = 0
+    High = 1
+    Medium = 2
+    Low = 3
+
+class EMegascanImportType(IntEnum):
+    Model3D = 0
+    Surface = 1
+    Decal = 2
+    Imperfection = 3
+    Plant = 4
+
+class EMegascanMaterialType(IntEnum):
+    Invalid = 0
+    Base = 1
+    BaseMasked = 2
+    BaseFuzz = 3
+    BaseTransmission = 4
+    Glass = 5
+    Surface = 6
+    SurfaceMasked = 7
+    SurfaceFuzz = 8
+    SurfaceTransmission = 9
+    Fabric = 10
+    FabricMasked = 11
+    Decal = 12
+    Plant = 13
+    PlantBillboard = 14
 
 class EMemoryUnitStandard(IntEnum):
     IEC = 0
@@ -11386,6 +11456,10 @@ class EOcclusionTriangleSamplingUIMode(IntEnum):
     Vertices = 0
     VerticesAndCentroids = 1
 
+class EOculusMobileDevice(IntEnum):
+    Quest = 1
+    Quest2 = 2
+
 class EOfflineShaderCompiler(IntEnum):
     Mali = 0
     Adreno = 1
@@ -12440,12 +12514,6 @@ class EPositionOrigin(IntEnum):
 class EPostCopyOperation(IntEnum):
     NONE = 0
     LogicalNegateBool = 1
-
-class EPowerUsageFrameRateLock(IntEnum):
-    PUFRL_None = 0
-    PUFRL_20 = 20
-    PUFRL_30 = 30
-    PUFRL_60 = 60
 
 class EPreferredTriangulationDirection(IntEnum):
     NONE = 0
@@ -16074,6 +16142,16 @@ class ETableViewMode(IntEnum):
     List = 0
     Tile = 1
     Tree = 2
+
+class ETagForChildDirectedTreatment(IntEnum):
+    TAG_FOR_CHILD_DIRECTED_TREATMENT_UNSPECIFIED = 0
+    TAG_FOR_CHILD_DIRECTED_TREATMENT_TRUE = 1
+    TAG_FOR_CHILD_DIRECTED_TREATMENT_FALSE = 2
+
+class ETagForUnderAgeOfConsent(IntEnum):
+    TAG_FOR_UNDER_AGE_OF_CONSENT_UNSPECIFIED = 0
+    TAG_FOR_UNDER_AGE_OF_CONSENT_TRUE = 1
+    TAG_FOR_UNDER_AGE_OF_CONSENT_FALSE = 2
 
 class ETakeRecorderActorRecordType(IntEnum):
     Possessable = 0
@@ -19709,6 +19787,16 @@ class AssetFilterData(StructBase):
 class AssetImportInfo(StructBase):
     ...
 
+class AssetImportTime(StructBase):
+    path: str
+    time: str
+
+
+class AssetInfo(StructBase):
+    path: str
+    version: str
+
+
 class AssetLocatorFragment(StructBase):
     Path: TopLevelAssetPath
 
@@ -19732,6 +19820,14 @@ class AssetManagerSearchRules(StructBase):
 class AssetMapping(StructBase):
     SourceAsset: AnimationAsset
     TargetAsset: AnimationAsset
+
+
+class AssetMetaDataJson(StructBase):
+    Id: str
+    Categories: list[str]
+    SemanticTags: SemanticTags
+    Displacement_Bias_Tier1: float
+    Displacement_Scale_Tier1: float
 
 
 class AssetPlacementInfo(StructBase):
@@ -20346,6 +20442,11 @@ class BehaviorInfo(StructBase):
 class BehaviorTreeTemplateInfo(StructBase):
     Asset: BehaviorTree
     Template: BTCompositeNode
+
+
+class BifrostNodeInfo(StructBase):
+    Name: str
+    Value: str
 
 
 class BindingTargets(StructBase):
@@ -21501,6 +21602,11 @@ class ChannelMapInfo(StructBase):
     MaskIndex: int
     CategoryIndex: int
     ConstraintsIndex: list[int]
+
+
+class ChannelPackedInfo(StructBase):
+    channel: str
+    packedType: str
 
 
 class ChaosBreakEvent(StructBase):
@@ -24588,12 +24694,34 @@ class EnvTraceData(StructBase):
     bCanProjectDown: bool
 
 
+class EosConstantsGameDev(StructBase):
+    ProductId: str
+    SandboxId: str
+    DeploymentId: str
+    ClientCredentialsId: str
+    ClientCredentialsSecret: str
+    GameName: str
+    EncryptionKey: str
+    ProductVersion: str
+
+
 class EosConstantsPlatform(StructBase):
     ProductId: str
     SandboxId: str
     DeploymentId: str
     ClientCredentialsId: str
     ClientCredentialsSecret: str
+
+
+class EosConstantsProd(StructBase):
+    ProductId: str
+    SandboxId: str
+    DeploymentId: str
+    ClientCredentialsId: str
+    ClientCredentialsSecret: str
+    GameName: str
+    EncryptionKey: str
+    ProductVersion: str
 
 
 class EpicSynth1Patch(StructBase):
@@ -24827,6 +24955,42 @@ class FXSystemSpawnParameters(StructBase):
     bIsPlayerEffect: bool
 
 
+class FabAnalyticsEventValue(StructBase):
+    Platform: str
+    ApiVersion: FabApiVersion
+
+
+class FabAnalyticsPayload(StructBase):
+    InteractionType: str
+    EventCategory: str
+    EventAction: str
+    EventLabel: str
+    EventType: str
+    EventValue: FabAnalyticsEventValue
+
+
+class FabApiVersion(StructBase):
+    ue: str
+    api: str
+    pluginversion: str
+    platform: str
+
+
+class FabAssetMetadata(StructBase):
+    AssetId: str
+    AssetName: str
+    AssetType: str
+    ListingType: str
+    AssetNamespace: str
+    DistributionPointBaseUrls: list[str]
+    IsQuixel: bool
+
+
+class FabFrontendSettings(StructBase):
+    preferredformat: str
+    preferredquality: str
+
+
 class FallbackStruct(StructBase):
     ...
 
@@ -25011,6 +25175,10 @@ class FocusEvent(StructBase):
 class FoliageDensityFalloff(StructBase):
     bUseFalloffCurve: bool
     FalloffCurve: RuntimeFloatCurve
+
+
+class FoliageTypeInfo(StructBase):
+    path: str
 
 
 class FoliageTypeObject(StructBase):
@@ -25986,6 +26154,16 @@ class GizmosParameters(StructBase):
 class GoalBone(StructBase):
     ...
 
+class GooglePlayAchievementMapping(StructBase):
+    Name: str
+    AchievementID: str
+
+
+class GooglePlayLeaderboardMapping(StructBase):
+    Name: str
+    LeaderboardID: str
+
+
 class GoomBindingGroupInfo(StructBase):
     RenRootCount: int
     RenLODCount: int
@@ -26644,37 +26822,6 @@ class IKRigStructWrapperPool(StructBase):
 class IKRigWorkData(StructBase):
     ...
 
-class IOSBuildResourceDirectory(StructBase):
-    Path: str
-
-
-class IOSBuildResourceFilePath(StructBase):
-    FilePath: str
-
-
-class IOSLaunchDaemonLaunchApp(StructBase):
-    AppID: str
-    Parameters: str
-
-
-class IOSLaunchDaemonPing(StructBase):
-    ...
-
-class IOSLaunchDaemonPong(StructBase):
-    DeviceID: str
-    DeviceUDID: str
-    DeviceName: str
-    DeviceStatus: str
-    DeviceType: str
-    DeviceOSVersion: str
-    DeviceModelId: str
-    DeviceConnectionType: str
-    bCanPowerOff: bool
-    bCanPowerOn: bool
-    bIsAuthorized: bool
-    bCanReboot: bool
-
-
 class ISMClientData(StructBase):
     Instances: list[ISMClientInstance]
 
@@ -26844,6 +26991,10 @@ class ImportFactorySettingValues(StructBase):
 
 class ImportMeshLodSectionsData(StructBase):
     SectionOriginalMaterialName: list[str]
+
+
+class ImportTimeData(StructBase):
+    assets: list[AssetImportTime]
 
 
 class ImportanceTexture(StructBase):
@@ -28750,6 +28901,12 @@ class MassSharedFragment(StructBase):
 class MassTag(StructBase):
     ...
 
+class MasterMaterialInfo(StructBase):
+    masterID: str
+    masterMaterialName: str
+    path: str
+
+
 class MaterialAggregateAttribute(StructBase):
     Name: str
     Type: EMaterialAggregateAttributeType
@@ -28991,6 +29148,15 @@ class MaterialInstanceCachedData(StructBase):
     ParentLayerIndexRemap: list[int]
 
 
+class MaterialInstanceInfo(StructBase):
+    instanceID: str
+    instanceName: str
+    instancePath: str
+    instanceMaster: str
+    type: str
+    params: list[MaterialParams]
+
+
 class MaterialLayersFunctionsEditorOnlyData(StructBase):
     LayerStates: list[bool]
     LayerNames: list[str]
@@ -29022,6 +29188,11 @@ class MaterialParameterInfo(StructBase):
     Name: str
     Association: EMaterialParameterAssociation
     Index: int
+
+
+class MaterialParams(StructBase):
+    paramName: str
+    usedTextureID: str
 
 
 class MaterialProxySettings(StructBase):
@@ -29110,6 +29281,11 @@ class MaterialTextureInfo(StructBase):
     TextureName: str
     TextureReference: SoftObjectPath
     TextureIndex: int
+
+
+class MaterialUsage(StructBase):
+    instanceID: str
+    materialSlot: str
 
 
 class MathRBFInterpolateQuatColor_Target(StructBase):
@@ -29374,6 +29550,11 @@ class MediaTextureResourceSettings(StructBase):
     bEnableGenMips: bool
 
 
+class MegascanMaterialPair(StructBase):
+    StandardMaterial: MaterialInterface
+    VTMaterial: MaterialInterface
+
+
 class MemberReference(StructBase):
     MemberParent: Object
     MemberScope: str
@@ -29504,6 +29685,14 @@ class MeshDrawCommandStatsBudgetTotals(StructBase):
 
 class MeshElementSelectionParams(StructBase):
     SelectionFillColor: MaterialInstanceDynamic
+
+
+class MeshInfo(StructBase):
+    meshID: str
+    name: str
+    path: str
+    numberOfLods: int
+    materialUsage: list[MaterialUsage]
 
 
 class MeshInstancingSettings(StructBase):
@@ -34416,16 +34605,6 @@ class PBIKWorkData(StructBase):
     Solver: PBIKSolver
 
 
-class PGFWorldContext(StructBase):
-    WorldContextObject: Object
-    World: World
-    GameInstance: GameInstance
-    NetMode: int
-    NetModeName: str
-    bIsGameWorld: bool
-    bIsPlayInEditor: bool
-
-
 class PIEAndroidDeviceProperties(StructBase):
     GPUFamily: str
     GLVersion: str
@@ -38748,6 +38927,10 @@ class SelectionStateOfLevel(StructBase):
     SelectedComponents: list[str]
 
 
+class SemanticTags(StructBase):
+    Asset_Type: str
+
+
 class SequenceRecorderActorFilter(StructBase):
     ActorClassesToRecord: list[Class]
 
@@ -42115,6 +42298,22 @@ class TextureSourceLayerColorInfo(StructBase):
     ColorMax: LinearColor
 
 
+class TextureUsage(StructBase):
+    matID: str
+    matParams: str
+
+
+class TexturesList(StructBase):
+    textureID: str
+    type: str
+    resolution: str
+    name: str
+    path: str
+    isChannelPacked: bool
+    channelPackInfo: list[ChannelPackedInfo]
+    pluggedIn: list[TextureUsage]
+
+
 class ThreadingOptions(StructBase):
     bUseGlobalThreadPool: bool
     IntraOpNumThreads: int
@@ -42815,6 +43014,20 @@ class Typeface(StructBase):
 class TypefaceEntry(StructBase):
     Name: str
     Font: FontData
+
+
+class UAssetMeta(StructBase):
+    assetID: str
+    assetName: str
+    assetType: str
+    assetSubType: str
+    assetTier: int
+    assetRootPath: str
+    meshList: list[MeshInfo]
+    foliageAssetPaths: list[str]
+    materialInstances: list[MaterialInstanceInfo]
+    textureSets: list[TexturesList]
+    masterMaterials: list[MasterMaterialInfo]
 
 
 class UDIMBlock(StructBase):
@@ -43651,6 +43864,10 @@ class VerseRational(StructBase):
 
 class VerseSessionVar(StructBase):
     Property: FieldPath
+
+
+class VersionData(StructBase):
+    assets: list[AssetInfo]
 
 
 class VersionedNiagaraEmitter(StructBase):
@@ -46727,26 +46944,6 @@ class DataHierarchyElementMetaData_SectionAssociation(DataHierarchyElementMetaDa
     Section: HierarchySection
 
 
-class DataSemanticTestTableRow(TableRowBase):
-    bEnabled: bool
-    Count: int
-    LargeCount: int
-    Weight: float
-    Accuracy: float
-    Label: str
-    RowName: str
-    Description: str
-    Rarity: EDataSemanticTestEnum
-    Icon: Texture2D
-    ActorClass: Class
-    SpawnOffset: Vector
-    Tint: LinearColor
-    Facing: Rotator
-    RewardCounts: list[int]
-    Tags: list[str]
-    PatrolPoints: list[Vector]
-
-
 class DataStorageClassTypeInfoTag(EditorDataStorageTag):
     ...
 
@@ -47590,6 +47787,23 @@ class ExternalWidgetOnClickedColumn_Experimental(EditorDataStorageColumn):
 
 class ExternalWidgetSelectionColumn(EditorDataStorageColumn):
     ...
+
+class FabDistributionMethodTag(EditorDataStorageTag):
+    ...
+
+class FabObjectColumn(EditorDataStorageColumn):
+    Description: str
+    AssetId: str
+    AssetNamespace: str
+    ListingType: str
+    Seller: str
+    Source: str
+    UrlString: str
+
+
+class FabObjectNameColumn(EditorDataStorageColumn):
+    Name: str
+
 
 class FarmCropFragment(MassFragment):
     ...
@@ -63271,6 +63485,149 @@ class AndroidPermissionCallbackProxy(Object):
     OnPermissionsGrantedDynamicDelegate: MulticastDelegateBase
 
 
+class AndroidRuntimeSettings(Object):
+    PackageName: str
+    StoreVersion: int
+    StoreVersionOffsetArm64: int
+    StoreVersionOffsetX8664: int
+    ApplicationDisplayName: str
+    VersionDisplayName: str
+    MinSDKVersion: int
+    TargetSDKVersion: int
+    InstallLocation: EAndroidInstallLocation
+    bEnableLint: bool
+    bPackageDataInsideApk: bool
+    bCreateAllPlatformsInstall: bool
+    bDisableVerifyOBBOnStartUp: bool
+    bForceSmallOBBFiles: bool
+    bAllowLargeOBBFiles: bool
+    bAllowPatchOBBFile: bool
+    bAllowOverflowOBBFiles: bool
+    bDontBundleLibrariesInAPK: bool
+    bUseExternalFilesDir: bool
+    bPublicLogFiles: bool
+    Orientation: EAndroidScreenOrientation
+    MinAspectRatio: float
+    MaxAspectRatio: float
+    bUseDisplayCutout: bool
+    RoundedEdgeSafeZone: EAndroidRoundedEdgeSafeZoneDirection
+    bAllowResizing: bool
+    bSupportSizeChanges: bool
+    bRestoreNotificationsOnReboot: bool
+    bFullScreen: bool
+    bEnableNewKeyboard: bool
+    DepthBufferPreference: EAndroidDepthBufferPreference
+    bValidateTextureFormats: bool
+    bForceCompressNativeLibs: bool
+    bEnableAdvancedBinaryCompression: bool
+    bEnableBundle: bool
+    bEnableUniversalAPK: bool
+    bBundleABISplit: bool
+    bBundleLanguageSplit: bool
+    bBundleDensitySplit: bool
+    ExtraManifestNodeTags: list[str]
+    ExtraApplicationNodeTags: list[str]
+    ExtraApplicationSettings: str
+    ExtraActivityNodeTags: list[str]
+    ExtraActivitySettings: str
+    ExtraPermissions: list[str]
+    bAndroidVoiceEnabled: bool
+    bRecordPermissionAtStartupEnabled: bool
+    bEnableMulticastSupport: bool
+    bPackageForMetaQuest: bool
+    bRemoveOSIG: bool
+    KeyStore: str
+    KeyAlias: str
+    KeyStorePassword: str
+    KeyPassword: str
+    DebugKeyStore: str
+    DebugKeyAlias: str
+    DebugKeyStorePassword: str
+    DebugKeyPassword: str
+    bBuildForArm64: bool
+    bBuildForX8664: bool
+    bBuildForES31: bool
+    bSupportsVulkan: bool
+    bSupportsVulkanSM5: bool
+    DebugVulkanLayerDirectory: DirectoryPath
+    DebugVulkanDeviceLayers: list[str]
+    DebugVulkanInstanceLayers: list[str]
+    bAndroidOpenGLSupportsBackbufferSampling: bool
+    bForceEmulatorProfileSelectionInNonShippingBuilds: bool
+    bDetectVulkanByDefault: bool
+    bBuildWithHiddenSymbolVisibility: bool
+    bCompressDebugSymbols: bool
+    bDisableStackProtector: bool
+    bDisableLibCppSharedDependencyValidation: bool
+    bSaveSymbols: bool
+    bStripShaderReflection: bool
+    bEnableGooglePlaySupport: bool
+    RequestCodeForPlayGamesActivities: int
+    PlayGamesClientId: str
+    bForceRefreshToken: bool
+    GamesAppID: str
+    AchievementMap: list[GooglePlayAchievementMapping]
+    LeaderboardMap: list[GooglePlayLeaderboardMapping]
+    bSupportAdMob: bool
+    AdMobAppID: str
+    TagForChildDirectedTreatment: ETagForChildDirectedTreatment
+    TagForUnderAgeOfConsent: ETagForUnderAgeOfConsent
+    MaxAdContentRating: EMaxAdContentRating
+    AdMobAdUnitID: str
+    AdMobAdUnitIDs: list[str]
+    GooglePlayLicenseKey: str
+    GCMClientSenderID: str
+    bShowLaunchImage: bool
+    bAllowIMU: bool
+    bAllowControllers: bool
+    bBlockAndroidKeysOnControllers: bool
+    bControllersBlockDeviceFeedback: bool
+    AudioSampleRate: int
+    AudioCallbackBufferFrameSize: int
+    AudioNumBuffersToEnqueue: int
+    AudioMaxChannels: int
+    AudioNumSourceWorkers: int
+    SpatializationPlugin: str
+    SourceDataOverridePlugin: str
+    ReverbPlugin: str
+    OcclusionPlugin: str
+    CompressionOverrides: PlatformRuntimeAudioCompressionOverrides
+    CacheSizeKB: int
+    MaxChunkSizeOverrideKB: int
+    bResampleForDevice: bool
+    SoundCueCookQualityIndex: int
+    MaxSampleRate: float
+    HighSampleRate: float
+    MedSampleRate: float
+    LowSampleRate: float
+    MinSampleRate: float
+    CompressionQualityModifier: float
+    AutoStreamingThreshold: float
+    AndroidGraphicsDebugger: EAndroidGraphicsDebugger
+    MaliGraphicsDebuggerPath: DirectoryPath
+    bEnableMaliPerfCounters: bool
+    bMultiTargetFormat_ETC2: bool
+    bMultiTargetFormat_DXT: bool
+    bMultiTargetFormat_ASTC: bool
+    TextureFormatPriority_ETC2: float
+    TextureFormatPriority_DXT: float
+    TextureFormatPriority_ASTC: float
+    bASTCUseRDO: bool
+    SDKAPILevelOverride: str
+    NDKAPILevelOverride: str
+    BuildToolsOverride: str
+    bStreamLandscapeMeshLODs: bool
+    bEnableDomStorage: bool
+
+
+class AndroidSDKSettings(Object):
+    SDKPath: DirectoryPath
+    NDKPath: DirectoryPath
+    JavaPath: DirectoryPath
+    SDKAPILevel: str
+    NDKAPILevel: str
+
+
 class AnimAssetFindReplaceContext(Object):
     ...
 
@@ -64826,6 +65183,68 @@ class BookmarkBase(Object):
 class BoolChannelKeyProxy(Object, CurveEditorKeyProxy, MovieSceneKeyProxy):
     Time: FrameNumber
     bValue: bool
+
+
+class BrowserBinding(Object):
+    def DialogFailCallback(self, DialogJSCallback: WebJSFunction) -> None:
+        ...
+
+    def DialogSuccessCallback(self, DialogJSCallback: WebJSFunction) -> None:
+        ...
+
+    def DragStarted(self, ImageUrl: list[str], IDs: list[str], Types: list[str]) -> None:
+        ...
+
+    def ExportDataToMSPlugin(self, Data: str) -> None:
+        ...
+
+    def GetAuthToken(self) -> str:
+        ...
+
+    def GetProjectPath(self) -> str:
+        ...
+
+    def Logout(self) -> None:
+        ...
+
+    def OnBulkExportMetahumansCallback(self, OnBulkExportMetahumansJSCallback: WebJSFunction) -> None:
+        ...
+
+    def OnDropDiscardedCallback(self, OnDropDiscardedJSCallback: WebJSFunction) -> None:
+        ...
+
+    def OnDroppedCallback(self, OnDroppedJSCallback: WebJSFunction) -> None:
+        ...
+
+    def OnExitCallback(self, OnExitJSCallback: WebJSFunction) -> None:
+        ...
+
+    def OpenExternalUrl(self, Url: str) -> None:
+        ...
+
+    def OpenMegascansPluginSettings(self) -> None:
+        ...
+
+    def RestartNodeProcess(self) -> None:
+        ...
+
+    def SaveAuthToken(self, Value: str) -> None:
+        ...
+
+    def SendFailure(self, Message: str) -> None:
+        ...
+
+    def SendSuccess(self, Value: str) -> None:
+        ...
+
+    def ShowDialog(self, Type: str, Url: str) -> None:
+        ...
+
+    def ShowLoginDialog(self, LoginUrl: str, ResponseCodeUrl: str) -> None:
+        ...
+
+    def StartNodeProcess(self) -> None:
+        ...
 
 
 class BrushBuilder(Object):
@@ -67541,6 +67960,73 @@ class FXSystemAsset(Object):
     PoolPrimeSize: int
 
 
+class FabBrowserApi(Object):
+    def AddToProject(self, DownloadUrl: str, AssetMetadata: FabAssetMetadata) -> None:
+        ...
+
+    def CopyToClipboard(self, Content: str) -> None:
+        ...
+
+    def DragStart(self, AssetMetadata: FabAssetMetadata) -> None:
+        ...
+
+    @staticmethod
+    def GetApiVersion() -> FabApiVersion:
+        ...
+
+    def GetAuthToken(self) -> str:
+        ...
+
+    def GetRefreshToken(self) -> str:
+        ...
+
+    def GetSettings(self) -> FabFrontendSettings:
+        ...
+
+    def GetUrl(self) -> str:
+        ...
+
+    def Login(self) -> None:
+        ...
+
+    def Logout(self) -> None:
+        ...
+
+    def OnDragInfoFailure(self, AssetId: str) -> None:
+        ...
+
+    def OnDragInfoSuccess(self, DownloadUrl: str, AssetMetadata: FabAssetMetadata) -> None:
+        ...
+
+    def OpenPluginSettings(self) -> None:
+        ...
+
+    def OpenUrlInBrowser(self, Url: str) -> None:
+        ...
+
+    def PluginOpened(self) -> None:
+        ...
+
+    def SetPreferredQualityTier(self, PreferredQuality: str) -> None:
+        ...
+
+
+class FabLocalAssets(Object):
+    PathsListingID: dict[str, str]
+
+
+class FabSettings(Object):
+    Environment: EFabEnvironment
+    CustomUrl: str
+    CustomAuthToken: str
+    bEnableDebugOptions: bool
+    CacheDirectoryPath: DirectoryPath
+    CacheDirectorySize: str
+    ProductFormatsSectionSubText: str
+    PreferredDefaultFormat: EFabPreferredFormats
+    PreferredQualityTier: EFabPreferredQualityTier
+
+
 class FacialAnimationBulkImporterSettings(Object):
     SourceImportPath: DirectoryPath
     TargetImportPath: DirectoryPath
@@ -69595,110 +70081,6 @@ class IKRig_SetTransformEffector(Object):
     Alpha: float
 
 
-class IOSRuntimeSettings(Object):
-    bEnableStoreKitSupport: bool
-    bEnableGameCenterSupport: bool
-    bEnableCloudKitSupport: bool
-    IOSCloudKitSyncStrategy: EIOSCloudKitSyncStrategy
-    bEnableRemoteNotificationsSupport: bool
-    bEnableBackgroundFetch: bool
-    bSupportsMetal: bool
-    bSupportsMetalMRT: bool
-    bSupportHighRefreshRates: bool
-    bStreamLandscapeMeshLODs: bool
-    MinimumiOSVersion: EIOSVersion
-    WindowsMetalToolchainOverride: IOSBuildResourceDirectory
-    bGeneratedSYMFile: bool
-    bGeneratedSYMBundle: bool
-    bGenerateCrashReportSymbols: bool
-    bGenerateXCArchive: bool
-    bUsesNonExemptEncryption: bool
-    ITSEncryptionExportComplianceCode: str
-    bEnableAdvertisingIdentifier: bool
-    AdditionalLinkerFlags: str
-    AdditionalShippingLinkerFlags: str
-    AdditionalPlistData: str
-    RequiredEntitlements: list[str]
-    bSupportsIPad: bool
-    bSupportsIPhone: bool
-    bEnableSplitView: bool
-    bEnableSimulatorSupport: bool
-    bEnableIOS16DynLinkerBugWAR: bool
-    FrameRateLock: EPowerUsageFrameRateLock
-    bEnableDynamicMaxFPS: bool
-    bUseRSync: bool
-    RemoteServerName: str
-    RSyncUsername: str
-    RemoteServerOverrideBuildPath: str
-    CwRsyncInstallPath: IOSBuildResourceDirectory
-    SSHPrivateKeyLocation: str
-    SSHPrivateKeyOverridePath: IOSBuildResourceFilePath
-    bSupportSecondaryMac: bool
-    SecondaryRemoteServerName: str
-    SecondaryRSyncUsername: str
-    SecondaryRemoteServerOverrideBuildPath: str
-    SecondaryCwRsyncInstallPath: IOSBuildResourceDirectory
-    SecondarySSHPrivateKeyLocation: str
-    SecondarySSHPrivateKeyOverridePath: IOSBuildResourceFilePath
-    bUserSwitching: bool
-    bGameSupportsMultipleActiveControllers: bool
-    bAllowRemoteRotation: bool
-    bAllowControllers: bool
-    bControllersBlockDeviceFeedback: bool
-    bDisableMotionData: bool
-    bSupportsPortraitOrientation: bool
-    bSupportsUpsideDownOrientation: bool
-    bSupportsLandscapeLeftOrientation: bool
-    bSupportsLandscapeRightOrientation: bool
-    bSupportsITunesFileSharing: bool
-    bSupportsFilesApp: bool
-    PreferredLandscapeOrientation: EIOSLandscapeOrientation
-    BundleDisplayName: str
-    BundleName: str
-    BundleIdentifier: str
-    VersionInfo: str
-    bCustomLaunchscreenStoryboard: bool
-    bEnableFacebookSupport: bool
-    FacebookAppID: str
-    MobileProvision: str
-    SigningCertificate: str
-    bAutomaticSigning: bool
-    IOSTeamID: str
-    DevCenterUsername: str
-    DevCenterPassword: str
-    bDisableHTTPS: bool
-    MetalLanguageVersion: int
-    UseFastIntrinsics: bool
-    ForceFloats: bool
-    EnableMathOptimisations: bool
-    bSupportAppleA8: bool
-    bUseIntegratedKeyboard: bool
-    bEnableVirtualKeyboardVisibilityEvent: bool
-    bAllowWidgetEnablingIntegratedKeyboard: bool
-    AudioSampleRate: int
-    AudioCallbackBufferFrameSize: int
-    AudioNumBuffersToEnqueue: int
-    AudioMaxChannels: int
-    AudioNumSourceWorkers: int
-    SpatializationPlugin: str
-    SourceDataOverridePlugin: str
-    ReverbPlugin: str
-    OcclusionPlugin: str
-    CompressionOverrides: PlatformRuntimeAudioCompressionOverrides
-    bSupportsBackgroundAudio: bool
-    CacheSizeKB: int
-    MaxChunkSizeOverrideKB: int
-    bResampleForDevice: bool
-    SoundCueCookQualityIndex: int
-    MaxSampleRate: float
-    HighSampleRate: float
-    MedSampleRate: float
-    LowSampleRate: float
-    MinSampleRate: float
-    CompressionQualityModifier: float
-    AutoStreamingThreshold: float
-
-
 class ImgMediaProcessEXROptions(Object):
     InputPath: FilePath
     OutputPath: DirectoryPath
@@ -71407,6 +71789,18 @@ class LinkerPlaceholderExportObject(Object):
 class ListViewDesignerPreviewItem(Object):
     ...
 
+class LiveCodingSettings(Object):
+    bEnabled: bool
+    Startup: ELiveCodingStartupMode
+    bEnableReinstancing: bool
+    bAutomaticallyCompileNewClasses: bool
+    bPreloadEngineModules: bool
+    bPreloadEnginePluginModules: bool
+    bPreloadProjectModules: bool
+    bPreloadProjectPluginModules: bool
+    PreloadNamedModules: list[str]
+
+
 class LiveLinkController(Object):
     ...
 
@@ -71542,33 +71936,6 @@ class MRMeshBodyHolder(Object, Interface_CollisionDataProvider):
     BodyInstance: BodyInstance
 
 
-class MacGraphicsSwitchingSettings(Object):
-    RendererID: int
-    bShowGraphicsSwitching: bool
-
-
-class MacTargetSettings(Object):
-    TargetedRHIs: list[str]
-    EditorTargetArchitecture: EMacTargetArchitecture
-    TargetArchitecture: EMacTargetArchitecture
-    EditorDefaultArchitecture: EMacTargetArchitecture
-    DefaultArchitecture: EMacTargetArchitecture
-    bBuildAllSupportedOnBuildMachine: bool
-    MetalLanguageVersion: int
-    UseFastIntrinsics: bool
-    EnableMathOptimisations: bool
-    AudioSampleRate: int
-    AudioCallbackBufferFrameSize: int
-    AudioNumBuffersToEnqueue: int
-    AudioMaxChannels: int
-    AudioNumSourceWorkers: int
-    SpatializationPlugin: str
-    SourceDataOverridePlugin: str
-    ReverbPlugin: str
-    OcclusionPlugin: str
-    SoundCueCookQualityIndex: int
-
-
 class MapBuildDataRegistry(Object):
     LevelLightingQuality: ELightingBuildQuality
 
@@ -71590,6 +71957,17 @@ class MassProcessor(Object):
     bCanShowUpInSettings: bool
     ActivationState: EActivationState
     ExecutionPriority: int
+
+
+class MaterialAssetSettings(Object):
+    MasterMaterial3d: str
+    MasterMaterialSurface: str
+    MasterMaterialPlant: str
+
+
+class MaterialBlendSettings(Object):
+    BlendedMaterialName: str
+    BlendedMaterialPath: DirectoryPath
 
 
 class MaterialCacheStackProvider(Object):
@@ -71782,6 +72160,12 @@ class MaterialParameterCollection(Object):
 
 class MaterialParameterCollectionInstance(Object):
     Collection: MaterialParameterCollection
+
+
+class MaterialPresetsSettings(Object):
+    MasterMaterial3d: Material
+    MasterMaterialSurface: Material
+    MasterMaterialPlant: Material
 
 
 class MaterialShaderQualitySettings(Object):
@@ -72149,6 +72533,11 @@ class MediaSourceRenderer(Object, MediaSourceRendererInterface):
 class MediaTimeStampInfo(Object):
     Time: Timespan
     SequenceIndex: int
+
+
+class MegascansSettings(Object):
+    bCreateFoliage: bool
+    bApplyToSelection: bool
 
 
 class MeshApproximationSettingsObject(Object):
@@ -74741,6 +75130,14 @@ class NodeMappingContainer(Object):
     TargetAsset: Object
 
 
+class NodePort(Object):
+    def GetNodePort(self) -> str:
+        ...
+
+    def IsNodeRunning(self) -> bool:
+        ...
+
+
 class NotifyFieldValueChanged(Interface):
     ...
 
@@ -75091,6 +75488,115 @@ class OutputLogSettings(Object):
 
 class Overlays(Object):
     ...
+
+class PGFAsyncLoadRequest(Object):
+    OnCompleted: MulticastDelegateBase
+    OnFailed: MulticastDelegateBase
+    OnCanceled: MulticastDelegateBase
+    LoadedObject: Object
+
+    def Cancel(self) -> None:
+        ...
+
+    def GetAssetPath(self) -> str:
+        ...
+
+    def GetError(self) -> str:
+        ...
+
+    def GetLoadedObject(self) -> Object:
+        ...
+
+    def IsActive(self) -> bool:
+        ...
+
+    def IsCanceled(self) -> bool:
+        ...
+
+    def IsCompleted(self) -> bool:
+        ...
+
+    def IsDone(self) -> bool:
+        ...
+
+    def IsFailed(self) -> bool:
+        ...
+
+
+class PGFInputAxisBinding(Object):
+    OnAxis: MulticastDelegateBase
+    PlayerController: PlayerController
+    InputComponent: PGFInputComponent
+
+    def GetAxisKey(self) -> Key:
+        ...
+
+    def IsActive(self) -> bool:
+        ...
+
+    def Unbind(self) -> None:
+        ...
+
+
+class PGFInputBinding(Object):
+    OnTriggered: MulticastDelegateBase
+    PlayerController: PlayerController
+    InputComponent: PGFInputComponent
+
+    def GetChord(self) -> InputChord:
+        ...
+
+    def GetInputEvent(self) -> EInputEvent:
+        ...
+
+    def GetKey(self) -> Key:
+        ...
+
+    def HandleInput(self) -> None:
+        ...
+
+    def IsActive(self) -> bool:
+        ...
+
+    def Unbind(self) -> None:
+        ...
+
+
+class PGFInputLongPressBinding(Object):
+    OnTriggered: MulticastDelegateBase
+    PlayerController: PlayerController
+    InputComponent: PGFInputComponent
+
+    def GetChord(self) -> InputChord:
+        ...
+
+    def GetHoldTimeSeconds(self) -> float:
+        ...
+
+    def GetKey(self) -> Key:
+        ...
+
+    def IsActive(self) -> bool:
+        ...
+
+    def Unbind(self) -> None:
+        ...
+
+
+class PGFInputTouchBinding(Object):
+    OnTouch: MulticastDelegateBase
+    PlayerController: PlayerController
+    InputComponent: PGFInputComponent
+
+    def GetInputEvent(self) -> EInputEvent:
+        ...
+
+    def IsActive(self) -> bool:
+        ...
+
+    def Unbind(self) -> None:
+        ...
+
 
 class PIEPreviewDeviceSpecification(Object):
     PreviewDeviceType: EPIEPreviewDeviceType
@@ -81974,6 +82480,14 @@ class VectorField(Object):
     Intensity: float
 
 
+class VersionInfoHandler(Object):
+    CommonVersionData: VersionData
+
+    @staticmethod
+    def Get() -> VersionInfoHandler:
+        ...
+
+
 class VertexColorImportOptions(Object):
     UVIndex: int
     LODIndex: int
@@ -82117,6 +82631,11 @@ class VisualLoggerAutomationTests(Object):
 class VisualLoggerExtension(Object):
     ...
 
+class VisualStudioSourceCodeAccessSettings(Object):
+    bUproject: bool
+    bPreview: bool
+
+
 class VolumeCache(Object):
     FilePath: str
     CacheType: EVolumeCacheType
@@ -82232,6 +82751,36 @@ class WidgetTree(Object, NamedSlotInterface):
     RootWidget: Widget
     NamedSlotBindings: dict[str, Widget]
     AllWidgets: list[Widget]
+
+
+class WindowsTargetSettings(Object):
+    DefaultGraphicsRHI: EDefaultGraphicsRHI
+    D3D12TargetedShaderFormats: list[str]
+    D3D11TargetedShaderFormats: list[str]
+    VulkanTargetedShaderFormats: list[str]
+    bGenerateNaniteFallbackMeshes: bool
+    Compiler: ECompilerVersion
+    AudioSampleRate: int
+    AudioCallbackBufferFrameSize: int
+    AudioNumBuffersToEnqueue: int
+    AudioMaxChannels: int
+    AudioNumSourceWorkers: int
+    SpatializationPlugin: str
+    SourceDataOverridePlugin: str
+    ReverbPlugin: str
+    OcclusionPlugin: str
+    CompressionOverrides: PlatformRuntimeAudioCompressionOverrides
+    CacheSizeKB: int
+    MaxChunkSizeOverrideKB: int
+    bResampleForDevice: bool
+    MaxSampleRate: float
+    HighSampleRate: float
+    MedSampleRate: float
+    LowSampleRate: float
+    MinSampleRate: float
+    CompressionQualityModifier: float
+    AutoStreamingThreshold: float
+    SoundCueCookQualityIndex: int
 
 
 class WmfMediaSettings(Object):
@@ -82456,37 +83005,6 @@ class WorldTileDetails(Object):
     LOD2: TileLODEntryDetails
     LOD3: TileLODEntryDetails
     LOD4: TileLODEntryDetails
-
-
-class XcodeProjectSettings(Object):
-    bUseModernXcode: bool
-    CodeSigningTeam: str
-    BundleIdentifier: str
-    CodeSigningPrefix: str
-    ApplicationDisplayName: str
-    AppCategory: str
-    TemplateMacPlist: FilePath
-    TemplateIOSPlist: FilePath
-    PremadeMacEntitlements: FilePath
-    ShippingSpecificMacEntitlements: FilePath
-    PremadeIOSEntitlements: FilePath
-    ShippingSpecificIOSEntitlements: FilePath
-    bUseAutomaticCodeSigning: bool
-    bMacSignToRunLocally: bool
-    MacSigningIdentity: str
-    IOSSigningIdentity: str
-    IOSProvisioningProfile: FilePath
-    TVOSProvisioningProfile: FilePath
-    bUseAppStoreConnect: bool
-    AppStoreConnectIssuerID: str
-    AppStoreConnectKeyID: str
-    AppStoreConnectKeyPath: FilePath
-    AdditionalPrivacyInfoMac: FilePath
-    AdditionalPrivacyInfoIOS: FilePath
-
-    @staticmethod
-    def ShouldDisableIOSSettings() -> bool:
-        ...
 
 
 class ACLDatabaseBuildCommandlet(Commandlet):
@@ -84634,6 +85152,9 @@ class AssetRegUtilCommandlet(Commandlet):
     ...
 
 class AssetRegistryDumpCommandlet(Commandlet):
+    ...
+
+class AssetSemanticCommandlet(Commandlet):
     ...
 
 class AssetSizeQueryCommandlet(Commandlet):
@@ -87146,14 +87667,6 @@ class BlueprintPlatformLibrary(BlueprintFunctionLibrary):
     @staticmethod
     def SetAllowedDeviceOrientation(NewAllowedDeviceOrientation: EScreenOrientation) -> None:
         ...
-
-
-class BlueprintSemanticCommandlet(Commandlet):
-    ...
-
-class BlueprintSemanticImportMetadata(BlueprintExtension):
-    DocumentSignature: str
-    GraphSignature: str
 
 
 class BlueprintSetLibrary(BlueprintFunctionLibrary):
@@ -90129,30 +90642,6 @@ class DataLayerToAssetCommandlet(Commandlet):
     MainWorld: World
 
 
-class DataSemanticCommandlet(Commandlet):
-    ...
-
-class DataSemanticTestAsset(DataAsset):
-    bEnabled: bool
-    Count: int
-    LargeCount: int
-    Weight: float
-    Accuracy: float
-    Label: str
-    RowName: str
-    Description: str
-    Rarity: EDataSemanticTestEnum
-    Icon: Texture2D
-    ActorClass: Class
-    SpawnOffset: Vector
-    Tint: LinearColor
-    Facing: Rotator
-    RewardCounts: list[int]
-    Tags: list[str]
-    PatrolPoints: list[Vector]
-    UnsupportedSet: set[int]
-
-
 class DataStreamChannel(Channel):
     ...
 
@@ -92168,6 +92657,11 @@ class EnvelopeFollowerListener(ActorComponent):
 class EnvironmentQueryFactory(Factory):
     ...
 
+class EosConstants(DataAsset):
+    GameDev: EosConstantsGameDev
+    Prod: EosConstantsProd
+
+
 class EscalationManagerConfig(StatePerObjectConfig):
     EscalationSeverity: list[str]
 
@@ -92274,6 +92768,12 @@ class EyeTrackerFunctionLibrary(BlueprintFunctionLibrary):
     def SetEyeTrackedPlayer(PlayerController: PlayerController) -> None:
         ...
 
+
+class FabFactory(EditorDataStorageFactory):
+    ...
+
+class FabPlaceholderSpawner(ActorFactory):
+    ...
 
 class FarmProcessorBase(MassProcessor):
     ...
@@ -96160,6 +96660,9 @@ class InterchangeImportTestStepReimport(InterchangeImportTestStepBase):
     LastSourceFileExtension: str
 
 
+class InterchangeInstancedFoliageTypeFactory(InterchangeFactoryBase):
+    ...
+
 class InterchangeJPGTranslator(InterchangeTranslatorBase, InterchangeTexturePayloadInterface):
     ...
 
@@ -96231,6 +96734,12 @@ class InterchangeMaterialXPipeline(InterchangePipelineBase):
 
 class InterchangeMaterialXTranslator(InterchangeTranslatorBase, InterchangeTexturePayloadInterface, InterchangeBlockedTexturePayloadInterface):
     ...
+
+class InterchangeMegascansPipeline(InterchangePipelineBase):
+    MegascanImportType: EMegascanImportType
+    MegascansMaterialParentSettings: MegascansMaterialParentSettings
+    BaseNodeContainer: InterchangeBaseNodeContainer
+
 
 class InterchangeMeshLODContainerNode(InterchangeBaseNode):
     def AddMeshLODNodeUid(self, MeshLODNodeUid: str) -> bool:
@@ -105884,6 +106393,10 @@ class MediaPlaylistFactoryNew(Factory):
 class MediaTextureFactoryNew(Factory):
     ...
 
+class MegascansMaterialParentSettings(DeveloperSettings):
+    MaterialParents: dict[EMegascanMaterialType, MegascanMaterialPair]
+
+
 class MergeMeshesToolProperties(InteractiveToolPropertySet):
     VoxelCount: int
     MeshAdaptivity: float
@@ -109732,9 +110245,6 @@ class NiagaraScriptSource(NiagaraScriptSourceBase):
 class NiagaraScriptValidationCommandlet(Commandlet):
     ...
 
-class NiagaraSemanticCommandlet(Commandlet):
-    ...
-
 class NiagaraSequencerTrackFilter(SequencerTrackFilterExtension):
     ...
 
@@ -110734,9 +111244,48 @@ class OutlinerVisibilityHeaderFactory(EditorDataStorageFactory):
 class OutlinerVisibilityWidgetFactory(EditorDataStorageFactory):
     ...
 
+class PGFActorLifecycleBinding(ActorComponent):
+    OnBeginPlay: MulticastDelegateBase
+    OnEndPlay: MulticastDelegateBase
+
+    def IsBindingActive(self) -> bool:
+        ...
+
+    def Unbind(self) -> None:
+        ...
+
+
 class PGFBlueprintLibrary(BlueprintFunctionLibrary):
     @staticmethod
-    def GetNetModeName(Context: PGFWorldContext) -> str:
+    def BindActorLifecycle(Actor: Actor) -> PGFActorLifecycleBinding:
+        ...
+
+    @staticmethod
+    def BindInputAxis(PlayerController: PlayerController, AxisKey: Key, bConsumeInput: bool, bExecuteWhenPaused: bool, Priority: int) -> PGFInputAxisBinding:
+        ...
+
+    @staticmethod
+    def BindInputChord(PlayerController: PlayerController, Key: Key, bShift: bool, bCtrl: bool, bAlt: bool, bCmd: bool, InputEvent: EInputEvent, bConsumeInput: bool, bExecuteWhenPaused: bool, Priority: int) -> PGFInputBinding:
+        ...
+
+    @staticmethod
+    def BindInputKey(PlayerController: PlayerController, Key: Key, InputEvent: EInputEvent, bConsumeInput: bool, bExecuteWhenPaused: bool, Priority: int) -> PGFInputBinding:
+        ...
+
+    @staticmethod
+    def BindInputLongPress(PlayerController: PlayerController, Key: Key, HoldTimeSeconds: float, bConsumeInput: bool, bExecuteWhenPaused: bool, Priority: int) -> PGFInputLongPressBinding:
+        ...
+
+    @staticmethod
+    def BindInputLongPressChord(PlayerController: PlayerController, Key: Key, bShift: bool, bCtrl: bool, bAlt: bool, bCmd: bool, HoldTimeSeconds: float, bConsumeInput: bool, bExecuteWhenPaused: bool, Priority: int) -> PGFInputLongPressBinding:
+        ...
+
+    @staticmethod
+    def BindInputTouch(PlayerController: PlayerController, InputEvent: EInputEvent, bConsumeInput: bool, bExecuteWhenPaused: bool, Priority: int) -> PGFInputTouchBinding:
+        ...
+
+    @staticmethod
+    def GetObjectUniqueId(Object: Object) -> int:
         ...
 
     @staticmethod
@@ -110744,15 +111293,11 @@ class PGFBlueprintLibrary(BlueprintFunctionLibrary):
         ...
 
     @staticmethod
-    def IsClient(Context: PGFWorldContext) -> bool:
+    def LoadClassAsync(WorldContextObject: Object, ClassPath: str) -> PGFAsyncLoadRequest:
         ...
 
     @staticmethod
-    def IsServer(Context: PGFWorldContext) -> bool:
-        ...
-
-    @staticmethod
-    def MakeWorldContext(WorldContextObject: Object) -> PGFWorldContext:
+    def LoadObjectAsync(WorldContextObject: Object, AssetPath: str) -> PGFAsyncLoadRequest:
         ...
 
     @staticmethod
@@ -110760,7 +111305,11 @@ class PGFBlueprintLibrary(BlueprintFunctionLibrary):
         ...
 
     @staticmethod
-    def ReloadPythonPackage(PackageName: str, EntryModuleName: str) -> None:
+    def ReloadPythonPackage(PackageName: str) -> None:
+        ...
+
+    @staticmethod
+    def UnbindActorLifecycle(Actor: Actor) -> None:
         ...
 
 
@@ -111609,6 +112158,25 @@ class PlanePositionGizmoBuilder(InteractiveGizmoBuilder):
 class PlaneTranslationDragOperation(ViewportDragOperation):
     ...
 
+class PlasticSourceControlProjectSettings(DeveloperSettings):
+    UserNameToDisplayName: dict[str, str]
+    bHideEmailDomainInUsername: bool
+    bPromptForCheckoutOnChange: bool
+    LimitNumberOfRevisionsInHistory: int
+    bShowBranchRepositoryColumn: bool
+    bShowBranchCreatedByColumn: bool
+    bShowBranchDateColumn: bool
+    bShowBranchCommentColumn: bool
+    bShowLockIdColumn: bool
+    bShowLockWorkspaceColumn: bool
+    bShowLockDateColumn: bool
+    bShowLockDestinationBranchColumn: bool
+    bShowChangesetCreatedByColumn: bool
+    bShowChangesetDateColumn: bool
+    bShowChangesetCommentColumn: bool
+    bShowChangesetBranchColumn: bool
+
+
 class PlatformEventsComponent(ActorComponent):
     PlatformChangedToLaptopModeDelegate: MulticastDelegateBase
     PlatformChangedToTabletModeDelegate: MulticastDelegateBase
@@ -112384,6 +112952,20 @@ class RenderCaptureProperties(InteractiveToolPropertySet):
     bDeviceDepthMap: bool
     CaptureFieldOfView: float
     NearPlaneDist: float
+
+
+class RenderDocPluginSettings(DeveloperSettings):
+    bCaptureAllActivity: bool
+    bCaptureAllCallstacks: bool
+    bReferenceAllResources: bool
+    bSaveAllInitials: bool
+    bCaptureDelayInSeconds: bool
+    CaptureDelay: int
+    CaptureFrameCount: int
+    bAutoAttach: bool
+    bShowHelpOnStartup: bool
+    bEnableRenderDocCrashHandler: bool
+    RenderDocBinaryPath: str
 
 
 class RenderResourceViewerSettings(DeveloperSettings):
@@ -116602,6 +117184,10 @@ class UObjectLabelWidgetFactory(EditorDataStorageFactory):
     ...
 
 class UPyBlueprintLibrary(BlueprintFunctionLibrary):
+    @staticmethod
+    def CallLoadedPythonMethod(ModuleName: str, MethodName: str) -> bool:
+        ...
+
     @staticmethod
     def CallPythonMethod_IntArray_RetIntArray(ModuleName: str, MethodName: str, Arg: list[int]) -> list[int]:
         ...
@@ -122298,27 +122884,6 @@ class DataLayerSubsystem(WorldSubsystem):
         ...
 
 
-class DataSemanticTestPrimaryAsset(PrimaryDataAsset):
-    bEnabled: bool
-    Count: int
-    LargeCount: int
-    Weight: float
-    Accuracy: float
-    Label: str
-    RowName: str
-    Description: str
-    Rarity: EDataSemanticTestEnum
-    Icon: Texture2D
-    ActorClass: Class
-    SpawnOffset: Vector
-    Tint: LinearColor
-    Facing: Rotator
-    RewardCounts: list[int]
-    Tags: list[str]
-    PatrolPoints: list[Vector]
-    UnsupportedSet: set[int]
-
-
 class DataflowComponentReadOnlyToolTarget(PrimitiveComponentToolTarget, MeshDescriptionProvider, DynamicMeshProvider, MaterialProvider):
     ...
 
@@ -123386,6 +123951,15 @@ class FKControlRig(ControlRig):
     IsControlActive: list[bool]
     ApplyMode: EControlRigFKRigExecuteMode
 
+
+class FabDecalPlaceholderSpawner(FabPlaceholderSpawner):
+    ...
+
+class FabSkeletalMeshPlaceholderSpawner(FabPlaceholderSpawner):
+    ...
+
+class FabStaticMeshPlaceholderSpawner(FabPlaceholderSpawner):
+    ...
 
 class FarmHarvestTimerExpired(FarmProcessorBase):
     ...
@@ -124954,6 +125528,68 @@ class InterchangeGroomFactoryNode(InterchangeFactoryBaseNode):
 
 class InterchangeHeterogeneousVolumeActorFactory(InterchangeActorFactory):
     ...
+
+class InterchangeInstancedFoliageTypeFactoryNode(InterchangeFactoryBaseNode):
+    def GetCustomAffectDistanceFieldLighting(self) -> tuple[bool, bool]:
+        ...
+
+    def GetCustomAlignToNormal(self) -> tuple[bool, bool]:
+        ...
+
+    def GetCustomRandomPitchAngle(self) -> tuple[bool, float]:
+        ...
+
+    def GetCustomRandomYaw(self) -> tuple[bool, bool]:
+        ...
+
+    def GetCustomScaleX(self) -> tuple[bool, Vector2f]:
+        ...
+
+    def GetCustomScaleY(self) -> tuple[bool, Vector2f]:
+        ...
+
+    def GetCustomScaleZ(self) -> tuple[bool, Vector2f]:
+        ...
+
+    def GetCustomScaling(self) -> tuple[bool, EFoliageScaling]:
+        ...
+
+    def GetCustomStaticMesh(self) -> tuple[bool, str]:
+        ...
+
+    def GetCustomWorldPositionOffsetDisableDistance(self) -> tuple[bool, int]:
+        ...
+
+    def SetCustomAffectDistanceFieldLighting(self, AttributeValue: bool, bAddApplyDelegate: bool=True) -> bool:
+        ...
+
+    def SetCustomAlignToNormal(self, AttributeValue: bool, bAddApplyDelegate: bool=True) -> bool:
+        ...
+
+    def SetCustomRandomPitchAngle(self, AttributeValue: float, bAddApplyDelegate: bool=True) -> bool:
+        ...
+
+    def SetCustomRandomYaw(self, AttributeValue: bool, bAddApplyDelegate: bool=True) -> bool:
+        ...
+
+    def SetCustomScaleX(self, AttributeValue: Vector2f) -> bool:
+        ...
+
+    def SetCustomScaleY(self, AttributeValue: Vector2f) -> bool:
+        ...
+
+    def SetCustomScaleZ(self, AttributeValue: Vector2f) -> bool:
+        ...
+
+    def SetCustomScaling(self, AttributeValue: EFoliageScaling, bAddApplyDelegate: bool=True) -> bool:
+        ...
+
+    def SetCustomStaticMesh(self, AttributeValue: str) -> bool:
+        ...
+
+    def SetCustomWorldPositionOffsetDisableDistance(self, AttributeValue: int, bAddApplyDelegate: bool=True) -> bool:
+        ...
+
 
 class InterchangeInstancedStaticMeshComponentNode(InterchangeSceneComponentNode):
     def AddInstanceTransform(self, InstanceTransform: Transform) -> None:
@@ -129052,11 +129688,15 @@ class OverlaySlot(PanelSlot):
 
 
 class PGFGameInstanceSubsystem(GameInstanceSubsystem):
-    def GetWorldContext(self) -> PGFWorldContext:
-        ...
-
     def IsInitialized(self) -> bool:
         ...
+
+
+class PGFInputComponent(InputComponent):
+    PGFBindings: list[PGFInputBinding]
+    PGFAxisBindings: list[PGFInputAxisBinding]
+    PGFLongPressBindings: list[PGFInputLongPressBinding]
+    PGFTouchBindings: list[PGFInputTouchBinding]
 
 
 class PackedLevelActor(LevelInstance):
@@ -134915,9 +135555,6 @@ class WaveOscillatorCameraShakePattern(SimpleCameraShakePattern):
     Roll: WaveOscillator
     FOV: WaveOscillator
 
-
-class WebBrowserTexture(Texture):
-    ...
 
 class WidgetAnimation(MovieSceneSequence):
     MovieScene: MovieScene
@@ -143339,9 +143976,7 @@ class Overlay(PanelWidget):
 
 
 class PGFGameInstance(UPyGameInstance):
-    PythonReloadRoot: str
-    PythonEntryModuleName: str
-
+    ...
 
 class PanelExtensionSubsystem(EditorSubsystem):
     ...

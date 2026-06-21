@@ -7,13 +7,18 @@
 #include "Wrapper/AutoGen/CoreUObject/Struct/UPyWrapperVector2D.h"
 #include "Wrapper/AutoGen/CoreUObject/Struct/UPyWrapperColor.h"
 #include "Wrapper/AutoGen/CoreUObject/Struct/UPyWrapperLinearColor.h"
+#include "Wrapper/AutoGen/CoreUObject/Struct/UPyWrapperIntPoint.h"
+#include "Wrapper/AutoGen/CoreUObject/Struct/UPyWrapperIntVector.h"
+#include "Wrapper/AutoGen/CoreUObject/Struct/UPyWrapperVector4.h"
 #include "Wrapper/AutoGen/CoreUObject/Struct/UPyWrapperGuid.h"
 #include "Wrapper/AutoGen/CoreUObject/Struct/UPyWrapperBox.h"
 #include "Wrapper/AutoGen/CoreUObject/Struct/UPyWrapperBox2D.h"
+#include "Wrapper/AutoGen/CoreUObject/Struct/UPyWrapperBoxSphereBounds.h"
 #include "Wrapper/AutoGen/CoreUObject/Struct/UPyWrapperMatrix.h"
 #include "Wrapper/AutoGen/CoreUObject/Struct/UPyWrapperSoftObjectPath.h"
 #include "Wrapper/AutoGen/CoreUObject/Struct/UPyWrapperSoftClassPath.h"
 #include "Wrapper/AutoGen/CoreUObject/Struct/UPyWrapperVector2f.h"
+#include "Wrapper/AutoGen/CoreUObject/Struct/UPyWrapperVector4f.h"
 
 void InitializeCoreUObjectModuleWrapperTypes(UPyGenUtil::FNativePythonModule& ModuleInfo)
 {
@@ -24,11 +29,16 @@ void InitializeCoreUObjectModuleWrapperTypes(UPyGenUtil::FNativePythonModule& Mo
 	InitializeUPyWrapperVector2D(ModuleInfo);
 	InitializeUPyWrapperColor(ModuleInfo);
 	InitializeUPyWrapperLinearColor(ModuleInfo);
+	InitializeUPyWrapperIntPoint(ModuleInfo);
+	InitializeUPyWrapperIntVector(ModuleInfo);
+	InitializeUPyWrapperVector4(ModuleInfo);
 	InitializeUPyWrapperGuid(ModuleInfo);
 	InitializeUPyWrapperBox(ModuleInfo);
 	InitializeUPyWrapperBox2D(ModuleInfo);
+	InitializeUPyWrapperBoxSphereBounds(ModuleInfo);
 	InitializeUPyWrapperMatrix(ModuleInfo);
 	InitializeUPyWrapperSoftObjectPath(ModuleInfo);
 	InitializeUPyWrapperSoftClassPath(ModuleInfo);
 	InitializeUPyWrapperVector2f(ModuleInfo);
+	InitializeUPyWrapperVector4f(ModuleInfo);
 }

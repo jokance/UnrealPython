@@ -27,6 +27,7 @@ struct TBaseStructure<T> \
 
 IMPLEMENT_TBASE_STRUCTURE(FVector2f, "/Script/CoreUObject.Vector2f")
 IMPLEMENT_TBASE_STRUCTURE(FVector3f, "/Script/CoreUObject.Vector3f")
+IMPLEMENT_TBASE_STRUCTURE(FVector4f, "/Script/CoreUObject.Vector4f")
 IMPLEMENT_TBASE_STRUCTURE(FTimespan, "/Script/CoreUObject.Timespan")
 IMPLEMENT_TBASE_STRUCTURE(FBox, "/Script/CoreUObject.Box")
 IMPLEMENT_TBASE_STRUCTURE(FBoxSphereBounds, "/Script/CoreUObject.BoxSphereBounds")

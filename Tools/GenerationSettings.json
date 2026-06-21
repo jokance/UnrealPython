@@ -36,6 +36,7 @@
                 "ServerMoveOld"
             ]
         },
+        "Controller": {},
         "PlayerController": {
             "ExcludeMethods": [
                 "GetDeprecatedInputPitchScale",
@@ -47,9 +48,12 @@
             ]
         },
         "PlayerCameraManager": {},
+        "PlayerState": {},
         "GameInstance": {},
         "World": {},
         "GameModeBase": {},
+        "GameStateBase": {},
+        "HUD": {},
         "ActorComponent": {},
         "SceneComponent": {
             "ExcludeMethods": ["DetachFromParent", "K2_AttachTo"]
@@ -63,6 +67,8 @@
             "ExcludeProperties": ["AnimBlueprintGeneratedClass", "SubInstances", "ClothingSimulationFactory"],
             "ExcludeMethods": ["GetDisableAnimCurves", "SetDisableAnimCurves"]
         },
+        "CameraComponent": {},
+        "CharacterMovementComponent": {},
         "GameplayStatics": {
             "ForceReflectionMethods": ["BlueprintSuggestProjectileVelocity"]
         },
@@ -74,6 +80,17 @@
         "FXSystemComponent": {},
         "ParticleSystemComponent": {},
         "EngineTypes": {},
+        "StaticMesh": {},
+        "SkeletalMesh": {},
+        "Texture2D": {
+            "ForceReflectionMethods": ["Blueprint_GetCPUCopy", "Blueprint_GetSizeX", "Blueprint_GetSizeY"]
+        },
+        "MaterialInterface": {},
+        "MaterialInstanceDynamic": {},
+        "AnimInstance": {},
+        "AnimMontage": {
+            "ForceReflectionMethods": ["IsValidAdditiveSlot"]
+        },
 
         "Widget": {
             "ExcludeProperties": [
@@ -104,6 +121,24 @@
 			"ExcludeMethods": ["CreateDragDropOperation"]
 		},
         "ListView": {},
+        "PanelWidget": {},
+        "CanvasPanel": {},
+        "Button": {},
+        "TextBlock": {},
+        "Image": {},
+        "Border": {},
+        "SizeBox": {},
+        "HorizontalBox": {},
+        "VerticalBox": {},
+        "Overlay": {},
+        "ScrollBox": {},
+        "EditableTextBox": {},
+        "Slider": {},
+        "CheckBox": {},
+        "WidgetComponent": {},
+        "WidgetTree": {},
+        "WidgetBlueprintLibrary": {},
+        "WidgetLayoutLibrary": {},
         "ProgressBar": {
             "ExcludeProperties": [
                 "BarFillStyle",
@@ -148,7 +183,17 @@
         "LinearColor": {
             "IsInline": true
         },
+        "IntPoint": {
+            "IsInline": true
+        },
+        "IntVector": {
+            "IsInline": true
+        },
+        "Vector4": {
+            "IsInline": true
+        },
         "HitResult": {},
+        "TimerHandle": {},
         "Key": {
             "IsInline": true
         },
@@ -161,6 +206,7 @@
         "Box2D": {
             "IsInline": true
         },
+        "BoxSphereBounds": {},
         "Matrix": {
             "IsInline": true,
             "ExcludeProperties": ["XPlane", "YPlane", "ZPlane", "WPlane"]
@@ -170,7 +216,18 @@
         },
         "SoftClassPath": {},
         "SlateColor": {},
+        "SlateBrush": {},
+        "Margin": {
+            "IsInline": true
+        },
+        "Anchors": {
+            "IsInline": true
+        },
+        "EventReply": {},
         "Geometry": {},
-        "Vector2f": {}
+        "Vector2f": {},
+        "Vector4f": {
+            "IsInline": true
+        }
     }
 }

@@ -42,6 +42,9 @@ public class UnrealPython : ModuleRules
 				"UMG",
 				"PhysicsCore",
 				"FieldNotification",
+				"ImageCore",
+				"ClothingSystemRuntimeInterface",
+				"StaticMeshDescription",
 			]
 		);
 

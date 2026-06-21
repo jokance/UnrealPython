@@ -2,6 +2,7 @@
 #pragma once
 
 #include "InputCoreTypes.h"
+#include "Layout/Margin.h"
 #include "Math/Box2D.h"
 #include "Math/Color.h"
 #include "Math/Plane.h"
@@ -14,9 +15,11 @@
 #include "Templates/SharedPointer.h"
 #include "UObject/NoExportTypes.h"
 #include "Utils/UPyGenUtil.h"
+#include "Widgets/Layout/Anchors.h"
 #include "Wrapper/AutoGen/CoreUObject/UPyCoreUObjectModuleWrapper.h"
 #include "Wrapper/AutoGen/Engine/UPyEngineModuleWrapper.h"
 #include "Wrapper/AutoGen/InputCore/UPyInputCoreModuleWrapper.h"
+#include "Wrapper/AutoGen/Slate/UPySlateModuleWrapper.h"
 #include "Wrapper/AutoGen/SlateCore/UPySlateCoreModuleWrapper.h"
 #include "Wrapper/AutoGen/UMG/UPyUMGModuleWrapper.h"
 #include "Wrapper/UPyWrapperTypeFactory.h"
@@ -27,6 +30,7 @@ inline void InitializeAutoGenWrapperTypes(UPyGenUtil::FNativePythonModule& Modul
 	InitializeCoreUObjectModuleWrapperTypes(ModuleInfo);
 	InitializeEngineModuleWrapperTypes(ModuleInfo);
 	InitializeInputCoreModuleWrapperTypes(ModuleInfo);
+	InitializeSlateModuleWrapperTypes(ModuleInfo);
 	InitializeSlateCoreModuleWrapperTypes(ModuleInfo);
 	InitializeUMGModuleWrapperTypes(ModuleInfo);
 }
