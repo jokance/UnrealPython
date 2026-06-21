@@ -9,6 +9,7 @@
 #include "Materials/MaterialInterface.h"
 #include "Materials/MaterialInstanceDynamic.h"
 #include "UObject/NoExportTypes.h"
+#include "ParticleHelper.h"
 #include "Particles/ParticleSystem.h"
 
 

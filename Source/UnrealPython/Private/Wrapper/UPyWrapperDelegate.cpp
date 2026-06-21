@@ -13,6 +13,7 @@
 #include "UObject/UnrealType.h"
 #include "UObject/StructOnScope.h"
 #include "Templates/Casts.h"
+#include "Misc/EngineVersionComparison.h"
 
 #include UE_INLINE_GENERATED_CPP_BY_NAME(UPyWrapperDelegate)
 
@@ -253,7 +254,11 @@ struct TPyDelegateInvocation<FMulticastScriptDelegate>
 	{
 		if (Delegate)
 		{
+#if UE_VERSION_OLDER_THAN(5, 8, 0)
 			Delegate->ProcessMulticastDelegate<UObject>(Params);
+#else
+			Delegate->ProcessDelegate<UObject>(Params);
+#endif
 		}
 	}
 
