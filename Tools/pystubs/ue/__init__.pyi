@@ -63770,9 +63770,6 @@ class AnimInstance(Object):
     def Blueprint_GetSlotMontageLocalWeight(self, SlotNodeName: str) -> float:
         ...
 
-    def CalculateDirection(self, Velocity: Vector, BaseRotation: Rotator) -> float:
-        ...
-
     def ClearAllTransitionEvents(self) -> None:
         ...
 
@@ -115314,21 +115311,12 @@ class StaticMesh(StreamableRenderAsset, Interface_CollisionDataProvider, Interfa
     HiResSourceModel: StaticMeshSourceModel
     SectionInfoMap: MeshSectionInfoMap
     OriginalSectionInfoMap: MeshSectionInfoMap
-    LODGroup: str
-    NumStreamedLODs: PerPlatformInt
-    ImportVersion: int
-    MaterialRemapIndexPerImportVersion: list[MaterialRemapIndex]
-    bAutoComputeLODScreenSize: bool
-    NaniteSettings: MeshNaniteSettings
     LightmapUVVersion: int
     MinQualityLevelLOD: PerQualityLevelInt
-    MinLOD: PerPlatformInt
     ElementToIgnoreForTexFactor: int
     StaticMaterials: list[StaticMaterial]
     AssemblyReferenceCache: list[StaticMesh]
     LightmapUVDensity: float
-    LightMapResolution: int
-    LightMapCoordinateIndex: int
     StaticMeshPaintSupport: EStaticMeshPaintSupport
     MeshPaintTextureCoordinateIndex: int
     MeshPaintTextureResolution: int
@@ -115340,19 +115328,11 @@ class StaticMesh(StreamableRenderAsset, Interface_CollisionDataProvider, Interfa
     bSupportUniformlyDistributedSampling: bool
     bSupportPhysicalMaterialMasks: bool
     bUseLegacyTangentScaling: bool
-    RayTracingProxySettings: MeshRayTracingProxySettings
     bSupportRayTracing: bool
     bDoFastBuild: bool
     bAllowCPUAccess: bool
     bSupportGpuUniformlyDistributedSampling: bool
-    AssetImportData: AssetImportData
-    ThumbnailInfo: ThumbnailInfo
-    EditorCameraPosition: AssetEditorOrbitCameraPosition
-    bCustomizedCollision: bool
     Sockets: list[StaticMeshSocket]
-    PositiveBoundsExtension: Vector
-    NegativeBoundsExtension: Vector
-    ExtendedBounds: BoxSphereBounds
     AssetUserData: list[AssetUserData]
     ComplexCollisionMesh: StaticMesh
     NavCollision: NavCollisionBase
@@ -123414,26 +123394,14 @@ class EditableText(Widget):
 
 
 class EditableTextBox(Widget):
-    Text: str
     TextDelegate: DelegateBase
     WidgetStyle: EditableTextBoxStyle
-    HintText: str
     HintTextDelegate: DelegateBase
-    IsReadOnly: bool
-    IsPassword: bool
-    MinimumDesiredWidth: float
-    IsCaretMovedWhenGainFocus: bool
-    SelectAllTextWhenFocused: bool
-    RevertTextOnEscape: bool
-    ClearKeyboardFocusOnCommit: bool
-    SelectAllTextOnCommit: bool
     AllowContextMenu: bool
     KeyboardType: EVirtualKeyboardType
     VirtualKeyboardOptions: VirtualKeyboardOptions
     VirtualKeyboardTrigger: EVirtualKeyboardTrigger
     VirtualKeyboardDismissAction: EVirtualKeyboardDismissAction
-    Justification: ETextJustify
-    OverflowPolicy: ETextOverflowPolicy
     ShapedTextOptions: ShapedTextOptions
     OnTextChanged: MulticastDelegateBase
     OnTextCommitted: MulticastDelegateBase
@@ -124906,11 +124874,8 @@ class ISMPoolSubSystem(WorldSubsystem):
 
 
 class Image(Widget):
-    Brush: SlateBrush
     BrushDelegate: DelegateBase
-    ColorAndOpacity: LinearColor
     ColorAndOpacityDelegate: DelegateBase
-    bFlipForRightToLeftFlowDirection: bool
     OnMouseButtonDownEvent: DelegateBase
 
     def GetDynamicMaterial(self) -> MaterialInstanceDynamic:
@@ -133111,50 +133076,14 @@ class SkeletalBodySetup(BodySetup):
 
 class SkeletalMesh(SkinnedAsset, Interface_CollisionDataProvider, Interface_AssetUserData, NodeMappingProviderInterface):
     SourceModels: list[SkeletalMeshSourceModel]
-    Skeleton: Skeleton
     ImportedBounds: BoxSphereBounds
     ExtendedBounds: BoxSphereBounds
     PositiveBoundsExtension: Vector
     NegativeBoundsExtension: Vector
-    Materials: list[SkeletalMaterial]
-    SkelMirrorTable: list[BoneMirrorInfo]
     NaniteSettings: MeshNaniteSettings
     AssemblyReferenceCache: list[SkeletalMesh]
     MinQualityLevelLOD: PerQualityLevelInt
-    MinLod: PerPlatformInt
-    DisableBelowMinLodStripping: PerPlatformBool
-    bOverrideLODStreamingSettings: bool
-    bSupportLODStreaming: PerPlatformBool
-    MaxNumStreamedLODs: PerPlatformInt
-    MaxNumOptionalLODs: PerPlatformInt
-    LODSettings: SkeletalMeshLODSettings
-    DefaultAnimatingRig: Object
-    SkelMirrorAxis: EAxis
-    SkelMirrorFlipAxis: EAxis
-    bHasVertexColors: bool
-    bEnablePerPolyCollision: bool
-    VertexColorGuid: str
-    BodySetup: BodySetup
-    PhysicsAsset: PhysicsAsset
-    ShadowPhysicsAsset: PhysicsAsset
-    NodeMappingData: list[NodeMappingContainer]
-    AssetImportData: AssetImportData
-    ThumbnailInfo: ThumbnailInfo
-    bHasCustomDefaultEditorCamera: bool
-    DefaultEditorCameraLocation: Vector
-    DefaultEditorCameraRotation: Rotator
-    DefaultEditorCameraLookAt: Vector
-    DefaultEditorCameraOrthoZoom: float
-    PreviewAttachedAssetContainer: PreviewAssetAttachContainer
-    bSupportRayTracing: bool
-    RayTracingMinLOD: int
-    ClothLODBiasMode: EClothLODBiasMode
-    MorphTargets: list[MorphTarget]
-    FloorOffset: float
-    BoneDrawSize: float
-    PostProcessAnimBlueprint: Class | type
     PostProcessAnimBPLODThreshold: int
-    MeshClothingAssets: list[ClothingAssetBase]
     SamplingInfo: SkeletalMeshSamplingInfo
     AssetUserData: list[AssetUserData]
     AssetUserDataEditorOnly: list[AssetUserData]
@@ -133487,19 +133416,9 @@ class SlateBrushThumbnailRenderer(DefaultSizedThumbnailRenderer):
     ...
 
 class Slider(Widget):
-    Value: float
     ValueDelegate: DelegateBase
-    MinValue: float
-    MaxValue: float
-    WidgetStyle: SliderStyle
-    Orientation: EOrientation
-    SliderBarColor: LinearColor
-    SliderHandleColor: LinearColor
-    IndentHandle: bool
-    Locked: bool
     MouseUsesStep: bool
     RequiresControllerLock: bool
-    StepSize: float
     IsFocusable: bool
     bPreventThrottling: bool
     OnMouseCaptureBegin: MulticastDelegateBase
@@ -144677,24 +144596,6 @@ class ScrollBox(PanelWidget):
     bConsumePointerInput: bool
     AnalogMouseWheelKey: Key
     bIsFocusable: bool
-    WidgetStyle: ScrollBoxStyle
-    WidgetBarStyle: ScrollBarStyle
-    Orientation: EOrientation
-    ScrollBarVisibility: ESlateVisibility
-    ConsumeMouseWheel: EConsumeMouseWheel
-    ScrollbarThickness: Vector2D
-    ScrollbarPadding: Margin
-    AlwaysShowScrollbar: bool
-    AlwaysShowScrollbarTrack: bool
-    AllowOverscroll: bool
-    BackPadScrolling: bool
-    FrontPadScrolling: bool
-    bAnimateWheelScrolling: bool
-    NavigationDestination: EDescendantScrollDestination
-    NavigationScrollPadding: float
-    ScrollWhenFocusChanges: EScrollWhenFocusChanges
-    bAllowRightClickDragScrolling: bool
-    WheelScrollMultiplier: float
     OnUserScrolled: MulticastDelegateBase
     OnScrollBarVisibilityChanged: MulticastDelegateBase
     OnFocusReceived: MulticastDelegateBase
@@ -146239,19 +146140,10 @@ class TestMovieSceneTrack(MovieSceneTrack, MovieSceneTrackTemplateProducer):
 
 
 class TextBlock(TextLayoutWidget):
-    Text: str
     TextDelegate: DelegateBase
-    ColorAndOpacity: SlateColor
     ColorAndOpacityDelegate: DelegateBase
-    MinDesiredWidth: float
-    Font: SlateFontInfo
-    StrikeBrush: SlateBrush
-    ShadowOffset: Vector2D
-    ShadowColorAndOpacity: LinearColor
     ShadowColorAndOpacityDelegate: DelegateBase
     bWrapWithInvalidationPanel: bool
-    TextTransformPolicy: ETextTransformPolicy
-    TextOverflowPolicy: ETextOverflowPolicy
     bSimpleTextMode: bool
 
     def GetDynamicFontMaterial(self) -> MaterialInstanceDynamic:
@@ -147332,17 +147224,10 @@ class BehaviorTreeGraphNode_SubtreeTask(BehaviorTreeGraphNode_Task):
     ...
 
 class Border(ContentWidget):
-    HorizontalAlignment: EHorizontalAlignment
-    VerticalAlignment: EVerticalAlignment
-    bShowEffectWhenDisabled: bool
-    ContentColorAndOpacity: LinearColor
     ContentColorAndOpacityDelegate: DelegateBase
-    Padding: Margin
     Background: SlateBrush
     BackgroundDelegate: DelegateBase
-    BrushColor: LinearColor
     BrushColorDelegate: DelegateBase
-    DesiredSizeScale: Vector2D
     bFlipForRightToLeftFlowDirection: bool
     OnMouseButtonDownEvent: DelegateBase
     OnMouseButtonUpEvent: DelegateBase
@@ -147403,13 +147288,6 @@ class BrushEditingSubsystemImpl(BrushEditingSubsystem):
     ...
 
 class Button(ContentWidget):
-    WidgetStyle: ButtonStyle
-    ColorAndOpacity: LinearColor
-    BackgroundColor: LinearColor
-    ClickMethod: EButtonClickMethod
-    TouchMethod: EButtonTouchMethod
-    PressMethod: EButtonPressMethod
-    IsFocusable: bool
     OnClicked: MulticastDelegateBase
     OnPressed: MulticastDelegateBase
     OnReleased: MulticastDelegateBase
@@ -147603,7 +147481,6 @@ class CharacterMovementComponent(PawnMovementComponent, RVOAvoidanceInterface, N
     AirControlBoostMultiplier: float
     AirControlBoostVelocityThreshold: float
     FallingLateralFriction: float
-    CrouchedHalfHeight: float
     Buoyancy: float
     PerchRadiusThreshold: float
     PerchAdditionalHeight: float
@@ -147858,14 +147735,8 @@ class CharacterMovementComponent(PawnMovementComponent, RVOAvoidanceInterface, N
 
 
 class CheckBox(ContentWidget):
-    CheckedState: ECheckBoxState
     CheckedStateDelegate: DelegateBase
-    WidgetStyle: CheckBoxStyle
     HorizontalAlignment: EHorizontalAlignment
-    ClickMethod: EButtonClickMethod
-    TouchMethod: EButtonTouchMethod
-    PressMethod: EButtonPressMethod
-    IsFocusable: bool
     OnCheckStateChanged: MulticastDelegateBase
 
     def GetCheckedState(self) -> ECheckBoxState:
@@ -150528,23 +150399,6 @@ class ShapeSprayToolBuilder(MeshSurfacePointMeshEditingToolBuilder):
     ...
 
 class SizeBox(ContentWidget):
-    WidthOverride: float
-    HeightOverride: float
-    MinDesiredWidth: float
-    MinDesiredHeight: float
-    MaxDesiredWidth: float
-    MaxDesiredHeight: float
-    MinAspectRatio: float
-    MaxAspectRatio: float
-    bOverride_WidthOverride: bool
-    bOverride_HeightOverride: bool
-    bOverride_MinDesiredWidth: bool
-    bOverride_MinDesiredHeight: bool
-    bOverride_MaxDesiredWidth: bool
-    bOverride_MaxDesiredHeight: bool
-    bOverride_MinAspectRatio: bool
-    bOverride_MaxAspectRatio: bool
-
     def ClearHeightOverride(self) -> None:
         ...
 

@@ -22,29 +22,6 @@ PyTypeObject UPyWrapperTextBlockType = {
 
 struct FGetSets_TextBlock
 {
-	static PyObject* GetColorAndOpacity(FUPyWrapperTextBlock* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperTextBlock::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FSlateColor>::Get(), (void*)&InSelf->ValuePtr()->ColorAndOpacity, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
-	}
-
-	static int SetColorAndOpacity(FUPyWrapperTextBlock* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperTextBlock::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->ColorAndOpacity))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("TextBlock::ColorAndOpacity"), TEXT("value is not a compatible struct"));
-		return -1;
-	}
-
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_ColorAndOpacityDelegate()
 	{
 		static bool bInitialized = false;
@@ -79,75 +56,6 @@ struct FGetSets_TextBlock
 			return -1;
 		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ColorAndOpacityDelegate(), "ColorAndOpacityDelegate");
-	}
-
-	static PyObject* GetFont(FUPyWrapperTextBlock* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperTextBlock::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FSlateFontInfo>::Get(), (void*)&InSelf->ValuePtr()->Font, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
-	}
-
-	static int SetFont(FUPyWrapperTextBlock* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperTextBlock::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->Font))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("TextBlock::Font"), TEXT("value is not a compatible struct"));
-		return -1;
-	}
-
-	static PyObject* GetMinDesiredWidth(FUPyWrapperTextBlock* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperTextBlock::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::Pythonize(InSelf->ValuePtr()->MinDesiredWidth);
-	}
-
-	static int SetMinDesiredWidth(FUPyWrapperTextBlock* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperTextBlock::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->MinDesiredWidth))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("TextBlock::MinDesiredWidth"), TEXT("value is not numeric"));
-		return -1;
-	}
-
-	static PyObject* GetShadowColorAndOpacity(FUPyWrapperTextBlock* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperTextBlock::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FLinearColor>::Get(), (void*)&InSelf->ValuePtr()->ShadowColorAndOpacity, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
-	}
-
-	static int SetShadowColorAndOpacity(FUPyWrapperTextBlock* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperTextBlock::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->ShadowColorAndOpacity))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("TextBlock::ShadowColorAndOpacity"), TEXT("value is not a compatible struct"));
-		return -1;
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_ShadowColorAndOpacityDelegate()
@@ -186,75 +94,6 @@ struct FGetSets_TextBlock
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ShadowColorAndOpacityDelegate(), "ShadowColorAndOpacityDelegate");
 	}
 
-	static PyObject* GetShadowOffset(FUPyWrapperTextBlock* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperTextBlock::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FVector2D>::Get(), (void*)&InSelf->ValuePtr()->ShadowOffset, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
-	}
-
-	static int SetShadowOffset(FUPyWrapperTextBlock* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperTextBlock::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->ShadowOffset))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("TextBlock::ShadowOffset"), TEXT("value is not a compatible struct"));
-		return -1;
-	}
-
-	static PyObject* GetStrikeBrush(FUPyWrapperTextBlock* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperTextBlock::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FSlateBrush>::Get(), (void*)&InSelf->ValuePtr()->StrikeBrush, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
-	}
-
-	static int SetStrikeBrush(FUPyWrapperTextBlock* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperTextBlock::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->StrikeBrush))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("TextBlock::StrikeBrush"), TEXT("value is not a compatible struct"));
-		return -1;
-	}
-
-	static PyObject* GetText(FUPyWrapperTextBlock* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperTextBlock::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::Pythonize(InSelf->ValuePtr()->Text);
-	}
-
-	static int SetText(FUPyWrapperTextBlock* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperTextBlock::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->Text))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("TextBlock::Text"), TEXT("value is not Text"));
-		return -1;
-	}
-
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_TextDelegate()
 	{
 		static bool bInitialized = false;
@@ -289,52 +128,6 @@ struct FGetSets_TextBlock
 			return -1;
 		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_TextDelegate(), "TextDelegate");
-	}
-
-	static PyObject* GetTextOverflowPolicy(FUPyWrapperTextBlock* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperTextBlock::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->TextOverflowPolicy, StaticEnum<ETextOverflowPolicy>());
-	}
-
-	static int SetTextOverflowPolicy(FUPyWrapperTextBlock* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperTextBlock::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<ETextOverflowPolicy>(), InSelf->ValuePtr()->TextOverflowPolicy))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("TextBlock::TextOverflowPolicy"), TEXT("value is not compatible with this property"));
-		return -1;
-	}
-
-	static PyObject* GetTextTransformPolicy(FUPyWrapperTextBlock* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperTextBlock::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->TextTransformPolicy, StaticEnum<ETextTransformPolicy>());
-	}
-
-	static int SetTextTransformPolicy(FUPyWrapperTextBlock* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperTextBlock::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<ETextTransformPolicy>(), InSelf->ValuePtr()->TextTransformPolicy))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("TextBlock::TextTransformPolicy"), TEXT("value is not compatible with this property"));
-		return -1;
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_bSimpleTextMode()
@@ -402,18 +195,9 @@ struct FGetSets_TextBlock
 
 
 static PyGetSetDef FUPyWrapperTextBlockGetSets[] = {
-	{ UPyCStrCast("ColorAndOpacity"), (getter)&FGetSets_TextBlock::GetColorAndOpacity, (setter)&FGetSets_TextBlock::SetColorAndOpacity, nullptr, nullptr },
 	{ UPyCStrCast("ColorAndOpacityDelegate"), (getter)&FGetSets_TextBlock::GetColorAndOpacityDelegate, (setter)&FGetSets_TextBlock::SetColorAndOpacityDelegate, nullptr, nullptr },
-	{ UPyCStrCast("Font"), (getter)&FGetSets_TextBlock::GetFont, (setter)&FGetSets_TextBlock::SetFont, nullptr, nullptr },
-	{ UPyCStrCast("MinDesiredWidth"), (getter)&FGetSets_TextBlock::GetMinDesiredWidth, (setter)&FGetSets_TextBlock::SetMinDesiredWidth, nullptr, nullptr },
-	{ UPyCStrCast("ShadowColorAndOpacity"), (getter)&FGetSets_TextBlock::GetShadowColorAndOpacity, (setter)&FGetSets_TextBlock::SetShadowColorAndOpacity, nullptr, nullptr },
 	{ UPyCStrCast("ShadowColorAndOpacityDelegate"), (getter)&FGetSets_TextBlock::GetShadowColorAndOpacityDelegate, (setter)&FGetSets_TextBlock::SetShadowColorAndOpacityDelegate, nullptr, nullptr },
-	{ UPyCStrCast("ShadowOffset"), (getter)&FGetSets_TextBlock::GetShadowOffset, (setter)&FGetSets_TextBlock::SetShadowOffset, nullptr, nullptr },
-	{ UPyCStrCast("StrikeBrush"), (getter)&FGetSets_TextBlock::GetStrikeBrush, (setter)&FGetSets_TextBlock::SetStrikeBrush, nullptr, nullptr },
-	{ UPyCStrCast("Text"), (getter)&FGetSets_TextBlock::GetText, (setter)&FGetSets_TextBlock::SetText, nullptr, nullptr },
 	{ UPyCStrCast("TextDelegate"), (getter)&FGetSets_TextBlock::GetTextDelegate, (setter)&FGetSets_TextBlock::SetTextDelegate, nullptr, nullptr },
-	{ UPyCStrCast("TextOverflowPolicy"), (getter)&FGetSets_TextBlock::GetTextOverflowPolicy, (setter)&FGetSets_TextBlock::SetTextOverflowPolicy, nullptr, nullptr },
-	{ UPyCStrCast("TextTransformPolicy"), (getter)&FGetSets_TextBlock::GetTextTransformPolicy, (setter)&FGetSets_TextBlock::SetTextTransformPolicy, nullptr, nullptr },
 	{ UPyCStrCast("bSimpleTextMode"), (getter)&FGetSets_TextBlock::GetbSimpleTextMode, (setter)&FGetSets_TextBlock::SetbSimpleTextMode, nullptr, nullptr },
 	{ UPyCStrCast("bWrapWithInvalidationPanel"), (getter)&FGetSets_TextBlock::GetbWrapWithInvalidationPanel, (setter)&FGetSets_TextBlock::SetbWrapWithInvalidationPanel, nullptr, nullptr },
 	{ nullptr }

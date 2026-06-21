@@ -24,29 +24,6 @@ PyTypeObject UPyWrapperImageType = {
 
 struct FGetSets_Image
 {
-	static PyObject* GetBrush(FUPyWrapperImage* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperImage::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FSlateBrush>::Get(), (void*)&InSelf->ValuePtr()->Brush, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
-	}
-
-	static int SetBrush(FUPyWrapperImage* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperImage::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->Brush))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("Image::Brush"), TEXT("value is not a compatible struct"));
-		return -1;
-	}
-
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_BrushDelegate()
 	{
 		static bool bInitialized = false;
@@ -81,29 +58,6 @@ struct FGetSets_Image
 			return -1;
 		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_BrushDelegate(), "BrushDelegate");
-	}
-
-	static PyObject* GetColorAndOpacity(FUPyWrapperImage* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperImage::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FLinearColor>::Get(), (void*)&InSelf->ValuePtr()->ColorAndOpacity, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
-	}
-
-	static int SetColorAndOpacity(FUPyWrapperImage* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperImage::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->ColorAndOpacity))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("Image::ColorAndOpacity"), TEXT("value is not a compatible struct"));
-		return -1;
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_ColorAndOpacityDelegate()
@@ -178,41 +132,13 @@ struct FGetSets_Image
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnMouseButtonDownEvent(), "OnMouseButtonDownEvent");
 	}
 
-	static PyObject* GetbFlipForRightToLeftFlowDirection(FUPyWrapperImage* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperImage::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::Pythonize(InSelf->ValuePtr()->bFlipForRightToLeftFlowDirection);
-	}
-
-	static int SetbFlipForRightToLeftFlowDirection(FUPyWrapperImage* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperImage::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		bool bTemp = false;
-		if (UPyConversion::Nativize(InValue, bTemp))
-		{
-			InSelf->ValuePtr()->bFlipForRightToLeftFlowDirection = bTemp;
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("Image::bFlipForRightToLeftFlowDirection"), TEXT("value is not bool"));
-		return -1;
-	}
-
 };
 
 
 static PyGetSetDef FUPyWrapperImageGetSets[] = {
-	{ UPyCStrCast("Brush"), (getter)&FGetSets_Image::GetBrush, (setter)&FGetSets_Image::SetBrush, nullptr, nullptr },
 	{ UPyCStrCast("BrushDelegate"), (getter)&FGetSets_Image::GetBrushDelegate, (setter)&FGetSets_Image::SetBrushDelegate, nullptr, nullptr },
-	{ UPyCStrCast("ColorAndOpacity"), (getter)&FGetSets_Image::GetColorAndOpacity, (setter)&FGetSets_Image::SetColorAndOpacity, nullptr, nullptr },
 	{ UPyCStrCast("ColorAndOpacityDelegate"), (getter)&FGetSets_Image::GetColorAndOpacityDelegate, (setter)&FGetSets_Image::SetColorAndOpacityDelegate, nullptr, nullptr },
 	{ UPyCStrCast("OnMouseButtonDownEvent"), (getter)&FGetSets_Image::GetOnMouseButtonDownEvent, (setter)&FGetSets_Image::SetOnMouseButtonDownEvent, nullptr, nullptr },
-	{ UPyCStrCast("bFlipForRightToLeftFlowDirection"), (getter)&FGetSets_Image::GetbFlipForRightToLeftFlowDirection, (setter)&FGetSets_Image::SetbFlipForRightToLeftFlowDirection, nullptr, nullptr },
 	{ nullptr }
 };
 

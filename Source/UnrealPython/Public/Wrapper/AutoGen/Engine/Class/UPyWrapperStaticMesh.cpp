@@ -59,31 +59,6 @@ struct FGetSets_StaticMesh
 	}
 
 #endif
-#if WITH_EDITOR
-	static PyObject* GetAssetImportData(FUPyWrapperStaticMesh* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperStaticMesh::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::Pythonize(InSelf->ValuePtr()->AssetImportData);
-	}
-
-	static int SetAssetImportData(FUPyWrapperStaticMesh* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperStaticMesh::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->AssetImportData))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("StaticMesh::AssetImportData"), TEXT("value is not a compatible object"));
-		return -1;
-	}
-
-#endif
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_AssetUserData()
 	{
 		static bool bInitialized = false;
@@ -204,31 +179,6 @@ struct FGetSets_StaticMesh
 		return -1;
 	}
 
-#if WITH_EDITOR
-	static PyObject* GetEditorCameraPosition(FUPyWrapperStaticMesh* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperStaticMesh::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FAssetEditorOrbitCameraPosition>::Get(), (void*)&InSelf->ValuePtr()->EditorCameraPosition, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
-	}
-
-	static int SetEditorCameraPosition(FUPyWrapperStaticMesh* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperStaticMesh::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->EditorCameraPosition))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("StaticMesh::EditorCameraPosition"), TEXT("value is not a compatible struct"));
-		return -1;
-	}
-
-#endif
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_ElementToIgnoreForTexFactor()
 	{
 		static bool bInitialized = false;
@@ -263,29 +213,6 @@ struct FGetSets_StaticMesh
 			return -1;
 		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ElementToIgnoreForTexFactor(), "ElementToIgnoreForTexFactor");
-	}
-
-	static PyObject* GetExtendedBounds(FUPyWrapperStaticMesh* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperStaticMesh::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FBoxSphereBounds>::Get(), (void*)&InSelf->ValuePtr()->ExtendedBounds, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
-	}
-
-	static int SetExtendedBounds(FUPyWrapperStaticMesh* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperStaticMesh::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->ExtendedBounds))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("StaticMesh::ExtendedBounds"), TEXT("value is not a compatible struct"));
-		return -1;
 	}
 
 #if WITH_EDITOR
@@ -326,31 +253,6 @@ struct FGetSets_StaticMesh
 	}
 
 #endif
-#if WITH_EDITOR
-	static PyObject* GetImportVersion(FUPyWrapperStaticMesh* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperStaticMesh::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::Pythonize(InSelf->ValuePtr()->ImportVersion);
-	}
-
-	static int SetImportVersion(FUPyWrapperStaticMesh* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperStaticMesh::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->ImportVersion))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("StaticMesh::ImportVersion"), TEXT("value is not numeric"));
-		return -1;
-	}
-
-#endif
 	static PyObject* GetLODForCollision(FUPyWrapperStaticMesh* InSelf, void* InClosure)
 	{
 		if (!FUPyWrapperStaticMesh::ValidateInternalState(InSelf))
@@ -371,77 +273,6 @@ struct FGetSets_StaticMesh
 			return 0;
 		}
 		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("StaticMesh::LODForCollision"), TEXT("value is not numeric"));
-		return -1;
-	}
-
-#if WITH_EDITOR
-	static PyObject* GetLODGroup(FUPyWrapperStaticMesh* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperStaticMesh::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::Pythonize(InSelf->ValuePtr()->LODGroup);
-	}
-
-	static int SetLODGroup(FUPyWrapperStaticMesh* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperStaticMesh::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->LODGroup))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("StaticMesh::LODGroup"), TEXT("value is not a Name"));
-		return -1;
-	}
-
-#endif
-	static PyObject* GetLightMapCoordinateIndex(FUPyWrapperStaticMesh* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperStaticMesh::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::Pythonize(InSelf->ValuePtr()->LightMapCoordinateIndex);
-	}
-
-	static int SetLightMapCoordinateIndex(FUPyWrapperStaticMesh* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperStaticMesh::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->LightMapCoordinateIndex))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("StaticMesh::LightMapCoordinateIndex"), TEXT("value is not numeric"));
-		return -1;
-	}
-
-	static PyObject* GetLightMapResolution(FUPyWrapperStaticMesh* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperStaticMesh::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::Pythonize(InSelf->ValuePtr()->LightMapResolution);
-	}
-
-	static int SetLightMapResolution(FUPyWrapperStaticMesh* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperStaticMesh::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->LightMapResolution))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("StaticMesh::LightMapResolution"), TEXT("value is not numeric"));
 		return -1;
 	}
 
@@ -519,44 +350,6 @@ struct FGetSets_StaticMesh
 	}
 
 #endif
-#if WITH_EDITOR
-	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_MaterialRemapIndexPerImportVersion()
-	{
-		static bool bInitialized = false;
-		static UPyGenUtil::FGeneratedWrappedProperty Property;
-		if (!bInitialized)
-		{
-			if (const UClass* Class = UStaticMesh::StaticClass())
-			{
-				if (const FProperty* FoundProperty = Class->FindPropertyByName(TEXT("MaterialRemapIndexPerImportVersion")))
-				{
-					Property.SetProperty(FoundProperty);
-				}
-			}
-			bInitialized = true;
-		}
-		return Property;
-	}
-
-	static PyObject* GetMaterialRemapIndexPerImportVersion(FUPyWrapperStaticMesh* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperStaticMesh::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->MaterialRemapIndexPerImportVersion, CastField<FArrayProperty>(GetPropertyDef_MaterialRemapIndexPerImportVersion().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
-	}
-
-	static int SetMaterialRemapIndexPerImportVersion(FUPyWrapperStaticMesh* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperStaticMesh::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_MaterialRemapIndexPerImportVersion(), "MaterialRemapIndexPerImportVersion");
-	}
-
-#endif
 	static PyObject* GetMeshPaintTextureCoordinateIndex(FUPyWrapperStaticMesh* InSelf, void* InClosure)
 	{
 		if (!FUPyWrapperStaticMesh::ValidateInternalState(InSelf))
@@ -603,29 +396,6 @@ struct FGetSets_StaticMesh
 		return -1;
 	}
 
-	static PyObject* GetMinLOD(FUPyWrapperStaticMesh* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperStaticMesh::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FPerPlatformInt>::Get(), (void*)&InSelf->ValuePtr()->MinLOD, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
-	}
-
-	static int SetMinLOD(FUPyWrapperStaticMesh* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperStaticMesh::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->MinLOD))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("StaticMesh::MinLOD"), TEXT("value is not a compatible struct"));
-		return -1;
-	}
-
 	static PyObject* GetMinQualityLevelLOD(FUPyWrapperStaticMesh* InSelf, void* InClosure)
 	{
 		if (!FUPyWrapperStaticMesh::ValidateInternalState(InSelf))
@@ -649,31 +419,6 @@ struct FGetSets_StaticMesh
 		return -1;
 	}
 
-#if WITH_EDITOR
-	static PyObject* GetNaniteSettings(FUPyWrapperStaticMesh* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperStaticMesh::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FMeshNaniteSettings>::Get(), (void*)&InSelf->ValuePtr()->NaniteSettings, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
-	}
-
-	static int SetNaniteSettings(FUPyWrapperStaticMesh* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperStaticMesh::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->NaniteSettings))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("StaticMesh::NaniteSettings"), TEXT("value is not a compatible struct"));
-		return -1;
-	}
-
-#endif
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_NavCollision()
 	{
 		static bool bInitialized = false;
@@ -710,40 +455,6 @@ struct FGetSets_StaticMesh
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_NavCollision(), "NavCollision");
 	}
 
-	static PyObject* GetNegativeBoundsExtension(FUPyWrapperStaticMesh* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperStaticMesh::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FVector>::Get(), (void*)&InSelf->ValuePtr()->NegativeBoundsExtension, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
-	}
-
-#if WITH_EDITOR
-	static PyObject* GetNumStreamedLODs(FUPyWrapperStaticMesh* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperStaticMesh::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FPerPlatformInt>::Get(), (void*)&InSelf->ValuePtr()->NumStreamedLODs, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
-	}
-
-	static int SetNumStreamedLODs(FUPyWrapperStaticMesh* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperStaticMesh::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->NumStreamedLODs))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("StaticMesh::NumStreamedLODs"), TEXT("value is not a compatible struct"));
-		return -1;
-	}
-
-#endif
 #if WITH_EDITOR
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OriginalSectionInfoMap()
 	{
@@ -779,40 +490,6 @@ struct FGetSets_StaticMesh
 			return -1;
 		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OriginalSectionInfoMap(), "OriginalSectionInfoMap");
-	}
-
-#endif
-	static PyObject* GetPositiveBoundsExtension(FUPyWrapperStaticMesh* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperStaticMesh::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FVector>::Get(), (void*)&InSelf->ValuePtr()->PositiveBoundsExtension, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
-	}
-
-#if WITH_EDITOR
-	static PyObject* GetRayTracingProxySettings(FUPyWrapperStaticMesh* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperStaticMesh::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FMeshRayTracingProxySettings>::Get(), (void*)&InSelf->ValuePtr()->RayTracingProxySettings, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
-	}
-
-	static int SetRayTracingProxySettings(FUPyWrapperStaticMesh* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperStaticMesh::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->RayTracingProxySettings))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("StaticMesh::RayTracingProxySettings"), TEXT("value is not a compatible struct"));
-		return -1;
 	}
 
 #endif
@@ -987,31 +664,6 @@ struct FGetSets_StaticMesh
 		return -1;
 	}
 
-#if WITH_EDITOR
-	static PyObject* GetThumbnailInfo(FUPyWrapperStaticMesh* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperStaticMesh::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::Pythonize(InSelf->ValuePtr()->ThumbnailInfo);
-	}
-
-	static int SetThumbnailInfo(FUPyWrapperStaticMesh* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperStaticMesh::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->ThumbnailInfo))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("StaticMesh::ThumbnailInfo"), TEXT("value is not a compatible object"));
-		return -1;
-	}
-
-#endif
 	static PyObject* GetbAllowCPUAccess(FUPyWrapperStaticMesh* InSelf, void* InClosure)
 	{
 		if (!FUPyWrapperStaticMesh::ValidateInternalState(InSelf))
@@ -1037,60 +689,6 @@ struct FGetSets_StaticMesh
 		return -1;
 	}
 
-#if WITH_EDITOR
-	static PyObject* GetbAutoComputeLODScreenSize(FUPyWrapperStaticMesh* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperStaticMesh::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::Pythonize(InSelf->ValuePtr()->bAutoComputeLODScreenSize);
-	}
-
-	static int SetbAutoComputeLODScreenSize(FUPyWrapperStaticMesh* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperStaticMesh::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		bool bTemp = false;
-		if (UPyConversion::Nativize(InValue, bTemp))
-		{
-			InSelf->ValuePtr()->bAutoComputeLODScreenSize = bTemp;
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("StaticMesh::bAutoComputeLODScreenSize"), TEXT("value is not bool"));
-		return -1;
-	}
-
-#endif
-#if WITH_EDITOR
-	static PyObject* GetbCustomizedCollision(FUPyWrapperStaticMesh* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperStaticMesh::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::Pythonize(InSelf->ValuePtr()->bCustomizedCollision);
-	}
-
-	static int SetbCustomizedCollision(FUPyWrapperStaticMesh* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperStaticMesh::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		bool bTemp = false;
-		if (UPyConversion::Nativize(InValue, bTemp))
-		{
-			InSelf->ValuePtr()->bCustomizedCollision = bTemp;
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("StaticMesh::bCustomizedCollision"), TEXT("value is not bool"));
-		return -1;
-	}
-
-#endif
 	static PyObject* GetbDoFastBuild(FUPyWrapperStaticMesh* InSelf, void* InClosure)
 	{
 		if (!FUPyWrapperStaticMesh::ValidateInternalState(InSelf))
@@ -1311,57 +909,27 @@ static PyGetSetDef FUPyWrapperStaticMeshGetSets[] = {
 #if WITH_EDITOR
 	{ UPyCStrCast("AssemblyReferenceCache"), (getter)&FGetSets_StaticMesh::GetAssemblyReferenceCache, (setter)&FGetSets_StaticMesh::SetAssemblyReferenceCache, nullptr, nullptr },
 #endif
-#if WITH_EDITOR
-	{ UPyCStrCast("AssetImportData"), (getter)&FGetSets_StaticMesh::GetAssetImportData, (setter)&FGetSets_StaticMesh::SetAssetImportData, nullptr, nullptr },
-#endif
 	{ UPyCStrCast("AssetUserData"), (getter)&FGetSets_StaticMesh::GetAssetUserData, (setter)&FGetSets_StaticMesh::SetAssetUserData, nullptr, nullptr },
 	{ UPyCStrCast("BodySetup"), (getter)&FGetSets_StaticMesh::GetBodySetup, (setter)&FGetSets_StaticMesh::SetBodySetup, nullptr, nullptr },
 #if WITH_EDITOR
 	{ UPyCStrCast("ComplexCollisionMesh"), (getter)&FGetSets_StaticMesh::GetComplexCollisionMesh, (setter)&FGetSets_StaticMesh::SetComplexCollisionMesh, nullptr, nullptr },
 #endif
 	{ UPyCStrCast("DistanceFieldSelfShadowBias"), (getter)&FGetSets_StaticMesh::GetDistanceFieldSelfShadowBias, (setter)&FGetSets_StaticMesh::SetDistanceFieldSelfShadowBias, nullptr, nullptr },
-#if WITH_EDITOR
-	{ UPyCStrCast("EditorCameraPosition"), (getter)&FGetSets_StaticMesh::GetEditorCameraPosition, (setter)&FGetSets_StaticMesh::SetEditorCameraPosition, nullptr, nullptr },
-#endif
 	{ UPyCStrCast("ElementToIgnoreForTexFactor"), (getter)&FGetSets_StaticMesh::GetElementToIgnoreForTexFactor, (setter)&FGetSets_StaticMesh::SetElementToIgnoreForTexFactor, nullptr, nullptr },
-	{ UPyCStrCast("ExtendedBounds"), (getter)&FGetSets_StaticMesh::GetExtendedBounds, (setter)&FGetSets_StaticMesh::SetExtendedBounds, nullptr, nullptr },
 #if WITH_EDITOR
 	{ UPyCStrCast("HiResSourceModel"), (getter)&FGetSets_StaticMesh::GetHiResSourceModel, (setter)&FGetSets_StaticMesh::SetHiResSourceModel, nullptr, nullptr },
 #endif
-#if WITH_EDITOR
-	{ UPyCStrCast("ImportVersion"), (getter)&FGetSets_StaticMesh::GetImportVersion, (setter)&FGetSets_StaticMesh::SetImportVersion, nullptr, nullptr },
-#endif
 	{ UPyCStrCast("LODForCollision"), (getter)&FGetSets_StaticMesh::GetLODForCollision, (setter)&FGetSets_StaticMesh::SetLODForCollision, nullptr, nullptr },
-#if WITH_EDITOR
-	{ UPyCStrCast("LODGroup"), (getter)&FGetSets_StaticMesh::GetLODGroup, (setter)&FGetSets_StaticMesh::SetLODGroup, nullptr, nullptr },
-#endif
-	{ UPyCStrCast("LightMapCoordinateIndex"), (getter)&FGetSets_StaticMesh::GetLightMapCoordinateIndex, (setter)&FGetSets_StaticMesh::SetLightMapCoordinateIndex, nullptr, nullptr },
-	{ UPyCStrCast("LightMapResolution"), (getter)&FGetSets_StaticMesh::GetLightMapResolution, (setter)&FGetSets_StaticMesh::SetLightMapResolution, nullptr, nullptr },
 	{ UPyCStrCast("LightmapUVDensity"), (getter)&FGetSets_StaticMesh::GetLightmapUVDensity, (setter)&FGetSets_StaticMesh::SetLightmapUVDensity, nullptr, nullptr },
 #if WITH_EDITOR
 	{ UPyCStrCast("LightmapUVVersion"), (getter)&FGetSets_StaticMesh::GetLightmapUVVersion, (setter)&FGetSets_StaticMesh::SetLightmapUVVersion, nullptr, nullptr },
 #endif
-#if WITH_EDITOR
-	{ UPyCStrCast("MaterialRemapIndexPerImportVersion"), (getter)&FGetSets_StaticMesh::GetMaterialRemapIndexPerImportVersion, (setter)&FGetSets_StaticMesh::SetMaterialRemapIndexPerImportVersion, nullptr, nullptr },
-#endif
 	{ UPyCStrCast("MeshPaintTextureCoordinateIndex"), (getter)&FGetSets_StaticMesh::GetMeshPaintTextureCoordinateIndex, (setter)&FGetSets_StaticMesh::SetMeshPaintTextureCoordinateIndex, nullptr, nullptr },
 	{ UPyCStrCast("MeshPaintTextureResolution"), (getter)&FGetSets_StaticMesh::GetMeshPaintTextureResolution, (setter)&FGetSets_StaticMesh::SetMeshPaintTextureResolution, nullptr, nullptr },
-	{ UPyCStrCast("MinLOD"), (getter)&FGetSets_StaticMesh::GetMinLOD, (setter)&FGetSets_StaticMesh::SetMinLOD, nullptr, nullptr },
 	{ UPyCStrCast("MinQualityLevelLOD"), (getter)&FGetSets_StaticMesh::GetMinQualityLevelLOD, (setter)&FGetSets_StaticMesh::SetMinQualityLevelLOD, nullptr, nullptr },
-#if WITH_EDITOR
-	{ UPyCStrCast("NaniteSettings"), (getter)&FGetSets_StaticMesh::GetNaniteSettings, (setter)&FGetSets_StaticMesh::SetNaniteSettings, nullptr, nullptr },
-#endif
 	{ UPyCStrCast("NavCollision"), (getter)&FGetSets_StaticMesh::GetNavCollision, (setter)&FGetSets_StaticMesh::SetNavCollision, nullptr, nullptr },
-	{ UPyCStrCast("NegativeBoundsExtension"), (getter)&FGetSets_StaticMesh::GetNegativeBoundsExtension, nullptr, nullptr, nullptr },
-#if WITH_EDITOR
-	{ UPyCStrCast("NumStreamedLODs"), (getter)&FGetSets_StaticMesh::GetNumStreamedLODs, (setter)&FGetSets_StaticMesh::SetNumStreamedLODs, nullptr, nullptr },
-#endif
 #if WITH_EDITOR
 	{ UPyCStrCast("OriginalSectionInfoMap"), (getter)&FGetSets_StaticMesh::GetOriginalSectionInfoMap, (setter)&FGetSets_StaticMesh::SetOriginalSectionInfoMap, nullptr, nullptr },
-#endif
-	{ UPyCStrCast("PositiveBoundsExtension"), (getter)&FGetSets_StaticMesh::GetPositiveBoundsExtension, nullptr, nullptr, nullptr },
-#if WITH_EDITOR
-	{ UPyCStrCast("RayTracingProxySettings"), (getter)&FGetSets_StaticMesh::GetRayTracingProxySettings, (setter)&FGetSets_StaticMesh::SetRayTracingProxySettings, nullptr, nullptr },
 #endif
 #if WITH_EDITOR
 	{ UPyCStrCast("SectionInfoMap"), (getter)&FGetSets_StaticMesh::GetSectionInfoMap, (setter)&FGetSets_StaticMesh::SetSectionInfoMap, nullptr, nullptr },
@@ -1372,16 +940,7 @@ static PyGetSetDef FUPyWrapperStaticMeshGetSets[] = {
 #endif
 	{ UPyCStrCast("StaticMaterials"), (getter)&FGetSets_StaticMesh::GetStaticMaterials, (setter)&FGetSets_StaticMesh::SetStaticMaterials, nullptr, nullptr },
 	{ UPyCStrCast("StaticMeshPaintSupport"), (getter)&FGetSets_StaticMesh::GetStaticMeshPaintSupport, (setter)&FGetSets_StaticMesh::SetStaticMeshPaintSupport, nullptr, nullptr },
-#if WITH_EDITOR
-	{ UPyCStrCast("ThumbnailInfo"), (getter)&FGetSets_StaticMesh::GetThumbnailInfo, (setter)&FGetSets_StaticMesh::SetThumbnailInfo, nullptr, nullptr },
-#endif
 	{ UPyCStrCast("bAllowCPUAccess"), (getter)&FGetSets_StaticMesh::GetbAllowCPUAccess, (setter)&FGetSets_StaticMesh::SetbAllowCPUAccess, nullptr, nullptr },
-#if WITH_EDITOR
-	{ UPyCStrCast("bAutoComputeLODScreenSize"), (getter)&FGetSets_StaticMesh::GetbAutoComputeLODScreenSize, (setter)&FGetSets_StaticMesh::SetbAutoComputeLODScreenSize, nullptr, nullptr },
-#endif
-#if WITH_EDITOR
-	{ UPyCStrCast("bCustomizedCollision"), (getter)&FGetSets_StaticMesh::GetbCustomizedCollision, (setter)&FGetSets_StaticMesh::SetbCustomizedCollision, nullptr, nullptr },
-#endif
 	{ UPyCStrCast("bDoFastBuild"), (getter)&FGetSets_StaticMesh::GetbDoFastBuild, (setter)&FGetSets_StaticMesh::SetbDoFastBuild, nullptr, nullptr },
 	{ UPyCStrCast("bGenerateMeshDistanceField"), (getter)&FGetSets_StaticMesh::GetbGenerateMeshDistanceField, (setter)&FGetSets_StaticMesh::SetbGenerateMeshDistanceField, nullptr, nullptr },
 	{ UPyCStrCast("bHasNavigationData"), (getter)&FGetSets_StaticMesh::GetbHasNavigationData, (setter)&FGetSets_StaticMesh::SetbHasNavigationData, nullptr, nullptr },

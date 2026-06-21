@@ -499,29 +499,6 @@ struct FGetSets_CharacterMovementComponent
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_CharacterOwner(), "CharacterOwner");
 	}
 
-	static PyObject* GetCrouchedHalfHeight(FUPyWrapperCharacterMovementComponent* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperCharacterMovementComponent::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::Pythonize(InSelf->ValuePtr()->CrouchedHalfHeight);
-	}
-
-	static int SetCrouchedHalfHeight(FUPyWrapperCharacterMovementComponent* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperCharacterMovementComponent::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->CrouchedHalfHeight))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("CharacterMovementComponent::CrouchedHalfHeight"), TEXT("value is not numeric"));
-		return -1;
-	}
-
 	static PyObject* GetCurrentFloor(FUPyWrapperCharacterMovementComponent* InSelf, void* InClosure)
 	{
 		if (!FUPyWrapperCharacterMovementComponent::ValidateInternalState(InSelf))
@@ -4060,7 +4037,6 @@ static PyGetSetDef FUPyWrapperCharacterMovementComponentGetSets[] = {
 	{ UPyCStrCast("BrakingSubStepTime"), (getter)&FGetSets_CharacterMovementComponent::GetBrakingSubStepTime, (setter)&FGetSets_CharacterMovementComponent::SetBrakingSubStepTime, nullptr, nullptr },
 	{ UPyCStrCast("Buoyancy"), (getter)&FGetSets_CharacterMovementComponent::GetBuoyancy, (setter)&FGetSets_CharacterMovementComponent::SetBuoyancy, nullptr, nullptr },
 	{ UPyCStrCast("CharacterOwner"), (getter)&FGetSets_CharacterMovementComponent::GetCharacterOwner, (setter)&FGetSets_CharacterMovementComponent::SetCharacterOwner, nullptr, nullptr },
-	{ UPyCStrCast("CrouchedHalfHeight"), (getter)&FGetSets_CharacterMovementComponent::GetCrouchedHalfHeight, (setter)&FGetSets_CharacterMovementComponent::SetCrouchedHalfHeight, nullptr, nullptr },
 	{ UPyCStrCast("CurrentFloor"), (getter)&FGetSets_CharacterMovementComponent::GetCurrentFloor, (setter)&FGetSets_CharacterMovementComponent::SetCurrentFloor, nullptr, nullptr },
 	{ UPyCStrCast("CurrentRootMotion"), (getter)&FGetSets_CharacterMovementComponent::GetCurrentRootMotion, (setter)&FGetSets_CharacterMovementComponent::SetCurrentRootMotion, nullptr, nullptr },
 	{ UPyCStrCast("CustomMovementMode"), (getter)&FGetSets_CharacterMovementComponent::GetCustomMovementMode, (setter)&FGetSets_CharacterMovementComponent::SetCustomMovementMode, nullptr, nullptr },

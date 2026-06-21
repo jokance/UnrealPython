@@ -16,31 +16,6 @@ PyTypeObject UPyWrapperSliderType = {
 
 struct FGetSets_Slider
 {
-	static PyObject* GetIndentHandle(FUPyWrapperSlider* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperSlider::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::Pythonize(InSelf->ValuePtr()->IndentHandle);
-	}
-
-	static int SetIndentHandle(FUPyWrapperSlider* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperSlider::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		bool bTemp = false;
-		if (UPyConversion::Nativize(InValue, bTemp))
-		{
-			InSelf->ValuePtr()->IndentHandle = bTemp;
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("Slider::IndentHandle"), TEXT("value is not bool"));
-		return -1;
-	}
-
 	static PyObject* GetIsFocusable(FUPyWrapperSlider* InSelf, void* InClosure)
 	{
 		if (!FUPyWrapperSlider::ValidateInternalState(InSelf))
@@ -63,77 +38,6 @@ struct FGetSets_Slider
 			return 0;
 		}
 		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("Slider::IsFocusable"), TEXT("value is not bool"));
-		return -1;
-	}
-
-	static PyObject* GetLocked(FUPyWrapperSlider* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperSlider::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::Pythonize(InSelf->ValuePtr()->Locked);
-	}
-
-	static int SetLocked(FUPyWrapperSlider* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperSlider::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		bool bTemp = false;
-		if (UPyConversion::Nativize(InValue, bTemp))
-		{
-			InSelf->ValuePtr()->Locked = bTemp;
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("Slider::Locked"), TEXT("value is not bool"));
-		return -1;
-	}
-
-	static PyObject* GetMaxValue(FUPyWrapperSlider* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperSlider::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::Pythonize(InSelf->ValuePtr()->MaxValue);
-	}
-
-	static int SetMaxValue(FUPyWrapperSlider* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperSlider::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->MaxValue))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("Slider::MaxValue"), TEXT("value is not numeric"));
-		return -1;
-	}
-
-	static PyObject* GetMinValue(FUPyWrapperSlider* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperSlider::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::Pythonize(InSelf->ValuePtr()->MinValue);
-	}
-
-	static int SetMinValue(FUPyWrapperSlider* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperSlider::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->MinValue))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("Slider::MinValue"), TEXT("value is not numeric"));
 		return -1;
 	}
 
@@ -342,29 +246,6 @@ struct FGetSets_Slider
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnValueChanged(), "OnValueChanged");
 	}
 
-	static PyObject* GetOrientation(FUPyWrapperSlider* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperSlider::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->Orientation, StaticEnum<EOrientation>());
-	}
-
-	static int SetOrientation(FUPyWrapperSlider* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperSlider::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<EOrientation>(), InSelf->ValuePtr()->Orientation))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("Slider::Orientation"), TEXT("value is not numeric"));
-		return -1;
-	}
-
 	static PyObject* GetRequiresControllerLock(FUPyWrapperSlider* InSelf, void* InClosure)
 	{
 		if (!FUPyWrapperSlider::ValidateInternalState(InSelf))
@@ -387,98 +268,6 @@ struct FGetSets_Slider
 			return 0;
 		}
 		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("Slider::RequiresControllerLock"), TEXT("value is not bool"));
-		return -1;
-	}
-
-	static PyObject* GetSliderBarColor(FUPyWrapperSlider* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperSlider::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FLinearColor>::Get(), (void*)&InSelf->ValuePtr()->SliderBarColor, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
-	}
-
-	static int SetSliderBarColor(FUPyWrapperSlider* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperSlider::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->SliderBarColor))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("Slider::SliderBarColor"), TEXT("value is not a compatible struct"));
-		return -1;
-	}
-
-	static PyObject* GetSliderHandleColor(FUPyWrapperSlider* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperSlider::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FLinearColor>::Get(), (void*)&InSelf->ValuePtr()->SliderHandleColor, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
-	}
-
-	static int SetSliderHandleColor(FUPyWrapperSlider* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperSlider::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->SliderHandleColor))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("Slider::SliderHandleColor"), TEXT("value is not a compatible struct"));
-		return -1;
-	}
-
-	static PyObject* GetStepSize(FUPyWrapperSlider* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperSlider::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::Pythonize(InSelf->ValuePtr()->StepSize);
-	}
-
-	static int SetStepSize(FUPyWrapperSlider* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperSlider::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->StepSize))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("Slider::StepSize"), TEXT("value is not numeric"));
-		return -1;
-	}
-
-	static PyObject* GetValue(FUPyWrapperSlider* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperSlider::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::Pythonize(InSelf->ValuePtr()->Value);
-	}
-
-	static int SetValue(FUPyWrapperSlider* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperSlider::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->Value))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("Slider::Value"), TEXT("value is not numeric"));
 		return -1;
 	}
 
@@ -518,29 +307,6 @@ struct FGetSets_Slider
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ValueDelegate(), "ValueDelegate");
 	}
 
-	static PyObject* GetWidgetStyle(FUPyWrapperSlider* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperSlider::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FSliderStyle>::Get(), (void*)&InSelf->ValuePtr()->WidgetStyle, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
-	}
-
-	static int SetWidgetStyle(FUPyWrapperSlider* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperSlider::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->WidgetStyle))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("Slider::WidgetStyle"), TEXT("value is not a compatible struct"));
-		return -1;
-	}
-
 	static PyObject* GetbPreventThrottling(FUPyWrapperSlider* InSelf, void* InClosure)
 	{
 		if (!FUPyWrapperSlider::ValidateInternalState(InSelf))
@@ -570,25 +336,15 @@ struct FGetSets_Slider
 
 
 static PyGetSetDef FUPyWrapperSliderGetSets[] = {
-	{ UPyCStrCast("IndentHandle"), (getter)&FGetSets_Slider::GetIndentHandle, (setter)&FGetSets_Slider::SetIndentHandle, nullptr, nullptr },
 	{ UPyCStrCast("IsFocusable"), (getter)&FGetSets_Slider::GetIsFocusable, (setter)&FGetSets_Slider::SetIsFocusable, nullptr, nullptr },
-	{ UPyCStrCast("Locked"), (getter)&FGetSets_Slider::GetLocked, (setter)&FGetSets_Slider::SetLocked, nullptr, nullptr },
-	{ UPyCStrCast("MaxValue"), (getter)&FGetSets_Slider::GetMaxValue, (setter)&FGetSets_Slider::SetMaxValue, nullptr, nullptr },
-	{ UPyCStrCast("MinValue"), (getter)&FGetSets_Slider::GetMinValue, (setter)&FGetSets_Slider::SetMinValue, nullptr, nullptr },
 	{ UPyCStrCast("MouseUsesStep"), (getter)&FGetSets_Slider::GetMouseUsesStep, (setter)&FGetSets_Slider::SetMouseUsesStep, nullptr, nullptr },
 	{ UPyCStrCast("OnControllerCaptureBegin"), (getter)&FGetSets_Slider::GetOnControllerCaptureBegin, (setter)&FGetSets_Slider::SetOnControllerCaptureBegin, nullptr, nullptr },
 	{ UPyCStrCast("OnControllerCaptureEnd"), (getter)&FGetSets_Slider::GetOnControllerCaptureEnd, (setter)&FGetSets_Slider::SetOnControllerCaptureEnd, nullptr, nullptr },
 	{ UPyCStrCast("OnMouseCaptureBegin"), (getter)&FGetSets_Slider::GetOnMouseCaptureBegin, (setter)&FGetSets_Slider::SetOnMouseCaptureBegin, nullptr, nullptr },
 	{ UPyCStrCast("OnMouseCaptureEnd"), (getter)&FGetSets_Slider::GetOnMouseCaptureEnd, (setter)&FGetSets_Slider::SetOnMouseCaptureEnd, nullptr, nullptr },
 	{ UPyCStrCast("OnValueChanged"), (getter)&FGetSets_Slider::GetOnValueChanged, (setter)&FGetSets_Slider::SetOnValueChanged, nullptr, nullptr },
-	{ UPyCStrCast("Orientation"), (getter)&FGetSets_Slider::GetOrientation, (setter)&FGetSets_Slider::SetOrientation, nullptr, nullptr },
 	{ UPyCStrCast("RequiresControllerLock"), (getter)&FGetSets_Slider::GetRequiresControllerLock, (setter)&FGetSets_Slider::SetRequiresControllerLock, nullptr, nullptr },
-	{ UPyCStrCast("SliderBarColor"), (getter)&FGetSets_Slider::GetSliderBarColor, (setter)&FGetSets_Slider::SetSliderBarColor, nullptr, nullptr },
-	{ UPyCStrCast("SliderHandleColor"), (getter)&FGetSets_Slider::GetSliderHandleColor, (setter)&FGetSets_Slider::SetSliderHandleColor, nullptr, nullptr },
-	{ UPyCStrCast("StepSize"), (getter)&FGetSets_Slider::GetStepSize, (setter)&FGetSets_Slider::SetStepSize, nullptr, nullptr },
-	{ UPyCStrCast("Value"), (getter)&FGetSets_Slider::GetValue, (setter)&FGetSets_Slider::SetValue, nullptr, nullptr },
 	{ UPyCStrCast("ValueDelegate"), (getter)&FGetSets_Slider::GetValueDelegate, (setter)&FGetSets_Slider::SetValueDelegate, nullptr, nullptr },
-	{ UPyCStrCast("WidgetStyle"), (getter)&FGetSets_Slider::GetWidgetStyle, (setter)&FGetSets_Slider::SetWidgetStyle, nullptr, nullptr },
 	{ UPyCStrCast("bPreventThrottling"), (getter)&FGetSets_Slider::GetbPreventThrottling, (setter)&FGetSets_Slider::SetbPreventThrottling, nullptr, nullptr },
 	{ nullptr }
 };

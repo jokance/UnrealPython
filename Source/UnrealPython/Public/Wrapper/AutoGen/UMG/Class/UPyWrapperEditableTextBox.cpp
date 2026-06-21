@@ -43,54 +43,6 @@ struct FGetSets_EditableTextBox
 		return -1;
 	}
 
-	static PyObject* GetClearKeyboardFocusOnCommit(FUPyWrapperEditableTextBox* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperEditableTextBox::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::Pythonize(InSelf->ValuePtr()->ClearKeyboardFocusOnCommit);
-	}
-
-	static int SetClearKeyboardFocusOnCommit(FUPyWrapperEditableTextBox* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperEditableTextBox::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		bool bTemp = false;
-		if (UPyConversion::Nativize(InValue, bTemp))
-		{
-			InSelf->ValuePtr()->ClearKeyboardFocusOnCommit = bTemp;
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("EditableTextBox::ClearKeyboardFocusOnCommit"), TEXT("value is not bool"));
-		return -1;
-	}
-
-	static PyObject* GetHintText(FUPyWrapperEditableTextBox* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperEditableTextBox::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::Pythonize(InSelf->ValuePtr()->HintText);
-	}
-
-	static int SetHintText(FUPyWrapperEditableTextBox* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperEditableTextBox::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->HintText))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("EditableTextBox::HintText"), TEXT("value is not Text"));
-		return -1;
-	}
-
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_HintTextDelegate()
 	{
 		static bool bInitialized = false;
@@ -127,104 +79,6 @@ struct FGetSets_EditableTextBox
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_HintTextDelegate(), "HintTextDelegate");
 	}
 
-	static PyObject* GetIsCaretMovedWhenGainFocus(FUPyWrapperEditableTextBox* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperEditableTextBox::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::Pythonize(InSelf->ValuePtr()->IsCaretMovedWhenGainFocus);
-	}
-
-	static int SetIsCaretMovedWhenGainFocus(FUPyWrapperEditableTextBox* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperEditableTextBox::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		bool bTemp = false;
-		if (UPyConversion::Nativize(InValue, bTemp))
-		{
-			InSelf->ValuePtr()->IsCaretMovedWhenGainFocus = bTemp;
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("EditableTextBox::IsCaretMovedWhenGainFocus"), TEXT("value is not bool"));
-		return -1;
-	}
-
-	static PyObject* GetIsPassword(FUPyWrapperEditableTextBox* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperEditableTextBox::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::Pythonize(InSelf->ValuePtr()->IsPassword);
-	}
-
-	static int SetIsPassword(FUPyWrapperEditableTextBox* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperEditableTextBox::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		bool bTemp = false;
-		if (UPyConversion::Nativize(InValue, bTemp))
-		{
-			InSelf->ValuePtr()->IsPassword = bTemp;
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("EditableTextBox::IsPassword"), TEXT("value is not bool"));
-		return -1;
-	}
-
-	static PyObject* GetIsReadOnly(FUPyWrapperEditableTextBox* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperEditableTextBox::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::Pythonize(InSelf->ValuePtr()->IsReadOnly);
-	}
-
-	static int SetIsReadOnly(FUPyWrapperEditableTextBox* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperEditableTextBox::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		bool bTemp = false;
-		if (UPyConversion::Nativize(InValue, bTemp))
-		{
-			InSelf->ValuePtr()->IsReadOnly = bTemp;
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("EditableTextBox::IsReadOnly"), TEXT("value is not bool"));
-		return -1;
-	}
-
-	static PyObject* GetJustification(FUPyWrapperEditableTextBox* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperEditableTextBox::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->Justification, StaticEnum<ETextJustify::Type>());
-	}
-
-	static int SetJustification(FUPyWrapperEditableTextBox* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperEditableTextBox::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<ETextJustify::Type>(), InSelf->ValuePtr()->Justification))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("EditableTextBox::Justification"), TEXT("value is not numeric"));
-		return -1;
-	}
-
 	static PyObject* GetKeyboardType(FUPyWrapperEditableTextBox* InSelf, void* InClosure)
 	{
 		if (!FUPyWrapperEditableTextBox::ValidateInternalState(InSelf))
@@ -245,29 +99,6 @@ struct FGetSets_EditableTextBox
 			return 0;
 		}
 		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("EditableTextBox::KeyboardType"), TEXT("value is not numeric"));
-		return -1;
-	}
-
-	static PyObject* GetMinimumDesiredWidth(FUPyWrapperEditableTextBox* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperEditableTextBox::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::Pythonize(InSelf->ValuePtr()->MinimumDesiredWidth);
-	}
-
-	static int SetMinimumDesiredWidth(FUPyWrapperEditableTextBox* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperEditableTextBox::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->MinimumDesiredWidth))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("EditableTextBox::MinimumDesiredWidth"), TEXT("value is not numeric"));
 		return -1;
 	}
 
@@ -343,104 +174,6 @@ struct FGetSets_EditableTextBox
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnTextCommitted(), "OnTextCommitted");
 	}
 
-	static PyObject* GetOverflowPolicy(FUPyWrapperEditableTextBox* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperEditableTextBox::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->OverflowPolicy, StaticEnum<ETextOverflowPolicy>());
-	}
-
-	static int SetOverflowPolicy(FUPyWrapperEditableTextBox* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperEditableTextBox::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<ETextOverflowPolicy>(), InSelf->ValuePtr()->OverflowPolicy))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("EditableTextBox::OverflowPolicy"), TEXT("value is not compatible with this property"));
-		return -1;
-	}
-
-	static PyObject* GetRevertTextOnEscape(FUPyWrapperEditableTextBox* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperEditableTextBox::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::Pythonize(InSelf->ValuePtr()->RevertTextOnEscape);
-	}
-
-	static int SetRevertTextOnEscape(FUPyWrapperEditableTextBox* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperEditableTextBox::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		bool bTemp = false;
-		if (UPyConversion::Nativize(InValue, bTemp))
-		{
-			InSelf->ValuePtr()->RevertTextOnEscape = bTemp;
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("EditableTextBox::RevertTextOnEscape"), TEXT("value is not bool"));
-		return -1;
-	}
-
-	static PyObject* GetSelectAllTextOnCommit(FUPyWrapperEditableTextBox* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperEditableTextBox::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::Pythonize(InSelf->ValuePtr()->SelectAllTextOnCommit);
-	}
-
-	static int SetSelectAllTextOnCommit(FUPyWrapperEditableTextBox* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperEditableTextBox::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		bool bTemp = false;
-		if (UPyConversion::Nativize(InValue, bTemp))
-		{
-			InSelf->ValuePtr()->SelectAllTextOnCommit = bTemp;
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("EditableTextBox::SelectAllTextOnCommit"), TEXT("value is not bool"));
-		return -1;
-	}
-
-	static PyObject* GetSelectAllTextWhenFocused(FUPyWrapperEditableTextBox* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperEditableTextBox::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::Pythonize(InSelf->ValuePtr()->SelectAllTextWhenFocused);
-	}
-
-	static int SetSelectAllTextWhenFocused(FUPyWrapperEditableTextBox* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperEditableTextBox::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		bool bTemp = false;
-		if (UPyConversion::Nativize(InValue, bTemp))
-		{
-			InSelf->ValuePtr()->SelectAllTextWhenFocused = bTemp;
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("EditableTextBox::SelectAllTextWhenFocused"), TEXT("value is not bool"));
-		return -1;
-	}
-
 	static PyObject* GetShapedTextOptions(FUPyWrapperEditableTextBox* InSelf, void* InClosure)
 	{
 		if (!FUPyWrapperEditableTextBox::ValidateInternalState(InSelf))
@@ -461,29 +194,6 @@ struct FGetSets_EditableTextBox
 			return 0;
 		}
 		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("EditableTextBox::ShapedTextOptions"), TEXT("value is not a compatible struct"));
-		return -1;
-	}
-
-	static PyObject* GetText(FUPyWrapperEditableTextBox* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperEditableTextBox::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::Pythonize(InSelf->ValuePtr()->Text);
-	}
-
-	static int SetText(FUPyWrapperEditableTextBox* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperEditableTextBox::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->Text))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("EditableTextBox::Text"), TEXT("value is not Text"));
 		return -1;
 	}
 
@@ -658,23 +368,11 @@ struct FGetSets_EditableTextBox
 
 static PyGetSetDef FUPyWrapperEditableTextBoxGetSets[] = {
 	{ UPyCStrCast("AllowContextMenu"), (getter)&FGetSets_EditableTextBox::GetAllowContextMenu, (setter)&FGetSets_EditableTextBox::SetAllowContextMenu, nullptr, nullptr },
-	{ UPyCStrCast("ClearKeyboardFocusOnCommit"), (getter)&FGetSets_EditableTextBox::GetClearKeyboardFocusOnCommit, (setter)&FGetSets_EditableTextBox::SetClearKeyboardFocusOnCommit, nullptr, nullptr },
-	{ UPyCStrCast("HintText"), (getter)&FGetSets_EditableTextBox::GetHintText, (setter)&FGetSets_EditableTextBox::SetHintText, nullptr, nullptr },
 	{ UPyCStrCast("HintTextDelegate"), (getter)&FGetSets_EditableTextBox::GetHintTextDelegate, (setter)&FGetSets_EditableTextBox::SetHintTextDelegate, nullptr, nullptr },
-	{ UPyCStrCast("IsCaretMovedWhenGainFocus"), (getter)&FGetSets_EditableTextBox::GetIsCaretMovedWhenGainFocus, (setter)&FGetSets_EditableTextBox::SetIsCaretMovedWhenGainFocus, nullptr, nullptr },
-	{ UPyCStrCast("IsPassword"), (getter)&FGetSets_EditableTextBox::GetIsPassword, (setter)&FGetSets_EditableTextBox::SetIsPassword, nullptr, nullptr },
-	{ UPyCStrCast("IsReadOnly"), (getter)&FGetSets_EditableTextBox::GetIsReadOnly, (setter)&FGetSets_EditableTextBox::SetIsReadOnly, nullptr, nullptr },
-	{ UPyCStrCast("Justification"), (getter)&FGetSets_EditableTextBox::GetJustification, (setter)&FGetSets_EditableTextBox::SetJustification, nullptr, nullptr },
 	{ UPyCStrCast("KeyboardType"), (getter)&FGetSets_EditableTextBox::GetKeyboardType, (setter)&FGetSets_EditableTextBox::SetKeyboardType, nullptr, nullptr },
-	{ UPyCStrCast("MinimumDesiredWidth"), (getter)&FGetSets_EditableTextBox::GetMinimumDesiredWidth, (setter)&FGetSets_EditableTextBox::SetMinimumDesiredWidth, nullptr, nullptr },
 	{ UPyCStrCast("OnTextChanged"), (getter)&FGetSets_EditableTextBox::GetOnTextChanged, (setter)&FGetSets_EditableTextBox::SetOnTextChanged, nullptr, nullptr },
 	{ UPyCStrCast("OnTextCommitted"), (getter)&FGetSets_EditableTextBox::GetOnTextCommitted, (setter)&FGetSets_EditableTextBox::SetOnTextCommitted, nullptr, nullptr },
-	{ UPyCStrCast("OverflowPolicy"), (getter)&FGetSets_EditableTextBox::GetOverflowPolicy, (setter)&FGetSets_EditableTextBox::SetOverflowPolicy, nullptr, nullptr },
-	{ UPyCStrCast("RevertTextOnEscape"), (getter)&FGetSets_EditableTextBox::GetRevertTextOnEscape, (setter)&FGetSets_EditableTextBox::SetRevertTextOnEscape, nullptr, nullptr },
-	{ UPyCStrCast("SelectAllTextOnCommit"), (getter)&FGetSets_EditableTextBox::GetSelectAllTextOnCommit, (setter)&FGetSets_EditableTextBox::SetSelectAllTextOnCommit, nullptr, nullptr },
-	{ UPyCStrCast("SelectAllTextWhenFocused"), (getter)&FGetSets_EditableTextBox::GetSelectAllTextWhenFocused, (setter)&FGetSets_EditableTextBox::SetSelectAllTextWhenFocused, nullptr, nullptr },
 	{ UPyCStrCast("ShapedTextOptions"), (getter)&FGetSets_EditableTextBox::GetShapedTextOptions, (setter)&FGetSets_EditableTextBox::SetShapedTextOptions, nullptr, nullptr },
-	{ UPyCStrCast("Text"), (getter)&FGetSets_EditableTextBox::GetText, (setter)&FGetSets_EditableTextBox::SetText, nullptr, nullptr },
 	{ UPyCStrCast("TextDelegate"), (getter)&FGetSets_EditableTextBox::GetTextDelegate, (setter)&FGetSets_EditableTextBox::SetTextDelegate, nullptr, nullptr },
 	{ UPyCStrCast("VirtualKeyboardDismissAction"), (getter)&FGetSets_EditableTextBox::GetVirtualKeyboardDismissAction, (setter)&FGetSets_EditableTextBox::SetVirtualKeyboardDismissAction, nullptr, nullptr },
 	{ UPyCStrCast("VirtualKeyboardOptions"), (getter)&FGetSets_EditableTextBox::GetVirtualKeyboardOptions, (setter)&FGetSets_EditableTextBox::SetVirtualKeyboardOptions, nullptr, nullptr },

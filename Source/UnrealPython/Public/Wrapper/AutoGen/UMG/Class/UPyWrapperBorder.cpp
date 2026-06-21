@@ -82,29 +82,6 @@ struct FGetSets_Border
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_BackgroundDelegate(), "BackgroundDelegate");
 	}
 
-	static PyObject* GetBrushColor(FUPyWrapperBorder* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperBorder::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FLinearColor>::Get(), (void*)&InSelf->ValuePtr()->BrushColor, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
-	}
-
-	static int SetBrushColor(FUPyWrapperBorder* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperBorder::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->BrushColor))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("Border::BrushColor"), TEXT("value is not a compatible struct"));
-		return -1;
-	}
-
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_BrushColorDelegate()
 	{
 		static bool bInitialized = false;
@@ -141,29 +118,6 @@ struct FGetSets_Border
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_BrushColorDelegate(), "BrushColorDelegate");
 	}
 
-	static PyObject* GetContentColorAndOpacity(FUPyWrapperBorder* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperBorder::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FLinearColor>::Get(), (void*)&InSelf->ValuePtr()->ContentColorAndOpacity, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
-	}
-
-	static int SetContentColorAndOpacity(FUPyWrapperBorder* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperBorder::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->ContentColorAndOpacity))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("Border::ContentColorAndOpacity"), TEXT("value is not a compatible struct"));
-		return -1;
-	}
-
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_ContentColorAndOpacityDelegate()
 	{
 		static bool bInitialized = false;
@@ -198,52 +152,6 @@ struct FGetSets_Border
 			return -1;
 		}
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ContentColorAndOpacityDelegate(), "ContentColorAndOpacityDelegate");
-	}
-
-	static PyObject* GetDesiredSizeScale(FUPyWrapperBorder* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperBorder::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FVector2D>::Get(), (void*)&InSelf->ValuePtr()->DesiredSizeScale, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
-	}
-
-	static int SetDesiredSizeScale(FUPyWrapperBorder* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperBorder::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->DesiredSizeScale))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("Border::DesiredSizeScale"), TEXT("value is not a compatible struct"));
-		return -1;
-	}
-
-	static PyObject* GetHorizontalAlignment(FUPyWrapperBorder* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperBorder::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->HorizontalAlignment, StaticEnum<EHorizontalAlignment>());
-	}
-
-	static int SetHorizontalAlignment(FUPyWrapperBorder* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperBorder::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<EHorizontalAlignment>(), InSelf->ValuePtr()->HorizontalAlignment))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("Border::HorizontalAlignment"), TEXT("value is not numeric"));
-		return -1;
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnMouseButtonDownEvent()
@@ -390,52 +298,6 @@ struct FGetSets_Border
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnMouseMoveEvent(), "OnMouseMoveEvent");
 	}
 
-	static PyObject* GetPadding(FUPyWrapperBorder* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperBorder::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FMargin>::Get(), (void*)&InSelf->ValuePtr()->Padding, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
-	}
-
-	static int SetPadding(FUPyWrapperBorder* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperBorder::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->Padding))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("Border::Padding"), TEXT("value is not a compatible struct"));
-		return -1;
-	}
-
-	static PyObject* GetVerticalAlignment(FUPyWrapperBorder* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperBorder::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->VerticalAlignment, StaticEnum<EVerticalAlignment>());
-	}
-
-	static int SetVerticalAlignment(FUPyWrapperBorder* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperBorder::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<EVerticalAlignment>(), InSelf->ValuePtr()->VerticalAlignment))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("Border::VerticalAlignment"), TEXT("value is not numeric"));
-		return -1;
-	}
-
 	static PyObject* GetbFlipForRightToLeftFlowDirection(FUPyWrapperBorder* InSelf, void* InClosure)
 	{
 		if (!FUPyWrapperBorder::ValidateInternalState(InSelf))
@@ -461,51 +323,19 @@ struct FGetSets_Border
 		return -1;
 	}
 
-	static PyObject* GetbShowEffectWhenDisabled(FUPyWrapperBorder* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperBorder::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::Pythonize(InSelf->ValuePtr()->bShowEffectWhenDisabled);
-	}
-
-	static int SetbShowEffectWhenDisabled(FUPyWrapperBorder* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperBorder::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		bool bTemp = false;
-		if (UPyConversion::Nativize(InValue, bTemp))
-		{
-			InSelf->ValuePtr()->bShowEffectWhenDisabled = bTemp;
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("Border::bShowEffectWhenDisabled"), TEXT("value is not bool"));
-		return -1;
-	}
-
 };
 
 
 static PyGetSetDef FUPyWrapperBorderGetSets[] = {
 	{ UPyCStrCast("Background"), (getter)&FGetSets_Border::GetBackground, (setter)&FGetSets_Border::SetBackground, nullptr, nullptr },
 	{ UPyCStrCast("BackgroundDelegate"), (getter)&FGetSets_Border::GetBackgroundDelegate, (setter)&FGetSets_Border::SetBackgroundDelegate, nullptr, nullptr },
-	{ UPyCStrCast("BrushColor"), (getter)&FGetSets_Border::GetBrushColor, (setter)&FGetSets_Border::SetBrushColor, nullptr, nullptr },
 	{ UPyCStrCast("BrushColorDelegate"), (getter)&FGetSets_Border::GetBrushColorDelegate, (setter)&FGetSets_Border::SetBrushColorDelegate, nullptr, nullptr },
-	{ UPyCStrCast("ContentColorAndOpacity"), (getter)&FGetSets_Border::GetContentColorAndOpacity, (setter)&FGetSets_Border::SetContentColorAndOpacity, nullptr, nullptr },
 	{ UPyCStrCast("ContentColorAndOpacityDelegate"), (getter)&FGetSets_Border::GetContentColorAndOpacityDelegate, (setter)&FGetSets_Border::SetContentColorAndOpacityDelegate, nullptr, nullptr },
-	{ UPyCStrCast("DesiredSizeScale"), (getter)&FGetSets_Border::GetDesiredSizeScale, (setter)&FGetSets_Border::SetDesiredSizeScale, nullptr, nullptr },
-	{ UPyCStrCast("HorizontalAlignment"), (getter)&FGetSets_Border::GetHorizontalAlignment, (setter)&FGetSets_Border::SetHorizontalAlignment, nullptr, nullptr },
 	{ UPyCStrCast("OnMouseButtonDownEvent"), (getter)&FGetSets_Border::GetOnMouseButtonDownEvent, (setter)&FGetSets_Border::SetOnMouseButtonDownEvent, nullptr, nullptr },
 	{ UPyCStrCast("OnMouseButtonUpEvent"), (getter)&FGetSets_Border::GetOnMouseButtonUpEvent, (setter)&FGetSets_Border::SetOnMouseButtonUpEvent, nullptr, nullptr },
 	{ UPyCStrCast("OnMouseDoubleClickEvent"), (getter)&FGetSets_Border::GetOnMouseDoubleClickEvent, (setter)&FGetSets_Border::SetOnMouseDoubleClickEvent, nullptr, nullptr },
 	{ UPyCStrCast("OnMouseMoveEvent"), (getter)&FGetSets_Border::GetOnMouseMoveEvent, (setter)&FGetSets_Border::SetOnMouseMoveEvent, nullptr, nullptr },
-	{ UPyCStrCast("Padding"), (getter)&FGetSets_Border::GetPadding, (setter)&FGetSets_Border::SetPadding, nullptr, nullptr },
-	{ UPyCStrCast("VerticalAlignment"), (getter)&FGetSets_Border::GetVerticalAlignment, (setter)&FGetSets_Border::SetVerticalAlignment, nullptr, nullptr },
 	{ UPyCStrCast("bFlipForRightToLeftFlowDirection"), (getter)&FGetSets_Border::GetbFlipForRightToLeftFlowDirection, (setter)&FGetSets_Border::SetbFlipForRightToLeftFlowDirection, nullptr, nullptr },
-	{ UPyCStrCast("bShowEffectWhenDisabled"), (getter)&FGetSets_Border::GetbShowEffectWhenDisabled, (setter)&FGetSets_Border::SetbShowEffectWhenDisabled, nullptr, nullptr },
 	{ nullptr }
 };
 

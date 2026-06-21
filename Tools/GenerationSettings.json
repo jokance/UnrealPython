@@ -68,7 +68,9 @@
             "ExcludeMethods": ["GetDisableAnimCurves", "SetDisableAnimCurves"]
         },
         "CameraComponent": {},
-        "CharacterMovementComponent": {},
+        "CharacterMovementComponent": {
+            "ExcludeProperties": ["CrouchedHalfHeight"]
+        },
         "GameplayStatics": {
             "ForceReflectionMethods": ["BlueprintSuggestProjectileVelocity"]
         },
@@ -80,14 +82,75 @@
         "FXSystemComponent": {},
         "ParticleSystemComponent": {},
         "EngineTypes": {},
-        "StaticMesh": {},
-        "SkeletalMesh": {},
+        "StaticMesh": {
+            "ExcludeProperties": [
+                "AssetImportData",
+                "EditorCameraPosition",
+                "ExtendedBounds",
+                "ImportVersion",
+                "LightMapCoordinateIndex",
+                "LightMapResolution",
+                "LODGroup",
+                "MaterialRemapIndexPerImportVersion",
+                "MinLOD",
+                "NaniteSettings",
+                "NegativeBoundsExtension",
+                "NumStreamedLODs",
+                "PositiveBoundsExtension",
+                "RayTracingProxySettings",
+                "ThumbnailInfo",
+                "bAutoComputeLODScreenSize",
+                "bCustomizedCollision"
+            ]
+        },
+        "SkeletalMesh": {
+            "ExcludeProperties": [
+                "AssetImportData",
+                "BodySetup",
+                "BoneDrawSize",
+                "ClothLODBiasMode",
+                "DefaultAnimatingRig",
+                "DefaultEditorCameraLocation",
+                "DefaultEditorCameraLookAt",
+                "DefaultEditorCameraOrthoZoom",
+                "DefaultEditorCameraRotation",
+                "DisableBelowMinLodStripping",
+                "FloorOffset",
+                "LODSettings",
+                "Materials",
+                "MaxNumOptionalLODs",
+                "MaxNumStreamedLODs",
+                "MeshClothingAssets",
+                "MinLod",
+                "MorphTargets",
+                "NodeMappingData",
+                "PhysicsAsset",
+                "PostProcessAnimBlueprint",
+                "PreviewAttachedAssetContainer",
+                "RayTracingMinLOD",
+                "ShadowPhysicsAsset",
+                "Skeleton",
+                "SkelMirrorAxis",
+                "SkelMirrorFlipAxis",
+                "SkelMirrorTable",
+                "ThumbnailInfo",
+                "VertexColorGuid",
+                "bEnablePerPolyCollision",
+                "bHasCustomDefaultEditorCamera",
+                "bHasVertexColors",
+                "bOverrideLODStreamingSettings",
+                "bSupportLODStreaming",
+                "bSupportRayTracing"
+            ]
+        },
         "Texture2D": {
             "ForceReflectionMethods": ["Blueprint_GetCPUCopy", "Blueprint_GetSizeX", "Blueprint_GetSizeY"]
         },
         "MaterialInterface": {},
         "MaterialInstanceDynamic": {},
-        "AnimInstance": {},
+        "AnimInstance": {
+            "ExcludeMethods": ["CalculateDirection"]
+        },
         "AnimMontage": {
             "ForceReflectionMethods": ["IsValidAdditiveSlot"]
         },
@@ -123,18 +186,133 @@
         "ListView": {},
         "PanelWidget": {},
         "CanvasPanel": {},
-        "Button": {},
-        "TextBlock": {},
-        "Image": {},
-        "Border": {},
-        "SizeBox": {},
+        "Button": {
+            "ExcludeProperties": [
+                "BackgroundColor",
+                "ClickMethod",
+                "ColorAndOpacity",
+                "IsFocusable",
+                "PressMethod",
+                "TouchMethod",
+                "WidgetStyle"
+            ]
+        },
+        "TextBlock": {
+            "ExcludeProperties": [
+                "ColorAndOpacity",
+                "Font",
+                "MinDesiredWidth",
+                "ShadowColorAndOpacity",
+                "ShadowOffset",
+                "StrikeBrush",
+                "Text",
+                "TextOverflowPolicy",
+                "TextTransformPolicy"
+            ]
+        },
+        "Image": {
+            "ExcludeProperties": [
+                "Brush",
+                "ColorAndOpacity",
+                "bFlipForRightToLeftFlowDirection"
+            ]
+        },
+        "Border": {
+            "ExcludeProperties": [
+                "BrushColor",
+                "ContentColorAndOpacity",
+                "DesiredSizeScale",
+                "HorizontalAlignment",
+                "Padding",
+                "VerticalAlignment",
+                "bShowEffectWhenDisabled"
+            ]
+        },
+        "SizeBox": {
+            "ExcludeProperties": [
+                "HeightOverride",
+                "MaxAspectRatio",
+                "MaxDesiredHeight",
+                "MaxDesiredWidth",
+                "MinAspectRatio",
+                "MinDesiredHeight",
+                "MinDesiredWidth",
+                "WidthOverride",
+                "bOverride_HeightOverride",
+                "bOverride_MaxAspectRatio",
+                "bOverride_MaxDesiredHeight",
+                "bOverride_MaxDesiredWidth",
+                "bOverride_MinAspectRatio",
+                "bOverride_MinDesiredHeight",
+                "bOverride_MinDesiredWidth",
+                "bOverride_WidthOverride"
+            ]
+        },
         "HorizontalBox": {},
         "VerticalBox": {},
         "Overlay": {},
-        "ScrollBox": {},
-        "EditableTextBox": {},
-        "Slider": {},
-        "CheckBox": {},
+        "ScrollBox": {
+            "ExcludeProperties": [
+                "AllowOverscroll",
+                "AlwaysShowScrollbar",
+                "AlwaysShowScrollbarTrack",
+                "BackPadScrolling",
+                "ConsumeMouseWheel",
+                "FrontPadScrolling",
+                "NavigationDestination",
+                "NavigationScrollPadding",
+                "Orientation",
+                "ScrollBarVisibility",
+                "ScrollWhenFocusChanges",
+                "ScrollbarPadding",
+                "ScrollbarThickness",
+                "WheelScrollMultiplier",
+                "WidgetBarStyle",
+                "WidgetStyle",
+                "bAllowRightClickDragScrolling",
+                "bAnimateWheelScrolling"
+            ]
+        },
+        "EditableTextBox": {
+            "ExcludeProperties": [
+                "ClearKeyboardFocusOnCommit",
+                "HintText",
+                "IsCaretMovedWhenGainFocus",
+                "IsPassword",
+                "IsReadOnly",
+                "Justification",
+                "MinimumDesiredWidth",
+                "OverflowPolicy",
+                "RevertTextOnEscape",
+                "SelectAllTextOnCommit",
+                "SelectAllTextWhenFocused",
+                "Text"
+            ]
+        },
+        "Slider": {
+            "ExcludeProperties": [
+                "IndentHandle",
+                "Locked",
+                "MaxValue",
+                "MinValue",
+                "Orientation",
+                "SliderBarColor",
+                "SliderHandleColor",
+                "StepSize",
+                "Value",
+                "WidgetStyle"
+            ]
+        },
+        "CheckBox": {
+            "ExcludeProperties": [
+                "CheckedState",
+                "ClickMethod",
+                "IsFocusable",
+                "PressMethod",
+                "TouchMethod",
+                "WidgetStyle"
+            ]
+        },
         "WidgetComponent": {},
         "WidgetTree": {},
         "WidgetBlueprintLibrary": {},

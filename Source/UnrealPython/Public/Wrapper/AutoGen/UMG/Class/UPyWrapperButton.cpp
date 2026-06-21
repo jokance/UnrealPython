@@ -18,100 +18,6 @@ PyTypeObject UPyWrapperButtonType = {
 
 struct FGetSets_Button
 {
-	static PyObject* GetBackgroundColor(FUPyWrapperButton* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperButton::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FLinearColor>::Get(), (void*)&InSelf->ValuePtr()->BackgroundColor, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
-	}
-
-	static int SetBackgroundColor(FUPyWrapperButton* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperButton::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->BackgroundColor))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("Button::BackgroundColor"), TEXT("value is not a compatible struct"));
-		return -1;
-	}
-
-	static PyObject* GetClickMethod(FUPyWrapperButton* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperButton::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->ClickMethod, StaticEnum<EButtonClickMethod::Type>());
-	}
-
-	static int SetClickMethod(FUPyWrapperButton* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperButton::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<EButtonClickMethod::Type>(), InSelf->ValuePtr()->ClickMethod))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("Button::ClickMethod"), TEXT("value is not numeric"));
-		return -1;
-	}
-
-	static PyObject* GetColorAndOpacity(FUPyWrapperButton* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperButton::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FLinearColor>::Get(), (void*)&InSelf->ValuePtr()->ColorAndOpacity, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
-	}
-
-	static int SetColorAndOpacity(FUPyWrapperButton* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperButton::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->ColorAndOpacity))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("Button::ColorAndOpacity"), TEXT("value is not a compatible struct"));
-		return -1;
-	}
-
-	static PyObject* GetIsFocusable(FUPyWrapperButton* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperButton::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::Pythonize(InSelf->ValuePtr()->IsFocusable);
-	}
-
-	static int SetIsFocusable(FUPyWrapperButton* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperButton::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		bool bTemp = false;
-		if (UPyConversion::Nativize(InValue, bTemp))
-		{
-			InSelf->ValuePtr()->IsFocusable = bTemp;
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("Button::IsFocusable"), TEXT("value is not bool"));
-		return -1;
-	}
-
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnClicked()
 	{
 		static bool bInitialized = false;
@@ -292,75 +198,6 @@ struct FGetSets_Button
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnUnhovered(), "OnUnhovered");
 	}
 
-	static PyObject* GetPressMethod(FUPyWrapperButton* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperButton::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->PressMethod, StaticEnum<EButtonPressMethod::Type>());
-	}
-
-	static int SetPressMethod(FUPyWrapperButton* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperButton::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<EButtonPressMethod::Type>(), InSelf->ValuePtr()->PressMethod))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("Button::PressMethod"), TEXT("value is not numeric"));
-		return -1;
-	}
-
-	static PyObject* GetTouchMethod(FUPyWrapperButton* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperButton::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->TouchMethod, StaticEnum<EButtonTouchMethod::Type>());
-	}
-
-	static int SetTouchMethod(FUPyWrapperButton* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperButton::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<EButtonTouchMethod::Type>(), InSelf->ValuePtr()->TouchMethod))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("Button::TouchMethod"), TEXT("value is not numeric"));
-		return -1;
-	}
-
-	static PyObject* GetWidgetStyle(FUPyWrapperButton* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperButton::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FButtonStyle>::Get(), (void*)&InSelf->ValuePtr()->WidgetStyle, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
-	}
-
-	static int SetWidgetStyle(FUPyWrapperButton* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperButton::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->WidgetStyle))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("Button::WidgetStyle"), TEXT("value is not a compatible struct"));
-		return -1;
-	}
-
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_bAllowDragDrop()
 	{
 		static bool bInitialized = false;
@@ -401,18 +238,11 @@ struct FGetSets_Button
 
 
 static PyGetSetDef FUPyWrapperButtonGetSets[] = {
-	{ UPyCStrCast("BackgroundColor"), (getter)&FGetSets_Button::GetBackgroundColor, (setter)&FGetSets_Button::SetBackgroundColor, nullptr, nullptr },
-	{ UPyCStrCast("ClickMethod"), (getter)&FGetSets_Button::GetClickMethod, (setter)&FGetSets_Button::SetClickMethod, nullptr, nullptr },
-	{ UPyCStrCast("ColorAndOpacity"), (getter)&FGetSets_Button::GetColorAndOpacity, (setter)&FGetSets_Button::SetColorAndOpacity, nullptr, nullptr },
-	{ UPyCStrCast("IsFocusable"), (getter)&FGetSets_Button::GetIsFocusable, (setter)&FGetSets_Button::SetIsFocusable, nullptr, nullptr },
 	{ UPyCStrCast("OnClicked"), (getter)&FGetSets_Button::GetOnClicked, (setter)&FGetSets_Button::SetOnClicked, nullptr, nullptr },
 	{ UPyCStrCast("OnHovered"), (getter)&FGetSets_Button::GetOnHovered, (setter)&FGetSets_Button::SetOnHovered, nullptr, nullptr },
 	{ UPyCStrCast("OnPressed"), (getter)&FGetSets_Button::GetOnPressed, (setter)&FGetSets_Button::SetOnPressed, nullptr, nullptr },
 	{ UPyCStrCast("OnReleased"), (getter)&FGetSets_Button::GetOnReleased, (setter)&FGetSets_Button::SetOnReleased, nullptr, nullptr },
 	{ UPyCStrCast("OnUnhovered"), (getter)&FGetSets_Button::GetOnUnhovered, (setter)&FGetSets_Button::SetOnUnhovered, nullptr, nullptr },
-	{ UPyCStrCast("PressMethod"), (getter)&FGetSets_Button::GetPressMethod, (setter)&FGetSets_Button::SetPressMethod, nullptr, nullptr },
-	{ UPyCStrCast("TouchMethod"), (getter)&FGetSets_Button::GetTouchMethod, (setter)&FGetSets_Button::SetTouchMethod, nullptr, nullptr },
-	{ UPyCStrCast("WidgetStyle"), (getter)&FGetSets_Button::GetWidgetStyle, (setter)&FGetSets_Button::SetWidgetStyle, nullptr, nullptr },
 	{ UPyCStrCast("bAllowDragDrop"), (getter)&FGetSets_Button::GetbAllowDragDrop, (setter)&FGetSets_Button::SetbAllowDragDrop, nullptr, nullptr },
 	{ nullptr }
 };

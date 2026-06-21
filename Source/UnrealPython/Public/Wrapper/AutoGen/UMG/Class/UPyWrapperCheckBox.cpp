@@ -17,29 +17,6 @@ PyTypeObject UPyWrapperCheckBoxType = {
 
 struct FGetSets_CheckBox
 {
-	static PyObject* GetCheckedState(FUPyWrapperCheckBox* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperCheckBox::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->CheckedState, StaticEnum<ECheckBoxState>());
-	}
-
-	static int SetCheckedState(FUPyWrapperCheckBox* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperCheckBox::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<ECheckBoxState>(), InSelf->ValuePtr()->CheckedState))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("CheckBox::CheckedState"), TEXT("value is not compatible with this property"));
-		return -1;
-	}
-
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_CheckedStateDelegate()
 	{
 		static bool bInitialized = false;
@@ -76,29 +53,6 @@ struct FGetSets_CheckBox
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_CheckedStateDelegate(), "CheckedStateDelegate");
 	}
 
-	static PyObject* GetClickMethod(FUPyWrapperCheckBox* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperCheckBox::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->ClickMethod, StaticEnum<EButtonClickMethod::Type>());
-	}
-
-	static int SetClickMethod(FUPyWrapperCheckBox* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperCheckBox::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<EButtonClickMethod::Type>(), InSelf->ValuePtr()->ClickMethod))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("CheckBox::ClickMethod"), TEXT("value is not numeric"));
-		return -1;
-	}
-
 	static PyObject* GetHorizontalAlignment(FUPyWrapperCheckBox* InSelf, void* InClosure)
 	{
 		if (!FUPyWrapperCheckBox::ValidateInternalState(InSelf))
@@ -119,31 +73,6 @@ struct FGetSets_CheckBox
 			return 0;
 		}
 		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("CheckBox::HorizontalAlignment"), TEXT("value is not numeric"));
-		return -1;
-	}
-
-	static PyObject* GetIsFocusable(FUPyWrapperCheckBox* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperCheckBox::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::Pythonize(InSelf->ValuePtr()->IsFocusable);
-	}
-
-	static int SetIsFocusable(FUPyWrapperCheckBox* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperCheckBox::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		bool bTemp = false;
-		if (UPyConversion::Nativize(InValue, bTemp))
-		{
-			InSelf->ValuePtr()->IsFocusable = bTemp;
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("CheckBox::IsFocusable"), TEXT("value is not bool"));
 		return -1;
 	}
 
@@ -183,88 +112,13 @@ struct FGetSets_CheckBox
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnCheckStateChanged(), "OnCheckStateChanged");
 	}
 
-	static PyObject* GetPressMethod(FUPyWrapperCheckBox* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperCheckBox::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->PressMethod, StaticEnum<EButtonPressMethod::Type>());
-	}
-
-	static int SetPressMethod(FUPyWrapperCheckBox* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperCheckBox::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<EButtonPressMethod::Type>(), InSelf->ValuePtr()->PressMethod))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("CheckBox::PressMethod"), TEXT("value is not numeric"));
-		return -1;
-	}
-
-	static PyObject* GetTouchMethod(FUPyWrapperCheckBox* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperCheckBox::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::PythonizeEnumEntry((int64)InSelf->ValuePtr()->TouchMethod, StaticEnum<EButtonTouchMethod::Type>());
-	}
-
-	static int SetTouchMethod(FUPyWrapperCheckBox* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperCheckBox::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::NativizeEnumEntry(InValue, StaticEnum<EButtonTouchMethod::Type>(), InSelf->ValuePtr()->TouchMethod))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("CheckBox::TouchMethod"), TEXT("value is not numeric"));
-		return -1;
-	}
-
-	static PyObject* GetWidgetStyle(FUPyWrapperCheckBox* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperCheckBox::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FCheckBoxStyle>::Get(), (void*)&InSelf->ValuePtr()->WidgetStyle, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
-	}
-
-	static int SetWidgetStyle(FUPyWrapperCheckBox* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperCheckBox::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->WidgetStyle))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("CheckBox::WidgetStyle"), TEXT("value is not a compatible struct"));
-		return -1;
-	}
-
 };
 
 
 static PyGetSetDef FUPyWrapperCheckBoxGetSets[] = {
-	{ UPyCStrCast("CheckedState"), (getter)&FGetSets_CheckBox::GetCheckedState, (setter)&FGetSets_CheckBox::SetCheckedState, nullptr, nullptr },
 	{ UPyCStrCast("CheckedStateDelegate"), (getter)&FGetSets_CheckBox::GetCheckedStateDelegate, (setter)&FGetSets_CheckBox::SetCheckedStateDelegate, nullptr, nullptr },
-	{ UPyCStrCast("ClickMethod"), (getter)&FGetSets_CheckBox::GetClickMethod, (setter)&FGetSets_CheckBox::SetClickMethod, nullptr, nullptr },
 	{ UPyCStrCast("HorizontalAlignment"), (getter)&FGetSets_CheckBox::GetHorizontalAlignment, (setter)&FGetSets_CheckBox::SetHorizontalAlignment, nullptr, nullptr },
-	{ UPyCStrCast("IsFocusable"), (getter)&FGetSets_CheckBox::GetIsFocusable, (setter)&FGetSets_CheckBox::SetIsFocusable, nullptr, nullptr },
 	{ UPyCStrCast("OnCheckStateChanged"), (getter)&FGetSets_CheckBox::GetOnCheckStateChanged, (setter)&FGetSets_CheckBox::SetOnCheckStateChanged, nullptr, nullptr },
-	{ UPyCStrCast("PressMethod"), (getter)&FGetSets_CheckBox::GetPressMethod, (setter)&FGetSets_CheckBox::SetPressMethod, nullptr, nullptr },
-	{ UPyCStrCast("TouchMethod"), (getter)&FGetSets_CheckBox::GetTouchMethod, (setter)&FGetSets_CheckBox::SetTouchMethod, nullptr, nullptr },
-	{ UPyCStrCast("WidgetStyle"), (getter)&FGetSets_CheckBox::GetWidgetStyle, (setter)&FGetSets_CheckBox::SetWidgetStyle, nullptr, nullptr },
 	{ nullptr }
 };
 

@@ -6,7 +6,6 @@
 #include "Wrapper/UPyWrapperTypeFactory.h"
 #include "Utils/UPyUtil.h"
 #include "Animation/AnimInstance.h"
-#include "UObject/NoExportTypes.h"
 #include "Animation/AnimSequenceBase.h"
 #include "Animation/AnimCurveTypes.h"
 #include "UObject/UnrealTypePrivate.h"
@@ -679,40 +678,6 @@ struct FMethods_AnimInstance
 		}
 
 		const auto Result = InSelf->ValuePtr()->Blueprint_GetSlotMontageLocalWeight(Arg0);
-		return UPyConversion::Pythonize(Result);
-	}
-
-	static PyObject* CallCalculateDirection(FUPyWrapperAnimInstance* InSelf, PyObject* InArgs)
-	{
-		if (!InSelf->ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		PyObject* PyArg0 = PyTuple_GetItem(InArgs, 0);
-		if (PyArg0 == nullptr)
-		{
-			return nullptr;
-		}
-		FVector Arg0;
-		if (!UPyConversion::NativizeStructInstance(PyArg0, Arg0))
-		{
-			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("AnimInstance::CalculateDirection"), TEXT("invalid argument"));
-			return nullptr;
-		}
-
-		PyObject* PyArg1 = PyTuple_GetItem(InArgs, 1);
-		if (PyArg1 == nullptr)
-		{
-			return nullptr;
-		}
-		FRotator Arg1;
-		if (!UPyConversion::NativizeStructInstance(PyArg1, Arg1))
-		{
-			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("AnimInstance::CalculateDirection"), TEXT("invalid argument"));
-			return nullptr;
-		}
-
-		const auto Result = InSelf->ValuePtr()->CalculateDirection(Arg0, Arg1);
 		return UPyConversion::Pythonize(Result);
 	}
 
@@ -3634,7 +3599,6 @@ static PyMethodDef FUPyWrapperAnimInstancePyMethodDefs[] = {
 	{ "BlueprintUpdateAnimation", UPyCFunctionCast(&FMethods_AnimInstance::CallBlueprintUpdateAnimation), METH_O, nullptr },
 	{ "Blueprint_GetMainAnimInstance", UPyCFunctionCast(&FMethods_AnimInstance::CallBlueprint_GetMainAnimInstance), METH_NOARGS, nullptr },
 	{ "Blueprint_GetSlotMontageLocalWeight", UPyCFunctionCast(&FMethods_AnimInstance::CallBlueprint_GetSlotMontageLocalWeight), METH_O, nullptr },
-	{ "CalculateDirection", UPyCFunctionCast(&FMethods_AnimInstance::CallCalculateDirection), METH_VARARGS, nullptr },
 	{ "ClearAllTransitionEvents", UPyCFunctionCast(&FMethods_AnimInstance::CallClearAllTransitionEvents), METH_NOARGS, nullptr },
 	{ "ClearMorphTargets", UPyCFunctionCast(&FMethods_AnimInstance::CallClearMorphTargets), METH_NOARGS, nullptr },
 	{ "ClearTransitionEvents", UPyCFunctionCast(&FMethods_AnimInstance::CallClearTransitionEvents), METH_O, nullptr },
