@@ -235,13 +235,31 @@ struct FGetSets_InputSettings
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_DefaultPlayerInputClass(), "DefaultPlayerInputClass");
 	}
 
+	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_DefaultPreferredInputAPIList()
+	{
+		static bool bInitialized = false;
+		static UPyGenUtil::FGeneratedWrappedProperty Property;
+		if (!bInitialized)
+		{
+			if (const UClass* Class = UInputSettings::StaticClass())
+			{
+				if (const FProperty* FoundProperty = Class->FindPropertyByName(TEXT("DefaultPreferredInputAPIList")))
+				{
+					Property.SetProperty(FoundProperty);
+				}
+			}
+			bInitialized = true;
+		}
+		return Property;
+	}
+
 	static PyObject* GetDefaultPreferredInputAPIList(FUPyWrapperInputSettings* InSelf, void* InClosure)
 	{
 		if (!FUPyWrapperInputSettings::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
-		return UPyConversion::Pythonize(InSelf->ValuePtr()->DefaultPreferredInputAPIList);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_DefaultPreferredInputAPIList(), "DefaultPreferredInputAPIList");
 	}
 
 	static int SetDefaultPreferredInputAPIList(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
@@ -250,12 +268,7 @@ struct FGetSets_InputSettings
 		{
 			return -1;
 		}
-		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->DefaultPreferredInputAPIList))
-		{
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("InputSettings::DefaultPreferredInputAPIList"), TEXT("value is not a string"));
-		return -1;
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_DefaultPreferredInputAPIList(), "DefaultPreferredInputAPIList");
 	}
 
 	static PyObject* GetDefaultTouchInterface(FUPyWrapperInputSettings* InSelf, void* InClosure)
@@ -776,13 +789,31 @@ struct FGetSets_InputSettings
 		return -1;
 	}
 
+	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_bEnablePreferredInputAPIPreferences()
+	{
+		static bool bInitialized = false;
+		static UPyGenUtil::FGeneratedWrappedProperty Property;
+		if (!bInitialized)
+		{
+			if (const UClass* Class = UInputSettings::StaticClass())
+			{
+				if (const FProperty* FoundProperty = Class->FindPropertyByName(TEXT("bEnablePreferredInputAPIPreferences")))
+				{
+					Property.SetProperty(FoundProperty);
+				}
+			}
+			bInitialized = true;
+		}
+		return Property;
+	}
+
 	static PyObject* GetbEnablePreferredInputAPIPreferences(FUPyWrapperInputSettings* InSelf, void* InClosure)
 	{
 		if (!FUPyWrapperInputSettings::ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
-		return UPyConversion::Pythonize(InSelf->ValuePtr()->bEnablePreferredInputAPIPreferences);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bEnablePreferredInputAPIPreferences(), "bEnablePreferredInputAPIPreferences");
 	}
 
 	static int SetbEnablePreferredInputAPIPreferences(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
@@ -791,14 +822,7 @@ struct FGetSets_InputSettings
 		{
 			return -1;
 		}
-		bool bTemp = false;
-		if (UPyConversion::Nativize(InValue, bTemp))
-		{
-			InSelf->ValuePtr()->bEnablePreferredInputAPIPreferences = bTemp;
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("InputSettings::bEnablePreferredInputAPIPreferences"), TEXT("value is not bool"));
-		return -1;
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bEnablePreferredInputAPIPreferences(), "bEnablePreferredInputAPIPreferences");
 	}
 
 	static PyObject* GetbEnabledLegacyMappingDeprecationWarnings(FUPyWrapperInputSettings* InSelf, void* InClosure)

@@ -75,7 +75,8 @@
             "ForceReflectionMethods": ["BlueprintSuggestProjectileVelocity"]
         },
         "KismetSystemLibrary": {
-            "ExcludeMethods": ["StackTrace", "RaiseScriptError", "GetStructTopLevelAssetPath", "GetEnumTopLevelAssetPath", "IsObjectOfSoftClass", "GetCollisionProfileNames"]
+            "ExcludeMethods": ["StackTrace", "RaiseScriptError", "GetStructTopLevelAssetPath", "GetEnumTopLevelAssetPath", "IsObjectOfSoftClass", "GetCollisionProfileNames"],
+            "ForceReflectionMethods": ["GetObjectFromSoftPath", "GetClassFromSoftPath"]
         },
         "KismetMathLibrary": {},
         "InputSettings": {},
@@ -183,7 +184,9 @@
         "ListViewBase": {
 			"ExcludeMethods": ["CreateDragDropOperation"]
 		},
-        "ListView": {},
+        "ListView": {
+            "ForceReflectionMethods": ["SetReturnFocusToSelection"]
+        },
         "PanelWidget": {},
         "CanvasPanel": {},
         "Button": {

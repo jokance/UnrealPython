@@ -6650,7 +6650,25 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 
-		const auto Result = UKismetSystemLibrary::GetClassFromSoftPath(Arg0);
+		static UFunction* Func = UKismetSystemLibrary::StaticClass()->FindFunctionByName(TEXT("GetClassFromSoftPath"));
+		static FProperty* Prop_Path = Func ? Func->FindPropertyByName(TEXT("Path")) : nullptr;
+		static FProperty* Prop__ReturnValue = Func ? Func->GetReturnProperty() : nullptr;
+		UClass* Result = nullptr;
+		if (Func)
+		{
+			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
+			FMemory::Memzero(Parms, Func->ParmsSize);
+			if (Prop_Path)
+			{
+				Prop_Path->CopyCompleteValue_InContainer(Parms, &Arg0);
+			}
+			GetMutableDefault<UKismetSystemLibrary>()->ProcessEvent(Func, Parms);
+			if (Prop__ReturnValue)
+			{
+				Prop__ReturnValue->CopyCompleteValue_InContainer(&Result, Parms);
+			}
+			FMemory::Free(Parms);
+		}
 		return UPyConversion::Pythonize(Result);
 	}
 
@@ -7041,7 +7059,25 @@ struct FMethods_KismetSystemLibrary
 			return nullptr;
 		}
 
-		const auto Result = UKismetSystemLibrary::GetObjectFromSoftPath(Arg0);
+		static UFunction* Func = UKismetSystemLibrary::StaticClass()->FindFunctionByName(TEXT("GetObjectFromSoftPath"));
+		static FProperty* Prop_Path = Func ? Func->FindPropertyByName(TEXT("Path")) : nullptr;
+		static FProperty* Prop__ReturnValue = Func ? Func->GetReturnProperty() : nullptr;
+		UObject* Result = nullptr;
+		if (Func)
+		{
+			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
+			FMemory::Memzero(Parms, Func->ParmsSize);
+			if (Prop_Path)
+			{
+				Prop_Path->CopyCompleteValue_InContainer(Parms, &Arg0);
+			}
+			GetMutableDefault<UKismetSystemLibrary>()->ProcessEvent(Func, Parms);
+			if (Prop__ReturnValue)
+			{
+				Prop__ReturnValue->CopyCompleteValue_InContainer(&Result, Parms);
+			}
+			FMemory::Free(Parms);
+		}
 		return UPyConversion::Pythonize(Result);
 	}
 

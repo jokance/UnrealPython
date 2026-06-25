@@ -2171,7 +2171,19 @@ struct FMethods_ListView
 			return nullptr;
 		}
 
-		InSelf->ValuePtr()->SetReturnFocusToSelection(Arg0);
+		static UFunction* Func = UListView::StaticClass()->FindFunctionByName(TEXT("SetReturnFocusToSelection"));
+		static FProperty* Prop_bEnabled = Func ? Func->FindPropertyByName(TEXT("bEnabled")) : nullptr;
+		if (Func)
+		{
+			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
+			FMemory::Memzero(Parms, Func->ParmsSize);
+			if (Prop_bEnabled)
+			{
+				Prop_bEnabled->CopyCompleteValue_InContainer(Parms, &Arg0);
+			}
+			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
+			FMemory::Free(Parms);
+		}
 		Py_RETURN_NONE;
 	}
 
