@@ -6,6 +6,7 @@
 #include "UObject/UnrealType.h"
 #include "UObject/Package.h"
 #include "UObject/PropertyPortFlags.h"
+#include "Misc/EngineVersionComparison.h"
 
 extern PyMethodDef MapPyMethodDefs[];
 
@@ -23,6 +24,15 @@ namespace
 	bool IsSameMapInstance(const FUPyWrapperMap* InLhs, const FUPyWrapperMap* InRhs)
 	{
 		return InLhs == InRhs || (InLhs && InRhs && InLhs->MapInstance == InRhs->MapInstance && InLhs->MapProp.Get() == InRhs->MapProp.Get());
+	}
+
+	FMapProperty* CreatePythonMapProperty()
+	{
+#if UE_VERSION_OLDER_THAN(5, 8, 0)
+		return new FMapProperty(FFieldVariant(), UPyUtil::DefaultPythonPropertyName, RF_NoFlags);
+#else
+		return new FMapProperty(FFieldVariant(), UPyUtil::DefaultPythonPropertyName);
+#endif
 	}
 }
 
@@ -472,7 +482,7 @@ int FUPyWrapperMap::Init(FUPyWrapperMap* InSelf, const UPyUtil::FPropertyDef& In
 		return -1;
 	}
 
-	UPyUtil::FMapPropOnScope MapProp = UPyUtil::FMapPropOnScope::OwnedReference(new FMapProperty(FFieldVariant(), UPyUtil::DefaultPythonPropertyName, RF_NoFlags));
+	UPyUtil::FMapPropOnScope MapProp = UPyUtil::FMapPropOnScope::OwnedReference(CreatePythonMapProperty());
 	MapProp->KeyProp = MapKeyProp.Release();
 	MapProp->ValueProp = MapValueProp.Release();
 
@@ -527,7 +537,7 @@ int FUPyWrapperMap::Init(FUPyWrapperMap* InSelf, const FUPyWrapperOwnerContext& 
 				return -1;
 			}
 
-			UPyUtil::FMapPropOnScope MapProp = UPyUtil::FMapPropOnScope::OwnedReference(new FMapProperty(FFieldVariant(), UPyUtil::DefaultPythonPropertyName, RF_NoFlags));
+			UPyUtil::FMapPropOnScope MapProp = UPyUtil::FMapPropOnScope::OwnedReference(CreatePythonMapProperty());
 			MapProp->KeyProp = MapKeyProp.Release();
 			MapProp->ValueProp = MapValueProp.Release();
 

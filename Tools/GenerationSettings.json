@@ -79,7 +79,9 @@
             "ForceReflectionMethods": ["GetObjectFromSoftPath", "GetClassFromSoftPath"]
         },
         "KismetMathLibrary": {},
-        "InputSettings": {},
+        "InputSettings": {
+            "ForceReflectionProperties": ["DefaultPreferredInputAPIList", "bEnablePreferredInputAPIPreferences"]
+        },
         "FXSystemComponent": {},
         "ParticleSystemComponent": {},
         "EngineTypes": {},

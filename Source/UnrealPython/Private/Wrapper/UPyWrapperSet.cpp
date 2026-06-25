@@ -7,6 +7,7 @@
 #include "UObject/Package.h"
 #include "UObject/PropertyPortFlags.h"
 #include "Wrapper/UPyWrapperTypeFactory.h"
+#include "Misc/EngineVersionComparison.h"
 
 extern PyMethodDef SetPyMethodDefs[];
 
@@ -15,6 +16,15 @@ namespace
 	bool IsSameSetInstance(const FUPyWrapperSet* InLhs, const FUPyWrapperSet* InRhs)
 	{
 		return InLhs == InRhs || (InLhs && InRhs && InLhs->SetInstance == InRhs->SetInstance && InLhs->SetProp.Get() == InRhs->SetProp.Get());
+	}
+
+	FSetProperty* CreatePythonSetProperty()
+	{
+#if UE_VERSION_OLDER_THAN(5, 8, 0)
+		return new FSetProperty(FFieldVariant(), UPyUtil::DefaultPythonPropertyName, RF_NoFlags);
+#else
+		return new FSetProperty(FFieldVariant(), UPyUtil::DefaultPythonPropertyName);
+#endif
 	}
 }
 
@@ -198,7 +208,7 @@ int FUPyWrapperSet::Init(FUPyWrapperSet* InSelf, const UPyUtil::FPropertyDef& In
 		return -1;
 	}
 
-	UPyUtil::FSetPropOnScope SetProp = UPyUtil::FSetPropOnScope::OwnedReference(new FSetProperty(FFieldVariant(), UPyUtil::DefaultPythonPropertyName, RF_NoFlags));
+	UPyUtil::FSetPropOnScope SetProp = UPyUtil::FSetPropOnScope::OwnedReference(CreatePythonSetProperty());
 	SetProp->ElementProp = SetElementProp.Release();
 
 	// Need to manually call Link to fix-up some data (such as the C++ property flags and the set layout) that are only set during Link
@@ -251,7 +261,7 @@ int FUPyWrapperSet::Init(FUPyWrapperSet* InSelf, const FUPyWrapperOwnerContext& 
 				return -1;
 			}
 
-			UPyUtil::FSetPropOnScope SetProp = UPyUtil::FSetPropOnScope::OwnedReference(new FSetProperty(FFieldVariant(), UPyUtil::DefaultPythonPropertyName, RF_NoFlags));
+			UPyUtil::FSetPropOnScope SetProp = UPyUtil::FSetPropOnScope::OwnedReference(CreatePythonSetProperty());
 			SetProp->ElementProp = SetElementProp.Release();
 
 			// Need to manually call Link to fix-up some data (such as the C++ property flags and the set layout) that are only set during Link

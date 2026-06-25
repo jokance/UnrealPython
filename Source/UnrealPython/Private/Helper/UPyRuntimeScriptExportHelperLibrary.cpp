@@ -4,6 +4,7 @@
 #include "Blueprint/GameViewportSubsystem.h"
 #include "Components/EditableText.h"
 #include "Engine/World.h"
+#include "Misc/EngineVersionComparison.h"
 #include "Styling/SlateColor.h"
 
 void UUPyRuntimeScriptExportHelperLibrary::Transform_SetRotation(FTransform& Host, const FRotator& InRot)
@@ -35,7 +36,11 @@ void UUPyRuntimeScriptExportHelperLibrary::UserWidget_AddToViewportWithAutoRemov
 {
 	if (Host)
 	{
+#if UE_VERSION_OLDER_THAN(5, 8, 0)
 		if (UGameViewportSubsystem* Subsystem = UGameViewportSubsystem::Get(Host->GetWorld()))
+#else
+		if (UGameViewportSubsystem* Subsystem = UGameViewportSubsystem::Get())
+#endif
 		{
 			FGameViewportWidgetSlot ViewportSlot;
 			if (Subsystem->IsWidgetAdded(Host))
