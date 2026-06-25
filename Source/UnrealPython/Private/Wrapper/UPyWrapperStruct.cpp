@@ -45,11 +45,6 @@ FUPyWrapperStruct* FUPyWrapperStruct::New(PyTypeObject* InType)
 		new(&Self->OwnerContext) FUPyWrapperOwnerContext();
 		Self->ScriptStruct = nullptr;
 		Self->StructInstance = nullptr;
-		if (FUPyWrapperTypeRegistry::Get().FindStruct(InType) && Init(Self) != 0)
-		{
-			Free(Self);
-			return nullptr;
-		}
 	}
 	return Self;
 }
