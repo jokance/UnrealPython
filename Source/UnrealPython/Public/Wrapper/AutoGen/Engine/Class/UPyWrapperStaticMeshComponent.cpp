@@ -204,6 +204,52 @@ struct FGetSets_StaticMeshComponent
 		return -1;
 	}
 
+	static PyObject* GetMaterialCacheUVCoordinateIndex(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
+	{
+		if (!FUPyWrapperStaticMeshComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		return UPyConversion::Pythonize(InSelf->ValuePtr()->MaterialCacheUVCoordinateIndex);
+	}
+
+	static int SetMaterialCacheUVCoordinateIndex(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
+	{
+		if (!FUPyWrapperStaticMeshComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
+		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->MaterialCacheUVCoordinateIndex))
+		{
+			return 0;
+		}
+		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("StaticMeshComponent::MaterialCacheUVCoordinateIndex"), TEXT("value is not numeric"));
+		return -1;
+	}
+
+	static PyObject* GetMaterialCacheUVRegion(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
+	{
+		if (!FUPyWrapperStaticMeshComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		return (PyObject*)FUPyWrapperStructFactory::Get().CreateInstance(TBaseStructure<FBox2f>::Get(), (void*)&InSelf->ValuePtr()->MaterialCacheUVRegion, FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+	}
+
+	static int SetMaterialCacheUVRegion(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
+	{
+		if (!FUPyWrapperStaticMeshComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
+		if (UPyConversion::NativizeStructInstance(InValue, InSelf->ValuePtr()->MaterialCacheUVRegion))
+		{
+			return 0;
+		}
+		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("StaticMeshComponent::MaterialCacheUVRegion"), TEXT("value is not a compatible struct"));
+		return -1;
+	}
+
 #if WITH_EDITOR
 	static PyObject* GetMaterialIndexPreview(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
 	{
@@ -1427,6 +1473,31 @@ struct FGetSets_StaticMeshComponent
 		return -1;
 	}
 
+	static PyObject* GetbWritesToMaterialCache(FUPyWrapperStaticMeshComponent* InSelf, void* InClosure)
+	{
+		if (!FUPyWrapperStaticMeshComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		return UPyConversion::Pythonize(InSelf->ValuePtr()->bWritesToMaterialCache);
+	}
+
+	static int SetbWritesToMaterialCache(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
+	{
+		if (!FUPyWrapperStaticMeshComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
+		bool bTemp = false;
+		if (UPyConversion::Nativize(InValue, bTemp))
+		{
+			InSelf->ValuePtr()->bWritesToMaterialCache = bTemp;
+			return 0;
+		}
+		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("StaticMeshComponent::bWritesToMaterialCache"), TEXT("value is not bool"));
+		return -1;
+	}
+
 };
 
 
@@ -1438,6 +1509,8 @@ static PyGetSetDef FUPyWrapperStaticMeshComponentGetSets[] = {
 	{ UPyCStrCast("LightmassSettings"), (getter)&FGetSets_StaticMeshComponent::GetLightmassSettings, (setter)&FGetSets_StaticMeshComponent::SetLightmassSettings, nullptr, nullptr },
 	{ UPyCStrCast("MaterialCacheTextures"), (getter)&FGetSets_StaticMeshComponent::GetMaterialCacheTextures, (setter)&FGetSets_StaticMeshComponent::SetMaterialCacheTextures, nullptr, nullptr },
 	{ UPyCStrCast("MaterialCacheTileCount"), (getter)&FGetSets_StaticMeshComponent::GetMaterialCacheTileCount, (setter)&FGetSets_StaticMeshComponent::SetMaterialCacheTileCount, nullptr, nullptr },
+	{ UPyCStrCast("MaterialCacheUVCoordinateIndex"), (getter)&FGetSets_StaticMeshComponent::GetMaterialCacheUVCoordinateIndex, (setter)&FGetSets_StaticMeshComponent::SetMaterialCacheUVCoordinateIndex, nullptr, nullptr },
+	{ UPyCStrCast("MaterialCacheUVRegion"), (getter)&FGetSets_StaticMeshComponent::GetMaterialCacheUVRegion, (setter)&FGetSets_StaticMeshComponent::SetMaterialCacheUVRegion, nullptr, nullptr },
 #if WITH_EDITOR
 	{ UPyCStrCast("MaterialIndexPreview"), (getter)&FGetSets_StaticMeshComponent::GetMaterialIndexPreview, (setter)&FGetSets_StaticMeshComponent::SetMaterialIndexPreview, nullptr, nullptr },
 #endif
@@ -1512,6 +1585,7 @@ static PyGetSetDef FUPyWrapperStaticMeshComponentGetSets[] = {
 	{ UPyCStrCast("bUseDefaultCollision"), (getter)&FGetSets_StaticMeshComponent::GetbUseDefaultCollision, (setter)&FGetSets_StaticMeshComponent::SetbUseDefaultCollision, nullptr, nullptr },
 	{ UPyCStrCast("bUseSubDivisions"), (getter)&FGetSets_StaticMeshComponent::GetbUseSubDivisions, (setter)&FGetSets_StaticMeshComponent::SetbUseSubDivisions, nullptr, nullptr },
 	{ UPyCStrCast("bWorldPositionOffsetWritesVelocity"), (getter)&FGetSets_StaticMeshComponent::GetbWorldPositionOffsetWritesVelocity, (setter)&FGetSets_StaticMeshComponent::SetbWorldPositionOffsetWritesVelocity, nullptr, nullptr },
+	{ UPyCStrCast("bWritesToMaterialCache"), (getter)&FGetSets_StaticMeshComponent::GetbWritesToMaterialCache, (setter)&FGetSets_StaticMeshComponent::SetbWritesToMaterialCache, nullptr, nullptr },
 	{ nullptr }
 };
 

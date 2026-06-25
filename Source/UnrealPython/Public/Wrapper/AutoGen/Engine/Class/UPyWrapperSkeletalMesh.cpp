@@ -1137,6 +1137,114 @@ struct FMethods_SkeletalMesh
 		return UPyConversion::Pythonize(Result);
 	}
 
+#if WITH_EDITOR
+	static PyObject* CallRemoveMorphTarget(FUPyWrapperSkeletalMesh* InSelf, PyObject* InArgs)
+	{
+		if (!InSelf->ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		Py_ssize_t ArgCount = PyTuple_GET_SIZE(InArgs);
+		PyObject* PyArg0 = PyTuple_GetItem(InArgs, 0);
+		if (PyArg0 == nullptr)
+		{
+			return nullptr;
+		}
+		FName Arg0;
+		if (!UPyConversion::Nativize(PyArg0, Arg0))
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("SkeletalMesh::RemoveMorphTarget"), TEXT("invalid argument"));
+			return nullptr;
+		}
+
+		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
+		bool Arg1 = false;
+		if (PyArg1 != nullptr)
+		{
+			if (!UPyConversion::Nativize(PyArg1, Arg1))
+			{
+				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("SkeletalMesh::RemoveMorphTarget"), TEXT("invalid argument"));
+				return nullptr;
+			}
+		}
+
+		const bool bResult = InSelf->ValuePtr()->RemoveMorphTarget(Arg0, Arg1);
+		return PyBool_FromLong(bResult ? 1 : 0);
+	}
+
+#endif
+#if WITH_EDITOR
+	static PyObject* CallRemoveSkinWeightProfile(FUPyWrapperSkeletalMesh* InSelf, PyObject* InArgs)
+	{
+		if (!InSelf->ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		Py_ssize_t ArgCount = PyTuple_GET_SIZE(InArgs);
+		PyObject* PyArg0 = PyTuple_GetItem(InArgs, 0);
+		if (PyArg0 == nullptr)
+		{
+			return nullptr;
+		}
+		FName Arg0;
+		if (!UPyConversion::Nativize(PyArg0, Arg0))
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("SkeletalMesh::RemoveSkinWeightProfile"), TEXT("invalid argument"));
+			return nullptr;
+		}
+
+		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
+		bool Arg1 = false;
+		if (PyArg1 != nullptr)
+		{
+			if (!UPyConversion::Nativize(PyArg1, Arg1))
+			{
+				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("SkeletalMesh::RemoveSkinWeightProfile"), TEXT("invalid argument"));
+				return nullptr;
+			}
+		}
+
+		const bool bResult = InSelf->ValuePtr()->RemoveSkinWeightProfile(Arg0, Arg1);
+		return PyBool_FromLong(bResult ? 1 : 0);
+	}
+
+#endif
+#if WITH_EDITOR
+	static PyObject* CallRenameMorphTarget(FUPyWrapperSkeletalMesh* InSelf, PyObject* InArgs)
+	{
+		if (!InSelf->ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		PyObject* PyArg0 = PyTuple_GetItem(InArgs, 0);
+		if (PyArg0 == nullptr)
+		{
+			return nullptr;
+		}
+		FName Arg0;
+		if (!UPyConversion::Nativize(PyArg0, Arg0))
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("SkeletalMesh::RenameMorphTarget"), TEXT("invalid argument"));
+			return nullptr;
+		}
+
+		PyObject* PyArg1 = PyTuple_GetItem(InArgs, 1);
+		if (PyArg1 == nullptr)
+		{
+			return nullptr;
+		}
+		FName Arg1;
+		if (!UPyConversion::Nativize(PyArg1, Arg1))
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("SkeletalMesh::RenameMorphTarget"), TEXT("invalid argument"));
+			return nullptr;
+		}
+
+		const bool bResult = InSelf->ValuePtr()->RenameMorphTarget(Arg0, Arg1);
+		return PyBool_FromLong(bResult ? 1 : 0);
+	}
+
+#endif
 	static PyObject* CallSetDefaultAnimatingRig(FUPyWrapperSkeletalMesh* InSelf, PyObject* InArg)
 	{
 		if (!InSelf->ValidateInternalState(InSelf))
@@ -1198,14 +1306,14 @@ struct FMethods_SkeletalMesh
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("SkeletalMesh::SetMaterials"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::NativizeStructInstance(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("SkeletalMesh::SetMaterials"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -1241,14 +1349,14 @@ struct FMethods_SkeletalMesh
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("SkeletalMesh::SetMeshClothingAssets"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("SkeletalMesh::SetMeshClothingAssets"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -1285,13 +1393,13 @@ struct FMethods_SkeletalMesh
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("SkeletalMesh::SetMinLODForQualityLevels"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Value_Arg0, V))
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("SkeletalMesh::SetMinLODForQualityLevels"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Arg0.Add(K, V);
 		}
@@ -1338,14 +1446,14 @@ struct FMethods_SkeletalMesh
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("SkeletalMesh::SetMorphTargets"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("SkeletalMesh::SetMorphTargets"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -1437,6 +1545,15 @@ static PyMethodDef FUPyWrapperSkeletalMeshPyMethodDefs[] = {
 	{ "K2_GetAllMorphTargetNames", UPyCFunctionCast(&FMethods_SkeletalMesh::CallK2_GetAllMorphTargetNames), METH_NOARGS, nullptr },
 	{ "K2_GetAllSkinWeightProfileNames", UPyCFunctionCast(&FMethods_SkeletalMesh::CallK2_GetAllSkinWeightProfileNames), METH_NOARGS, nullptr },
 	{ "NumSockets", UPyCFunctionCast(&FMethods_SkeletalMesh::CallNumSockets), METH_NOARGS, nullptr },
+#if WITH_EDITOR
+	{ "RemoveMorphTarget", UPyCFunctionCast(&FMethods_SkeletalMesh::CallRemoveMorphTarget), METH_VARARGS, nullptr },
+#endif
+#if WITH_EDITOR
+	{ "RemoveSkinWeightProfile", UPyCFunctionCast(&FMethods_SkeletalMesh::CallRemoveSkinWeightProfile), METH_VARARGS, nullptr },
+#endif
+#if WITH_EDITOR
+	{ "RenameMorphTarget", UPyCFunctionCast(&FMethods_SkeletalMesh::CallRenameMorphTarget), METH_VARARGS, nullptr },
+#endif
 	{ "SetDefaultAnimatingRig", UPyCFunctionCast(&FMethods_SkeletalMesh::CallSetDefaultAnimatingRig), METH_O, nullptr },
 	{ "SetLODSettings", UPyCFunctionCast(&FMethods_SkeletalMesh::CallSetLODSettings), METH_O, nullptr },
 	{ "SetMaterials", UPyCFunctionCast(&FMethods_SkeletalMesh::CallSetMaterials), METH_O, nullptr },

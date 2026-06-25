@@ -132,7 +132,7 @@ namespace UPyConversion
 
 		UPYCONVERSION_RETURN(FUPyConversionResult::Failure(), TEXT("NativizeStructInstance"), *FString::Printf(TEXT("Cannot nativize '%s' as 'FTimerHandle'"), *UPyUtil::GetFriendlyTypename(PyObj)));
 	}
-
+	
 	FUPyConversionResult PythonizeStructInstance(const FTimerHandle& InVal, PyObject*& OutPyObj, const ESetErrorState SetErrorState)
 	{
 		OutPyObj = FUPyWrapperTimerHandle::CreateInstance(InVal, FUPyWrapperOwnerContext(), EUPyConversionMethod::Copy);

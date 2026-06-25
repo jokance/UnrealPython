@@ -375,44 +375,6 @@ struct FGetSets_Actor
 	}
 
 #endif
-#if WITH_EDITOR
-	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_DataLayers()
-	{
-		static bool bInitialized = false;
-		static UPyGenUtil::FGeneratedWrappedProperty Property;
-		if (!bInitialized)
-		{
-			if (const UClass* Class = AActor::StaticClass())
-			{
-				if (const FProperty* FoundProperty = Class->FindPropertyByName(TEXT("DataLayers")))
-				{
-					Property.SetProperty(FoundProperty);
-				}
-			}
-			bInitialized = true;
-		}
-		return Property;
-	}
-
-	static PyObject* GetDataLayers(FUPyWrapperActor* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperActor::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_DataLayers(), "DataLayers");
-	}
-
-	static int SetDataLayers(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperActor::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_DataLayers(), "DataLayers");
-	}
-
-#endif
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_DefaultUpdateOverlapsMethodDuringLevelStreaming()
 	{
 		static bool bInitialized = false;
@@ -2603,6 +2565,33 @@ struct FGetSets_Actor
 	}
 
 #if WITH_EDITOR
+	static PyObject* GetbForceDuplicateInPIE(FUPyWrapperActor* InSelf, void* InClosure)
+	{
+		if (!FUPyWrapperActor::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		return UPyConversion::Pythonize(InSelf->ValuePtr()->bForceDuplicateInPIE);
+	}
+
+	static int SetbForceDuplicateInPIE(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
+	{
+		if (!FUPyWrapperActor::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
+		bool bTemp = false;
+		if (UPyConversion::Nativize(InValue, bTemp))
+		{
+			InSelf->ValuePtr()->bForceDuplicateInPIE = bTemp;
+			return 0;
+		}
+		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("Actor::bForceDuplicateInPIE"), TEXT("value is not bool"));
+		return -1;
+	}
+
+#endif
+#if WITH_EDITOR
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_bForceExternalActorLevelReferenceForPIE()
 	{
 		static bool bInitialized = false;
@@ -3436,9 +3425,6 @@ static PyGetSetDef FUPyWrapperActorGetSets[] = {
 #if WITH_EDITOR
 	{ UPyCStrCast("DataLayerAssets"), (getter)&FGetSets_Actor::GetDataLayerAssets, (setter)&FGetSets_Actor::SetDataLayerAssets, nullptr, nullptr },
 #endif
-#if WITH_EDITOR
-	{ UPyCStrCast("DataLayers"), (getter)&FGetSets_Actor::GetDataLayers, (setter)&FGetSets_Actor::SetDataLayers, nullptr, nullptr },
-#endif
 	{ UPyCStrCast("DefaultUpdateOverlapsMethodDuringLevelStreaming"), (getter)&FGetSets_Actor::GetDefaultUpdateOverlapsMethodDuringLevelStreaming, (setter)&FGetSets_Actor::SetDefaultUpdateOverlapsMethodDuringLevelStreaming, nullptr, nullptr },
 #if WITH_EDITOR
 	{ UPyCStrCast("ExternalDataLayerAsset"), (getter)&FGetSets_Actor::GetExternalDataLayerAsset, (setter)&FGetSets_Actor::SetExternalDataLayerAsset, nullptr, nullptr },
@@ -3537,6 +3523,9 @@ static PyGetSetDef FUPyWrapperActorGetSets[] = {
 	{ UPyCStrCast("bEnableAutoLODGeneration"), (getter)&FGetSets_Actor::GetbEnableAutoLODGeneration, (setter)&FGetSets_Actor::SetbEnableAutoLODGeneration, nullptr, nullptr },
 	{ UPyCStrCast("bExchangedRoles"), (getter)&FGetSets_Actor::GetbExchangedRoles, (setter)&FGetSets_Actor::SetbExchangedRoles, nullptr, nullptr },
 	{ UPyCStrCast("bFindCameraComponentWhenViewTarget"), (getter)&FGetSets_Actor::GetbFindCameraComponentWhenViewTarget, (setter)&FGetSets_Actor::SetbFindCameraComponentWhenViewTarget, nullptr, nullptr },
+#if WITH_EDITOR
+	{ UPyCStrCast("bForceDuplicateInPIE"), (getter)&FGetSets_Actor::GetbForceDuplicateInPIE, (setter)&FGetSets_Actor::SetbForceDuplicateInPIE, nullptr, nullptr },
+#endif
 #if WITH_EDITOR
 	{ UPyCStrCast("bForceExternalActorLevelReferenceForPIE"), (getter)&FGetSets_Actor::GetbForceExternalActorLevelReferenceForPIE, (setter)&FGetSets_Actor::SetbForceExternalActorLevelReferenceForPIE, nullptr, nullptr },
 #endif

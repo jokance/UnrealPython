@@ -86,7 +86,7 @@ namespace UPyConversion
 
 		UPYCONVERSION_RETURN(FUPyConversionResult::Failure(), TEXT("NativizeStructInstance"), *FString::Printf(TEXT("Cannot nativize '%s' as 'FEventReply'"), *UPyUtil::GetFriendlyTypename(PyObj)));
 	}
-
+	
 	FUPyConversionResult PythonizeStructInstance(const FEventReply& InVal, PyObject*& OutPyObj, const ESetErrorState SetErrorState)
 	{
 		OutPyObj = FUPyWrapperEventReply::CreateInstance(InVal, FUPyWrapperOwnerContext(), EUPyConversionMethod::Copy);

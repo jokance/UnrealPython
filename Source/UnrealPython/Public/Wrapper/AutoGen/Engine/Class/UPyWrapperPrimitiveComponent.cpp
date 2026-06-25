@@ -1153,6 +1153,150 @@ struct FGetSets_PrimitiveComponent
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnReleased(), "OnReleased");
 	}
 
+	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnTouchBegan()
+	{
+		static bool bInitialized = false;
+		static UPyGenUtil::FGeneratedWrappedProperty Property;
+		if (!bInitialized)
+		{
+			if (const UClass* Class = UPrimitiveComponent::StaticClass())
+			{
+				if (const FProperty* FoundProperty = Class->FindPropertyByName(TEXT("OnTouchBegan")))
+				{
+					Property.SetProperty(FoundProperty);
+				}
+			}
+			bInitialized = true;
+		}
+		return Property;
+	}
+
+	static PyObject* GetOnTouchBegan(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
+	{
+		if (!FUPyWrapperPrimitiveComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnTouchBegan(), "OnTouchBegan");
+	}
+
+	static int SetOnTouchBegan(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
+	{
+		if (!FUPyWrapperPrimitiveComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnTouchBegan(), "OnTouchBegan");
+	}
+
+	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnTouchEnded()
+	{
+		static bool bInitialized = false;
+		static UPyGenUtil::FGeneratedWrappedProperty Property;
+		if (!bInitialized)
+		{
+			if (const UClass* Class = UPrimitiveComponent::StaticClass())
+			{
+				if (const FProperty* FoundProperty = Class->FindPropertyByName(TEXT("OnTouchEnded")))
+				{
+					Property.SetProperty(FoundProperty);
+				}
+			}
+			bInitialized = true;
+		}
+		return Property;
+	}
+
+	static PyObject* GetOnTouchEnded(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
+	{
+		if (!FUPyWrapperPrimitiveComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnTouchEnded(), "OnTouchEnded");
+	}
+
+	static int SetOnTouchEnded(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
+	{
+		if (!FUPyWrapperPrimitiveComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnTouchEnded(), "OnTouchEnded");
+	}
+
+	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnTouchEntered()
+	{
+		static bool bInitialized = false;
+		static UPyGenUtil::FGeneratedWrappedProperty Property;
+		if (!bInitialized)
+		{
+			if (const UClass* Class = UPrimitiveComponent::StaticClass())
+			{
+				if (const FProperty* FoundProperty = Class->FindPropertyByName(TEXT("OnTouchEntered")))
+				{
+					Property.SetProperty(FoundProperty);
+				}
+			}
+			bInitialized = true;
+		}
+		return Property;
+	}
+
+	static PyObject* GetOnTouchEntered(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
+	{
+		if (!FUPyWrapperPrimitiveComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnTouchEntered(), "OnTouchEntered");
+	}
+
+	static int SetOnTouchEntered(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
+	{
+		if (!FUPyWrapperPrimitiveComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnTouchEntered(), "OnTouchEntered");
+	}
+
+	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnTouchExited()
+	{
+		static bool bInitialized = false;
+		static UPyGenUtil::FGeneratedWrappedProperty Property;
+		if (!bInitialized)
+		{
+			if (const UClass* Class = UPrimitiveComponent::StaticClass())
+			{
+				if (const FProperty* FoundProperty = Class->FindPropertyByName(TEXT("OnTouchExited")))
+				{
+					Property.SetProperty(FoundProperty);
+				}
+			}
+			bInitialized = true;
+		}
+		return Property;
+	}
+
+	static PyObject* GetOnTouchExited(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
+	{
+		if (!FUPyWrapperPrimitiveComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnTouchExited(), "OnTouchExited");
+	}
+
+	static int SetOnTouchExited(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
+	{
+		if (!FUPyWrapperPrimitiveComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnTouchExited(), "OnTouchExited");
+	}
+
 	static PyObject* GetRayTracingGroupCullingPriority(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
 		if (!FUPyWrapperPrimitiveComponent::ValidateInternalState(InSelf))
@@ -2934,6 +3078,31 @@ struct FGetSets_PrimitiveComponent
 		return -1;
 	}
 
+	static PyObject* GetbVisibleInReflections(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
+	{
+		if (!FUPyWrapperPrimitiveComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		return UPyConversion::Pythonize(InSelf->ValuePtr()->bVisibleInReflections);
+	}
+
+	static int SetbVisibleInReflections(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
+	{
+		if (!FUPyWrapperPrimitiveComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
+		bool bTemp = false;
+		if (UPyConversion::Nativize(InValue, bTemp))
+		{
+			InSelf->ValuePtr()->bVisibleInReflections = bTemp;
+			return 0;
+		}
+		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("PrimitiveComponent::bVisibleInReflections"), TEXT("value is not bool"));
+		return -1;
+	}
+
 	static PyObject* GetbVisibleInSceneCaptureOnly(FUPyWrapperPrimitiveComponent* InSelf, void* InClosure)
 	{
 		if (!FUPyWrapperPrimitiveComponent::ValidateInternalState(InSelf))
@@ -3027,6 +3196,10 @@ static PyGetSetDef FUPyWrapperPrimitiveComponentGetSets[] = {
 	{ UPyCStrCast("OnInputTouchEnter"), (getter)&FGetSets_PrimitiveComponent::GetOnInputTouchEnter, (setter)&FGetSets_PrimitiveComponent::SetOnInputTouchEnter, nullptr, nullptr },
 	{ UPyCStrCast("OnInputTouchLeave"), (getter)&FGetSets_PrimitiveComponent::GetOnInputTouchLeave, (setter)&FGetSets_PrimitiveComponent::SetOnInputTouchLeave, nullptr, nullptr },
 	{ UPyCStrCast("OnReleased"), (getter)&FGetSets_PrimitiveComponent::GetOnReleased, (setter)&FGetSets_PrimitiveComponent::SetOnReleased, nullptr, nullptr },
+	{ UPyCStrCast("OnTouchBegan"), (getter)&FGetSets_PrimitiveComponent::GetOnTouchBegan, (setter)&FGetSets_PrimitiveComponent::SetOnTouchBegan, nullptr, nullptr },
+	{ UPyCStrCast("OnTouchEnded"), (getter)&FGetSets_PrimitiveComponent::GetOnTouchEnded, (setter)&FGetSets_PrimitiveComponent::SetOnTouchEnded, nullptr, nullptr },
+	{ UPyCStrCast("OnTouchEntered"), (getter)&FGetSets_PrimitiveComponent::GetOnTouchEntered, (setter)&FGetSets_PrimitiveComponent::SetOnTouchEntered, nullptr, nullptr },
+	{ UPyCStrCast("OnTouchExited"), (getter)&FGetSets_PrimitiveComponent::GetOnTouchExited, (setter)&FGetSets_PrimitiveComponent::SetOnTouchExited, nullptr, nullptr },
 	{ UPyCStrCast("RayTracingGroupCullingPriority"), (getter)&FGetSets_PrimitiveComponent::GetRayTracingGroupCullingPriority, (setter)&FGetSets_PrimitiveComponent::SetRayTracingGroupCullingPriority, nullptr, nullptr },
 	{ UPyCStrCast("RayTracingGroupId"), (getter)&FGetSets_PrimitiveComponent::GetRayTracingGroupId, (setter)&FGetSets_PrimitiveComponent::SetRayTracingGroupId, nullptr, nullptr },
 	{ UPyCStrCast("RuntimeVirtualTextures"), (getter)&FGetSets_PrimitiveComponent::GetRuntimeVirtualTextures, (setter)&FGetSets_PrimitiveComponent::SetRuntimeVirtualTextures, nullptr, nullptr },
@@ -3100,6 +3273,7 @@ static PyGetSetDef FUPyWrapperPrimitiveComponentGetSets[] = {
 	{ UPyCStrCast("bVisibleInRayTracing"), (getter)&FGetSets_PrimitiveComponent::GetbVisibleInRayTracing, (setter)&FGetSets_PrimitiveComponent::SetbVisibleInRayTracing, nullptr, nullptr },
 	{ UPyCStrCast("bVisibleInRealTimeSkyCaptures"), (getter)&FGetSets_PrimitiveComponent::GetbVisibleInRealTimeSkyCaptures, (setter)&FGetSets_PrimitiveComponent::SetbVisibleInRealTimeSkyCaptures, nullptr, nullptr },
 	{ UPyCStrCast("bVisibleInReflectionCaptures"), (getter)&FGetSets_PrimitiveComponent::GetbVisibleInReflectionCaptures, (setter)&FGetSets_PrimitiveComponent::SetbVisibleInReflectionCaptures, nullptr, nullptr },
+	{ UPyCStrCast("bVisibleInReflections"), (getter)&FGetSets_PrimitiveComponent::GetbVisibleInReflections, (setter)&FGetSets_PrimitiveComponent::SetbVisibleInReflections, nullptr, nullptr },
 	{ UPyCStrCast("bVisibleInSceneCaptureOnly"), (getter)&FGetSets_PrimitiveComponent::GetbVisibleInSceneCaptureOnly, (setter)&FGetSets_PrimitiveComponent::SetbVisibleInSceneCaptureOnly, nullptr, nullptr },
 	{ UPyCStrCast("bWantsEditorEffects"), (getter)&FGetSets_PrimitiveComponent::GetbWantsEditorEffects, (setter)&FGetSets_PrimitiveComponent::SetbWantsEditorEffects, nullptr, nullptr },
 	{ nullptr }
@@ -5866,14 +6040,14 @@ struct FMethods_PrimitiveComponent
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("PrimitiveComponent::SetCustomPrimitiveDataFloatArray"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg1[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("PrimitiveComponent::SetCustomPrimitiveDataFloatArray"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -6062,14 +6236,14 @@ struct FMethods_PrimitiveComponent
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("PrimitiveComponent::SetDefaultCustomPrimitiveDataFloatArray"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg1[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("PrimitiveComponent::SetDefaultCustomPrimitiveDataFloatArray"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -6241,14 +6415,14 @@ struct FMethods_PrimitiveComponent
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("PrimitiveComponent::SetExcludeForSpecificHLODLevels"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("PrimitiveComponent::SetExcludeForSpecificHLODLevels"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -7398,6 +7572,16 @@ struct FMethods_PrimitiveComponent
 		Py_RETURN_NONE;
 	}
 
+	static PyObject* CallSetupDefaultCustomPrimitiveDataFromMaterials(FUPyWrapperPrimitiveComponent* InSelf, PyObject* Py_UNUSED(InUnused))
+	{
+		if (!InSelf->ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		InSelf->ValuePtr()->SetupDefaultCustomPrimitiveDataFromMaterials();
+		Py_RETURN_NONE;
+	}
+
 	static PyObject* CallUnregisterAsFocalPointInPhysicsReplicationLOD(FUPyWrapperPrimitiveComponent* InSelf, PyObject* Py_UNUSED(InUnused))
 	{
 		if (!InSelf->ValidateInternalState(InSelf))
@@ -7626,6 +7810,7 @@ static PyMethodDef FUPyWrapperPrimitiveComponentPyMethodDefs[] = {
 	{ "SetVisibleInRayTracing", UPyCFunctionCast(&FMethods_PrimitiveComponent::CallSetVisibleInRayTracing), METH_O, nullptr },
 	{ "SetVisibleInSceneCaptureOnly", UPyCFunctionCast(&FMethods_PrimitiveComponent::CallSetVisibleInSceneCaptureOnly), METH_O, nullptr },
 	{ "SetWalkableSlopeOverride", UPyCFunctionCast(&FMethods_PrimitiveComponent::CallSetWalkableSlopeOverride), METH_O, nullptr },
+	{ "SetupDefaultCustomPrimitiveDataFromMaterials", UPyCFunctionCast(&FMethods_PrimitiveComponent::CallSetupDefaultCustomPrimitiveDataFromMaterials), METH_NOARGS, nullptr },
 	{ "UnregisterAsFocalPointInPhysicsReplicationLOD", UPyCFunctionCast(&FMethods_PrimitiveComponent::CallUnregisterAsFocalPointInPhysicsReplicationLOD), METH_NOARGS, nullptr },
 	{ "WakeAllRigidBodies", UPyCFunctionCast(&FMethods_PrimitiveComponent::CallWakeAllRigidBodies), METH_NOARGS, nullptr },
 	{ "WakeRigidBody", UPyCFunctionCast(&FMethods_PrimitiveComponent::CallWakeRigidBody), METH_VARARGS, nullptr },

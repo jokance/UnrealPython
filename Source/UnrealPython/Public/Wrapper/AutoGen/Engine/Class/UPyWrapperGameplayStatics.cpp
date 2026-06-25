@@ -401,14 +401,14 @@ struct FMethods_GameplayStatics
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::ApplyRadialDamage"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg5[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::ApplyRadialDamage"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -586,14 +586,14 @@ struct FMethods_GameplayStatics
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::ApplyRadialDamageWithFalloff"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg8[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::ApplyRadialDamageWithFalloff"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -1097,14 +1097,14 @@ struct FMethods_GameplayStatics
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::Blueprint_PredictProjectilePath_ByObjectType"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg5[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::Blueprint_PredictProjectilePath_ByObjectType"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -1147,14 +1147,14 @@ struct FMethods_GameplayStatics
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::Blueprint_PredictProjectilePath_ByObjectType"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg7[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::Blueprint_PredictProjectilePath_ByObjectType"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -1360,14 +1360,14 @@ struct FMethods_GameplayStatics
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::Blueprint_PredictProjectilePath_ByTraceChannel"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg7[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::Blueprint_PredictProjectilePath_ByTraceChannel"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -1535,12 +1535,6 @@ struct FMethods_GameplayStatics
 		PyTuple_SET_ITEM(ReturnTuple, 17, UPyConversion::PythonizeStructInstance(OutParam17));
 
 		return ReturnTuple;
-	}
-
-	static PyObject* CallCancelAsyncLoading(FUPyWrapperGameplayStatics* InSelf, PyObject* Py_UNUSED(InUnused))
-	{
-		UGameplayStatics::CancelAsyncLoading();
-		Py_RETURN_NONE;
 	}
 
 	static PyObject* CallClearSoundMixClassOverride(FUPyWrapperGameplayStatics* InSelf, PyObject* InArgs)
@@ -2135,14 +2129,14 @@ struct FMethods_GameplayStatics
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::FindNearestActor"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg1[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::FindNearestActor"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -2279,14 +2273,14 @@ struct FMethods_GameplayStatics
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::GetActorArrayAverageLocation"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::GetActorArrayAverageLocation"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -2323,14 +2317,14 @@ struct FMethods_GameplayStatics
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::GetActorArrayBounds"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::GetActorArrayBounds"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -7069,6 +7063,48 @@ struct FMethods_GameplayStatics
 		return ReturnTuple;
 	}
 
+	static PyObject* CallTransformFirstPersonToWorld(FUPyWrapperGameplayStatics* InSelf, PyObject* InArgs)
+	{
+		PyObject* PyArg0 = PyTuple_GetItem(InArgs, 0);
+		if (PyArg0 == nullptr)
+		{
+			return nullptr;
+		}
+		FMinimalViewInfo Arg0;
+		if (!UPyConversion::NativizeStructInstance(PyArg0, Arg0))
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::TransformFirstPersonToWorld"), TEXT("invalid argument"));
+			return nullptr;
+		}
+
+		PyObject* PyArg1 = PyTuple_GetItem(InArgs, 1);
+		if (PyArg1 == nullptr)
+		{
+			return nullptr;
+		}
+		FVector Arg1;
+		if (!UPyConversion::NativizeStructInstance(PyArg1, Arg1))
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::TransformFirstPersonToWorld"), TEXT("invalid argument"));
+			return nullptr;
+		}
+
+		PyObject* PyArg2 = PyTuple_GetItem(InArgs, 2);
+		if (PyArg2 == nullptr)
+		{
+			return nullptr;
+		}
+		bool Arg2 = false;
+		if (!UPyConversion::Nativize(PyArg2, Arg2))
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("GameplayStatics::TransformFirstPersonToWorld"), TEXT("invalid argument"));
+			return nullptr;
+		}
+
+		const auto Result = UGameplayStatics::TransformFirstPersonToWorld(Arg0, Arg1, Arg2);
+		return UPyConversion::PythonizeStructInstance(Result);
+	}
+
 	static PyObject* CallTransformWorldToFirstPerson(FUPyWrapperGameplayStatics* InSelf, PyObject* InArgs)
 	{
 		PyObject* PyArg0 = PyTuple_GetItem(InArgs, 0);
@@ -7250,7 +7286,6 @@ static PyMethodDef FUPyWrapperGameplayStaticsPyMethodDefs[] = {
 	{ "Blueprint_PredictProjectilePath_ByObjectType", UPyCFunctionCast(&FMethods_GameplayStatics::CallBlueprint_PredictProjectilePath_ByObjectType), METH_VARARGS | METH_STATIC, nullptr },
 	{ "Blueprint_PredictProjectilePath_ByTraceChannel", UPyCFunctionCast(&FMethods_GameplayStatics::CallBlueprint_PredictProjectilePath_ByTraceChannel), METH_VARARGS | METH_STATIC, nullptr },
 	{ "BreakHitResult", UPyCFunctionCast(&FMethods_GameplayStatics::CallBreakHitResult), METH_O | METH_STATIC, nullptr },
-	{ "CancelAsyncLoading", UPyCFunctionCast(&FMethods_GameplayStatics::CallCancelAsyncLoading), METH_NOARGS | METH_STATIC, nullptr },
 	{ "ClearSoundMixClassOverride", UPyCFunctionCast(&FMethods_GameplayStatics::CallClearSoundMixClassOverride), METH_VARARGS | METH_STATIC, nullptr },
 	{ "ClearSoundMixModifiers", UPyCFunctionCast(&FMethods_GameplayStatics::CallClearSoundMixModifiers), METH_O | METH_STATIC, nullptr },
 	{ "CreatePlayer", UPyCFunctionCast(&FMethods_GameplayStatics::CallCreatePlayer), METH_VARARGS | METH_STATIC, nullptr },
@@ -7372,6 +7407,7 @@ static PyMethodDef FUPyWrapperGameplayStaticsPyMethodDefs[] = {
 	{ "SpawnSoundAttached", UPyCFunctionCast(&FMethods_GameplayStatics::CallSpawnSoundAttached), METH_VARARGS | METH_STATIC, nullptr },
 	{ "SuggestProjectileVelocity_CustomArc", UPyCFunctionCast(&FMethods_GameplayStatics::CallSuggestProjectileVelocity_CustomArc), METH_VARARGS | METH_STATIC, nullptr },
 	{ "SuggestProjectileVelocity_MovingTarget", UPyCFunctionCast(&FMethods_GameplayStatics::CallSuggestProjectileVelocity_MovingTarget), METH_VARARGS | METH_STATIC, nullptr },
+	{ "TransformFirstPersonToWorld", UPyCFunctionCast(&FMethods_GameplayStatics::CallTransformFirstPersonToWorld), METH_VARARGS | METH_STATIC, nullptr },
 	{ "TransformWorldToFirstPerson", UPyCFunctionCast(&FMethods_GameplayStatics::CallTransformWorldToFirstPerson), METH_VARARGS | METH_STATIC, nullptr },
 	{ "UnRetainAllSoundsInSoundClass", UPyCFunctionCast(&FMethods_GameplayStatics::CallUnRetainAllSoundsInSoundClass), METH_O | METH_STATIC, nullptr },
 	{ "UnloadStreamLevel", UPyCFunctionCast(&FMethods_GameplayStatics::CallUnloadStreamLevel), METH_VARARGS | METH_STATIC, nullptr },

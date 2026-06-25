@@ -235,6 +235,29 @@ struct FGetSets_InputSettings
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_DefaultPlayerInputClass(), "DefaultPlayerInputClass");
 	}
 
+	static PyObject* GetDefaultPreferredInputAPIList(FUPyWrapperInputSettings* InSelf, void* InClosure)
+	{
+		if (!FUPyWrapperInputSettings::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		return UPyConversion::Pythonize(InSelf->ValuePtr()->DefaultPreferredInputAPIList);
+	}
+
+	static int SetDefaultPreferredInputAPIList(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
+	{
+		if (!FUPyWrapperInputSettings::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
+		if (UPyConversion::Nativize(InValue, InSelf->ValuePtr()->DefaultPreferredInputAPIList))
+		{
+			return 0;
+		}
+		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("InputSettings::DefaultPreferredInputAPIList"), TEXT("value is not a string"));
+		return -1;
+	}
+
 	static PyObject* GetDefaultTouchInterface(FUPyWrapperInputSettings* InSelf, void* InClosure)
 	{
 		if (!FUPyWrapperInputSettings::ValidateInternalState(InSelf))
@@ -753,6 +776,31 @@ struct FGetSets_InputSettings
 		return -1;
 	}
 
+	static PyObject* GetbEnablePreferredInputAPIPreferences(FUPyWrapperInputSettings* InSelf, void* InClosure)
+	{
+		if (!FUPyWrapperInputSettings::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		return UPyConversion::Pythonize(InSelf->ValuePtr()->bEnablePreferredInputAPIPreferences);
+	}
+
+	static int SetbEnablePreferredInputAPIPreferences(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
+	{
+		if (!FUPyWrapperInputSettings::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
+		bool bTemp = false;
+		if (UPyConversion::Nativize(InValue, bTemp))
+		{
+			InSelf->ValuePtr()->bEnablePreferredInputAPIPreferences = bTemp;
+			return 0;
+		}
+		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("InputSettings::bEnablePreferredInputAPIPreferences"), TEXT("value is not bool"));
+		return -1;
+	}
+
 	static PyObject* GetbEnabledLegacyMappingDeprecationWarnings(FUPyWrapperInputSettings* InSelf, void* InClosure)
 	{
 		if (!FUPyWrapperInputSettings::ValidateInternalState(InSelf))
@@ -938,6 +986,7 @@ static PyGetSetDef FUPyWrapperInputSettingsGetSets[] = {
 	{ UPyCStrCast("ConsoleKeys"), (getter)&FGetSets_InputSettings::GetConsoleKeys, (setter)&FGetSets_InputSettings::SetConsoleKeys, nullptr, nullptr },
 	{ UPyCStrCast("DefaultInputComponentClass"), (getter)&FGetSets_InputSettings::GetDefaultInputComponentClass, (setter)&FGetSets_InputSettings::SetDefaultInputComponentClass, nullptr, nullptr },
 	{ UPyCStrCast("DefaultPlayerInputClass"), (getter)&FGetSets_InputSettings::GetDefaultPlayerInputClass, (setter)&FGetSets_InputSettings::SetDefaultPlayerInputClass, nullptr, nullptr },
+	{ UPyCStrCast("DefaultPreferredInputAPIList"), (getter)&FGetSets_InputSettings::GetDefaultPreferredInputAPIList, (setter)&FGetSets_InputSettings::SetDefaultPreferredInputAPIList, nullptr, nullptr },
 	{ UPyCStrCast("DefaultTouchInterface"), (getter)&FGetSets_InputSettings::GetDefaultTouchInterface, (setter)&FGetSets_InputSettings::SetDefaultTouchInterface, nullptr, nullptr },
 	{ UPyCStrCast("DefaultViewportMouseCaptureMode"), (getter)&FGetSets_InputSettings::GetDefaultViewportMouseCaptureMode, (setter)&FGetSets_InputSettings::SetDefaultViewportMouseCaptureMode, nullptr, nullptr },
 	{ UPyCStrCast("DefaultViewportMouseLockMode"), (getter)&FGetSets_InputSettings::GetDefaultViewportMouseLockMode, (setter)&FGetSets_InputSettings::SetDefaultViewportMouseLockMode, nullptr, nullptr },
@@ -957,6 +1006,7 @@ static PyGetSetDef FUPyWrapperInputSettingsGetSets[] = {
 	{ UPyCStrCast("bEnableLegacyInputScales"), (getter)&FGetSets_InputSettings::GetbEnableLegacyInputScales, (setter)&FGetSets_InputSettings::SetbEnableLegacyInputScales, nullptr, nullptr },
 	{ UPyCStrCast("bEnableMotionControls"), (getter)&FGetSets_InputSettings::GetbEnableMotionControls, (setter)&FGetSets_InputSettings::SetbEnableMotionControls, nullptr, nullptr },
 	{ UPyCStrCast("bEnableMouseSmoothing"), (getter)&FGetSets_InputSettings::GetbEnableMouseSmoothing, (setter)&FGetSets_InputSettings::SetbEnableMouseSmoothing, nullptr, nullptr },
+	{ UPyCStrCast("bEnablePreferredInputAPIPreferences"), (getter)&FGetSets_InputSettings::GetbEnablePreferredInputAPIPreferences, (setter)&FGetSets_InputSettings::SetbEnablePreferredInputAPIPreferences, nullptr, nullptr },
 	{ UPyCStrCast("bEnabledLegacyMappingDeprecationWarnings"), (getter)&FGetSets_InputSettings::GetbEnabledLegacyMappingDeprecationWarnings, (setter)&FGetSets_InputSettings::SetbEnabledLegacyMappingDeprecationWarnings, nullptr, nullptr },
 	{ UPyCStrCast("bF11TogglesFullscreen"), (getter)&FGetSets_InputSettings::GetbF11TogglesFullscreen, (setter)&FGetSets_InputSettings::SetbF11TogglesFullscreen, nullptr, nullptr },
 	{ UPyCStrCast("bFilterInputByPlatformUser"), (getter)&FGetSets_InputSettings::GetbFilterInputByPlatformUser, (setter)&FGetSets_InputSettings::SetbFilterInputByPlatformUser, nullptr, nullptr },

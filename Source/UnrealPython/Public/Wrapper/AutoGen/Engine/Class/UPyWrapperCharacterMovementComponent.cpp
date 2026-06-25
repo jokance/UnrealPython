@@ -11,6 +11,7 @@
 #include "GameFramework/Actor.h"
 #include "Engine/HitResult.h"
 #include "GameFramework/Character.h"
+#include "UObject/Object.h"
 #include "CharacterMovementComponentAsync.h"
 #include "AI/Navigation/NavigationAvoidanceTypes.h"
 
@@ -2760,6 +2761,31 @@ struct FGetSets_CharacterMovementComponent
 		return -1;
 	}
 
+	static PyObject* GetbClientIgnoreMovementCorrections(FUPyWrapperCharacterMovementComponent* InSelf, void* InClosure)
+	{
+		if (!FUPyWrapperCharacterMovementComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		return UPyConversion::Pythonize(InSelf->ValuePtr()->bClientIgnoreMovementCorrections);
+	}
+
+	static int SetbClientIgnoreMovementCorrections(FUPyWrapperCharacterMovementComponent* InSelf, PyObject* InValue, void* InClosure)
+	{
+		if (!FUPyWrapperCharacterMovementComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
+		bool bTemp = false;
+		if (UPyConversion::Nativize(InValue, bTemp))
+		{
+			InSelf->ValuePtr()->bClientIgnoreMovementCorrections = bTemp;
+			return 0;
+		}
+		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("CharacterMovementComponent::bClientIgnoreMovementCorrections"), TEXT("value is not bool"));
+		return -1;
+	}
+
 	static PyObject* GetbCrouchMaintainsBaseLocation(FUPyWrapperCharacterMovementComponent* InSelf, void* InClosure)
 	{
 		if (!FUPyWrapperCharacterMovementComponent::ValidateInternalState(InSelf))
@@ -4134,6 +4160,7 @@ static PyGetSetDef FUPyWrapperCharacterMovementComponentGetSets[] = {
 	{ UPyCStrCast("bCanWalkOffLedges"), (getter)&FGetSets_CharacterMovementComponent::GetbCanWalkOffLedges, (setter)&FGetSets_CharacterMovementComponent::SetbCanWalkOffLedges, nullptr, nullptr },
 	{ UPyCStrCast("bCanWalkOffLedgesWhenCrouching"), (getter)&FGetSets_CharacterMovementComponent::GetbCanWalkOffLedgesWhenCrouching, (setter)&FGetSets_CharacterMovementComponent::SetbCanWalkOffLedgesWhenCrouching, nullptr, nullptr },
 	{ UPyCStrCast("bCheatFlying"), (getter)&FGetSets_CharacterMovementComponent::GetbCheatFlying, (setter)&FGetSets_CharacterMovementComponent::SetbCheatFlying, nullptr, nullptr },
+	{ UPyCStrCast("bClientIgnoreMovementCorrections"), (getter)&FGetSets_CharacterMovementComponent::GetbClientIgnoreMovementCorrections, (setter)&FGetSets_CharacterMovementComponent::SetbClientIgnoreMovementCorrections, nullptr, nullptr },
 	{ UPyCStrCast("bCrouchMaintainsBaseLocation"), (getter)&FGetSets_CharacterMovementComponent::GetbCrouchMaintainsBaseLocation, (setter)&FGetSets_CharacterMovementComponent::SetbCrouchMaintainsBaseLocation, nullptr, nullptr },
 	{ UPyCStrCast("bDeferUpdateMoveComponent"), (getter)&FGetSets_CharacterMovementComponent::GetbDeferUpdateMoveComponent, (setter)&FGetSets_CharacterMovementComponent::SetbDeferUpdateMoveComponent, nullptr, nullptr },
 	{ UPyCStrCast("bDontFallBelowJumpZVelocityDuringJump"), (getter)&FGetSets_CharacterMovementComponent::GetbDontFallBelowJumpZVelocityDuringJump, (setter)&FGetSets_CharacterMovementComponent::SetbDontFallBelowJumpZVelocityDuringJump, nullptr, nullptr },
@@ -4588,13 +4615,13 @@ struct FMethods_CharacterMovementComponent
 		return UPyConversion::Pythonize(Result);
 	}
 
-	static PyObject* CallGetMovementBase(FUPyWrapperCharacterMovementComponent* InSelf, PyObject* Py_UNUSED(InUnused))
+	static PyObject* CallGetMovementBaseObject(FUPyWrapperCharacterMovementComponent* InSelf, PyObject* Py_UNUSED(InUnused))
 	{
 		if (!InSelf->ValidateInternalState(InSelf))
 		{
 			return nullptr;
 		}
-		const auto Result = InSelf->ValuePtr()->GetMovementBase();
+		const auto Result = InSelf->ValuePtr()->GetMovementBaseObject();
 		return UPyConversion::Pythonize(Result);
 	}
 
@@ -4947,7 +4974,7 @@ static PyMethodDef FUPyWrapperCharacterMovementComponentPyMethodDefs[] = {
 	{ "GetMaxJumpHeight", UPyCFunctionCast(&FMethods_CharacterMovementComponent::CallGetMaxJumpHeight), METH_NOARGS, nullptr },
 	{ "GetMaxJumpHeightWithJumpTime", UPyCFunctionCast(&FMethods_CharacterMovementComponent::CallGetMaxJumpHeightWithJumpTime), METH_NOARGS, nullptr },
 	{ "GetMinAnalogSpeed", UPyCFunctionCast(&FMethods_CharacterMovementComponent::CallGetMinAnalogSpeed), METH_NOARGS, nullptr },
-	{ "GetMovementBase", UPyCFunctionCast(&FMethods_CharacterMovementComponent::CallGetMovementBase), METH_NOARGS, nullptr },
+	{ "GetMovementBaseObject", UPyCFunctionCast(&FMethods_CharacterMovementComponent::CallGetMovementBaseObject), METH_NOARGS, nullptr },
 	{ "GetPerchRadiusThreshold", UPyCFunctionCast(&FMethods_CharacterMovementComponent::CallGetPerchRadiusThreshold), METH_NOARGS, nullptr },
 	{ "GetValidPerchRadius", UPyCFunctionCast(&FMethods_CharacterMovementComponent::CallGetValidPerchRadius), METH_NOARGS, nullptr },
 	{ "HasCustomGravity", UPyCFunctionCast(&FMethods_CharacterMovementComponent::CallHasCustomGravity), METH_NOARGS, nullptr },

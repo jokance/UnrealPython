@@ -144,7 +144,7 @@ namespace UPyConversion
 
 		UPYCONVERSION_RETURN(FUPyConversionResult::Failure(), TEXT("NativizeStructInstance"), *FString::Printf(TEXT("Cannot nativize '%s' as 'FAnchors'"), *UPyUtil::GetFriendlyTypename(PyObj)));
 	}
-
+	
 	FUPyConversionResult PythonizeStructInstance(const FAnchors& InVal, PyObject*& OutPyObj, const ESetErrorState SetErrorState)
 	{
 		OutPyObj = FUPyWrapperAnchors::CreateInstance(InVal, FUPyWrapperOwnerContext(), EUPyConversionMethod::Copy);

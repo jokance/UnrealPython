@@ -168,7 +168,7 @@ namespace UPyConversion
 
 		UPYCONVERSION_RETURN(FUPyConversionResult::Failure(), TEXT("NativizeStructInstance"), *FString::Printf(TEXT("Cannot nativize '%s' as 'FIntVector'"), *UPyUtil::GetFriendlyTypename(PyObj)));
 	}
-
+	
 	FUPyConversionResult PythonizeStructInstance(const FIntVector& InVal, PyObject*& OutPyObj, const ESetErrorState SetErrorState)
 	{
 		OutPyObj = FUPyWrapperIntVector::CreateInstance(InVal, FUPyWrapperOwnerContext(), EUPyConversionMethod::Copy);

@@ -276,6 +276,44 @@ struct FGetSets_StaticMesh
 		return -1;
 	}
 
+#if WITH_EDITOR
+	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_LODStreaming()
+	{
+		static bool bInitialized = false;
+		static UPyGenUtil::FGeneratedWrappedProperty Property;
+		if (!bInitialized)
+		{
+			if (const UClass* Class = UStaticMesh::StaticClass())
+			{
+				if (const FProperty* FoundProperty = Class->FindPropertyByName(TEXT("LODStreaming")))
+				{
+					Property.SetProperty(FoundProperty);
+				}
+			}
+			bInitialized = true;
+		}
+		return Property;
+	}
+
+	static PyObject* GetLODStreaming(FUPyWrapperStaticMesh* InSelf, void* InClosure)
+	{
+		if (!FUPyWrapperStaticMesh::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_LODStreaming(), "LODStreaming");
+	}
+
+	static int SetLODStreaming(FUPyWrapperStaticMesh* InSelf, PyObject* InValue, void* InClosure)
+	{
+		if (!FUPyWrapperStaticMesh::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_LODStreaming(), "LODStreaming");
+	}
+
+#endif
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_LightmapUVDensity()
 	{
 		static bool bInitialized = false;
@@ -920,6 +958,9 @@ static PyGetSetDef FUPyWrapperStaticMeshGetSets[] = {
 	{ UPyCStrCast("HiResSourceModel"), (getter)&FGetSets_StaticMesh::GetHiResSourceModel, (setter)&FGetSets_StaticMesh::SetHiResSourceModel, nullptr, nullptr },
 #endif
 	{ UPyCStrCast("LODForCollision"), (getter)&FGetSets_StaticMesh::GetLODForCollision, (setter)&FGetSets_StaticMesh::SetLODForCollision, nullptr, nullptr },
+#if WITH_EDITOR
+	{ UPyCStrCast("LODStreaming"), (getter)&FGetSets_StaticMesh::GetLODStreaming, (setter)&FGetSets_StaticMesh::SetLODStreaming, nullptr, nullptr },
+#endif
 	{ UPyCStrCast("LightmapUVDensity"), (getter)&FGetSets_StaticMesh::GetLightmapUVDensity, (setter)&FGetSets_StaticMesh::SetLightmapUVDensity, nullptr, nullptr },
 #if WITH_EDITOR
 	{ UPyCStrCast("LightmapUVVersion"), (getter)&FGetSets_StaticMesh::GetLightmapUVVersion, (setter)&FGetSets_StaticMesh::SetLightmapUVVersion, nullptr, nullptr },
@@ -1025,14 +1066,14 @@ struct FMethods_StaticMesh
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("StaticMesh::BuildFromStaticMeshDescriptions"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("StaticMesh::BuildFromStaticMeshDescriptions"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -1271,6 +1312,26 @@ struct FMethods_StaticMesh
 		return UPyConversion::Pythonize(Result);
 	}
 
+	static PyObject* CallGetNumNaniteTriangles(FUPyWrapperStaticMesh* InSelf, PyObject* Py_UNUSED(InUnused))
+	{
+		if (!InSelf->ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		const auto Result = InSelf->ValuePtr()->GetNumNaniteTriangles();
+		return UPyConversion::Pythonize(Result);
+	}
+
+	static PyObject* CallGetNumNaniteVertices(FUPyWrapperStaticMesh* InSelf, PyObject* Py_UNUSED(InUnused))
+	{
+		if (!InSelf->ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		const auto Result = InSelf->ValuePtr()->GetNumNaniteVertices();
+		return UPyConversion::Pythonize(Result);
+	}
+
 	static PyObject* CallGetNumSections(FUPyWrapperStaticMesh* InSelf, PyObject* InArg)
 	{
 		if (!InSelf->ValidateInternalState(InSelf))
@@ -1285,6 +1346,23 @@ struct FMethods_StaticMesh
 		}
 
 		const auto Result = InSelf->ValuePtr()->GetNumSections(Arg0);
+		return UPyConversion::Pythonize(Result);
+	}
+
+	static PyObject* CallGetNumTexCoords(FUPyWrapperStaticMesh* InSelf, PyObject* InArg)
+	{
+		if (!InSelf->ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		int32 Arg0 = 0;
+		if (!UPyConversion::Nativize(InArg, Arg0))
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("StaticMesh::GetNumTexCoords"), TEXT("invalid argument"));
+			return nullptr;
+		}
+
+		const auto Result = InSelf->ValuePtr()->GetNumTexCoords(Arg0);
 		return UPyConversion::Pythonize(Result);
 	}
 
@@ -1471,13 +1549,13 @@ struct FMethods_StaticMesh
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("StaticMesh::SetMinLODForQualityLevels"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Value_Arg0, V))
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("StaticMesh::SetMinLODForQualityLevels"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Arg0.Add(K, V);
 		}
@@ -1553,13 +1631,13 @@ struct FMethods_StaticMesh
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("StaticMesh::SetMinimumLODForPlatforms"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Value_Arg0, V))
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("StaticMesh::SetMinimumLODForPlatforms"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Arg0.Add(K, V);
 		}
@@ -1614,14 +1692,14 @@ struct FMethods_StaticMesh
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("StaticMesh::SetStaticMaterials"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::NativizeStructInstance(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("StaticMesh::SetStaticMaterials"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -1649,7 +1727,10 @@ static PyMethodDef FUPyWrapperStaticMeshPyMethodDefs[] = {
 	{ "GetMinimumLODForQualityLevel", UPyCFunctionCast(&FMethods_StaticMesh::CallGetMinimumLODForQualityLevel), METH_O, nullptr },
 	{ "GetMinimumLODForQualityLevels", UPyCFunctionCast(&FMethods_StaticMesh::CallGetMinimumLODForQualityLevels), METH_NOARGS, nullptr },
 	{ "GetNumLODs", UPyCFunctionCast(&FMethods_StaticMesh::CallGetNumLODs), METH_NOARGS, nullptr },
+	{ "GetNumNaniteTriangles", UPyCFunctionCast(&FMethods_StaticMesh::CallGetNumNaniteTriangles), METH_NOARGS, nullptr },
+	{ "GetNumNaniteVertices", UPyCFunctionCast(&FMethods_StaticMesh::CallGetNumNaniteVertices), METH_NOARGS, nullptr },
 	{ "GetNumSections", UPyCFunctionCast(&FMethods_StaticMesh::CallGetNumSections), METH_O, nullptr },
+	{ "GetNumTexCoords", UPyCFunctionCast(&FMethods_StaticMesh::CallGetNumTexCoords), METH_O, nullptr },
 	{ "GetNumTriangles", UPyCFunctionCast(&FMethods_StaticMesh::CallGetNumTriangles), METH_O, nullptr },
 	{ "GetNumVertices", UPyCFunctionCast(&FMethods_StaticMesh::CallGetNumVertices), METH_O, nullptr },
 	{ "GetSocketsByTag", UPyCFunctionCast(&FMethods_StaticMesh::CallGetSocketsByTag), METH_O, nullptr },

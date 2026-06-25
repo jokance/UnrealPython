@@ -11,6 +11,7 @@
 #include "GameFramework/PlayerController.h"
 #include "GameFramework/Pawn.h"
 #include "GameFramework/Actor.h"
+#include "UObject/Object.h"
 #include "GameFramework/PawnMovementComponent.h"
 #include "UObject/Class.h"
 
@@ -772,6 +773,19 @@ struct FMethods_Pawn
 		return UPyConversion::Pythonize(Result);
 	}
 
+	static PyObject* CallGetMovementBaseOwner(FUPyWrapperPawn* InSelf, PyObject* InArg)
+	{
+		APawn* Arg0 = nullptr;
+		if (!UPyConversion::Nativize(InArg, Arg0))
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("Pawn::GetMovementBaseOwner"), TEXT("invalid argument"));
+			return nullptr;
+		}
+
+		const auto Result = APawn::GetMovementBaseOwner(Arg0);
+		return UPyConversion::Pythonize(Result);
+	}
+
 	static PyObject* CallGetMovementComponent(FUPyWrapperPawn* InSelf, PyObject* Py_UNUSED(InUnused))
 	{
 		if (!InSelf->ValidateInternalState(InSelf))
@@ -1097,6 +1111,7 @@ static PyMethodDef FUPyWrapperPawnPyMethodDefs[] = {
 	{ "GetLastMovementInputVector", UPyCFunctionCast(&FMethods_Pawn::CallGetLastMovementInputVector), METH_NOARGS, nullptr },
 	{ "GetLocalViewingPlayerController", UPyCFunctionCast(&FMethods_Pawn::CallGetLocalViewingPlayerController), METH_NOARGS, nullptr },
 	{ "GetMovementBaseActor", UPyCFunctionCast(&FMethods_Pawn::CallGetMovementBaseActor), METH_O | METH_STATIC, nullptr },
+	{ "GetMovementBaseOwner", UPyCFunctionCast(&FMethods_Pawn::CallGetMovementBaseOwner), METH_O | METH_STATIC, nullptr },
 	{ "GetMovementComponent", UPyCFunctionCast(&FMethods_Pawn::CallGetMovementComponent), METH_NOARGS, nullptr },
 	{ "GetNavAgentLocation", UPyCFunctionCast(&FMethods_Pawn::CallGetNavAgentLocation), METH_NOARGS, nullptr },
 	{ "GetOverrideInputComponentClass", UPyCFunctionCast(&FMethods_Pawn::CallGetOverrideInputComponentClass), METH_NOARGS, nullptr },

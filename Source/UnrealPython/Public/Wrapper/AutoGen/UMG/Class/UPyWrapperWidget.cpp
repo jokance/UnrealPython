@@ -1770,6 +1770,16 @@ struct FMethods_Widget
 		Py_RETURN_NONE;
 	}
 
+	static PyObject* CallSupportsKeyboardFocus(FUPyWrapperWidget* InSelf, PyObject* Py_UNUSED(InUnused))
+	{
+		if (!InSelf->ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		const bool bResult = InSelf->ValuePtr()->SupportsKeyboardFocus();
+		return PyBool_FromLong(bResult ? 1 : 0);
+	}
+
 };
 
 
@@ -1830,6 +1840,7 @@ static PyMethodDef FUPyWrapperWidgetPyMethodDefs[] = {
 	{ "SetToolTipText", UPyCFunctionCast(&FMethods_Widget::CallSetToolTipText), METH_O, nullptr },
 	{ "SetUserFocus", UPyCFunctionCast(&FMethods_Widget::CallSetUserFocus), METH_O, nullptr },
 	{ "SetVisibility", UPyCFunctionCast(&FMethods_Widget::CallSetVisibility), METH_O, nullptr },
+	{ "SupportsKeyboardFocus", UPyCFunctionCast(&FMethods_Widget::CallSupportsKeyboardFocus), METH_NOARGS, nullptr },
 	{ nullptr }
 };
 

@@ -192,7 +192,7 @@ namespace UPyConversion
 
 		UPYCONVERSION_RETURN(FUPyConversionResult::Failure(), TEXT("NativizeStructInstance"), *FString::Printf(TEXT("Cannot nativize '%s' as 'FVector4'"), *UPyUtil::GetFriendlyTypename(PyObj)));
 	}
-
+	
 	FUPyConversionResult PythonizeStructInstance(const FVector4& InVal, PyObject*& OutPyObj, const ESetErrorState SetErrorState)
 	{
 		OutPyObj = FUPyWrapperVector4::CreateInstance(InVal, FUPyWrapperOwnerContext(), EUPyConversionMethod::Copy);

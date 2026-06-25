@@ -5,11 +5,12 @@
 #include "Wrapper/UPyWrapperTypeRegistry.h"
 #include "Wrapper/UPyWrapperTypeFactory.h"
 #include "Utils/UPyUtil.h"
+#include "Components/Widget.h"
+#include "Blueprint/WidgetLayoutLibrary.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/Object.h"
 #include "GameFramework/PlayerController.h"
 #include "Layout/Geometry.h"
-#include "Components/Widget.h"
 #include "Components/BorderSlot.h"
 #include "Components/CanvasPanelSlot.h"
 #include "Components/GridSlot.h"
@@ -37,6 +38,19 @@ PyTypeObject UPyWrapperWidgetLayoutLibraryType = {
 
 struct FMethods_WidgetLayoutLibrary
 {
+	static PyObject* CallGetDesignTimeInfo(FUPyWrapperWidgetLayoutLibrary* InSelf, PyObject* InArg)
+	{
+		UWidget* Arg0 = nullptr;
+		if (!UPyConversion::Nativize(InArg, Arg0))
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("WidgetLayoutLibrary::GetDesignTimeInfo"), TEXT("invalid argument"));
+			return nullptr;
+		}
+
+		const auto Result = UWidgetLayoutLibrary::GetDesignTimeInfo(Arg0);
+		return UPyConversion::PythonizeStructInstance(Result);
+	}
+
 	static PyObject* CallGetMousePositionOnPlatform(FUPyWrapperWidgetLayoutLibrary* InSelf, PyObject* Py_UNUSED(InUnused))
 	{
 		const auto Result = UWidgetLayoutLibrary::GetMousePositionOnPlatform();
@@ -395,6 +409,7 @@ struct FMethods_WidgetLayoutLibrary
 
 
 static PyMethodDef FUPyWrapperWidgetLayoutLibraryPyMethodDefs[] = {
+	{ "GetDesignTimeInfo", UPyCFunctionCast(&FMethods_WidgetLayoutLibrary::CallGetDesignTimeInfo), METH_O | METH_STATIC, nullptr },
 	{ "GetMousePositionOnPlatform", UPyCFunctionCast(&FMethods_WidgetLayoutLibrary::CallGetMousePositionOnPlatform), METH_NOARGS | METH_STATIC, nullptr },
 	{ "GetMousePositionOnViewport", UPyCFunctionCast(&FMethods_WidgetLayoutLibrary::CallGetMousePositionOnViewport), METH_O | METH_STATIC, nullptr },
 	{ "GetMousePositionScaledByDPI", UPyCFunctionCast(&FMethods_WidgetLayoutLibrary::CallGetMousePositionScaledByDPI), METH_O | METH_STATIC, nullptr },

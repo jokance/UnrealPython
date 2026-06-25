@@ -131,6 +131,42 @@ struct FGetSets_ScrollBox
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnFocusReceived(), "OnFocusReceived");
 	}
 
+	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnFocusUpdated()
+	{
+		static bool bInitialized = false;
+		static UPyGenUtil::FGeneratedWrappedProperty Property;
+		if (!bInitialized)
+		{
+			if (const UClass* Class = UScrollBox::StaticClass())
+			{
+				if (const FProperty* FoundProperty = Class->FindPropertyByName(TEXT("OnFocusUpdated")))
+				{
+					Property.SetProperty(FoundProperty);
+				}
+			}
+			bInitialized = true;
+		}
+		return Property;
+	}
+
+	static PyObject* GetOnFocusUpdated(FUPyWrapperScrollBox* InSelf, void* InClosure)
+	{
+		if (!FUPyWrapperScrollBox::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnFocusUpdated(), "OnFocusUpdated");
+	}
+
+	static int SetOnFocusUpdated(FUPyWrapperScrollBox* InSelf, PyObject* InValue, void* InClosure)
+	{
+		if (!FUPyWrapperScrollBox::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnFocusUpdated(), "OnFocusUpdated");
+	}
+
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnScrollBarVisibilityChanged()
 	{
 		static bool bInitialized = false;
@@ -354,6 +390,7 @@ static PyGetSetDef FUPyWrapperScrollBoxGetSets[] = {
 	{ UPyCStrCast("AnalogMouseWheelKey"), (getter)&FGetSets_ScrollBox::GetAnalogMouseWheelKey, (setter)&FGetSets_ScrollBox::SetAnalogMouseWheelKey, nullptr, nullptr },
 	{ UPyCStrCast("OnFocusLost"), (getter)&FGetSets_ScrollBox::GetOnFocusLost, (setter)&FGetSets_ScrollBox::SetOnFocusLost, nullptr, nullptr },
 	{ UPyCStrCast("OnFocusReceived"), (getter)&FGetSets_ScrollBox::GetOnFocusReceived, (setter)&FGetSets_ScrollBox::SetOnFocusReceived, nullptr, nullptr },
+	{ UPyCStrCast("OnFocusUpdated"), (getter)&FGetSets_ScrollBox::GetOnFocusUpdated, (setter)&FGetSets_ScrollBox::SetOnFocusUpdated, nullptr, nullptr },
 	{ UPyCStrCast("OnScrollBarVisibilityChanged"), (getter)&FGetSets_ScrollBox::GetOnScrollBarVisibilityChanged, (setter)&FGetSets_ScrollBox::SetOnScrollBarVisibilityChanged, nullptr, nullptr },
 	{ UPyCStrCast("OnUserScrolled"), (getter)&FGetSets_ScrollBox::GetOnUserScrolled, (setter)&FGetSets_ScrollBox::SetOnUserScrolled, nullptr, nullptr },
 	{ UPyCStrCast("ScrollAnimationInterpolationSpeed"), (getter)&FGetSets_ScrollBox::GetScrollAnimationInterpolationSpeed, (setter)&FGetSets_ScrollBox::SetScrollAnimationInterpolationSpeed, nullptr, nullptr },

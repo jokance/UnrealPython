@@ -6,10 +6,10 @@
 #include "Wrapper/UPyWrapperTypeFactory.h"
 #include "Utils/UPyUtil.h"
 #include "Components/WidgetComponent.h"
+#include "Engine/TextureRenderTarget2D.h"
 #include "UObject/NoExportTypes.h"
 #include "Materials/MaterialInstanceDynamic.h"
 #include "Engine/LocalPlayer.h"
-#include "Engine/TextureRenderTarget2D.h"
 #include "Blueprint/UserWidget.h"
 
 
@@ -660,6 +660,42 @@ struct FGetSets_WidgetComponent
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_RenderTarget(), "RenderTarget");
 	}
 
+	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_RenderTargetFormatOverride()
+	{
+		static bool bInitialized = false;
+		static UPyGenUtil::FGeneratedWrappedProperty Property;
+		if (!bInitialized)
+		{
+			if (const UClass* Class = UWidgetComponent::StaticClass())
+			{
+				if (const FProperty* FoundProperty = Class->FindPropertyByName(TEXT("RenderTargetFormatOverride")))
+				{
+					Property.SetProperty(FoundProperty);
+				}
+			}
+			bInitialized = true;
+		}
+		return Property;
+	}
+
+	static PyObject* GetRenderTargetFormatOverride(FUPyWrapperWidgetComponent* InSelf, void* InClosure)
+	{
+		if (!FUPyWrapperWidgetComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_RenderTargetFormatOverride(), "RenderTargetFormatOverride");
+	}
+
+	static int SetRenderTargetFormatOverride(FUPyWrapperWidgetComponent* InSelf, PyObject* InValue, void* InClosure)
+	{
+		if (!FUPyWrapperWidgetComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_RenderTargetFormatOverride(), "RenderTargetFormatOverride");
+	}
+
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_SharedLayerName()
 	{
 		static bool bInitialized = false;
@@ -1263,6 +1299,42 @@ struct FGetSets_WidgetComponent
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bManuallyRedraw(), "bManuallyRedraw");
 	}
 
+	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_bOverrideRenderTargetFormat()
+	{
+		static bool bInitialized = false;
+		static UPyGenUtil::FGeneratedWrappedProperty Property;
+		if (!bInitialized)
+		{
+			if (const UClass* Class = UWidgetComponent::StaticClass())
+			{
+				if (const FProperty* FoundProperty = Class->FindPropertyByName(TEXT("bOverrideRenderTargetFormat")))
+				{
+					Property.SetProperty(FoundProperty);
+				}
+			}
+			bInitialized = true;
+		}
+		return Property;
+	}
+
+	static PyObject* GetbOverrideRenderTargetFormat(FUPyWrapperWidgetComponent* InSelf, void* InClosure)
+	{
+		if (!FUPyWrapperWidgetComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bOverrideRenderTargetFormat(), "bOverrideRenderTargetFormat");
+	}
+
+	static int SetbOverrideRenderTargetFormat(FUPyWrapperWidgetComponent* InSelf, PyObject* InValue, void* InClosure)
+	{
+		if (!FUPyWrapperWidgetComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bOverrideRenderTargetFormat(), "bOverrideRenderTargetFormat");
+	}
+
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_bReceiveHardwareInput()
 	{
 		static bool bInitialized = false;
@@ -1429,6 +1501,7 @@ static PyGetSetDef FUPyWrapperWidgetComponentGetSets[] = {
 	{ UPyCStrCast("Pivot"), (getter)&FGetSets_WidgetComponent::GetPivot, (setter)&FGetSets_WidgetComponent::SetPivot, nullptr, nullptr },
 	{ UPyCStrCast("RedrawTime"), (getter)&FGetSets_WidgetComponent::GetRedrawTime, (setter)&FGetSets_WidgetComponent::SetRedrawTime, nullptr, nullptr },
 	{ UPyCStrCast("RenderTarget"), (getter)&FGetSets_WidgetComponent::GetRenderTarget, (setter)&FGetSets_WidgetComponent::SetRenderTarget, nullptr, nullptr },
+	{ UPyCStrCast("RenderTargetFormatOverride"), (getter)&FGetSets_WidgetComponent::GetRenderTargetFormatOverride, (setter)&FGetSets_WidgetComponent::SetRenderTargetFormatOverride, nullptr, nullptr },
 	{ UPyCStrCast("SharedLayerName"), (getter)&FGetSets_WidgetComponent::GetSharedLayerName, nullptr, nullptr, nullptr },
 	{ UPyCStrCast("Space"), (getter)&FGetSets_WidgetComponent::GetSpace, (setter)&FGetSets_WidgetComponent::SetSpace, nullptr, nullptr },
 	{ UPyCStrCast("TickMode"), (getter)&FGetSets_WidgetComponent::GetTickMode, (setter)&FGetSets_WidgetComponent::SetTickMode, nullptr, nullptr },
@@ -1446,6 +1519,7 @@ static PyGetSetDef FUPyWrapperWidgetComponentGetSets[] = {
 	{ UPyCStrCast("bEditTimeUsable"), (getter)&FGetSets_WidgetComponent::GetbEditTimeUsable, (setter)&FGetSets_WidgetComponent::SetbEditTimeUsable, nullptr, nullptr },
 	{ UPyCStrCast("bIsTwoSided"), (getter)&FGetSets_WidgetComponent::GetbIsTwoSided, (setter)&FGetSets_WidgetComponent::SetbIsTwoSided, nullptr, nullptr },
 	{ UPyCStrCast("bManuallyRedraw"), (getter)&FGetSets_WidgetComponent::GetbManuallyRedraw, (setter)&FGetSets_WidgetComponent::SetbManuallyRedraw, nullptr, nullptr },
+	{ UPyCStrCast("bOverrideRenderTargetFormat"), (getter)&FGetSets_WidgetComponent::GetbOverrideRenderTargetFormat, (setter)&FGetSets_WidgetComponent::SetbOverrideRenderTargetFormat, nullptr, nullptr },
 	{ UPyCStrCast("bReceiveHardwareInput"), (getter)&FGetSets_WidgetComponent::GetbReceiveHardwareInput, (setter)&FGetSets_WidgetComponent::SetbReceiveHardwareInput, nullptr, nullptr },
 	{ UPyCStrCast("bRedrawRequested"), (getter)&FGetSets_WidgetComponent::GetbRedrawRequested, (setter)&FGetSets_WidgetComponent::SetbRedrawRequested, nullptr, nullptr },
 	{ UPyCStrCast("bUseInvalidationInWorldSpace"), (getter)&FGetSets_WidgetComponent::GetbUseInvalidationInWorldSpace, (setter)&FGetSets_WidgetComponent::SetbUseInvalidationInWorldSpace, nullptr, nullptr },

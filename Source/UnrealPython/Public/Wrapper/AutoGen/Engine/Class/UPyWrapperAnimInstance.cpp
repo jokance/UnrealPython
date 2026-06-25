@@ -3100,6 +3100,16 @@ struct FMethods_AnimInstance
 		Py_RETURN_NONE;
 	}
 
+	static PyObject* CallResetSync(FUPyWrapperAnimInstance* InSelf, PyObject* Py_UNUSED(InUnused))
+	{
+		if (!InSelf->ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		InSelf->ValuePtr()->ResetSync();
+		Py_RETURN_NONE;
+	}
+
 	static PyObject* CallSavePoseSnapshot(FUPyWrapperAnimInstance* InSelf, PyObject* InArg)
 	{
 		if (!InSelf->ValidateInternalState(InSelf))
@@ -3680,6 +3690,7 @@ static PyMethodDef FUPyWrapperAnimInstancePyMethodDefs[] = {
 	{ "RequestSlotGroupInertialization", UPyCFunctionCast(&FMethods_AnimInstance::CallRequestSlotGroupInertialization), METH_VARARGS, nullptr },
 	{ "RequestTransitionEvent", UPyCFunctionCast(&FMethods_AnimInstance::CallRequestTransitionEvent), METH_VARARGS, nullptr },
 	{ "ResetDynamics", UPyCFunctionCast(&FMethods_AnimInstance::CallResetDynamics), METH_O, nullptr },
+	{ "ResetSync", UPyCFunctionCast(&FMethods_AnimInstance::CallResetSync), METH_NOARGS, nullptr },
 	{ "SavePoseSnapshot", UPyCFunctionCast(&FMethods_AnimInstance::CallSavePoseSnapshot), METH_O, nullptr },
 	{ "SetMorphTarget", UPyCFunctionCast(&FMethods_AnimInstance::CallSetMorphTarget), METH_VARARGS, nullptr },
 	{ "SetPropagateNotifiesToLinkedInstances", UPyCFunctionCast(&FMethods_AnimInstance::CallSetPropagateNotifiesToLinkedInstances), METH_O, nullptr },

@@ -1135,6 +1135,42 @@ struct FGetSets_Character
 		return -1;
 	}
 
+	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_bProxyIsCharacterMovementActive()
+	{
+		static bool bInitialized = false;
+		static UPyGenUtil::FGeneratedWrappedProperty Property;
+		if (!bInitialized)
+		{
+			if (const UClass* Class = ACharacter::StaticClass())
+			{
+				if (const FProperty* FoundProperty = Class->FindPropertyByName(TEXT("bProxyIsCharacterMovementActive")))
+				{
+					Property.SetProperty(FoundProperty);
+				}
+			}
+			bInitialized = true;
+		}
+		return Property;
+	}
+
+	static PyObject* GetbProxyIsCharacterMovementActive(FUPyWrapperCharacter* InSelf, void* InClosure)
+	{
+		if (!FUPyWrapperCharacter::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bProxyIsCharacterMovementActive(), "bProxyIsCharacterMovementActive");
+	}
+
+	static int SetbProxyIsCharacterMovementActive(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
+	{
+		if (!FUPyWrapperCharacter::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bProxyIsCharacterMovementActive(), "bProxyIsCharacterMovementActive");
+	}
+
 	static PyObject* GetbProxyIsJumpForceApplied(FUPyWrapperCharacter* InSelf, void* InClosure)
 	{
 		if (!FUPyWrapperCharacter::ValidateInternalState(InSelf))
@@ -1278,6 +1314,7 @@ static PyGetSetDef FUPyWrapperCharacterGetSets[] = {
 	{ UPyCStrCast("bInBaseReplication"), (getter)&FGetSets_Character::GetbInBaseReplication, (setter)&FGetSets_Character::SetbInBaseReplication, nullptr, nullptr },
 	{ UPyCStrCast("bIsCrouched"), (getter)&FGetSets_Character::GetbIsCrouched, (setter)&FGetSets_Character::SetbIsCrouched, nullptr, nullptr },
 	{ UPyCStrCast("bPressedJump"), (getter)&FGetSets_Character::GetbPressedJump, (setter)&FGetSets_Character::SetbPressedJump, nullptr, nullptr },
+	{ UPyCStrCast("bProxyIsCharacterMovementActive"), (getter)&FGetSets_Character::GetbProxyIsCharacterMovementActive, (setter)&FGetSets_Character::SetbProxyIsCharacterMovementActive, nullptr, nullptr },
 	{ UPyCStrCast("bProxyIsJumpForceApplied"), (getter)&FGetSets_Character::GetbProxyIsJumpForceApplied, (setter)&FGetSets_Character::SetbProxyIsJumpForceApplied, nullptr, nullptr },
 	{ UPyCStrCast("bServerMoveIgnoreRootMotion"), (getter)&FGetSets_Character::GetbServerMoveIgnoreRootMotion, (setter)&FGetSets_Character::SetbServerMoveIgnoreRootMotion, nullptr, nullptr },
 	{ UPyCStrCast("bSimGravityDisabled"), (getter)&FGetSets_Character::GetbSimGravityDisabled, (setter)&FGetSets_Character::SetbSimGravityDisabled, nullptr, nullptr },
@@ -1797,6 +1834,23 @@ struct FMethods_Character
 		Py_RETURN_NONE;
 	}
 
+	static PyObject* CallOnRep_IsCharacterMovementActive(FUPyWrapperCharacter* InSelf, PyObject* Py_UNUSED(InUnused))
+	{
+		if (!InSelf->ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		static UFunction* Func = ACharacter::StaticClass()->FindFunctionByName(TEXT("OnRep_IsCharacterMovementActive"));
+		if (Func)
+		{
+			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
+			FMemory::Memzero(Parms, Func->ParmsSize);
+			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
+			FMemory::Free(Parms);
+		}
+		Py_RETURN_NONE;
+	}
+
 	static PyObject* CallOnRep_IsCrouched(FUPyWrapperCharacter* InSelf, PyObject* Py_UNUSED(InUnused))
 	{
 		if (!InSelf->ValidateInternalState(InSelf))
@@ -2059,6 +2113,7 @@ static PyMethodDef FUPyWrapperCharacterPyMethodDefs[] = {
 	{ "OnJumped", UPyCFunctionCast(&FMethods_Character::CallOnJumped), METH_NOARGS, nullptr },
 	{ "OnLanded", UPyCFunctionCast(&FMethods_Character::CallOnLanded), METH_O, nullptr },
 	{ "OnLaunched", UPyCFunctionCast(&FMethods_Character::CallOnLaunched), METH_VARARGS, nullptr },
+	{ "OnRep_IsCharacterMovementActive", UPyCFunctionCast(&FMethods_Character::CallOnRep_IsCharacterMovementActive), METH_NOARGS, nullptr },
 	{ "OnRep_IsCrouched", UPyCFunctionCast(&FMethods_Character::CallOnRep_IsCrouched), METH_NOARGS, nullptr },
 	{ "OnRep_ReplayLastTransformUpdateTimeStamp", UPyCFunctionCast(&FMethods_Character::CallOnRep_ReplayLastTransformUpdateTimeStamp), METH_NOARGS, nullptr },
 	{ "OnRep_ReplicatedBasedMovement", UPyCFunctionCast(&FMethods_Character::CallOnRep_ReplicatedBasedMovement), METH_NOARGS, nullptr },

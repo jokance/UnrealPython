@@ -563,6 +563,114 @@ struct FGetSets_ListView
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_BP_OnListViewScrolled(), "BP_OnListViewScrolled");
 	}
 
+	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_BP_OnListViewTouchEnd()
+	{
+		static bool bInitialized = false;
+		static UPyGenUtil::FGeneratedWrappedProperty Property;
+		if (!bInitialized)
+		{
+			if (const UClass* Class = UListView::StaticClass())
+			{
+				if (const FProperty* FoundProperty = Class->FindPropertyByName(TEXT("BP_OnListViewTouchEnd")))
+				{
+					Property.SetProperty(FoundProperty);
+				}
+			}
+			bInitialized = true;
+		}
+		return Property;
+	}
+
+	static PyObject* GetBP_OnListViewTouchEnd(FUPyWrapperListView* InSelf, void* InClosure)
+	{
+		if (!FUPyWrapperListView::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_BP_OnListViewTouchEnd(), "BP_OnListViewTouchEnd");
+	}
+
+	static int SetBP_OnListViewTouchEnd(FUPyWrapperListView* InSelf, PyObject* InValue, void* InClosure)
+	{
+		if (!FUPyWrapperListView::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_BP_OnListViewTouchEnd(), "BP_OnListViewTouchEnd");
+	}
+
+	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_BP_OnListViewTouchMove()
+	{
+		static bool bInitialized = false;
+		static UPyGenUtil::FGeneratedWrappedProperty Property;
+		if (!bInitialized)
+		{
+			if (const UClass* Class = UListView::StaticClass())
+			{
+				if (const FProperty* FoundProperty = Class->FindPropertyByName(TEXT("BP_OnListViewTouchMove")))
+				{
+					Property.SetProperty(FoundProperty);
+				}
+			}
+			bInitialized = true;
+		}
+		return Property;
+	}
+
+	static PyObject* GetBP_OnListViewTouchMove(FUPyWrapperListView* InSelf, void* InClosure)
+	{
+		if (!FUPyWrapperListView::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_BP_OnListViewTouchMove(), "BP_OnListViewTouchMove");
+	}
+
+	static int SetBP_OnListViewTouchMove(FUPyWrapperListView* InSelf, PyObject* InValue, void* InClosure)
+	{
+		if (!FUPyWrapperListView::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_BP_OnListViewTouchMove(), "BP_OnListViewTouchMove");
+	}
+
+	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_BP_OnListViewTouchStart()
+	{
+		static bool bInitialized = false;
+		static UPyGenUtil::FGeneratedWrappedProperty Property;
+		if (!bInitialized)
+		{
+			if (const UClass* Class = UListView::StaticClass())
+			{
+				if (const FProperty* FoundProperty = Class->FindPropertyByName(TEXT("BP_OnListViewTouchStart")))
+				{
+					Property.SetProperty(FoundProperty);
+				}
+			}
+			bInitialized = true;
+		}
+		return Property;
+	}
+
+	static PyObject* GetBP_OnListViewTouchStart(FUPyWrapperListView* InSelf, void* InClosure)
+	{
+		if (!FUPyWrapperListView::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_BP_OnListViewTouchStart(), "BP_OnListViewTouchStart");
+	}
+
+	static int SetBP_OnListViewTouchStart(FUPyWrapperListView* InSelf, PyObject* InValue, void* InClosure)
+	{
+		if (!FUPyWrapperListView::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_BP_OnListViewTouchStart(), "BP_OnListViewTouchStart");
+	}
+
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_ConsumeMouseWheel()
 	{
 		static bool bInitialized = false;
@@ -1031,6 +1139,42 @@ struct FGetSets_ListView
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bClearSelectionOnClick(), "bClearSelectionOnClick");
 	}
 
+	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_bEnableProximateEntryNavigation()
+	{
+		static bool bInitialized = false;
+		static UPyGenUtil::FGeneratedWrappedProperty Property;
+		if (!bInitialized)
+		{
+			if (const UClass* Class = UListView::StaticClass())
+			{
+				if (const FProperty* FoundProperty = Class->FindPropertyByName(TEXT("bEnableProximateEntryNavigation")))
+				{
+					Property.SetProperty(FoundProperty);
+				}
+			}
+			bInitialized = true;
+		}
+		return Property;
+	}
+
+	static PyObject* GetbEnableProximateEntryNavigation(FUPyWrapperListView* InSelf, void* InClosure)
+	{
+		if (!FUPyWrapperListView::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bEnableProximateEntryNavigation(), "bEnableProximateEntryNavigation");
+	}
+
+	static int SetbEnableProximateEntryNavigation(FUPyWrapperListView* InSelf, PyObject* InValue, void* InClosure)
+	{
+		if (!FUPyWrapperListView::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bEnableProximateEntryNavigation(), "bEnableProximateEntryNavigation");
+	}
+
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_bEnableShadowBrush()
 	{
 		static bool bInitialized = false;
@@ -1158,6 +1302,9 @@ static PyGetSetDef FUPyWrapperListViewGetSets[] = {
 	{ UPyCStrCast("BP_OnListViewDraggingStateChanged"), (getter)&FGetSets_ListView::GetBP_OnListViewDraggingStateChanged, (setter)&FGetSets_ListView::SetBP_OnListViewDraggingStateChanged, nullptr, nullptr },
 	{ UPyCStrCast("BP_OnListViewFinishedScrolling"), (getter)&FGetSets_ListView::GetBP_OnListViewFinishedScrolling, (setter)&FGetSets_ListView::SetBP_OnListViewFinishedScrolling, nullptr, nullptr },
 	{ UPyCStrCast("BP_OnListViewScrolled"), (getter)&FGetSets_ListView::GetBP_OnListViewScrolled, (setter)&FGetSets_ListView::SetBP_OnListViewScrolled, nullptr, nullptr },
+	{ UPyCStrCast("BP_OnListViewTouchEnd"), (getter)&FGetSets_ListView::GetBP_OnListViewTouchEnd, (setter)&FGetSets_ListView::SetBP_OnListViewTouchEnd, nullptr, nullptr },
+	{ UPyCStrCast("BP_OnListViewTouchMove"), (getter)&FGetSets_ListView::GetBP_OnListViewTouchMove, (setter)&FGetSets_ListView::SetBP_OnListViewTouchMove, nullptr, nullptr },
+	{ UPyCStrCast("BP_OnListViewTouchStart"), (getter)&FGetSets_ListView::GetBP_OnListViewTouchStart, (setter)&FGetSets_ListView::SetBP_OnListViewTouchStart, nullptr, nullptr },
 	{ UPyCStrCast("ConsumeMouseWheel"), (getter)&FGetSets_ListView::GetConsumeMouseWheel, (setter)&FGetSets_ListView::SetConsumeMouseWheel, nullptr, nullptr },
 	{ UPyCStrCast("HorizontalEntrySpacing"), (getter)&FGetSets_ListView::GetHorizontalEntrySpacing, (setter)&FGetSets_ListView::SetHorizontalEntrySpacing, nullptr, nullptr },
 	{ UPyCStrCast("ListItems"), (getter)&FGetSets_ListView::GetListItems, (setter)&FGetSets_ListView::SetListItems, nullptr, nullptr },
@@ -1171,6 +1318,7 @@ static PyGetSetDef FUPyWrapperListViewGetSets[] = {
 	{ UPyCStrCast("WidgetStyle"), (getter)&FGetSets_ListView::GetWidgetStyle, (setter)&FGetSets_ListView::SetWidgetStyle, nullptr, nullptr },
 	{ UPyCStrCast("bClearScrollVelocityOnSelection"), (getter)&FGetSets_ListView::GetbClearScrollVelocityOnSelection, (setter)&FGetSets_ListView::SetbClearScrollVelocityOnSelection, nullptr, nullptr },
 	{ UPyCStrCast("bClearSelectionOnClick"), (getter)&FGetSets_ListView::GetbClearSelectionOnClick, (setter)&FGetSets_ListView::SetbClearSelectionOnClick, nullptr, nullptr },
+	{ UPyCStrCast("bEnableProximateEntryNavigation"), (getter)&FGetSets_ListView::GetbEnableProximateEntryNavigation, (setter)&FGetSets_ListView::SetbEnableProximateEntryNavigation, nullptr, nullptr },
 	{ UPyCStrCast("bEnableShadowBrush"), (getter)&FGetSets_ListView::GetbEnableShadowBrush, (setter)&FGetSets_ListView::SetbEnableShadowBrush, nullptr, nullptr },
 	{ UPyCStrCast("bIsFocusable"), (getter)&FGetSets_ListView::GetbIsFocusable, (setter)&FGetSets_ListView::SetbIsFocusable, nullptr, nullptr },
 	{ UPyCStrCast("bReturnFocusToSelection"), (getter)&FGetSets_ListView::GetbReturnFocusToSelection, (setter)&FGetSets_ListView::SetbReturnFocusToSelection, nullptr, nullptr },
@@ -1195,6 +1343,143 @@ struct FMethods_ListView
 		}
 
 		InSelf->ValuePtr()->AddItem(Arg0);
+		Py_RETURN_NONE;
+	}
+
+	static PyObject* CallAddItemAt(FUPyWrapperListView* InSelf, PyObject* InArgs)
+	{
+		if (!InSelf->ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		PyObject* PyArg0 = PyTuple_GetItem(InArgs, 0);
+		if (PyArg0 == nullptr)
+		{
+			return nullptr;
+		}
+		UObject* Arg0 = nullptr;
+		if (!UPyConversion::Nativize(PyArg0, Arg0))
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("ListView::AddItemAt"), TEXT("invalid argument"));
+			return nullptr;
+		}
+
+		PyObject* PyArg1 = PyTuple_GetItem(InArgs, 1);
+		if (PyArg1 == nullptr)
+		{
+			return nullptr;
+		}
+		int32 Arg1 = 0;
+		if (!UPyConversion::Nativize(PyArg1, Arg1))
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("ListView::AddItemAt"), TEXT("invalid argument"));
+			return nullptr;
+		}
+
+		InSelf->ValuePtr()->AddItemAt(Arg0, Arg1);
+		Py_RETURN_NONE;
+	}
+
+	static PyObject* CallAddItems(FUPyWrapperListView* InSelf, PyObject* InArg)
+	{
+		if (!InSelf->ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		TArray<UObject*> Arg0;
+		if (!PySequence_Check(InArg))
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("ListView::AddItems"), TEXT("invalid argument"));
+			return nullptr;
+		}
+		Py_ssize_t Len_Arg0 = PySequence_Size(InArg);
+		int32 ElementCount_Arg0 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg0, ElementCount_Arg0, TEXT("Array")) != 0)
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("ListView::AddItems"), TEXT("invalid argument"));
+			return nullptr;
+		}
+		Arg0.SetNum(ElementCount_Arg0);
+		for (int32 i = 0; i < ElementCount_Arg0; ++i)
+		{
+			PyObject* Item = PySequence_GetItem(InArg, i);
+			if (!Item)
+			{
+				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("ListView::AddItems"), TEXT("invalid argument"));
+				return nullptr;
+	
+			}
+			if (!UPyConversion::Nativize(Item, Arg0[i]))
+			{
+				Py_DECREF(Item);
+				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("ListView::AddItems"), TEXT("invalid argument"));
+				return nullptr;
+	
+			}
+			Py_DECREF(Item);
+		}
+
+		InSelf->ValuePtr()->AddItems(Arg0);
+		Py_RETURN_NONE;
+	}
+
+	static PyObject* CallAddItemsAt(FUPyWrapperListView* InSelf, PyObject* InArgs)
+	{
+		if (!InSelf->ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		PyObject* PyArg0 = PyTuple_GetItem(InArgs, 0);
+		if (PyArg0 == nullptr)
+		{
+			return nullptr;
+		}
+		TArray<UObject*> Arg0;
+		if (!PySequence_Check(PyArg0))
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("ListView::AddItemsAt"), TEXT("invalid argument"));
+			return nullptr;
+		}
+		Py_ssize_t Len_Arg0 = PySequence_Size(PyArg0);
+		int32 ElementCount_Arg0 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg0, ElementCount_Arg0, TEXT("Array")) != 0)
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("ListView::AddItemsAt"), TEXT("invalid argument"));
+			return nullptr;
+		}
+		Arg0.SetNum(ElementCount_Arg0);
+		for (int32 i = 0; i < ElementCount_Arg0; ++i)
+		{
+			PyObject* Item = PySequence_GetItem(PyArg0, i);
+			if (!Item)
+			{
+				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("ListView::AddItemsAt"), TEXT("invalid argument"));
+				return nullptr;
+	
+			}
+			if (!UPyConversion::Nativize(Item, Arg0[i]))
+			{
+				Py_DECREF(Item);
+				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("ListView::AddItemsAt"), TEXT("invalid argument"));
+				return nullptr;
+	
+			}
+			Py_DECREF(Item);
+		}
+
+		PyObject* PyArg1 = PyTuple_GetItem(InArgs, 1);
+		if (PyArg1 == nullptr)
+		{
+			return nullptr;
+		}
+		int32 Arg1 = 0;
+		if (!UPyConversion::Nativize(PyArg1, Arg1))
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("ListView::AddItemsAt"), TEXT("invalid argument"));
+			return nullptr;
+		}
+
+		InSelf->ValuePtr()->AddItemsAt(Arg0, Arg1);
 		Py_RETURN_NONE;
 	}
 
@@ -1493,14 +1778,14 @@ struct FMethods_ListView
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("ListView::BP_SetListItems"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("ListView::BP_SetListItems"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -1796,6 +2081,49 @@ struct FMethods_ListView
 		Py_RETURN_NONE;
 	}
 
+	static PyObject* CallRemoveItems(FUPyWrapperListView* InSelf, PyObject* InArg)
+	{
+		if (!InSelf->ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		TArray<UObject*> Arg0;
+		if (!PySequence_Check(InArg))
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("ListView::RemoveItems"), TEXT("invalid argument"));
+			return nullptr;
+		}
+		Py_ssize_t Len_Arg0 = PySequence_Size(InArg);
+		int32 ElementCount_Arg0 = 0;
+		if (UPyUtil::ValidateContainerLenValue(Len_Arg0, ElementCount_Arg0, TEXT("Array")) != 0)
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("ListView::RemoveItems"), TEXT("invalid argument"));
+			return nullptr;
+		}
+		Arg0.SetNum(ElementCount_Arg0);
+		for (int32 i = 0; i < ElementCount_Arg0; ++i)
+		{
+			PyObject* Item = PySequence_GetItem(InArg, i);
+			if (!Item)
+			{
+				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("ListView::RemoveItems"), TEXT("invalid argument"));
+				return nullptr;
+	
+			}
+			if (!UPyConversion::Nativize(Item, Arg0[i]))
+			{
+				Py_DECREF(Item);
+				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("ListView::RemoveItems"), TEXT("invalid argument"));
+				return nullptr;
+	
+			}
+			Py_DECREF(Item);
+		}
+
+		InSelf->ValuePtr()->RemoveItems(Arg0);
+		Py_RETURN_NONE;
+	}
+
 	static PyObject* CallScrollIndexIntoView(FUPyWrapperListView* InSelf, PyObject* InArg)
 	{
 		if (!InSelf->ValidateInternalState(InSelf))
@@ -1810,6 +2138,40 @@ struct FMethods_ListView
 		}
 
 		InSelf->ValuePtr()->ScrollIndexIntoView(Arg0);
+		Py_RETURN_NONE;
+	}
+
+	static PyObject* CallSetEnableProximateEntryNavigation(FUPyWrapperListView* InSelf, PyObject* InArg)
+	{
+		if (!InSelf->ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		bool Arg0 = false;
+		if (!UPyConversion::Nativize(InArg, Arg0))
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("ListView::SetEnableProximateEntryNavigation"), TEXT("invalid argument"));
+			return nullptr;
+		}
+
+		InSelf->ValuePtr()->SetEnableProximateEntryNavigation(Arg0);
+		Py_RETURN_NONE;
+	}
+
+	static PyObject* CallSetReturnFocusToSelection(FUPyWrapperListView* InSelf, PyObject* InArg)
+	{
+		if (!InSelf->ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		bool Arg0 = false;
+		if (!UPyConversion::Nativize(InArg, Arg0))
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("ListView::SetReturnFocusToSelection"), TEXT("invalid argument"));
+			return nullptr;
+		}
+
+		InSelf->ValuePtr()->SetReturnFocusToSelection(Arg0);
 		Py_RETURN_NONE;
 	}
 
@@ -1886,6 +2248,9 @@ struct FMethods_ListView
 
 static PyMethodDef FUPyWrapperListViewPyMethodDefs[] = {
 	{ "AddItem", UPyCFunctionCast(&FMethods_ListView::CallAddItem), METH_O, nullptr },
+	{ "AddItemAt", UPyCFunctionCast(&FMethods_ListView::CallAddItemAt), METH_VARARGS, nullptr },
+	{ "AddItems", UPyCFunctionCast(&FMethods_ListView::CallAddItems), METH_O, nullptr },
+	{ "AddItemsAt", UPyCFunctionCast(&FMethods_ListView::CallAddItemsAt), METH_VARARGS, nullptr },
 	{ "BP_CancelScrollIntoView", UPyCFunctionCast(&FMethods_ListView::CallBP_CancelScrollIntoView), METH_NOARGS, nullptr },
 	{ "BP_ClearSelection", UPyCFunctionCast(&FMethods_ListView::CallBP_ClearSelection), METH_NOARGS, nullptr },
 	{ "BP_GetNumItemsSelected", UPyCFunctionCast(&FMethods_ListView::CallBP_GetNumItemsSelected), METH_NOARGS, nullptr },
@@ -1910,7 +2275,10 @@ static PyMethodDef FUPyWrapperListViewPyMethodDefs[] = {
 	{ "OnListItemEndPlayed", UPyCFunctionCast(&FMethods_ListView::CallOnListItemEndPlayed), METH_VARARGS, nullptr },
 	{ "OnListItemOuterEndPlayed", UPyCFunctionCast(&FMethods_ListView::CallOnListItemOuterEndPlayed), METH_VARARGS, nullptr },
 	{ "RemoveItem", UPyCFunctionCast(&FMethods_ListView::CallRemoveItem), METH_O, nullptr },
+	{ "RemoveItems", UPyCFunctionCast(&FMethods_ListView::CallRemoveItems), METH_O, nullptr },
 	{ "ScrollIndexIntoView", UPyCFunctionCast(&FMethods_ListView::CallScrollIndexIntoView), METH_O, nullptr },
+	{ "SetEnableProximateEntryNavigation", UPyCFunctionCast(&FMethods_ListView::CallSetEnableProximateEntryNavigation), METH_O, nullptr },
+	{ "SetReturnFocusToSelection", UPyCFunctionCast(&FMethods_ListView::CallSetReturnFocusToSelection), METH_O, nullptr },
 	{ "SetScrollBarPadding", UPyCFunctionCast(&FMethods_ListView::CallSetScrollBarPadding), METH_O, nullptr },
 	{ "SetScrollIntoViewAlignment", UPyCFunctionCast(&FMethods_ListView::CallSetScrollIntoViewAlignment), METH_O, nullptr },
 	{ "SetSelectedIndex", UPyCFunctionCast(&FMethods_ListView::CallSetSelectedIndex), METH_O, nullptr },

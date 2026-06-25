@@ -1060,6 +1060,16 @@ struct FMethods_ListViewBase
 		return PyBool_FromLong(bResult ? 1 : 0);
 	}
 
+	static PyObject* CallGetOverscroll(FUPyWrapperListViewBase* InSelf, PyObject* Py_UNUSED(InUnused))
+	{
+		if (!InSelf->ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		const auto Result = InSelf->ValuePtr()->GetOverscroll();
+		return UPyConversion::Pythonize(Result);
+	}
+
 	static PyObject* CallGetScrollOffset(FUPyWrapperListViewBase* InSelf, PyObject* Py_UNUSED(InUnused))
 	{
 		if (!InSelf->ValidateInternalState(InSelf))
@@ -1068,6 +1078,16 @@ struct FMethods_ListViewBase
 		}
 		const auto Result = InSelf->ValuePtr()->GetScrollOffset();
 		return UPyConversion::Pythonize(Result);
+	}
+
+	static PyObject* CallGetScrollbarVisibility(FUPyWrapperListViewBase* InSelf, PyObject* Py_UNUSED(InUnused))
+	{
+		if (!InSelf->ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		const auto Result = InSelf->ValuePtr()->GetScrollbarVisibility();
+		return UPyConversion::PythonizeEnumEntry((int64)Result, StaticEnum<ESlateVisibility>());
 	}
 
 	static PyObject* CallRegenerateAllEntries(FUPyWrapperListViewBase* InSelf, PyObject* Py_UNUSED(InUnused))
@@ -1161,6 +1181,23 @@ struct FMethods_ListViewBase
 		Py_RETURN_NONE;
 	}
 
+	static PyObject* CallSetIsTouchScrollingEnabled(FUPyWrapperListViewBase* InSelf, PyObject* InArg)
+	{
+		if (!InSelf->ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		bool Arg0 = false;
+		if (!UPyConversion::Nativize(InArg, Arg0))
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("ListViewBase::SetIsTouchScrollingEnabled"), TEXT("invalid argument"));
+			return nullptr;
+		}
+
+		InSelf->ValuePtr()->SetIsTouchScrollingEnabled(Arg0);
+		Py_RETURN_NONE;
+	}
+
 	static PyObject* CallSetScrollOffset(FUPyWrapperListViewBase* InSelf, PyObject* InArg)
 	{
 		if (!InSelf->ValidateInternalState(InSelf))
@@ -1220,7 +1257,9 @@ static PyMethodDef FUPyWrapperListViewBasePyMethodDefs[] = {
 	{ "EndInertialScrolling", UPyCFunctionCast(&FMethods_ListViewBase::CallEndInertialScrolling), METH_NOARGS, nullptr },
 	{ "GetDisplayedEntryWidgets", UPyCFunctionCast(&FMethods_ListViewBase::CallGetDisplayedEntryWidgets), METH_NOARGS, nullptr },
 	{ "GetIsDraggingListItem", UPyCFunctionCast(&FMethods_ListViewBase::CallGetIsDraggingListItem), METH_NOARGS, nullptr },
+	{ "GetOverscroll", UPyCFunctionCast(&FMethods_ListViewBase::CallGetOverscroll), METH_NOARGS, nullptr },
 	{ "GetScrollOffset", UPyCFunctionCast(&FMethods_ListViewBase::CallGetScrollOffset), METH_NOARGS, nullptr },
+	{ "GetScrollbarVisibility", UPyCFunctionCast(&FMethods_ListViewBase::CallGetScrollbarVisibility), METH_NOARGS, nullptr },
 	{ "RegenerateAllEntries", UPyCFunctionCast(&FMethods_ListViewBase::CallRegenerateAllEntries), METH_NOARGS, nullptr },
 	{ "RequestRefresh", UPyCFunctionCast(&FMethods_ListViewBase::CallRequestRefresh), METH_NOARGS, nullptr },
 	{ "ScrollToBottom", UPyCFunctionCast(&FMethods_ListViewBase::CallScrollToBottom), METH_NOARGS, nullptr },
@@ -1228,6 +1267,7 @@ static PyMethodDef FUPyWrapperListViewBasePyMethodDefs[] = {
 	{ "SetAllowOverScroll", UPyCFunctionCast(&FMethods_ListViewBase::CallSetAllowOverScroll), METH_O, nullptr },
 	{ "SetIsGamepadScrollingEnabled", UPyCFunctionCast(&FMethods_ListViewBase::CallSetIsGamepadScrollingEnabled), METH_O, nullptr },
 	{ "SetIsPointerScrollingEnabled", UPyCFunctionCast(&FMethods_ListViewBase::CallSetIsPointerScrollingEnabled), METH_O, nullptr },
+	{ "SetIsTouchScrollingEnabled", UPyCFunctionCast(&FMethods_ListViewBase::CallSetIsTouchScrollingEnabled), METH_O, nullptr },
 	{ "SetScrollOffset", UPyCFunctionCast(&FMethods_ListViewBase::CallSetScrollOffset), METH_O, nullptr },
 	{ "SetScrollbarVisibility", UPyCFunctionCast(&FMethods_ListViewBase::CallSetScrollbarVisibility), METH_O, nullptr },
 	{ "SetWheelScrollMultiplier", UPyCFunctionCast(&FMethods_ListViewBase::CallSetWheelScrollMultiplier), METH_O, nullptr },

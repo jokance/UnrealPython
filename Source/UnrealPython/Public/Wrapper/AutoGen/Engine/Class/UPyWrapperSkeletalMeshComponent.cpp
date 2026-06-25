@@ -1173,31 +1173,6 @@ struct FGetSets_SkeletalMeshComponent
 		return -1;
 	}
 
-	static PyObject* GetbCollideWithAttachedChildren(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperSkeletalMeshComponent::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return UPyConversion::Pythonize(InSelf->ValuePtr()->bCollideWithAttachedChildren);
-	}
-
-	static int SetbCollideWithAttachedChildren(FUPyWrapperSkeletalMeshComponent* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperSkeletalMeshComponent::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		bool bTemp = false;
-		if (UPyConversion::Nativize(InValue, bTemp))
-		{
-			InSelf->ValuePtr()->bCollideWithAttachedChildren = bTemp;
-			return 0;
-		}
-		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("SkeletalMeshComponent::bCollideWithAttachedChildren"), TEXT("value is not bool"));
-		return -1;
-	}
-
 	static PyObject* GetbCollideWithEnvironment(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
 	{
 		if (!FUPyWrapperSkeletalMeshComponent::ValidateInternalState(InSelf))
@@ -1246,6 +1221,42 @@ struct FGetSets_SkeletalMeshComponent
 		}
 		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("SkeletalMeshComponent::bDeferKinematicBoneUpdate"), TEXT("value is not bool"));
 		return -1;
+	}
+
+	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_bDisableAnimDynamicsAnimNode()
+	{
+		static bool bInitialized = false;
+		static UPyGenUtil::FGeneratedWrappedProperty Property;
+		if (!bInitialized)
+		{
+			if (const UClass* Class = USkeletalMeshComponent::StaticClass())
+			{
+				if (const FProperty* FoundProperty = Class->FindPropertyByName(TEXT("bDisableAnimDynamicsAnimNode")))
+				{
+					Property.SetProperty(FoundProperty);
+				}
+			}
+			bInitialized = true;
+		}
+		return Property;
+	}
+
+	static PyObject* GetbDisableAnimDynamicsAnimNode(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
+	{
+		if (!FUPyWrapperSkeletalMeshComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_bDisableAnimDynamicsAnimNode(), "bDisableAnimDynamicsAnimNode");
+	}
+
+	static int SetbDisableAnimDynamicsAnimNode(FUPyWrapperSkeletalMeshComponent* InSelf, PyObject* InValue, void* InClosure)
+	{
+		if (!FUPyWrapperSkeletalMeshComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_bDisableAnimDynamicsAnimNode(), "bDisableAnimDynamicsAnimNode");
 	}
 
 	static PyObject* GetbDisableClothSimulation(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
@@ -1905,6 +1916,31 @@ struct FGetSets_SkeletalMeshComponent
 		return -1;
 	}
 
+	static PyObject* GetbSuppressNotifyEventDispatch(FUPyWrapperSkeletalMeshComponent* InSelf, void* InClosure)
+	{
+		if (!FUPyWrapperSkeletalMeshComponent::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		return UPyConversion::Pythonize(InSelf->ValuePtr()->bSuppressNotifyEventDispatch);
+	}
+
+	static int SetbSuppressNotifyEventDispatch(FUPyWrapperSkeletalMeshComponent* InSelf, PyObject* InValue, void* InClosure)
+	{
+		if (!FUPyWrapperSkeletalMeshComponent::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
+		bool bTemp = false;
+		if (UPyConversion::Nativize(InValue, bTemp))
+		{
+			InSelf->ValuePtr()->bSuppressNotifyEventDispatch = bTemp;
+			return 0;
+		}
+		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("SkeletalMeshComponent::bSuppressNotifyEventDispatch"), TEXT("value is not bool"));
+		return -1;
+	}
+
 #if WITH_EDITOR
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_bUpdateAnimationInEditor()
 	{
@@ -2152,9 +2188,9 @@ static PyGetSetDef FUPyWrapperSkeletalMeshComponentGetSets[] = {
 	{ UPyCStrCast("bAllowClothActors"), (getter)&FGetSets_SkeletalMeshComponent::GetbAllowClothActors, (setter)&FGetSets_SkeletalMeshComponent::SetbAllowClothActors, nullptr, nullptr },
 	{ UPyCStrCast("bAnimTreeInitialised"), (getter)&FGetSets_SkeletalMeshComponent::GetbAnimTreeInitialised, (setter)&FGetSets_SkeletalMeshComponent::SetbAnimTreeInitialised, nullptr, nullptr },
 	{ UPyCStrCast("bBlendPhysics"), (getter)&FGetSets_SkeletalMeshComponent::GetbBlendPhysics, (setter)&FGetSets_SkeletalMeshComponent::SetbBlendPhysics, nullptr, nullptr },
-	{ UPyCStrCast("bCollideWithAttachedChildren"), (getter)&FGetSets_SkeletalMeshComponent::GetbCollideWithAttachedChildren, (setter)&FGetSets_SkeletalMeshComponent::SetbCollideWithAttachedChildren, nullptr, nullptr },
 	{ UPyCStrCast("bCollideWithEnvironment"), (getter)&FGetSets_SkeletalMeshComponent::GetbCollideWithEnvironment, (setter)&FGetSets_SkeletalMeshComponent::SetbCollideWithEnvironment, nullptr, nullptr },
 	{ UPyCStrCast("bDeferKinematicBoneUpdate"), (getter)&FGetSets_SkeletalMeshComponent::GetbDeferKinematicBoneUpdate, (setter)&FGetSets_SkeletalMeshComponent::SetbDeferKinematicBoneUpdate, nullptr, nullptr },
+	{ UPyCStrCast("bDisableAnimDynamicsAnimNode"), (getter)&FGetSets_SkeletalMeshComponent::GetbDisableAnimDynamicsAnimNode, (setter)&FGetSets_SkeletalMeshComponent::SetbDisableAnimDynamicsAnimNode, nullptr, nullptr },
 	{ UPyCStrCast("bDisableClothSimulation"), (getter)&FGetSets_SkeletalMeshComponent::GetbDisableClothSimulation, (setter)&FGetSets_SkeletalMeshComponent::SetbDisableClothSimulation, nullptr, nullptr },
 	{ UPyCStrCast("bDisablePostProcessBlueprint"), (getter)&FGetSets_SkeletalMeshComponent::GetbDisablePostProcessBlueprint, (setter)&FGetSets_SkeletalMeshComponent::SetbDisablePostProcessBlueprint, nullptr, nullptr },
 	{ UPyCStrCast("bDisableRigidBodyAnimNode"), (getter)&FGetSets_SkeletalMeshComponent::GetbDisableRigidBodyAnimNode, (setter)&FGetSets_SkeletalMeshComponent::SetbDisableRigidBodyAnimNode, nullptr, nullptr },
@@ -2181,6 +2217,7 @@ static PyGetSetDef FUPyWrapperSkeletalMeshComponentGetSets[] = {
 	{ UPyCStrCast("bShowPrePhysBones"), (getter)&FGetSets_SkeletalMeshComponent::GetbShowPrePhysBones, (setter)&FGetSets_SkeletalMeshComponent::SetbShowPrePhysBones, nullptr, nullptr },
 	{ UPyCStrCast("bSkipBoundsUpdateWhenInterpolating"), (getter)&FGetSets_SkeletalMeshComponent::GetbSkipBoundsUpdateWhenInterpolating, (setter)&FGetSets_SkeletalMeshComponent::SetbSkipBoundsUpdateWhenInterpolating, nullptr, nullptr },
 	{ UPyCStrCast("bSkipKinematicUpdateWhenInterpolating"), (getter)&FGetSets_SkeletalMeshComponent::GetbSkipKinematicUpdateWhenInterpolating, (setter)&FGetSets_SkeletalMeshComponent::SetbSkipKinematicUpdateWhenInterpolating, nullptr, nullptr },
+	{ UPyCStrCast("bSuppressNotifyEventDispatch"), (getter)&FGetSets_SkeletalMeshComponent::GetbSuppressNotifyEventDispatch, (setter)&FGetSets_SkeletalMeshComponent::SetbSuppressNotifyEventDispatch, nullptr, nullptr },
 #if WITH_EDITOR
 	{ UPyCStrCast("bUpdateAnimationInEditor"), (getter)&FGetSets_SkeletalMeshComponent::GetbUpdateAnimationInEditor, (setter)&FGetSets_SkeletalMeshComponent::SetbUpdateAnimationInEditor, nullptr, nullptr },
 #endif
@@ -2526,6 +2563,16 @@ struct FMethods_SkeletalMeshComponent
 		}
 		InSelf->ValuePtr()->ForceClothNextUpdateTeleportAndReset();
 		Py_RETURN_NONE;
+	}
+
+	static PyObject* CallGetAllowAnimDynamicsAnimNode(FUPyWrapperSkeletalMeshComponent* InSelf, PyObject* Py_UNUSED(InUnused))
+	{
+		if (!InSelf->ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		const bool bResult = InSelf->ValuePtr()->GetAllowAnimDynamicsAnimNode();
+		return PyBool_FromLong(bResult ? 1 : 0);
 	}
 
 	static PyObject* CallGetAllowClothActors(FUPyWrapperSkeletalMeshComponent* InSelf, PyObject* Py_UNUSED(InUnused))
@@ -3300,6 +3347,151 @@ struct FMethods_SkeletalMeshComponent
 		return UPyConversion::Pythonize(Result);
 	}
 
+	static PyObject* CallGetQuaternionAttribute(FUPyWrapperSkeletalMeshComponent* InSelf, PyObject* InArgs)
+	{
+		if (!InSelf->ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		Py_ssize_t ArgCount = PyTuple_GET_SIZE(InArgs);
+		PyObject* PyArg0 = PyTuple_GetItem(InArgs, 0);
+		if (PyArg0 == nullptr)
+		{
+			return nullptr;
+		}
+		FName Arg0;
+		if (!UPyConversion::Nativize(PyArg0, Arg0))
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("SkeletalMeshComponent::GetQuaternionAttribute"), TEXT("invalid argument"));
+			return nullptr;
+		}
+
+		PyObject* PyArg1 = PyTuple_GetItem(InArgs, 1);
+		if (PyArg1 == nullptr)
+		{
+			return nullptr;
+		}
+		FName Arg1;
+		if (!UPyConversion::Nativize(PyArg1, Arg1))
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("SkeletalMeshComponent::GetQuaternionAttribute"), TEXT("invalid argument"));
+			return nullptr;
+		}
+
+		PyObject* PyArg2 = PyTuple_GetItem(InArgs, 2);
+		if (PyArg2 == nullptr)
+		{
+			return nullptr;
+		}
+		FQuat Arg2;
+		if (!UPyConversion::NativizeStructInstance(PyArg2, Arg2))
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("SkeletalMeshComponent::GetQuaternionAttribute"), TEXT("invalid argument"));
+			return nullptr;
+		}
+
+		PyObject* PyArg3 = (ArgCount > 3) ? PyTuple_GetItem(InArgs, 3) : nullptr;
+		ECustomBoneAttributeLookup Arg3 = ECustomBoneAttributeLookup::BoneOnly;
+		if (PyArg3 != nullptr)
+		{
+			if (!UPyConversion::NativizeEnumEntry(PyArg3, StaticEnum<ECustomBoneAttributeLookup>(), Arg3))
+			{
+				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("SkeletalMeshComponent::GetQuaternionAttribute"), TEXT("invalid argument"));
+				return nullptr;
+			}
+		}
+
+		FQuat OutParam0;
+		// Call the method
+		const bool ReturnValue = InSelf->ValuePtr()->GetQuaternionAttribute(Arg0, Arg1, Arg2, OutParam0, Arg3);
+
+		// Build return tuple with 2 values
+		PyObject* ReturnTuple = PyTuple_New(2);
+		if (ReturnTuple == nullptr)
+		{
+			return nullptr;
+		}
+
+		// Add return value to tuple
+		PyTuple_SET_ITEM(ReturnTuple, 0, PyBool_FromLong(ReturnValue ? 1 : 0));
+		// Add output parameter 'OutValue' to tuple
+		PyTuple_SET_ITEM(ReturnTuple, 1, UPyConversion::PythonizeStructInstance(OutParam0));
+
+		return ReturnTuple;
+	}
+
+	static PyObject* CallGetQuaternionAttribute_Ref(FUPyWrapperSkeletalMeshComponent* InSelf, PyObject* InArgs)
+	{
+		if (!InSelf->ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		Py_ssize_t ArgCount = PyTuple_GET_SIZE(InArgs);
+		PyObject* PyArg0 = PyTuple_GetItem(InArgs, 0);
+		if (PyArg0 == nullptr)
+		{
+			return nullptr;
+		}
+		FName Arg0;
+		if (!UPyConversion::Nativize(PyArg0, Arg0))
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("SkeletalMeshComponent::GetQuaternionAttribute_Ref"), TEXT("invalid argument"));
+			return nullptr;
+		}
+
+		PyObject* PyArg1 = PyTuple_GetItem(InArgs, 1);
+		if (PyArg1 == nullptr)
+		{
+			return nullptr;
+		}
+		FName Arg1;
+		if (!UPyConversion::Nativize(PyArg1, Arg1))
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("SkeletalMeshComponent::GetQuaternionAttribute_Ref"), TEXT("invalid argument"));
+			return nullptr;
+		}
+
+		PyObject* PyArg2 = PyTuple_GetItem(InArgs, 2);
+		if (PyArg2 == nullptr)
+		{
+			return nullptr;
+		}
+		FQuat Arg2;
+		if (!UPyConversion::NativizeStructInstance(PyArg2, Arg2))
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("SkeletalMeshComponent::GetQuaternionAttribute_Ref"), TEXT("invalid argument"));
+			return nullptr;
+		}
+
+		PyObject* PyArg3 = (ArgCount > 3) ? PyTuple_GetItem(InArgs, 3) : nullptr;
+		ECustomBoneAttributeLookup Arg3 = ECustomBoneAttributeLookup::BoneOnly;
+		if (PyArg3 != nullptr)
+		{
+			if (!UPyConversion::NativizeEnumEntry(PyArg3, StaticEnum<ECustomBoneAttributeLookup>(), Arg3))
+			{
+				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("SkeletalMeshComponent::GetQuaternionAttribute_Ref"), TEXT("invalid argument"));
+				return nullptr;
+			}
+		}
+
+		// Call the method
+		const bool ReturnValue = InSelf->ValuePtr()->GetQuaternionAttribute_Ref(Arg0, Arg1, Arg2, Arg3);
+
+		// Build return tuple with 2 values
+		PyObject* ReturnTuple = PyTuple_New(2);
+		if (ReturnTuple == nullptr)
+		{
+			return nullptr;
+		}
+
+		// Add return value to tuple
+		PyTuple_SET_ITEM(ReturnTuple, 0, PyBool_FromLong(ReturnValue ? 1 : 0));
+		// Add output parameter 'OutValue' to tuple
+		PyTuple_SET_ITEM(ReturnTuple, 1, UPyConversion::PythonizeStructInstance(Arg2));
+
+		return ReturnTuple;
+	}
+
 	static PyObject* CallGetSkeletalCenterOfMass(FUPyWrapperSkeletalMeshComponent* InSelf, PyObject* Py_UNUSED(InUnused))
 	{
 		if (!InSelf->ValidateInternalState(InSelf))
@@ -3630,6 +3822,151 @@ struct FMethods_SkeletalMeshComponent
 		return ReturnTuple;
 	}
 
+	static PyObject* CallGetVectorAttribute(FUPyWrapperSkeletalMeshComponent* InSelf, PyObject* InArgs)
+	{
+		if (!InSelf->ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		Py_ssize_t ArgCount = PyTuple_GET_SIZE(InArgs);
+		PyObject* PyArg0 = PyTuple_GetItem(InArgs, 0);
+		if (PyArg0 == nullptr)
+		{
+			return nullptr;
+		}
+		FName Arg0;
+		if (!UPyConversion::Nativize(PyArg0, Arg0))
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("SkeletalMeshComponent::GetVectorAttribute"), TEXT("invalid argument"));
+			return nullptr;
+		}
+
+		PyObject* PyArg1 = PyTuple_GetItem(InArgs, 1);
+		if (PyArg1 == nullptr)
+		{
+			return nullptr;
+		}
+		FName Arg1;
+		if (!UPyConversion::Nativize(PyArg1, Arg1))
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("SkeletalMeshComponent::GetVectorAttribute"), TEXT("invalid argument"));
+			return nullptr;
+		}
+
+		PyObject* PyArg2 = PyTuple_GetItem(InArgs, 2);
+		if (PyArg2 == nullptr)
+		{
+			return nullptr;
+		}
+		FVector Arg2;
+		if (!UPyConversion::NativizeStructInstance(PyArg2, Arg2))
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("SkeletalMeshComponent::GetVectorAttribute"), TEXT("invalid argument"));
+			return nullptr;
+		}
+
+		PyObject* PyArg3 = (ArgCount > 3) ? PyTuple_GetItem(InArgs, 3) : nullptr;
+		ECustomBoneAttributeLookup Arg3 = ECustomBoneAttributeLookup::BoneOnly;
+		if (PyArg3 != nullptr)
+		{
+			if (!UPyConversion::NativizeEnumEntry(PyArg3, StaticEnum<ECustomBoneAttributeLookup>(), Arg3))
+			{
+				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("SkeletalMeshComponent::GetVectorAttribute"), TEXT("invalid argument"));
+				return nullptr;
+			}
+		}
+
+		FVector OutParam0;
+		// Call the method
+		const bool ReturnValue = InSelf->ValuePtr()->GetVectorAttribute(Arg0, Arg1, Arg2, OutParam0, Arg3);
+
+		// Build return tuple with 2 values
+		PyObject* ReturnTuple = PyTuple_New(2);
+		if (ReturnTuple == nullptr)
+		{
+			return nullptr;
+		}
+
+		// Add return value to tuple
+		PyTuple_SET_ITEM(ReturnTuple, 0, PyBool_FromLong(ReturnValue ? 1 : 0));
+		// Add output parameter 'OutValue' to tuple
+		PyTuple_SET_ITEM(ReturnTuple, 1, UPyConversion::PythonizeStructInstance(OutParam0));
+
+		return ReturnTuple;
+	}
+
+	static PyObject* CallGetVectorAttribute_Ref(FUPyWrapperSkeletalMeshComponent* InSelf, PyObject* InArgs)
+	{
+		if (!InSelf->ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		Py_ssize_t ArgCount = PyTuple_GET_SIZE(InArgs);
+		PyObject* PyArg0 = PyTuple_GetItem(InArgs, 0);
+		if (PyArg0 == nullptr)
+		{
+			return nullptr;
+		}
+		FName Arg0;
+		if (!UPyConversion::Nativize(PyArg0, Arg0))
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("SkeletalMeshComponent::GetVectorAttribute_Ref"), TEXT("invalid argument"));
+			return nullptr;
+		}
+
+		PyObject* PyArg1 = PyTuple_GetItem(InArgs, 1);
+		if (PyArg1 == nullptr)
+		{
+			return nullptr;
+		}
+		FName Arg1;
+		if (!UPyConversion::Nativize(PyArg1, Arg1))
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("SkeletalMeshComponent::GetVectorAttribute_Ref"), TEXT("invalid argument"));
+			return nullptr;
+		}
+
+		PyObject* PyArg2 = PyTuple_GetItem(InArgs, 2);
+		if (PyArg2 == nullptr)
+		{
+			return nullptr;
+		}
+		FVector Arg2;
+		if (!UPyConversion::NativizeStructInstance(PyArg2, Arg2))
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("SkeletalMeshComponent::GetVectorAttribute_Ref"), TEXT("invalid argument"));
+			return nullptr;
+		}
+
+		PyObject* PyArg3 = (ArgCount > 3) ? PyTuple_GetItem(InArgs, 3) : nullptr;
+		ECustomBoneAttributeLookup Arg3 = ECustomBoneAttributeLookup::BoneOnly;
+		if (PyArg3 != nullptr)
+		{
+			if (!UPyConversion::NativizeEnumEntry(PyArg3, StaticEnum<ECustomBoneAttributeLookup>(), Arg3))
+			{
+				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("SkeletalMeshComponent::GetVectorAttribute_Ref"), TEXT("invalid argument"));
+				return nullptr;
+			}
+		}
+
+		// Call the method
+		const bool ReturnValue = InSelf->ValuePtr()->GetVectorAttribute_Ref(Arg0, Arg1, Arg2, Arg3);
+
+		// Build return tuple with 2 values
+		PyObject* ReturnTuple = PyTuple_New(2);
+		if (ReturnTuple == nullptr)
+		{
+			return nullptr;
+		}
+
+		// Add return value to tuple
+		PyTuple_SET_ITEM(ReturnTuple, 0, PyBool_FromLong(ReturnValue ? 1 : 0));
+		// Add output parameter 'OutValue' to tuple
+		PyTuple_SET_ITEM(ReturnTuple, 1, UPyConversion::PythonizeStructInstance(Arg2));
+
+		return ReturnTuple;
+	}
+
 	static PyObject* CallHasValidAnimationInstance(FUPyWrapperSkeletalMeshComponent* InSelf, PyObject* Py_UNUSED(InUnused))
 	{
 		if (!InSelf->ValidateInternalState(InSelf))
@@ -3894,6 +4231,16 @@ struct FMethods_SkeletalMeshComponent
 			return nullptr;
 		}
 		InSelf->ValuePtr()->RecreateClothingActors();
+		Py_RETURN_NONE;
+	}
+
+	static PyObject* CallReinitializeAnimNodes(FUPyWrapperSkeletalMeshComponent* InSelf, PyObject* Py_UNUSED(InUnused))
+	{
+		if (!InSelf->ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		InSelf->ValuePtr()->ReinitializeAnimNodes();
 		Py_RETURN_NONE;
 	}
 
@@ -4433,6 +4780,40 @@ struct FMethods_SkeletalMeshComponent
 		Py_RETURN_NONE;
 	}
 
+	static PyObject* CallSetAllowAnimDynamicsAnimNode(FUPyWrapperSkeletalMeshComponent* InSelf, PyObject* InArgs)
+	{
+		if (!InSelf->ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		Py_ssize_t ArgCount = PyTuple_GET_SIZE(InArgs);
+		PyObject* PyArg0 = PyTuple_GetItem(InArgs, 0);
+		if (PyArg0 == nullptr)
+		{
+			return nullptr;
+		}
+		bool Arg0 = false;
+		if (!UPyConversion::Nativize(PyArg0, Arg0))
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("SkeletalMeshComponent::SetAllowAnimDynamicsAnimNode"), TEXT("invalid argument"));
+			return nullptr;
+		}
+
+		PyObject* PyArg1 = (ArgCount > 1) ? PyTuple_GetItem(InArgs, 1) : nullptr;
+		bool Arg1 = true;
+		if (PyArg1 != nullptr)
+		{
+			if (!UPyConversion::Nativize(PyArg1, Arg1))
+			{
+				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("SkeletalMeshComponent::SetAllowAnimDynamicsAnimNode"), TEXT("invalid argument"));
+				return nullptr;
+			}
+		}
+
+		InSelf->ValuePtr()->SetAllowAnimDynamicsAnimNode(Arg0, Arg1);
+		Py_RETURN_NONE;
+	}
+
 	static PyObject* CallSetAllowClothActors(FUPyWrapperSkeletalMeshComponent* InSelf, PyObject* InArg)
 	{
 		if (!InSelf->ValidateInternalState(InSelf))
@@ -4516,14 +4897,14 @@ struct FMethods_SkeletalMeshComponent
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("SkeletalMeshComponent::SetAllowedAnimCurvesEvaluation"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("SkeletalMeshComponent::SetAllowedAnimCurvesEvaluation"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -5398,6 +5779,7 @@ static PyMethodDef FUPyWrapperSkeletalMeshComponentPyMethodDefs[] = {
 	{ "FindConstraintBoneName", UPyCFunctionCast(&FMethods_SkeletalMeshComponent::CallFindConstraintBoneName), METH_O, nullptr },
 	{ "ForceClothNextUpdateTeleport", UPyCFunctionCast(&FMethods_SkeletalMeshComponent::CallForceClothNextUpdateTeleport), METH_NOARGS, nullptr },
 	{ "ForceClothNextUpdateTeleportAndReset", UPyCFunctionCast(&FMethods_SkeletalMeshComponent::CallForceClothNextUpdateTeleportAndReset), METH_NOARGS, nullptr },
+	{ "GetAllowAnimDynamicsAnimNode", UPyCFunctionCast(&FMethods_SkeletalMeshComponent::CallGetAllowAnimDynamicsAnimNode), METH_NOARGS, nullptr },
 	{ "GetAllowClothActors", UPyCFunctionCast(&FMethods_SkeletalMeshComponent::CallGetAllowClothActors), METH_NOARGS, nullptr },
 	{ "GetAllowRigidBodyAnimNode", UPyCFunctionCast(&FMethods_SkeletalMeshComponent::CallGetAllowRigidBodyAnimNode), METH_NOARGS, nullptr },
 	{ "GetAllowedAnimCurveEvaluate", UPyCFunctionCast(&FMethods_SkeletalMeshComponent::CallGetAllowedAnimCurveEvaluate), METH_NOARGS, nullptr },
@@ -5431,6 +5813,8 @@ static PyMethodDef FUPyWrapperSkeletalMeshComponentPyMethodDefs[] = {
 	{ "GetPlayRate", UPyCFunctionCast(&FMethods_SkeletalMeshComponent::CallGetPlayRate), METH_NOARGS, nullptr },
 	{ "GetPosition", UPyCFunctionCast(&FMethods_SkeletalMeshComponent::CallGetPosition), METH_NOARGS, nullptr },
 	{ "GetPostProcessInstance", UPyCFunctionCast(&FMethods_SkeletalMeshComponent::CallGetPostProcessInstance), METH_NOARGS, nullptr },
+	{ "GetQuaternionAttribute", UPyCFunctionCast(&FMethods_SkeletalMeshComponent::CallGetQuaternionAttribute), METH_VARARGS, nullptr },
+	{ "GetQuaternionAttribute_Ref", UPyCFunctionCast(&FMethods_SkeletalMeshComponent::CallGetQuaternionAttribute_Ref), METH_VARARGS, nullptr },
 	{ "GetSkeletalCenterOfMass", UPyCFunctionCast(&FMethods_SkeletalMeshComponent::CallGetSkeletalCenterOfMass), METH_NOARGS, nullptr },
 	{ "GetSkeletalMeshAsset", UPyCFunctionCast(&FMethods_SkeletalMeshComponent::CallGetSkeletalMeshAsset), METH_NOARGS, nullptr },
 	{ "GetStringAttribute", UPyCFunctionCast(&FMethods_SkeletalMeshComponent::CallGetStringAttribute), METH_VARARGS, nullptr },
@@ -5439,6 +5823,8 @@ static PyMethodDef FUPyWrapperSkeletalMeshComponentPyMethodDefs[] = {
 	{ "GetTeleportRotationThreshold", UPyCFunctionCast(&FMethods_SkeletalMeshComponent::CallGetTeleportRotationThreshold), METH_NOARGS, nullptr },
 	{ "GetTransformAttribute", UPyCFunctionCast(&FMethods_SkeletalMeshComponent::CallGetTransformAttribute), METH_VARARGS, nullptr },
 	{ "GetTransformAttribute_Ref", UPyCFunctionCast(&FMethods_SkeletalMeshComponent::CallGetTransformAttribute_Ref), METH_VARARGS, nullptr },
+	{ "GetVectorAttribute", UPyCFunctionCast(&FMethods_SkeletalMeshComponent::CallGetVectorAttribute), METH_VARARGS, nullptr },
+	{ "GetVectorAttribute_Ref", UPyCFunctionCast(&FMethods_SkeletalMeshComponent::CallGetVectorAttribute_Ref), METH_VARARGS, nullptr },
 	{ "HasValidAnimationInstance", UPyCFunctionCast(&FMethods_SkeletalMeshComponent::CallHasValidAnimationInstance), METH_NOARGS, nullptr },
 	{ "IsBodyGravityEnabled", UPyCFunctionCast(&FMethods_SkeletalMeshComponent::CallIsBodyGravityEnabled), METH_O, nullptr },
 	{ "IsClothingSimulationSuspended", UPyCFunctionCast(&FMethods_SkeletalMeshComponent::CallIsClothingSimulationSuspended), METH_NOARGS, nullptr },
@@ -5450,6 +5836,7 @@ static PyMethodDef FUPyWrapperSkeletalMeshComponentPyMethodDefs[] = {
 	{ "Play", UPyCFunctionCast(&FMethods_SkeletalMeshComponent::CallPlay), METH_O, nullptr },
 	{ "PlayAnimation", UPyCFunctionCast(&FMethods_SkeletalMeshComponent::CallPlayAnimation), METH_VARARGS, nullptr },
 	{ "RecreateClothingActors", UPyCFunctionCast(&FMethods_SkeletalMeshComponent::CallRecreateClothingActors), METH_NOARGS, nullptr },
+	{ "ReinitializeAnimNodes", UPyCFunctionCast(&FMethods_SkeletalMeshComponent::CallReinitializeAnimNodes), METH_NOARGS, nullptr },
 	{ "RemoveClothCollisionSource", UPyCFunctionCast(&FMethods_SkeletalMeshComponent::CallRemoveClothCollisionSource), METH_VARARGS, nullptr },
 	{ "RemoveClothCollisionSources", UPyCFunctionCast(&FMethods_SkeletalMeshComponent::CallRemoveClothCollisionSources), METH_O, nullptr },
 	{ "ResetAllBodiesSimulatePhysics", UPyCFunctionCast(&FMethods_SkeletalMeshComponent::CallResetAllBodiesSimulatePhysics), METH_NOARGS, nullptr },
@@ -5468,6 +5855,7 @@ static PyMethodDef FUPyWrapperSkeletalMeshComponentPyMethodDefs[] = {
 	{ "SetAllMotorsAngularPositionDrive", UPyCFunctionCast(&FMethods_SkeletalMeshComponent::CallSetAllMotorsAngularPositionDrive), METH_VARARGS, nullptr },
 	{ "SetAllMotorsAngularVelocityDrive", UPyCFunctionCast(&FMethods_SkeletalMeshComponent::CallSetAllMotorsAngularVelocityDrive), METH_VARARGS, nullptr },
 	{ "SetAllowAnimCurveEvaluation", UPyCFunctionCast(&FMethods_SkeletalMeshComponent::CallSetAllowAnimCurveEvaluation), METH_O, nullptr },
+	{ "SetAllowAnimDynamicsAnimNode", UPyCFunctionCast(&FMethods_SkeletalMeshComponent::CallSetAllowAnimDynamicsAnimNode), METH_VARARGS, nullptr },
 	{ "SetAllowClothActors", UPyCFunctionCast(&FMethods_SkeletalMeshComponent::CallSetAllowClothActors), METH_O, nullptr },
 	{ "SetAllowRigidBodyAnimNode", UPyCFunctionCast(&FMethods_SkeletalMeshComponent::CallSetAllowRigidBodyAnimNode), METH_VARARGS, nullptr },
 	{ "SetAllowedAnimCurvesEvaluation", UPyCFunctionCast(&FMethods_SkeletalMeshComponent::CallSetAllowedAnimCurvesEvaluation), METH_VARARGS, nullptr },

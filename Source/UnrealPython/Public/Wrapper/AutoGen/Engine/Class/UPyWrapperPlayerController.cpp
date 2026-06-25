@@ -3137,14 +3137,14 @@ struct FMethods_PlayerController
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("PlayerController::ClientUnmutePlayers"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::NativizeStructInstance(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("PlayerController::ClientUnmutePlayers"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -3274,14 +3274,14 @@ struct FMethods_PlayerController
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("PlayerController::ClientUpdateMultipleLevelsStreamingStatus"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::NativizeStructInstance(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("PlayerController::ClientUpdateMultipleLevelsStreamingStatus"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -3542,14 +3542,14 @@ struct FMethods_PlayerController
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("PlayerController::GetHitResultUnderCursorForObjects"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("PlayerController::GetHitResultUnderCursorForObjects"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -3690,14 +3690,14 @@ struct FMethods_PlayerController
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("PlayerController::GetHitResultUnderFingerForObjects"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg1[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("PlayerController::GetHitResultUnderFingerForObjects"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -4800,6 +4800,40 @@ struct FMethods_PlayerController
 		Py_RETURN_NONE;
 	}
 
+	static PyObject* CallServerUpdateContainerVisibility(FUPyWrapperPlayerController* InSelf, PyObject* InArgs)
+	{
+		if (!InSelf->ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		PyObject* PyArg0 = PyTuple_GetItem(InArgs, 0);
+		if (PyArg0 == nullptr)
+		{
+			return nullptr;
+		}
+		UObject* Arg0 = nullptr;
+		if (!UPyConversion::Nativize(PyArg0, Arg0))
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("PlayerController::ServerUpdateContainerVisibility"), TEXT("invalid argument"));
+			return nullptr;
+		}
+
+		PyObject* PyArg1 = PyTuple_GetItem(InArgs, 1);
+		if (PyArg1 == nullptr)
+		{
+			return nullptr;
+		}
+		bool Arg1 = false;
+		if (!UPyConversion::Nativize(PyArg1, Arg1))
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("PlayerController::ServerUpdateContainerVisibility"), TEXT("invalid argument"));
+			return nullptr;
+		}
+
+		InSelf->ValuePtr()->ServerUpdateContainerVisibility(Arg0, Arg1);
+		Py_RETURN_NONE;
+	}
+
 	static PyObject* CallServerUpdateLevelVisibility(FUPyWrapperPlayerController* InSelf, PyObject* InArg)
 	{
 		if (!InSelf->ValidateInternalState(InSelf))
@@ -4844,14 +4878,14 @@ struct FMethods_PlayerController
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("PlayerController::ServerUpdateMultipleLevelsVisibility"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::NativizeStructInstance(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("PlayerController::ServerUpdateMultipleLevelsVisibility"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -5712,6 +5746,7 @@ static PyMethodDef FUPyWrapperPlayerControllerPyMethodDefs[] = {
 	{ "ServerUnblockPlayer", UPyCFunctionCast(&FMethods_PlayerController::CallServerUnblockPlayer), METH_O, nullptr },
 	{ "ServerUnmutePlayer", UPyCFunctionCast(&FMethods_PlayerController::CallServerUnmutePlayer), METH_O, nullptr },
 	{ "ServerUpdateCamera", UPyCFunctionCast(&FMethods_PlayerController::CallServerUpdateCamera), METH_VARARGS, nullptr },
+	{ "ServerUpdateContainerVisibility", UPyCFunctionCast(&FMethods_PlayerController::CallServerUpdateContainerVisibility), METH_VARARGS, nullptr },
 	{ "ServerUpdateLevelVisibility", UPyCFunctionCast(&FMethods_PlayerController::CallServerUpdateLevelVisibility), METH_O, nullptr },
 	{ "ServerUpdateMultipleLevelsVisibility", UPyCFunctionCast(&FMethods_PlayerController::CallServerUpdateMultipleLevelsVisibility), METH_O, nullptr },
 	{ "ServerVerifyViewTarget", UPyCFunctionCast(&FMethods_PlayerController::CallServerVerifyViewTarget), METH_NOARGS, nullptr },

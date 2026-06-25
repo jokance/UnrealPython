@@ -83,42 +83,6 @@ struct FGetSets_MaterialInterface
 		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_AssetUserData(), "AssetUserData");
 	}
 
-	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_CachedTexturesSamplingInfo()
-	{
-		static bool bInitialized = false;
-		static UPyGenUtil::FGeneratedWrappedProperty Property;
-		if (!bInitialized)
-		{
-			if (const UClass* Class = UMaterialInterface::StaticClass())
-			{
-				if (const FProperty* FoundProperty = Class->FindPropertyByName(TEXT("CachedTexturesSamplingInfo")))
-				{
-					Property.SetProperty(FoundProperty);
-				}
-			}
-			bInitialized = true;
-		}
-		return Property;
-	}
-
-	static PyObject* GetCachedTexturesSamplingInfo(FUPyWrapperMaterialInterface* InSelf, void* InClosure)
-	{
-		if (!FUPyWrapperMaterialInterface::ValidateInternalState(InSelf))
-		{
-			return nullptr;
-		}
-		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_CachedTexturesSamplingInfo(), "CachedTexturesSamplingInfo");
-	}
-
-	static int SetCachedTexturesSamplingInfo(FUPyWrapperMaterialInterface* InSelf, PyObject* InValue, void* InClosure)
-	{
-		if (!FUPyWrapperMaterialInterface::ValidateInternalState(InSelf))
-		{
-			return -1;
-		}
-		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_CachedTexturesSamplingInfo(), "CachedTexturesSamplingInfo");
-	}
-
 #if WITH_EDITOR
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_EditorOnlyData()
 	{
@@ -355,6 +319,42 @@ struct FGetSets_MaterialInterface
 	}
 
 #endif
+	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_ReferencedDefaultTextures()
+	{
+		static bool bInitialized = false;
+		static UPyGenUtil::FGeneratedWrappedProperty Property;
+		if (!bInitialized)
+		{
+			if (const UClass* Class = UMaterialInterface::StaticClass())
+			{
+				if (const FProperty* FoundProperty = Class->FindPropertyByName(TEXT("ReferencedDefaultTextures")))
+				{
+					Property.SetProperty(FoundProperty);
+				}
+			}
+			bInitialized = true;
+		}
+		return Property;
+	}
+
+	static PyObject* GetReferencedDefaultTextures(FUPyWrapperMaterialInterface* InSelf, void* InClosure)
+	{
+		if (!FUPyWrapperMaterialInterface::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ReferencedDefaultTextures(), "ReferencedDefaultTextures");
+	}
+
+	static int SetReferencedDefaultTextures(FUPyWrapperMaterialInterface* InSelf, PyObject* InValue, void* InClosure)
+	{
+		if (!FUPyWrapperMaterialInterface::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ReferencedDefaultTextures(), "ReferencedDefaultTextures");
+	}
+
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_SpecularProfiles()
 	{
 		static bool bInitialized = false;
@@ -587,6 +587,42 @@ struct FGetSets_MaterialInterface
 	}
 
 #endif
+	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_ToonProfiles()
+	{
+		static bool bInitialized = false;
+		static UPyGenUtil::FGeneratedWrappedProperty Property;
+		if (!bInitialized)
+		{
+			if (const UClass* Class = UMaterialInterface::StaticClass())
+			{
+				if (const FProperty* FoundProperty = Class->FindPropertyByName(TEXT("ToonProfiles")))
+				{
+					Property.SetProperty(FoundProperty);
+				}
+			}
+			bInitialized = true;
+		}
+		return Property;
+	}
+
+	static PyObject* GetToonProfiles(FUPyWrapperMaterialInterface* InSelf, void* InClosure)
+	{
+		if (!FUPyWrapperMaterialInterface::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->ToonProfiles, CastField<FArrayProperty>(GetPropertyDef_ToonProfiles().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+	}
+
+	static int SetToonProfiles(FUPyWrapperMaterialInterface* InSelf, PyObject* InValue, void* InClosure)
+	{
+		if (!FUPyWrapperMaterialInterface::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_ToonProfiles(), "ToonProfiles");
+	}
+
 	static PyObject* GetbIncludedInBaseGame(FUPyWrapperMaterialInterface* InSelf, void* InClosure)
 	{
 		if (!FUPyWrapperMaterialInterface::ValidateInternalState(InSelf))
@@ -658,7 +694,6 @@ static PyGetSetDef FUPyWrapperMaterialInterfaceGetSets[] = {
 	{ UPyCStrCast("AssetImportData"), (getter)&FGetSets_MaterialInterface::GetAssetImportData, (setter)&FGetSets_MaterialInterface::SetAssetImportData, nullptr, nullptr },
 #endif
 	{ UPyCStrCast("AssetUserData"), (getter)&FGetSets_MaterialInterface::GetAssetUserData, (setter)&FGetSets_MaterialInterface::SetAssetUserData, nullptr, nullptr },
-	{ UPyCStrCast("CachedTexturesSamplingInfo"), (getter)&FGetSets_MaterialInterface::GetCachedTexturesSamplingInfo, (setter)&FGetSets_MaterialInterface::SetCachedTexturesSamplingInfo, nullptr, nullptr },
 #if WITH_EDITOR
 	{ UPyCStrCast("EditorOnlyData"), (getter)&FGetSets_MaterialInterface::GetEditorOnlyData, (setter)&FGetSets_MaterialInterface::SetEditorOnlyData, nullptr, nullptr },
 #endif
@@ -676,6 +711,7 @@ static PyGetSetDef FUPyWrapperMaterialInterfaceGetSets[] = {
 #if WITH_EDITOR
 	{ UPyCStrCast("PreviewMesh"), (getter)&FGetSets_MaterialInterface::GetPreviewMesh, (setter)&FGetSets_MaterialInterface::SetPreviewMesh, nullptr, nullptr },
 #endif
+	{ UPyCStrCast("ReferencedDefaultTextures"), (getter)&FGetSets_MaterialInterface::GetReferencedDefaultTextures, (setter)&FGetSets_MaterialInterface::SetReferencedDefaultTextures, nullptr, nullptr },
 	{ UPyCStrCast("SpecularProfiles"), (getter)&FGetSets_MaterialInterface::GetSpecularProfiles, (setter)&FGetSets_MaterialInterface::SetSpecularProfiles, nullptr, nullptr },
 	{ UPyCStrCast("SubsurfaceProfile"), (getter)&FGetSets_MaterialInterface::GetSubsurfaceProfile, (setter)&FGetSets_MaterialInterface::SetSubsurfaceProfile, nullptr, nullptr },
 	{ UPyCStrCast("SubsurfaceProfiles"), (getter)&FGetSets_MaterialInterface::GetSubsurfaceProfiles, (setter)&FGetSets_MaterialInterface::SetSubsurfaceProfiles, nullptr, nullptr },
@@ -689,6 +725,7 @@ static PyGetSetDef FUPyWrapperMaterialInterfaceGetSets[] = {
 #if WITH_EDITOR
 	{ UPyCStrCast("ThumbnailInfo"), (getter)&FGetSets_MaterialInterface::GetThumbnailInfo, (setter)&FGetSets_MaterialInterface::SetThumbnailInfo, nullptr, nullptr },
 #endif
+	{ UPyCStrCast("ToonProfiles"), (getter)&FGetSets_MaterialInterface::GetToonProfiles, (setter)&FGetSets_MaterialInterface::SetToonProfiles, nullptr, nullptr },
 	{ UPyCStrCast("bIncludedInBaseGame"), (getter)&FGetSets_MaterialInterface::GetbIncludedInBaseGame, (setter)&FGetSets_MaterialInterface::SetbIncludedInBaseGame, nullptr, nullptr },
 #if WITH_EDITOR
 	{ UPyCStrCast("bTextureStreamingDataSorted"), (getter)&FGetSets_MaterialInterface::GetbTextureStreamingDataSorted, (setter)&FGetSets_MaterialInterface::SetbTextureStreamingDataSorted, nullptr, nullptr },

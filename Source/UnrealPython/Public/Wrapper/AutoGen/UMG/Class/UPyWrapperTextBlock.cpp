@@ -227,6 +227,16 @@ struct FMethods_TextBlock
 		return UPyConversion::Pythonize(Result);
 	}
 
+	static PyObject* CallGetFontSize(FUPyWrapperTextBlock* InSelf, PyObject* Py_UNUSED(InUnused))
+	{
+		if (!InSelf->ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		const auto Result = InSelf->ValuePtr()->GetFontSize();
+		return UPyConversion::Pythonize(Result);
+	}
+
 	static PyObject* CallGetText(FUPyWrapperTextBlock* InSelf, PyObject* Py_UNUSED(InUnused))
 	{
 		if (!InSelf->ValidateInternalState(InSelf))
@@ -319,6 +329,23 @@ struct FMethods_TextBlock
 		}
 
 		InSelf->ValuePtr()->SetFontOutlineMaterial(Arg0);
+		Py_RETURN_NONE;
+	}
+
+	static PyObject* CallSetFontSize(FUPyWrapperTextBlock* InSelf, PyObject* InArg)
+	{
+		if (!InSelf->ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		float Arg0 = 0.0f;
+		if (!UPyConversion::Nativize(InArg, Arg0))
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("TextBlock::SetFontSize"), TEXT("invalid argument"));
+			return nullptr;
+		}
+
+		InSelf->ValuePtr()->SetFontSize(Arg0);
 		Py_RETURN_NONE;
 	}
 
@@ -464,12 +491,14 @@ struct FMethods_TextBlock
 static PyMethodDef FUPyWrapperTextBlockPyMethodDefs[] = {
 	{ "GetDynamicFontMaterial", UPyCFunctionCast(&FMethods_TextBlock::CallGetDynamicFontMaterial), METH_NOARGS, nullptr },
 	{ "GetDynamicOutlineMaterial", UPyCFunctionCast(&FMethods_TextBlock::CallGetDynamicOutlineMaterial), METH_NOARGS, nullptr },
+	{ "GetFontSize", UPyCFunctionCast(&FMethods_TextBlock::CallGetFontSize), METH_NOARGS, nullptr },
 	{ "GetText", UPyCFunctionCast(&FMethods_TextBlock::CallGetText), METH_NOARGS, nullptr },
 	{ "SetAutoWrapText", UPyCFunctionCast(&FMethods_TextBlock::CallSetAutoWrapText), METH_O, nullptr },
 	{ "SetColorAndOpacity", UPyCFunctionCast(&FMethods_TextBlock::CallSetColorAndOpacity), METH_O, nullptr },
 	{ "SetFont", UPyCFunctionCast(&FMethods_TextBlock::CallSetFont), METH_O, nullptr },
 	{ "SetFontMaterial", UPyCFunctionCast(&FMethods_TextBlock::CallSetFontMaterial), METH_O, nullptr },
 	{ "SetFontOutlineMaterial", UPyCFunctionCast(&FMethods_TextBlock::CallSetFontOutlineMaterial), METH_O, nullptr },
+	{ "SetFontSize", UPyCFunctionCast(&FMethods_TextBlock::CallSetFontSize), METH_O, nullptr },
 	{ "SetMinDesiredWidth", UPyCFunctionCast(&FMethods_TextBlock::CallSetMinDesiredWidth), METH_O, nullptr },
 	{ "SetOpacity", UPyCFunctionCast(&FMethods_TextBlock::CallSetOpacity), METH_O, nullptr },
 	{ "SetShadowColorAndOpacity", UPyCFunctionCast(&FMethods_TextBlock::CallSetShadowColorAndOpacity), METH_O, nullptr },

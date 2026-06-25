@@ -851,6 +851,23 @@ struct FMethods_UserWidget
 		return PyList;
 	}
 
+	static PyObject* CallGetOrAddExtension(FUPyWrapperUserWidget* InSelf, PyObject* InArg)
+	{
+		if (!InSelf->ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		UClass* Arg0 = nullptr;
+		if (!UPyConversion::NativizeClass(InArg, Arg0, nullptr))
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("UserWidget::GetOrAddExtension"), TEXT("invalid argument"));
+			return nullptr;
+		}
+
+		const auto Result = InSelf->ValuePtr()->GetOrAddExtension(Arg0);
+		return UPyConversion::Pythonize(Result);
+	}
+
 	static PyObject* CallGetOwningPlayerCameraManager(FUPyWrapperUserWidget* InSelf, PyObject* Py_UNUSED(InUnused))
 	{
 		if (!InSelf->ValidateInternalState(InSelf))
@@ -3272,6 +3289,7 @@ static PyMethodDef FUPyWrapperUserWidgetPyMethodDefs[] = {
 	{ "GetAnimationCurrentTime", UPyCFunctionCast(&FMethods_UserWidget::CallGetAnimationCurrentTime), METH_O, nullptr },
 	{ "GetExtension", UPyCFunctionCast(&FMethods_UserWidget::CallGetExtension), METH_O, nullptr },
 	{ "GetExtensions", UPyCFunctionCast(&FMethods_UserWidget::CallGetExtensions), METH_O, nullptr },
+	{ "GetOrAddExtension", UPyCFunctionCast(&FMethods_UserWidget::CallGetOrAddExtension), METH_O, nullptr },
 	{ "GetOwningPlayerCameraManager", UPyCFunctionCast(&FMethods_UserWidget::CallGetOwningPlayerCameraManager), METH_NOARGS, nullptr },
 	{ "GetOwningPlayerPawn", UPyCFunctionCast(&FMethods_UserWidget::CallGetOwningPlayerPawn), METH_NOARGS, nullptr },
 	{ "IsAnimationPlaying", UPyCFunctionCast(&FMethods_UserWidget::CallIsAnimationPlaying), METH_O, nullptr },

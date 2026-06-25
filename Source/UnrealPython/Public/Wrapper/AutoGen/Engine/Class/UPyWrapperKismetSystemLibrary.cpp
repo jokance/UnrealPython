@@ -175,14 +175,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxOverlapActors"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg3[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxOverlapActors"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -225,14 +225,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxOverlapActors"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg5[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxOverlapActors"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -338,14 +338,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxOverlapActorsWithOrientation"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg4[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxOverlapActorsWithOrientation"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -388,14 +388,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxOverlapActorsWithOrientation"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg6[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxOverlapActorsWithOrientation"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -489,14 +489,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxOverlapComponents"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg3[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxOverlapComponents"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -539,14 +539,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxOverlapComponents"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg5[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxOverlapComponents"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -652,14 +652,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxOverlapComponentsWithOrientation"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg4[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxOverlapComponentsWithOrientation"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -702,14 +702,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxOverlapComponentsWithOrientation"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg6[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxOverlapComponentsWithOrientation"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -852,14 +852,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxTraceMulti"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg7[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxTraceMulti"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -1059,14 +1059,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxTraceMultiByProfile"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg7[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxTraceMultiByProfile"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -1242,14 +1242,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxTraceMultiForObjects"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg5[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxTraceMultiForObjects"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -1292,14 +1292,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxTraceMultiForObjects"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg7[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxTraceMultiForObjects"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -1499,14 +1499,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxTraceSingle"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg7[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxTraceSingle"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -1700,14 +1700,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxTraceSingleByProfile"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg7[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxTraceSingleByProfile"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -1877,14 +1877,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxTraceSingleForObjects"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg5[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxTraceSingleForObjects"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -1927,14 +1927,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxTraceSingleForObjects"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg7[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::BoxTraceSingleForObjects"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -2256,14 +2256,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleOverlapActors"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg4[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleOverlapActors"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -2306,14 +2306,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleOverlapActors"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg6[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleOverlapActors"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -2431,14 +2431,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleOverlapActorsWithOrientation"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg5[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleOverlapActorsWithOrientation"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -2481,14 +2481,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleOverlapActorsWithOrientation"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg7[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleOverlapActorsWithOrientation"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -2594,14 +2594,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleOverlapComponents"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg4[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleOverlapComponents"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -2644,14 +2644,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleOverlapComponents"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg6[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleOverlapComponents"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -2769,14 +2769,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleOverlapComponentsWithOrientation"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg5[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleOverlapComponentsWithOrientation"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -2819,14 +2819,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleOverlapComponentsWithOrientation"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg7[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleOverlapComponentsWithOrientation"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -2969,14 +2969,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleTraceMulti"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg7[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleTraceMulti"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -3176,14 +3176,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleTraceMultiByProfile"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg7[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleTraceMultiByProfile"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -3359,14 +3359,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleTraceMultiForObjects"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg5[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleTraceMultiForObjects"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -3409,14 +3409,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleTraceMultiForObjects"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg7[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleTraceMultiForObjects"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -3616,14 +3616,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleTraceSingle"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg7[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleTraceSingle"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -3817,14 +3817,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleTraceSingleByProfile"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg7[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleTraceSingleByProfile"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -3994,14 +3994,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleTraceSingleForObjects"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg5[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleTraceSingleForObjects"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -4044,14 +4044,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleTraceSingleForObjects"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg7[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::CapsuleTraceSingleForObjects"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -4190,14 +4190,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::ComponentOverlapActors"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg2[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::ComponentOverlapActors"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -4240,14 +4240,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::ComponentOverlapActors"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg4[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::ComponentOverlapActors"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -4329,14 +4329,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::ComponentOverlapComponents"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg2[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::ComponentOverlapComponents"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -4379,14 +4379,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::ComponentOverlapComponents"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg4[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::ComponentOverlapComponents"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -6561,14 +6561,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::GetActorListFromComponentList"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::GetActorListFromComponentList"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -6640,6 +6640,21 @@ struct FMethods_KismetSystemLibrary
 		return UPyConversion::Pythonize(Result);
 	}
 
+#if WITH_EDITOR
+	static PyObject* CallGetClassFromSoftPath(FUPyWrapperKismetSystemLibrary* InSelf, PyObject* InArg)
+	{
+		FSoftClassPath Arg0;
+		if (!UPyConversion::NativizeStructInstance(InArg, Arg0))
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::GetClassFromSoftPath"), TEXT("invalid argument"));
+			return nullptr;
+		}
+
+		const auto Result = UKismetSystemLibrary::GetClassFromSoftPath(Arg0);
+		return UPyConversion::Pythonize(Result);
+	}
+
+#endif
 	static PyObject* CallGetClassTopLevelAssetPath(FUPyWrapperKismetSystemLibrary* InSelf, PyObject* InArg)
 	{
 		UClass* Arg0 = nullptr;
@@ -7016,6 +7031,21 @@ struct FMethods_KismetSystemLibrary
 		return UPyConversion::Pythonize(Result);
 	}
 
+#if WITH_EDITOR
+	static PyObject* CallGetObjectFromSoftPath(FUPyWrapperKismetSystemLibrary* InSelf, PyObject* InArg)
+	{
+		FSoftObjectPath Arg0;
+		if (!UPyConversion::NativizeStructInstance(InArg, Arg0))
+		{
+			UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::GetObjectFromSoftPath"), TEXT("invalid argument"));
+			return nullptr;
+		}
+
+		const auto Result = UKismetSystemLibrary::GetObjectFromSoftPath(Arg0);
+		return UPyConversion::Pythonize(Result);
+	}
+
+#endif
 	static PyObject* CallGetObjectName(FUPyWrapperKismetSystemLibrary* InSelf, PyObject* InArg)
 	{
 		UObject* Arg0 = nullptr;
@@ -7187,14 +7217,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::GetPrimaryAssetsWithBundleState"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::GetPrimaryAssetsWithBundleState"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -7225,14 +7255,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::GetPrimaryAssetsWithBundleState"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg1[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::GetPrimaryAssetsWithBundleState"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -7263,14 +7293,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::GetPrimaryAssetsWithBundleState"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::NativizeStructInstance(Item, Arg2[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::GetPrimaryAssetsWithBundleState"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -8362,14 +8392,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LaunchExternalUrl"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LaunchExternalUrl"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -8492,14 +8522,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LineTraceMulti"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg5[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LineTraceMulti"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -8675,14 +8705,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LineTraceMultiByProfile"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg5[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LineTraceMultiByProfile"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -8834,14 +8864,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LineTraceMultiForObjects"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg3[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LineTraceMultiForObjects"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -8884,14 +8914,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LineTraceMultiForObjects"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg5[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LineTraceMultiForObjects"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -9067,14 +9097,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LineTraceSingle"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg5[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LineTraceSingle"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -9244,14 +9274,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LineTraceSingleByProfile"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg5[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LineTraceSingleByProfile"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -9397,14 +9427,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LineTraceSingleForObjects"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg3[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LineTraceSingleForObjects"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -9447,14 +9477,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LineTraceSingleForObjects"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg5[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::LineTraceSingleForObjects"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -9650,14 +9680,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::MakeARFilter"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::MakeARFilter"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -9688,14 +9718,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::MakeARFilter"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg1[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::MakeARFilter"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -9726,14 +9756,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::MakeARFilter"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::NativizeStructInstance(Item, Arg2[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::MakeARFilter"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -9764,14 +9794,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::MakeARFilter"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::NativizeStructInstance(Item, Arg3[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::MakeARFilter"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -9803,7 +9833,7 @@ struct FMethods_KismetSystemLibrary
 				Py_DECREF(Iter_Arg4);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::MakeARFilter"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Arg4.Add(Val);
 			Py_DECREF(Item_Arg4);
@@ -9841,14 +9871,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::MakeARFilter"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg5[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::MakeARFilter"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -9880,7 +9910,7 @@ struct FMethods_KismetSystemLibrary
 				Py_DECREF(Iter_Arg6);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::MakeARFilter"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Arg6.Add(Val);
 			Py_DECREF(Item_Arg6);
@@ -11964,14 +11994,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereOverlapActors"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg3[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereOverlapActors"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -12014,14 +12044,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereOverlapActors"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg5[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereOverlapActors"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -12115,14 +12145,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereOverlapComponents"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg3[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereOverlapComponents"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -12165,14 +12195,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereOverlapComponents"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg5[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereOverlapComponents"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -12303,14 +12333,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereTraceMulti"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg6[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereTraceMulti"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -12498,14 +12528,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereTraceMultiByProfile"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg6[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereTraceMultiByProfile"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -12669,14 +12699,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereTraceMultiForObjects"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg4[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereTraceMultiForObjects"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -12719,14 +12749,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereTraceMultiForObjects"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg6[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereTraceMultiForObjects"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -12914,14 +12944,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereTraceSingle"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg6[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereTraceSingle"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -13103,14 +13133,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereTraceSingleByProfile"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg6[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereTraceSingleByProfile"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -13268,14 +13298,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereTraceSingleForObjects"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg4[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereTraceSingleForObjects"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -13318,14 +13348,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereTraceSingleForObjects"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::Nativize(Item, Arg6[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::SphereTraceSingleForObjects"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -13455,14 +13485,14 @@ struct FMethods_KismetSystemLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::UnloadPrimaryAssetList"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::NativizeStructInstance(Item, Arg0[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("KismetSystemLibrary::UnloadPrimaryAssetList"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}
@@ -13570,6 +13600,9 @@ static PyMethodDef FUPyWrapperKismetSystemLibraryPyMethodDefs[] = {
 	{ "GetBuildVersion", UPyCFunctionCast(&FMethods_KismetSystemLibrary::CallGetBuildVersion), METH_NOARGS | METH_STATIC, nullptr },
 	{ "GetClassDisplayName", UPyCFunctionCast(&FMethods_KismetSystemLibrary::CallGetClassDisplayName), METH_O | METH_STATIC, nullptr },
 	{ "GetClassFromPrimaryAssetId", UPyCFunctionCast(&FMethods_KismetSystemLibrary::CallGetClassFromPrimaryAssetId), METH_O | METH_STATIC, nullptr },
+#if WITH_EDITOR
+	{ "GetClassFromSoftPath", UPyCFunctionCast(&FMethods_KismetSystemLibrary::CallGetClassFromSoftPath), METH_O | METH_STATIC, nullptr },
+#endif
 	{ "GetClassTopLevelAssetPath", UPyCFunctionCast(&FMethods_KismetSystemLibrary::CallGetClassTopLevelAssetPath), METH_O | METH_STATIC, nullptr },
 	{ "GetCommandLine", UPyCFunctionCast(&FMethods_KismetSystemLibrary::CallGetCommandLine), METH_NOARGS | METH_STATIC, nullptr },
 	{ "GetComponentBounds", UPyCFunctionCast(&FMethods_KismetSystemLibrary::CallGetComponentBounds), METH_O | METH_STATIC, nullptr },
@@ -13598,6 +13631,9 @@ static PyMethodDef FUPyWrapperKismetSystemLibraryPyMethodDefs[] = {
 	{ "GetMinYResolutionFor3DView", UPyCFunctionCast(&FMethods_KismetSystemLibrary::CallGetMinYResolutionFor3DView), METH_NOARGS | METH_STATIC, nullptr },
 	{ "GetMinYResolutionForUI", UPyCFunctionCast(&FMethods_KismetSystemLibrary::CallGetMinYResolutionForUI), METH_NOARGS | METH_STATIC, nullptr },
 	{ "GetObjectFromPrimaryAssetId", UPyCFunctionCast(&FMethods_KismetSystemLibrary::CallGetObjectFromPrimaryAssetId), METH_O | METH_STATIC, nullptr },
+#if WITH_EDITOR
+	{ "GetObjectFromSoftPath", UPyCFunctionCast(&FMethods_KismetSystemLibrary::CallGetObjectFromSoftPath), METH_O | METH_STATIC, nullptr },
+#endif
 	{ "GetObjectName", UPyCFunctionCast(&FMethods_KismetSystemLibrary::CallGetObjectName), METH_O | METH_STATIC, nullptr },
 	{ "GetOuterObject", UPyCFunctionCast(&FMethods_KismetSystemLibrary::CallGetOuterObject), METH_O | METH_STATIC, nullptr },
 	{ "GetPathName", UPyCFunctionCast(&FMethods_KismetSystemLibrary::CallGetPathName), METH_O | METH_STATIC, nullptr },

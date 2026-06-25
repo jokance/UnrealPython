@@ -473,14 +473,14 @@ struct FMethods_WidgetBlueprintLibrary
 			{
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("WidgetBlueprintLibrary::DrawLines"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			if (!UPyConversion::NativizeStructInstance(Item, Arg1[i]))
 			{
 				Py_DECREF(Item);
 				UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("WidgetBlueprintLibrary::DrawLines"), TEXT("invalid argument"));
 				return nullptr;
-
+	
 			}
 			Py_DECREF(Item);
 		}

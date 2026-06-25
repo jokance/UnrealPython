@@ -5,6 +5,7 @@
 #include "Wrapper/UPyWrapperTypeRegistry.h"
 #include "Wrapper/UPyWrapperTypeFactory.h"
 #include "Utils/UPyUtil.h"
+#include "Framework/Text/SlateAsyncFontLoadingTypes.h"
 #include "Components/SlateWrapperTypes.h"
 #include "Widgets/Text/ISlateEditableTextWidget.h"
 #include "UObject/NoExportTypes.h"
@@ -43,6 +44,42 @@ struct FGetSets_EditableTextBox
 		}
 		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("EditableTextBox::AllowContextMenu"), TEXT("value is not bool"));
 		return -1;
+	}
+
+	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_FontFacesLoadingPaintPolicy()
+	{
+		static bool bInitialized = false;
+		static UPyGenUtil::FGeneratedWrappedProperty Property;
+		if (!bInitialized)
+		{
+			if (const UClass* Class = UEditableTextBox::StaticClass())
+			{
+				if (const FProperty* FoundProperty = Class->FindPropertyByName(TEXT("FontFacesLoadingPaintPolicy")))
+				{
+					Property.SetProperty(FoundProperty);
+				}
+			}
+			bInitialized = true;
+		}
+		return Property;
+	}
+
+	static PyObject* GetFontFacesLoadingPaintPolicy(FUPyWrapperEditableTextBox* InSelf, void* InClosure)
+	{
+		if (!FUPyWrapperEditableTextBox::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_FontFacesLoadingPaintPolicy(), "FontFacesLoadingPaintPolicy");
+	}
+
+	static int SetFontFacesLoadingPaintPolicy(FUPyWrapperEditableTextBox* InSelf, PyObject* InValue, void* InClosure)
+	{
+		if (!FUPyWrapperEditableTextBox::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_FontFacesLoadingPaintPolicy(), "FontFacesLoadingPaintPolicy");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_HintTextDelegate()
@@ -102,6 +139,42 @@ struct FGetSets_EditableTextBox
 		}
 		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("EditableTextBox::KeyboardType"), TEXT("value is not numeric"));
 		return -1;
+	}
+
+	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnAllFontFacesFinishLoading()
+	{
+		static bool bInitialized = false;
+		static UPyGenUtil::FGeneratedWrappedProperty Property;
+		if (!bInitialized)
+		{
+			if (const UClass* Class = UEditableTextBox::StaticClass())
+			{
+				if (const FProperty* FoundProperty = Class->FindPropertyByName(TEXT("OnAllFontFacesFinishLoading")))
+				{
+					Property.SetProperty(FoundProperty);
+				}
+			}
+			bInitialized = true;
+		}
+		return Property;
+	}
+
+	static PyObject* GetOnAllFontFacesFinishLoading(FUPyWrapperEditableTextBox* InSelf, void* InClosure)
+	{
+		if (!FUPyWrapperEditableTextBox::ValidateInternalState(InSelf))
+		{
+			return nullptr;
+		}
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_OnAllFontFacesFinishLoading(), "OnAllFontFacesFinishLoading");
+	}
+
+	static int SetOnAllFontFacesFinishLoading(FUPyWrapperEditableTextBox* InSelf, PyObject* InValue, void* InClosure)
+	{
+		if (!FUPyWrapperEditableTextBox::ValidateInternalState(InSelf))
+		{
+			return -1;
+		}
+		return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, GetPropertyDef_OnAllFontFacesFinishLoading(), "OnAllFontFacesFinishLoading");
 	}
 
 	static UPyGenUtil::FGeneratedWrappedProperty& GetPropertyDef_OnTextChanged()
@@ -370,8 +443,10 @@ struct FGetSets_EditableTextBox
 
 static PyGetSetDef FUPyWrapperEditableTextBoxGetSets[] = {
 	{ UPyCStrCast("AllowContextMenu"), (getter)&FGetSets_EditableTextBox::GetAllowContextMenu, (setter)&FGetSets_EditableTextBox::SetAllowContextMenu, nullptr, nullptr },
+	{ UPyCStrCast("FontFacesLoadingPaintPolicy"), (getter)&FGetSets_EditableTextBox::GetFontFacesLoadingPaintPolicy, (setter)&FGetSets_EditableTextBox::SetFontFacesLoadingPaintPolicy, nullptr, nullptr },
 	{ UPyCStrCast("HintTextDelegate"), (getter)&FGetSets_EditableTextBox::GetHintTextDelegate, (setter)&FGetSets_EditableTextBox::SetHintTextDelegate, nullptr, nullptr },
 	{ UPyCStrCast("KeyboardType"), (getter)&FGetSets_EditableTextBox::GetKeyboardType, (setter)&FGetSets_EditableTextBox::SetKeyboardType, nullptr, nullptr },
+	{ UPyCStrCast("OnAllFontFacesFinishLoading"), (getter)&FGetSets_EditableTextBox::GetOnAllFontFacesFinishLoading, (setter)&FGetSets_EditableTextBox::SetOnAllFontFacesFinishLoading, nullptr, nullptr },
 	{ UPyCStrCast("OnTextChanged"), (getter)&FGetSets_EditableTextBox::GetOnTextChanged, (setter)&FGetSets_EditableTextBox::SetOnTextChanged, nullptr, nullptr },
 	{ UPyCStrCast("OnTextCommitted"), (getter)&FGetSets_EditableTextBox::GetOnTextCommitted, (setter)&FGetSets_EditableTextBox::SetOnTextCommitted, nullptr, nullptr },
 	{ UPyCStrCast("ShapedTextOptions"), (getter)&FGetSets_EditableTextBox::GetShapedTextOptions, (setter)&FGetSets_EditableTextBox::SetShapedTextOptions, nullptr, nullptr },
