@@ -47,8 +47,7 @@ public:
 private:
 	static int32 SetTimerInternal(float Rate, bool bLoop);
 	static void OnTimerCallback(int32 Handle);
-	static void ReleaseTimerCallback();
-
+	
 	static TMap<int32, FTSTicker::FDelegateHandle> ActiveTimers;
 	static int32 NextTimerId;
 	
