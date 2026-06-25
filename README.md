@@ -1,4 +1,4 @@
-# Unreal Python
+# Unreal Python: Runtime Python integration for Unreal Engine 5
 
 English | [中文](README.zh.md)
 
@@ -11,6 +11,14 @@ UnrealPython is a plugin for embedding CPython into Unreal Engine at runtime. It
 **Runtime supported platforms**: Win64, Android, Mac, iOS
 
 **Editor tool supported platforms**: Win64, Mac
+
+---
+
+To speed up game development, try these companion plugins:
+
+- [WidgetSemanticBridge](https://www.fab.com/listings/92270793-0b09-406a-81b9-d6f9f307044f): Use AI to quickly generate and iterate UMG, with plain-text DSL files that describe widget structure. Combined with UnrealPython and DSL workflows, you can hand all UI logic development to AI.
+- [MaterialSemanticBridge](https://www.fab.com/listings/cb2fcfbe-a4db-4dee-a9cf-8bbe62823418): Use AI to quickly generate and iterate materials, turning AI into your dedicated technical artist.
+
 
 ## Contents
 
