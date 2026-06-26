@@ -337,7 +337,7 @@ struct TUPyWrapperDelegateImpl
 
 		case EUPyConversionMethod::Reference:
 			DelegateInstanceToUse = InValue;
-			if (DelegateInstanceToUse)
+			if (DelegateInstanceToUse || (InProp && InPropAddr))
 			{
 				InOwnerContext.AddOwnedPyProp(InSelf);
 			}
