@@ -16,6 +16,7 @@
 
 #include "HAL/FileManager.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "Misc/EngineVersionComparison.h"
 #include "Misc/MessageDialog.h"
 #include "Misc/PackageName.h"
 #include "Misc/Paths.h"
@@ -457,7 +458,11 @@ bool CalculatePropertyDef(PyObject* InPyObj, FPropertyDef& OutPropertyDef)
 FProperty* CreateProperty(const FPropertyDef& InPropertyDef, const int32 InArrayDim, FFieldVariant InOuter, const FName InName)
 {
 	check(InArrayDim > 0);
+#if UE_VERSION_OLDER_THAN(5, 8, 0)
 	FProperty* Prop = CastFieldChecked<FProperty>(InPropertyDef.PropertyClass->Construct(InOuter, InName, RF_NoFlags));
+#else
+	FProperty* Prop = CastFieldChecked<FProperty>(InPropertyDef.PropertyClass->Construct(InOuter, InName));
+#endif
 	if (Prop)
 	{
 		Prop->ArrayDim = InArrayDim;
@@ -492,7 +497,11 @@ FProperty* CreateProperty(const FPropertyDef& InPropertyDef, const int32 InArray
 		{
 			UEnum* EnumType = CastChecked<UEnum>(InPropertyDef.PropertySubType);
 			EnumProp->SetEnum(EnumType);
+#if UE_VERSION_OLDER_THAN(5, 8, 0)
 			EnumProp->AddCppProperty(new FByteProperty(EnumProp, TEXT("UnderlyingType"), RF_NoFlags));
+#else
+			EnumProp->AddCppProperty(new FByteProperty(EnumProp, TEXT("UnderlyingType")));
+#endif
 		}
 
 		if (FDelegateProperty* DelegateProp = CastField<FDelegateProperty>(Prop))

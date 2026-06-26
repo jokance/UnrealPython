@@ -4,6 +4,7 @@
 #include "Wrapper/UPyWrapperTypeRegistry.h"
 #include "Wrapper/UPyWrapperEnum.h"
 #include "Core/UPyGIL.h"
+#include "Misc/EngineVersionComparison.h"
 
 PyTypeObject UPyUEnumDecoratorType = {
 	PyVarObject_HEAD_INIT(nullptr, 0)
@@ -171,7 +172,11 @@ private:
 				const FString NamespacedValueName = FString::Printf(TEXT("%s::%s"), *EnumName, *EnumValueDef->Name);
 				ValueNames.Emplace(MakeTuple(FName(*NamespacedValueName), EnumValueDef->Value));
 			}
+#if UE_VERSION_OLDER_THAN(5, 8, 0)
 			if (!NewEnum->SetEnums(ValueNames, UEnum::ECppForm::Namespaced))
+#else
+			if (!NewEnum->SetEnums(ValueNames, UEnum::ECppForm::Namespaced, UEnum::EUnderlyingType::int64, EEnumFlags::None, UEnum::EAddMaxKeyIfMissing::Yes))
+#endif
 			{
 				UPyUtil::SetPythonError(PyExc_Exception, PyType, TEXT("Failed to set enum values"));
 				return false;

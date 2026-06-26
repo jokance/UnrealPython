@@ -7,6 +7,7 @@
 #include "UObject/Package.h"
 #include "UObject/PropertyPortFlags.h"
 #include "Wrapper/UPyWrapperTypeFactory.h"
+#include "Misc/EngineVersionComparison.h"
 
 extern PyMethodDef ArrayPyMethodDefs[];
 
@@ -24,6 +25,15 @@ namespace
 	{
 		const Py_ssize_t ResolvedIndex = UPyUtil::ResolveContainerIndexParam(InIndex, InLen);
 		return FMath::Clamp(ResolvedIndex, (Py_ssize_t)0, InLen);
+	}
+
+	FArrayProperty* CreatePythonArrayProperty()
+	{
+#if UE_VERSION_OLDER_THAN(5, 8, 0)
+		return new FArrayProperty(FFieldVariant(), UPyUtil::DefaultPythonPropertyName, RF_NoFlags);
+#else
+		return new FArrayProperty(FFieldVariant(), UPyUtil::DefaultPythonPropertyName);
+#endif
 	}
 }
 
@@ -170,7 +180,7 @@ int FUPyWrapperArray::Init(FUPyWrapperArray* InSelf, const UPyUtil::FPropertyDef
 		return -1;
 	}
 
-	UPyUtil::FArrayPropOnScope ArrayProp = UPyUtil::FArrayPropOnScope::OwnedReference(new FArrayProperty(FFieldVariant(), UPyUtil::DefaultPythonPropertyName, RF_NoFlags));
+	UPyUtil::FArrayPropOnScope ArrayProp = UPyUtil::FArrayPropOnScope::OwnedReference(CreatePythonArrayProperty());
 	ArrayProp->Inner = ArrayElementProp.Release();
 
 	// Need to manually call Link to fix-up some data (such as the C++ property flags) that are only set during Link
@@ -217,7 +227,7 @@ int FUPyWrapperArray::Init(FUPyWrapperArray* InSelf, const FUPyWrapperOwnerConte
 				return -1;
 			}
 
-			UPyUtil::FArrayPropOnScope ArrayProp = UPyUtil::FArrayPropOnScope::OwnedReference(new FArrayProperty(FFieldVariant(), UPyUtil::DefaultPythonPropertyName, RF_NoFlags));
+			UPyUtil::FArrayPropOnScope ArrayProp = UPyUtil::FArrayPropOnScope::OwnedReference(CreatePythonArrayProperty());
 			ArrayProp->Inner = ArrayElementProp.Release();
 
 			// Need to manually call Link to fix-up some data (such as the C++ property flags) that are only set during Link
