@@ -10,6 +10,9 @@
 #include "Subclassing/UPyGeneratedClass.h"
 #include "Subclassing/UPyGeneratedStruct.h"
 #include "Subclassing/UPyGeneratedEnum.h"
+#include "Blueprint/UserWidget.h"
+#include "Blueprint/WidgetTree.h"
+#include "Components/Widget.h"
 
 PyObject* CallLog(PyObject* InSelf, PyObject* InArgs)
 {
@@ -263,6 +266,35 @@ PyObject* CallNewObject(PyObject* InSelf, PyObject* InArgs, PyObject* InKwds)
 	}
 
 	return UPyConversion::Pythonize(ObjectInstance);
+}
+
+PyObject* CallFindWidget(PyObject* InSelf, PyObject* InArgs)
+{
+	PyObject* PyUserWidgetObj = nullptr;
+	PyObject* PyNameObj = nullptr;
+
+	if (!PyArg_ParseTuple(InArgs, "OO:FindWidget", &PyUserWidgetObj, &PyNameObj))
+	{
+		return nullptr;
+	}
+
+	UUserWidget* UserWidget = nullptr;
+	if (!UPyConversion::Nativize(PyUserWidgetObj, UserWidget))
+	{
+		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("FindWidget"), *FString::Printf(TEXT("Failed to convert 'UserWidget' (%s) to 'UserWidget'"), *UPyUtil::GetFriendlyTypename(PyUserWidgetObj)));
+		return nullptr;
+	}
+
+	FName WidgetName;
+	if (!UPyConversion::Nativize(PyNameObj, WidgetName))
+	{
+		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("FindWidget"), *FString::Printf(TEXT("Failed to convert 'Name' (%s) to 'Name'"), *UPyUtil::GetFriendlyTypename(PyNameObj)));
+		return nullptr;
+	}
+
+	UWidgetTree* WidgetTree = UserWidget ? UserWidget->WidgetTree : nullptr;
+	UWidget* Widget = WidgetTree ? WidgetTree->FindWidget(WidgetName) : nullptr;
+	return UPyConversion::Pythonize(Widget);
 }
 
 PyObject* CallFindObject(PyObject* InSelf, PyObject* InArgs, PyObject* InKwds)
@@ -1043,6 +1075,7 @@ PyMethodDef UEPyMethodDefs[] = {
 	// { "reload", UPyCFunctionCast(&Reload), METH_VARARGS, "reload(module: str) -> None -- reload the given Unreal Python module." },
 	// { "load_module", UPyCFunctionCast(&LoadModule), METH_VARARGS, "load_module(module: str) -> None -- load the given Unreal module and generate any Python code for its reflected types" },
 	{ "NewObject", UPyCFunctionCast(&CallNewObject), METH_VARARGS | METH_KEYWORDS, UPyDoc_STR("NewObject(Type: Union[Class, type], Outer: Optional[Object]=None, Name: str=\"\", BaseType: Optional[Object]=None) -> Object -- create an Unreal object of the given class (and optional outer and name), optionally validating its type") },
+	{ "FindWidget", UPyCFunctionCast(&CallFindWidget), METH_VARARGS, UPyDoc_STR("FindWidget(UserWidget: UserWidget, Name: str) -> Widget | None -- find a child widget by name on a user widget's runtime widget tree") },
 	{ "FindObject", UPyCFunctionCast(&CallFindObject), METH_VARARGS | METH_KEYWORDS, UPyDoc_STR("FindObject(Type: Union[Class, type], Name: str, Outer: Optional[Object]=None, FollowRedirectors: bool=True) -> Object | None -- find an already loaded Unreal object with the given outer and name, optionally validating its type") },
 	{ "LoadObject", UPyCFunctionCast(&CallLoadObject), METH_VARARGS | METH_KEYWORDS, UPyDoc_STR("LoadObject(Type: Union[Class, type], Name: str, Outer: Optional[Object]=None, FollowRedirectors: bool=True) -> Object | None -- load an Unreal object with the given outer and name, optionally validating its type") },
 	{ "LoadClass", UPyCFunctionCast(&CallLoadClass), METH_VARARGS | METH_KEYWORDS, UPyDoc_STR("LoadClass(Name: str, Type: Union[Class, type]=Object.StaticClass(), Outer: Optional[Object]=None) -> Class | None -- load an Unreal class with the given outer and name, optionally validating its base type") },
