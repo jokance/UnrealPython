@@ -2,7 +2,7 @@
 
 English | [中文](README.zh.md)
 
-UnrealPython is a plugin for embedding CPython into Unreal Engine at runtime. It uses the Python runtime bundled with the plugin and exposes the `ue` module, generated Unreal Engine type wrappers, Blueprint/C++ entry points for calling Python, packaged-game script loading, and lifecycle callbacks.
+UnrealPython is a plugin for embedding CPython into Unreal Engine at runtime. It bundles its own Python runtime and provides the `ue` module, generated Unreal Engine type wrappers, and Blueprint/C++ interop entry points so projects can access engine objects and write runtime logic in Python.
 
 **Python version**: 3.14.5 (the bundled runtime directory is `ThirdParty/python314`)
 

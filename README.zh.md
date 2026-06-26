@@ -2,7 +2,7 @@
 
 [English](README.md) | 中文
 
-UnrealPython 是一个用于在 Unreal Engine 运行时嵌入 CPython 的插件。它使用插件自带的 Python 运行时，暴露 `ue` 模块、自动生成的 UE 类型包装、Blueprint/C++ 调 Python 入口，以及面向 packaged game 的脚本加载和生命周期回调。
+UnrealPython 是一个用于在 Unreal Engine 运行时嵌入 CPython 的插件。它内置 Python 运行时，提供 `ue` 模块、自动生成的 UE 类型包装和 Blueprint/C++ 互调入口，让项目可以用 Python 访问引擎对象并编写运行时逻辑。
 
 **Python 版本**: 3.14.5（插件目录名为 `ThirdParty/python314`）
 
