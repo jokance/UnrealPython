@@ -41,6 +41,7 @@ To speed up game development, try these companion plugins:
   - [Editor Tools (UnrealPythonEditor)](#editor-tools-unrealpythoneditor)
 - [Notes](#notes)
 - [Related Documentation](#related-documentation)
+- [Community](#community)
 
 ## Installation
 
@@ -503,3 +504,7 @@ The plugin provides helper tools in the Unreal Engine editor.
 - [GenerationSettings.json Guide](Docs/GenerationSettings.md): documents static wrapper generation scope, member filtering, `ForceReflection*`, `IsInline`, project module output, and verification flow.
 - [Python 3.14 Runtime Build and Packaging Flow](Docs/PythonRuntimeBuild.md): records the source, platform directories, build process, and packaging verification for the bundled Python runtime.
 - [Differences Between UnrealPython and UE PythonScriptPlugin](Docs/PythonScriptPluginDifferences.md): compares this plugin with UE's built-in `PythonScriptPlugin` in positioning, module structure, and runtime behavior.
+
+## Community
+
+- [Discord](https://discord.gg/gbbPGeVXw9)
