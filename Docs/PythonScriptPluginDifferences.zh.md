@@ -1,4 +1,4 @@
-[英文](PythonScriptPluginDifferences.md) [中文](PythonScriptPluginDifferences.zh.md)
+[English](PythonScriptPluginDifferences.md) | 中文
 
 # UnrealPython 与 UE PythonScriptPlugin 源码差异
 

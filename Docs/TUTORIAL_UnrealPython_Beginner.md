@@ -1,4 +1,4 @@
-[英文](TUTORIAL_UnrealPython_Beginner.md) [中文](TUTORIAL_UnrealPython_Beginner.zh.md)
+English | [中文](TUTORIAL_UnrealPython_Beginner.zh.md)
 
 # UnrealPython Quick Start
 

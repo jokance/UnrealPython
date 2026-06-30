@@ -1,4 +1,4 @@
-[英文](PythonRuntimeBuild.md) [中文](PythonRuntimeBuild.zh.md)
+English | [中文](PythonRuntimeBuild.zh.md)
 
 # Python 3.14 Runtime Build and Packaging Flow
 

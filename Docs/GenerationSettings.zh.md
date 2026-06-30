@@ -1,4 +1,4 @@
-[英文](GenerationSettings.md) [中文](GenerationSettings.zh.md)
+[English](GenerationSettings.md) | 中文
 
 # GenerationSettings.json 配置说明
 

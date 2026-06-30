@@ -1,4 +1,4 @@
-[英文](GeneratedType.md) [中文](GeneratedType.zh.md)
+English | [中文](GeneratedType.zh.md)
 
 # Python Generated Type Guide
 

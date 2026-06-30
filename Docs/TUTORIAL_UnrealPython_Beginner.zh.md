@@ -1,4 +1,4 @@
-[英文](TUTORIAL_UnrealPython_Beginner.md) [中文](TUTORIAL_UnrealPython_Beginner.zh.md)
+[English](TUTORIAL_UnrealPython_Beginner.md) | 中文
 
 # UnrealPython 快速入门
 

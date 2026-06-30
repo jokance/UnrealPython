@@ -1,4 +1,4 @@
-[英文](PythonRuntimeBuild.md) [中文](PythonRuntimeBuild.zh.md)
+[English](PythonRuntimeBuild.md) | 中文
 
 # Python 3.14 Runtime 构建与打包流程
 
