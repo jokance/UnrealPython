@@ -1905,37 +1905,18 @@ internal static class AutoWrapperGenerator
 			builder.AppendLine("\t\t\treturn BaseInit;");
 			builder.AppendLine("\t\t}");
 			builder.AppendLine();
-			builder.AppendLine("\t\tswitch (PyTuple_Size(InArgs))");
-			builder.AppendLine("\t\t{");
-
-			foreach (IGrouping<int, StructInitFunctionCode> group in initFunctionCodes
-				.GroupBy(code => code.ArgumentCount)
-				.OrderBy(entry => entry.Key))
+			builder.AppendLine("\t\tif (");
+			for (int funcIndex = 0; funcIndex < initFunctionCodes.Count; ++funcIndex)
 			{
-				int argumentCount = group.Key;
-				List<StructInitFunctionCode> overloads = group.ToList();
-
-				builder.AppendLine($"\t\tcase {argumentCount}:");
-				builder.AppendLine("\t\t{");
-				builder.AppendLine("\t\t\tif (");
-				for (int funcIndex = 0; funcIndex < overloads.Count; ++funcIndex)
-				{
-					string prefix = funcIndex == 0 ? "\t\t\t\t" : "\t\t\t\t|| ";
-					builder.AppendLine($"{prefix}UPyUtil::TryInit(InSelf, InArgs, InKwds, &{funcStructName}::{overloads[funcIndex].FunctionName})");
-				}
-				builder.AppendLine("\t\t\t)");
-				builder.AppendLine("\t\t\t{");
-				builder.AppendLine("\t\t\t\treturn 0;");
-				builder.AppendLine("\t\t\t}");
-				builder.AppendLine("\t\t\tbreak;");
-				builder.AppendLine("\t\t}");
+				string prefix = funcIndex == 0 ? "\t\t\t" : "\t\t\t|| ";
+				builder.AppendLine($"{prefix}UPyUtil::TryInit(InSelf, InArgs, InKwds, &{funcStructName}::{initFunctionCodes[funcIndex].FunctionName})");
 			}
-
-			builder.AppendLine("\t\tdefault:");
-			builder.AppendLine("\t\t\tbreak;");
+			builder.AppendLine("\t\t)");
+			builder.AppendLine("\t\t{");
+			builder.AppendLine("\t\t\treturn 0;");
 			builder.AppendLine("\t\t}");
 			builder.AppendLine();
-			builder.AppendLine($"\t\tUPyUtil::SetPythonError(PyExc_RuntimeError, TEXT(\"{initErrorContext}\"), TEXT(\"invalid argument\"));");
+			builder.AppendLine($"\t\tUPyUtil::SetPythonError(PyExc_TypeError, TEXT(\"{initErrorContext}\"), TEXT(\"invalid argument\"));");
 			builder.AppendLine("\t\treturn -1;");
 			builder.AppendLine("\t}");
 		}
@@ -1943,12 +1924,21 @@ internal static class AutoWrapperGenerator
 		{
 			builder.AppendLine($"\tstatic int Init({cppType}* InSelf, PyObject* InArgs, PyObject* InKwds)");
 			builder.AppendLine("\t{");
+			builder.AppendLine("\t\tif (PyTuple_Size(InArgs) != 0 || (InKwds && PyDict_Size(InKwds) != 0))");
+			builder.AppendLine("\t\t{");
+			builder.AppendLine($"\t\t\tUPyUtil::SetPythonError(PyExc_TypeError, TEXT(\"{EscapeForCxxLiteral(BuildPropertyErrorContext(rawType, "__init__"))}\"), TEXT(\"this type does not accept constructor arguments\"));");
+			builder.AppendLine("\t\t\treturn -1;");
+			builder.AppendLine("\t\t}");
 			builder.AppendLine("\t\treturn FUPyWrapperStruct::Init(InSelf);");
 			builder.AppendLine("\t}");
 		}
 
+		HashSet<string> comparisonMethodNames = new(StringComparer.Ordinal)
+		{
+			"__eq__", "__ne__", "__lt__", "__le__", "__gt__", "__ge__"
+		};
 		List<MethodJsonInfo> comparisonMethods = structMethods
-			.Where(method => method.bIsOperator && (method.MethodName.Equals("__eq__", StringComparison.Ordinal) || method.MethodName.Equals("__ne__", StringComparison.Ordinal)))
+			.Where(method => method.bIsOperator && comparisonMethodNames.Contains(method.MethodName))
 			.ToList();
 
 		Dictionary<string, List<string>> comparisonAttempts = new(StringComparer.Ordinal);
@@ -2081,6 +2071,30 @@ internal static class AutoWrapperGenerator
 				AppendRichCompareCase("Py_NE", eqAttempts, true);
 			}
 
+			comparisonAttempts.TryGetValue("__lt__", out List<string>? ltAttempts);
+			if (ltAttempts != null && ltAttempts.Count > 0)
+			{
+				AppendRichCompareCase("Py_LT", ltAttempts, false);
+			}
+
+			comparisonAttempts.TryGetValue("__le__", out List<string>? leAttempts);
+			if (leAttempts != null && leAttempts.Count > 0)
+			{
+				AppendRichCompareCase("Py_LE", leAttempts, false);
+			}
+
+			comparisonAttempts.TryGetValue("__gt__", out List<string>? gtAttempts);
+			if (gtAttempts != null && gtAttempts.Count > 0)
+			{
+				AppendRichCompareCase("Py_GT", gtAttempts, false);
+			}
+
+			comparisonAttempts.TryGetValue("__ge__", out List<string>? geAttempts);
+			if (geAttempts != null && geAttempts.Count > 0)
+			{
+				AppendRichCompareCase("Py_GE", geAttempts, false);
+			}
+
 			builder.AppendLine("\t\tdefault:");
 			builder.AppendLine("\t\t\tbreak;");
 			builder.AppendLine("\t\t}");
@@ -2132,12 +2146,20 @@ internal static class AutoWrapperGenerator
 
 		for (int paramIndex = 0; paramIndex < paramSnippets.Count; ++paramIndex)
 		{
-			string pyArgName = $"PyArg{paramIndex}";
-			functionBuilder.AppendLine($"\t\tPyObject* {pyArgName} = PyTuple_GetItem(InArgs, {paramIndex});");
-			functionBuilder.AppendLine($"\t\tif ({pyArgName} == nullptr)");
-			functionBuilder.AppendLine("\t\t{");
-			functionBuilder.AppendLine("\t\t\treturn -1;");
-			functionBuilder.AppendLine("\t\t}");
+			functionBuilder.AppendLine($"\t\tPyObject* PyArg{paramIndex} = nullptr;");
+		}
+		string keywordNames = String.Join(", ", method.Params.Take(paramCount).Select(param => $"\"{EscapeForCxxLiteral(param.PropName)}\""));
+		functionBuilder.AppendLine($"\t\tstatic const char* ArgsKwdList[] = {{ {(keywordNames.Length > 0 ? keywordNames + ", " : String.Empty)}nullptr }};");
+		string parseFormat = new string('O', paramCount) + ":" + errorContextLiteral;
+		string parseArguments = String.Join(", ", Enumerable.Range(0, paramCount).Select(paramIndex => $"&PyArg{paramIndex}"));
+		functionBuilder.AppendLine($"\t\tif (!PyArg_ParseTupleAndKeywords(InArgs, InKwds, \"{parseFormat}\", (char**)ArgsKwdList{(parseArguments.Length > 0 ? ", " + parseArguments : String.Empty)}))");
+		functionBuilder.AppendLine("\t\t{");
+		functionBuilder.AppendLine("\t\t\treturn -1;");
+		functionBuilder.AppendLine("\t\t}");
+		functionBuilder.AppendLine();
+
+		for (int paramIndex = 0; paramIndex < paramSnippets.Count; ++paramIndex)
+		{
 			functionBuilder.AppendLine($"\t\t{paramSnippets[paramIndex].Declaration}");
 			functionBuilder.AppendLine(IndentCode(paramSnippets[paramIndex].Conversion.TrimEnd(), 2));
 			functionBuilder.AppendLine();
@@ -2146,6 +2168,7 @@ internal static class AutoWrapperGenerator
 		string constructorArgs = paramSnippets.Count > 0
 			? String.Join(", ", paramSnippets.Select(snippet => snippet.ArgumentExpression))
 			: String.Empty;
+		functionBuilder.AppendLine("\t\tInSelf->ScriptStruct->DestroyStruct(InSelf->StructInstance);");
 		if (constructorArgs.Length > 0)
 		{
 			functionBuilder.AppendLine($"\t\tnew (InSelf->StructInstance) {rawType}({constructorArgs});");
@@ -2301,6 +2324,13 @@ internal static class AutoWrapperGenerator
 
 			helperBuilder.AppendLine($"\tstatic {(mapping.DelegateType == "inquiry" ? "int" : "PyObject*")} {finalFunctionName}({cppType}* InSelf{(mapping.IsUnary ? String.Empty : ", PyObject* InRHS")})");
 			helperBuilder.AppendLine("\t{");
+			if (!mapping.IsUnary)
+			{
+				helperBuilder.AppendLine($"\t\tif (!UPyIs{wrapperSuffix}((PyObject*)InSelf))");
+				helperBuilder.AppendLine("\t\t{");
+				helperBuilder.AppendLine("\t\t\tPy_RETURN_NOTIMPLEMENTED;");
+				helperBuilder.AppendLine("\t\t}");
+			}
 
 			foreach (string attemptName in attemptNames)
 			{
@@ -2379,6 +2409,10 @@ internal static class AutoWrapperGenerator
 			"__irshift__" => $"{selfExpression}->operator>>=({rhsExpression})",
 			"__eq__" => $"*({selfExpression}) == {rhsExpression}",
 			"__ne__" => $"*({selfExpression}) != {rhsExpression}",
+			"__lt__" => $"*({selfExpression}) < {rhsExpression}",
+			"__le__" => $"*({selfExpression}) <= {rhsExpression}",
+			"__gt__" => $"*({selfExpression}) > {rhsExpression}",
+			"__ge__" => $"*({selfExpression}) >= {rhsExpression}",
 			_ => null
 		};
 	}
@@ -2497,16 +2531,18 @@ internal static class AutoWrapperGenerator
 
 	private sealed class MethodFunctionCode
 	{
-		public MethodFunctionCode(string definition, string functionName, int argumentCount)
+		public MethodFunctionCode(string definition, string functionName, int minArgumentCount, int maxArgumentCount)
 		{
 			Definition = definition;
 			FunctionName = functionName;
-			ArgumentCount = argumentCount;
+			MinArgumentCount = minArgumentCount;
+			MaxArgumentCount = maxArgumentCount;
 		}
 
 		public string Definition { get; }
 		public string FunctionName { get; }
-		public int ArgumentCount { get; }
+		public int MinArgumentCount { get; }
+		public int MaxArgumentCount { get; }
 	}
 
 	private sealed class InitParamSnippet
@@ -2598,23 +2634,8 @@ internal static class AutoWrapperGenerator
 				helperBuilder.AppendLine("\t}");
 				helperBuilder.AppendLine();
 
-				if (property.PropType == "ArrayProperty")
-				{
-					getterBody = $"return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&{memberAccess}, CastField<FArrayProperty>({propertyDefName}().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);";
-				}
-				else if (property.PropType == "SetProperty")
-				{
-					getterBody = $"return (PyObject*)FUPyWrapperSetFactory::Get().CreateInstance((void*)&{memberAccess}, CastField<FSetProperty>({propertyDefName}().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);";
-				}
-				else if (property.PropType == "MapProperty")
-				{
-					getterBody = $"return (PyObject*)FUPyWrapperMapFactory::Get().CreateInstance((void*)&{memberAccess}, CastField<FMapProperty>({propertyDefName}().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);";
-				}
-				else
-				{
-					getterBody =
-						$"return FUPyWrapperStruct::GetPropertyValue(InSelf, {propertyDefName}(), \"{pythonAttrNameLiteral}\");";
-				}
+				getterBody =
+					$"return FUPyWrapperStruct::GetPropertyValue(InSelf, {propertyDefName}(), \"{pythonAttrNameLiteral}\");";
 
 				setterBody =
 					$"return FUPyWrapperStruct::SetPropertyValue(InSelf, InValue, {propertyDefName}(), \"{pythonAttrNameLiteral}\");";
@@ -3031,6 +3052,7 @@ internal static class AutoWrapperGenerator
 			string accessorBase = SanitizeIdentifier(method.MethodName, "Method");
 			List<PropJsonInfo> inputParams = method.Params.Where(IsInputParameter).ToList();
 			int parameterCount = inputParams.Count;
+			int minParameterCount = inputParams.Count(param => param.DefaultValue == null);
 
 			string methodFunctionName;
 			if (isOverloaded)
@@ -3295,7 +3317,7 @@ internal static class AutoWrapperGenerator
 						methodBuilder.AppendLine("\t\tif (Func)");
 						methodBuilder.AppendLine("\t\t{");
 						methodBuilder.AppendLine("\t\t\tuint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);");
-						methodBuilder.AppendLine("\t\t\tFMemory::Memzero(Parms, Func->ParmsSize);");
+						methodBuilder.AppendLine("\t\t\tFunc->InitializeStruct(Parms);");
 
 						for (int i = 0; i < inputParams.Count; i++)
 						{
@@ -3303,7 +3325,7 @@ internal static class AutoWrapperGenerator
 							string varName = argumentExpressions[i];
 							methodBuilder.AppendLine($"\t\t\tif (Prop_{param.RawPropName})");
 							methodBuilder.AppendLine("\t\t\t{");
-							methodBuilder.AppendLine($"\t\t\t\tProp_{param.RawPropName}->CopyCompleteValue_InContainer(Parms, &{varName});");
+							methodBuilder.AppendLine($"\t\t\t\tProp_{param.RawPropName}->CopyCompleteValue(Prop_{param.RawPropName}->ContainerPtrToValuePtr<void>(Parms), &{varName});");
 							methodBuilder.AppendLine("\t\t\t}");
 						}
 
@@ -3321,7 +3343,7 @@ internal static class AutoWrapperGenerator
 							string varName = outputParamMap[param.PropName];
 							methodBuilder.AppendLine($"\t\t\tif (Prop_{param.RawPropName})");
 							methodBuilder.AppendLine("\t\t\t{");
-							methodBuilder.AppendLine($"\t\t\t\tProp_{param.RawPropName}->CopyCompleteValue_InContainer(&{varName}, Parms);");
+							methodBuilder.AppendLine($"\t\t\t\tProp_{param.RawPropName}->CopyCompleteValue(&{varName}, Prop_{param.RawPropName}->ContainerPtrToValuePtr<void>(Parms));");
 							methodBuilder.AppendLine("\t\t\t}");
 						}
 
@@ -3330,9 +3352,10 @@ internal static class AutoWrapperGenerator
 							string resultVarName = totalReturns > 1 ? "ReturnValue" : "Result";
 							methodBuilder.AppendLine($"\t\t\tif (Prop__ReturnValue)");
 							methodBuilder.AppendLine("\t\t\t{");
-							methodBuilder.AppendLine($"\t\t\t\tProp__ReturnValue->CopyCompleteValue_InContainer(&{resultVarName}, Parms);");
+							methodBuilder.AppendLine($"\t\t\t\tProp__ReturnValue->CopyCompleteValue(&{resultVarName}, Prop__ReturnValue->ContainerPtrToValuePtr<void>(Parms));");
 							methodBuilder.AppendLine("\t\t\t}");
 						}
+						methodBuilder.AppendLine("\t\t\tFunc->DestroyStruct(Parms);");
 						methodBuilder.AppendLine("\t\t\tFMemory::Free(Parms);");
 						methodBuilder.AppendLine("\t\t}");
 
@@ -3623,7 +3646,7 @@ internal static class AutoWrapperGenerator
 
 				if (generatedBinding)
 				{
-					validImpls.Add(new MethodFunctionCode(String.Empty, methodFunctionName, parameterCount));
+					validImpls.Add(new MethodFunctionCode(String.Empty, methodFunctionName, minParameterCount, parameterCount));
 				}
 
 				if (!isOverloaded)
@@ -3660,31 +3683,19 @@ internal static class AutoWrapperGenerator
 				helperBuilder.AppendLine($"\tstatic PyObject* {dispatcherName}({cppType}* InSelf, PyObject* InArgs)");
 				helperBuilder.AppendLine("\t{");
 				helperBuilder.AppendLine("\t\tPy_ssize_t ArgCount = PyTuple_Size(InArgs);");
-				helperBuilder.AppendLine("\t\tswitch (ArgCount)");
-				helperBuilder.AppendLine("\t\t{");
 
-				foreach (var implGroup in validImpls.GroupBy(x => x.ArgumentCount))
+				foreach (MethodFunctionCode impl in validImpls)
 				{
-					helperBuilder.AppendLine($"\t\tcase {implGroup.Key}:");
+					helperBuilder.AppendLine($"\t\tif (ArgCount >= {impl.MinArgumentCount} && ArgCount <= {impl.MaxArgumentCount})");
 					helperBuilder.AppendLine("\t\t{");
-					foreach (var impl in implGroup)
-					{
-						helperBuilder.AppendLine("\t\t\t{");
-						helperBuilder.AppendLine($"\t\t\t\tPyObject* Result = {impl.FunctionName}(InSelf, InArgs);");
-						helperBuilder.AppendLine("\t\t\t\tif (Result)");
-						helperBuilder.AppendLine("\t\t\t\t{");
-						helperBuilder.AppendLine("\t\t\t\t\treturn Result;");
-						helperBuilder.AppendLine("\t\t\t\t}");
-						helperBuilder.AppendLine("\t\t\t\tPyErr_Clear();");
-						helperBuilder.AppendLine("\t\t\t}");
-					}
-					helperBuilder.AppendLine("\t\t\tbreak;");
+					helperBuilder.AppendLine($"\t\t\tPyObject* Result = {impl.FunctionName}(InSelf, InArgs);");
+					helperBuilder.AppendLine("\t\t\tif (Result)");
+					helperBuilder.AppendLine("\t\t\t{");
+					helperBuilder.AppendLine("\t\t\t\treturn Result;");
+					helperBuilder.AppendLine("\t\t\t}");
+					helperBuilder.AppendLine("\t\t\tPyErr_Clear();");
 					helperBuilder.AppendLine("\t\t}");
 				}
-
-				helperBuilder.AppendLine("\t\tdefault:");
-				helperBuilder.AppendLine("\t\t\tbreak;");
-				helperBuilder.AppendLine("\t\t}");
 				
 				string errorContextLiteral = EscapeForCxxLiteral(BuildPropertyErrorContext(rawType, methodName));
 				helperBuilder.AppendLine($"\t\tUPyUtil::SetPythonError(PyExc_TypeError, TEXT(\"{errorContextLiteral}\"), TEXT(\"invalid argument count\"));");
@@ -3693,7 +3704,7 @@ internal static class AutoWrapperGenerator
 				helperBuilder.AppendLine();
 
 				string methodFlags = "METH_VARARGS";
-				bool isStatic = overloads.Any(m => IsStaticMethod(m)); 
+				bool isStatic = overloads.All(m => IsStaticMethod(m));
 				if (isStatic) methodFlags += " | METH_STATIC";
 
 				tableBuilder.AppendLine($"\t{{ \"{EscapeForCxxLiteral(methodName)}\", UPyCFunctionCast(&{helperName}::{dispatcherName}), {methodFlags}, \"Overloaded function\" }},");
@@ -3775,23 +3786,8 @@ internal static class AutoWrapperGenerator
 				helperBuilder.AppendLine("\t}");
 				helperBuilder.AppendLine();
 
-				if (IsPropertyExternallyAccessible(property) && property.PropType == "ArrayProperty")
-				{
-					getterBody = $"return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&{memberAccess}, CastField<FArrayProperty>({propertyDefName}().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);";
-				}
-				else if (IsPropertyExternallyAccessible(property) && property.PropType == "SetProperty")
-				{
-					getterBody = $"return (PyObject*)FUPyWrapperSetFactory::Get().CreateInstance((void*)&{memberAccess}, CastField<FSetProperty>({propertyDefName}().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);";
-				}
-				else if (IsPropertyExternallyAccessible(property) && property.PropType == "MapProperty")
-				{
-					getterBody = $"return (PyObject*)FUPyWrapperMapFactory::Get().CreateInstance((void*)&{memberAccess}, CastField<FMapProperty>({propertyDefName}().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);";
-				}
-				else
-				{
-					getterBody =
-						$"return FUPyWrapperObject::GetPropertyValue(InSelf, {propertyDefName}(), \"{pythonAttrNameLiteral}\");";
-				}
+				getterBody =
+					$"return FUPyWrapperObject::GetPropertyValue(InSelf, {propertyDefName}(), \"{pythonAttrNameLiteral}\");";
 
 				setterBody =
 					$"return FUPyWrapperObject::SetPropertyValue(InSelf, InValue, {propertyDefName}(), \"{pythonAttrNameLiteral}\");";

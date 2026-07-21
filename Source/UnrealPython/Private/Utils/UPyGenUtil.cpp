@@ -703,6 +703,38 @@ bool InvokePythonCallableFromUnrealFunctionThunk(FUPyObjectPtr InSelf, PyObject*
 	return true;
 }
 
+void DiscardUnrealFunctionThunk(const UFunction* InFunc, FFrame& Stack)
+{
+	check(InFunc);
+
+	void* LocalStruct = FMemory_Alloca(FMath::Max<int32>(1, InFunc->GetStructureSize()));
+	InFunc->InitializeStruct(LocalStruct);
+	ON_SCOPE_EXIT
+	{
+		InFunc->DestroyStruct(LocalStruct);
+	};
+
+	for (TFieldIterator<FProperty> ParamIt(InFunc); ParamIt; ++ParamIt)
+	{
+		FProperty* Param = *ParamIt;
+		if (Param->HasAnyPropertyFlags(CPF_ReturnParm))
+		{
+			continue;
+		}
+
+		Stack.MostRecentPropertyAddress = nullptr;
+		Stack.MostRecentPropertyContainer = nullptr;
+		void* LocalValue = Param->ContainerPtrToValuePtr<void>(LocalStruct);
+		Stack.StepCompiledIn(LocalValue, Param->GetClass());
+	}
+
+	if (Stack.Code)
+	{
+		checkSlow(*Stack.Code == EX_EndFunctionParms);
+		++Stack.Code;
+	}
+}
+
 PyObject* GetPropertyValue(const UStruct* InStruct, const void* InStructData, const FGeneratedWrappedProperty& InPropDef, const char *InAttributeName, PyObject* InOwnerPyObject, const TCHAR* InErrorCtxt)
 {
 	// Has this property been deprecated?

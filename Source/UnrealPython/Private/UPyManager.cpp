@@ -6,7 +6,9 @@
 #include "Core/UPyModuleInitializer.h"
 #include "Core/UPyGIL.h"
 #include "Wrapper/UPyWrapperObjectBase.h"
+#include "Wrapper/UPyReferenceCollector.h"
 #include "Wrapper/UPyWrapperTypeFactory.h"
+#include "PyGameFramework/UPyTimerManager.h"
 
 void FUPyPythonOwnedObjectReferencer::Add(UObject* Object)
 {
@@ -49,7 +51,7 @@ void FUPyPythonOwnedObjectReferencer::OnObjectsReplaced(const TMap<UObject*, UOb
 
 void FUPyPythonOwnedObjectReferencer::AddReferencedObjects(FReferenceCollector& Collector)
 {
-	Collector.AddReferencedObjects(Objects);
+	Collector.AddStableReferenceSet(&Objects);
 }
 
 FString FUPyPythonOwnedObjectReferencer::GetReferencerName() const
@@ -79,7 +81,11 @@ void UUPyManager::Initialize()
 		return;
 	}
 
-	FUPyModuleInitializer::Get().InitializeModules();
+	if (!FUPyModuleInitializer::Get().InitializeModules())
+	{
+		FUPyVirtualMachine::Get().ShutdownPython();
+		return;
+	}
 
 	RedirectOutput();
 
@@ -100,6 +106,7 @@ void UUPyManager::Shutdown()
 
 	if (!FUPyVirtualMachine::Get().IsInitialized())
 	{
+		UUPyTimerManager::Shutdown();
 		return;
 	}
 
@@ -108,8 +115,10 @@ void UUPyManager::Shutdown()
 	FUPyVirtualMachine::Get().RestoreThread();
 
 	PyRun_SimpleString("import ue_site; ue_site.on_shutdown()");
+	UUPyTimerManager::Shutdown();
 
 	FUPyModuleInitializer::Get().CleanupModules();
+	FUPyReferenceCollector::Get().Shutdown();
 
 	FUPyVirtualMachine::Get().ShutdownPython();
 }
@@ -201,6 +210,12 @@ void UUPyManager::NotifyUObjectDeleted(const UObjectBase* ObjectBase, int32 Inde
 #if WITH_EDITOR
 void UUPyManager::OnObjectsReplaced(const TMap<UObject*, UObject*>& ReplacementMap)
 {
+	if (!Py_IsInitialized())
+	{
+		return;
+	}
+
+	FUPyScopedGIL GIL;
 	PythonOwnedObjects.OnObjectsReplaced(ReplacementMap);
 	FUPyWrapperObjectFactory::Get().OnObjectsReplaced(ReplacementMap);
 }

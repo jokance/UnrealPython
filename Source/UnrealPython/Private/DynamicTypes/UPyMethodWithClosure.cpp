@@ -208,6 +208,8 @@ FUPyCFunctionWithClosureObject* FUPyCFunctionWithClosureObject::New(FUPyMethodWi
 
 		Py_XINCREF(InModule);
 		Self->ModuleAttr = InModule;
+		Self->WeakRefList = nullptr;
+		Self->VectorCall = nullptr;
 
 		PyObject_GC_Track(Self);
 	}
@@ -218,6 +220,10 @@ FUPyCFunctionWithClosureObject* FUPyCFunctionWithClosureObject::New(FUPyMethodWi
 void FUPyCFunctionWithClosureObject::Free(FUPyCFunctionWithClosureObject* InSelf)
 {
 	PyObject_GC_UnTrack(InSelf);
+	if (InSelf->WeakRefList)
+	{
+		PyObject_ClearWeakRefs(reinterpret_cast<PyObject*>(InSelf));
+	}
 
 	InSelf->MethodDef = nullptr;
 
@@ -226,6 +232,8 @@ void FUPyCFunctionWithClosureObject::Free(FUPyCFunctionWithClosureObject* InSelf
 
 	Py_XDECREF(InSelf->ModuleAttr);
 	InSelf->ModuleAttr = nullptr;
+	InSelf->WeakRefList = nullptr;
+	InSelf->VectorCall = nullptr;
 
 	if (!PyCFunctionWithClosureObjectFreeList || !PyCFunctionWithClosureObjectFreeList->Push(InSelf))
 	{
@@ -461,6 +469,8 @@ PyTypeObject InitializeUPyCFunctionWithClosureType()
 	};
 
 	PyType.tp_base = &PyCFunction_Type; // This is a hack so that the doc gen code will think this is a built-in function
+	static_assert(sizeof(FUPyCFunctionWithClosureObject) >= sizeof(PyCFunctionObject), "PyCFunction-compatible wrapper must not be smaller than its base");
+	PyType.tp_weaklistoffset = STRUCT_OFFSET(FUPyCFunctionWithClosureObject, WeakRefList);
 
 	PyType.tp_dealloc = (destructor)&FFuncs::Dealloc;
 	PyType.tp_traverse = (traverseproc)&FFuncs::Traverse;

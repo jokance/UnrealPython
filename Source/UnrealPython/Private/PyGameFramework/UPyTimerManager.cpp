@@ -1,5 +1,6 @@
 
 #include "PyGameFramework/UPyTimerManager.h"
+#include "Utils/UPyUtil.h"
 
 TMap<int32, FTSTicker::FDelegateHandle> UUPyTimerManager::ActiveTimers;
 int32 UUPyTimerManager::NextTimerId = 1;
@@ -30,11 +31,10 @@ int32 UUPyTimerManager::SetTimerInternal(float Rate, bool bLoop)
 		FTickerDelegate::CreateLambda([bLoop, TimerId](float DeltaTime) -> bool
 		{
 			// Call Python unreal_timer.on_timer(handle)
-			OnTimerCallback(TimerId);
-			
-			if (!bLoop)
+			const bool bCallbackSucceeded = OnTimerCallback(TimerId);
+
+			if (!bCallbackSucceeded || !bLoop || !ActiveTimers.Contains(TimerId))
 			{
-				// One-shot timer, remove from map
 				ActiveTimers.Remove(TimerId);
 				return false;
 			}
@@ -51,8 +51,13 @@ int32 UUPyTimerManager::SetTimerInternal(float Rate, bool bLoop)
 	return TimerId;
 }
 
-void UUPyTimerManager::OnTimerCallback(int32 Handle)
+bool UUPyTimerManager::OnTimerCallback(int32 Handle)
 {
+	if (!Py_IsInitialized())
+	{
+		return false;
+	}
+
 	FUPyScopedGIL GIL;
 	
 	// Lazy cache the on_timer function
@@ -64,11 +69,10 @@ void UUPyTimerManager::OnTimerCallback(int32 Handle)
 		{
 			if (PyErr_Occurred())
 			{
-				PyErr_Print();
-				PyErr_Clear();
+				UPyUtil::LogPythonError();
 			}
 			UE_LOG(LogUnrealPython, Error, TEXT("UUPyTimerManager: Failed to import unreal_timer module"));
-			return;
+			return false;
 		}
 		
 		// Get on_timer function
@@ -80,37 +84,37 @@ void UUPyTimerManager::OnTimerCallback(int32 Handle)
 			Py_XDECREF(Func);
 			if (PyErr_Occurred())
 			{
-				PyErr_Print();
-				PyErr_Clear();
+				UPyUtil::LogPythonError();
 			}
 			UE_LOG(LogUnrealPython, Error, TEXT("UUPyTimerManager: unreal_timer.on_timer not found or not callable"));
-			return;
+			return false;
 		}
 		
 		OnTimerFunc = FUPyAutoGILPtr(FUPyObjectPtr::StealReference(Func));
 	}
 	
 	// Call on_timer(handle)
-	PyObject* PyHandle = PyLong_FromUnsignedLong(Handle);
-	PyObject* Args = PyTuple_Pack(1, PyHandle);
-	Py_DECREF(PyHandle);
-	
-	PyObject* Result = PyObject_CallObject(OnTimerFunc.Get(), Args);
-	Py_DECREF(Args);
-	
+	FUPyObjectPtr PyHandle = FUPyObjectPtr::StealReference(PyLong_FromLong(Handle));
+	FUPyObjectPtr Args = PyHandle ? FUPyObjectPtr::StealReference(PyTuple_Pack(1, PyHandle.Get())) : FUPyObjectPtr();
+	if (!Args)
+	{
+		UPyUtil::LogPythonError();
+		return false;
+	}
+
+	FUPyObjectPtr Result = FUPyObjectPtr::StealReference(PyObject_CallObject(OnTimerFunc.Get(), Args));
+
 	if (!Result)
 	{
 		if (PyErr_Occurred())
 		{
-			PyErr_Print();
-			PyErr_Clear();
+			UPyUtil::LogPythonError();
 		}
 		UE_LOG(LogUnrealPython, Error, TEXT("UUPyTimerManager: Failed to call unreal_timer.on_timer (handle=%u)"), Handle);
+		return false;
 	}
-	else
-	{
-		Py_DECREF(Result);
-	}
+
+	return true;
 }
 
 void UUPyTimerManager::ClearTimer(int32 Handle)
@@ -147,4 +151,20 @@ void UUPyTimerManager::ClearAllTimers()
 	ActiveTimers.Empty();
 	
 	UE_LOG(LogUnrealPython, Verbose, TEXT("UUPyTimerManager: Cleared all timers"));
+}
+
+void UUPyTimerManager::Shutdown()
+{
+	ClearAllTimers();
+	NextTimerId = 1;
+
+	if (Py_IsInitialized())
+	{
+		FUPyScopedGIL GIL;
+		OnTimerFunc.Get().Reset();
+	}
+	else
+	{
+		OnTimerFunc.Get().Release();
+	}
 }

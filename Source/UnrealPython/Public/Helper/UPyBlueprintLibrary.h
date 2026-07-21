@@ -6,6 +6,7 @@
 #include "Core/UPyConversion.h"
 #include "Core/UPyGIL.h"
 #include "Core/UPyPtr.h"
+#include "Utils/UPyUtil.h"
 #include "UPyBlueprintLibrary.generated.h"
 
 UCLASS()
@@ -44,23 +45,51 @@ public:
 	template <typename ReturnType, typename... ArgTypes>
 	static ReturnType CallPythonMethod(const FString& ModuleName, const FString& MethodName, ArgTypes... Args)
 	{
+		if (!Py_IsInitialized())
+		{
+			if constexpr (std::is_same_v<ReturnType, void>)
+			{
+				return;
+			}
+			else
+			{
+				return ReturnType();
+			}
+		}
+
 		FUPyScopedGIL GIL;
 
 		FUPyObjectPtr PyArgs;
 		if constexpr (sizeof...(Args) > 0)
 		{
 			PyArgs = FUPyObjectPtr::StealReference(PyTuple_New(sizeof...(Args)));
+			if (!PyArgs)
+			{
+				UPyUtil::LogPythonError();
+				if constexpr (std::is_same_v<ReturnType, void>)
+				{
+					return;
+				}
+				else
+				{
+					return ReturnType();
+				}
+			}
+
 			int32 ArgIndex = 0;
+			bool bConvertedArgs = true;
 
 			auto ProcessArg = [&](auto&& Arg)
 			{
 				PyObject* PyArg = nullptr;
-				if (UPyConversion::Pythonize(Arg, PyArg))
+				if (UPyConversion::Pythonize(Arg, PyArg) && PyArg)
 				{
 					PyTuple_SetItem(PyArgs, ArgIndex, PyArg);
 				}
 				else
 				{
+					Py_XDECREF(PyArg);
+					bConvertedArgs = false;
 					Py_INCREF(Py_None);
 					PyTuple_SetItem(PyArgs, ArgIndex, Py_None);
 				}
@@ -68,6 +97,18 @@ public:
 			};
 
 			(ProcessArg(Args), ...);
+			if (!bConvertedArgs)
+			{
+				UPyUtil::LogPythonError();
+				if constexpr (std::is_same_v<ReturnType, void>)
+				{
+					return;
+				}
+				else
+				{
+					return ReturnType();
+				}
+			}
 		}
 
 		FUPyObjectPtr PyResult = CallPythonMethodInternal(ModuleName, MethodName, PyArgs);
@@ -84,7 +125,11 @@ public:
 			}
 
 			ReturnType Result = ReturnType();
-			UPyConversion::Nativize(PyResult, Result);
+			if (!UPyConversion::Nativize(PyResult, Result))
+			{
+				UPyUtil::LogPythonError();
+				return ReturnType();
+			}
 			return Result;
 		}
 	}

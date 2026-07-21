@@ -9,7 +9,7 @@ FUPyObjectPtr UUPyBlueprintLibrary::CallPythonMethodInternal(const FString& Modu
 	if (!PyModule)
 	{
 		UE_LOG(LogUnrealPython, Error, TEXT("Failed to import module: %s"), *ModuleName);
-		PyErr_Print();
+		UPyUtil::LogPythonError();
 		return FUPyObjectPtr();
 	}
 
@@ -17,7 +17,7 @@ FUPyObjectPtr UUPyBlueprintLibrary::CallPythonMethodInternal(const FString& Modu
 	if (!PyMethod)
 	{
 		UE_LOG(LogUnrealPython, Error, TEXT("Failed to find method: %s in module: %s"), *MethodName, *ModuleName);
-		PyErr_Print();
+		UPyUtil::LogPythonError();
 		return FUPyObjectPtr();
 	}
 
@@ -31,7 +31,7 @@ FUPyObjectPtr UUPyBlueprintLibrary::CallPythonMethodInternal(const FString& Modu
 	if (!PyResult)
 	{
 		UE_LOG(LogUnrealPython, Error, TEXT("Failed to call method: %s in module: %s"), *MethodName, *ModuleName);
-		PyErr_Print();
+		UPyUtil::LogPythonError();
 		return FUPyObjectPtr();
 	}
 
@@ -100,7 +100,7 @@ bool UUPyBlueprintLibrary::CallLoadedPythonMethod(const FString& ModuleName, con
 	{
 		if (PyErr_Occurred())
 		{
-			PyErr_Print();
+			UPyUtil::LogPythonError();
 		}
 		UE_LOG(LogUnrealPython, Warning, TEXT("Skipping loaded Python method '%s.%s'; method is not callable."), *ModuleName, *MethodName);
 		return false;
@@ -111,7 +111,7 @@ bool UUPyBlueprintLibrary::CallLoadedPythonMethod(const FString& ModuleName, con
 	{
 		if (PyErr_Occurred())
 		{
-			PyErr_Print();
+			UPyUtil::LogPythonError();
 		}
 		UE_LOG(LogUnrealPython, Error, TEXT("Failed to call loaded Python method '%s.%s'."), *ModuleName, *MethodName);
 		return false;

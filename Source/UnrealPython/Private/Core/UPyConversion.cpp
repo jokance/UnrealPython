@@ -1302,7 +1302,9 @@ FUPyConversionResult PythonizeProperty_Direct(const FProperty* Prop, const void*
 
 	if (const FMulticastDelegateProperty* CastProp = CastField<FMulticastDelegateProperty>(Prop))
 	{
-		const FMulticastScriptDelegate* Value = CastProp->GetMulticastDelegate(ValueAddr);
+		// Sparse delegate storage is transient and must be resolved from the property for
+		// every operation. Passing null prevents the wrapper from caching a stale pointer.
+		const FMulticastScriptDelegate* Value = CastField<FMulticastSparseDelegateProperty>(CastProp) ? nullptr : CastProp->GetMulticastDelegate(ValueAddr);
 		OutPyObj = (PyObject*)FUPyWrapperMulticastDelegateFactory::Get().CreateInstance(CastProp->SignatureFunction, (FMulticastScriptDelegate*)Value, (void*)ValueAddr, CastProp, OwnerContext, ConversionMethod);
 		return FUPyConversionResult::Success();
 	}

@@ -91,7 +91,7 @@ internal sealed class UnrealPythonCodeGenerator
 		{ "*", new OperatorSignature("*", "__mul__", OperatorValueType.Any, OperatorValueType.Any) },
 		{ "*=", new OperatorSignature("*=", "__imul__", OperatorValueType.Struct, OperatorValueType.Any) },
 		{ "/", new OperatorSignature("/", "__truediv__", OperatorValueType.Any, OperatorValueType.Any) },
-		{ "/=", new OperatorSignature("/=", "__truediv__", OperatorValueType.Struct, OperatorValueType.Any) },
+		{ "/=", new OperatorSignature("/=", "__itruediv__", OperatorValueType.Struct, OperatorValueType.Any) },
 		{ "%", new OperatorSignature("%", "__mod__", OperatorValueType.Any, OperatorValueType.Any) },
 		{ "%=", new OperatorSignature("%=", "__imod__", OperatorValueType.Struct, OperatorValueType.Any) },
 		{ "&", new OperatorSignature("&", "__and__", OperatorValueType.Any, OperatorValueType.Any) },

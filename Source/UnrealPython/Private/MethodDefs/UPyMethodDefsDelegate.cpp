@@ -61,13 +61,23 @@ struct FMethods_WrapperDelegate
 			return nullptr;
 		}
 
-		FUPyWrapperDelegate* PyOtherDelegate = FUPyWrapperDelegate::CastPyObject(PyObj, Py_TYPE(InSelf));
+		FUPyWrapperDelegatePtr PyOtherDelegate = FUPyWrapperDelegatePtr::StealReference(FUPyWrapperDelegate::CastPyObject(PyObj, Py_TYPE(InSelf)));
 		if (!PyOtherDelegate)
 		{
 			UPyUtil::SetPythonError(PyExc_TypeError, InSelf, *FString::Printf(TEXT("Failed to convert argument 0 (%s) to '%s'"), *UPyUtil::GetFriendlyTypename(PyObj), *UPyUtil::GetFriendlyTypename(InSelf)));
 			return nullptr;
 		}
 
+		if (InSelf->DelegateInstance->GetUObject() == PyOtherDelegate->DelegateInstance->GetUObject()
+			&& InSelf->DelegateInstance->GetFunctionName() == PyOtherDelegate->DelegateInstance->GetFunctionName())
+		{
+			Py_RETURN_NONE;
+		}
+
+		if (!FUPyWrapperDelegate::Unbind(InSelf))
+		{
+			return nullptr;
+		}
 		*InSelf->DelegateInstance = *PyOtherDelegate->DelegateInstance;
 
 		Py_RETURN_NONE;
@@ -80,14 +90,18 @@ struct FMethods_WrapperDelegate
 			return nullptr;
 		}
 
-		// Unbind previous binding to ensure cleanup of UUPyCallableForDelegate if any
-		FUPyWrapperDelegate::Unbind(InSelf);
-
-		// const UPyGenUtil::FGeneratedWrappedFunction& DelegateSignature = FUPyWrapperDelegateMetaData::GetDelegateSignature(InSelf);
-		if (!UPyDelegateUtil::PythonArgsToDelegate_ObjectAndName(InArgs, InSelf->DelegateProp->SignatureFunction, *InSelf->DelegateInstance, TEXT("bind_function"), *UPyUtil::GetErrorContext(InSelf)))
+		FScriptDelegate NewDelegate;
+		if (!UPyDelegateUtil::PythonArgsToDelegate_ObjectAndName(InArgs, InSelf->DelegateProp->SignatureFunction, NewDelegate, TEXT("bind_function"), *UPyUtil::GetErrorContext(InSelf)))
 		{
 			return nullptr;
 		}
+
+		// Only replace the existing binding after the new arguments have been validated.
+		if (!FUPyWrapperDelegate::Unbind(InSelf))
+		{
+			return nullptr;
+		}
+		*InSelf->DelegateInstance = MoveTemp(NewDelegate);
 
 		Py_RETURN_NONE;
 	}
@@ -99,17 +113,21 @@ struct FMethods_WrapperDelegate
 			return nullptr;
 		}
 
-		// Unbind previous binding to ensure cleanup of UUPyCallableForDelegate if any
-		FUPyWrapperDelegate::Unbind(InSelf);
-
 		// const UPyGenUtil::FGeneratedWrappedFunction& DelegateSignature = FUPyWrapperDelegateMetaData::GetDelegateSignature(InSelf);
 		// const UClass* PythonCallableForDelegateClass = FUPyWrapperDelegateMetaData::GetPythonCallableForDelegateClass(InSelf);
 
-		UUPyCallableForDelegate* PythonCallableForDelegate = UPyDelegateUtil::PythonArgsToDelegate_Callable(InArgs, InSelf->DelegateProp->SignatureFunction, *InSelf->DelegateInstance, TEXT("bind_callable"), *UPyUtil::GetErrorContext(InSelf));
+		FScriptDelegate NewDelegate;
+		UUPyCallableForDelegate* PythonCallableForDelegate = UPyDelegateUtil::PythonArgsToDelegate_Callable(InArgs, InSelf->DelegateProp->SignatureFunction, NewDelegate, TEXT("bind_callable"), *UPyUtil::GetErrorContext(InSelf));
 		if (!PythonCallableForDelegate)
 		{
 			return nullptr;
 		}
+		if (!FUPyWrapperDelegate::Unbind(InSelf))
+		{
+			PythonCallableForDelegate->Deinit();
+			return nullptr;
+		}
+		*InSelf->DelegateInstance = MoveTemp(NewDelegate);
 		FUPyWrapperDelegate::TrackCallableProxy(InSelf, PythonCallableForDelegate);
 
 		Py_RETURN_NONE;

@@ -245,7 +245,7 @@ void FUPyWrapperFixedArray::Deinit(FUPyWrapperFixedArray* InSelf)
 		}
 		FMemory::Free(InSelf->ArrayInstance);
 	}
-	InSelf->ArrayProp.Release();
+	InSelf->ArrayProp.Reset();
 	InSelf->ArrayInstance = nullptr;
 }
 

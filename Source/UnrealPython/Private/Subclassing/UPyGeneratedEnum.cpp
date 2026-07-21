@@ -127,6 +127,7 @@ public:
 		// FPyWrapperEnumMetaData::SetMetaData(PyType, &NewEnum->PyMetaData);
 
 		// Map the Unreal enum to the Python type
+		NewEnum->UnregisterGeneratedType();
 		NewEnum->PyType = FUPyTypeObjectPtr::NewReference(PyType);
 		FUPyWrapperTypeRegistry::Get().RegisterWrappedEnumType(NewEnum, PyType);
 

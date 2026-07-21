@@ -938,7 +938,17 @@ private:
 		{
 			if (FuncDef->bIsHidden)
 			{
-				PyDict_DelItemString(PyType->tp_dict, FuncDef->PyMethod.MethodName);
+				if (PyDict_DelItemString(PyType->tp_dict, FuncDef->PyMethod.MethodName) != 0)
+				{
+					if (PyErr_ExceptionMatches(PyExc_KeyError))
+					{
+						PyErr_Clear();
+					}
+					else
+					{
+						return false;
+					}
+				}
 			}
 			else
 			{
@@ -1251,6 +1261,11 @@ DEFINE_FUNCTION(UUPyGeneratedClass::CallPythonFunction)
 	// Note: This function *must not* return until InvokePythonCallableFromUnrealFunctionThunk has been called, as we need to step over the correct amount of data from the bytecode stack!
 
 	const UFunction* Func = Stack.CurrentNativeFunction;
+	if (!Py_IsInitialized())
+	{
+		UPyGenUtil::DiscardUnrealFunctionThunk(Func, Stack);
+		return;
+	}
 
 	// Find the Python function to call
 	TSharedPtr<UPyGenUtil::FFunctionDef> FuncDef;

@@ -6,6 +6,7 @@
 #include "Misc/App.h"
 #include "Misc/ConfigCacheIni.h"
 #include "Misc/PackageName.h"
+#include "Utils/UPyUtil.h"
 
 #if PLATFORM_IOS
 #include <CoreFoundation/CoreFoundation.h>
@@ -411,7 +412,11 @@ bool FUPyVirtualMachine::InitializePython()
 	}
 
 	PyConfig PythonConfig;
-	ConfigurePython(PythonConfig);
+	if (!ConfigurePython(PythonConfig))
+	{
+		PyConfig_Clear(&PythonConfig);
+		return false;
+	}
 
 	PyStatus Status = Py_InitializeFromConfig(&PythonConfig);
 	if (PyStatus_Exception(Status))
@@ -464,8 +469,11 @@ void FUPyVirtualMachine::RestoreThread()
 	PyMainThreadState = nullptr;
 }
 
-void FUPyVirtualMachine::ConfigurePython(PyConfig& PythonConfig)
+bool FUPyVirtualMachine::ConfigurePython(PyConfig& PythonConfig)
 {
+	// Initialize this before pre-initialization so every failure path may safely clear it.
+	PyConfig_InitIsolatedConfig(&PythonConfig);
+
 	// Check if the interpreter is should run in isolation mode.
 	int IsolatedInterpreterFlag = 1; // PythonPluginSettings->bIsolateInterpreterEnvironment ? 1 : 0;
 
@@ -481,18 +489,17 @@ void FUPyVirtualMachine::ConfigurePython(PyConfig& PythonConfig)
 	if (PyStatus Status = Py_PreInitialize(&PreConfig);
 		!ensure(!PyStatus_Exception(Status)))
 	{
-		UE_LOG(LogUnrealPython, Error, TEXT("Py_PreInitialize failed! Error: '%hs'. Python will be disabled."), Status.err_msg)
-		return;
+		UE_LOG(LogUnrealPython, Error, TEXT("Py_PreInitialize failed! Error: '%hs'. Python will be disabled."), Status.err_msg);
+		return false;
 	}
 
-	// Create empty init config
-	PyConfig_InitIsolatedConfig(&PythonConfig);
 	PythonConfig.use_environment = !IsolatedInterpreterFlag;
 	PythonConfig.isolated = IsolatedInterpreterFlag;
 	PythonConfig.module_search_paths_set = 1;
 	// PythonConfig.stdio_encoding = Utf8String.GetData();
 
 	ConfigureSearchPaths( PythonConfig);
+	return true;
 }
 
 void FUPyVirtualMachine::ConfigureSearchPaths(PyConfig& PythonConfig)
@@ -637,7 +644,7 @@ void FUPyVirtualMachine::SetPythonSysArgv()
 	PyObject* SysModule = PyImport_ImportModule("sys");
 	if (!SysModule)
 	{
-		PyErr_Print();
+		UPyUtil::LogPythonError();
 		return;
 	}
 

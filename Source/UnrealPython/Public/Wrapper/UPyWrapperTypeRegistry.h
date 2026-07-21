@@ -8,13 +8,18 @@
 #include "Containers/Set.h"
 #include "Subclassing/UPyGeneratedClass.h"
 #include "Subclassing/UPyGeneratedStruct.h"
+#include "UObject/GCObject.h"
 
 struct FUPyGeneratedWrappedClassType;
 
-class UNREALPYTHON_API FUPyWrapperTypeRegistry
+class UNREALPYTHON_API FUPyWrapperTypeRegistry : public FGCObject
 {
 public:
 	static FUPyWrapperTypeRegistry& Get();
+
+	//~ FGCObject interface
+	virtual void AddReferencedObjects(FReferenceCollector& InCollector) override;
+	virtual FString GetReferencerName() const override;
 	
 	/** Generate a wrapped type for the given class (only if this class has not yet been registered; will also register the type) */
 	const PyTypeObject* GenerateWrappedClassType(const UClass* InClass);

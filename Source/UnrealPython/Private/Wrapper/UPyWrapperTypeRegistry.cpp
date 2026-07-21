@@ -225,6 +225,40 @@ FUPyWrapperTypeRegistry& FUPyWrapperTypeRegistry::Get()
 	return Instance;
 }
 
+void FUPyWrapperTypeRegistry::AddReferencedObjects(FReferenceCollector& InCollector)
+{
+	for (const TPair<const UClass*, const PyTypeObject*>& Pair : PythonWrappedClasses)
+	{
+		TObjectPtr<const UClass> Type = Pair.Key;
+		InCollector.AddReferencedObject(Type);
+	}
+	for (const TPair<const UScriptStruct*, const PyTypeObject*>& Pair : PythonWrappedStructs)
+	{
+		TObjectPtr<const UScriptStruct> Type = Pair.Key;
+		InCollector.AddReferencedObject(Type);
+	}
+	for (const TPair<const UEnum*, const PyTypeObject*>& Pair : PythonWrappedEnums)
+	{
+		TObjectPtr<const UEnum> Type = Pair.Key;
+		InCollector.AddReferencedObject(Type);
+	}
+	for (const TPair<const UFunction*, const PyTypeObject*>& Pair : PythonWrappedDelegates)
+	{
+		TObjectPtr<const UFunction> Type = Pair.Key;
+		InCollector.AddReferencedObject(Type);
+	}
+	for (const TPair<const UField*, TSharedPtr<UPyGenUtil::FGeneratedWrappedType>>& Pair : GeneratedWrappedTypes)
+	{
+		TObjectPtr<const UField> Type = Pair.Key;
+		InCollector.AddReferencedObject(Type);
+	}
+}
+
+FString FUPyWrapperTypeRegistry::GetReferencerName() const
+{
+	return TEXT("FUPyWrapperTypeRegistry");
+}
+
 const PyTypeObject* FUPyWrapperTypeRegistry::GenerateWrappedClassType(const UClass* InClass)
 {
 	if (const PyTypeObject* ExistingPyType = PythonWrappedClasses.FindRef(InClass))
@@ -511,6 +545,11 @@ void FUPyWrapperTypeRegistry::RegisterInlineStructFactory(const TSharedRef<const
 
 const PyTypeObject* FUPyWrapperTypeRegistry::GetWrappedEnumType(const UEnum* InEnum)
 {
+	if (!InEnum)
+	{
+		return nullptr;
+	}
+
 	const PyTypeObject* PyType = PythonWrappedEnums.FindRef(InEnum);
 	if (!PyType)
 	{
@@ -521,6 +560,11 @@ const PyTypeObject* FUPyWrapperTypeRegistry::GetWrappedEnumType(const UEnum* InE
 
 const PyTypeObject* FUPyWrapperTypeRegistry::GenerateWrappedEnumType(const UEnum* InEnum)
 {
+	if (!InEnum)
+	{
+		return nullptr;
+	}
+
 	// Already processed? Nothing more to do
 	if (const PyTypeObject* ExistingPyType = PythonWrappedEnums.FindRef(InEnum))
 	{

@@ -11,6 +11,20 @@
 #include "Subclassing/UPyGeneratedStruct.h"
 #include "Subclassing/UPyGeneratedEnum.h"
 
+namespace
+{
+bool RequireGameThread(const TCHAR* InFunctionName)
+{
+	if (IsInGameThread())
+	{
+		return true;
+	}
+
+	UPyUtil::SetPythonError(PyExc_RuntimeError, InFunctionName, TEXT("this Unreal Engine operation must be called from the game thread"));
+	return false;
+}
+}
+
 PyObject* CallLog(PyObject* InSelf, PyObject* InArgs)
 {
 	PyObject* PyObj = nullptr;
@@ -145,6 +159,11 @@ PyObject* CallLogFlush(PyObject* InSelf)
 
 PyObject* FindOrLoadObjectImpl(PyObject* InSelf, PyObject* InArgs, PyObject* InKwds, const TCHAR* InFuncName, const TFunctionRef<UObject*(UClass*, UObject*, const TCHAR*)>& InFunc)
 {
+	if (!RequireGameThread(InFuncName))
+	{
+		return nullptr;
+	}
+
 	PyObject* PyOuterObj = nullptr;
 	PyObject* PyNameObj = nullptr;
 	PyObject* PyTypeObj = nullptr;
@@ -210,6 +229,11 @@ PyObject* FindOrLoadObjectImpl(PyObject* InSelf, PyObject* InArgs, PyObject* InK
 
 PyObject* CallNewObject(PyObject* InSelf, PyObject* InArgs, PyObject* InKwds)
 {
+	if (!RequireGameThread(TEXT("NewObject")))
+	{
+		return nullptr;
+	}
+
 	UClass* ObjectType = nullptr;
 	UObject* ObjectOuter = GetTransientPackage();
 	FName ObjectName;
@@ -291,6 +315,11 @@ PyObject* CallLoadObject(PyObject* InSelf, PyObject* InArgs, PyObject* InKwds)
 
 PyObject* CallLoadClass(PyObject* InSelf, PyObject* InArgs, PyObject* InKwds)
 {
+	if (!RequireGameThread(TEXT("LoadClass")))
+	{
+		return nullptr;
+	}
+
 	PyObject* PyNameObj = nullptr;
 	PyObject* PyTypeObj = nullptr;
 	PyObject* PyOuterObj = nullptr;
@@ -335,6 +364,11 @@ PyObject* CallLoadClass(PyObject* InSelf, PyObject* InArgs, PyObject* InKwds)
 
 PyObject* FindOrLoadAssetImpl(PyObject* InSelf, PyObject* InArgs, PyObject* InKwds, const TCHAR* InFuncName, const TFunctionRef<UObject*(UClass*, UObject*, const TCHAR*)>& InFunc)
 {
+	if (!RequireGameThread(InFuncName))
+	{
+		return nullptr;
+	}
+
 	PyObject* PyNameObj = nullptr;
 	PyObject* PyTypeObj = nullptr;
 	PyObject* PyFollowRedirectorsObj = nullptr;
@@ -422,6 +456,11 @@ PyObject* CallLoadAsset(PyObject* InSelf, PyObject* InArgs, PyObject* InKwds)
 
 PyObject* FindOrLoadPackageImpl(PyObject* InSelf, PyObject* InArgs, const TCHAR* InFuncName, const TFunctionRef<UPackage*(const TCHAR*)>& InFunc)
 {
+	if (!RequireGameThread(InFuncName))
+	{
+		return nullptr;
+	}
+
 	PyObject* PyNameObj = nullptr;
 
 	if (!PyArg_ParseTuple(InArgs, TCHAR_TO_UTF8(*FString::Printf(TEXT("O:%s"), InFuncName)), &PyNameObj))
@@ -465,6 +504,11 @@ PyObject* CallLoadPackage(PyObject* InSelf, PyObject* InArgs)
 
 PyObject* CallGetDefaultObject(PyObject* InSelf, PyObject* InArgs)
 {
+	if (!RequireGameThread(TEXT("GetDefaultObject")))
+	{
+		return nullptr;
+	}
+
 	PyObject* PyObj = nullptr;
 	if (!PyArg_ParseTuple(InArgs, "O:GetDefaultObject", &PyObj))
 	{
@@ -483,6 +527,11 @@ PyObject* CallGetDefaultObject(PyObject* InSelf, PyObject* InArgs)
 
 PyObject* CallGenerateClass(PyObject* InSelf, PyObject* InArgs, PyObject* InKwds)
 {
+	if (!RequireGameThread(TEXT("uclass")))
+	{
+		return nullptr;
+	}
+
 	FUPyUClassDecorator* PyClassDecorator = FUPyUClassDecorator::New(&UPyUClassDecoratorType, InArgs, InKwds);
 	if (PyClassDecorator)
 	{
@@ -497,6 +546,11 @@ PyObject* CallGenerateClass(PyObject* InSelf, PyObject* InArgs, PyObject* InKwds
 
 PyObject* CallGenerateStruct(PyObject* InSelf, PyObject* InArgs, PyObject* InKwds)
 {
+	if (!RequireGameThread(TEXT("ustruct")))
+	{
+		return nullptr;
+	}
+
 	FUPyUStructDecorator* PyStructDecorator = FUPyUStructDecorator::New(&UPyUStructDecoratorType, InArgs, InKwds);
 	if (PyStructDecorator)
 	{
@@ -511,6 +565,11 @@ PyObject* CallGenerateStruct(PyObject* InSelf, PyObject* InArgs, PyObject* InKwd
 
 PyObject* CallGenerateEnum(PyObject* InSelf, PyObject* InArgs, PyObject* InKwds)
 {
+	if (!RequireGameThread(TEXT("uenum")))
+	{
+		return nullptr;
+	}
+
 	FUPyUEnumDecorator* PyEnumDecorator = FUPyUEnumDecorator::New(&UPyUEnumDecoratorType, InArgs, InKwds);
 	if (PyEnumDecorator)
 	{
@@ -561,6 +620,11 @@ PyObject* CallGenerateFunction(PyObject* InSelf, PyObject* InArgs, PyObject* InK
 
 PyObject* CallFlushGeneratedTypeReinstancing(PyObject* InSelf)
 {
+	if (!RequireGameThread(TEXT("FlushGeneratedTypeReinstancing")))
+	{
+		return nullptr;
+	}
+
 	Py_BEGIN_ALLOW_THREADS
 	FUPyWrapperTypeReinstancer::Get().ProcessPending();
 	Py_END_ALLOW_THREADS
@@ -570,6 +634,11 @@ PyObject* CallFlushGeneratedTypeReinstancing(PyObject* InSelf)
 
 PyObject* CallReloadModule(PyObject* InSelf, PyObject* InArgs)
 {
+	if (!RequireGameThread(TEXT("ReloadModule")))
+	{
+		return nullptr;
+	}
+
 	PyObject* PyModuleOrName = nullptr;
 	if (!PyArg_ParseTuple(InArgs, "O:ReloadModule", &PyModuleOrName))
 	{
@@ -623,6 +692,11 @@ PyObject* CallReloadModule(PyObject* InSelf, PyObject* InArgs)
 
 PyObject* CallCollectGarbage(PyObject* InSelf)
 {
+	if (!RequireGameThread(TEXT("CollectGarbage")))
+	{
+		return nullptr;
+	}
+
 	Py_BEGIN_ALLOW_THREADS
 	::CollectGarbage(IsRunningCommandlet() ? RF_NoFlags : GARBAGE_COLLECTION_KEEPFLAGS);
 	Py_END_ALLOW_THREADS
@@ -632,6 +706,11 @@ PyObject* CallCollectGarbage(PyObject* InSelf)
 
 PyObject* CallGetTypeFromClass(PyObject* InSelf, PyObject* InArgs)
 {
+	if (!RequireGameThread(TEXT("GetTypeFromClass")))
+	{
+		return nullptr;
+	}
+
 	PyObject* PyObj = nullptr;
 	if (!PyArg_ParseTuple(InArgs, "O:GetTypeFromClass", &PyObj))
 	{
@@ -653,6 +732,11 @@ PyObject* CallGetTypeFromClass(PyObject* InSelf, PyObject* InArgs)
 
 PyObject* CallGetTypeFromStruct(PyObject* InSelf, PyObject* InArgs)
 {
+	if (!RequireGameThread(TEXT("GetTypeFromStruct")))
+	{
+		return nullptr;
+	}
+
 	PyObject* PyObj = nullptr;
 	if (!PyArg_ParseTuple(InArgs, "O:GetTypeFromStruct", &PyObj))
 	{
@@ -674,6 +758,11 @@ PyObject* CallGetTypeFromStruct(PyObject* InSelf, PyObject* InArgs)
 
 PyObject* CallGetStructFromType(PyObject* InSelf, PyObject* InArgs)
 {
+	if (!RequireGameThread(TEXT("GetStructFromType")))
+	{
+		return nullptr;
+	}
+
 	PyObject* PyObj = nullptr;
 	if (!PyArg_ParseTuple(InArgs, "O:GetStructFromType", &PyObj))
 	{
@@ -728,6 +817,11 @@ const UField* ResolveGeneratedFieldFromType(PyObject* PyObj, const TCHAR* InFunc
 
 PyObject* CallHasTypeMetaData(PyObject* InSelf, PyObject* InArgs)
 {
+	if (!RequireGameThread(TEXT("HasTypeMetaData")))
+	{
+		return nullptr;
+	}
+
 	PyObject* PyTypeObj = nullptr;
 	PyObject* PyKeyObj = nullptr;
 	if (!PyArg_ParseTuple(InArgs, "OO:HasTypeMetaData", &PyTypeObj, &PyKeyObj))
@@ -755,6 +849,11 @@ PyObject* CallHasTypeMetaData(PyObject* InSelf, PyObject* InArgs)
 
 PyObject* CallGetTypeMetaData(PyObject* InSelf, PyObject* InArgs)
 {
+	if (!RequireGameThread(TEXT("GetTypeMetaData")))
+	{
+		return nullptr;
+	}
+
 	PyObject* PyTypeObj = nullptr;
 	PyObject* PyKeyObj = nullptr;
 	if (!PyArg_ParseTuple(InArgs, "OO:GetTypeMetaData", &PyTypeObj, &PyKeyObj))
@@ -782,6 +881,11 @@ PyObject* CallGetTypeMetaData(PyObject* InSelf, PyObject* InArgs)
 
 PyObject* CallGetTypeFromEnum(PyObject* InSelf, PyObject* InArgs)
 {
+	if (!RequireGameThread(TEXT("GetTypeFromEnum")))
+	{
+		return nullptr;
+	}
+
 	PyObject* PyObj = nullptr;
 	if (!PyArg_ParseTuple(InArgs, "O:GetTypeFromEnum", &PyObj))
 	{
@@ -790,7 +894,7 @@ PyObject* CallGetTypeFromEnum(PyObject* InSelf, PyObject* InArgs)
 	check(PyObj);
 
 	UEnum* Enum = nullptr;
-	if (!UPyConversion::Nativize(PyObj, Enum))
+	if (!UPyConversion::Nativize(PyObj, Enum) || !Enum)
 	{
 		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("GetTypeFromEnum"), *FString::Printf(TEXT("Parameter must be a 'Enum' not '%s'"), *UPyUtil::GetFriendlyTypename(PyObj)));
 		return nullptr;
@@ -809,6 +913,11 @@ PyObject* CallGetTypeFromEnum(PyObject* InSelf, PyObject* InArgs)
 
 PyObject* CallGetFunctionFlags(PyObject* InSelf, PyObject* InArgs)
 {
+	if (!RequireGameThread(TEXT("GetFunctionFlags")))
+	{
+		return nullptr;
+	}
+
 	PyObject* PyClassObj = nullptr;
 	PyObject* PyNameObj = nullptr;
 	if (!PyArg_ParseTuple(InArgs, "OO:GetFunctionFlags", &PyClassObj, &PyNameObj))
@@ -836,6 +945,11 @@ PyObject* CallGetFunctionFlags(PyObject* InSelf, PyObject* InArgs)
 
 PyObject* CallGetClassFlags(PyObject* InSelf, PyObject* InArgs)
 {
+	if (!RequireGameThread(TEXT("GetClassFlags")))
+	{
+		return nullptr;
+	}
+
 	PyObject* PyClassObj = nullptr;
 	if (!PyArg_ParseTuple(InArgs, "O:GetClassFlags", &PyClassObj))
 	{
@@ -854,6 +968,11 @@ PyObject* CallGetClassFlags(PyObject* InSelf, PyObject* InArgs)
 
 PyObject* CallGetPropertyFlags(PyObject* InSelf, PyObject* InArgs)
 {
+	if (!RequireGameThread(TEXT("GetPropertyFlags")))
+	{
+		return nullptr;
+	}
+
 	PyObject* PyClassObj = nullptr;
 	PyObject* PyNameObj = nullptr;
 	if (!PyArg_ParseTuple(InArgs, "OO:GetPropertyFlags", &PyClassObj, &PyNameObj))
@@ -881,6 +1000,11 @@ PyObject* CallGetPropertyFlags(PyObject* InSelf, PyObject* InArgs)
 
 PyObject* CallGetPropertyRepNotifyName(PyObject* InSelf, PyObject* InArgs)
 {
+	if (!RequireGameThread(TEXT("GetPropertyRepNotifyName")))
+	{
+		return nullptr;
+	}
+
 	PyObject* PyClassObj = nullptr;
 	PyObject* PyNameObj = nullptr;
 	if (!PyArg_ParseTuple(InArgs, "OO:GetPropertyRepNotifyName", &PyClassObj, &PyNameObj))
@@ -908,6 +1032,11 @@ PyObject* CallGetPropertyRepNotifyName(PyObject* InSelf, PyObject* InArgs)
 
 PyObject* CallGetPropertyReplicationInfo(PyObject* InSelf, PyObject* InArgs)
 {
+	if (!RequireGameThread(TEXT("GetPropertyReplicationInfo")))
+	{
+		return nullptr;
+	}
+
 	PyObject* PyClassObj = nullptr;
 	PyObject* PyNameObj = nullptr;
 	if (!PyArg_ParseTuple(InArgs, "OO:GetPropertyReplicationInfo", &PyClassObj, &PyNameObj))
@@ -951,6 +1080,11 @@ PyObject* CallGetPropertyReplicationInfo(PyObject* InSelf, PyObject* InArgs)
 
 PyObject* CallGetPropertyLifetimeReplicationInfo(PyObject* InSelf, PyObject* InArgs)
 {
+	if (!RequireGameThread(TEXT("GetPropertyLifetimeReplicationInfo")))
+	{
+		return nullptr;
+	}
+
 	PyObject* PyClassObj = nullptr;
 	PyObject* PyNameObj = nullptr;
 	if (!PyArg_ParseTuple(InArgs, "OO:GetPropertyLifetimeReplicationInfo", &PyClassObj, &PyNameObj))

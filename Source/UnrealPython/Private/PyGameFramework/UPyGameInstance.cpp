@@ -2,6 +2,7 @@
 #include "PyGameFramework/UPyGameInstance.h"
 #include "Core/UPyGIL.h"
 #include "Core/UPyConversion.h"
+#include "Utils/UPyUtil.h"
 
 UUPyGameInstance::UUPyGameInstance(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -31,7 +32,7 @@ void UUPyGameInstance::CallGameInstanceFunction(const char* FunctionName, PyObje
 	{
 		if (PyErr_Occurred())
 		{
-			PyErr_Print();
+			UPyUtil::LogPythonError();
 		}
 		UE_LOG(LogUnrealPython, Error, TEXT("Failed to call Python GameInstance function '%s.%s'."), *GameInstanceModuleName, UTF8_TO_TCHAR(FunctionName));
 	}
@@ -55,7 +56,7 @@ bool UUPyGameInstance::EnsureModuleLoaded()
 	{
 		if (PyErr_Occurred())
 		{
-			PyErr_Print();
+			UPyUtil::LogPythonError();
 		}
 		UE_LOG(LogUnrealPython, Warning, TEXT("Failed to import Python module '%s'. Game instance callbacks will not be executed."), *ModuleNameStr);
 		return false;
@@ -101,7 +102,7 @@ bool UUPyGameInstance::CreateGameInstanceObject()
 	{
 		if (PyErr_Occurred())
 		{
-			PyErr_Print();
+			UPyUtil::LogPythonError();
 		}
 		UE_LOG(LogUnrealPython, Error, TEXT("Failed to create arguments for Python function '%s.%s'."), *GameInstanceModuleName, *GameInstanceFactoryFunctionName);
 		return false;
@@ -112,7 +113,7 @@ bool UUPyGameInstance::CreateGameInstanceObject()
 	{
 		if (PyErr_Occurred())
 		{
-			PyErr_Print();
+			UPyUtil::LogPythonError();
 		}
 		UE_LOG(LogUnrealPython, Error, TEXT("Failed to call Python function '%s.%s'."), *GameInstanceModuleName, *GameInstanceFactoryFunctionName);
 		return false;

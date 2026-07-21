@@ -47,6 +47,11 @@ bool FUnrealPythonCommandExecutor::Exec(const TCHAR* Input)
 	IConsoleManager::Get().AddConsoleHistoryEntry(TEXT("UnrealPython"), Input);
 
 	UE_LOG(LogUnrealPython, Log, TEXT("%s"), Input);
+	if (!Py_IsInitialized())
+	{
+		UE_LOG(LogUnrealPython, Error, TEXT("Cannot execute Python because the interpreter is not initialized."));
+		return false;
+	}
 
 	FUPyScopedGIL GIL;
 	PyRun_SimpleString(TCHAR_TO_UTF8(Input));

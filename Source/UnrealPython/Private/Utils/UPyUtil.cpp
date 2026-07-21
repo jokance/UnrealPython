@@ -66,7 +66,8 @@ const FName DefaultPythonPropertyName = "TransientPythonProperty";
 UObjectRedirector* CreatePythonTypeLegacyRedirector(const FString& ShortName, const FTopLevelAssetPath& GeneratedPathName)
 {
 	UObject* RedirectorOuter = GetPythonTypeContainer();
-	UObjectRedirector* Redirector = FindObject<UObjectRedirector>(RedirectorOuter, *ShortName);
+	UObject* ExistingObject = FindObject<UObject>(RedirectorOuter, *ShortName);
+	UObjectRedirector* Redirector = Cast<UObjectRedirector>(ExistingObject);
 
 	// If the generated path name matches the redirector path name, then delete any existing redirector as we're about to create an object with that name
 	if (FTopLevelAssetPath(RedirectorOuter->GetFName(), *ShortName) == GeneratedPathName)
@@ -82,7 +83,7 @@ UObjectRedirector* CreatePythonTypeLegacyRedirector(const FString& ShortName, co
 
 	// Otherwise, create a redirector if one doesn't already exist
 	// The caller is responsible for setting DestinationObject
-	if (!Redirector)
+	if (!ExistingObject)
 	{
 		Redirector = NewObject<UObjectRedirector>(RedirectorOuter, *ShortName, RF_Public | RF_Transient);
 	}
@@ -1888,11 +1889,7 @@ bool ReThrowPythonError(FString* OutError)
 {
 	if (PyErr_Occurred())
 	{
-		PyErr_Print();
-		if (OutError)
-		{
-			*OutError = TEXT("Python Error (see log for details)");
-		}
+		LogPythonError(OutError);
 		// FFrame::KismetExecutionMessage(**OutError, ELogVerbosity::Error);
 		return true;
 	}

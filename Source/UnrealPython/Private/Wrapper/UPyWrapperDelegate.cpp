@@ -39,6 +39,11 @@ DEFINE_FUNCTION(UUPyCallableForDelegate::CallPythonNative)
 	// Note: This function *must not* return until InvokePythonCallableFromUnrealFunctionThunk has been called, as we need to step over the correct amount of data from the bytecode stack!
 
 	const UFunction* Func = Stack.CurrentNativeFunction;
+	if (!Py_IsInitialized())
+	{
+		UPyGenUtil::DiscardUnrealFunctionThunk(Func, Stack);
+		return;
+	}
 
 	// Execute Python code within this block
 	{
@@ -105,7 +110,7 @@ void UUPyCallableForDelegate::CallPython()
 
 void UUPyCallableForDelegate::ProcessEvent(UFunction* InFunc, void* InBuffer)
 {
-	if (!PyCallable.IsValid())
+	if (!Py_IsInitialized() || !PyCallable.IsValid())
 	{
 		return;
 	}
@@ -186,6 +191,7 @@ void UUPyCallableForDelegate::ProcessEvent(UFunction* InFunc, void* InBuffer)
 
 	if (!bProcessedInputs)
 	{
+		UPyUtil::LogPythonError();
 		return;
 	}
 
@@ -247,7 +253,8 @@ struct TPyDelegateInvocation<FMulticastScriptDelegate>
 {
 	static bool CanCall(const FMulticastScriptDelegate* Delegate)
 	{
-		return Delegate && Delegate->IsBound();
+		// Broadcasting an empty multicast delegate is a valid no-op.
+		return true;
 	}
 
 	static void Call(const FMulticastScriptDelegate* Delegate, void* Params)
@@ -336,7 +343,9 @@ struct TUPyWrapperDelegateImpl
 			break;
 
 		case EUPyConversionMethod::Reference:
-			DelegateInstanceToUse = InValue;
+			// Sparse multicast delegate storage may be removed whenever the last binding is
+			// removed. Never cache that storage pointer; resolve it from the property each use.
+			DelegateInstanceToUse = CastField<FMulticastSparseDelegateProperty>(InProp) ? nullptr : InValue;
 			if (DelegateInstanceToUse || (InProp && InPropAddr))
 			{
 				InOwnerContext.AddOwnedPyProp(InSelf);

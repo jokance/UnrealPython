@@ -24,18 +24,28 @@ void FUnrealPythonModule::StartupModule()
 
 	UUPyManager* PyManager = UUPyManager::Get();
 	PyManager->Initialize();
-	
-#if WITH_EDITOR
-	CmdExec = new FUnrealPythonCommandExecutor();
-	IModularFeatures::Get().RegisterModularFeature(IConsoleCommandExecutor::ModularFeatureName(), CmdExec);
 
-	UToolMenus::RegisterStartupCallback(FSimpleMulticastDelegate::FDelegate::CreateLambda([]()
+#if WITH_EDITOR
+	if (Py_IsInitialized())
 	{
-		UToolMenus::Get()->RegisterStringCommandHandler("UnrealPython", FToolMenuExecuteString::CreateLambda([](const FString& InString, const FToolMenuContext& InContext) {
-			FUPyScopedGIL GIL;
-			PyRun_SimpleString(TCHAR_TO_UTF8(*InString));
+		CmdExec = new FUnrealPythonCommandExecutor();
+		IModularFeatures::Get().RegisterModularFeature(IConsoleCommandExecutor::ModularFeatureName(), CmdExec);
+
+		UToolMenus::RegisterStartupCallback(FSimpleMulticastDelegate::FDelegate::CreateLambda([]()
+		{
+			UToolMenus::Get()->RegisterStringCommandHandler("UnrealPython", FToolMenuExecuteString::CreateLambda([](const FString& InString, const FToolMenuContext& InContext)
+			{
+				if (!Py_IsInitialized())
+				{
+					UE_LOG(LogUnrealPython, Error, TEXT("Cannot execute Python because the interpreter is not initialized."));
+					return;
+				}
+
+				FUPyScopedGIL GIL;
+				PyRun_SimpleString(TCHAR_TO_UTF8(*InString));
+			}));
 		}));
-	}));
+	}
 #endif
 }
 

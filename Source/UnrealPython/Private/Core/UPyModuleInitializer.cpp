@@ -69,19 +69,19 @@ bool FUPyModuleInitializer::InitializeModules()
 		return true;
 	}
 
-	bIsInitialized = true;
-
 	InitializeUPyConstant();
 
 	if (!InitializeMainModule())
 	{
 		UE_LOG(LogUnrealPython, Error, TEXT("Failed to initialize main module"));
+		CleanupModules();
 		return false;
 	}
 
 	if (!InitializeUEModule())
 	{
 		UE_LOG(LogUnrealPython, Error, TEXT("Failed to initialize ue module"));
+		CleanupModules();
 		return false;
 	}
 
@@ -89,6 +89,7 @@ bool FUPyModuleInitializer::InitializeModules()
 
 	InitializeCoreModule();
 
+	bIsInitialized = true;
 	return true;
 }
 
@@ -104,6 +105,11 @@ void FUPyModuleInitializer::CleanupModules()
 
 PyObject* FUPyModuleInitializer::FindOrAddPyTypeByName(const FString& AttrName)
 {
+	if (!PyUEDict)
+	{
+		return nullptr;
+	}
+
 	UClass* Class = nullptr;
 	UScriptStruct* Struct = nullptr;
 	UEnum* Enum = nullptr;
@@ -174,7 +180,7 @@ PyObject* FUPyModuleInitializer::FindOrAddPyTypeByName(const FString& AttrName)
 
 bool FUPyModuleInitializer::InitializeMainModule()
 {
-	PyMainModule = FUPyObjectPtr::NewReference(PyImport_ImportModule("__main__"));
+	PyMainModule = FUPyObjectPtr::StealReference(PyImport_ImportModule("__main__"));
 	if (PyMainModule)
 	{
 		PyMainDict = FUPyObjectPtr::NewReference(PyModule_GetDict(PyMainModule));

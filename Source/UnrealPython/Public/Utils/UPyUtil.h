@@ -98,7 +98,7 @@ namespace UPyUtil
 			(InOp == Py_LT && InLHS < InRHS)  ||
 			(InOp == Py_GT && InLHS > InRHS)  ||
 			(InOp == Py_LE && InLHS <= InRHS) ||
-			(InOp == Py_GE && InLHS > InRHS);
+			(InOp == Py_GE && InLHS >= InRHS);
 		return PyBool_FromLong(bResult);
 	}
 
@@ -692,7 +692,7 @@ namespace UPyUtil
 	 * Log and clear any pending Python error, optionally retrieving the error text that was logged.
 	 * @return True if Python was in an error state, false otherwise.
 	 */
-	bool LogPythonError(FString* OutError = nullptr, const bool bInteractive = false);
+	UNREALPYTHON_API bool LogPythonError(FString* OutError = nullptr, const bool bInteractive = false);
 
 	/**
 	 * Re-throw and clear any pending Python error via FFrame::KismetExecutionMessage, optionally retrieving the error text that was thrown.

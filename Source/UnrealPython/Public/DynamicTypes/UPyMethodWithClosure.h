@@ -74,6 +74,10 @@ struct FUPyCFunctionWithClosureObject
 	/* The __module__ attribute, can be anything */
     PyObject* ModuleAttr;
 
+	/* Keep the prefix layout compatible with PyCFunctionObject, our declared base. */
+	PyObject* WeakRefList;
+	vectorcallfunc VectorCall;
+
 	/** New this instance */
 	static FUPyCFunctionWithClosureObject* New(FUPyMethodWithClosureDef* InMethod, PyObject* InSelf, PyObject* InModule);
 

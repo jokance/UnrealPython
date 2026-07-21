@@ -21,7 +21,7 @@ private:
 	FUPyVirtualMachine() = default;
 	~FUPyVirtualMachine() = default;
 
-	void ConfigurePython(PyConfig& PythonConfig);
+	bool ConfigurePython(PyConfig& PythonConfig);
 
 	void ConfigureSearchPaths(PyConfig& PythonConfig);
 

@@ -2,6 +2,7 @@
 #include "Wrapper/UPyWrapperBase.h"
 #include "Core/UPyGIL.h"
 #include "Utils/UPyUtil.h"
+#include "Wrapper/UPyReferenceCollector.h"
 
 PyTypeObject UPyWrapperBaseType = {
 	PyVarObject_HEAD_INIT(nullptr, 0)
@@ -28,16 +29,16 @@ PyTypeObject UPyWrapperBaseMetaDataType = {
 FUPyWrapperBase* FUPyWrapperBase::New(PyTypeObject* InType)
 {
 	FUPyWrapperBase* Self = (FUPyWrapperBase*)InType->tp_alloc(InType, 0);
-	// if (Self)
-	// {
-	// 	FPyReferenceCollector::Get().AddWrappedInstance(Self);
-	// }
+	if (Self)
+	{
+		FUPyReferenceCollector::Get().AddWrappedInstance(Self);
+	}
 	return Self;
 }
 
 void FUPyWrapperBase::Free(FUPyWrapperBase* InSelf)
 {
-	// FPyReferenceCollector::Get().RemoveWrappedInstance(InSelf);
+	FUPyReferenceCollector::Get().RemoveWrappedInstance(InSelf);
 	Deinit(InSelf);
 	Py_TYPE(InSelf)->tp_free((PyObject*)InSelf);
 }

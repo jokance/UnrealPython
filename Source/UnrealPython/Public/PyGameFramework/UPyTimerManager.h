@@ -44,9 +44,12 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Python|Timer")
 	static void ClearAllTimers();
 
+	/** Stop all timers and release cached Python state before interpreter shutdown. */
+	static void Shutdown();
+
 private:
 	static int32 SetTimerInternal(float Rate, bool bLoop);
-	static void OnTimerCallback(int32 Handle);
+	static bool OnTimerCallback(int32 Handle);
 	
 	static TMap<int32, FTSTicker::FDelegateHandle> ActiveTimers;
 	static int32 NextTimerId;

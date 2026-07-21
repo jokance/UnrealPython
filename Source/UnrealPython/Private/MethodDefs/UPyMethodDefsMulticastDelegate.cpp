@@ -497,7 +497,6 @@ struct FMethods_WrapperMulticastDelegate
 		{
 			if (const FMulticastScriptDelegate* ScriptDelegate = MulticastProp->GetMulticastDelegate(InSelf->PropAddr))
 			{
-				InSelf->DelegateInstance = const_cast<FMulticastScriptDelegate*>(ScriptDelegate);
 				return FUPyWrapperMulticastDelegate::CallDelegate(InSelf, InArgs);
 			}
 			// If unbound/empty sparse delegate, nothing to broadcast.

@@ -422,6 +422,9 @@ namespace UPyGenUtil
 	/** Invoke a Python callable from an Unreal function thunk (ie, DEFINE_FUNCTION), ensuring that the calling convention is correct for both native and script function callers */
 	bool InvokePythonCallableFromUnrealFunctionThunk(FUPyObjectPtr InSelf, PyObject* InCallable, const UFunction* InFunc, UObject* Context, FFrame& Stack, RESULT_DECL);
 
+	/** Step over every argument in an Unreal function thunk without invoking Python */
+	void DiscardUnrealFunctionThunk(const UFunction* InFunc, FFrame& Stack);
+
 	/** Get the current value of the given property from the given struct */
 	PyObject* GetPropertyValue(const UStruct* InStruct, const void* InStructData, const FGeneratedWrappedProperty& InPropDef, const char *InAttributeName, PyObject* InOwnerPyObject, const TCHAR* InErrorCtxt);
 
