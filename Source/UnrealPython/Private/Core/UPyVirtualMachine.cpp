@@ -42,6 +42,10 @@ bool AddPythonZipPathIfExists(PyConfig& PythonConfig, const FString& PythonZipPa
 
 	const FString FullPythonZipPath = FPaths::ConvertRelativePathToFull(PythonZipPath);
 	PyWideStringList_Append(&PythonConfig.module_search_paths, TCHAR_TO_WCHAR(*FullPythonZipPath));
+	// CPython cannot import native extension modules from a zip archive.
+	// Search beside it for staged .pyd modules in both the editor and packaged game.
+	const FString ExtensionModulePath = FPaths::GetPath(FullPythonZipPath);
+	PyWideStringList_Append(&PythonConfig.module_search_paths, TCHAR_TO_WCHAR(*ExtensionModulePath));
 	UE_LOG(LogUnrealPython, Log, TEXT("Added bundled Windows Python path: %s"), *FullPythonZipPath);
 	return true;
 }
