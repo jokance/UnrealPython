@@ -7866,6 +7866,13 @@ namespace UPyConversion
 {
 	FUPyConversionResult Nativize(PyObject* PyObj, UPrimitiveComponent*& OutVal, const ESetErrorState SetErrorState)
 	{
+		// UObject pointer parameters accept an explicit Python None.
+		if (PyObj == Py_None)
+		{
+			OutVal = nullptr;
+			return FUPyConversionResult::Success();
+		}
+
 		if (FUPyWrapperPrimitiveComponent* PyPrimitiveComponent = UPyIsPrimitiveComponent(PyObj))
 		{
 			if (!FUPyWrapperObject::ValidateInternalState(PyPrimitiveComponent))

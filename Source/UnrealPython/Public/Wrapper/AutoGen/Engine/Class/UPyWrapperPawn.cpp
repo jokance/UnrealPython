@@ -1183,6 +1183,13 @@ namespace UPyConversion
 {
 	FUPyConversionResult Nativize(PyObject* PyObj, APawn*& OutVal, const ESetErrorState SetErrorState)
 	{
+		// UObject pointer parameters accept an explicit Python None.
+		if (PyObj == Py_None)
+		{
+			OutVal = nullptr;
+			return FUPyConversionResult::Success();
+		}
+
 		if (FUPyWrapperPawn* PyPawn = UPyIsPawn(PyObj))
 		{
 			if (!FUPyWrapperObject::ValidateInternalState(PyPawn))

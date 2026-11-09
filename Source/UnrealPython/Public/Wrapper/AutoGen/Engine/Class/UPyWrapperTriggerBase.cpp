@@ -171,6 +171,13 @@ namespace UPyConversion
 {
 	FUPyConversionResult Nativize(PyObject* PyObj, ATriggerBase*& OutVal, const ESetErrorState SetErrorState)
 	{
+		// UObject pointer parameters accept an explicit Python None.
+		if (PyObj == Py_None)
+		{
+			OutVal = nullptr;
+			return FUPyConversionResult::Success();
+		}
+
 		if (FUPyWrapperTriggerBase* PyTriggerBase = UPyIsTriggerBase(PyObj))
 		{
 			if (!FUPyWrapperObject::ValidateInternalState(PyTriggerBase))

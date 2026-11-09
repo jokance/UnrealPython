@@ -965,6 +965,13 @@ namespace UPyConversion
 {
 	FUPyConversionResult Nativize(PyObject* PyObj, UScrollBox*& OutVal, const ESetErrorState SetErrorState)
 	{
+		// UObject pointer parameters accept an explicit Python None.
+		if (PyObj == Py_None)
+		{
+			OutVal = nullptr;
+			return FUPyConversionResult::Success();
+		}
+
 		if (FUPyWrapperScrollBox* PyScrollBox = UPyIsScrollBox(PyObj))
 		{
 			if (!FUPyWrapperObject::ValidateInternalState(PyScrollBox))

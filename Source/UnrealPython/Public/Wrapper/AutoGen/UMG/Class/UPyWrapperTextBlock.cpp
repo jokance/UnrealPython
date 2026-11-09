@@ -558,6 +558,13 @@ namespace UPyConversion
 {
 	FUPyConversionResult Nativize(PyObject* PyObj, UTextBlock*& OutVal, const ESetErrorState SetErrorState)
 	{
+		// UObject pointer parameters accept an explicit Python None.
+		if (PyObj == Py_None)
+		{
+			OutVal = nullptr;
+			return FUPyConversionResult::Success();
+		}
+
 		if (FUPyWrapperTextBlock* PyTextBlock = UPyIsTextBlock(PyObj))
 		{
 			if (!FUPyWrapperObject::ValidateInternalState(PyTextBlock))

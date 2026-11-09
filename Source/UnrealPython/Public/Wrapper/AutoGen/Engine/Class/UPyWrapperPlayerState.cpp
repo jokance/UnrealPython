@@ -909,6 +909,13 @@ namespace UPyConversion
 {
 	FUPyConversionResult Nativize(PyObject* PyObj, APlayerState*& OutVal, const ESetErrorState SetErrorState)
 	{
+		// UObject pointer parameters accept an explicit Python None.
+		if (PyObj == Py_None)
+		{
+			OutVal = nullptr;
+			return FUPyConversionResult::Success();
+		}
+
 		if (FUPyWrapperPlayerState* PyPlayerState = UPyIsPlayerState(PyObj))
 		{
 			if (!FUPyWrapperObject::ValidateInternalState(PyPlayerState))

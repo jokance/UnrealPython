@@ -1816,6 +1816,13 @@ namespace UPyConversion
 {
 	FUPyConversionResult Nativize(PyObject* PyObj, APlayerCameraManager*& OutVal, const ESetErrorState SetErrorState)
 	{
+		// UObject pointer parameters accept an explicit Python None.
+		if (PyObj == Py_None)
+		{
+			OutVal = nullptr;
+			return FUPyConversionResult::Success();
+		}
+
 		if (FUPyWrapperPlayerCameraManager* PyPlayerCameraManager = UPyIsPlayerCameraManager(PyObj))
 		{
 			if (!FUPyWrapperObject::ValidateInternalState(PyPlayerCameraManager))
