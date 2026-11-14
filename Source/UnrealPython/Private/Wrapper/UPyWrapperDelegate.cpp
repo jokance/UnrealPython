@@ -110,6 +110,13 @@ void UUPyCallableForDelegate::CallPython()
 
 void UUPyCallableForDelegate::ProcessEvent(UFunction* InFunc, void* InBuffer)
 {
+	// Commandlets skip VM startup, and empty proxies may outlive the VM.
+	// Do not acquire the GIL or copy Python references in either case.
+	if (!Py_IsInitialized() || !PyCallable.IsValid())
+	{
+		return;
+	}
+
 	FUPyScopedGIL GIL;
 	const TStrongObjectPtr<UUPyCallableForDelegate> KeepAlive(this);
 	const FUPyObjectPtr Callable = PyCallable;
