@@ -482,6 +482,13 @@ namespace UPyConversion
 {
 	FUPyConversionResult Nativize(PyObject* PyObj, AGameStateBase*& OutVal, const ESetErrorState SetErrorState)
 	{
+		// UObject pointer parameters accept an explicit Python None.
+		if (PyObj == Py_None)
+		{
+			OutVal = nullptr;
+			return FUPyConversionResult::Success();
+		}
+
 		if (FUPyWrapperGameStateBase* PyGameStateBase = UPyIsGameStateBase(PyObj))
 		{
 			if (!FUPyWrapperObject::ValidateInternalState(PyGameStateBase))

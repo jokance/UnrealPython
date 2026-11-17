@@ -982,6 +982,13 @@ namespace UPyConversion
 {
 	FUPyConversionResult Nativize(PyObject* PyObj, UMaterialInterface*& OutVal, const ESetErrorState SetErrorState)
 	{
+		// UObject pointer parameters accept an explicit Python None.
+		if (PyObj == Py_None)
+		{
+			OutVal = nullptr;
+			return FUPyConversionResult::Success();
+		}
+
 		if (FUPyWrapperMaterialInterface* PyMaterialInterface = UPyIsMaterialInterface(PyObj))
 		{
 			if (!FUPyWrapperObject::ValidateInternalState(PyMaterialInterface))

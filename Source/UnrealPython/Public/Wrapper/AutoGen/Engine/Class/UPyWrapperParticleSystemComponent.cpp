@@ -2050,6 +2050,13 @@ namespace UPyConversion
 {
 	FUPyConversionResult Nativize(PyObject* PyObj, UParticleSystemComponent*& OutVal, const ESetErrorState SetErrorState)
 	{
+		// UObject pointer parameters accept an explicit Python None.
+		if (PyObj == Py_None)
+		{
+			OutVal = nullptr;
+			return FUPyConversionResult::Success();
+		}
+
 		if (FUPyWrapperParticleSystemComponent* PyParticleSystemComponent = UPyIsParticleSystemComponent(PyObj))
 		{
 			if (!FUPyWrapperObject::ValidateInternalState(PyParticleSystemComponent))

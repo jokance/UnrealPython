@@ -2790,6 +2790,13 @@ namespace UPyConversion
 {
 	FUPyConversionResult Nativize(PyObject* PyObj, USceneComponent*& OutVal, const ESetErrorState SetErrorState)
 	{
+		// UObject pointer parameters accept an explicit Python None.
+		if (PyObj == Py_None)
+		{
+			OutVal = nullptr;
+			return FUPyConversionResult::Success();
+		}
+
 		if (FUPyWrapperSceneComponent* PySceneComponent = UPyIsSceneComponent(PyObj))
 		{
 			if (!FUPyWrapperObject::ValidateInternalState(PySceneComponent))

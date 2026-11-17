@@ -359,6 +359,13 @@ namespace UPyConversion
 {
 	FUPyConversionResult Nativize(PyObject* PyObj, UTexture2D*& OutVal, const ESetErrorState SetErrorState)
 	{
+		// UObject pointer parameters accept an explicit Python None.
+		if (PyObj == Py_None)
+		{
+			OutVal = nullptr;
+			return FUPyConversionResult::Success();
+		}
+
 		if (FUPyWrapperTexture2D* PyTexture2D = UPyIsTexture2D(PyObj))
 		{
 			if (!FUPyWrapperObject::ValidateInternalState(PyTexture2D))

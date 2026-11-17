@@ -5946,6 +5946,13 @@ namespace UPyConversion
 {
 	FUPyConversionResult Nativize(PyObject* PyObj, USkeletalMeshComponent*& OutVal, const ESetErrorState SetErrorState)
 	{
+		// UObject pointer parameters accept an explicit Python None.
+		if (PyObj == Py_None)
+		{
+			OutVal = nullptr;
+			return FUPyConversionResult::Success();
+		}
+
 		if (FUPyWrapperSkeletalMeshComponent* PySkeletalMeshComponent = UPyIsSkeletalMeshComponent(PyObj))
 		{
 			if (!FUPyWrapperObject::ValidateInternalState(PySkeletalMeshComponent))

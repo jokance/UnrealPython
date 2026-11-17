@@ -1674,6 +1674,13 @@ namespace UPyConversion
 {
 	FUPyConversionResult Nativize(PyObject* PyObj, UWorld*& OutVal, const ESetErrorState SetErrorState)
 	{
+		// UObject pointer parameters accept an explicit Python None.
+		if (PyObj == Py_None)
+		{
+			OutVal = nullptr;
+			return FUPyConversionResult::Success();
+		}
+
 		if (FUPyWrapperWorld* PyWorld = UPyIsWorld(PyObj))
 		{
 			if (!FUPyWrapperObject::ValidateInternalState(PyWorld))

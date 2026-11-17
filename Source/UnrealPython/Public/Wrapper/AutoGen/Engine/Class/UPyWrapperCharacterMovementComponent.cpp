@@ -5044,6 +5044,13 @@ namespace UPyConversion
 {
 	FUPyConversionResult Nativize(PyObject* PyObj, UCharacterMovementComponent*& OutVal, const ESetErrorState SetErrorState)
 	{
+		// UObject pointer parameters accept an explicit Python None.
+		if (PyObj == Py_None)
+		{
+			OutVal = nullptr;
+			return FUPyConversionResult::Success();
+		}
+
 		if (FUPyWrapperCharacterMovementComponent* PyCharacterMovementComponent = UPyIsCharacterMovementComponent(PyObj))
 		{
 			if (!FUPyWrapperObject::ValidateInternalState(PyCharacterMovementComponent))

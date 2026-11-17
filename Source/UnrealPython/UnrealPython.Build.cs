@@ -102,6 +102,13 @@ public class UnrealPython : ModuleRules
 			Path.Combine(ThirdPartyPath, PythonVersion, "Win64", $"{PythonVersion}.dll"));
 		RuntimeDependencies.Add(Path.Combine(DllOutputDir, $"{PythonVersion}.zip"),
 			Path.Combine(ThirdPartyPath, PythonVersion, "Win64", $"{PythonVersion}.zip"));
+		string RuntimeSourceDir = Path.Combine(ThirdPartyPath, PythonVersion, "Win64");
+		foreach (string ExtensionModule in Directory.GetFiles(RuntimeSourceDir, "*.pyd"))
+		{
+			RuntimeDependencies.Add(Path.Combine(DllOutputDir, Path.GetFileName(ExtensionModule)), ExtensionModule);
+		}
+		RuntimeDependencies.Add(Path.Combine(DllOutputDir, "Python-LICENSE.txt"),
+			Path.Combine(RuntimeSourceDir, "LICENSE.txt"), StagedFileType.NonUFS);
 	}
 
 	private void ConfigureAndroidPython(ReadOnlyTargetRules Target, string ThirdPartyPath)

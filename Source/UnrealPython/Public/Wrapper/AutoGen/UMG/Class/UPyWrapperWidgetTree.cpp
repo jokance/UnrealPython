@@ -174,6 +174,13 @@ namespace UPyConversion
 {
 	FUPyConversionResult Nativize(PyObject* PyObj, UWidgetTree*& OutVal, const ESetErrorState SetErrorState)
 	{
+		// UObject pointer parameters accept an explicit Python None.
+		if (PyObj == Py_None)
+		{
+			OutVal = nullptr;
+			return FUPyConversionResult::Success();
+		}
+
 		if (FUPyWrapperWidgetTree* PyWidgetTree = UPyIsWidgetTree(PyObj))
 		{
 			if (!FUPyWrapperObject::ValidateInternalState(PyWidgetTree))

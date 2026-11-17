@@ -12,6 +12,7 @@
 #include "UObject/Package.h"
 #include "UObject/UnrealType.h"
 #include "UObject/StructOnScope.h"
+#include "UObject/StrongObjectPtr.h"
 #include "Templates/Casts.h"
 #include "Misc/EngineVersionComparison.h"
 
@@ -48,7 +49,11 @@ DEFINE_FUNCTION(UUPyCallableForDelegate::CallPythonNative)
 	// Execute Python code within this block
 	{
 		FUPyScopedGIL GIL;
-		if (!UPyGenUtil::InvokePythonCallableFromUnrealFunctionThunk(FUPyObjectPtr(), P_THIS->PyCallable, Func, Context, Stack, RESULT_PARAM))
+		// A callback may unbind itself (or rebuild its owning UI). Deinit clears
+		// the proxy's member while the call is still on the stack.
+		const TStrongObjectPtr<UUPyCallableForDelegate> KeepAlive(P_THIS);
+		const FUPyObjectPtr Callable = P_THIS->PyCallable;
+		if (!UPyGenUtil::InvokePythonCallableFromUnrealFunctionThunk(FUPyObjectPtr(), Callable, Func, Context, Stack, RESULT_PARAM))
 		{
 			UPyUtil::ReThrowPythonError();
 		}
@@ -116,8 +121,15 @@ void UUPyCallableForDelegate::ProcessEvent(UFunction* InFunc, void* InBuffer)
 	}
 
 	FUPyScopedGIL GIL;
+	const TStrongObjectPtr<UUPyCallableForDelegate> KeepAlive(this);
+	const FUPyObjectPtr Callable = PyCallable;
+	if (!Callable.IsValid())
+	{
+		return;
+	}
 
-	const UFunction* FuncToUse = DelegateSignature ? DelegateSignature : InFunc;
+	const TStrongObjectPtr<UFunction> Signature(const_cast<UFunction*>(DelegateSignature ? DelegateSignature : InFunc));
+	const UFunction* FuncToUse = Signature.Get();
 	if (!FuncToUse)
 	{
 		return;
@@ -182,7 +194,7 @@ void UUPyCallableForDelegate::ProcessEvent(UFunction* InFunc, void* InBuffer)
 			FUPyObjectPtr& PyParam = PyParams.AddDefaulted_GetRef();
 			if (!UPyConversion::PythonizeProperty_Direct(Param, ValueAddress, PyParam.Get()))
 			{
-				UPyUtil::SetPythonError(PyExc_TypeError, PyCallable.Get(), *FString::Printf(TEXT("Failed to convert argument at pos '%d' when calling delegate '%s'"), ArgIndex + 1, *FuncToUse->GetName()));
+				UPyUtil::SetPythonError(PyExc_TypeError, Callable.GetPtr(), *FString::Printf(TEXT("Failed to convert argument at pos '%d' when calling delegate '%s'"), ArgIndex + 1, *FuncToUse->GetName()));
 				bProcessedInputs = false;
 			}
 			++ArgIndex;
@@ -207,7 +219,7 @@ void UUPyCallableForDelegate::ProcessEvent(UFunction* InFunc, void* InBuffer)
 	}
 
 	// Invoke the Python callable
-	FUPyObjectPtr RetVals = FUPyObjectPtr::StealReference(PyObject_CallObject(PyCallable.Get(), PyArgs));
+	FUPyObjectPtr RetVals = FUPyObjectPtr::StealReference(PyObject_CallObject(Callable.GetPtr(), PyArgs));
 	if (!RetVals)
 	{
 		UPyUtil::ReThrowPythonError();
@@ -215,7 +227,7 @@ void UUPyCallableForDelegate::ProcessEvent(UFunction* InFunc, void* InBuffer)
 	}
 
 	// Unpack any output values
-	if (!UPyGenUtil::UnpackReturnValues(RetVals, OutParms, *UPyUtil::GetErrorContext(PyCallable.Get()), *FString::Printf(TEXT("delegate '%s'"), *FuncToUse->GetName())))
+	if (!UPyGenUtil::UnpackReturnValues(RetVals, OutParms, *UPyUtil::GetErrorContext(Callable.GetPtr()), *FString::Printf(TEXT("delegate '%s'"), *FuncToUse->GetName())))
 	{
 		UPyUtil::ReThrowPythonError();
 	}

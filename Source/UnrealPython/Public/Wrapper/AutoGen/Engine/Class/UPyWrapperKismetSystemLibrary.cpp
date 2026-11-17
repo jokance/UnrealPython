@@ -13895,6 +13895,13 @@ namespace UPyConversion
 {
 	FUPyConversionResult Nativize(PyObject* PyObj, UKismetSystemLibrary*& OutVal, const ESetErrorState SetErrorState)
 	{
+		// UObject pointer parameters accept an explicit Python None.
+		if (PyObj == Py_None)
+		{
+			OutVal = nullptr;
+			return FUPyConversionResult::Success();
+		}
+
 		if (FUPyWrapperKismetSystemLibrary* PyKismetSystemLibrary = UPyIsKismetSystemLibrary(PyObj))
 		{
 			if (!FUPyWrapperObject::ValidateInternalState(PyKismetSystemLibrary))

@@ -433,6 +433,13 @@ namespace UPyConversion
 {
 	FUPyConversionResult Nativize(PyObject* PyObj, UFXSystemComponent*& OutVal, const ESetErrorState SetErrorState)
 	{
+		// UObject pointer parameters accept an explicit Python None.
+		if (PyObj == Py_None)
+		{
+			OutVal = nullptr;
+			return FUPyConversionResult::Success();
+		}
+
 		if (FUPyWrapperFXSystemComponent* PyFXSystemComponent = UPyIsFXSystemComponent(PyObj))
 		{
 			if (!FUPyWrapperObject::ValidateInternalState(PyFXSystemComponent))

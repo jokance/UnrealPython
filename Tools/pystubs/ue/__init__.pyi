@@ -2308,10 +2308,6 @@ class EButtonTouchMethod(IntEnum):
     Down = 1
     PreciseTap = 2
 
-class EBypassContainerCheck(IntEnum):
-    No = 0
-    Yes = 1
-
 class ECOMacroIOType(IntEnum):
     COMVT_Input = 0
     COMVT_Output = 1
@@ -4653,7 +4649,11 @@ class ECustomizableObjectVersions(IntEnum):
     MaterialModifyIssues = 619
     FixMinQualityLODLevels = 620
     AddedClothAssetLODIndexMetadata = 621
-    LastCustomizableObjectVersion = 622
+    AddedMacroContextToSKMNodeKey = 622
+    RemoveMeshFormatInProjectors = 623
+    AddedSKMMakeNodesInReshapeOps = 624
+    IM_CONFORM = 625
+    LastCustomizableObjectVersion = 626
 
 class ECustomizedToolMenuVisibility(IntEnum):
     NONE = 0
@@ -6219,8 +6219,7 @@ class EFOVScalingType(IntEnum):
 class EFabEnvironment(IntEnum):
     Prod = 0
     Gamedev = 1
-    Test = 2
-    CustomUrl = 3
+    Local = 2
 
 class EFabExperienceMode(IntEnum):
     Standard = 0
@@ -23341,10 +23340,6 @@ class AdvancedCopyMap(StructBase):
 class AdvancedCopyParams(StructBase):
     ...
 
-class AgentSkillDetails(StructBase):
-    Instructions: str
-
-
 class AimTarget(StructBase):
     Weight: float
     Transform: Transform
@@ -27384,11 +27379,6 @@ class Color(StructBase):
         ...
 
 
-class ColorConverterTest(StructBase):
-    TestColor: Color
-    TestLinearColor: LinearColor
-
-
 class ColorGradePerRangeSettings(StructBase):
     Saturation: Vector4
     Contrast: Vector4
@@ -30105,15 +30095,6 @@ class DelegateRuntimeBinding(StructBase):
     Kind: EBindingKind
 
 
-class DelegatingConverterTestContainer(StructBase):
-    TestStruct: DelegatingConverterTestStruct
-
-
-class DelegatingConverterTestStruct(StructBase):
-    HiddenField: str
-    Color: Color
-
-
 class DeletedSessionInfo(StructBase):
     SessionId: str
     SessionName: str
@@ -31109,6 +31090,8 @@ class FabApiVersion(StructBase):
     pluginversion: str
     platform: str
     supportedfeatures: FabSupportedFeatures
+    selectedlocale: str
+    selectedlocalename: str
 
 
 class FabAssetMetadata(StructBase):
@@ -31134,11 +31117,6 @@ class FabFrontendSettings(StructBase):
 
 class FabSupportedFeatures(StructBase):
     banners: bool
-
-
-class FakeConverterTest(StructBase):
-    TestFloat: float
-    TestString: str
 
 
 class FallbackStruct(StructBase):
@@ -33792,10 +33770,6 @@ class Guid(StructBase):
 
     def __ne__(self, Other: str) -> bool:
         ...
-
-
-class GuidConverterTest(StructBase):
-    TestGuid: str
 
 
 class HLODBuildInputReferencedAssets(StructBase):
@@ -46432,17 +46406,6 @@ class PythonLogOutputEntry(StructBase):
     Output: str
 
 
-class PythonTestRunnerResult(StructBase):
-    bIsComplete: bool
-    bIsSuccessful: bool
-
-
-class PythonTestRunnerSearchOptions(StructBase):
-    RootModule: str
-    TestModuleGlob: str
-    TestNameGlobs: list[str]
-
-
 class QualifiedFrameTime(StructBase):
     Time: FrameTime
     Rate: FrameRate
@@ -46915,15 +46878,6 @@ class Redirector(StructBase):
 class ReferenceBoneFrame(StructBase):
     Bone: BoneReference
     Axis: Axis
-
-
-class ReferenceConverterTest(StructBase):
-    TestObject: ReferenceConverterTestObject
-    TestObjectPath: SoftObjectPath
-    TestObjectSoft: ReferenceConverterTestObject
-    TestObjectWeak: ReferenceConverterTestObject
-    TestClass: Class | type
-    TestClassPath: SoftClassPath
 
 
 class ReferencePose(StructBase):
@@ -53346,45 +53300,6 @@ class ToolableTimelineInstanceSettings(StructBase):
     DragRangeIndicatorLineColor: LinearColor
 
 
-class ToolsetImage(StructBase):
-    MimeType: str
-    Data: str
-
-
-class ToolsetJsonTest(StructBase):
-    TestToolCallAsyncResult: ToolCallAsyncResult
-
-
-class ToolsetLibraryInnerStruct(StructBase):
-    InnerItems: list[int]
-
-
-class ToolsetLibraryNestedStruct(StructBase):
-    Name: str
-    Inner: ToolsetLibraryTestStruct
-
-
-class ToolsetLibraryTestStruct(StructBase):
-    Name: str
-    Items: list[int]
-
-
-class ToolsetReference(StructBase):
-    RefPath: str
-
-
-class ToolsetRegistryPropertyValueAsObjectTestStruct(StructBase):
-    TestObject: ToolsetRegistryPropertyAccessorsTestObject
-    TestAssetManager: AssetManager
-    TestInt: int
-
-
-class ToolsetTransform(StructBase):
-    Location: Any
-    Rotation: Any
-    Scale: Any
-
-
 class ToonProfileStruct(StructBase):
     DiffuseRamp: RuntimeCurveLinearColor
     DiffuseRampOffsetTexture: Texture
@@ -53766,10 +53681,6 @@ class TransformConstraint(StructBase):
     TargetNode: str
     Weight: float
     bMaintainOffset: bool
-
-
-class TransformConverterTest(StructBase):
-    TestTransform: Transform
 
 
 class TransformDynamicState(StructBase):
@@ -55421,6 +55332,11 @@ class WidgetSegmentValueOverride(StructBase):
     bOverrideDisplayName: bool
     DisplayNameOverride: str
     DisplayIcon: Texture2D
+
+
+class WidgetSemanticEditablePropertyTestStruct(StructBase):
+    Count: int
+    Label: str
 
 
 class WidgetSnapshotRequest(StructBase):
@@ -79856,14 +79772,6 @@ class ActorSoundParameterInterface(Interface):
 class AdvancedCopyCustomization(Object):
     ...
 
-class AgentSkill(Object):
-    Description: str
-    Instructions: str
-
-    def GeneratePrompt(self, InitialInstructions: str) -> str:
-        ...
-
-
 class AnalysisProperties(Object):
     Function: str
 
@@ -82552,11 +82460,6 @@ class ClothingSimulationInteractor(Object):
         ...
 
     def SetNumSubsteps(self, NumSubsteps: int=1) -> None:
-        ...
-
-
-class ColorConverterTestObject(Object):
-    def TestDefault(self, TestColor: Color=Color(10, 20, 30, 40), TestLinearColor: LinearColor=LinearColor(0.100000, 0.200000, 0.300000, 0.400000)) -> None:
         ...
 
 
@@ -85630,6 +85533,18 @@ class FabBrowserApi(Object):
     def InstallToProject(self, DownloadUrl: str, AssetMetadata: FabAssetMetadata) -> None:
         ...
 
+    def LogDisplay(self, Payload: str) -> None:
+        ...
+
+    def LogError(self, Payload: str) -> None:
+        ...
+
+    def LogVerbose(self, Payload: str) -> None:
+        ...
+
+    def LogWarning(self, Payload: str) -> None:
+        ...
+
     def Login(self) -> None:
         ...
 
@@ -85667,7 +85582,6 @@ class FabLocalAssets(Object):
 
 class FabSettings(Object):
     Environment: EFabEnvironment
-    CustomUrl: str
     CustomAuthToken: str
     ExperienceMode: EFabExperienceMode
     bEnableDebugOptions: bool
@@ -87228,14 +87142,6 @@ class GroundTruthData(Object):
         ...
 
     def SaveObject(self, GroundTruth: Object) -> None:
-        ...
-
-
-class GuidConverterTestObject(Object):
-    def TestDefault(self, TestGuid: str=str()) -> None:
-        ...
-
-    def TestGuidParam(self, TestGuid: str) -> None:
         ...
 
 
@@ -94364,133 +94270,6 @@ class PCGSkinnedMeshSelector(Object):
 class PCGToolPresetMenuContext(Object):
     ...
 
-class PGFAsyncLoadRequest(Object):
-    OnCompleted: MulticastDelegateBase
-    OnFailed: MulticastDelegateBase
-    OnCanceled: MulticastDelegateBase
-    LoadedObject: Object
-
-    def Cancel(self) -> None:
-        ...
-
-    def GetAssetPath(self) -> str:
-        ...
-
-    def GetError(self) -> str:
-        ...
-
-    def GetLoadedObject(self) -> Object:
-        ...
-
-    def IsActive(self) -> bool:
-        ...
-
-    def IsCanceled(self) -> bool:
-        ...
-
-    def IsCompleted(self) -> bool:
-        ...
-
-    def IsDone(self) -> bool:
-        ...
-
-    def IsFailed(self) -> bool:
-        ...
-
-
-class PGFConsoleCommandManager(Object):
-    @staticmethod
-    def ClearCommands() -> None:
-        ...
-
-    @staticmethod
-    def IsCommandRegistered(CommandName: str) -> bool:
-        ...
-
-    @staticmethod
-    def RegisterCommand(CommandName: str, HelpText: str, bReplaceExisting: bool=False) -> bool:
-        ...
-
-    @staticmethod
-    def UnregisterCommand(CommandName: str) -> bool:
-        ...
-
-
-class PGFInputAxisBinding(Object):
-    OnAxis: MulticastDelegateBase
-    PlayerController: PlayerController
-    InputComponent: PGFInputComponent
-
-    def GetAxisKey(self) -> Key:
-        ...
-
-    def IsActive(self) -> bool:
-        ...
-
-    def Unbind(self) -> None:
-        ...
-
-
-class PGFInputBinding(Object):
-    OnTriggered: MulticastDelegateBase
-    PlayerController: PlayerController
-    InputComponent: PGFInputComponent
-
-    def GetChord(self) -> InputChord:
-        ...
-
-    def GetInputEvent(self) -> EInputEvent:
-        ...
-
-    def GetKey(self) -> Key:
-        ...
-
-    def HandleInput(self) -> None:
-        ...
-
-    def IsActive(self) -> bool:
-        ...
-
-    def Unbind(self) -> None:
-        ...
-
-
-class PGFInputLongPressBinding(Object):
-    OnTriggered: MulticastDelegateBase
-    PlayerController: PlayerController
-    InputComponent: PGFInputComponent
-
-    def GetChord(self) -> InputChord:
-        ...
-
-    def GetHoldTimeSeconds(self) -> float:
-        ...
-
-    def GetKey(self) -> Key:
-        ...
-
-    def IsActive(self) -> bool:
-        ...
-
-    def Unbind(self) -> None:
-        ...
-
-
-class PGFInputTouchBinding(Object):
-    OnTouch: MulticastDelegateBase
-    PlayerController: PlayerController
-    InputComponent: PGFInputComponent
-
-    def GetInputEvent(self) -> EInputEvent:
-        ...
-
-    def IsActive(self) -> bool:
-        ...
-
-    def Unbind(self) -> None:
-        ...
-
-
 class PIEPreviewDeviceSpecification(Object):
     PreviewDeviceType: EPIEPreviewDeviceType
     GPUFamily: str
@@ -95566,6 +95345,14 @@ class PropertyBindingUtilsTest_PropertyObjectInstanced(Object):
     InstancedStruct: InstancedStruct
 
 
+class PropertyChangeListenerTestObject(Object):
+    SubObject: PropertyChangeListenerTestSubObject
+
+
+class PropertyChangeListenerTestSubObject(Object):
+    Value: float
+
+
 class PropertyColorSettings(Object):
     CustomProperties: list[PropertyColorCustomProperty]
 
@@ -96063,21 +95850,6 @@ class PythonCallableForDelegate(Object, PythonResourceOwner):
 class PythonObjectHandle(Object, PythonResourceOwner):
     ...
 
-class PythonTestRunner(Object):
-    @staticmethod
-    def Create(BaseName: str, SearchOptions: PythonTestRunnerSearchOptions, TimeoutInSeconds: float=5) -> PythonTestRunner:
-        ...
-
-    def GetLastTestResult(self, TestId: str) -> PythonTestRunnerResult:
-        ...
-
-    def GetTests(self) -> list[str]:
-        ...
-
-    def RunTest(self, TestId: str) -> None:
-        ...
-
-
 class QuartzClockHandle(Object):
     def GetBeatProgressPercent(self, QuantizationBoundary: EQuartzCommandQuantization=EQuartzCommandQuantization.Beat, PhaseOffset: float=0, MsOffset: float=0) -> float:
         ...
@@ -96192,38 +95964,6 @@ class RectangleMarqueeManager(Object):
 
 class RefSkeletonPoser(Object):
     ...
-
-class ReferenceConverterTestObject(Object):
-    TestInstancedObject: ReferenceConverterTestObject
-    TestInstancedArray: list[ReferenceConverterTestObject]
-
-    def TestClassParam(self, TestClass: Class | type) -> None:
-        ...
-
-    def TestDefault(self, TestObject: Object | None=None) -> None:
-        ...
-
-    def TestObjectParam(self, TestObject: Object) -> None:
-        ...
-
-    def TestOptionalObject(self, TestObject: Object | None=None) -> None:
-        ...
-
-    def TestSoftClassParam(self, TestClass: Class) -> None:
-        ...
-
-    def TestSoftClassPathParam(self, TestClassPath: SoftClassPath) -> None:
-        ...
-
-    def TestSoftObjectParam(self, TestObject: ReferenceConverterTestObject) -> None:
-        ...
-
-    def TestSpecObjectParam(self, TestObject: ReferenceConverterTestObject) -> None:
-        ...
-
-    def TestSubClassParam(self, TestClass: Class | type) -> None:
-        ...
-
 
 class ReferenceViewerSettings(Object):
     bLimitSearchDepth: bool
@@ -100614,52 +100354,6 @@ class TmvMediaTranscodeList(Object):
 class TmvMediaTranscodeStage(Object):
     ...
 
-class ToolCallAsyncResult(Object):
-    bIsComplete: bool
-    OnCompleted: MulticastDelegateBase
-    Error: str
-
-    def BroadcastOnCompletedIfComplete(self) -> bool:
-        ...
-
-    def GetValueAsJsonString(self) -> str:
-        ...
-
-    def SetError(self, InError: str) -> bool:
-        ...
-
-
-class ToolCallAsyncResultFutureHandler(Object):
-    def OnCompleted(self, Result: ToolCallAsyncResult) -> None:
-        ...
-
-
-class ToolCallExceptionHandlerTestObject(Object):
-    def TestEmptyError(self) -> None:
-        ...
-
-    def TestMultipleRefs(self, FirstObject: ToolCallExceptionHandlerTestObject, SecondObject: ToolCallExceptionHandlerTestObject) -> None:
-        ...
-
-    def TestSpecObjectParam(self, TestObject: ToolCallExceptionHandlerTestObject) -> None:
-        ...
-
-
-class ToolCallExceptionHandlerTestScope(Object):
-    def CallFunctionInternal(self) -> None:
-        ...
-
-
-class ToolCallFakeClass(Object):
-    Float: float
-
-    def TestFuncWithOptionalParam(self, InFloat: float=3) -> float:
-        ...
-
-    def TestFuncWithRequiredParam(self, InFloat: float) -> float:
-        ...
-
-
 class ToolGroupManager(Object):
     EnabledGroups: dict[str, EnabledToolGroupState]
 
@@ -100895,34 +100589,6 @@ class ToolableTimelineMenuContext(Object):
     ...
 
 class ToolsContextCursorAPI(Object):
-    ...
-
-class ToolsetContainerTestObject(Object):
-    IntArray: list[int]
-    IntSet: set[int]
-    IntMap: dict[str, int]
-    StructMap: dict[str, ToolsetLibraryInnerStruct]
-    StructProp: ToolsetLibraryTestStruct
-    OuterArray: list[ToolsetLibraryInnerStruct]
-    NestedStruct: ToolsetLibraryNestedStruct
-    RefObj: Object
-    TransformProp: Transform
-    TransformArray: list[Transform]
-
-
-class ToolsetDefinition(Object):
-    ...
-
-class ToolsetJsonTestObject(Object):
-    VisibleProperty: bool
-    StructProperty: Vector
-    HiddenProperty: bool
-    ReadOnlyProperty: bool
-    DefaultsOnlyProperty: bool
-    InstanceOnlyProperty: bool
-
-
-class ToolsetRegistryPropertyAccessorsTestObject(Object):
     ...
 
 class ToonProfile(Object):
@@ -102243,6 +101909,10 @@ class WidgetPreview(Object):
         ...
 
 
+class WidgetSemanticEditablePropertyTestSubobject(Object):
+    Value: int
+
+
 class WidgetSlotPair(Object):
     WidgetName: str
     SlotPropertyNames: list[str]
@@ -103335,30 +103005,6 @@ class AddPatchToolProperties(InteractiveToolPropertySet):
 
 
 class AddPrimitiveToolBuilder(InteractiveToolBuilder):
-    ...
-
-class AgentSkillCustomPrompt(AgentSkill):
-    ...
-
-class AgentSkillToolset(ToolsetDefinition):
-    @staticmethod
-    def CreateSkill(FolderPath: str, AssetName: str, Description: str, Details: AgentSkillDetails) -> str:
-        ...
-
-    @staticmethod
-    def GetSkills(SkillPaths: list[str]) -> dict[str, AgentSkillDetails]:
-        ...
-
-    @staticmethod
-    def ListSkills() -> dict[str, str]:
-        ...
-
-    @staticmethod
-    def UpdateSkill(SkillPath: str, Description: str, Details: AgentSkillDetails) -> bool:
-        ...
-
-
-class AgentSkillTransient(AgentSkill):
     ...
 
 class AlembicImportFactory(Factory):
@@ -104973,9 +104619,6 @@ class AssetRegUtilCommandlet(Commandlet):
     ...
 
 class AssetRegistryDumpCommandlet(Commandlet):
-    ...
-
-class AssetSemanticCommandlet(Commandlet):
     ...
 
 class AssetSizeQueryCommandlet(Commandlet):
@@ -114018,82 +113661,6 @@ class FabFactory(EditorDataStorageFactory):
 
 class FabPlaceholderSpawner(ActorFactory):
     ...
-
-class FakeErrorProneToolset(ToolsetDefinition):
-    @staticmethod
-    def BuggyTool() -> None:
-        ...
-
-
-class FakeToolset(ToolsetDefinition):
-    @staticmethod
-    def SimpleInternalMethod() -> None:
-        ...
-
-    @staticmethod
-    def SimpleNoReturnTool(InString: str) -> None:
-        ...
-
-    @staticmethod
-    def SimpleTool(InString: str) -> str:
-        ...
-
-
-class FakeToolsetWithArrayParams(ToolsetDefinition):
-    @staticmethod
-    def ToolWithArrays(ArrayParamOne: list[int], ArrayParamTwo: list[str]) -> list[float]:
-        ...
-
-
-class FakeToolsetWithDefaultParams(ToolsetDefinition):
-    @staticmethod
-    def ToolWithDefaults(InString: str, InValue: int=42) -> str:
-        ...
-
-
-class FakeToolsetWithInvalidUFunctions(ToolsetDefinition):
-    def NonStaticFunction(self) -> None:
-        ...
-
-    @staticmethod
-    def SimplePrivateTool() -> None:
-        ...
-
-    @staticmethod
-    def UntaggedFunction() -> None:
-        ...
-
-
-class FakeToolsetWithMapParams(ToolsetDefinition):
-    @staticmethod
-    def ToolWithMaps(MapParamOne: dict[str, int], MapParamTwo: dict[str, str]) -> dict[str, float]:
-        ...
-
-
-class FakeToolsetWithNoTools(ToolsetDefinition):
-    ...
-
-class FakeToolsetWithObjectParams(ToolsetDefinition):
-    @staticmethod
-    def TestClassParam(TestClass: Class | type) -> None:
-        ...
-
-    @staticmethod
-    def TestObjectParam(TestObject: Object) -> None:
-        ...
-
-
-class FakeToolsetWithSetParams(ToolsetDefinition):
-    @staticmethod
-    def ToolWithSets(SetParamOne: set[int], SetParamTwo: set[str]) -> set[float]:
-        ...
-
-
-class FakeToolsetWithVersionOverride(ToolsetDefinition):
-    @staticmethod
-    def SimpleTool() -> None:
-        ...
-
 
 class FarmProcessorBase(MassProcessor):
     ...
@@ -136906,9 +136473,6 @@ class PCGEditorGraphNodeBase(EdGraphNode):
 class PCGEditorGraphSchema(EdGraphSchema):
     ...
 
-class PCGEditorMode(EdMode):
-    ...
-
 class PCGEditorModeSettings(DeveloperSettings):
     bEnableEditorMode: bool
     GraphRefreshRate: float
@@ -137870,75 +137434,6 @@ class PCGWorldPartitionBuilder(WorldPartitionBuilder):
 class PCGWorldPartitionBuilderHelper(BlueprintFunctionLibrary):
     @staticmethod
     def AddAssetToSubmitAllowList(InPath: Object) -> None:
-        ...
-
-
-class PGFActorLifecycleBinding(ActorComponent):
-    OnBeginPlay: MulticastDelegateBase
-    OnEndPlay: MulticastDelegateBase
-
-    def IsBindingActive(self) -> bool:
-        ...
-
-    def Unbind(self) -> None:
-        ...
-
-
-class PGFBlueprintLibrary(BlueprintFunctionLibrary):
-    @staticmethod
-    def BindActorLifecycle(Actor: Actor) -> PGFActorLifecycleBinding:
-        ...
-
-    @staticmethod
-    def BindInputAxis(PlayerController: PlayerController, AxisKey: Key, bConsumeInput: bool, bExecuteWhenPaused: bool, Priority: int) -> PGFInputAxisBinding:
-        ...
-
-    @staticmethod
-    def BindInputChord(PlayerController: PlayerController, Key: Key, bShift: bool, bCtrl: bool, bAlt: bool, bCmd: bool, InputEvent: EInputEvent, bConsumeInput: bool, bExecuteWhenPaused: bool, Priority: int) -> PGFInputBinding:
-        ...
-
-    @staticmethod
-    def BindInputKey(PlayerController: PlayerController, Key: Key, InputEvent: EInputEvent, bConsumeInput: bool, bExecuteWhenPaused: bool, Priority: int) -> PGFInputBinding:
-        ...
-
-    @staticmethod
-    def BindInputLongPress(PlayerController: PlayerController, Key: Key, HoldTimeSeconds: float, bConsumeInput: bool, bExecuteWhenPaused: bool, Priority: int) -> PGFInputLongPressBinding:
-        ...
-
-    @staticmethod
-    def BindInputLongPressChord(PlayerController: PlayerController, Key: Key, bShift: bool, bCtrl: bool, bAlt: bool, bCmd: bool, HoldTimeSeconds: float, bConsumeInput: bool, bExecuteWhenPaused: bool, Priority: int) -> PGFInputLongPressBinding:
-        ...
-
-    @staticmethod
-    def BindInputTouch(PlayerController: PlayerController, InputEvent: EInputEvent, bConsumeInput: bool, bExecuteWhenPaused: bool, Priority: int) -> PGFInputTouchBinding:
-        ...
-
-    @staticmethod
-    def GetObjectUniqueId(Object: Object) -> int:
-        ...
-
-    @staticmethod
-    def HotReloadPythonRuntime() -> None:
-        ...
-
-    @staticmethod
-    def LoadClassAsync(WorldContextObject: Object, ClassPath: str) -> PGFAsyncLoadRequest:
-        ...
-
-    @staticmethod
-    def LoadObjectAsync(WorldContextObject: Object, AssetPath: str) -> PGFAsyncLoadRequest:
-        ...
-
-    @staticmethod
-    def ReloadPythonModule(ModuleName: str) -> None:
-        ...
-
-    @staticmethod
-    def ReloadPythonPackage(PackageName: str) -> None:
-        ...
-
-    @staticmethod
-    def UnbindActorLifecycle(Actor: Actor) -> None:
         ...
 
 
@@ -143766,39 +143261,6 @@ class TmvMediaTranscodeCommandlet(Commandlet):
 class TmvMediaTranscodeMuxer(TmvMediaTranscodeStage):
     ...
 
-class ToolCallAsyncResultImage(ToolCallAsyncResult):
-    Value: ToolsetImage
-
-    def SetValue(self, InValue: ToolsetImage) -> bool:
-        ...
-
-
-class ToolCallAsyncResultReturnPropertyTest(ToolsetDefinition):
-    @staticmethod
-    def Broken() -> ToolCallAsyncResultVoid:
-        ...
-
-    @staticmethod
-    def SlowError(Error: str, DelayInSeconds: float) -> ToolCallAsyncResultVoid:
-        ...
-
-    @staticmethod
-    def SlowGreeting(Subject: str, DelayInSeconds: float) -> ToolCallAsyncResultString:
-        ...
-
-
-class ToolCallAsyncResultString(ToolCallAsyncResult):
-    Value: str
-
-    def SetValue(self, InValue: str) -> bool:
-        ...
-
-
-class ToolCallAsyncResultVoid(ToolCallAsyncResult):
-    def SetCompleted(self) -> bool:
-        ...
-
-
 class ToolMenu(ToolMenuBase):
     MenuName: str
     MenuParent: str
@@ -143878,79 +143340,6 @@ class ToolableTimelineDefaultSettings(DeveloperSettings):
 
 class ToolableTimelineSettings(DeveloperSettings):
     Settings: ToolableTimelineInstanceSettings
-
-
-class ToolsetLibrary(BlueprintFunctionLibrary):
-    @staticmethod
-    def GetActiveUndoCount() -> int:
-        ...
-
-    @staticmethod
-    def GetDerivedClasses(BaseClass: Class | type) -> list[SoftClassPath]:
-        ...
-
-    @staticmethod
-    def GetDerivedStructs(BaseStruct: ScriptStruct) -> list[ScriptStruct]:
-        ...
-
-    @staticmethod
-    def GetObjectProperties(Object: Object, PropertyNames: list[str]) -> str:
-        ...
-
-    @staticmethod
-    def ListStructProperties(Struct: Struct, bUserVisiblePropertiesOnly: bool=True) -> str:
-        ...
-
-    @staticmethod
-    def SetObjectProperties(Object: Object, PropertiesJson: str, BypassContainerCheck: EBypassContainerCheck=EBypassContainerCheck.No) -> bool:
-        ...
-
-    @staticmethod
-    def UndoTransaction(bCanRedo: bool=False) -> bool:
-        ...
-
-
-class ToolsetRegistry(BlueprintFunctionLibrary):
-    @staticmethod
-    def ExecuteTool(ToolsetName: str, ToolName: str, JsonInput: str) -> ToolCallAsyncResultString:
-        ...
-
-    @staticmethod
-    def GetAllToolsetJsonSchemas() -> str:
-        ...
-
-    @staticmethod
-    def GetToolsetJsonSchema(InToolsetClass: Class | type) -> str:
-        ...
-
-    @staticmethod
-    def IsAvailable() -> bool:
-        ...
-
-    @staticmethod
-    def IsToolsetClassRegistered(InToolsetClass: Class | type) -> bool:
-        ...
-
-    @staticmethod
-    def IsToolsetRegistered(InToolsetName: str) -> bool:
-        ...
-
-    @staticmethod
-    def RegisterToolsetClass(InToolsetClass: Class | type) -> None:
-        ...
-
-    @staticmethod
-    def UnregisterToolsetClass(InToolsetClass: Class | type) -> None:
-        ...
-
-
-class ToolsetRegistrySettings(DeveloperSettings):
-    BlockedNames: list[str]
-    AllowedNames: list[str]
-    AgentSkillBlockedNames: list[str]
-    AgentSkillAllowedNames: list[str]
-    SetObjectPropertiesBlockedClasses: list[str]
-    SetObjectPropertiesBlockedProperties: list[str]
 
 
 class ToonProfileFactory(Factory):
@@ -159071,6 +158460,9 @@ class PCGEditorGraphNode(PCGEditorGraphNodeBase):
 class PCGEditorGraphNodeComment(EdGraphNode_Comment):
     ...
 
+class PCGEditorMode(BaseLegacyWidgetEdMode):
+    ...
+
 class PCGEngineSettings(DeveloperSettingsBackedByCVars):
     VolumeScale: Vector
     bGenerateOnDrop: bool
@@ -159365,18 +158757,6 @@ class PCGWorldRaycastDataInterface(PCGComputeDataInterface):
 
 class PCGWorldRaycastDataProvider(PCGComputeDataProvider):
     ...
-
-class PGFGameInstanceSubsystem(GameInstanceSubsystem):
-    def IsInitialized(self) -> bool:
-        ...
-
-
-class PGFInputComponent(InputComponent):
-    PGFBindings: list[PGFInputBinding]
-    PGFAxisBindings: list[PGFInputAxisBinding]
-    PGFLongPressBindings: list[PGFInputLongPressBinding]
-    PGFTouchBindings: list[PGFInputTouchBinding]
-
 
 class PackedLevelActor(LevelInstance):
     PackedVersion: str
@@ -165977,6 +165357,12 @@ class WidgetInteractionComponent(SceneComponent):
 
     def SetFocus(self, FocusWidget: Widget) -> None:
         ...
+
+
+class WidgetSemanticEditablePropertyTestSlot(PanelSlot):
+    ReflectedSlotInt: int
+    ReflectedSlotString: str
+    ReflectedSlotStruct: WidgetSemanticEditablePropertyTestStruct
 
 
 class WidgetSwitcherSlot(PanelSlot):
@@ -177147,9 +176533,6 @@ class PCGWriteDataIndexSettings(PCGSettings):
     IndexAttribute: PCGAttributePropertyOutputSelector
 
 
-class PGFGameInstance(UPyGameInstance):
-    ...
-
 class PanelExtensionSubsystem(EditorSubsystem):
     ...
 
@@ -179666,9 +179049,6 @@ class ToolMeshSelectorSelectionMechanic(PolygonSelectionMechanic):
 class ToolPresetAssetSubsystem(EditorSubsystem):
     DefaultCollection: InteractiveToolsPresetCollectionAsset
 
-
-class ToolsetRegistrySubsystem(EditorSubsystem):
-    ...
 
 class TransferMeshTool(MultiSelectionMeshEditingTool, InteractiveToolExclusiveToolAPI):
     BasicProperties: TransferMeshToolProperties
@@ -185635,6 +185015,21 @@ class WidgetComponent(MeshComponent):
 
 class WidgetEditorModeUISubsystem(AssetEditorUISubsystem):
     ...
+
+class WidgetSemanticEditablePropertyTestWidget(TextBlock):
+    ReflectedInt: int
+    ReflectedString: str
+    ReflectedStruct: WidgetSemanticEditablePropertyTestStruct
+    ReflectedArray: list[int]
+    ReflectedFixedValues: int
+    StructuralWidgetReference: Widget
+    InstancedState: WidgetSemanticEditablePropertyTestSubobject
+    TransientValue: int
+    ReflectedDelegate: MulticastDelegateBase
+
+    def HandleReflectedDelegate(self) -> None:
+        ...
+
 
 class WindowTitleBarArea(ContentWidget):
     bWindowButtonsEnabled: bool

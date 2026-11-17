@@ -92,6 +92,13 @@ namespace UPyConversion
 {
 	FUPyConversionResult Nativize(PyObject* PyObj, UCanvasPanel*& OutVal, const ESetErrorState SetErrorState)
 	{
+		// UObject pointer parameters accept an explicit Python None.
+		if (PyObj == Py_None)
+		{
+			OutVal = nullptr;
+			return FUPyConversionResult::Success();
+		}
+
 		if (FUPyWrapperCanvasPanel* PyCanvasPanel = UPyIsCanvasPanel(PyObj))
 		{
 			if (!FUPyWrapperObject::ValidateInternalState(PyCanvasPanel))
