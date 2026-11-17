@@ -77,7 +77,7 @@ struct FGetSets_WidgetTree
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperMapFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->NamedSlotBindings, CastField<FMapProperty>(GetPropertyDef_NamedSlotBindings().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_NamedSlotBindings(), "NamedSlotBindings");
 	}
 
 	static int SetNamedSlotBindings(FUPyWrapperWidgetTree* InSelf, PyObject* InValue, void* InClosure)

@@ -22,6 +22,11 @@ struct FFuncs_Geometry
 {
 	static int Init(FUPyWrapperGeometry* InSelf, PyObject* InArgs, PyObject* InKwds)
 	{
+		if (PyTuple_Size(InArgs) != 0 || (InKwds && PyDict_Size(InKwds) != 0))
+		{
+			UPyUtil::SetPythonError(PyExc_TypeError, TEXT("Geometry::__init__"), TEXT("this type does not accept constructor arguments"));
+			return -1;
+		}
 		return FUPyWrapperStruct::Init(InSelf);
 	}
 };

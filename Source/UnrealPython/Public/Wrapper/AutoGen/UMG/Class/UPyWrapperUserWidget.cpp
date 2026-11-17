@@ -447,7 +447,7 @@ struct FGetSets_UserWidget
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->QueuedWidgetAnimationTransitions, CastField<FArrayProperty>(GetPropertyDef_QueuedWidgetAnimationTransitions().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_QueuedWidgetAnimationTransitions(), "QueuedWidgetAnimationTransitions");
 	}
 
 	static int SetQueuedWidgetAnimationTransitions(FUPyWrapperUserWidget* InSelf, PyObject* InValue, void* InClosure)
@@ -962,16 +962,17 @@ struct FMethods_UserWidget
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			if (Prop_ActionName)
 			{
-				Prop_ActionName->CopyCompleteValue_InContainer(Parms, &Arg0);
+				Prop_ActionName->CopyCompleteValue(Prop_ActionName->ContainerPtrToValuePtr<void>(Parms), &Arg0);
 			}
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
 			if (Prop__ReturnValue)
 			{
-				Prop__ReturnValue->CopyCompleteValue_InContainer(&Result, Parms);
+				Prop__ReturnValue->CopyCompleteValue(&Result, Prop__ReturnValue->ContainerPtrToValuePtr<void>(Parms));
 			}
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		return PyBool_FromLong(Result ? 1 : 0);
@@ -1062,12 +1063,13 @@ struct FMethods_UserWidget
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			if (Prop_Animation)
 			{
-				Prop_Animation->CopyCompleteValue_InContainer(Parms, &Arg0);
+				Prop_Animation->CopyCompleteValue(Prop_Animation->ContainerPtrToValuePtr<void>(Parms), &Arg0);
 			}
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		Py_RETURN_NONE;
@@ -1091,12 +1093,13 @@ struct FMethods_UserWidget
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			if (Prop_Animation)
 			{
-				Prop_Animation->CopyCompleteValue_InContainer(Parms, &Arg0);
+				Prop_Animation->CopyCompleteValue(Prop_Animation->ContainerPtrToValuePtr<void>(Parms), &Arg0);
 			}
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		Py_RETURN_NONE;
@@ -2679,8 +2682,9 @@ struct FMethods_UserWidget
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		Py_RETURN_NONE;
@@ -2891,12 +2895,13 @@ struct FMethods_UserWidget
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			if (Prop_bShouldBlock)
 			{
-				Prop_bShouldBlock->CopyCompleteValue_InContainer(Parms, &Arg0);
+				Prop_bShouldBlock->CopyCompleteValue(Prop_bShouldBlock->ContainerPtrToValuePtr<void>(Parms), &Arg0);
 			}
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		Py_RETURN_NONE;
@@ -2920,12 +2925,13 @@ struct FMethods_UserWidget
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			if (Prop_NewPriority)
 			{
-				Prop_NewPriority->CopyCompleteValue_InContainer(Parms, &Arg0);
+				Prop_NewPriority->CopyCompleteValue(Prop_NewPriority->ContainerPtrToValuePtr<void>(Parms), &Arg0);
 			}
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		Py_RETURN_NONE;
@@ -3114,8 +3120,9 @@ struct FMethods_UserWidget
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		Py_RETURN_NONE;
@@ -3157,16 +3164,17 @@ struct FMethods_UserWidget
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			if (Prop_ActionName)
 			{
-				Prop_ActionName->CopyCompleteValue_InContainer(Parms, &Arg0);
+				Prop_ActionName->CopyCompleteValue(Prop_ActionName->ContainerPtrToValuePtr<void>(Parms), &Arg0);
 			}
 			if (Prop_EventType)
 			{
-				Prop_EventType->CopyCompleteValue_InContainer(Parms, &Arg1);
+				Prop_EventType->CopyCompleteValue(Prop_EventType->ContainerPtrToValuePtr<void>(Parms), &Arg1);
 			}
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		Py_RETURN_NONE;
@@ -3262,8 +3270,9 @@ struct FMethods_UserWidget
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		Py_RETURN_NONE;

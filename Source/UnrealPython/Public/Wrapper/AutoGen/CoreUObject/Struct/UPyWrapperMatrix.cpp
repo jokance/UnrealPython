@@ -22,6 +22,13 @@ struct FFuncs_Matrix
 {
 	static int Matrix_Init_ArgCnt0_Overload0(FUPyWrapperMatrix* InSelf, PyObject* InArgs, PyObject* InKwds)
 	{
+		static const char* ArgsKwdList[] = { nullptr };
+		if (!PyArg_ParseTupleAndKeywords(InArgs, InKwds, ":Matrix::__init__", (char**)ArgsKwdList))
+		{
+			return -1;
+		}
+
+		InSelf->ScriptStruct->DestroyStruct(InSelf->StructInstance);
 		new (InSelf->StructInstance) FMatrix();
 		return 0;
 	}
@@ -29,50 +36,41 @@ struct FFuncs_Matrix
 
 	static int Matrix_Init_ArgCnt4_Overload0(FUPyWrapperMatrix* InSelf, PyObject* InArgs, PyObject* InKwds)
 	{
-		PyObject* PyArg0 = PyTuple_GetItem(InArgs, 0);
-		if (PyArg0 == nullptr)
+		PyObject* PyArg0 = nullptr;
+		PyObject* PyArg1 = nullptr;
+		PyObject* PyArg2 = nullptr;
+		PyObject* PyArg3 = nullptr;
+		static const char* ArgsKwdList[] = { "InX", "InY", "InZ", "InW", nullptr };
+		if (!PyArg_ParseTupleAndKeywords(InArgs, InKwds, "OOOO:Matrix::__init__", (char**)ArgsKwdList, &PyArg0, &PyArg1, &PyArg2, &PyArg3))
 		{
 			return -1;
 		}
+
 		FVector Arg0;
 		if (!UPyConversion::NativizeStructInstance(PyArg0, Arg0))
 		{
 			return -1;
 		}
 
-		PyObject* PyArg1 = PyTuple_GetItem(InArgs, 1);
-		if (PyArg1 == nullptr)
-		{
-			return -1;
-		}
 		FVector Arg1;
 		if (!UPyConversion::NativizeStructInstance(PyArg1, Arg1))
 		{
 			return -1;
 		}
 
-		PyObject* PyArg2 = PyTuple_GetItem(InArgs, 2);
-		if (PyArg2 == nullptr)
-		{
-			return -1;
-		}
 		FVector Arg2;
 		if (!UPyConversion::NativizeStructInstance(PyArg2, Arg2))
 		{
 			return -1;
 		}
 
-		PyObject* PyArg3 = PyTuple_GetItem(InArgs, 3);
-		if (PyArg3 == nullptr)
-		{
-			return -1;
-		}
 		FVector Arg3;
 		if (!UPyConversion::NativizeStructInstance(PyArg3, Arg3))
 		{
 			return -1;
 		}
 
+		InSelf->ScriptStruct->DestroyStruct(InSelf->StructInstance);
 		new (InSelf->StructInstance) FMatrix(Arg0, Arg1, Arg2, Arg3);
 		return 0;
 	}
@@ -86,33 +84,15 @@ struct FFuncs_Matrix
 			return BaseInit;
 		}
 
-		switch (PyTuple_Size(InArgs))
+		if (
+			UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_Matrix::Matrix_Init_ArgCnt0_Overload0)
+			|| UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_Matrix::Matrix_Init_ArgCnt4_Overload0)
+		)
 		{
-		case 0:
-		{
-			if (
-				UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_Matrix::Matrix_Init_ArgCnt0_Overload0)
-			)
-			{
-				return 0;
-			}
-			break;
-		}
-		case 4:
-		{
-			if (
-				UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_Matrix::Matrix_Init_ArgCnt4_Overload0)
-			)
-			{
-				return 0;
-			}
-			break;
-		}
-		default:
-			break;
+			return 0;
 		}
 
-		UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("Matrix::__init__"), TEXT("invalid argument"));
+		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("Matrix::__init__"), TEXT("invalid argument"));
 		return -1;
 	}
 };
@@ -133,6 +113,10 @@ struct FNumberFuncs_Matrix
 
 	static PyObject* Op_add(FUPyWrapperMatrix* InSelf, PyObject* InRHS)
 	{
+		if (!UPyIsMatrix((PyObject*)InSelf))
+		{
+			Py_RETURN_NOTIMPLEMENTED;
+		}
 		{
 			PyObject* AttemptResult = Op_add_Attempt0(InSelf, InRHS);
 			if (AttemptResult != nullptr)
@@ -160,6 +144,10 @@ struct FNumberFuncs_Matrix
 
 	static PyObject* Op_iadd(FUPyWrapperMatrix* InSelf, PyObject* InRHS)
 	{
+		if (!UPyIsMatrix((PyObject*)InSelf))
+		{
+			Py_RETURN_NOTIMPLEMENTED;
+		}
 		{
 			PyObject* AttemptResult = Op_iadd_Attempt0(InSelf, InRHS);
 			if (AttemptResult != nullptr)
@@ -200,6 +188,10 @@ struct FNumberFuncs_Matrix
 
 	static PyObject* Op_imul(FUPyWrapperMatrix* InSelf, PyObject* InRHS)
 	{
+		if (!UPyIsMatrix((PyObject*)InSelf))
+		{
+			Py_RETURN_NOTIMPLEMENTED;
+		}
 		{
 			PyObject* AttemptResult = Op_imul_Attempt0(InSelf, InRHS);
 			if (AttemptResult != nullptr)
@@ -246,6 +238,10 @@ struct FNumberFuncs_Matrix
 
 	static PyObject* Op_mul(FUPyWrapperMatrix* InSelf, PyObject* InRHS)
 	{
+		if (!UPyIsMatrix((PyObject*)InSelf))
+		{
+			Py_RETURN_NOTIMPLEMENTED;
+		}
 		{
 			PyObject* AttemptResult = Op_mul_Attempt0(InSelf, InRHS);
 			if (AttemptResult != nullptr)

@@ -657,24 +657,25 @@ struct FMethods_Controller
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			if (Prop_Damage)
 			{
-				Prop_Damage->CopyCompleteValue_InContainer(Parms, &Arg0);
+				Prop_Damage->CopyCompleteValue(Prop_Damage->ContainerPtrToValuePtr<void>(Parms), &Arg0);
 			}
 			if (Prop_DamageType)
 			{
-				Prop_DamageType->CopyCompleteValue_InContainer(Parms, &Arg1);
+				Prop_DamageType->CopyCompleteValue(Prop_DamageType->ContainerPtrToValuePtr<void>(Parms), &Arg1);
 			}
 			if (Prop_DamagedActor)
 			{
-				Prop_DamagedActor->CopyCompleteValue_InContainer(Parms, &Arg2);
+				Prop_DamagedActor->CopyCompleteValue(Prop_DamagedActor->ContainerPtrToValuePtr<void>(Parms), &Arg2);
 			}
 			if (Prop_DamageCauser)
 			{
-				Prop_DamageCauser->CopyCompleteValue_InContainer(Parms, &Arg3);
+				Prop_DamageCauser->CopyCompleteValue(Prop_DamageCauser->ContainerPtrToValuePtr<void>(Parms), &Arg3);
 			}
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		Py_RETURN_NONE;
@@ -698,12 +699,13 @@ struct FMethods_Controller
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			if (Prop_PossessedPawn)
 			{
-				Prop_PossessedPawn->CopyCompleteValue_InContainer(Parms, &Arg0);
+				Prop_PossessedPawn->CopyCompleteValue(Prop_PossessedPawn->ContainerPtrToValuePtr<void>(Parms), &Arg0);
 			}
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		Py_RETURN_NONE;
@@ -727,12 +729,13 @@ struct FMethods_Controller
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			if (Prop_UnpossessedPawn)
 			{
-				Prop_UnpossessedPawn->CopyCompleteValue_InContainer(Parms, &Arg0);
+				Prop_UnpossessedPawn->CopyCompleteValue(Prop_UnpossessedPawn->ContainerPtrToValuePtr<void>(Parms), &Arg0);
 			}
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		Py_RETURN_NONE;

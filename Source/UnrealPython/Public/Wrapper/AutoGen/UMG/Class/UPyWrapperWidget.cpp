@@ -1361,12 +1361,13 @@ struct FMethods_Widget
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			if (Prop_FieldId)
 			{
-				Prop_FieldId->CopyCompleteValue_InContainer(Parms, &Arg0);
+				Prop_FieldId->CopyCompleteValue(Prop_FieldId->ContainerPtrToValuePtr<void>(Parms), &Arg0);
 			}
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		Py_RETURN_NONE;

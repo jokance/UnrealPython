@@ -244,12 +244,13 @@ struct FMethods_Texture2D
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
 			if (Prop__ReturnValue)
 			{
-				Prop__ReturnValue->CopyCompleteValue_InContainer(&Result, Parms);
+				Prop__ReturnValue->CopyCompleteValue(&Result, Prop__ReturnValue->ContainerPtrToValuePtr<void>(Parms));
 			}
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		return UPyConversion::PythonizeStructInstance(Result);
@@ -267,12 +268,13 @@ struct FMethods_Texture2D
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
 			if (Prop__ReturnValue)
 			{
-				Prop__ReturnValue->CopyCompleteValue_InContainer(&Result, Parms);
+				Prop__ReturnValue->CopyCompleteValue(&Result, Prop__ReturnValue->ContainerPtrToValuePtr<void>(Parms));
 			}
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		return UPyConversion::Pythonize(Result);
@@ -290,12 +292,13 @@ struct FMethods_Texture2D
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
 			if (Prop__ReturnValue)
 			{
-				Prop__ReturnValue->CopyCompleteValue_InContainer(&Result, Parms);
+				Prop__ReturnValue->CopyCompleteValue(&Result, Prop__ReturnValue->ContainerPtrToValuePtr<void>(Parms));
 			}
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		return UPyConversion::Pythonize(Result);

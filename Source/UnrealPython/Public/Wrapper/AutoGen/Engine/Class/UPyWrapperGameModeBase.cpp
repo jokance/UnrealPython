@@ -764,12 +764,13 @@ struct FMethods_GameModeBase
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			if (Prop_NewPlayer)
 			{
-				Prop_NewPlayer->CopyCompleteValue_InContainer(Parms, &Arg0);
+				Prop_NewPlayer->CopyCompleteValue(Prop_NewPlayer->ContainerPtrToValuePtr<void>(Parms), &Arg0);
 			}
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		Py_RETURN_NONE;
@@ -925,16 +926,17 @@ struct FMethods_GameModeBase
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			if (Prop_OldPC)
 			{
-				Prop_OldPC->CopyCompleteValue_InContainer(Parms, &Arg0);
+				Prop_OldPC->CopyCompleteValue(Prop_OldPC->ContainerPtrToValuePtr<void>(Parms), &Arg0);
 			}
 			if (Prop_NewPC)
 			{
-				Prop_NewPC->CopyCompleteValue_InContainer(Parms, &Arg1);
+				Prop_NewPC->CopyCompleteValue(Prop_NewPC->ContainerPtrToValuePtr<void>(Parms), &Arg1);
 			}
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		Py_RETURN_NONE;

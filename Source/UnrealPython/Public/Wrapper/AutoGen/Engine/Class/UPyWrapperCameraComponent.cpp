@@ -824,8 +824,9 @@ struct FMethods_CameraComponent
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		Py_RETURN_NONE;

@@ -143,7 +143,7 @@ struct FGetSets_HUD
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->DebugDisplay, CastField<FArrayProperty>(GetPropertyDef_DebugDisplay().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_DebugDisplay(), "DebugDisplay");
 	}
 
 	static int SetDebugDisplay(FUPyWrapperHUD* InSelf, PyObject* InValue, void* InClosure)
@@ -238,7 +238,7 @@ struct FGetSets_HUD
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->PostRenderedActors, CastField<FArrayProperty>(GetPropertyDef_PostRenderedActors().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_PostRenderedActors(), "PostRenderedActors");
 	}
 
 	static int SetPostRenderedActors(FUPyWrapperHUD* InSelf, PyObject* InValue, void* InClosure)
@@ -346,7 +346,7 @@ struct FGetSets_HUD
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->ToggledDebugCategories, CastField<FArrayProperty>(GetPropertyDef_ToggledDebugCategories().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ToggledDebugCategories(), "ToggledDebugCategories");
 	}
 
 	static int SetToggledDebugCategories(FUPyWrapperHUD* InSelf, PyObject* InValue, void* InClosure)

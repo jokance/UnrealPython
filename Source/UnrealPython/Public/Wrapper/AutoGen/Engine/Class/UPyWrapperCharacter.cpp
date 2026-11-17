@@ -889,7 +889,7 @@ struct FGetSets_Character
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->RootMotionRepMoves, CastField<FArrayProperty>(GetPropertyDef_RootMotionRepMoves().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_RootMotionRepMoves(), "RootMotionRepMoves");
 	}
 
 	static int SetRootMotionRepMoves(FUPyWrapperCharacter* InSelf, PyObject* InValue, void* InClosure)
@@ -1392,12 +1392,13 @@ struct FMethods_Character
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
 			if (Prop__ReturnValue)
 			{
-				Prop__ReturnValue->CopyCompleteValue_InContainer(&Result, Parms);
+				Prop__ReturnValue->CopyCompleteValue(&Result, Prop__ReturnValue->ContainerPtrToValuePtr<void>(Parms));
 			}
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		return PyBool_FromLong(Result ? 1 : 0);
@@ -1844,8 +1845,9 @@ struct FMethods_Character
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		Py_RETURN_NONE;

@@ -601,7 +601,7 @@ struct FGetSets_PrimitiveComponent
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->MoveIgnoreActors, CastField<FArrayProperty>(GetPropertyDef_MoveIgnoreActors().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_MoveIgnoreActors(), "MoveIgnoreActors");
 	}
 
 	static int SetMoveIgnoreActors(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
@@ -637,7 +637,7 @@ struct FGetSets_PrimitiveComponent
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->MoveIgnoreComponents, CastField<FArrayProperty>(GetPropertyDef_MoveIgnoreComponents().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_MoveIgnoreComponents(), "MoveIgnoreComponents");
 	}
 
 	static int SetMoveIgnoreComponents(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
@@ -1367,7 +1367,7 @@ struct FGetSets_PrimitiveComponent
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->RuntimeVirtualTextures, CastField<FArrayProperty>(GetPropertyDef_RuntimeVirtualTextures().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_RuntimeVirtualTextures(), "RuntimeVirtualTextures");
 	}
 
 	static int SetRuntimeVirtualTextures(FUPyWrapperPrimitiveComponent* InSelf, PyObject* InValue, void* InClosure)
@@ -3889,12 +3889,13 @@ struct FMethods_PrimitiveComponent
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
 			if (Prop__ReturnValue)
 			{
-				Prop__ReturnValue->CopyCompleteValue_InContainer(&Result, Parms);
+				Prop__ReturnValue->CopyCompleteValue(&Result, Prop__ReturnValue->ContainerPtrToValuePtr<void>(Parms));
 			}
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		return PyBool_FromLong(Result ? 1 : 0);
@@ -4251,12 +4252,13 @@ struct FMethods_PrimitiveComponent
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
 			if (Prop__ReturnValue)
 			{
-				Prop__ReturnValue->CopyCompleteValue_InContainer(&Result, Parms);
+				Prop__ReturnValue->CopyCompleteValue(&Result, Prop__ReturnValue->ContainerPtrToValuePtr<void>(Parms));
 			}
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		PyObject* PyList = PyList_New(Result.Num());
@@ -4705,16 +4707,17 @@ struct FMethods_PrimitiveComponent
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			if (Prop_ChangedComponent)
 			{
-				Prop_ChangedComponent->CopyCompleteValue_InContainer(Parms, &Arg0);
+				Prop_ChangedComponent->CopyCompleteValue(Prop_ChangedComponent->ContainerPtrToValuePtr<void>(Parms), &Arg0);
 			}
 			if (Prop_StateChange)
 			{
-				Prop_StateChange->CopyCompleteValue_InContainer(Parms, &Arg1);
+				Prop_StateChange->CopyCompleteValue(Prop_StateChange->ContainerPtrToValuePtr<void>(Parms), &Arg1);
 			}
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		Py_RETURN_NONE;
@@ -6432,12 +6435,13 @@ struct FMethods_PrimitiveComponent
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			if (Prop_InExcludeForSpecificHLODLevels)
 			{
-				Prop_InExcludeForSpecificHLODLevels->CopyCompleteValue_InContainer(Parms, &Arg0);
+				Prop_InExcludeForSpecificHLODLevels->CopyCompleteValue(Prop_InExcludeForSpecificHLODLevels->ContainerPtrToValuePtr<void>(Parms), &Arg0);
 			}
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		Py_RETURN_NONE;

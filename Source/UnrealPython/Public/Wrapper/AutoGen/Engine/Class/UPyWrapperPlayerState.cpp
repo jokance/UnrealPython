@@ -716,12 +716,13 @@ struct FMethods_PlayerState
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			if (Prop_InActor)
 			{
-				Prop_InActor->CopyCompleteValue_InContainer(Parms, &Arg0);
+				Prop_InActor->CopyCompleteValue(Prop_InActor->ContainerPtrToValuePtr<void>(Parms), &Arg0);
 			}
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		Py_RETURN_NONE;
@@ -795,12 +796,13 @@ struct FMethods_PlayerState
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			if (Prop_NewPlayerState)
 			{
-				Prop_NewPlayerState->CopyCompleteValue_InContainer(Parms, &Arg0);
+				Prop_NewPlayerState->CopyCompleteValue(Prop_NewPlayerState->ContainerPtrToValuePtr<void>(Parms), &Arg0);
 			}
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		Py_RETURN_NONE;
@@ -824,12 +826,13 @@ struct FMethods_PlayerState
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			if (Prop_OldPlayerState)
 			{
-				Prop_OldPlayerState->CopyCompleteValue_InContainer(Parms, &Arg0);
+				Prop_OldPlayerState->CopyCompleteValue(Prop_OldPlayerState->ContainerPtrToValuePtr<void>(Parms), &Arg0);
 			}
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		Py_RETURN_NONE;

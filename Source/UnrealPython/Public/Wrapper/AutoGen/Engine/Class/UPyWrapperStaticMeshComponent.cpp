@@ -110,7 +110,7 @@ struct FGetSets_StaticMeshComponent
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->LODData, CastField<FArrayProperty>(GetPropertyDef_LODData().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_LODData(), "LODData");
 	}
 
 	static int SetLODData(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
@@ -169,7 +169,7 @@ struct FGetSets_StaticMeshComponent
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->MaterialCacheTextures, CastField<FArrayProperty>(GetPropertyDef_MaterialCacheTextures().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_MaterialCacheTextures(), "MaterialCacheTextures");
 	}
 
 	static int SetMaterialCacheTextures(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
@@ -300,7 +300,7 @@ struct FGetSets_StaticMeshComponent
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->MaterialStreamingRelativeBoxes, CastField<FArrayProperty>(GetPropertyDef_MaterialStreamingRelativeBoxes().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_MaterialStreamingRelativeBoxes(), "MaterialStreamingRelativeBoxes");
 	}
 
 	static int SetMaterialStreamingRelativeBoxes(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)
@@ -707,7 +707,7 @@ struct FGetSets_StaticMeshComponent
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->StreamingTextureData, CastField<FArrayProperty>(GetPropertyDef_StreamingTextureData().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_StreamingTextureData(), "StreamingTextureData");
 	}
 
 	static int SetStreamingTextureData(FUPyWrapperStaticMeshComponent* InSelf, PyObject* InValue, void* InClosure)

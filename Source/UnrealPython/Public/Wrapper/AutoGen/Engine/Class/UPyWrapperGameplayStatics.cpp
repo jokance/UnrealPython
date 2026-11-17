@@ -899,56 +899,57 @@ struct FMethods_GameplayStatics
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			if (Prop_WorldContextObject)
 			{
-				Prop_WorldContextObject->CopyCompleteValue_InContainer(Parms, &Arg0);
+				Prop_WorldContextObject->CopyCompleteValue(Prop_WorldContextObject->ContainerPtrToValuePtr<void>(Parms), &Arg0);
 			}
 			if (Prop_StartLocation)
 			{
-				Prop_StartLocation->CopyCompleteValue_InContainer(Parms, &Arg1);
+				Prop_StartLocation->CopyCompleteValue(Prop_StartLocation->ContainerPtrToValuePtr<void>(Parms), &Arg1);
 			}
 			if (Prop_EndLocation)
 			{
-				Prop_EndLocation->CopyCompleteValue_InContainer(Parms, &Arg2);
+				Prop_EndLocation->CopyCompleteValue(Prop_EndLocation->ContainerPtrToValuePtr<void>(Parms), &Arg2);
 			}
 			if (Prop_LaunchSpeed)
 			{
-				Prop_LaunchSpeed->CopyCompleteValue_InContainer(Parms, &Arg3);
+				Prop_LaunchSpeed->CopyCompleteValue(Prop_LaunchSpeed->ContainerPtrToValuePtr<void>(Parms), &Arg3);
 			}
 			if (Prop_OverrideGravityZ)
 			{
-				Prop_OverrideGravityZ->CopyCompleteValue_InContainer(Parms, &Arg4);
+				Prop_OverrideGravityZ->CopyCompleteValue(Prop_OverrideGravityZ->ContainerPtrToValuePtr<void>(Parms), &Arg4);
 			}
 			if (Prop_TraceOption)
 			{
-				Prop_TraceOption->CopyCompleteValue_InContainer(Parms, &Arg5);
+				Prop_TraceOption->CopyCompleteValue(Prop_TraceOption->ContainerPtrToValuePtr<void>(Parms), &Arg5);
 			}
 			if (Prop_CollisionRadius)
 			{
-				Prop_CollisionRadius->CopyCompleteValue_InContainer(Parms, &Arg6);
+				Prop_CollisionRadius->CopyCompleteValue(Prop_CollisionRadius->ContainerPtrToValuePtr<void>(Parms), &Arg6);
 			}
 			if (Prop_bFavorHighArc)
 			{
-				Prop_bFavorHighArc->CopyCompleteValue_InContainer(Parms, &Arg7);
+				Prop_bFavorHighArc->CopyCompleteValue(Prop_bFavorHighArc->ContainerPtrToValuePtr<void>(Parms), &Arg7);
 			}
 			if (Prop_bDrawDebug)
 			{
-				Prop_bDrawDebug->CopyCompleteValue_InContainer(Parms, &Arg8);
+				Prop_bDrawDebug->CopyCompleteValue(Prop_bDrawDebug->ContainerPtrToValuePtr<void>(Parms), &Arg8);
 			}
 			if (Prop_bAcceptClosestOnNoSolutions)
 			{
-				Prop_bAcceptClosestOnNoSolutions->CopyCompleteValue_InContainer(Parms, &Arg9);
+				Prop_bAcceptClosestOnNoSolutions->CopyCompleteValue(Prop_bAcceptClosestOnNoSolutions->ContainerPtrToValuePtr<void>(Parms), &Arg9);
 			}
 			GetMutableDefault<UGameplayStatics>()->ProcessEvent(Func, Parms);
 			if (Prop_TossVelocity)
 			{
-				Prop_TossVelocity->CopyCompleteValue_InContainer(&OutParam0, Parms);
+				Prop_TossVelocity->CopyCompleteValue(&OutParam0, Prop_TossVelocity->ContainerPtrToValuePtr<void>(Parms));
 			}
 			if (Prop__ReturnValue)
 			{
-				Prop__ReturnValue->CopyCompleteValue_InContainer(&ReturnValue, Parms);
+				Prop__ReturnValue->CopyCompleteValue(&ReturnValue, Prop__ReturnValue->ContainerPtrToValuePtr<void>(Parms));
 			}
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		PyObject* ReturnTuple = PyTuple_New(2);

@@ -102,6 +102,13 @@ struct FFuncs_Rotator
 {
 	static int Rotator_Init_ArgCnt0_Overload0(FUPyWrapperRotator* InSelf, PyObject* InArgs, PyObject* InKwds)
 	{
+		static const char* ArgsKwdList[] = { nullptr };
+		if (!PyArg_ParseTupleAndKeywords(InArgs, InKwds, ":Rotator::__init__", (char**)ArgsKwdList))
+		{
+			return -1;
+		}
+
+		InSelf->ScriptStruct->DestroyStruct(InSelf->StructInstance);
 		new (InSelf->StructInstance) FRotator();
 		return 0;
 	}
@@ -109,17 +116,20 @@ struct FFuncs_Rotator
 
 	static int Rotator_Init_ArgCnt1_Overload0(FUPyWrapperRotator* InSelf, PyObject* InArgs, PyObject* InKwds)
 	{
-		PyObject* PyArg0 = PyTuple_GetItem(InArgs, 0);
-		if (PyArg0 == nullptr)
+		PyObject* PyArg0 = nullptr;
+		static const char* ArgsKwdList[] = { "InF", nullptr };
+		if (!PyArg_ParseTupleAndKeywords(InArgs, InKwds, "O:Rotator::__init__", (char**)ArgsKwdList, &PyArg0))
 		{
 			return -1;
 		}
+
 		double Arg0 = 0.0;
 		if (!UPyConversion::Nativize(PyArg0, Arg0))
 		{
 			return -1;
 		}
 
+		InSelf->ScriptStruct->DestroyStruct(InSelf->StructInstance);
 		new (InSelf->StructInstance) FRotator(Arg0);
 		return 0;
 	}
@@ -127,39 +137,34 @@ struct FFuncs_Rotator
 
 	static int Rotator_Init_ArgCnt3_Overload0(FUPyWrapperRotator* InSelf, PyObject* InArgs, PyObject* InKwds)
 	{
-		PyObject* PyArg0 = PyTuple_GetItem(InArgs, 0);
-		if (PyArg0 == nullptr)
+		PyObject* PyArg0 = nullptr;
+		PyObject* PyArg1 = nullptr;
+		PyObject* PyArg2 = nullptr;
+		static const char* ArgsKwdList[] = { "InPitch", "InYaw", "InRoll", nullptr };
+		if (!PyArg_ParseTupleAndKeywords(InArgs, InKwds, "OOO:Rotator::__init__", (char**)ArgsKwdList, &PyArg0, &PyArg1, &PyArg2))
 		{
 			return -1;
 		}
+
 		double Arg0 = 0.0;
 		if (!UPyConversion::Nativize(PyArg0, Arg0))
 		{
 			return -1;
 		}
 
-		PyObject* PyArg1 = PyTuple_GetItem(InArgs, 1);
-		if (PyArg1 == nullptr)
-		{
-			return -1;
-		}
 		double Arg1 = 0.0;
 		if (!UPyConversion::Nativize(PyArg1, Arg1))
 		{
 			return -1;
 		}
 
-		PyObject* PyArg2 = PyTuple_GetItem(InArgs, 2);
-		if (PyArg2 == nullptr)
-		{
-			return -1;
-		}
 		double Arg2 = 0.0;
 		if (!UPyConversion::Nativize(PyArg2, Arg2))
 		{
 			return -1;
 		}
 
+		InSelf->ScriptStruct->DestroyStruct(InSelf->StructInstance);
 		new (InSelf->StructInstance) FRotator(Arg0, Arg1, Arg2);
 		return 0;
 	}
@@ -173,43 +178,16 @@ struct FFuncs_Rotator
 			return BaseInit;
 		}
 
-		switch (PyTuple_Size(InArgs))
+		if (
+			UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_Rotator::Rotator_Init_ArgCnt0_Overload0)
+			|| UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_Rotator::Rotator_Init_ArgCnt1_Overload0)
+			|| UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_Rotator::Rotator_Init_ArgCnt3_Overload0)
+		)
 		{
-		case 0:
-		{
-			if (
-				UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_Rotator::Rotator_Init_ArgCnt0_Overload0)
-			)
-			{
-				return 0;
-			}
-			break;
-		}
-		case 1:
-		{
-			if (
-				UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_Rotator::Rotator_Init_ArgCnt1_Overload0)
-			)
-			{
-				return 0;
-			}
-			break;
-		}
-		case 3:
-		{
-			if (
-				UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_Rotator::Rotator_Init_ArgCnt3_Overload0)
-			)
-			{
-				return 0;
-			}
-			break;
-		}
-		default:
-			break;
+			return 0;
 		}
 
-		UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("Rotator::__init__"), TEXT("invalid argument"));
+		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("Rotator::__init__"), TEXT("invalid argument"));
 		return -1;
 	}
 
@@ -308,6 +286,10 @@ struct FNumberFuncs_Rotator
 
 	static PyObject* Op_add(FUPyWrapperRotator* InSelf, PyObject* InRHS)
 	{
+		if (!UPyIsRotator((PyObject*)InSelf))
+		{
+			Py_RETURN_NOTIMPLEMENTED;
+		}
 		{
 			PyObject* AttemptResult = Op_add_Attempt0(InSelf, InRHS);
 			if (AttemptResult != nullptr)
@@ -335,6 +317,10 @@ struct FNumberFuncs_Rotator
 
 	static PyObject* Op_iadd(FUPyWrapperRotator* InSelf, PyObject* InRHS)
 	{
+		if (!UPyIsRotator((PyObject*)InSelf))
+		{
+			Py_RETURN_NOTIMPLEMENTED;
+		}
 		{
 			PyObject* AttemptResult = Op_iadd_Attempt0(InSelf, InRHS);
 			if (AttemptResult != nullptr)
@@ -362,6 +348,10 @@ struct FNumberFuncs_Rotator
 
 	static PyObject* Op_imul(FUPyWrapperRotator* InSelf, PyObject* InRHS)
 	{
+		if (!UPyIsRotator((PyObject*)InSelf))
+		{
+			Py_RETURN_NOTIMPLEMENTED;
+		}
 		{
 			PyObject* AttemptResult = Op_imul_Attempt0(InSelf, InRHS);
 			if (AttemptResult != nullptr)
@@ -389,6 +379,10 @@ struct FNumberFuncs_Rotator
 
 	static PyObject* Op_isub(FUPyWrapperRotator* InSelf, PyObject* InRHS)
 	{
+		if (!UPyIsRotator((PyObject*)InSelf))
+		{
+			Py_RETURN_NOTIMPLEMENTED;
+		}
 		{
 			PyObject* AttemptResult = Op_isub_Attempt0(InSelf, InRHS);
 			if (AttemptResult != nullptr)
@@ -415,6 +409,10 @@ struct FNumberFuncs_Rotator
 
 	static PyObject* Op_mul(FUPyWrapperRotator* InSelf, PyObject* InRHS)
 	{
+		if (!UPyIsRotator((PyObject*)InSelf))
+		{
+			Py_RETURN_NOTIMPLEMENTED;
+		}
 		{
 			PyObject* AttemptResult = Op_mul_Attempt0(InSelf, InRHS);
 			if (AttemptResult != nullptr)
@@ -441,6 +439,10 @@ struct FNumberFuncs_Rotator
 
 	static PyObject* Op_sub(FUPyWrapperRotator* InSelf, PyObject* InRHS)
 	{
+		if (!UPyIsRotator((PyObject*)InSelf))
+		{
+			Py_RETURN_NOTIMPLEMENTED;
+		}
 		{
 			PyObject* AttemptResult = Op_sub_Attempt0(InSelf, InRHS);
 			if (AttemptResult != nullptr)

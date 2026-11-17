@@ -4414,32 +4414,33 @@ struct FMethods_CharacterMovementComponent
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			if (Prop_OverlappedComp)
 			{
-				Prop_OverlappedComp->CopyCompleteValue_InContainer(Parms, &Arg0);
+				Prop_OverlappedComp->CopyCompleteValue(Prop_OverlappedComp->ContainerPtrToValuePtr<void>(Parms), &Arg0);
 			}
 			if (Prop_Other)
 			{
-				Prop_Other->CopyCompleteValue_InContainer(Parms, &Arg1);
+				Prop_Other->CopyCompleteValue(Prop_Other->ContainerPtrToValuePtr<void>(Parms), &Arg1);
 			}
 			if (Prop_OtherComp)
 			{
-				Prop_OtherComp->CopyCompleteValue_InContainer(Parms, &Arg2);
+				Prop_OtherComp->CopyCompleteValue(Prop_OtherComp->ContainerPtrToValuePtr<void>(Parms), &Arg2);
 			}
 			if (Prop_OtherBodyIndex)
 			{
-				Prop_OtherBodyIndex->CopyCompleteValue_InContainer(Parms, &Arg3);
+				Prop_OtherBodyIndex->CopyCompleteValue(Prop_OtherBodyIndex->ContainerPtrToValuePtr<void>(Parms), &Arg3);
 			}
 			if (Prop_bFromSweep)
 			{
-				Prop_bFromSweep->CopyCompleteValue_InContainer(Parms, &Arg4);
+				Prop_bFromSweep->CopyCompleteValue(Prop_bFromSweep->ContainerPtrToValuePtr<void>(Parms), &Arg4);
 			}
 			if (Prop_SweepResult)
 			{
-				Prop_SweepResult->CopyCompleteValue_InContainer(Parms, &Arg5);
+				Prop_SweepResult->CopyCompleteValue(Prop_SweepResult->ContainerPtrToValuePtr<void>(Parms), &Arg5);
 			}
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		Py_RETURN_NONE;

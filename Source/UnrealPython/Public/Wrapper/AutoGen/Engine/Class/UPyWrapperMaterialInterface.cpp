@@ -146,7 +146,7 @@ struct FGetSets_MaterialInterface
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperMapFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->LayerParameterExpansion, CastField<FMapProperty>(GetPropertyDef_LayerParameterExpansion().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_LayerParameterExpansion(), "LayerParameterExpansion");
 	}
 
 	static int SetLayerParameterExpansion(FUPyWrapperMaterialInterface* InSelf, PyObject* InValue, void* InClosure)
@@ -281,7 +281,7 @@ struct FGetSets_MaterialInterface
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperMapFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->ParameterOverviewExpansion, CastField<FMapProperty>(GetPropertyDef_ParameterOverviewExpansion().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ParameterOverviewExpansion(), "ParameterOverviewExpansion");
 	}
 
 	static int SetParameterOverviewExpansion(FUPyWrapperMaterialInterface* InSelf, PyObject* InValue, void* InClosure)
@@ -379,7 +379,7 @@ struct FGetSets_MaterialInterface
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->SpecularProfiles, CastField<FArrayProperty>(GetPropertyDef_SpecularProfiles().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_SpecularProfiles(), "SpecularProfiles");
 	}
 
 	static int SetSpecularProfiles(FUPyWrapperMaterialInterface* InSelf, PyObject* InValue, void* InClosure)
@@ -438,7 +438,7 @@ struct FGetSets_MaterialInterface
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->SubsurfaceProfiles, CastField<FArrayProperty>(GetPropertyDef_SubsurfaceProfiles().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_SubsurfaceProfiles(), "SubsurfaceProfiles");
 	}
 
 	static int SetSubsurfaceProfiles(FUPyWrapperMaterialInterface* InSelf, PyObject* InValue, void* InClosure)
@@ -511,7 +511,7 @@ struct FGetSets_MaterialInterface
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->TextureStreamingDataMissingEntries, CastField<FArrayProperty>(GetPropertyDef_TextureStreamingDataMissingEntries().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_TextureStreamingDataMissingEntries(), "TextureStreamingDataMissingEntries");
 	}
 
 	static int SetTextureStreamingDataMissingEntries(FUPyWrapperMaterialInterface* InSelf, PyObject* InValue, void* InClosure)
@@ -611,7 +611,7 @@ struct FGetSets_MaterialInterface
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->ToonProfiles, CastField<FArrayProperty>(GetPropertyDef_ToonProfiles().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ToonProfiles(), "ToonProfiles");
 	}
 
 	static int SetToonProfiles(FUPyWrapperMaterialInterface* InSelf, PyObject* InValue, void* InClosure)

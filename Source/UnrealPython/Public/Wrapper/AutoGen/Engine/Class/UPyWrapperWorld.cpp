@@ -79,7 +79,7 @@ struct FGetSets_World
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->ActiveGroupActors, CastField<FArrayProperty>(GetPropertyDef_ActiveGroupActors().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ActiveGroupActors(), "ActiveGroupActors");
 	}
 
 	static int SetActiveGroupActors(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
@@ -610,7 +610,7 @@ struct FGetSets_World
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->EditorViews, CastField<FArrayProperty>(GetPropertyDef_EditorViews().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_EditorViews(), "EditorViews");
 	}
 
 	static int SetEditorViews(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
@@ -647,7 +647,7 @@ struct FGetSets_World
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->ExtraReferencedObjects, CastField<FArrayProperty>(GetPropertyDef_ExtraReferencedObjects().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ExtraReferencedObjects(), "ExtraReferencedObjects");
 	}
 
 	static int SetExtraReferencedObjects(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
@@ -720,7 +720,7 @@ struct FGetSets_World
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->Layers, CastField<FArrayProperty>(GetPropertyDef_Layers().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_Layers(), "Layers");
 	}
 
 	static int SetLayers(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)
@@ -1150,7 +1150,7 @@ struct FGetSets_World
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->PerModuleDataObjects, CastField<FArrayProperty>(GetPropertyDef_PerModuleDataObjects().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_PerModuleDataObjects(), "PerModuleDataObjects");
 	}
 
 	static int SetPerModuleDataObjects(FUPyWrapperWorld* InSelf, PyObject* InValue, void* InClosure)

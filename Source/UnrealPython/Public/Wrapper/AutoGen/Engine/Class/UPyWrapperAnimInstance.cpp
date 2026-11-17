@@ -55,7 +55,7 @@ struct FGetSets_AnimInstance
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->ActiveAnimNotifyEventReference, CastField<FArrayProperty>(GetPropertyDef_ActiveAnimNotifyEventReference().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ActiveAnimNotifyEventReference(), "ActiveAnimNotifyEventReference");
 	}
 
 	static int SetActiveAnimNotifyEventReference(FUPyWrapperAnimInstance* InSelf, PyObject* InValue, void* InClosure)
@@ -91,7 +91,7 @@ struct FGetSets_AnimInstance
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->ActiveAnimNotifyState, CastField<FArrayProperty>(GetPropertyDef_ActiveAnimNotifyState().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ActiveAnimNotifyState(), "ActiveAnimNotifyState");
 	}
 
 	static int SetActiveAnimNotifyState(FUPyWrapperAnimInstance* InSelf, PyObject* InValue, void* InClosure)

@@ -119,7 +119,7 @@ struct FGetSets_ActorComponent
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->ComponentTags, CastField<FArrayProperty>(GetPropertyDef_ComponentTags().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ComponentTags(), "ComponentTags");
 	}
 
 	static int SetComponentTags(FUPyWrapperActorComponent* InSelf, PyObject* InValue, void* InClosure)

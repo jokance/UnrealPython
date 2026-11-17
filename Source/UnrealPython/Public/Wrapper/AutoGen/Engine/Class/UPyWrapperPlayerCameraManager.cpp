@@ -260,7 +260,7 @@ struct FGetSets_PlayerCameraManager
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->DefaultModifiers, CastField<FArrayProperty>(GetPropertyDef_DefaultModifiers().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_DefaultModifiers(), "DefaultModifiers");
 	}
 
 	static PyObject* GetDefaultOrthoWidth(FUPyWrapperPlayerCameraManager* InSelf, void* InClosure)
@@ -1726,8 +1726,9 @@ struct FMethods_PlayerCameraManager
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		Py_RETURN_NONE;

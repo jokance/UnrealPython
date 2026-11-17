@@ -698,6 +698,31 @@ class EAbcGeometryCacheMotionVectorsImport(IntEnum):
     ImportAbcVelocitiesAsMotionVectors = 1
     CalculateMotionVectorsDuringImport = 2
 
+class EAbilityGenericReplicatedEvent(IntEnum):
+    GenericConfirm = 0
+    GenericCancel = 1
+    InputPressed = 2
+    InputReleased = 3
+    GenericSignalFromClient = 4
+    GenericSignalFromServer = 5
+    GameCustom1 = 6
+    GameCustom2 = 7
+    GameCustom3 = 8
+    GameCustom4 = 9
+    GameCustom5 = 10
+    GameCustom6 = 11
+    MAX = 12
+
+class EAbilityTaskNetSyncType(IntEnum):
+    BothWait = 0
+    OnlyServerWait = 1
+    OnlyClientWait = 2
+
+class EAbilityTaskWaitState(IntEnum):
+    WaitingOnGame = 1
+    WaitingOnUser = 2
+    WaitingOnAvatar = 4
+
 class EActivationFunction(IntEnum):
     Linear = 0
     ReLU = 1
@@ -1444,6 +1469,12 @@ class EAttractorParticleSelectionMethod(IntEnum):
     EAPSM_Sequential = 1
     EAPSM_MAX = 2
 
+class EAttributeBasedFloatCalculationType(IntEnum):
+    AttributeMagnitude = 0
+    AttributeBaseValue = 1
+    AttributeBonusMagnitude = 2
+    AttributeMagnitudeEvaluatedUpToChannel = 3
+
 class EAttributeEditorAttribType(IntEnum):
     Int32 = 0
     Boolean = 1
@@ -1783,6 +1814,10 @@ class EAxisRotateMode(IntEnum):
     Arc = 1
     ScreenArc = 2
 
+class EAxisSign(IntEnum):
+    Positive = 0
+    Negative = 1
+
 class EBPConditionType(IntEnum):
     NoCondition = 0
     TrueCondition = 1
@@ -2060,6 +2095,11 @@ class EBlendSpacePerBoneBlendMode(IntEnum):
     ManualPerBoneOverride = 0
     BlendProfile = 1
 
+class EBlendStack_BlendspaceUpdateMode(IntEnum):
+    InitialOnly = 0
+    UpdateActiveOnly = 1
+    UpdateAll = 2
+
 class EBlendableLocation(IntEnum):
     BL_SceneColorBeforeDOF = 2
     BL_SceneColorAfterDOF = 1
@@ -2193,6 +2233,11 @@ class EBoneSpaces(IntEnum):
     WorldSpace = 0
     ComponentSpace = 1
 
+class EBoneTransformResolution(IntEnum):
+    KeepParent = 0
+    KeepChild = 1
+    Combine = 2
+
 class EBoneTranslationRetargetingMode(IntEnum):
     Animation = 0
     Skeleton = 1
@@ -2210,6 +2255,11 @@ class EBonesToCopyFromSource(IntEnum):
     AllBones = 0
     OnlyBoundAndParents = 1
     OnlyBoundAndRoot = 2
+
+class EBoolColumnCellValue(IntEnum):
+    MatchFalse = 0
+    MatchTrue = 1
+    MatchAny = 2
 
 class EBooleanOperationEnum(IntEnum):
     Dataflow_And = 0
@@ -2519,6 +2569,10 @@ class ECanCreateConnectionResponse(IntEnum):
     CONNECT_RESPONSE_MAKE_WITH_CONVERSION_NODE = 5
     CONNECT_RESPONSE_MAKE_WITH_PROMOTION = 6
     CONNECT_RESPONSE_MAX = 7
+
+class ECancelAbilityTagsGameplayEffectComponentMode(IntEnum):
+    OnApplication = 0
+    OnExecution = 1
 
 class ECastRayTracedShadow(IntEnum):
     Disabled = 0
@@ -3124,6 +3178,12 @@ class EChildActorComponentTreeViewVisualizationMode(IntEnum):
     ComponentWithChildActor = 2
     ChildActorOnly = 3
     Hidden = 4
+
+class EChooserEvaluationFrequency(IntEnum):
+    OnInitialUpdate = 0
+    OnBecomeRelevant = 1
+    OnLoop = 2
+    OnUpdate = 3
 
 class EChunkMemorySize(IntEnum):
     Size4Kb = -1
@@ -4025,6 +4085,11 @@ class EContentSourceCategory(IntEnum):
     SharedPack = 5
     Unknown = 6
 
+class EContextObjectDirection(IntEnum):
+    Read = 0
+    Write = 1
+    ReadWrite = 2
+
 class EContextTargetFlags(IntEnum):
     TARGET_Blueprint = 1
     TARGET_SubComponents = 2
@@ -4665,6 +4730,284 @@ class EDBufferTextureId(IntEnum):
     DBT_B = 1
     DBT_C = 2
 
+class EDMXCommunicationType(IntEnum):
+    Broadcast = 0
+    Unicast = 1
+    Multicast = 2
+    InternalOnly = 3
+
+class EDMXFixturePatcherNameDisplayMode(IntEnum):
+    FixtureIDAndFixturePatchName = 0
+    FixtureID = 1
+    FixturePatchName = 2
+
+class EDMXFixtureSignalFormat(IntEnum):
+    E8Bit = 0
+    E16Bit = 1
+    E24Bit = 2
+    E32Bit = 3
+
+class EDMXGDTFBeamGeometryBeamType(IntEnum):
+    Wash = 0
+    Spot = 1
+    NONE = 2
+    Rectangle = 3
+    PC = 4
+    Fresnel = 5
+    Glow = 6
+    MaxEnumValue = 7
+
+class EDMXGDTFBeamGeometryLampType(IntEnum):
+    Discharge = 0
+    Tungsten = 1
+    Halogen = 2
+    LED = 3
+    MaxEnumValue = 4
+
+class EDMXGDTFChannelRelationType(IntEnum):
+    Multiply = 0
+    Override = 1
+    MaxEnumValue = 2
+
+class EDMXGDTFColorSpaceMode(IntEnum):
+    Custom = 0
+    sRGB = 1
+    ProPhoto = 2
+    ANSI = 3
+    MaxEnumValue = 4
+
+class EDMXGDTFGeometrySupportType(IntEnum):
+    Rope = 0
+    GroundSupport = 1
+    MaxEnumValue = 2
+
+class EDMXGDTFLogicalChannelMaster(IntEnum):
+    NONE = 0
+    Grand = 1
+    Group = 2
+    MaxEnumValue = 3
+
+class EDMXGDTFLogicalChannelSnap(IntEnum):
+    Yes = 0
+    No = 1
+    On = 2
+    Off = 3
+    MaxEnumValue = 4
+
+class EDMXGDTFMeasurementInterpolationTo(IntEnum):
+    Linear = 0
+    Step = 1
+    Log = 2
+    MaxEnumValue = 3
+
+class EDMXGDTFModelPrimitiveType(IntEnum):
+    Undefined = 0
+    Cube = 1
+    Cylinder = 2
+    Sphere = 3
+    Base = 4
+    Yoke = 5
+    Head = 6
+    Scanner = 7
+    Conventional = 8
+    Pigtail = 9
+    Base1_1 = 10
+    Scanner1_1 = 11
+    Conventional1_1 = 12
+    MaxEnumValue = 13
+
+class EDMXGDTFPhysicalUnit(IntEnum):
+    NONE = 0
+    Percent = 1
+    Length = 2
+    Mass = 3
+    Time = 4
+    Temperature = 5
+    LuminousIntensity = 6
+    Angle = 7
+    Force = 8
+    Frequency = 9
+    Current = 10
+    Voltage = 11
+    Power = 12
+    Energy = 13
+    Area = 14
+    Volume = 15
+    Speed = 16
+    Acceleration = 17
+    AngularSpeed = 18
+    AngularAccc = 19
+    WaveLength = 20
+    ColorComponent = 21
+    MaxEnumValue = 22
+
+class EDMXGDTFStructureGeometryCrossSectionType(IntEnum):
+    TrussFramework = 0
+    Tube = 1
+    MaxEnumValue = 2
+
+class EDMXGDTFStructureGeometryType(IntEnum):
+    CenterLineBased = 0
+    Detail = 1
+    MaxEnumValue = 2
+
+class EDMXGDTFSubphysicalUnit(IntEnum):
+    PlacementOffset = 0
+    Amplitude = 1
+    AmplitudeMin = 2
+    AmplitudeMax = 3
+    Duration = 4
+    DutyCycle = 5
+    TimeOffset = 6
+    MinimumOpening = 7
+    Value = 8
+    RatioHorizontal = 9
+    RatioVertical = 10
+    MaxEnumValue = 11
+
+class EDMXImportGDTFBeamType(IntEnum):
+    Wash = 0
+    Spot = 1
+    NONE = 2
+
+class EDMXImportGDTFDMXInvert(IntEnum):
+    Yes = 0
+    No = 1
+
+class EDMXImportGDTFInterpolationTo(IntEnum):
+    Linear = 0
+    Step = 1
+    Log = 2
+
+class EDMXImportGDTFLampType(IntEnum):
+    Discharge = 0
+    Tungsten = 1
+    Halogen = 2
+    LED = 3
+
+class EDMXImportGDTFMaster(IntEnum):
+    NONE = 0
+    Grand = 1
+    Group = 2
+
+class EDMXImportGDTFMode(IntEnum):
+    Custom = 0
+    sRGB = 1
+    ProPhoto = 2
+    ANSI = 3
+
+class EDMXImportGDTFPhysicalUnit(IntEnum):
+    NONE = 0
+    Percent = 1
+    Length = 2
+    Mass = 3
+    Time = 4
+    Temperature = 5
+    LuminousIntensity = 6
+    Angle = 7
+    Force = 8
+    Frequency = 9
+    Current = 10
+    Voltage = 11
+    Power = 12
+    Energy = 13
+    Area = 14
+    Volume = 15
+    Speed = 16
+    Acceleration = 17
+    AngularSpeed = 18
+    AngularAccc = 19
+    WaveLength = 20
+    ColorComponent = 21
+
+class EDMXImportGDTFPrimitiveType(IntEnum):
+    Undefined = 0
+    Cube = 1
+    Cylinder = 2
+    Sphere = 3
+    Base = 4
+    Yoke = 5
+    Head = 6
+    Scanner = 7
+    Conventional = 8
+    Pigtail = 9
+
+class EDMXImportGDTFSnap(IntEnum):
+    Yes = 0
+    No = 1
+    On = 2
+    Off = 3
+
+class EDMXImportGDTFType(IntEnum):
+    Multiply = 0
+    Override = 1
+
+class EDMXLaserGeometryColorType(IntEnum):
+    RGB = 0
+    SingleWaveLength = 1
+    MaxEnumValue = 2
+
+class EDMXPixelMappingDistribution(IntEnum):
+    TopLeftToRight = 0
+    TopLeftToBottom = 1
+    TopLeftToClockwise = 2
+    TopLeftToAntiClockwise = 3
+    TopRightToLeft = 4
+    BottomLeftToTop = 5
+    TopRightToAntiClockwise = 6
+    BottomLeftToClockwise = 7
+    BottomLeftToRight = 8
+    TopRightToBottom = 9
+    BottomLeftAntiClockwise = 10
+    TopRightToClockwise = 11
+    BottomRightToLeft = 12
+    BottomRightToTop = 13
+    BottomRightToClockwise = 14
+    BottomRightToAntiClockwise = 15
+
+class EDMXPortPriorityStrategy(IntEnum):
+    NONE = 0
+    Equal = 1
+    HigherThan = 2
+    LowerThan = 3
+    Highest = 4
+    Lowest = 5
+
+class EDMXSendResult(IntEnum):
+    Success = 0
+    ErrorGetUniverse = 1
+    ErrorSetBuffer = 2
+    ErrorSizeBuffer = 3
+    ErrorEnqueuePackage = 4
+    ErrorNoSenderInterface = 5
+
+class EDMXWiringObjectGeometryComponentType(IntEnum):
+    Input = 0
+    Output = 1
+    PowerSource = 2
+    Consumer = 3
+    Fuse = 4
+    NetworkProvider = 5
+    NetworkInput = 6
+    NetworkOutput = 7
+    NetworkInOut = 8
+    MaxEnumValue = 9
+
+class EDMXWiringObjectGeometryFuseRating(IntEnum):
+    B = 0
+    C = 1
+    D = 2
+    K = 3
+    Z = 4
+    MaxEnumValue = 5
+
+class EDMXWiringObjectGeometryOrientation(IntEnum):
+    Left = 0
+    Right = 1
+    Top = 2
+    Bottom = 3
+    MaxEnumValue = 4
+
 class EDNACopyPolicy(IntEnum):
     Copy = 0
     Alias = 1
@@ -4727,6 +5070,27 @@ class EDataLayerType(IntEnum):
     Editor = 1
     Unknown = 2
     Size = 3
+
+class EDataRegistryAcquireStatus(IntEnum):
+    NotStarted = 0
+    WaitingForInitialAcquire = 1
+    InitialAcquireFinished = 2
+    WaitingForResources = 3
+    AcquireFinished = 4
+    AcquireError = 5
+    DoesNotExist = 6
+
+class EDataRegistryAvailability(IntEnum):
+    DoesNotExist = 0
+    Unknown = 1
+    Remote = 2
+    OnDisk = 3
+    LocalAsset = 4
+    PreCached = 5
+
+class EDataRegistrySubsystemGetItemResult(IntEnum):
+    Found = 0
+    NotFound = 1
 
 class EDataSortTypeEnum(IntEnum):
     ChaosNiagara_DataSortType_NoSorting = 0
@@ -5347,6 +5711,13 @@ class EDeterminismLevel(IntEnum):
     OrderIndependent = -1
     Deterministic = -1
 
+class EDeviceHealth(IntEnum):
+    Nominal = 0
+    Good = 1
+    Info = 2
+    Warning = 3
+    Error = 4
+
 class EDirection(IntEnum):
     Left = 0
     Right = 1
@@ -5895,6 +6266,12 @@ class EEnumByte(IntEnum):
     EEnumByte_B = 119
     EEnumByte_C = 136
 
+class EEnumColumnCellValueComparison(IntEnum):
+    MatchEqual = 0
+    MatchNotEqual = 1
+    MatchAny = 2
+    Modulus = 3
+
 class EEnvDirection(IntEnum):
     TwoPoints = 0
     Rotation = 1
@@ -6029,9 +6406,25 @@ class EEulerRotationOrder(IntEnum):
     ZXY = 4
     ZYX = 5
 
+class EEvaluateChooserMode(IntEnum):
+    FirstResult = 0
+    AllResults = 1
+
+class EEvaluateChooserStructOutputMode(IntEnum):
+    Default = 0
+    SingleOutputStruct = 1
+
 class EEvaluateCurveTableResult(IntEnum):
     RowFound = 0
     RowNotFound = 1
+
+class EEvaluateProxyMode(IntEnum):
+    FirstResult = 0
+    AllResults = 1
+
+class EEvaluateProxyStructOutputMode(IntEnum):
+    Default = 0
+    SingleOutputStruct = 1
 
 class EEvaluationMethod(IntEnum):
     Static = 0
@@ -6762,6 +7155,65 @@ class EGainParamMode(IntEnum):
     Linear = 0
     Decibels = 1
 
+class EGameplayAbilityActivationMode(IntEnum):
+    Authority = 0
+    NonAuthority = 1
+    Predicting = 2
+    Confirmed = 3
+    Rejected = 4
+
+class EGameplayAbilityActivationPath(IntEnum):
+    Native = 0
+    Blueprint = 1
+    FromEvent = 2
+
+class EGameplayAbilityEndInBlueprints(IntEnum):
+    Missing = 0
+    EndAbility = -1
+    EndAbilityLocally = -1
+
+class EGameplayAbilityInputBinds(IntEnum):
+    Ability1 = 0
+    Ability2 = 1
+    Ability3 = 2
+    Ability4 = 3
+    Ability5 = 4
+    Ability6 = 5
+    Ability7 = 6
+    Ability8 = 7
+    Ability9 = 8
+
+class EGameplayAbilityInstancingPolicy(IntEnum):
+    NonInstanced = 0
+    InstancedPerActor = 1
+    InstancedPerExecution = 2
+
+class EGameplayAbilityNetExecutionPolicy(IntEnum):
+    LocalPredicted = 0
+    LocalOnly = 1
+    ServerInitiated = 2
+    ServerOnly = 3
+
+class EGameplayAbilityNetSecurityPolicy(IntEnum):
+    ClientOrServer = 0
+    ServerOnlyExecution = 1
+    ServerOnlyTermination = 2
+    ServerOnly = 3
+
+class EGameplayAbilityReplicationPolicy(IntEnum):
+    ReplicateNo = 0
+    ReplicateYes = 1
+
+class EGameplayAbilityTargetingLocationType(IntEnum):
+    LiteralTransform = 0
+    ActorTransform = 1
+    SocketTransform = 2
+
+class EGameplayAbilityTriggerSource(IntEnum):
+    GameplayEvent = 0
+    OwnedTagAdded = 1
+    OwnedTagPresent = 2
+
 class EGameplayCameraComponentActivationMode(IntEnum):
     Push = 0
     InsertOrPush = 1
@@ -6773,6 +7225,33 @@ class EGameplayCamerasViewRotationMode(IntEnum):
 class EGameplayContainerMatchType(IntEnum):
     Any = 0
     All = 1
+
+class EGameplayCueEvent(IntEnum):
+    OnActive = 0
+    WhileActive = 1
+    Executed = 2
+    Removed = 3
+
+class EGameplayCueNotify_AttachPolicy(IntEnum):
+    DoNotAttach = 0
+    AttachToTarget = 1
+
+class EGameplayCueNotify_EffectPlaySpace(IntEnum):
+    WorldSpace = 0
+    CameraSpace = 1
+
+class EGameplayCueNotify_LocallyControlledPolicy(IntEnum):
+    Always = 0
+    LocalOnly = 1
+    NotLocal = 2
+
+class EGameplayCueNotify_LocallyControlledSource(IntEnum):
+    InstigatorActor = 0
+    TargetActor = 1
+
+class EGameplayCuePayloadType(IntEnum):
+    CueParameters = 0
+    FromSpec = 1
 
 class EGameplayDebuggerOverrideMode(IntEnum):
     Enable = 0
@@ -6793,6 +7272,102 @@ class EGameplayDebuggerShape(IntEnum):
     Polyline = 10
     Arrow = 11
 
+class EGameplayEffectAttributeCaptureSource(IntEnum):
+    Source = 0
+    Target = 1
+
+class EGameplayEffectDurationType(IntEnum):
+    Instant = 0
+    Infinite = 1
+    HasDuration = 2
+
+class EGameplayEffectGrantedAbilityRemovePolicy(IntEnum):
+    CancelAbilityImmediately = 0
+    RemoveAbilityOnEnd = 1
+    DoNothing = 2
+
+class EGameplayEffectGrantedEffectRemovalPolicy(IntEnum):
+    GrantedEffectControlsOwnLifetime = 0
+    RemoveGrantedEffectOnEnd = 1
+
+class EGameplayEffectMagnitudeCalculation(IntEnum):
+    ScalableFloat = 0
+    AttributeBased = 1
+    CustomCalculationClass = 2
+    SetByCaller = 3
+
+class EGameplayEffectPeriodInhibitionRemovedPolicy(IntEnum):
+    NeverReset = 0
+    ResetPeriod = 1
+    ExecuteAndResetPeriod = 2
+
+class EGameplayEffectReplicationMode(IntEnum):
+    Minimal = 0
+    Mixed = 1
+    Full = 2
+
+class EGameplayEffectScopedModifierAggregatorType(IntEnum):
+    CapturedAttributeBacked = 0
+    Transient = 1
+
+class EGameplayEffectStackingDurationPolicy(IntEnum):
+    RefreshOnSuccessfulApplication = 0
+    NeverRefresh = 1
+    ExtendDuration = 2
+
+class EGameplayEffectStackingExpirationPolicy(IntEnum):
+    ClearEntireStack = 0
+    RemoveSingleStackAndRefreshDuration = 1
+    RefreshDuration = 2
+
+class EGameplayEffectStackingPeriodPolicy(IntEnum):
+    ResetOnSuccessfulApplication = 0
+    NeverReset = 1
+
+class EGameplayEffectStackingType(IntEnum):
+    NONE = 0
+    AggregateBySource = 1
+    AggregateByTarget = 2
+
+class EGameplayEffectVersion(IntEnum):
+    Monolithic = 0
+    Modular53 = 1
+    AbilitiesComponent53 = 2
+    Current = -1
+
+class EGameplayModEvaluationChannel(IntEnum):
+    Channel0 = 0
+    Channel1 = 1
+    Channel2 = 2
+    Channel3 = 3
+    Channel4 = 4
+    Channel5 = 5
+    Channel6 = 6
+    Channel7 = 7
+    Channel8 = 8
+    Channel9 = 9
+    Channel_MAX = 10
+
+class EGameplayModOp(IntEnum):
+    AddBase = 0
+    MultiplyAdditive = 1
+    DivideAdditive = 2
+    MultiplyCompound = 4
+    AddFinal = 5
+    Max = 6
+    Additive = 0
+    Multiplicitive = 1
+    Division = 2
+    Override = 3
+
+class EGameplayTagEventType(IntEnum):
+    NewOrRemoved = 0
+    AnyCountChange = 1
+
+class EGameplayTagMatchDirection(IntEnum):
+    RowValueInInput = 0
+    InputInRowValue = 1
+
 class EGameplayTagQueryExprType(IntEnum):
     Undefined = 0
     AnyTagsMatch = 1
@@ -6803,6 +7378,13 @@ class EGameplayTagQueryExprType(IntEnum):
     NoExprMatch = 6
     AnyTagsExactMatch = 7
     AllTagsExactMatch = 8
+
+class EGameplayTagReplicationState(IntEnum):
+    NONE = 0
+    SimulatedTagOnly = 1
+    TagOnly = 2
+    CountToOwner = 3
+    TagAndCountToAll = 4
 
 class EGameplayTagSelectionType(IntEnum):
     NONE = 0
@@ -6817,6 +7399,12 @@ class EGameplayTagSourceType(IntEnum):
     RestrictedTagList = 3
     DataTable = 4
     Invalid = 5
+
+class EGameplayTargetingConfirmation(IntEnum):
+    Instant = 0
+    UserConfirmed = 1
+    Custom = 2
+    CustomMulti = 3
 
 class EGameplayTaskRunResult(IntEnum):
     Error = 0
@@ -8141,6 +8729,14 @@ class EHttpReplayResult(IntEnum):
     DecompressionFailed = 5
     InvalidPayload = 6
     Unknown = 7
+
+class EHttpVerbs(IntEnum):
+    Post = 0
+    Put = 1
+    Delete = 2
+    Patch = 3
+    Get = 4
+    MAX = 255
 
 class EIKRigGoalPreviewMode(IntEnum):
     Additive = 0
@@ -9515,9 +10111,42 @@ class ELiveConnectionAttemptResult(IntEnum):
     Failed = 1
     Canceled = 2
 
+class ELiveLinkAxis(IntEnum):
+    X = 0
+    Y = 1
+    Z = 2
+    XNeg = 3
+    YNeg = 4
+    ZNeg = 5
+
 class ELiveLinkCameraProjectionMode(IntEnum):
     Perspective = 0
     Orthographic = 1
+
+class ELiveLinkCompressionBias(IntEnum):
+    NONE = 0
+    Size = 1
+    Speed = 2
+
+class ELiveLinkCompressionMethod(IntEnum):
+    Uncompressed = 0
+    Oodle = 1
+    Zlib = 2
+
+class ELiveLinkDeviceConnectionStatus(IntEnum):
+    Disconnected = 0
+    Connecting = 1
+    Connected = 2
+    Disconnecting = 3
+
+class ELiveLinkPayloadCompressionType(IntEnum):
+    NONE = 0
+    Heuristic = 1
+    Always = 2
+
+class ELiveLinkPayloadSerializationMethod(IntEnum):
+    Standard = 0
+    Cbor = 1
 
 class ELiveLinkSourceMode(IntEnum):
     Latest = 0
@@ -9531,6 +10160,21 @@ class ELiveLinkSubjectState(IntEnum):
     InvalidOrDisabled = 3
     Paused = 4
     Unknown = 5
+
+class ELiveLinkTimecodeProviderEvaluationType(IntEnum):
+    Lerp = 0
+    Nearest = 1
+    Latest = 2
+
+class ELiveLinkTopologyMode(IntEnum):
+    Hub = 0
+    Spoke = 1
+    UnrealClient = 2
+    External = 3
+
+class ELiveLinkVisualBoneType(IntEnum):
+    Joint = 0
+    Bone = 1
 
 class ELoadLevelAtStartup(IntEnum):
     NONE = 0
@@ -11150,6 +11794,12 @@ class EMeshVertexSculptBrushType(IntEnum):
     EraseSculptLayer = 18
     LastValue = 19
 
+class EMetaDataRegistrySourceAssetUsage(IntEnum):
+    NoAssets = 0
+    SearchAssets = 1
+    RegisterAssets = 2
+    SearchAndRegisterAssets = 3
+
 class EMetaHumanAssetType(IntEnum):
     Character = 0
     CharacterAssembly = 1
@@ -12068,6 +12718,12 @@ class ENSM_VelocityType(IntEnum):
     Linear = 0
     FromPoint = 1
     InCone = 2
+
+class ENameColumnCellValueComparison(IntEnum):
+    MatchEqual = 0
+    MatchNotEqual = 1
+    MatchAny = 2
+    Modulus = 3
 
 class ENamespaceEnumByte(IntEnum):
     A = 0
@@ -13404,6 +14060,24 @@ class ENotifyTriggerMode(IntEnum):
     AllAnimations = 0
     HighestWeightedAnimation = 1
     NONE = 2
+
+class EObjectChooserResultType(IntEnum):
+    ObjectResult = 0
+    ClassResult = 1
+    NoPrimaryResult = 2
+
+class EObjectClassColumnCellValueComparison(IntEnum):
+    Equal = 0
+    NotEqual = 1
+    SubClassOf = 2
+    NotSubClassOf = 3
+    Any = 4
+
+class EObjectColumnCellValueComparison(IntEnum):
+    MatchEqual = 0
+    MatchNotEqual = 1
+    MatchAny = 2
+    Modulus = 3
 
 class EObjectMixerHybridMode(IntEnum):
     HybridActor = 0
@@ -16810,6 +17484,11 @@ class EReloadPackagesInteractionMode(IntEnum):
     AssumePositive = 1
     AssumeNegative = 2
 
+class ERemapCurvesExpressionSource(IntEnum):
+    ExpressionList = 0
+    DataAsset = 1
+    ExpressionMap = 2
+
 class ERemeshSmoothingType(IntEnum):
     Uniform = 0
     Cotangent = 1
@@ -16876,6 +17555,10 @@ class ERendererStencilMask(IntEnum):
     ERSM_64 = 8
     ERSM_128 = 9
 
+class ERepAnimPositionMethod(IntEnum):
+    Position = 0
+    CurrentSectionId = 1
+
 class EReplayResult(IntEnum):
     Success = 0
     ReplayNotFound = 1
@@ -16902,6 +17585,12 @@ class EReplicationSystem(IntEnum):
 class EReporterLineStyle(IntEnum):
     Line = 0
     Dash = 1
+
+class ERequestPresets(IntEnum):
+    Json = 0
+    Http = 1
+    Url = 2
+    Custom = 3
 
 class ERequiredSubmixes(IntEnum):
     Main = 0
@@ -17703,6 +18392,11 @@ class ERootMotionMode(IntEnum):
     RootMotionFromEverything = 2
     RootMotionFromMontagesOnly = 3
 
+class ERootMotionMoveToActorTargetOffsetType(IntEnum):
+    AlignFromTargetToSource = 0
+    AlignToTargetForward = 1
+    AlignToWorldSpace = 2
+
 class ERootMotionRootLock(IntEnum):
     RefPose = 0
     AnimFirstFrame = 1
@@ -17947,6 +18641,57 @@ class ESceneSnapQueryType(IntEnum):
     Scale = 4
     Transform = 5
 
+class ESceneStateDataType(IntEnum):
+    Root = 0
+    Task = 1
+    EventHandler = 2
+    TaskExtension = 3
+    StateMachine = 4
+    Transition = 5
+    Function = 6
+    State = 7
+
+class ESceneStateMachineRunMode(IntEnum):
+    Auto = 0
+    Manual = 1
+
+class ESceneStatePropertyReferenceType(IntEnum):
+    NONE = 0
+    Bool = 1
+    Byte = 2
+    Int32 = 3
+    Int64 = 4
+    Float = 5
+    Double = 6
+    Name = 7
+    String = 8
+    Text = 9
+    Enum = 10
+    Struct = 11
+    Object = 12
+    SoftObject = 13
+    Class = 14
+    SoftClass = 15
+
+class ESceneStateTaskFlags(IntEnum):
+    NONE = 0
+    Ticks = -1
+    HasBindingExtension = -1
+
+class ESceneStateTaskStopReason(IntEnum):
+    State = 0
+    Finished = 1
+
+class ESceneStateTransitionEvaluationFlags(IntEnum):
+    NONE = 0
+    WaitForTasksToFinish = -1
+    EvaluationEventAlwaysTrue = -1
+
+class ESceneStateTransitionTargetType(IntEnum):
+    State = 0
+    Exit = 1
+    Conduit = 2
+
 class ESceneTextureId(IntEnum):
     PPI_SceneColor = 0
     PPI_SceneDepth = 1
@@ -18185,6 +18930,11 @@ class ESequenceEvalReinit(IntEnum):
     NoReset = 0
     StartPosition = 1
     ExplicitTime = 2
+
+class ESequenceSemanticFixtureEnum(IntEnum):
+    First = 0
+    Second = 1
+    Third = 2
 
 class ESequenceTimeUnit(IntEnum):
     DisplayRate = 0
@@ -20075,6 +20825,11 @@ class ETapLineMode(IntEnum):
     Panning = 1
     Disabled = 2
 
+class ETargetDataFilterSelf(IntEnum):
+    TDFS_Any = 0
+    TDFS_NoSelf = 1
+    TDFS_NoOthers = 2
+
 class ETargetFaces(IntEnum):
     InternalFaces = 0
     InternalFacesAndSelectedMaterialIDs = 1
@@ -20781,6 +21536,10 @@ class ETileMapProjectionMode(IntEnum):
 class ETileOverlapResolveType(IntEnum):
     Ignore = 0
     Feathering = 1
+
+class ETimeFloatFormat(IntEnum):
+    Frames = 0
+    Seconds = 1
 
 class ETimeFormat(IntEnum):
     Relative = 0
@@ -22201,6 +22960,20 @@ class EWASDType(IntEnum):
     WASD_Never = 2
     WASD_MAX = 3
 
+class EWaitAttributeChangeComparison(IntEnum):
+    NONE = 0
+    GreaterThan = 1
+    LessThan = 2
+    GreaterThanOrEqualTo = 3
+    LessThanOrEqualTo = 4
+    NotEqualTo = 5
+    ExactlyEqualTo = 6
+    MAX = 7
+
+class EWaitGameplayTagQueryTriggerCondition(IntEnum):
+    WhenTrue = 0
+    WhenFalse = 1
+
 class EWalkableSlopeBehavior(IntEnum):
     WalkableSlope_Default = 0
     WalkableSlope_Increase = 1
@@ -23101,6 +23874,23 @@ class AbcStaticMeshSettings(StructBase):
     bGenerateLightmapUVs: bool
 
 
+class AbilityEndedData(StructBase):
+    AbilityThatEnded: GameplayAbility
+    AbilitySpecHandle: GameplayAbilitySpecHandle
+    bReplicateEndAbility: bool
+    bWasCancelled: bool
+
+
+class AbilityTaskDebugMessage(StructBase):
+    FromTask: GameplayTask
+    Message: str
+
+
+class AbilityTriggerData(StructBase):
+    TriggerTag: GameplayTag
+    TriggerSource: EGameplayAbilityTriggerSource
+
+
 class AbstractSkeletonSet(StructBase):
     SetName: str
     ParentSetName: str
@@ -23164,6 +23954,15 @@ class ActiveForceFeedbackEffect(StructBase):
     ForceFeedbackEffect: ForceFeedbackEffect
     ActiveDeviceProperties: set[InputDevicePropertyHandle]
 
+
+class ActiveGameplayEffectHandle(StructBase):
+    WeakOwningASC: AbilitySystemComponent
+    Handle: int
+    bPassedFiltersAndWasExecuted: bool
+
+
+class ActiveGameplayEffectQuery(StructBase):
+    ...
 
 class ActiveGizmo(StructBase):
     Gizmo: InteractiveGizmo
@@ -23314,6 +24113,9 @@ class ActorSequenceObjectReferences(StructBase):
     Array: list[ActorSequenceObjectReference]
 
 
+class AddAllPatchesButton(StructBase):
+    ...
+
 class AddNewSubobjectParams(StructBase):
     ParentHandle: SubobjectDataHandle
     NewClass: Class | type
@@ -23455,6 +24257,16 @@ class AnimCurveMetadataEditorClipboard(StructBase):
 class AnimCurveMetadataEditorClipboardEntry(StructBase):
     CurveName: str
     MetaData: CurveMetaData
+
+
+class AnimCurveOverride(StructBase):
+    CurveName: str
+    CurveValue: float
+
+
+class AnimCurveOverrideList(StructBase):
+    Values: list[AnimCurveOverride]
+    Hash: int
 
 
 class AnimCurveParam(StructBase):
@@ -24419,6 +25231,23 @@ class AsyncPhysicsTimestamp(StructBase):
     LocalFrame: int
 
 
+class AttributeBasedFloat(StructBase):
+    Coefficient: ScalableFloat
+    PreMultiplyAdditiveValue: ScalableFloat
+    PostMultiplyAdditiveValue: ScalableFloat
+    BackingAttribute: GameplayEffectAttributeCaptureDefinition
+    AttributeCurve: CurveTableRowHandle
+    AttributeCalculationType: EAttributeBasedFloatCalculationType
+    FinalChannel: EGameplayModEvaluationChannel
+    SourceTagFilter: GameplayTagContainer
+    TargetTagFilter: GameplayTagContainer
+
+
+class AttributeDefaults(StructBase):
+    Attributes: Class | type
+    DefaultStartingTable: DataTable
+
+
 class AttributeKey(StructBase):
     Time: float
 
@@ -25123,6 +25952,13 @@ class BlendSpaceTriangleEdgeInfo(StructBase):
     NeighbourTriangleIndex: int
     AdjacentPerimeterTriangleIndices: int
     AdjacentPerimeterVertexIndices: int
+
+
+class BlendStackAnimPlayer(StructBase):
+    SequencePlayerNode: AnimNode_SequencePlayer_Standalone
+    BlendSpacePlayerNode: AnimNode_BlendSpacePlayer_Standalone
+    MirrorNode: AnimNode_Mirror_Standalone
+    BlendProfile: BlendProfile
 
 
 class BlendTarget(StructBase):
@@ -26871,6 +27707,100 @@ class ChildActorAttachedActorInfo(StructBase):
     RelativeTransform: Transform
 
 
+class ChooserColumnBase(StructBase):
+    bDisabled: bool
+    EditorColumnWidth: float
+
+
+class ChooserEnumRowData(StructBase):
+    ValueName: str
+    Comparison: EEnumColumnCellValueComparison
+    Value: int
+
+
+class ChooserEvaluationContext(StructBase):
+    ...
+
+class ChooserEvaluationInputObject(StructBase):
+    ...
+
+class ChooserEvaluationOutputArray(StructBase):
+    ...
+
+class ChooserFloatDistanceRowData(StructBase):
+    Value: float
+    DisableAutoPopulate: bool
+
+
+class ChooserFloatRangeRowData(StructBase):
+    Min: float
+    Max: float
+    bNoMin: bool
+    bNoMax: bool
+
+
+class ChooserInitializer(StructBase):
+    ...
+
+class ChooserMultiEnumRowData(StructBase):
+    Value: int
+
+
+class ChooserNameRowData(StructBase):
+    Comparison: ENameColumnCellValueComparison
+    Value: str
+
+
+class ChooserObjectClassRowData(StructBase):
+    Comparison: EObjectClassColumnCellValueComparison
+    Value: Class | type
+
+
+class ChooserObjectRowData(StructBase):
+    Comparison: EObjectColumnCellValueComparison
+    Value: Object
+
+
+class ChooserOutputEnumRowData(StructBase):
+    Value: int
+    ValueName: str
+
+
+class ChooserOutputObjectRowData(StructBase):
+    Value: InstancedStruct
+
+
+class ChooserParameterBase(StructBase):
+    ...
+
+class ChooserPlayerSettings(StructBase):
+    bMirror: bool
+    StartTime: float
+    bForceLooping: bool
+    PlaybackRate: float
+    CurveOverrides: AnimCurveOverrideList
+    BlendTime: float
+    BlendProfile: BlendProfile
+    BlendOption: EAlphaBlendOption
+    bUseInertialBlend: bool
+    bForceBlendTo: bool
+    MinDeltaTimeToForceBlendTo: float
+    PlayingAsset: Object
+    PlayingAssetAccumulatedTime: float
+    bIsPlayingAssetMirrored: bool
+    PlayingAssetBlendParameters: Vector
+
+
+class ChooserPropertyBinding(StructBase):
+    PropertyBindingChain: list[str]
+    ContextIndex: int
+    IsBoundToRoot: bool
+    DisplayName: str
+
+
+class ChooserRandomizationContext(StructBase):
+    ...
+
 class ChunkDependency(StructBase):
     ChunkID: int
     ParentChunkID: int
@@ -28492,6 +29422,13 @@ class ConcertWorkspaceSyncRequestedEvent(StructBase):
     bEnableLiveSync: bool
 
 
+class ConditionalGameplayEffect(StructBase):
+    EffectClass: Class | type
+    RequiredSourceTags: GameplayTagContainer
+    RemovalPolicy: EGameplayEffectGrantedEffectRemovalPolicy
+    StackCountToRemove: int
+
+
 class ConsoleVariablesEditorAssetSaveData(StructBase):
     CommandName: str
     CommandValueAsString: str
@@ -28733,6 +29670,10 @@ class ContentBrowserItemPath(StructBase):
 class ContentBrowserPluginSettings(StructBase):
     PluginName: str
     RootFolderSortPriority: float
+
+
+class ContextObjectTypeBase(StructBase):
+    Direction: EContextObjectDirection
 
 
 class ControlFindReplaceString(StructBase):
@@ -29123,6 +30064,10 @@ class CurveEditorZoomScaleConfig(StructBase):
     MaxVerticalZoomOut: float
 
 
+class CurveExpressionList(StructBase):
+    AssignmentExpressions: str
+
+
 class CurveMetaData(StructBase):
     LinkedBones: list[BoneReference]
     MaxLOD: int
@@ -29163,6 +30108,14 @@ class CustomAttributePerBoneData(StructBase):
 class CustomAttributeSetting(StructBase):
     Name: str
     Meaning: str
+
+
+class CustomCalculationBasedFloat(StructBase):
+    CalculationClassMagnitude: Class | type
+    Coefficient: ScalableFloat
+    PreMultiplyAdditiveValue: ScalableFloat
+    PostMultiplyAdditiveValue: ScalableFloat
+    FinalLookupCurve: CurveTableRowHandle
 
 
 class CustomCameraNodeBlendableParameter(StructBase):
@@ -29514,6 +30467,527 @@ class DFontParameters(StructBase):
     FontPage: int
 
 
+class DMXAttribute(StructBase):
+    Name: str
+    Keywords: str
+
+
+class DMXAttributeName(StructBase):
+    Name: str
+
+
+class DMXByteArray64(StructBase):
+    ...
+
+class DMXCell(StructBase):
+    CellID: int
+    Coordinate: IntPoint
+
+
+class DMXColorCIE(StructBase):
+    X: float
+    Y: float
+    YY: int
+
+
+class DMXConflictMonitorSettings(StructBase):
+    bAutoPause: bool
+    bPrintToLog: bool
+    bRunWhenOpened: bool
+    Depth: int
+
+
+class DMXEntityFixturePatchConstructionParams(StructBase):
+    FixtureTypeRef: DMXEntityFixtureTypeRef
+    ActiveMode: int
+    UniverseID: int
+    StartingAddress: int
+
+
+class DMXEntityFixtureTypeConstructionParams(StructBase):
+    ParentDMXLibrary: DMXLibrary
+    DMXCategory: DMXFixtureCategory
+    Modes: list[DMXFixtureMode]
+
+
+class DMXEntityReference(StructBase):
+    DMXLibrary: DMXLibrary
+    bDisplayLibraryPicker: bool
+    EntityType: Class | type
+    EntityId: str
+
+
+class DMXFixtureCategory(StructBase):
+    Name: str
+
+
+class DMXFixtureCellAttribute(StructBase):
+    Attribute: DMXAttributeName
+    Description: str
+    DefaultValue: int
+    DataType: EDMXFixtureSignalFormat
+    bUseLSBMode: bool
+
+
+class DMXFixtureFunction(StructBase):
+    Attribute: DMXAttributeName
+    FunctionName: str
+    Description: str
+    DefaultValue: int
+    Channel: int
+    DataType: EDMXFixtureSignalFormat
+    bUseLSBMode: bool
+    PhysicalDefaultValue: float
+    PhysicalUnit: EDMXGDTFPhysicalUnit
+    PhysicalFrom: float
+    PhysicalTo: float
+
+
+class DMXFixtureFunctionChannel(StructBase):
+    AttributeName: str
+    Channel: MovieSceneFloatChannel
+    CellCoordinate: IntPoint
+    DefaultValue: int
+    bEnabled: bool
+
+
+class DMXFixtureMatrix(StructBase):
+    CellAttributes: list[DMXFixtureCellAttribute]
+    FirstCellChannel: int
+    XCells: int
+    YCells: int
+    PixelMappingDistribution: EDMXPixelMappingDistribution
+
+
+class DMXFixtureMode(StructBase):
+    ModeName: str
+    Functions: list[DMXFixtureFunction]
+    bAutoChannelSpan: bool
+    ChannelSpan: int
+    bFixtureMatrixEnabled: bool
+    FixtureMatrixConfig: DMXFixtureMatrix
+
+
+class DMXFixturePatchChannel(StructBase):
+    DMXLibrary: DMXLibrary
+    Reference: DMXEntityFixturePatchRef
+    FunctionChannels: list[DMXFixtureFunctionChannel]
+    ActiveMode: int
+
+
+class DMXFixtureTypeFunctionsEditorSettings(StructBase):
+    NameColumnWidth: float
+    AttributeColumnWidth: float
+
+
+class DMXGDTFColorCIE1931xyY(StructBase):
+    X: float
+    Y: float
+    YY: float
+
+
+class DMXImportGDTFActivationGroup(StructBase):
+    Name: str
+
+
+class DMXImportGDTFAttribute(StructBase):
+    Name: str
+    Pretty: str
+    ActivationGroup: DMXImportGDTFActivationGroup
+    Feature: DMXImportGDTFFeature
+    MainAttribute: str
+    PhysicalUnit: EDMXImportGDTFPhysicalUnit
+    Color: DMXColorCIE
+
+
+class DMXImportGDTFBeam(StructBase):
+    Name: str
+    Model: str
+    Position: Matrix
+    LampType: EDMXImportGDTFLampType
+    PowerConsumption: float
+    LuminousFlux: float
+    ColorTemperature: float
+    BeamAngle: float
+    FieldAngle: float
+    BeamRadius: float
+    BeamType: EDMXImportGDTFBeamType
+    ColorRenderingIndex: int
+
+
+class DMXImportGDTFBreak(StructBase):
+    DMXOffset: int
+    DMXBreak: int
+
+
+class DMXImportGDTFCRIs(StructBase):
+    ...
+
+class DMXImportGDTFChannelFunction(StructBase):
+    Name: str
+    Attribute: DMXImportGDTFAttribute
+    OriginalAttribute: str
+    DMXFrom: DMXImportGDTFDMXValue
+    DMXValue: DMXImportGDTFDMXValue
+    PhysicalFrom: float
+    PhysicalTo: float
+    RealFade: float
+    Wheel: DMXImportGDTFWheel
+    Emitter: DMXImportGDTFEmitter
+    Filter: DMXImportGDTFFilter
+    DMXInvert: EDMXImportGDTFDMXInvert
+    ModeMaster: str
+    ModeFrom: DMXImportGDTFDMXValue
+    ModeTo: DMXImportGDTFDMXValue
+    ChannelSets: list[DMXImportGDTFChannelSet]
+
+
+class DMXImportGDTFChannelSet(StructBase):
+    Name: str
+    DMXFrom: DMXImportGDTFDMXValue
+    PhysicalFrom: float
+    PhysicalTo: float
+    WheelSlotIndex: int
+
+
+class DMXImportGDTFColorSpace(StructBase):
+    Mode: EDMXImportGDTFMode
+    Description: str
+    Red: DMXColorCIE
+    Green: DMXColorCIE
+    Blue: DMXColorCIE
+    WhitePoint: DMXColorCIE
+
+
+class DMXImportGDTFDMXChannel(StructBase):
+    DMXBreak: int
+    Offset: list[int]
+    Default: DMXImportGDTFDMXValue
+    Highlight: DMXImportGDTFDMXValue
+    Geometry: str
+    LogicalChannel: DMXImportGDTFLogicalChannel
+
+
+class DMXImportGDTFDMXMode(StructBase):
+    Name: str
+    Geometry: str
+    DMXChannels: list[DMXImportGDTFDMXChannel]
+    Relations: list[DMXImportGDTFRelation]
+    FTMacros: list[DMXImportGDTFFTMacro]
+
+
+class DMXImportGDTFDMXProfiles(StructBase):
+    ...
+
+class DMXImportGDTFDMXValue(StructBase):
+    Value: int
+    ValueSize: int
+
+
+class DMXImportGDTFEmitter(StructBase):
+    Name: str
+    Color: DMXColorCIE
+    DominantWaveLength: float
+    DiodePart: str
+    Measurement: DMXImportGDTFMeasurement
+
+
+class DMXImportGDTFFTMacro(StructBase):
+    Name: str
+
+
+class DMXImportGDTFFeature(StructBase):
+    Name: str
+
+
+class DMXImportGDTFFeatureGroup(StructBase):
+    Name: str
+    Pretty: str
+    Features: list[DMXImportGDTFFeature]
+
+
+class DMXImportGDTFFilter(StructBase):
+    Name: str
+    Color: DMXColorCIE
+
+
+class DMXImportGDTFFilterBeam(StructBase):
+    Name: str
+    Model: str
+    Position: Matrix
+
+
+class DMXImportGDTFFilterColor(StructBase):
+    Name: str
+    Model: str
+    Position: Matrix
+
+
+class DMXImportGDTFFilterGobo(StructBase):
+    Name: str
+    Model: str
+    Position: Matrix
+
+
+class DMXImportGDTFFilterShaper(StructBase):
+    Name: str
+    Model: str
+    Position: Matrix
+
+
+class DMXImportGDTFGeneralAxis(StructBase):
+    Name: str
+    Model: str
+    Position: Matrix
+    Axis: list[DMXImportGDTFTypeAxis]
+
+
+class DMXImportGDTFGeneralGeometry(StructBase):
+    Name: str
+    Model: str
+    Position: Matrix
+    Axis: DMXImportGDTFGeneralAxis
+    Geometry: DMXImportGDTFTypeGeometry
+    FilterBeam: DMXImportGDTFFilterBeam
+    FilterColor: DMXImportGDTFFilterColor
+    FilterGobo: DMXImportGDTFFilterGobo
+    FilterShaper: DMXImportGDTFFilterShaper
+    GeometryReference: DMXImportGDTFGeometryReference
+
+
+class DMXImportGDTFGeometryBase(StructBase):
+    Name: str
+    Model: str
+    Position: Matrix
+
+
+class DMXImportGDTFGeometryReference(StructBase):
+    Name: str
+    Model: str
+    Position: Matrix
+    Breaks: list[DMXImportGDTFBreak]
+
+
+class DMXImportGDTFLogicalChannel(StructBase):
+    Attribute: DMXImportGDTFAttribute
+    Snap: EDMXImportGDTFSnap
+    Master: EDMXImportGDTFMaster
+    MibFade: float
+    DMXChangeTimeLimit: float
+    ChannelFunction: DMXImportGDTFChannelFunction
+
+
+class DMXImportGDTFMeasurement(StructBase):
+    Physical: float
+    LuminousIntensity: float
+    Transmission: float
+    InterpolationTo: EDMXImportGDTFInterpolationTo
+    MeasurementPoints: list[DMXImportGDTFMeasurementPoint]
+
+
+class DMXImportGDTFMeasurementPoint(StructBase):
+    WaveLength: float
+    Energy: float
+
+
+class DMXImportGDTFModel(StructBase):
+    Name: str
+    Length: float
+    Width: float
+    Height: float
+    PrimitiveType: EDMXImportGDTFPrimitiveType
+
+
+class DMXImportGDTFRelation(StructBase):
+    Name: str
+    Master: str
+    Follower: str
+    Type: EDMXImportGDTFType
+
+
+class DMXImportGDTFTypeAxis(StructBase):
+    Name: str
+    Model: str
+    Position: Matrix
+    Beams: list[DMXImportGDTFBeam]
+
+
+class DMXImportGDTFTypeGeometry(StructBase):
+    Name: str
+    Model: str
+    Position: Matrix
+
+
+class DMXImportGDTFWheel(StructBase):
+    Name: str
+    Slots: list[DMXImportGDTFWheelSlot]
+
+
+class DMXImportGDTFWheelSlot(StructBase):
+    Name: str
+    Color: DMXColorCIE
+    Filter: DMXImportGDTFFilter
+    MediaFileName: Texture2D
+
+
+class DMXInputPortConfig(StructBase):
+    PortName: str
+    ProtocolName: str
+    CommunicationType: EDMXCommunicationType
+    bAutoCompleteDeviceAddressEnabled: bool
+    AutoCompleteDeviceAddress: str
+    DeviceAddress: str
+    LocalUniverseStart: int
+    NumUniverses: int
+    ExternUniverseStart: int
+    bIsExternUnivereStartEditable: bool
+    PriorityStrategy: EDMXPortPriorityStrategy
+    Priority: int
+    PortGuid: str
+
+
+class DMXInputPortReference(StructBase):
+    PortGuid: str
+    bEnabledFlag: bool
+
+
+class DMXLibraryPortReferences(StructBase):
+    InputPortReferences: list[DMXInputPortReference]
+    OutputPortReferences: list[DMXOutputPortReference]
+
+
+class DMXMVRFixtureAddresses(StructBase):
+    Universe: int
+    Address: int
+
+
+class DMXMVRFixtureGobo(StructBase):
+    Value: str
+    Rotation: DMXOptionalFloat
+
+
+class DMXMVRFixtureListSettings(StructBase):
+    ListWidth: float
+    FixtureIDColumnWidth: float
+    FixtureTypeColumnWidth: float
+    ModeColumnWidth: float
+    PatchColumnWidth: float
+    SortByCollumnID: str
+    SortPriorityEnumIndex: int
+
+
+class DMXMVRFixtureMapping(StructBase):
+    ...
+
+class DMXMVRFixturePatcherSettings(StructBase):
+    bMonitorEnabled: bool
+    FixturePatchNameDisplayMode: EDMXFixturePatcherNameDisplayMode
+
+
+class DMXMVRSceneFixtureTypeToActorClassPair(StructBase):
+    FixtureType: DMXEntityFixtureType
+    ActorClass: Class
+
+
+class DMXMVRSceneGDTFToActorClassPair(StructBase):
+    GDTF: DMXImportGDTF
+    ActorClass: Class
+
+
+class DMXMonitorSourceDescriptor(StructBase):
+    bMonitorAllPorts: bool
+    bMonitorInputPorts: bool
+    MonitoredPortGuid: str
+
+
+class DMXNameListItem(StructBase):
+    Name: str
+
+
+class DMXNormalizedAttributeValueMap(StructBase):
+    Map: dict[DMXAttributeName, float]
+
+
+class DMXOptionalBool(StructBase):
+    ...
+
+class DMXOptionalColorCIE1931(StructBase):
+    ...
+
+class DMXOptionalFloat(StructBase):
+    ...
+
+class DMXOptionalGuid(StructBase):
+    ...
+
+class DMXOptionalInt32(StructBase):
+    ...
+
+class DMXOptionalMVRFixtureGobo(StructBase):
+    ...
+
+class DMXOptionalString(StructBase):
+    ...
+
+class DMXOptionalTransform(StructBase):
+    ...
+
+class DMXOptionalVector2D(StructBase):
+    ...
+
+class DMXOutputConsoleFaderDescriptor(StructBase):
+    FaderName: str
+    Value: int
+    MaxValue: int
+    MinValue: int
+    UniversID: int
+    StartingAddress: int
+    EndingAddress: int
+    ProtocolName: str
+
+
+class DMXOutputPortConfig(StructBase):
+    PortName: str
+    ProtocolName: str
+    CommunicationType: EDMXCommunicationType
+    TimeToLive: int
+    bAutoCompleteDeviceAddressEnabled: bool
+    AutoCompleteDeviceAddress: str
+    DeviceAddress: str
+    DestinationAddresses: list[DMXOutputPortDestinationAddress]
+    bLoopbackToEngine: bool
+    LocalUniverseStart: int
+    NumUniverses: int
+    ExternUniverseStart: int
+    bIsExternUnivereStartEditable: bool
+    Priority: int
+    Delay: float
+    DelayFrameRate: FrameRate
+    PortGuid: str
+
+
+class DMXOutputPortDestinationAddress(StructBase):
+    DestinationAddressString: str
+
+
+class DMXOutputPortReference(StructBase):
+    PortGuid: str
+    bEnabledFlag: bool
+
+
+class DMXProtocolName(StructBase):
+    Name: str
+
+
+class DMXReadOnlyFixturePatchListDescriptor(StructBase):
+    SortedByColumnID: str
+    ColumnIDToShowStateMap: dict[str, bool]
+
+
+class DMXRequestBase(StructBase):
+    Value: int
+
+
 class DNAConfig(StructBase):
     Layers: int
     MaxLODPerPlatform: PerPlatformInt
@@ -29573,6 +31047,45 @@ class DataLayerCreationParameters(StructBase):
 class DataLayerInstanceNames(StructBase):
     bIsFirstDataLayerExternal: bool
     DataLayers: list[str]
+
+
+class DataRegistryCachePolicy(StructBase):
+    bCacheIsAlwaysVolatile: bool
+    bUseCurveTableCacheVersion: bool
+    MinNumberKept: int
+    MaxNumberKept: int
+    ForceKeepSeconds: float
+    ForceReleaseSeconds: float
+
+
+class DataRegistryId(StructBase):
+    RegistryType: DataRegistryType
+    ItemName: str
+
+
+class DataRegistryIdFormat(StructBase):
+    BaseGameplayTag: GameplayTag
+
+
+class DataRegistryLookup(StructBase):
+    ...
+
+class DataRegistryOrTableRow(StructBase):
+    bUseDataRegistryId: bool
+    DataTableRow: DataTableRowHandle
+    DataRegistryId: DataRegistryId
+
+
+class DataRegistrySourceItemId(StructBase):
+    ...
+
+class DataRegistrySource_DataTableRules(StructBase):
+    bPrecacheTable: bool
+    CachedTableKeepSeconds: float
+
+
+class DataRegistryType(StructBase):
+    Name: str
 
 
 class DataStreamDefinition(StructBase):
@@ -31779,12 +33292,310 @@ class GameViewportWidgetSlot(StructBase):
     bAutoRemoveOnWorldRemoved: bool
 
 
+class GameplayAbilityActivationInfo(StructBase):
+    ActivationMode: EGameplayAbilityActivationMode
+    bCanBeEndedByOtherInstance: bool
+    PredictionKeyWhenActivated: PredictionKey
+
+
+class GameplayAbilityActorInfo(StructBase):
+    OwnerActor: Actor
+    AvatarActor: Actor
+    PlayerController: PlayerController
+    AbilitySystemComponent: AbilitySystemComponent
+    SkeletalMeshComponent: SkeletalMeshComponent
+    AnimInstance: AnimInstance
+    MovementComponent: MovementComponent
+    AffectedAnimInstanceTag: str
+
+
+class GameplayAbilityBindInfo(StructBase):
+    Command: EGameplayAbilityInputBinds
+    GameplayAbilityClass: Class | type
+
+
+class GameplayAbilityLocalAnimMontage(StructBase):
+    AnimMontage: AnimMontage
+    PlayInstanceId: int
+    PredictionKey: PredictionKey
+    AnimatingAbility: GameplayAbility
+
+
+class GameplayAbilityRepAnimMontage(StructBase):
+    Animation: AnimSequenceBase
+    SlotName: str
+    PlayRate: float
+    Position: float
+    BlendTime: float
+    BlendOutTime: float
+    PlayCount: float
+    NextSectionID: int
+    PlayInstanceId: int
+    bRepPosition: bool
+    IsStopped: bool
+    SkipPositionCorrection: bool
+    bSkipPlayRate: bool
+    PredictionKey: PredictionKey
+    SectionIdToPlay: int
+
+
+class GameplayAbilitySpecConfig(StructBase):
+    Ability: Class | type
+    LevelScalableFloat: ScalableFloat
+    InputID: int
+    RemovalPolicy: EGameplayEffectGrantedAbilityRemovePolicy
+
+
+class GameplayAbilitySpecDef(StructBase):
+    Ability: Class | type
+    LevelScalableFloat: ScalableFloat
+    InputID: int
+    RemovalPolicy: EGameplayEffectGrantedAbilityRemovePolicy
+    SourceObject: Object
+    AssignedHandle: GameplayAbilitySpecHandle
+
+
+class GameplayAbilitySpecHandle(StructBase):
+    Handle: int
+
+
+class GameplayAbilitySpecHandleAndPredictionKey(StructBase):
+    AbilityHandle: GameplayAbilitySpecHandle
+    PredictionKeyAtCreation: int
+
+
+class GameplayAbilityTargetData(StructBase):
+    ...
+
+class GameplayAbilityTargetDataHandle(StructBase):
+    ...
+
+class GameplayAbilityTargetingLocationInfo(StructBase):
+    SourceActor: Actor
+    SourceComponent: MeshComponent
+    SourceAbility: GameplayAbility
+    LiteralTransform: Transform
+    SourceSocketName: str
+    LocationType: EGameplayAbilityTargetingLocationType
+
+
+class GameplayAttribute(StructBase):
+    AttributeName: str
+    Attribute: FieldPath
+    AttributeOwner: Struct
+
+
+class GameplayAttributeData(StructBase):
+    BaseValue: float
+    CurrentValue: float
+
+
 class GameplayCamerasActivateCameraRigTaskInstanceData(StructBase):
     CameraRig: CameraRigAsset
 
 
 class GameplayCamerasActivateCameraRigViaProxyTaskInstanceData(StructBase):
     CameraRigProxy: CameraRigProxyAsset
+
+
+class GameplayCueNotifyActorArray(StructBase):
+    Actors: list[GameplayCueNotify_Actor]
+
+
+class GameplayCueNotifyData(StructBase):
+    GameplayCueTag: GameplayTag
+    GameplayCueNotifyObj: SoftObjectPath
+    LoadedGameplayCueClass: Class | type
+
+
+class GameplayCueNotify_BurstEffects(StructBase):
+    BurstParticles: list[GameplayCueNotify_ParticleInfo]
+    BurstSounds: list[GameplayCueNotify_SoundInfo]
+    BurstCameraShake: GameplayCueNotify_CameraShakeInfo
+    BurstCameraLensEffect: GameplayCueNotify_CameraLensEffectInfo
+    BurstForceFeedback: GameplayCueNotify_ForceFeedbackInfo
+    BurstDevicePropertyEffect: GameplayCueNotify_InputDevicePropertyInfo
+    BurstDecal: GameplayCueNotify_DecalInfo
+
+
+class GameplayCueNotify_CameraLensEffectInfo(StructBase):
+    SpawnConditionOverride: GameplayCueNotify_SpawnCondition
+    PlacementInfoOverride: GameplayCueNotify_PlacementInfo
+    CameraLensEffect: Class | type
+    bOverrideSpawnCondition: bool
+    bOverridePlacementInfo: bool
+    bPlayInWorld: bool
+    WorldInnerRadius: float
+    WorldOuterRadius: float
+
+
+class GameplayCueNotify_CameraShakeInfo(StructBase):
+    SpawnConditionOverride: GameplayCueNotify_SpawnCondition
+    PlacementInfoOverride: GameplayCueNotify_PlacementInfo
+    CameraShake: Class | type
+    ShakeScale: float
+    PlaySpace: EGameplayCueNotify_EffectPlaySpace
+    bOverrideSpawnCondition: bool
+    bOverridePlacementInfo: bool
+    bPlayInWorld: bool
+    WorldInnerRadius: float
+    WorldOuterRadius: float
+    WorldFalloffExponent: float
+
+
+class GameplayCueNotify_DecalInfo(StructBase):
+    SpawnConditionOverride: GameplayCueNotify_SpawnCondition
+    PlacementInfoOverride: GameplayCueNotify_PlacementInfo
+    DecalMaterial: MaterialInterface
+    DecalSize: Vector
+    bOverrideSpawnCondition: bool
+    bOverridePlacementInfo: bool
+    bOverrideFadeOut: bool
+    FadeOutStartDelay: float
+    FadeOutDuration: float
+
+
+class GameplayCueNotify_ForceFeedbackInfo(StructBase):
+    SpawnConditionOverride: GameplayCueNotify_SpawnCondition
+    PlacementInfoOverride: GameplayCueNotify_PlacementInfo
+    ForceFeedbackEffect: ForceFeedbackEffect
+    ForceFeedbackTag: str
+    bIsLooping: bool
+    bOverrideSpawnCondition: bool
+    bOverridePlacementInfo: bool
+    bPlayInWorld: bool
+    WorldIntensity: float
+    WorldAttenuation: ForceFeedbackAttenuation
+
+
+class GameplayCueNotify_InputDevicePropertyInfo(StructBase):
+    DeviceProperties: list[Class]
+
+
+class GameplayCueNotify_LoopingEffects(StructBase):
+    LoopingParticles: list[GameplayCueNotify_ParticleInfo]
+    LoopingSounds: list[GameplayCueNotify_SoundInfo]
+    LoopingCameraShake: GameplayCueNotify_CameraShakeInfo
+    LoopingCameraLensEffect: GameplayCueNotify_CameraLensEffectInfo
+    LoopingForceFeedback: GameplayCueNotify_ForceFeedbackInfo
+    LoopingInputDevicePropertyEffect: GameplayCueNotify_InputDevicePropertyInfo
+
+
+class GameplayCueNotify_ParticleInfo(StructBase):
+    SpawnConditionOverride: GameplayCueNotify_SpawnCondition
+    PlacementInfoOverride: GameplayCueNotify_PlacementInfo
+    NiagaraSystem: NiagaraSystem
+    bOverrideSpawnCondition: bool
+    bOverridePlacementInfo: bool
+    bCastShadow: bool
+
+
+class GameplayCueNotify_PlacementInfo(StructBase):
+    SocketName: str
+    AttachPolicy: EGameplayCueNotify_AttachPolicy
+    AttachmentRule: EAttachmentRule
+    bOverrideRotation: bool
+    bOverrideScale: bool
+    RotationOverride: Rotator
+    ScaleOverride: Vector
+
+
+class GameplayCueNotify_SoundInfo(StructBase):
+    SpawnConditionOverride: GameplayCueNotify_SpawnCondition
+    PlacementInfoOverride: GameplayCueNotify_PlacementInfo
+    Sound: SoundBase
+    LoopingFadeOutDuration: float
+    LoopingFadeVolumeLevel: float
+    SoundParameterInterfaceInfo: GameplayCueNotify_SoundParameterInterfaceInfo
+    bOverrideSpawnCondition: bool
+    bOverridePlacementInfo: bool
+    bUseSoundParameterInterface: bool
+
+
+class GameplayCueNotify_SoundParameterInterfaceInfo(StructBase):
+    StopTriggerName: str
+
+
+class GameplayCueNotify_SpawnCondition(StructBase):
+    LocallyControlledSource: EGameplayCueNotify_LocallyControlledSource
+    LocallyControlledPolicy: EGameplayCueNotify_LocallyControlledPolicy
+    ChanceToPlay: float
+    AllowedSurfaceTypes: list[EPhysicalSurface]
+    RejectedSurfaceTypes: list[EPhysicalSurface]
+
+
+class GameplayCueNotify_SpawnResult(StructBase):
+    FxSystemComponents: list[FXSystemComponent]
+    AudioComponents: list[AudioComponent]
+    CameraShakes: list[CameraShakeBase]
+    CameraLensEffects: list[InterfaceProperty]
+    ForceFeedbackComponent: ForceFeedbackComponent
+    ForceFeedbackTargetPC: PlayerController
+    DecalComponent: DecalComponent
+
+
+class GameplayCueObjectLibrary(StructBase):
+    Paths: list[str]
+    ActorObjectLibrary: ObjectLibrary
+    StaticObjectLibrary: ObjectLibrary
+    CueSet: GameplayCueSet
+    bShouldSyncScan: bool
+    bShouldAsyncLoad: bool
+    bShouldSyncLoad: bool
+    bHasBeenInitialized: bool
+
+
+class GameplayCueParameters(StructBase):
+    NormalizedMagnitude: float
+    RawMagnitude: float
+    EffectContext: GameplayEffectContextHandle
+    MatchedTagName: GameplayTag
+    OriginalTag: GameplayTag
+    AggregatedSourceTags: GameplayTagContainer
+    AggregatedTargetTags: GameplayTagContainer
+    Location: Vector_NetQuantize10
+    Normal: Vector_NetQuantizeNormal
+    Instigator: Actor
+    EffectCauser: Actor
+    SourceObject: Object
+    PhysicalMaterial: PhysicalMaterial
+    GameplayEffectLevel: int
+    AbilityLevel: int
+    TargetAttachComponent: SceneComponent
+    bReplicateLocationWhenUsingMinimalRepProxy: bool
+
+
+class GameplayCuePendingExecute(StructBase):
+    PredictionKey: PredictionKey
+    PayloadType: EGameplayCuePayloadType
+    OwningComponent: AbilitySystemComponent
+    FromSpec: GameplayEffectSpecForRPC
+    CueParameters: GameplayCueParameters
+
+
+class GameplayCueTag(StructBase):
+    GameplayCueTag: GameplayTag
+
+
+class GameplayCueTranslationLink(StructBase):
+    RulesCDO: GameplayCueTranslator
+
+
+class GameplayCueTranslationManager(StructBase):
+    TranslationLUT: list[GameplayCueTranslatorNode]
+    TranslationNameToIndexMap: dict[str, GameplayCueTranslatorNodeIndex]
+    TagManager: GameplayTagsManager
+
+
+class GameplayCueTranslatorNode(StructBase):
+    Links: list[GameplayCueTranslationLink]
+    CachedIndex: GameplayCueTranslatorNodeIndex
+    CachedGameplayTag: GameplayTag
+    CachedGameplayTagName: str
+
+
+class GameplayCueTranslatorNodeIndex(StructBase):
+    Index: int
 
 
 class GameplayDebuggerCategoryConfig(StructBase):
@@ -31863,6 +33674,184 @@ class GameplayDebuggerVisLogSync(StructBase):
     DeviceIDs: str
 
 
+class GameplayEffectAttributeCaptureDefinition(StructBase):
+    AttributeToCapture: GameplayAttribute
+    AttributeSource: EGameplayEffectAttributeCaptureSource
+    bSnapshot: bool
+
+
+class GameplayEffectAttributeCaptureSpec(StructBase):
+    BackingDefinition: GameplayEffectAttributeCaptureDefinition
+
+
+class GameplayEffectAttributeCaptureSpecContainer(StructBase):
+    SourceAttributes: list[GameplayEffectAttributeCaptureSpec]
+    TargetAttributes: list[GameplayEffectAttributeCaptureSpec]
+    bHasNonSnapshottedAttributes: bool
+
+
+class GameplayEffectContext(StructBase):
+    Instigator: Actor
+    EffectCauser: Actor
+    AbilityCDO: GameplayAbility
+    AbilityInstanceNotReplicated: GameplayAbility
+    AbilityLevel: int
+    SourceObject: Object
+    InstigatorAbilitySystemComponent: AbilitySystemComponent
+    Actors: list[Actor]
+    WorldOrigin: Vector
+    bHasWorldOrigin: bool
+    bReplicateSourceObject: bool
+    bReplicateInstigator: bool
+    bReplicateEffectCauser: bool
+
+
+class GameplayEffectContextHandle(StructBase):
+    ...
+
+class GameplayEffectCreationData(StructBase):
+    MenuPath: str
+    BaseName: str
+    ParentGameplayEffect: Class | type
+
+
+class GameplayEffectCue(StructBase):
+    MagnitudeAttribute: GameplayAttribute
+    MinLevel: float
+    MaxLevel: float
+    GameplayCueTags: GameplayTagContainer
+
+
+class GameplayEffectCustomExecutionOutput(StructBase):
+    OutputModifiers: list[GameplayModifierEvaluatedData]
+    bTriggerConditionalGameplayEffects: bool
+    bHandledStackCountManually: bool
+    bHandledGameplayCuesManually: bool
+
+
+class GameplayEffectCustomExecutionParameters(StructBase):
+    ...
+
+class GameplayEffectExecutionDefinition(StructBase):
+    CalculationClass: Class | type
+    PassedInTags: GameplayTagContainer
+    CalculationModifiers: list[GameplayEffectExecutionScopedModifierInfo]
+    ConditionalGameplayEffects: list[ConditionalGameplayEffect]
+
+
+class GameplayEffectExecutionScopedModifierInfo(StructBase):
+    CapturedAttribute: GameplayEffectAttributeCaptureDefinition
+    TransientAggregatorIdentifier: GameplayTag
+    AggregatorType: EGameplayEffectScopedModifierAggregatorType
+    ModifierOp: EGameplayModOp
+    ModifierMagnitude: GameplayEffectModifierMagnitude
+    EvaluationChannelSettings: GameplayModEvaluationChannelSettings
+    SourceTags: GameplayTagRequirements
+    TargetTags: GameplayTagRequirements
+
+
+class GameplayEffectModifiedAttribute(StructBase):
+    Attribute: GameplayAttribute
+    TotalMagnitude: float
+
+
+class GameplayEffectModifierMagnitude(StructBase):
+    MagnitudeCalculationType: EGameplayEffectMagnitudeCalculation
+    ScalableFloatMagnitude: ScalableFloat
+    AttributeBasedMagnitude: AttributeBasedFloat
+    CustomMagnitude: CustomCalculationBasedFloat
+    SetByCallerMagnitude: SetByCallerFloat
+
+
+class GameplayEffectQuery(StructBase):
+    CustomMatchDelegate_BP: DelegateBase
+    OwningTagQuery: GameplayTagQuery
+    EffectTagQuery: GameplayTagQuery
+    SourceTagQuery: GameplayTagQuery
+    SourceAggregateTagQuery: GameplayTagQuery
+    ModifyingAttribute: GameplayAttribute
+    EffectSource: Object
+    EffectDefinition: Class | type
+
+
+class GameplayEffectRemovalInfo(StructBase):
+    bPrematureRemoval: bool
+    bPredictionRejected: bool
+    StackCount: int
+    EffectContext: GameplayEffectContextHandle
+    OwningASC: AbilitySystemComponent
+
+
+class GameplayEffectSpec(StructBase):
+    Def: GameplayEffect
+    ModifiedAttributes: list[GameplayEffectModifiedAttribute]
+    CapturedRelevantAttributes: GameplayEffectAttributeCaptureSpecContainer
+    Duration: float
+    Period: float
+    CapturedSourceTags: TagContainerAggregator
+    CapturedTargetTags: TagContainerAggregator
+    DynamicGrantedTags: GameplayTagContainer
+    DynamicAssetTags: GameplayTagContainer
+    Modifiers: list[ModifierSpec]
+    StackCount: int
+    bCompletedSourceAttributeCapture: bool
+    bCompletedTargetAttributeCapture: bool
+    bDurationLocked: bool
+    GrantedAbilitySpecs: list[GameplayAbilitySpecDef]
+    EffectContext: GameplayEffectContextHandle
+    Level: float
+
+
+class GameplayEffectSpecForRPC(StructBase):
+    Def: GameplayEffect
+    ModifiedAttributes: list[GameplayEffectModifiedAttribute]
+    EffectContext: GameplayEffectContextHandle
+    AggregatedSourceTags: GameplayTagContainer
+    AggregatedTargetTags: GameplayTagContainer
+    Level: float
+    AbilityLevel: float
+
+
+class GameplayEffectSpecHandle(StructBase):
+    ...
+
+class GameplayEffectVersion(StructBase):
+    ...
+
+class GameplayEventData(StructBase):
+    EventTag: GameplayTag
+    Instigator: Actor
+    Target: Actor
+    OptionalObject: Object
+    OptionalObject2: Object
+    ContextHandle: GameplayEffectContextHandle
+    InstigatorTags: GameplayTagContainer
+    TargetTags: GameplayTagContainer
+    EventMagnitude: float
+    TargetData: GameplayAbilityTargetDataHandle
+
+
+class GameplayModEvaluationChannelSettings(StructBase):
+    Channel: EGameplayModEvaluationChannel
+
+
+class GameplayModifierEvaluatedData(StructBase):
+    Attribute: GameplayAttribute
+    ModifierOp: EGameplayModOp
+    Magnitude: float
+    Handle: ActiveGameplayEffectHandle
+    IsValid: bool
+
+
+class GameplayModifierInfo(StructBase):
+    Attribute: GameplayAttribute
+    ModifierOp: EGameplayModOp
+    ModifierMagnitude: GameplayEffectModifierMagnitude
+    EvaluationChannelSettings: GameplayModEvaluationChannelSettings
+    SourceTags: GameplayTagRequirements
+    TargetTags: GameplayTagRequirements
+
+
 class GameplayResourceSet(StructBase):
     ...
 
@@ -31870,10 +33859,24 @@ class GameplayTag(StructBase):
     TagName: str
 
 
+class GameplayTagBlueprintPropertyMap(StructBase):
+    PropertyMappings: list[GameplayTagBlueprintPropertyMapping]
+
+
+class GameplayTagBlueprintPropertyMapping(StructBase):
+    TagToMap: GameplayTag
+    PropertyToEdit: FieldPath
+    PropertyName: str
+    PropertyGuid: str
+
+
 class GameplayTagCategoryRemap(StructBase):
     BaseCategory: str
     RemapCategories: list[str]
 
+
+class GameplayTagChangedEventWrapperSpecHandle(StructBase):
+    ...
 
 class GameplayTagContainer(StructBase):
     GameplayTags: list[GameplayTag]
@@ -31887,6 +33890,16 @@ class GameplayTagContainerMatchConditionInstanceData(StructBase):
 
 class GameplayTagContainerNetSerializerSerializationHelper(StructBase):
     GameplayTags: list[GameplayTag]
+
+
+class GameplayTagCountContainer(StructBase):
+    Owner: AbilitySystemComponent
+
+
+class GameplayTagCountItem(StructBase):
+    Tag: GameplayTag
+    Count: int
+    ReplicationState: EGameplayTagReplicationState
 
 
 class GameplayTagCreationWidgetHelper(StructBase):
@@ -31917,6 +33930,24 @@ class GameplayTagRedirect(StructBase):
     NewTagName: str
 
 
+class GameplayTagReponsePair(StructBase):
+    Tag: GameplayTag
+    ResponseGameplayEffect: Class | type
+    ResponseGameplayEffects: list[Class]
+    SoftCountCap: int
+
+
+class GameplayTagRequirements(StructBase):
+    RequireTags: GameplayTagContainer
+    IgnoreTags: GameplayTagContainer
+    TagQuery: GameplayTagQuery
+
+
+class GameplayTagResponseTableEntry(StructBase):
+    Positive: GameplayTagReponsePair
+    Negative: GameplayTagReponsePair
+
+
 class GameplayTagSingleMatchConditionInstanceData(StructBase):
     Left: GameplayTag
     Right: GameplayTag
@@ -31928,6 +33959,16 @@ class GameplayTagSource(StructBase):
     SourceTagList: GameplayTagsList
     SourceRestrictedTagList: RestrictedGameplayTagsList
 
+
+class GameplayTargetDataFilter(StructBase):
+    SelfActor: Actor
+    RequiredActorClass: Class | type
+    SelfFilter: ETargetDataFilterSelf
+    bReverseFilter: bool
+
+
+class GameplayTargetDataFilterHandle(StructBase):
+    ...
 
 class GatherTextCommandletPhase(StructBase):
     SequentialTasks: list[GatherTextCommandletTask]
@@ -34194,6 +36235,10 @@ class HitResult(StructBase):
     MyBoneName: str
 
 
+class HttpHeader(StructBase):
+    Headers: dict[str, str]
+
+
 class IKChain(StructBase):
     ...
 
@@ -34586,6 +36631,12 @@ class InertializationRequest(StructBase):
     DescriptionString: str
     NodeId: int
     AnimInstance: Object
+
+
+class InheritedTagContainer(StructBase):
+    CombinedTags: GameplayTagContainer
+    Added: GameplayTagContainer
+    Removed: GameplayTagContainer
 
 
 class IniStringValue(StructBase):
@@ -36149,6 +38200,14 @@ class LinearColor(StructBase):
         ...
 
     @overload
+    def __itruediv__(self, Color: LinearColor) -> LinearColor:
+        ...
+
+    @overload
+    def __itruediv__(self, Scalar: float) -> LinearColor:
+        ...
+
+    @overload
     def __mul__(self, Color: LinearColor) -> LinearColor:
         ...
 
@@ -36208,6 +38267,18 @@ class LiveLinkBaseStaticData(StructBase):
     PropertyNames: list[str]
 
 
+class LiveLinkByteArray(StructBase):
+    Bytes: list[int]
+
+
+class LiveLinkClearSubject(StructBase):
+    SubjectName: str
+
+
+class LiveLinkConnectMessage(StructBase):
+    LiveLinkVersion: int
+
+
 class LiveLinkCurveConversionSettings(StructBase):
     CurveConversionAssetMap: dict[str, SoftObjectPath]
 
@@ -36217,11 +38288,38 @@ class LiveLinkCurveElement(StructBase):
     CurveValue: float
 
 
+class LiveLinkDeviceCreateError(StructBase):
+    ...
+
+class LiveLinkDeviceCreateResult(StructBase):
+    DeviceId: str
+    Device: LiveLinkDevice
+
+
+class LiveLinkDevicePreset(StructBase):
+    DeviceGuid: str
+    DeviceClass: Class | type
+    DeviceSettings: LiveLinkDeviceSettings
+    DeviceCapabilityData: dict[Class, Object]
+
+
 class LiveLinkFrameData(StructBase):
     Transforms: list[Transform]
     CurveElements: list[LiveLinkCurveElement]
     WorldTime: LiveLinkWorldTime
     MetaData: LiveLinkMetaData
+
+
+class LiveLinkHeartbeatMessage(StructBase):
+    ...
+
+class LiveLinkInnerTestInternal(StructBase):
+    InnerSingleFloat: float
+    InnerSingleInt: int
+    InnerVectorDim: Vector
+    InnerFloatDim: float
+    InnerIntDim: int
+    InnerIntArray: list[int]
 
 
 class LiveLinkInterpolationSettings(StructBase):
@@ -36233,9 +38331,52 @@ class LiveLinkMetaData(StructBase):
     SceneTime: QualifiedFrameTime
 
 
+class LiveLinkPingMessage(StructBase):
+    PollRequest: str
+    LiveLinkVersion: int
+    DiscoveryProtocolVersion: int
+
+
+class LiveLinkPongMessage(StructBase):
+    ProviderName: str
+    MachineName: str
+    PollRequest: str
+    LiveLinkVersion: int
+    DiscoveryProtocolVersion: int
+    CreationPlatformTime: float
+
+
+class LiveLinkPropertyData(StructBase):
+    PropertyName: str
+    FloatChannel: list[MovieSceneFloatChannel]
+    StringChannel: list[MovieSceneStringChannel]
+    IntegerChannel: list[MovieSceneIntegerChannel]
+    BoolChannel: list[MovieSceneBoolChannel]
+    ByteChannel: list[MovieSceneByteChannel]
+
+
 class LiveLinkRefSkeleton(StructBase):
     BoneNames: list[str]
     BoneParents: list[int]
+
+
+class LiveLinkRetargetAssetReference(StructBase):
+    ...
+
+class LiveLinkRoleProjectSetting(StructBase):
+    Role: Class | type
+    SettingClass: Class | type
+    FrameInterpolationProcessor: Class | type
+    FramePreProcessors: list[Class]
+
+
+class LiveLinkSerializedFrameData(StructBase):
+    PayloadTypeName: str
+    SerializationMethod: ELiveLinkPayloadSerializationMethod
+    CompressionMethod: ELiveLinkCompressionMethod
+    CompressionBias: ELiveLinkCompressionBias
+    PayloadSize: int
+    PayloadBytes: LiveLinkByteArray
 
 
 class LiveLinkSourceBufferManagementSettings(StructBase):
@@ -36272,6 +38413,23 @@ class LiveLinkSourcePreset(StructBase):
     SourceType: str
 
 
+class LiveLinkSubSectionData(StructBase):
+    Properties: list[LiveLinkPropertyData]
+
+
+class LiveLinkSubjectDataMessage(StructBase):
+    RefSkeleton: LiveLinkRefSkeleton
+    SubjectName: str
+
+
+class LiveLinkSubjectFrameMessage(StructBase):
+    SubjectName: str
+    Transforms: list[Transform]
+    Curves: list[LiveLinkCurveElement]
+    MetaData: LiveLinkMetaData
+    Time: float
+
+
 class LiveLinkSubjectKey(StructBase):
     Source: str
     SubjectName: LiveLinkSubjectName
@@ -36286,6 +38444,11 @@ class LiveLinkSubjectPreset(StructBase):
     Role: Class | type
     Settings: LiveLinkSubjectSettings
     VirtualSubject: LiveLinkVirtualSubject
+    bEnabled: bool
+
+
+class LiveLinkSubjectProperty(StructBase):
+    SubjectName: str
     bEnabled: bool
 
 
@@ -36312,6 +38475,24 @@ class LiveLinkTimeSynchronizationSettings(StructBase):
 
 class LiveLinkTransform(StructBase):
     ...
+
+class LiveLinkTransformControllerData(StructBase):
+    bWorldTransform: bool
+    bUseLocation: bool
+    bUseRotation: bool
+    bUseScale: bool
+    bSweep: bool
+    bTeleport: bool
+
+
+class LiveLinkVirtualSubjectBoneAttachment(StructBase):
+    ParentSubject: LiveLinkSubjectName
+    ParentBone: str
+    ChildSubject: LiveLinkSubjectName
+    ChildBone: str
+    LocationOffset: Vector
+    RotationOffset: Rotator
+
 
 class LiveLinkWorldTime(StructBase):
     Time: float
@@ -38565,6 +40746,23 @@ class MinSettings(StructBase):
     MinColor: LinearColor
 
 
+class MinimalGameplayCueReplicationProxy(StructBase):
+    Owner: AbilitySystemComponent
+
+
+class MinimalGameplayCueReplicationProxyForNetSerializer(StructBase):
+    Tags: list[GameplayTag]
+    Locations: list[Vector_NetQuantize]
+
+
+class MinimalReplicationTagCountMap(StructBase):
+    Owner: AbilitySystemComponent
+
+
+class MinimalReplicationTagCountMapForNetSerializer(StructBase):
+    Tags: list[GameplayTag]
+
+
 class MinimalViewInfo(StructBase):
     Location: Vector
     Rotation: Rotator
@@ -38638,6 +40836,10 @@ class ModelingToolsColorChannelFilter(StructBase):
     bGreen: bool
     bBlue: bool
     bAlpha: bool
+
+
+class ModifierSpec(StructBase):
+    EvaluatedMagnitude: float
 
 
 class ModifyContextOptions(StructBase):
@@ -39206,6 +41408,20 @@ class MovieSceneFloatValue(StructBase):
 
 class MovieSceneFrameRange(StructBase):
     ...
+
+class MovieSceneGameplayCueKey(StructBase):
+    Cue: GameplayCueTag
+    Location: Vector
+    Normal: Vector
+    AttachSocketName: str
+    NormalizedMagnitude: float
+    Instigator: MovieSceneObjectBindingID
+    EffectCauser: MovieSceneObjectBindingID
+    PhysicalMaterial: PhysicalMaterial
+    GameplayEffectLevel: int
+    AbilityLevel: int
+    bAttachToBinding: bool
+
 
 class MovieSceneGeometryCacheParams(StructBase):
     GeometryCacheAsset: GeometryCache
@@ -40462,6 +42678,10 @@ class NetDriverReplicationSystemConfig(StructBase):
     bAllowParallelTasks: bool
 
 
+class NetGameplayTagCountContainerStateForNetSerialize(StructBase):
+    TagStates: list[GameplayTagCountItem]
+
+
 class NetLevelVisibilityTransactionId(StructBase):
     Data: int
 
@@ -40483,6 +42703,11 @@ class NetObjectPrioritizerDefinition(StructBase):
     Class: Class | type
     ConfigClassName: str
     ConfigClass: Class | type
+
+
+class NetSerializeScriptStructCache(StructBase):
+    ScriptStructs: list[ScriptStruct]
+    BaseStructType: ScriptStruct
 
 
 class NetSerializerConfig(StructBase):
@@ -42702,6 +44927,9 @@ class NodeTemplateGenerateInterfaceParams(StructBase):
 class NodeToCodeAssociation(StructBase):
     ...
 
+class ObjectChooserBase(StructBase):
+    ...
+
 class ObjectCookedMetaDataStore(StructBase):
     ObjectMetaData: dict[str, str]
 
@@ -43082,6 +45310,12 @@ class Optimus_ShaderBinding(StructBase):
 class OptionalMovieSceneBlendType(StructBase):
     BlendType: EMovieSceneBlendType
     bIsValid: bool
+
+
+class OptionalPin(StructBase):
+    PinName: str
+    PinDefaultValue: str
+    LinkedTo: EdGraphPinReference
 
 
 class OptionalPinFromProperty(StructBase):
@@ -45892,6 +48126,11 @@ class PreSetSkeletalMeshParams(StructBase):
     SkeletalMesh: SkeletalMesh
 
 
+class PreallocationInfo(StructBase):
+    PreallocatedInstances: dict[Class, GameplayCueNotifyActorArray]
+    ClassesNeedingPreallocation: list[Class]
+
+
 class PredictProjectilePathParams(StructBase):
     StartLocation: Vector
     LaunchVelocity: Vector
@@ -45919,6 +48158,12 @@ class PredictProjectilePathResult(StructBase):
     PathData: list[PredictProjectilePathPointData]
     LastTraceDestination: PredictProjectilePathPointData
     HitResult: HitResult
+
+
+class PredictionKey(StructBase):
+    Current: int
+    Base: int
+    bIsServerInitiated: bool
 
 
 class PreviewAssetAttachContainer(StructBase):
@@ -46369,6 +48614,26 @@ class PropertyTextFName(StructBase):
 
 class PropertyTextString(StructBase):
     ...
+
+class ProviderPollResult(StructBase):
+    Name: str
+    MachineName: str
+    MachineTimeOffset: float
+    bIsValidProvider: bool
+    DiscoveryProtocolVersion: int
+
+
+class ProxyEntry(StructBase):
+    Proxy: ProxyAsset
+    Key: str
+    ValueStruct: InstancedStruct
+    OutputStructData: list[ProxyStructOutput]
+
+
+class ProxyStructOutput(StructBase):
+    Binding: ChooserStructPropertyBinding
+    Value: InstancedStruct
+
 
 class PurchaseInfo(StructBase):
     Identifier: str
@@ -49120,6 +51385,12 @@ class RuntimePartitionStreamingData(StructBase):
     NonSpatiallyLoadedCells: list[WorldPartitionRuntimeCell]
 
 
+class RuntimeProxyValue(StructBase):
+    ProxyAsset: ProxyAsset
+    Value: InstancedStruct
+    OutputStructData: list[ProxyStructOutput]
+
+
 class RuntimeVectorCurve(StructBase):
     VectorCurves: RichCurve
     ExternalCurve: CurveVector
@@ -49142,6 +51413,12 @@ class SampleTrackMemoryData(StructBase):
     Buffer: list[int]
     Names: list[str]
     ObjectPaths: list[str]
+
+
+class ScalableFloat(StructBase):
+    Value: float
+    Curve: CurveTableRowHandle
+    RegistryType: DataRegistryType
 
 
 class ScalarMaterialParameterInfoAndCurve(StructBase):
@@ -49182,6 +51459,228 @@ class ScaleTrack(StructBase):
 class SceneOutlinerConfig(StructBase):
     ColumnVisibilities: dict[str, bool]
     bShouldStackHierarchyHeaders: bool
+
+
+class SceneState(StructBase):
+    Parameters: InstancedPropertyBag
+    BindingsBatch: PropertyBindingIndex16
+    TaskRange: SceneStateRange
+    StateMachineRange: SceneStateRange
+    TransitionRange: SceneStateRange
+    EventHandlerRange: SceneStateRange
+
+
+class SceneStateActorTemplate(StructBase):
+    Template: Actor
+
+
+class SceneStateBindingDataHandle(StructBase):
+    Type: int
+    Index: int
+    SubIndex: int
+
+
+class SceneStateBindingFunction(StructBase):
+    FunctionId: str
+    Function: InstancedStruct
+    FunctionInstance: InstancedStruct
+
+
+class SceneStateBindingReference(StructBase):
+    SourcePropertyPath: PropertyBindingPath
+    SourceDataHandle: SceneStateBindingDataHandle
+
+
+class SceneStateBindingResolvedReference(StructBase):
+    SourceIndirection: PropertyBindingPropertyIndirection
+    SourceStructType: Struct
+    SourceDataHandle: SceneStateBindingDataHandle
+
+
+class SceneStateBooleanNotFunctionInstance(StructBase):
+    bInput: bool
+    bOutput: bool
+
+
+class SceneStateBooleanOpFunctionInstance(StructBase):
+    bLeft: bool
+    bRight: bool
+    bOutput: bool
+
+
+class SceneStateConcatenateStringFunctionInstance(StructBase):
+    Left: str
+    Right: str
+    Output: str
+
+
+class SceneStateConduit(StructBase):
+    TransitionRange: SceneStateRange
+    EvaluationFlags: ESceneStateTransitionEvaluationFlags
+    EvaluationEvent: Function
+
+
+class SceneStateConduitInstance(StructBase):
+    bInitialized: bool
+
+
+class SceneStateConduitLink(StructBase):
+    EventName: str
+    ResultPropertyName: str
+
+
+class SceneStateDoubleOpFunctionInstance(StructBase):
+    Left: float
+    Right: float
+    Output: float
+
+
+class SceneStateEvent(StructBase):
+    Id: str
+    Data: InstancedStruct
+
+
+class SceneStateEventHandler(StructBase):
+    HandlerId: str
+    SchemaHandle: SceneStateEventSchemaHandle
+
+
+class SceneStateEventSchemaHandle(StructBase):
+    EventSchema: SceneStateEventSchemaObject
+    EventStruct: UserDefinedStruct
+
+
+class SceneStateEventTemplate(StructBase):
+    EventSchemaHandle: SceneStateEventSchemaHandle
+    EventData: InstancedStruct
+
+
+class SceneStateExecutionContext(StructBase):
+    ContextObjectWeak: Object
+    EventStreamWeak: SceneStateEventStream
+    RootObject: SceneStateObject
+    ContextName: str
+    TemplateData: SceneStateTemplateData
+    StateInstances: dict[int, SceneStateInstance]
+    StateMachineInstances: dict[int, SceneStateMachineInstance]
+    TransitionInstances: dict[int, SceneStateTransitionInstance]
+    ConduitInstances: dict[int, SceneStateConduitInstance]
+    FunctionInstanceBatches: dict[PropertyBindingIndex16, SceneStateFunctionInstanceBatch]
+
+
+class SceneStateFromStringFunctionInstance(StructBase):
+    String: str
+
+
+class SceneStateFunction(StructBase):
+    BindingsBatch: PropertyBindingIndex16
+
+
+class SceneStateFunctionInstanceBatch(StructBase):
+    FunctionRange: SceneStateRange
+    FunctionInstances: InstancedStructContainer
+
+
+class SceneStateFunctionMetadata(StructBase):
+    FunctionId: str
+
+
+class SceneStateInstance(StructBase):
+    Parameters: InstancedPropertyBag
+    TaskInstances: InstancedStructContainer
+
+
+class SceneStateIntegerOpFunctionInstance(StructBase):
+    Left: int
+    Right: int
+    Output: int
+
+
+class SceneStateMachine(StructBase):
+    Parameters: InstancedPropertyBag
+    BindingsBatch: PropertyBindingIndex16
+    StateRange: SceneStateRange
+    ConduitRange: SceneStateRange
+    EntryIndex: int
+
+
+class SceneStateMachineInstance(StructBase):
+    Parameters: InstancedPropertyBag
+
+
+class SceneStateMetadata(StructBase):
+    StateName: str
+
+
+class SceneStatePrintSettings(StructBase):
+    bPrintToLog: bool
+    bPrintToScreen: bool
+    TextColor: LinearColor
+    Duration: float
+    Key: str
+
+
+class SceneStatePropertyReference(StructBase):
+    ReferenceIndex: int
+
+
+class SceneStateRange(StructBase):
+    Index: int
+    Count: int
+
+
+class SceneStateTask(StructBase):
+    BindingsBatch: PropertyBindingIndex16
+    ParentStateIndex: int
+    TaskIndex: int
+    PrerequisiteRange: SceneStateRange
+
+
+class SceneStateTaskBindingExtension(StructBase):
+    ...
+
+class SceneStateTaskDesc(StructBase):
+    SupportedTask: ScriptStruct
+
+
+class SceneStateTaskInstance(StructBase):
+    ...
+
+class SceneStateTaskMetadata(StructBase):
+    TaskId: str
+
+
+class SceneStateToStringFunctionInstance(StructBase):
+    Output: str
+
+
+class SceneStateTransition(StructBase):
+    BindingsBatch: PropertyBindingIndex16
+    Target: SceneStateTransitionTarget
+    EvaluationFlags: ESceneStateTransitionEvaluationFlags
+    EvaluationEvent: Function
+
+
+class SceneStateTransitionInstance(StructBase):
+    Parameters: InstancedPropertyBag
+
+
+class SceneStateTransitionLink(StructBase):
+    EventName: str
+    ResultPropertyName: str
+
+
+class SceneStateTransitionMetadata(StructBase):
+    ParametersId: str
+
+
+class SceneStateTransitionResult(StructBase):
+    bCanTransition: bool
+
+
+class SceneStateTransitionTarget(StructBase):
+    Type: ESceneStateTransitionTargetType
+    Index: int
 
 
 class SceneViewExtensionIsActiveFunctor(StructBase):
@@ -49266,6 +51765,27 @@ class SemanticTags(StructBase):
 
 class SequenceRecorderActorFilter(StructBase):
     ActorClassesToRecord: list[Class]
+
+
+class SequenceSemanticFixtureNestedStruct(StructBase):
+    Count: int
+    Label: str
+
+
+class SequenceSemanticFixturePostSerializedStruct(StructBase):
+    ReflectedValue: int
+
+
+class SequenceSemanticFixtureSerializedStruct(StructBase):
+    ReflectedValue: int
+
+
+class SequenceSemanticFixtureStructuredSerializedStruct(StructBase):
+    ReflectedValue: int
+
+
+class SequenceSemanticFixtureTextSerializedStruct(StructBase):
+    ReflectedValue: int
 
 
 class SequenceTickManagerWidgetData(StructBase):
@@ -49353,6 +51873,15 @@ class SerializedSolverScene(StructBase):
     CollisionMidPhaseData: list[ChaosVDParticlePairMidPhase]
 
 
+class ServerAbilityRPCBatch(StructBase):
+    AbilitySpecHandle: GameplayAbilitySpecHandle
+    PredictionKey: PredictionKey
+    TargetData: GameplayAbilityTargetDataHandle
+    InputPressed: bool
+    Ended: bool
+    Started: bool
+
+
 class SessionPing(StructBase):
     ControllerInstanceId: str
 
@@ -49393,6 +51922,11 @@ class SessionServicePong(StructBase):
     SessionName: str
     SessionOwner: str
     Standalone: bool
+
+
+class SetByCallerFloat(StructBase):
+    DataName: str
+    DataTag: GameplayTag
 
 
 class SettingsForActorClass(StructBase):
@@ -50114,6 +52648,12 @@ class SocketReference(StructBase):
 class SoftAnimBankItem(StructBase):
     BankAsset: AnimBank
     SequenceIndex: int
+
+
+class SoftDataRegistryOrTable(StructBase):
+    bUseDataRegistry: bool
+    Table: DataTable
+    RegistryType: DataRegistryType
 
 
 class SoftObjectPath(StructBase):
@@ -52291,6 +54831,11 @@ class TableRowBase(StructBase):
 class TagAndValue(StructBase):
     Tag: str
     Value: str
+
+
+class TagContainerAggregator(StructBase):
+    CapturedActorTags: GameplayTagContainer
+    CapturedSpecTags: GameplayTagContainer
 
 
 class TaggedAssetBrowserConfigurationDataBase(StructBase):
@@ -54503,6 +57048,14 @@ class Vector(StructBase):
         ...
 
     @overload
+    def __itruediv__(self, Scale: float) -> Vector:
+        ...
+
+    @overload
+    def __itruediv__(self, V: Vector) -> Vector:
+        ...
+
+    @overload
     def __mul__(self, Scale: float) -> Vector:
         ...
 
@@ -54627,6 +57180,14 @@ class Vector2D(StructBase):
         ...
 
     def __isub__(self, V: Vector2D) -> Vector2D:
+        ...
+
+    @overload
+    def __itruediv__(self, V: Vector2D) -> Vector2D:
+        ...
+
+    @overload
+    def __itruediv__(self, Scale: float) -> Vector2D:
         ...
 
     @overload
@@ -55517,6 +58078,10 @@ class WorldPartitionUpdateStreamingTargetState(StructBase):
     ToUnloadCells: list[WorldPartitionRuntimeCell]
 
 
+class WorldReticleParameters(StructBase):
+    AOEScale: Vector
+
+
 class WrapButtonStyle(StructBase):
     Padding: Margin
     WrapButtonIndex: int
@@ -55636,6 +58201,32 @@ class ActionButtonStyle(SlateWidgetStyle):
     IconPressedPadding: Any
     ActionButtonType: str
     IconButtonStyle: Any
+
+
+class ActiveGameplayCue(FastArraySerializerItem):
+    GameplayCueTag: GameplayTag
+    PredictionKey: PredictionKey
+    Parameters: GameplayCueParameters
+    bPredictivelyRemoved: bool
+
+
+class ActiveGameplayCueContainer(FastArraySerializer):
+    GameplayCues: list[ActiveGameplayCue]
+    Owner: AbilitySystemComponent
+
+
+class ActiveGameplayEffect(FastArraySerializerItem):
+    Spec: GameplayEffectSpec
+    PredictionKey: PredictionKey
+    GrantedAbilityHandles: list[GameplayAbilitySpecHandle]
+    StartServerWorldTime: float
+    CachedStartServerWorldTime: float
+    StartWorldTime: float
+    bIsInhibited: bool
+
+
+class ActiveGameplayEffectsContainer(FastArraySerializer):
+    GameplayEffects_Internal: list[ActiveGameplayEffect]
 
 
 class ActorComponentInstanceData(InstanceCacheDataBase):
@@ -56093,6 +58684,13 @@ class AnimNode_BlendSpaceGraphBase(AnimNode_Base):
     SamplePoseLinks: list[PoseLink]
 
 
+class AnimNode_BlendStackInput(AnimNode_Base):
+    SampleIndex: int
+    BlendStackAllocationIndex: int
+    bOverridePlayRate: bool
+    PlayRate: float
+
+
 class AnimNode_CallFunction(AnimNode_Base):
     Source: PoseLink
     Function: AnimNodeFunctionRef
@@ -56200,6 +58798,14 @@ class AnimNode_LinkedInputPose(AnimNode_Base):
     bIsOutputLinked: bool
 
 
+class AnimNode_LiveLinkPose(AnimNode_Base):
+    InputPose: PoseLink
+    LiveLinkSubjectName: LiveLinkSubjectName
+    bDoLiveLinkEvaluation: bool
+    RetargetAsset: Class | type
+    CurrentRetargetAsset: LiveLinkRetargetAsset
+
+
 class AnimNode_MakeDynamicAdditive(AnimNode_Base):
     Base: PoseLink
     Additive: PoseLink
@@ -56241,6 +58847,16 @@ class AnimNode_PreviewRetargetPose(AnimNode_Base):
 
 class AnimNode_RefPose(AnimNode_Base):
     RefPoseType: ERefPoseType
+
+
+class AnimNode_RemapCurvesBase(AnimNode_Base):
+    SourcePose: PoseLink
+    ExpressionSource: ERemapCurvesExpressionSource
+    ExpressionList: CurveExpressionList
+    CurveExpressionsDataAsset: CurveExpressionsDataAsset
+    CurveExpressions: dict[str, str]
+    bExpressionsImmutable: bool
+    CachedConstantNames: list[str]
 
 
 class AnimNode_RemoveCurve(AnimNode_Base):
@@ -56527,6 +59143,10 @@ class ArrayPropertyNetSerializerConfig(NetSerializerConfig):
     Property: FieldPath
 
 
+class AssetChooser(ObjectChooserBase):
+    Asset: Object
+
+
 class AssetClassColumn(EditorDataStorageColumn):
     ClassPath: TopLevelAssetPath
 
@@ -56586,6 +59206,14 @@ class AttributeCurve(IndexedCurve):
     ScriptStructPath: SoftObjectPath
     ScriptStruct: ScriptStruct
     bShouldInterpolate: bool
+
+
+class AttributeMetaData(TableRowBase):
+    BaseValue: float
+    MinValue: float
+    MaxValue: float
+    DerivedAttributeInfo: str
+    bCanStack: bool
 
 
 class AttributePayload(EmptyPayload):
@@ -57009,6 +59637,12 @@ class BlendSpacePlayerReference(AnimNodeReference):
 class BlendSpaceReference(AnimNodeReference):
     ...
 
+class BlendStackAnimNodeReference(AnimNodeReference):
+    ...
+
+class BlendStackInputAnimNodeReference(AnimNodeReference):
+    ...
+
 class BlueprintActionMenuItem(EdGraphSchemaAction):
     ...
 
@@ -57127,6 +59761,12 @@ class BoolAlphaInputTraitArgs(AnimNextTraitSharedData):
 class BoolArrayToFaceSelectionDataflowNode(DataflowNode):
     BoolAttributeData: list[bool]
     FaceSelection: DataflowFaceSelection
+
+
+class BoolColumn(ChooserColumnBase):
+    InputValue: InstancedStruct
+    DefaultRowValue: EBoolColumnCellValue
+    RowValuesWithAny: list[EBoolColumnCellValue]
 
 
 class BoolNetSerializerConfig(NetSerializerConfig):
@@ -57834,11 +60474,74 @@ class CheckBoxStyle(SlateWidgetStyle):
     HoveredSlateSound: SlateSound
 
 
+class ChooserEnumPropertyBinding(ChooserPropertyBinding):
+    Enum: Enum
+
+
+class ChooserNameColumn(ChooserColumnBase):
+    InputValue: InstancedStruct
+    DefaultRowValue: ChooserNameRowData
+    RowValues: list[ChooserNameRowData]
+
+
+class ChooserObjectPropertyBinding(ChooserPropertyBinding):
+    AllowedClass: Class | type
+
+
+class ChooserOutputNameColumn(ChooserColumnBase):
+    InputValue: InstancedStruct
+    RowValues: list[str]
+    FallbackValue: str
+    DefaultRowValue: str
+
+
+class ChooserParameterBoolBase(ChooserParameterBase):
+    ...
+
+class ChooserParameterEnumBase(ChooserParameterBase):
+    ...
+
+class ChooserParameterFloatBase(ChooserParameterBase):
+    ...
+
+class ChooserParameterGameplayTagBase(ChooserParameterBase):
+    ...
+
+class ChooserParameterGameplayTagQueryBase(ChooserParameterBase):
+    ...
+
+class ChooserParameterNameBase(ChooserParameterBase):
+    ...
+
+class ChooserParameterObjectBase(ChooserParameterBase):
+    ...
+
+class ChooserParameterProxyTableBase(ChooserParameterBase):
+    ...
+
+class ChooserParameterRandomizeBase(ChooserParameterBase):
+    ...
+
+class ChooserParameterStructBase(ChooserParameterBase):
+    ...
+
+class ChooserPlayerInitializer(ChooserInitializer):
+    AnimClass: Class | type
+
+
+class ChooserStructPropertyBinding(ChooserPropertyBinding):
+    StructType: ScriptStruct
+
+
 class ClampDataflowNode(DataflowNode):
     Float: float
     Min: float
     Max: float
     ReturnValue: float
+
+
+class ClassChooser(ObjectChooserBase):
+    Class: Class | type
 
 
 class ClearConvexHullsDataflowNode(DataflowNode):
@@ -58582,6 +61285,14 @@ class ConstraintTickFunction(TickFunction):
 class ContentSourceColumn(EditorDataStorageColumn):
     ...
 
+class ContextObjectTypeClass(ContextObjectTypeBase):
+    Class: Class | type
+
+
+class ContextObjectTypeStruct(ContextObjectTypeBase):
+    Struct: ScriptStruct
+
+
 class ControlRigAnimInstanceProxy(AnimInstanceProxy):
     ...
 
@@ -58859,6 +61570,31 @@ class CustomizedToolMenu(ToolMenuProfile):
     SectionOrder: list[str]
 
 
+class DMXEntityControllerRef(DMXEntityReference):
+    ...
+
+class DMXEntityFixturePatchRef(DMXEntityReference):
+    ...
+
+class DMXEntityFixtureTypeRef(DMXEntityReference):
+    ...
+
+class DMXRawArtNetRequest(DMXRequestBase):
+    Net: int
+    SubNet: int
+    Universe: int
+    Address: int
+
+
+class DMXRawSACN(DMXRequestBase):
+    Universe: int
+    Address: int
+
+
+class DMXRequest(DMXRequestBase):
+    DMXLibrary: Class | type
+
+
 class DPMatchingRulestruct(DPMatchingRulestructBase):
     OnTrue: list[DPMatchingRulestructE]
     OnFalse: list[DPMatchingRulestructE]
@@ -58891,6 +61627,10 @@ class DPMatchingRulestructE(DPMatchingRulestructBase):
 
 class DataHierarchyElementMetaData_SectionAssociation(DataHierarchyElementMetaData):
     Section: HierarchySection
+
+
+class DataRegistryIdEditWrapper(PinStructEditWrapper):
+    RegistryId: DataRegistryId
 
 
 class DataStorageClassTypeInfoTag(EditorDataStorageTag):
@@ -60502,6 +63242,9 @@ class EncodeRootBoneWeightedBoneAxis(EncodeRootBoneWeightedBone):
 class EndPhysicsTickFunction(TickFunction):
     ...
 
+class EnumColumnBase(ChooserColumnBase):
+    ...
+
 class EnumInt16NetSerializerConfig(NetSerializerConfig):
     LowerBound: int
     UpperBound: int
@@ -60572,6 +63315,10 @@ class EscalationState(StateStruct):
     AutoEscalateTime: int
     HighestTimePeriod: int
     AllTimePeriods: list[int]
+
+
+class EvaluateChooser(ObjectChooserBase):
+    Chooser: ChooserTable
 
 
 class ExpDataflowNode(DataflowNode):
@@ -60792,6 +63539,19 @@ class FloatCurve(AnimCurveBase):
     FloatCurve: RichCurve
 
 
+class FloatDistanceColumn(ChooserColumnBase):
+    InputValue: InstancedStruct
+    MaxDistance: float
+    CostMultiplier: float
+    bFilterOverMaxDistance: bool
+    bWrapInput: bool
+    MinValue: float
+    MaxValue: float
+    DefaultRowValue: ChooserFloatDistanceRowData
+    AutoPopulator: Class | type
+    RowValues: list[ChooserFloatDistanceRowData]
+
+
 class FloatMathExpressionDataflowNode(DataflowNode):
     A: float
     B: float
@@ -60808,6 +63568,15 @@ class FloatOverrideDataflowNode(DataflowNode):
     PropertyName: str
     KeyName: str
     ValueOut: float
+
+
+class FloatRangeColumn(ChooserColumnBase):
+    InputValue: InstancedStruct
+    bWrapInput: bool
+    MinValue: float
+    MaxValue: float
+    DefaultRowValue: ChooserFloatRangeRowData
+    RowValues: list[ChooserFloatRangeRowData]
 
 
 class FloatToDoubleDataflowNode(DataflowNode):
@@ -60872,11 +63641,98 @@ class FrameRateChangedPayload(EmptyPayload):
     PreviousFrameRate: FrameRate
 
 
+class GameplayAbilityAuditRow(TableRowBase):
+    ActivationPath: EGameplayAbilityActivationPath
+    InstancingPolicy: EGameplayAbilityInstancingPolicy
+    NetExecutionPolicy: EGameplayAbilityNetExecutionPolicy
+    NetSecurityPolicy: EGameplayAbilityNetSecurityPolicy
+    ReplicationPolicy: EGameplayAbilityReplicationPolicy
+    AssetTags: list[str]
+    CostGE: str
+    CooldownGE: str
+    bOverridesCanActivate: bool
+    bOverridesShouldAbilityRespondToEvent: bool
+    bChecksCostManually: bool
+    bCommitAbility: bool
+    EndAbility: EGameplayAbilityEndInBlueprints
+    ReferencedTags: list[str]
+    Functions: list[str]
+    AsyncTasks: list[str]
+    MutatedVariables: list[str]
+
+
+class GameplayAbilityRepAnimMontageNetSerializerConfig(NetSerializerConfig):
+    ...
+
+class GameplayAbilitySpec(FastArraySerializerItem):
+    Handle: GameplayAbilitySpecHandle
+    Ability: GameplayAbility
+    Level: int
+    InputID: int
+    SourceObject: Object
+    ActiveCount: int
+    InputPressed: bool
+    RemoveAfterActivation: bool
+    PendingRemove: bool
+    bActivateOnce: bool
+    ActivationInfo: GameplayAbilityActivationInfo
+    DynamicAbilityTags: GameplayTagContainer
+    DynamicAbilityTriggers: list[AbilityTriggerData]
+    NonReplicatedInstances: list[GameplayAbility]
+    ReplicatedInstances: list[GameplayAbility]
+    GameplayEffectHandle: ActiveGameplayEffectHandle
+
+
+class GameplayAbilitySpecContainer(FastArraySerializer):
+    Items: list[GameplayAbilitySpec]
+    Owner: AbilitySystemComponent
+
+
+class GameplayAbilityTargetData_ActorArray(GameplayAbilityTargetData):
+    SourceLocation: GameplayAbilityTargetingLocationInfo
+    TargetActorArray: list[Actor]
+
+
+class GameplayAbilityTargetData_LocationInfo(GameplayAbilityTargetData):
+    SourceLocation: GameplayAbilityTargetingLocationInfo
+    TargetLocation: GameplayAbilityTargetingLocationInfo
+
+
+class GameplayAbilityTargetData_SingleTargetHit(GameplayAbilityTargetData):
+    HitResult: HitResult
+    bHitReplaced: bool
+
+
+class GameplayAbilityTargetingLocationInfoNetSerializerConfig(NetSerializerConfig):
+    ...
+
+class GameplayEffectContextNetSerializerConfig(NetSerializerConfig):
+    ...
+
+class GameplayTagColumn(ChooserColumnBase):
+    InputValue: InstancedStruct
+    TagMatchType: EGameplayContainerMatchType
+    TagMatchDirection: EGameplayTagMatchDirection
+    bMatchExact: bool
+    bInvertMatchingLogic: bool
+    DefaultRowValue: GameplayTagContainer
+    RowValues: list[GameplayTagContainer]
+
+
 class GameplayTagContainerNetSerializerConfig(NetSerializerConfig):
+    ...
+
+class GameplayTagCountContainerNetSerializerConfig(NetSerializerConfig):
     ...
 
 class GameplayTagNetSerializerConfig(NetSerializerConfig):
     ...
+
+class GameplayTagQueryColumn(ChooserColumnBase):
+    InputValue: InstancedStruct
+    DefaultRowValue: GameplayTagQuery
+    RowValues: list[GameplayTagQuery]
+
 
 class GameplayTagTableRow(TableRowBase):
     Tag: str
@@ -60945,6 +63801,12 @@ class GenerateCurveGeometryDataflowNode(DataflowNode):
 class GenerateGuidesCurvesDataflowNode(DataflowNode):
     Collection: ManagedArrayCollection
     GuidesCount: int
+
+
+class GenericChooserInitializer(ChooserInitializer):
+    ResultType: EObjectChooserResultType
+    OutputObjectType: Class | type
+    ContextData: list[InstancedStruct]
 
 
 class GeometryCollectionSetKinematicVertexSelectionNode(DataflowNode):
@@ -61959,6 +64821,10 @@ class LiveLinkGamepadInputDeviceFrameData(LiveLinkBaseFrameData):
 class LiveLinkGamepadInputDeviceStaticData(LiveLinkBaseStaticData):
     ...
 
+class LiveLinkInstanceProxy(AnimInstanceProxy):
+    PoseNode: AnimNode_LiveLinkPose
+
+
 class LiveLinkLightBlueprintData(LiveLinkBaseBlueprintData):
     StaticData: LiveLinkLightStaticData
     FrameData: LiveLinkLightFrameData
@@ -61981,6 +64847,18 @@ class LiveLinkLocatorStaticData(LiveLinkBaseStaticData):
 class LiveLinkSkeletonStaticData(LiveLinkBaseStaticData):
     BoneNames: list[str]
     BoneParents: list[int]
+
+
+class LiveLinkTestFrameDataInternal(LiveLinkBaseFrameData):
+    NotInterpolated: float
+    SingleVector: Vector
+    SingleStruct: LiveLinkInnerTestInternal
+    SingleFloat: float
+    SingleInt: int
+    VectorArray: list[Vector]
+    StructArray: list[LiveLinkInnerTestInternal]
+    FloatArray: list[float]
+    IntArray: list[int]
 
 
 class LiveLinkTimeCode(LiveLinkTimeCode_Base_DEPRECATED):
@@ -62018,6 +64896,16 @@ class LogStringDataflowNode(DataflowNode):
 class LogeDataflowNode(DataflowNode):
     A: float
     ReturnValue: float
+
+
+class LookupProxy(ObjectChooserBase):
+    Proxy: ProxyAsset
+    ProxyTable: InstancedStruct
+
+
+class LookupProxyWithOverrideTable(ObjectChooserBase):
+    Proxy: ProxyAsset
+    OverrideProxyTable: ProxyTable
 
 
 class LoudnessMeterRackUnitSettings(LoudnessMeterSettings):
@@ -62826,6 +65714,12 @@ class MinDataflowNode(DataflowNode):
     ReturnValue: float
 
 
+class MinimalGameplayCueReplicationProxyNetSerializerConfig(NetSerializerConfig):
+    ...
+
+class MinimalReplicationTagCountMapNetSerializerConfig(NetSerializerConfig):
+    ...
+
 class MirrorAnimNodeReference(AnimNodeReference):
     ...
 
@@ -63065,6 +65959,11 @@ class MovieSceneFloatVectorKeyStructBase(MovieSceneKeyStruct):
     Time: FrameNumber
 
 
+class MovieSceneGameplayCueChannel(MovieSceneChannel):
+    KeyTimes: list[FrameNumber]
+    KeyValues: list[MovieSceneGameplayCueKey]
+
+
 class MovieSceneGeometryCacheSectionTemplateParameters(MovieSceneGeometryCacheParams):
     SectionStartTime: FrameNumber
     SectionEndTime: FrameNumber
@@ -63142,6 +66041,12 @@ class MovieSceneTrackImplementation(MovieSceneEvalTemplateBase):
 
 class MovieSceneWarpCounter(MovieSceneTransformBreadcrumbs):
     ...
+
+class MultiEnumColumn(ChooserColumnBase):
+    InputValue: InstancedStruct
+    DefaultRowValue: ChooserMultiEnumRowData
+    RowValues: list[ChooserMultiEnumRowData]
+
 
 class MultiplyDataflowNode(DataflowNode):
     FloatA: float
@@ -63239,6 +66144,10 @@ class NavigationSegmentLink(NavigationLinkBase):
 class NegateDataflowNode(DataflowNode):
     Float: float
     ReturnValue: float
+
+
+class NestedChooser(ObjectChooserBase):
+    Chooser: ChooserTable
 
 
 class NetRoleNetSerializerConfig(NetSerializerConfig):
@@ -63548,6 +66457,10 @@ class NiagaraVariableWithOffset(NiagaraVariableBase):
 class NiagaraWorldManagerTickFunction(TickFunction):
     ...
 
+class NoPrimaryResultChooserInitializer(ChooserInitializer):
+    ContextData: list[InstancedStruct]
+
+
 class NoiseFieldDataflowNode(DataflowNode):
     SamplePositions: list[Vector3f]
     SampleIndices: DataflowVertexSelection
@@ -63620,6 +66533,18 @@ class NormalizeToRangeDataflowNode(DataflowNode):
     RangeMin: float
     RangeMax: float
     ReturnValue: float
+
+
+class ObjectClassColumn(ChooserColumnBase):
+    InputValue: InstancedStruct
+    DefaultRowValue: ChooserObjectClassRowData
+    RowValues: list[ChooserObjectClassRowData]
+
+
+class ObjectColumn(ChooserColumnBase):
+    InputValue: InstancedStruct
+    DefaultRowValue: ChooserObjectRowData
+    RowValues: list[ChooserObjectRowData]
 
 
 class ObjectNetSerializerConfig(NetSerializerConfig):
@@ -63819,6 +66744,48 @@ class OptimusVariableAction_SetDataType(OptimusAction):
 
 class OptionalPropertyNetSerializerConfig(NetSerializerConfig):
     Property: FieldPath
+
+
+class OutputBoolColumn(ChooserColumnBase):
+    InputValue: InstancedStruct
+    bFallbackValue: bool
+    DefaultRowValue: bool
+    RowValues: list[bool]
+
+
+class OutputFloatColumn(ChooserColumnBase):
+    InputValue: InstancedStruct
+    FallbackValue: float
+    DefaultRowValue: float
+    RowValues: list[float]
+
+
+class OutputGameplayTagColumn(ChooserColumnBase):
+    InputValue: InstancedStruct
+    DefaultRowValue: GameplayTagContainer
+    RowValues: list[GameplayTagContainer]
+    FallbackValue: GameplayTagContainer
+
+
+class OutputGameplayTagQueryColumn(ChooserColumnBase):
+    InputValue: InstancedStruct
+    DefaultRowValue: GameplayTagQuery
+    RowValues: list[GameplayTagQuery]
+    FallbackValue: GameplayTagQuery
+
+
+class OutputObjectColumn(ChooserColumnBase):
+    InputValue: InstancedStruct
+    DefaultRowValue: ChooserOutputObjectRowData
+    RowValues: list[ChooserOutputObjectRowData]
+    FallbackValue: ChooserOutputObjectRowData
+
+
+class OutputStructColumn(ChooserColumnBase):
+    InputValue: InstancedStruct
+    FallbackValue: InstancedStruct
+    DefaultRowValue: InstancedStruct
+    RowValues: list[InstancedStruct]
 
 
 class PCGAnimBankDataRow(TableRowBase):
@@ -64167,6 +67134,9 @@ class PowDataflowNode(DataflowNode):
     ReturnValue: float
 
 
+class PredictionKeyNetSerializerConfig(NetSerializerConfig):
+    ...
+
 class PrintStringDataflowNode(DataflowNode):
     bPrintToScreen: bool
     bPrintToLog: bool
@@ -64386,6 +67356,15 @@ class RandomVectorFieldDataflowNode(DataflowNode):
     NumSamplePositions: int
 
 
+class RandomizeColumn(ChooserColumnBase):
+    InputValue: InstancedStruct
+    RepeatProbabilityMultipliers: list[float]
+    EqualCostThreshold: float
+    DefaultRowValue: float
+    RepeatProbabilityMultiplier: float
+    RowValues: list[float]
+
+
 class RandomizeFloatArrayDataflowNode(DataflowNode):
     FloatArray: list[float]
     RandomRangeMin: float
@@ -64468,6 +67447,14 @@ class RemoveOnBreakDataflowNode(DataflowNode):
 
 class RepMovementNetSerializerConfig(NetSerializerConfig):
     ...
+
+class ReplicatedPredictionKeyItem(FastArraySerializerItem):
+    PredictionKey: PredictionKey
+
+
+class ReplicatedPredictionKeyMap(FastArraySerializer):
+    PredictionKeys: list[ReplicatedPredictionKeyItem]
+
 
 class ResampleCurvePointsDataflowNode(DataflowNode):
     Collection: ManagedArrayCollection
@@ -65414,6 +68401,185 @@ class SccStateDirtyTag(EditorDataStorageTag):
 class SceneOutlinerColumn(EditorDataStorageColumn):
     ...
 
+class SceneStateBinding(PropertyBindingBinding):
+    SourceDataHandle: SceneStateBindingDataHandle
+    TargetDataHandle: SceneStateBindingDataHandle
+
+
+class SceneStateBindingCollection(PropertyBindingBindingCollection):
+    BindingDescs: list[SceneStateBindingDesc]
+    Bindings: list[SceneStateBinding]
+    References: list[SceneStateBindingReference]
+    ResolvedReferences: list[SceneStateBindingResolvedReference]
+
+
+class SceneStateBindingDesc(PropertyBindingBindableStructDescriptor):
+    DataHandle: SceneStateBindingDataHandle
+    Section: str
+
+
+class SceneStateBlueprintPropertyReference(SceneStatePropertyReference):
+    ReferenceType: ESceneStatePropertyReferenceType
+    bIsReferenceToArray: bool
+    TypeObject: Object
+
+
+class SceneStateBlueprintableTaskDesc(SceneStateTaskDesc):
+    ...
+
+class SceneStateBlueprintableTaskInstance(SceneStateTaskInstance):
+    Task: SceneStateBlueprintableTask
+
+
+class SceneStateBlueprintableTaskWrapper(SceneStateTask):
+    TaskClass: Class | type
+
+
+class SceneStateBooleanFunction(SceneStateFunction):
+    ...
+
+class SceneStateConcatenateStringFunction(SceneStateFunction):
+    ...
+
+class SceneStateDelayTask(SceneStateTask):
+    ...
+
+class SceneStateDelayTaskInstance(SceneStateTaskInstance):
+    Delay: float
+
+
+class SceneStateDoubleFunction(SceneStateFunction):
+    ...
+
+class SceneStateDoubleToStringFunction(SceneStateFunction):
+    ...
+
+class SceneStateDoubleToStringFunctionInstance(SceneStateToStringFunctionInstance):
+    Value: float
+
+
+class SceneStateIntegerFunction(SceneStateFunction):
+    ...
+
+class SceneStateIntegerToStringFunction(SceneStateFunction):
+    ...
+
+class SceneStateIntegerToStringFunctionInstance(SceneStateToStringFunctionInstance):
+    Value: int
+
+
+class SceneStateMachineTask(SceneStateTask):
+    Binding: SceneStateMachineTaskBinding
+
+
+class SceneStateMachineTaskBinding(SceneStateTaskBindingExtension):
+    ParametersBatchIndex: int
+
+
+class SceneStateMachineTaskDesc(SceneStateTaskDesc):
+    ...
+
+class SceneStateMachineTaskInstance(SceneStateTaskInstance):
+    ExecutionContext: SceneStateExecutionContext
+    TargetId: str
+    ParametersId: str
+    Parameters: InstancedPropertyBag
+
+
+class SceneStateNameFromStringFunction(SceneStateFunction):
+    ...
+
+class SceneStateNameFromStringFunctionInstance(SceneStateFromStringFunctionInstance):
+    Output: str
+
+
+class SceneStateNameToStringFunction(SceneStateFunction):
+    ...
+
+class SceneStateNameToStringFunctionInstance(SceneStateToStringFunctionInstance):
+    Value: str
+
+
+class SceneStatePlayerTask(SceneStateTask):
+    ...
+
+class SceneStatePlayerTaskInstance(SceneStateTaskInstance):
+    Player: SceneStatePlayer
+
+
+class SceneStatePrintStringTask(SceneStateTask):
+    ...
+
+class SceneStatePrintStringTaskInstance(SceneStateTaskInstance):
+    Message: str
+    PrintSettings: SceneStatePrintSettings
+
+
+class SceneStateSetBoolTask(SceneStateTask):
+    ...
+
+class SceneStateSetBoolTaskInstance(SceneStateTaskInstance):
+    Target: SceneStatePropertyReference
+    Value: bool
+
+
+class SceneStateSetFloatTask(SceneStateTask):
+    ...
+
+class SceneStateSetFloatTaskInstance(SceneStateTaskInstance):
+    Target: SceneStatePropertyReference
+    Value: float
+
+
+class SceneStateSetIntegerTask(SceneStateTask):
+    ...
+
+class SceneStateSetIntegerTaskInstance(SceneStateTaskInstance):
+    Target: SceneStatePropertyReference
+    Value: int
+
+
+class SceneStateSetStringTask(SceneStateTask):
+    ...
+
+class SceneStateSetStringTaskInstance(SceneStateTaskInstance):
+    Target: SceneStatePropertyReference
+    Value: str
+
+
+class SceneStateSetTextTask(SceneStateTask):
+    ...
+
+class SceneStateSetTextTaskInstance(SceneStateTaskInstance):
+    Target: SceneStatePropertyReference
+    Value: str
+
+
+class SceneStateSpawnActorTask(SceneStateTask):
+    ActorClass: Class | type
+
+
+class SceneStateSpawnActorTaskInstance(SceneStateTaskInstance):
+    ActorTemplate: SceneStateActorTemplate
+    SpawnTransform: Transform
+    SpawnCollisionHandling: ESpawnActorCollisionHandlingMethod
+    SpawnedActor: SceneStatePropertyReference
+
+
+class SceneStateTextFromStringFunction(SceneStateFunction):
+    ...
+
+class SceneStateTextFromStringFunctionInstance(SceneStateFromStringFunctionInstance):
+    Output: str
+
+
+class SceneStateTextToStringFunction(SceneStateFunction):
+    ...
+
+class SceneStateTextToStringFunctionInstance(SceneStateToStringFunctionInstance):
+    Value: str
+
+
 class ScopeDataVersionColumn(EditorDataStorageColumn):
     ...
 
@@ -65850,6 +69016,10 @@ class SmoothMeshBoneWeightsDataflowNode(DataflowNode):
     Strength: float
     NumIterations: int
     WeightProfile: str
+
+
+class SoftAssetChooser(ObjectChooserBase):
+    Asset: Object
 
 
 class SoftClassPath(SoftObjectPath):
@@ -68155,6 +71325,14 @@ class AnimNode_RandomPlayer(AnimNode_AssetPlayerRelevancyBase):
     bShuffleMode: bool
 
 
+class AnimNode_RemapCurves(AnimNode_RemapCurvesBase):
+    ...
+
+class AnimNode_RemapCurvesFromMesh(AnimNode_RemapCurvesBase):
+    SourceMeshComponent: SkeletalMeshComponent
+    bUseAttachedParent: bool
+
+
 class AnimNode_ResetRoot(AnimNode_SkeletalControlBase):
     ...
 
@@ -68451,6 +71629,14 @@ class AudioMeterDefaultColorStyle(AudioMeterDefaultColorWidgetStyle):
 
 class AudioMeterStyle(AudioMeterWidgetStyle):
     ...
+
+class BoolCVarProperty(ChooserParameterBoolBase):
+    VariableName: str
+
+
+class BoolContextProperty(ChooserParameterBoolBase):
+    Binding: ChooserPropertyBinding
+
 
 class ChaosVDAABBTreeDataWrapper(ChaosVDAccelerationStructureBase):
     RootNodeIndex: int
@@ -68934,6 +72120,21 @@ class EditorCrashTimeHeaderWidgetConstructor(TypedElementWidgetConstructor):
 class EditorCrashTypeHeaderWidgetConstructor(TypedElementWidgetConstructor):
     ...
 
+class EnumCVarProperty(ChooserParameterEnumBase):
+    VariableName: str
+    Enum: Enum
+
+
+class EnumColumn(EnumColumnBase):
+    InputValue: InstancedStruct
+    DefaultRowValue: ChooserEnumRowData
+    RowValues: list[ChooserEnumRowData]
+
+
+class EnumContextProperty(ChooserParameterEnumBase):
+    Binding: ChooserEnumPropertyBinding
+
+
 class FarmCropFragment(MassFragment):
     ...
 
@@ -68961,6 +72162,14 @@ class FilterSimulationProxiesDataflowNode(DataflowSimulationNode):
     SimulationGroups: list[str]
 
 
+class FloatCVarProperty(ChooserParameterFloatBase):
+    VariableName: str
+
+
+class FloatContextProperty(ChooserParameterFloatBase):
+    Binding: ChooserPropertyBinding
+
+
 class FragmentWithSharedPtr(MassFragment):
     ...
 
@@ -68969,6 +72178,17 @@ class GameplayCamerasStateTreeCondition(StateTreeConditionBase):
 
 class GameplayCamerasStateTreeTask(StateTreeTaskBase):
     ...
+
+class GameplayEffectContextHandleNetSerializerConfig(PolymorphicStructNetSerializerConfig):
+    ...
+
+class GameplayTagContextProperty(ChooserParameterGameplayTagBase):
+    Binding: ChooserPropertyBinding
+
+
+class GameplayTagQueryContextProperty(ChooserParameterGameplayTagQueryBase):
+    Binding: ChooserPropertyBinding
+
 
 class GeometryCollectionTerminalDataflowNode(DataflowTerminalNode):
     Collection: ManagedArrayCollection
@@ -69512,6 +72732,10 @@ class MovieSceneChaosCacheSectionTemplate(MovieSceneEvalTemplate):
 class MovieSceneConstraintChannel(MovieSceneBoolChannel):
     ...
 
+class MovieSceneDMXLibraryTemplate(MovieSceneEvalTemplate):
+    Section: MovieSceneDMXLibrarySection
+
+
 class MovieSceneEventSectionTemplate(MovieSceneEvalTemplate):
     EventData: MovieSceneEventSectionData
     bFireEventsWhenForwards: bool
@@ -69621,6 +72845,10 @@ class NNEDenoiserTemporalInputMappingData(NNEDenoiserBaseMappingData):
 
 class NNEDenoiserTemporalOutputMappingData(NNEDenoiserBaseMappingData):
     Resource: ETemporalOutputResourceName
+
+
+class NameContextProperty(ChooserParameterNameBase):
+    Binding: ChooserPropertyBinding
 
 
 class NavDataConfig(NavAgentProperties):
@@ -69815,6 +73043,10 @@ class NiagaraStatelessExpressionVec4Subtract(NiagaraStatelessExpressionVec4):
     B: InstancedStruct
 
 
+class ObjectContextProperty(ChooserParameterObjectBase):
+    Binding: ChooserObjectPropertyBinding
+
+
 class ObjectPtrNetSerializerConfig(ObjectNetSerializerConfig):
     ...
 
@@ -69841,6 +73073,13 @@ class OptimusNodeGraphAction_RemoveLink(OptimusNodeGraphAction_AddRemoveLink):
 
 class OptimusNodeGraphAction_RemoveNodePair(OptimusNodeGraphAction_AddRemoveNodePair):
     ...
+
+class OutputEnumColumn(EnumColumnBase):
+    InputValue: InstancedStruct
+    FallbackValue: ChooserOutputEnumRowData
+    DefaultRowValue: ChooserOutputEnumRowData
+    RowValues: list[ChooserOutputEnumRowData]
+
 
 class PCGAttributePropertyOutputSelector(PCGAttributePropertyOutputNoSourceSelector):
     ...
@@ -69975,6 +73214,14 @@ class PolymorphicArrayStructNetSerializerConfig(PolymorphicStructNetSerializerCo
 class PropertyEditorPermissionTestStructC(PropertyEditorPermissionTestStructB):
     COne: int
     CTwo: int
+
+
+class ProxyTableContextProperty(ChooserParameterProxyTableBase):
+    Binding: ChooserPropertyBinding
+
+
+class RandomizeContextProperty(ChooserParameterRandomizeBase):
+    Binding: ChooserPropertyBinding
 
 
 class RestrictedGameplayTagTableRow(GameplayTagTableRow):
@@ -71642,6 +74889,45 @@ class SceneSimulationTerminalDataflowNode(DataflowSimulationNode):
     State: RigidPhysicsSceneDataflowState
 
 
+class SceneStateAddDoubleFunction(SceneStateDoubleFunction):
+    ...
+
+class SceneStateAddIntegerFunction(SceneStateIntegerFunction):
+    ...
+
+class SceneStateBooleanAndFunction(SceneStateBooleanFunction):
+    ...
+
+class SceneStateBooleanNotFunction(SceneStateBooleanFunction):
+    ...
+
+class SceneStateBooleanOrFunction(SceneStateBooleanFunction):
+    ...
+
+class SceneStateBooleanXorFunction(SceneStateBooleanFunction):
+    ...
+
+class SceneStateComponentInstanceData(ActorComponentInstanceData):
+    ...
+
+class SceneStateDivideDoubleFunction(SceneStateDoubleFunction):
+    ...
+
+class SceneStateDivideIntegerFunction(SceneStateIntegerFunction):
+    ...
+
+class SceneStateMultiplyDoubleFunction(SceneStateDoubleFunction):
+    ...
+
+class SceneStateMultiplyIntegerFunction(SceneStateIntegerFunction):
+    ...
+
+class SceneStateSubtractDoubleFunction(SceneStateDoubleFunction):
+    ...
+
+class SceneStateSubtractIntegerFunction(SceneStateIntegerFunction):
+    ...
+
 class ScriptInterfaceNetSerializerConfig(ObjectNetSerializerConfig):
     ...
 
@@ -71701,6 +74987,10 @@ class StateTreePropertyFunctionCommonBase(StateTreePropertyFunctionBase):
 
 class StateTreeTaskCommonBase(StateTreeTaskBase):
     ...
+
+class StructContextProperty(ChooserParameterStructBase):
+    Binding: ChooserStructPropertyBinding
+
 
 class SubScriptStructOfTest_GrandChildA(SubScriptStructOfTest_ChildA):
     ...
@@ -71928,6 +75218,20 @@ class AnimNextSkeletalMeshComponentReferenceComponent(AnimNextActorComponentRefe
 
 class AnimNode_BlendSpacePlayerBase(AnimNode_AssetPlayerBase):
     PreviousBlendSpace: BlendSpace
+
+
+class AnimNode_BlendStack_Standalone(AnimNode_AssetPlayerBase):
+    PerSampleGraphPoseLinks: list[PoseLink]
+    AnimPlayers: list[BlendStackAnimPlayer]
+    bShouldFilterNotifies: bool
+    StitchDatabase: Object
+    StitchBlendTime: float
+    StitchBlendMaxCost: float
+    MaxActiveBlends: int
+    bStoreBlendedPose: bool
+    NotifyRecencyTimeOut: float
+    MaxBlendInTimeToOverrideAnimation: float
+    PlayerDepthBlendInTimeMultiplier: float
 
 
 class AnimNode_ControlRig(AnimNode_ControlRigBase):
@@ -72215,6 +75519,12 @@ class MovieSceneControlRigParameterTemplate(MovieSceneParameterSectionTemplate):
     Integers: list[IntegerParameterNameAndCurve]
     Spaces: list[SpaceControlNameAndChannel]
     Constraints: list[ConstraintAndActiveChannel]
+
+
+class MovieSceneLiveLinkSectionTemplate(MovieScenePropertySectionTemplate):
+    SubjectPreset: LiveLinkSubjectPreset
+    ChannelMask: list[bool]
+    SubSectionsData: list[LiveLinkSubSectionData]
 
 
 class MovieSceneMediaPlayerPropertySectionTemplate(MovieScenePropertySectionTemplate):
@@ -75865,6 +79175,49 @@ class AnimNode_BlendSpacePlayer_Standalone(AnimNode_BlendSpacePlayerBase):
     BlendSpace: BlendSpace
 
 
+class AnimNode_BlendStack(AnimNode_BlendStack_Standalone):
+    AnimationAsset: AnimationAsset
+    AnimationTime: float
+    ActivationDelayTime: float
+    bLoop: bool
+    bMirrored: bool
+    WantedPlayRate: float
+    BlendTime: float
+    MaxAnimationDeltaTime: float
+    BlendProfile: BlendProfile
+    BlendOption: EAlphaBlendOption
+    BlendspaceUpdateMode: EBlendStack_BlendspaceUpdateMode
+    BlendParameters: Vector
+    MirrorDataTable: MirrorDataTable
+    BlendParametersDeltaThreshold: float
+    bForceBlendTo: bool
+    bUseInertialBlend: bool
+    InertialBlendNodeTag: str
+    bResetOnBecomingRelevant: bool
+    GroupName: str
+    GroupRole: EAnimGroupRole
+    Method: EAnimSyncMethod
+    PrevGroupName: str
+    PrevGroupRole: EAnimGroupRole
+    PrevMethod: EAnimSyncMethod
+    bIgnoreForRelevancyTest: bool
+
+
+class AnimNode_ChooserPlayer(AnimNode_BlendStack_Standalone):
+    EvaluationFrequency: EChooserEvaluationFrequency
+    Chooser: InstancedStruct
+    MirrorDataTable: MirrorDataTable
+    BlendSpaceX: float
+    BlendSpaceY: float
+    DefaultSettings: ChooserPlayerSettings
+    ChooserContextDefinition: list[InstancedStruct]
+    bStartFromMatchingPose: bool
+    GroupName: str
+    GroupRole: EAnimGroupRole
+    Method: EAnimSyncMethod
+    bIgnoreForRelevancyTest: bool
+
+
 class AnimNode_PoseBlendNode(AnimNode_PoseHandler):
     SourcePose: PoseLink
     BlendOption: EAlphaBlendOption
@@ -77907,6 +81260,12 @@ class AIResourceInterface(Object):
 class AISightTargetInterface(Object):
     ...
 
+class AbilitySystemInterface(Object):
+    ...
+
+class AbilitySystemReplicationProxyInterface(Object):
+    ...
+
 class ActiveSoundUpdateInterface(Object):
     ...
 
@@ -78003,6 +81362,24 @@ class ChaosVDSelectableObject(Object):
 class ChaosVDSkySphereInterface(Object):
     ...
 
+class ChooserColumn(Object):
+    ...
+
+class ChooserParameterBool(Object):
+    ...
+
+class ChooserParameterEnum(Object):
+    ...
+
+class ChooserParameterFloat(Object):
+    ...
+
+class ChooserParameterGameplayTag(Object):
+    ...
+
+class ChooserParameterProxyTable(Object):
+    ...
+
 class ClassVariableCreator(Object):
     ...
 
@@ -78037,6 +81414,9 @@ class CustomizableObjectNodeMeshInterface(Object):
     ...
 
 class CustomizableObjectVersionBridgeInterface(Object):
+    ...
+
+class DMXMVRFixtureActorInterface(Object):
     ...
 
 class DataLayerInstanceProvider(Object):
@@ -78105,6 +81485,9 @@ class FontProviderInterface(Object):
 class GameplayCameraSystemHost(Object):
     ...
 
+class GameplayCueInterface(Object):
+    ...
+
 class GameplayTagAssetInterface(Object):
     ...
 
@@ -78154,6 +81537,9 @@ class GizmoVec2ParameterSource(Object):
     ...
 
 class HasCameraBuildStatus(Object):
+    ...
+
+class HasContextClass(Object):
     ...
 
 class IKGoalCreatorInterface(Object):
@@ -78292,6 +81678,9 @@ class LevelInstanceEditorPivotInterface(Object):
     ...
 
 class LevelInstanceInterface(Object):
+    ...
+
+class LiveLinkDeviceCapability(Object):
     ...
 
 class MaterialEnumerationProvider(Object):
@@ -78536,6 +81925,9 @@ class Object(_ObjectBase):
         ...
 
 
+class ObjectChooser(Object):
+    ...
+
 class ObjectTreeGraphObject(Object):
     ...
 
@@ -78689,6 +82081,9 @@ class PythonResourceOwner(Object):
 class RVOAvoidanceInterface(Object):
     ...
 
+class RemapCurvesDebuggingProvider(Object):
+    ...
+
 class ReplicatedObjectInterface(Object):
     ...
 
@@ -78723,6 +82118,18 @@ class SMInstanceManagerProvider(Object):
     ...
 
 class SceneComponentBackedTarget(Object):
+    ...
+
+class SceneStateEventHandlerProvider(Object):
+    ...
+
+class SceneStateSchemaProvider(Object):
+    ...
+
+class SceneStateTransitionGraphProvider(Object):
+    ...
+
+class SequenceSemanticFixtureInterface(Object):
     ...
 
 class SequencerAnimationOverride(Object):
@@ -78780,6 +82187,9 @@ class TestTypedElementInterfaceB(Object):
     ...
 
 class TestTypedElementInterfaceC(Object):
+    ...
+
+class TickableAttributeSetInterface(Object):
     ...
 
 class ToolActivityHost(Object):
@@ -78939,6 +82349,46 @@ class AbcImportSettings(Object):
     StaticMeshSettings: AbcStaticMeshSettings
     GeometryCacheSettings: AbcGeometryCacheSettings
     ConversionSettings: AbcConversionSettings
+
+
+class AbilitySystemDebugHUDExtension(Object):
+    ...
+
+class AbilitySystemGlobals(Object):
+    AbilitySystemGlobalsClassName: SoftClassPath
+    ActivateFailIsDeadTag: GameplayTag
+    ActivateFailIsDeadName: str
+    ActivateFailCooldownTag: GameplayTag
+    ActivateFailCooldownName: str
+    ActivateFailCostTag: GameplayTag
+    ActivateFailCostName: str
+    ActivateFailTagsBlockedTag: GameplayTag
+    ActivateFailTagsBlockedName: str
+    ActivateFailTagsMissingTag: GameplayTag
+    ActivateFailTagsMissingName: str
+    ActivateFailNetworkingTag: GameplayTag
+    ActivateFailNetworkingName: str
+    MinimalReplicationTagCountBits: int
+    TargetDataStructCache: NetSerializeScriptStructCache
+    EffectContextStructCache: NetSerializeScriptStructCache
+    bAllowGameplayModEvaluationChannels: bool
+    DefaultGameplayModEvaluationChannel: EGameplayModEvaluationChannel
+    GameplayModEvaluationChannelAliases: str
+    GlobalCurveTableName: SoftObjectPath
+    GlobalCurveTable: CurveTable
+    GlobalAttributeMetaDataTableName: SoftObjectPath
+    GlobalAttributeMetaDataTable: DataTable
+    GlobalAttributeSetDefaultsTableName: SoftObjectPath
+    GlobalAttributeSetDefaultsTableNames: list[SoftObjectPath]
+    GlobalAttributeDefaultsTables: list[CurveTable]
+    GlobalGameplayCueManagerClass: SoftObjectPath
+    GlobalGameplayCueManagerName: SoftObjectPath
+    GameplayCueNotifyPaths: list[str]
+    GameplayTagResponseTableName: SoftObjectPath
+    GameplayTagResponseTable: GameplayTagReponseTable
+    PredictTargetGameplayEffects: bool
+    ReplicateActivationOwnedTags: bool
+    GlobalGameplayCueManager: GameplayCueManager
 
 
 class AbstractSkeletonLabelBinding(Object):
@@ -80858,6 +84308,9 @@ class AsyncPhysicsData(Object):
     ReplicationRedundancy: int
 
 
+class AttributeSet(Object):
+    ...
+
 class AttributesListMenuContext(Object):
     ...
 
@@ -82330,6 +85783,30 @@ class CheckBoxStyleAsset(Object):
     CheckBoxStyle: CheckBoxStyle
 
 
+class ChooserColumnDetails(Object):
+    Chooser: ChooserTable
+
+
+class ChooserColumnMenuContext(Object):
+    ...
+
+class ChooserEditorToolMenuContext(Object):
+    ...
+
+class ChooserRowDetails(Object):
+    Properties: InstancedPropertyBag
+    Chooser: ChooserTable
+
+    def ResultAssetFilter(self, AssetData: AssetData) -> bool:
+        ...
+
+
+class ChooserSignature(Object, HasContextClass):
+    ResultType: EObjectChooserResultType
+    OutputObjectType: Class | type
+    ContextData: list[InstancedStruct]
+
+
 class ChunkDependencyInfo(Object):
     DependencyArray: list[ChunkDependency]
 
@@ -82624,6 +86101,10 @@ class ConcertSyncConfig(Object):
 class ConfigHierarchyPropertyView(Object):
     EditProperty: FieldPath
     ConfigFilePropertyObjects: list[PropertyConfigFileDisplayRow]
+
+
+class ConnectionDelegate(Object):
+    ConnectionChangedDynamic: MulticastDelegateBase
 
 
 class Console(Object):
@@ -83752,6 +87233,160 @@ class DEditorParameterValue(Object):
     SortPriority: int
 
 
+class DMXAddFixturePatchMenuData(Object):
+    SoftFixtureType: DMXEntityFixtureType
+    ActiveModeIndex: int
+    NumPatches: int
+    bIncrementChannelAfterPatching: bool
+
+
+class DMXEditorSettings(Object):
+    LastGDTFImportPath: str
+    LastMVRImportPath: str
+    LastMVRExportPath: str
+    FixtureTypeFunctionsEditorSettings: DMXFixtureTypeFunctionsEditorSettings
+    MVRFixtureListSettings: DMXMVRFixtureListSettings
+    FixturePatcherSettings: DMXMVRFixturePatcherSettings
+    LastOpenedControlConsolePath: str
+    ChannelsMonitorUniverseID: int
+    ChannelsMonitorSource: DMXMonitorSourceDescriptor
+    ActivityMonitorSource: DMXMonitorSourceDescriptor
+    ActivityMonitorMinUniverseID: int
+    ActivityMonitorMaxUniverseID: int
+    ConflictMonitorSettings: DMXConflictMonitorSettings
+
+
+class DMXFixturePatchSharedDataSelection(Object):
+    SelectedFixturePatches: list[DMXEntityFixturePatch]
+    SelectedUniverse: int
+
+
+class DMXFixtureTypeSharedDataSelection(Object):
+    SelectedFixtureTypes: list[DMXEntityFixtureType]
+    SelectedModeIndices: list[int]
+    SelectedFunctionIndices: list[int]
+    bFixtureMatrixSelected: bool
+
+
+class DMXGDTF(Object):
+    ...
+
+class DMXGDTFImportUI(Object):
+    bUseSubDirectory: bool
+    bImportXML: bool
+    bImportTextures: bool
+    bImportModels: bool
+
+
+class DMXImport(Object):
+    ...
+
+class DMXImportAttributeDefinitions(Object):
+    ...
+
+class DMXImportDMXModes(Object):
+    ...
+
+class DMXImportFixtureType(Object):
+    ...
+
+class DMXImportGeometries(Object):
+    ...
+
+class DMXImportModels(Object):
+    ...
+
+class DMXImportPhysicalDescriptions(Object):
+    ...
+
+class DMXImportProtocols(Object):
+    ...
+
+class DMXImportWheels(Object):
+    ...
+
+class DMXLibraryFromMVRImportOptions(Object):
+    bIsReimport: bool
+    bCreateNewDMXLibrary: bool
+    ImportIntoDMXLibrary: DMXLibrary
+    bReimportExisitingGDTFs: bool
+    bUpdateInputPort: bool
+    InputPortToUpdate: DMXInputPortReference
+    bUpdateOutputPort: bool
+    OutputPortToUpdate: DMXOutputPortReference
+
+
+class DMXMVRChildListNode(Object):
+    ParametricObjectNodes: list[DMXMVRParametricObjectNodeBase]
+
+
+class DMXMVRExportOptions(Object):
+    bConsiderLevel: bool
+    bExportPatchesNotPresentInWorld: bool
+    bUseTransformsFromLevel: bool
+    bCreateMultiPatchFixtures: bool
+    bCanceled: bool
+
+
+class DMXMVRGeneralSceneDescription(Object):
+    RootNode: DMXMVRRootNode
+    MVRAssetImportData: DMXMVRAssetImportData
+
+
+class DMXMVRLayerNode(Object):
+    UUID: str
+    Name: DMXOptionalString
+    Matrix: DMXOptionalTransform
+    ChildListNode: DMXMVRChildListNode
+
+
+class DMXMVRLayersNode(Object):
+    LayerNodes: list[DMXMVRLayerNode]
+
+
+class DMXMVRParametricObjectNodeBase(Object):
+    UUID: str
+    Matrix: DMXOptionalTransform
+
+
+class DMXMVRRootNode(Object):
+    UserDataNode: DMXMVRUserDataNode
+    SceneNode: DMXMVRSceneNode
+
+
+class DMXMVRSceneNode(Object):
+    LayersNode: DMXMVRLayersNode
+
+
+class DMXMVRUnrealEngineDataNode(Object):
+    ...
+
+class DMXMVRUserDataNode(Object):
+    UnrealEngineDataNode: DMXMVRUnrealEngineDataNode
+
+
+class DMXModulator(Object):
+    def Modulate(self, FixturePatch: DMXEntityFixturePatch, InNormalizedAttributeValues: dict[DMXAttributeName, float]) -> dict[DMXAttributeName, float]:
+        ...
+
+    def ModulateMatrix(self, FixturePatch: DMXEntityFixturePatch, InNormalizedMatrixAttributeValues: list[DMXNormalizedAttributeValueMap]) -> list[DMXNormalizedAttributeValueMap]:
+        ...
+
+
+class DMXObjectBase(Object):
+    ...
+
+class DMXProtocolSettings(Object):
+    InputPortConfigs: list[DMXInputPortConfig]
+    OutputPortConfigs: list[DMXOutputPortConfig]
+    SendingRefreshRate: int
+    FixtureCategories: set[str]
+    Attributes: set[DMXAttribute]
+    bDefaultSendDMXEnabled: bool
+    bDefaultReceiveDMXEnabled: bool
+    bAllFixturePatchesReceiveDMXInEditor: bool
+
+
 class DNA(Object):
     AssetImportData: AssetImportData
     DNAConfig: DNAConfig
@@ -83887,6 +87522,20 @@ class DataLayerManager(Object):
 class DataLayerToAssetCommandletContext(Object):
     DataLayerConversionInfo: list[DataLayerConversionInfo]
     ConvertingDataLayerInfo: list[DataLayerConversionInfo]
+
+
+class DataRegistry(Object):
+    RegistryType: str
+    IdFormat: DataRegistryIdFormat
+    ItemStruct: ScriptStruct
+    DataSources: list[DataRegistrySource]
+    RuntimeSources: list[DataRegistrySource]
+    TimerUpdateFrequency: float
+    DefaultCachePolicy: DataRegistryCachePolicy
+
+
+class DataRegistrySource(Object):
+    ParentSource: DataRegistrySource
 
 
 class DataStream(Object):
@@ -85767,6 +89416,9 @@ class FlipbookEditorSettings(Object):
     bShowGridByDefault: bool
 
 
+class FloatAutoPopulator(Object):
+    ...
+
 class FloatChannelKeyProxy(Object, CurveEditorKeyProxy, MovieSceneKeyProxy):
     Time: FrameNumber
     Value: MovieSceneFloatValue
@@ -86416,7 +90068,234 @@ class GameUserSettings(Object):
         ...
 
 
+class GameplayAbility(Object, GameplayTaskOwnerInterface):
+    AbilityTags: GameplayTagContainer
+    bReplicateInputDirectly: bool
+    RemoteInstanceEnded: bool
+    ReplicationPolicy: EGameplayAbilityReplicationPolicy
+    InstancingPolicy: EGameplayAbilityInstancingPolicy
+    bServerRespectsRemoteAbilityCancellation: bool
+    bRetriggerInstancedAbility: bool
+    CurrentActivationInfo: GameplayAbilityActivationInfo
+    CurrentEventData: GameplayEventData
+    NetExecutionPolicy: EGameplayAbilityNetExecutionPolicy
+    NetSecurityPolicy: EGameplayAbilityNetSecurityPolicy
+    CostGameplayEffectClass: Class | type
+    AbilityTriggers: list[AbilityTriggerData]
+    CooldownGameplayEffectClass: Class | type
+    CancelAbilitiesWithTag: GameplayTagContainer
+    BlockAbilitiesWithTag: GameplayTagContainer
+    ActivationOwnedTags: GameplayTagContainer
+    ActivationRequiredTags: GameplayTagContainer
+    ActivationBlockedTags: GameplayTagContainer
+    SourceRequiredTags: GameplayTagContainer
+    SourceBlockedTags: GameplayTagContainer
+    TargetRequiredTags: GameplayTagContainer
+    TargetBlockedTags: GameplayTagContainer
+    ActiveTasks: list[GameplayTask]
+    CurrentMontage: AnimMontage
+    bIsActive: bool
+    bIsAbilityEnding: bool
+    bIsCancelable: bool
+    bIsBlockingOtherAbilities: bool
+
+    def BP_ApplyGameplayEffectToOwner(self, GameplayEffectClass: Class | type, GameplayEffectLevel: int=1, Stacks: int=1) -> ActiveGameplayEffectHandle:
+        ...
+
+    def BP_ApplyGameplayEffectToTarget(self, TargetData: GameplayAbilityTargetDataHandle, GameplayEffectClass: Class | type, GameplayEffectLevel: int=1, Stacks: int=1) -> list[ActiveGameplayEffectHandle]:
+        ...
+
+    def BP_EditSpecValues(self, SpecHandle: GameplayEffectSpecHandle) -> None:
+        ...
+
+    def BP_RemoveGameplayEffectFromOwnerWithAssetTags(self, WithAssetTags: GameplayTagContainer, StacksToRemove: int=-1) -> None:
+        ...
+
+    def BP_RemoveGameplayEffectFromOwnerWithGrantedTags(self, WithGrantedTags: GameplayTagContainer, StacksToRemove: int=-1) -> None:
+        ...
+
+    def BP_RemoveGameplayEffectFromOwnerWithHandle(self, Handle: ActiveGameplayEffectHandle, StacksToRemove: int=-1) -> None:
+        ...
+
+    def CancelTaskByInstanceName(self, InstanceName: str) -> None:
+        ...
+
+    def ConfirmTaskByInstanceName(self, InstanceName: str, bEndTask: bool) -> None:
+        ...
+
+    def EndAbilityState(self, OptionalStateNameToEnd: str) -> None:
+        ...
+
+    def EndTaskByInstanceName(self, InstanceName: str) -> None:
+        ...
+
+    def GetAbilityLevel(self) -> int:
+        ...
+
+    def GetAbilityLevel_BP(self, Handle: GameplayAbilitySpecHandle, ActorInfo: GameplayAbilityActorInfo) -> int:
+        ...
+
+    def GetAbilitySystemComponentFromActorInfo(self) -> AbilitySystemComponent:
+        ...
+
+    def GetActorInfo(self) -> GameplayAbilityActorInfo:
+        ...
+
+    def GetAvatarActorFromActorInfo(self) -> Actor:
+        ...
+
+    def GetContextFromOwner(self, OptionalTargetData: GameplayAbilityTargetDataHandle) -> GameplayEffectContextHandle:
+        ...
+
+    def GetCooldownTimeRemaining(self) -> float:
+        ...
+
+    def GetCurrentMontage(self) -> AnimMontage:
+        ...
+
+    def GetCurrentSourceObject(self) -> Object:
+        ...
+
+    def GetGrantedByEffectContext(self) -> GameplayEffectContextHandle:
+        ...
+
+    def GetOwningActorFromActorInfo(self) -> Actor:
+        ...
+
+    def GetOwningComponentFromActorInfo(self) -> SkeletalMeshComponent:
+        ...
+
+    def GetSourceObject_BP(self, Handle: GameplayAbilitySpecHandle, ActorInfo: GameplayAbilityActorInfo) -> Object:
+        ...
+
+    def InvalidateClientPredictionKey(self) -> None:
+        ...
+
+    def IsLocallyControlled(self) -> bool:
+        ...
+
+    def K2_ActivateAbility(self) -> None:
+        ...
+
+    def K2_ActivateAbilityFromEvent(self, EventData: GameplayEventData) -> None:
+        ...
+
+    def K2_AddGameplayCue(self, GameplayCueTag: GameplayTag, Context: GameplayEffectContextHandle, bRemoveOnAbilityEnd: bool=True) -> None:
+        ...
+
+    def K2_AddGameplayCueWithParams(self, GameplayCueTag: GameplayTag, GameplayCueParameter: GameplayCueParameters, bRemoveOnAbilityEnd: bool=True) -> None:
+        ...
+
+    def K2_ApplyGameplayEffectSpecToOwner(self, EffectSpecHandle: GameplayEffectSpecHandle) -> ActiveGameplayEffectHandle:
+        ...
+
+    def K2_ApplyGameplayEffectSpecToTarget(self, EffectSpecHandle: GameplayEffectSpecHandle, TargetData: GameplayAbilityTargetDataHandle) -> list[ActiveGameplayEffectHandle]:
+        ...
+
+    def K2_CanActivateAbility(self, ActorInfo: GameplayAbilityActorInfo, Handle: GameplayAbilitySpecHandle) -> tuple[bool, GameplayTagContainer]:
+        ...
+
+    def K2_CancelAbility(self) -> None:
+        ...
+
+    def K2_CheckAbilityCooldown(self) -> bool:
+        ...
+
+    def K2_CheckAbilityCost(self) -> bool:
+        ...
+
+    def K2_CommitAbility(self) -> bool:
+        ...
+
+    def K2_CommitAbilityCooldown(self, BroadcastCommitEvent: bool=False, ForceCooldown: bool=False) -> bool:
+        ...
+
+    def K2_CommitAbilityCost(self, BroadcastCommitEvent: bool=False) -> bool:
+        ...
+
+    def K2_CommitExecute(self) -> None:
+        ...
+
+    def K2_EndAbility(self) -> None:
+        ...
+
+    def K2_EndAbilityLocally(self) -> None:
+        ...
+
+    def K2_ExecuteGameplayCue(self, GameplayCueTag: GameplayTag, Context: GameplayEffectContextHandle) -> None:
+        ...
+
+    def K2_ExecuteGameplayCueWithParams(self, GameplayCueTag: GameplayTag, GameplayCueParameters: GameplayCueParameters) -> None:
+        ...
+
+    def K2_HasAuthority(self) -> bool:
+        ...
+
+    def K2_OnEndAbility(self, bWasCancelled: bool) -> None:
+        ...
+
+    def K2_RemoveGameplayCue(self, GameplayCueTag: GameplayTag) -> None:
+        ...
+
+    def K2_ShouldAbilityRespondToEvent(self, ActorInfo: GameplayAbilityActorInfo, Payload: GameplayEventData) -> bool:
+        ...
+
+    def MakeOutgoingGameplayEffectSpec(self, GameplayEffectClass: Class | type, Level: float=1) -> GameplayEffectSpecHandle:
+        ...
+
+    def MakeTargetLocationInfoFromOwnerActor(self) -> GameplayAbilityTargetingLocationInfo:
+        ...
+
+    def MakeTargetLocationInfoFromOwnerSkeletalMeshComponent(self, SocketName: str) -> GameplayAbilityTargetingLocationInfo:
+        ...
+
+    def MontageJumpToSection(self, SectionName: str) -> None:
+        ...
+
+    def MontageSetNextSectionName(self, FromSectionName: str, ToSectionName: str) -> None:
+        ...
+
+    def MontageStop(self, OverrideBlendOutTime: float=-1) -> None:
+        ...
+
+    def RemoveGrantedByEffect(self) -> None:
+        ...
+
+    def SendGameplayEvent(self, EventTag: GameplayTag, Payload: GameplayEventData) -> None:
+        ...
+
+    def SetCanBeCanceled(self, bCanBeCanceled: bool) -> None:
+        ...
+
+    def SetShouldBlockOtherAbilities(self, bShouldBlockAbilities: bool) -> None:
+        ...
+
+
 class GameplayCamerasDebuggerMenuContext(Object):
+    ...
+
+class GameplayCueNotify_Static(Object):
+    GameplayCueTag: GameplayTag
+    GameplayCueName: str
+    IsOverride: bool
+
+    def K2_HandleGameplayCue(self, MyTarget: Actor, EventType: EGameplayCueEvent, Parameters: GameplayCueParameters) -> None:
+        ...
+
+    def OnActive(self, MyTarget: Actor, Parameters: GameplayCueParameters) -> bool:
+        ...
+
+    def OnExecute(self, MyTarget: Actor, Parameters: GameplayCueParameters) -> bool:
+        ...
+
+    def OnRemove(self, MyTarget: Actor, Parameters: GameplayCueParameters) -> bool:
+        ...
+
+    def WhileActive(self, MyTarget: Actor, Parameters: GameplayCueParameters) -> bool:
+        ...
+
+
+class GameplayCueTranslator(Object):
     ...
 
 class GameplayDebuggerConfig(Object):
@@ -86447,6 +90326,50 @@ class GameplayDebuggerLocalController(Object):
     CachedPlayerManager: GameplayDebuggerPlayerManager
     DebugActorCandidate: Actor
     HUDFont: Font
+
+
+class GameplayEffect(Object, GameplayTagAssetInterface):
+    DurationPolicy: EGameplayEffectDurationType
+    DurationMagnitude: GameplayEffectModifierMagnitude
+    MaxDurationMagnitude: GameplayEffectModifierMagnitude
+    Period: ScalableFloat
+    bExecutePeriodicEffectOnApplication: bool
+    PeriodicInhibitionPolicy: EGameplayEffectPeriodInhibitionRemovedPolicy
+    Modifiers: list[GameplayModifierInfo]
+    Executions: list[GameplayEffectExecutionDefinition]
+    OverflowEffects: list[Class]
+    bDenyOverflowApplication: bool
+    bClearStackOnOverflow: bool
+    bRequireModifierSuccessToTriggerCues: bool
+    bSuppressStackingCues: bool
+    GameplayCues: list[GameplayEffectCue]
+    StackingType: EGameplayEffectStackingType
+    StackLimitCount: int
+    StackDurationRefreshPolicy: EGameplayEffectStackingDurationPolicy
+    StackPeriodResetPolicy: EGameplayEffectStackingPeriodPolicy
+    StackExpirationPolicy: EGameplayEffectStackingExpirationPolicy
+    bFactorInStackCount: bool
+    GrantedAbilities: list[GameplayAbilitySpecDef]
+    GEComponents: list[GameplayEffectComponent]
+    EditorStatusText: str
+    DataVersion: GameplayEffectVersion
+
+
+class GameplayEffectCalculation(Object):
+    RelevantAttributesToCapture: list[GameplayEffectAttributeCaptureDefinition]
+
+
+class GameplayEffectComponent(Object):
+    EditorFriendlyName: str
+
+
+class GameplayEffectCreationMenu(Object):
+    Definitions: list[GameplayEffectCreationData]
+
+
+class GameplayEffectCustomApplicationRequirement(Object):
+    def CanApplyGameplayEffect(self, GameplayEffect: GameplayEffect, Spec: GameplayEffectSpec, ASC: AbilitySystemComponent) -> bool:
+        ...
 
 
 class GameplayTagsList(Object):
@@ -87281,6 +91204,15 @@ class HomeScreenWeb(Object):
 
 class HotkeyHintProvider(Interface):
     ...
+
+class HttpRequestProxyObject(Object):
+    OnRequestComplete: MulticastDelegateBase
+    CachedHeader: HttpHeader
+
+    @staticmethod
+    def CreateHttpRequestProxyObject(InUrl: str, InVerb: str, InHeader: HttpHeader, InBody: str) -> HttpRequestProxyObject:
+        ...
+
 
 class HudSettings(Object):
     bShowHUD: bool
@@ -89546,8 +93478,17 @@ class LiveCodingSettings(Object):
     PreloadNamedModules: list[str]
 
 
+class LiveLinkComponentSettings(Object):
+    DefaultControllerForRole: dict[Class, Class]
+    bUpdateSubjectsImmediatelyInPIE: bool
+
+
 class LiveLinkController(Object):
     ...
+
+class LiveLinkControllerBase(Object):
+    ComponentPicker: ComponentReference
+
 
 class LiveLinkDefaultSourceSettings(Object):
     DefaultSourceFrameBufferSize: int
@@ -89555,6 +93496,36 @@ class LiveLinkDefaultSourceSettings(Object):
 
 class LiveLinkDefaultSubjectSettings(Object):
     bRebroadcastSubjectsByDefault: bool
+
+
+class LiveLinkDevice(Object):
+    Settings: LiveLinkDeviceSettings
+
+    def GetDeviceHealth(self) -> EDeviceHealth:
+        ...
+
+    def GetDisplayName(self) -> str:
+        ...
+
+    def GetHealthText(self) -> str:
+        ...
+
+
+class LiveLinkDeviceCapability_BasicTest(LiveLinkDeviceCapability):
+    ...
+
+class LiveLinkDeviceCapability_Connection(LiveLinkDeviceCapability):
+    ...
+
+class LiveLinkDeviceCapability_Recording(LiveLinkDeviceCapability):
+    ...
+
+class LiveLinkDeviceSettings(Object):
+    DisplayName: str
+
+
+class LiveLinkEditorSettings(Object):
+    bReadOnly: bool
 
 
 class LiveLinkFrameInterpolationProcessor(Object):
@@ -89569,8 +93540,63 @@ class LiveLinkFrameTranslator(Object):
 class LiveLinkHubSessionExtraData(Object):
     ...
 
+class LiveLinkMessageBusFinder(Object):
+    @staticmethod
+    def ConnectToProvider(Provider: ProviderPollResult) -> tuple[ProviderPollResult, LiveLinkSourceHandle]:
+        ...
+
+    @staticmethod
+    def ConstructMessageBusFinder() -> LiveLinkMessageBusFinder:
+        ...
+
+    def GetAvailableProviders(self, WorldContextObject: Object, LatentInfo: LatentActionInfo, Duration: float) -> list[ProviderPollResult]:
+        ...
+
+
+class LiveLinkPreset(Object):
+    Sources: list[LiveLinkSourcePreset]
+    Subjects: list[LiveLinkSubjectPreset]
+
+    def AddToClient(self, bRecreatePresets: bool=True) -> bool:
+        ...
+
+    def ApplyToClient(self) -> bool:
+        ...
+
+    def ApplyToClientLatent(self, WorldContextObject: Object, LatentInfo: LatentActionInfo) -> None:
+        ...
+
+    def BuildFromClient(self) -> None:
+        ...
+
+
+class LiveLinkRetargetAsset(Object):
+    ...
+
 class LiveLinkRole(Object):
     ...
+
+class LiveLinkSettings(Object):
+    DefaultRoleSettings: list[LiveLinkRoleProjectSetting]
+    DefaultSettingsClass: SoftClassPath
+    FrameInterpolationProcessor: Class | type
+    DefaultLiveLinkPreset: LiveLinkPreset
+    DefaultVirtualSubjectClass: Class | type
+    ClockOffsetCorrectionStep: float
+    DefaultMessageBusSourceMode: ELiveLinkSourceMode
+    MessageBusPingRequestFrequency: float
+    MessageBusHeartbeatFrequency: float
+    MessageBusHeartbeatTimeout: float
+    MessageBusTimeBeforeRemovingInactiveSource: float
+    bReEnableSubjectOnRemoval: bool
+    bPreProcessRebroadcastFrames: bool
+    bTranslateRebroadcastFrames: bool
+    TimeWithoutFrameToBeConsiderAsInvalid: float
+    ValidColor: LinearColor
+    InvalidColor: LinearColor
+    TextSizeSource: int
+    TextSizeSubject: int
+
 
 class LiveLinkSourceFactory(Object):
     ...
@@ -89582,6 +93608,10 @@ class LiveLinkSourceSettings(Object):
     ConnectionString: str
     Factory: Class | type
     ParentSubject: LiveLinkSubjectName
+
+
+class LiveLinkSubjectProperties(Object):
+    Properties: list[LiveLinkSubjectProperty]
 
 
 class LiveLinkSubjectRemapper(Object):
@@ -89598,6 +93628,10 @@ class LiveLinkSubjectSettings(Object):
     bRebroadcastSubject: bool
     OriginalSourceName: str
     Key: LiveLinkSubjectKey
+
+
+class LiveLinkUserSettings(Object):
+    PresetSaveDir: DirectoryPath
 
 
 class LiveLinkVirtualSubject(Object):
@@ -91957,6 +95991,11 @@ class MovieSceneLanguagePreviewDecoration(Object):
     PreviewLanguage: str
 
 
+class MovieSceneLiveLinkSubSection(Object):
+    SubSectionData: LiveLinkSubSectionData
+    SubjectRole: Class | type
+
+
 class MovieSceneMetaData(Object, MovieSceneMetaDataInterface):
     Author: str
     Created: DateTime
@@ -94270,6 +98309,133 @@ class PCGSkinnedMeshSelector(Object):
 class PCGToolPresetMenuContext(Object):
     ...
 
+class PGFAsyncLoadRequest(Object):
+    OnCompleted: MulticastDelegateBase
+    OnFailed: MulticastDelegateBase
+    OnCanceled: MulticastDelegateBase
+    LoadedObject: Object
+
+    def Cancel(self) -> None:
+        ...
+
+    def GetAssetPath(self) -> str:
+        ...
+
+    def GetError(self) -> str:
+        ...
+
+    def GetLoadedObject(self) -> Object:
+        ...
+
+    def IsActive(self) -> bool:
+        ...
+
+    def IsCanceled(self) -> bool:
+        ...
+
+    def IsCompleted(self) -> bool:
+        ...
+
+    def IsDone(self) -> bool:
+        ...
+
+    def IsFailed(self) -> bool:
+        ...
+
+
+class PGFConsoleCommandManager(Object):
+    @staticmethod
+    def ClearCommands() -> None:
+        ...
+
+    @staticmethod
+    def IsCommandRegistered(CommandName: str) -> bool:
+        ...
+
+    @staticmethod
+    def RegisterCommand(CommandName: str, HelpText: str, bReplaceExisting: bool=False) -> bool:
+        ...
+
+    @staticmethod
+    def UnregisterCommand(CommandName: str) -> bool:
+        ...
+
+
+class PGFInputAxisBinding(Object):
+    OnAxis: MulticastDelegateBase
+    PlayerController: PlayerController
+    InputComponent: PGFInputComponent
+
+    def GetAxisKey(self) -> Key:
+        ...
+
+    def IsActive(self) -> bool:
+        ...
+
+    def Unbind(self) -> None:
+        ...
+
+
+class PGFInputBinding(Object):
+    OnTriggered: MulticastDelegateBase
+    PlayerController: PlayerController
+    InputComponent: PGFInputComponent
+
+    def GetChord(self) -> InputChord:
+        ...
+
+    def GetInputEvent(self) -> EInputEvent:
+        ...
+
+    def GetKey(self) -> Key:
+        ...
+
+    def HandleInput(self) -> None:
+        ...
+
+    def IsActive(self) -> bool:
+        ...
+
+    def Unbind(self) -> None:
+        ...
+
+
+class PGFInputLongPressBinding(Object):
+    OnTriggered: MulticastDelegateBase
+    PlayerController: PlayerController
+    InputComponent: PGFInputComponent
+
+    def GetChord(self) -> InputChord:
+        ...
+
+    def GetHoldTimeSeconds(self) -> float:
+        ...
+
+    def GetKey(self) -> Key:
+        ...
+
+    def IsActive(self) -> bool:
+        ...
+
+    def Unbind(self) -> None:
+        ...
+
+
+class PGFInputTouchBinding(Object):
+    OnTouch: MulticastDelegateBase
+    PlayerController: PlayerController
+    InputComponent: PGFInputComponent
+
+    def GetInputEvent(self) -> EInputEvent:
+        ...
+
+    def IsActive(self) -> bool:
+        ...
+
+    def Unbind(self) -> None:
+        ...
+
+
 class PIEPreviewDeviceSpecification(Object):
     PreviewDeviceType: EPIEPreviewDeviceType
     GPUFamily: str
@@ -95649,6 +99815,24 @@ class PropertyValue(Object):
 
 class PropertyWrapper(Object):
     ...
+
+class ProxyAsset(Object, HasContextClass):
+    Type: Class | type
+    ResultType: EObjectChooserResultType
+    ContextData: list[InstancedStruct]
+    Guid: str
+
+
+class ProxyRowDetails(Object):
+    ProxyTable: ProxyTable
+
+
+class ProxyTable(Object):
+    Keys: list[str]
+    RuntimeValues: list[RuntimeProxyValue]
+    Entries: list[ProxyEntry]
+    InheritEntriesFrom: list[ProxyTable]
+
 
 class PyTestChildInterface(PyTestInterface):
     ...
@@ -98481,6 +102665,109 @@ class SceneOutlinerMenuContext(Object):
 class SceneSnappingManager(Object):
     ...
 
+class SceneStateBindingCollectionOwner(PropertyBindingBindingCollectionOwner):
+    ...
+
+class SceneStateBlueprintableTask(Object, SceneStateEventHandlerProvider):
+    def FinishTask(self) -> None:
+        ...
+
+    def GetContextObject(self) -> Object:
+        ...
+
+    def GetEventStream(self) -> SceneStateEventStream:
+        ...
+
+    def GetRootState(self) -> SceneStateObject:
+        ...
+
+    def ReceiveStart(self) -> None:
+        ...
+
+    def ReceiveStop(self, InStopReason: ESceneStateTaskStopReason) -> None:
+        ...
+
+    def ReceiveTick(self, InDeltaSeconds: float) -> None:
+        ...
+
+
+class SceneStateDebugControlsObject(Object):
+    Events: list[SceneStateEventTemplate]
+
+
+class SceneStateEventSchemaCollection(Object):
+    EventSchemas: list[SceneStateEventSchemaObject]
+
+
+class SceneStateEventSchemaObject(Object):
+    Id: str
+    Name: str
+    Struct: UserDefinedStruct
+
+
+class SceneStateEventStream(Object):
+    Events: list[SharedStruct]
+    CapturedEvents: dict[str, SharedStruct]
+
+
+class SceneStateObject(Object):
+    TemplateData: SceneStateTemplateData
+    EventStream: SceneStateEventStream
+    RootExecutionContext: SceneStateExecutionContext
+
+    def GetContextObject(self) -> Object:
+        ...
+
+    def GetEventStream(self) -> SceneStateEventStream:
+        ...
+
+    def IsActive(self) -> bool:
+        ...
+
+    def ReceiveEnter(self) -> None:
+        ...
+
+    def ReceiveExit(self) -> None:
+        ...
+
+    def ReceiveTick(self, InDeltaSeconds: float) -> None:
+        ...
+
+
+class SceneStatePlayer(Object):
+    SceneStateClass: Class | type
+    RootState: SceneStateObject
+    bEditableSceneStateClass: bool
+
+
+class SceneStateSchema(Object):
+    ContextObjectClass: Class | type
+
+
+class SceneStateTemplateData(Object):
+    BindingCollection: SceneStateBindingCollection
+    RootStateIndex: int
+    States: list[SceneState]
+    Tasks: InstancedStructContainer
+    TaskPrerequisites: list[int]
+    TaskInstances: InstancedStructContainer
+    Functions: InstancedStructContainer
+    FunctionInstances: InstancedStructContainer
+    EventHandlers: list[SceneStateEventHandler]
+    Transitions: list[SceneStateTransition]
+    TransitionLinks: list[SceneStateTransitionLink]
+    TransitionParameters: dict[int, InstancedPropertyBag]
+    Conduits: list[SceneStateConduit]
+    ConduitLinks: list[SceneStateConduitLink]
+    StateMachines: list[SceneStateMachine]
+    StateMachineIdToIndex: dict[str, int]
+    StateParameterIdToIndex: dict[str, int]
+    StateMetadata: list[SceneStateMetadata]
+    TaskMetadata: list[SceneStateTaskMetadata]
+    FunctionMetadata: list[SceneStateFunctionMetadata]
+    TransitionMetadata: list[SceneStateTransitionMetadata]
+
+
 class ScreenShotComparisonSettings(Object):
     bUseConfidentialPlatformPathsForSavedResults: bool
     ScreenshotFallbackPlatforms: list[ScreenshotFallbackEntry]
@@ -98538,6 +102825,100 @@ class SequenceRecorderSettings(Object):
 
 class SequenceRecordingBase(Object):
     ...
+
+class SequenceSemanticBindingReferenceFixtureObject(Object):
+    BindingGuidArray: list[str]
+
+
+class SequenceSemanticCollisionFixture(Object):
+    FirstOwner: SequenceSemanticInstancedClosureFixture
+    SecondOwner: SequenceSemanticInstancedClosureFixture
+
+
+class SequenceSemanticExternalReferenceFixture(Object):
+    HardReference: Object
+    SoftReference: Object
+    WeakReference: Object
+
+
+class SequenceSemanticInstancedClosureFixture(Object):
+    Primary: SequenceSemanticReflectionFixtureSubobject
+    Children: list[SequenceSemanticReflectionFixtureSubobject]
+    Alias: SequenceSemanticReflectionFixtureSubobject
+
+
+class SequenceSemanticReflectionFixtureObject(Object):
+    BoolValue: bool
+    Int8Value: int
+    UInt8Value: int
+    Int16Value: int
+    UInt16Value: int
+    Int32Value: int
+    UInt32Value: int
+    Int64Value: int
+    UInt64Value: int
+    FloatValue: float
+    DoubleValue: float
+    LinearColorValue: LinearColor
+    TransformValue: Transform
+    NameValue: str
+    StringValue: str
+    TextValue: str
+    EnumValue: ESequenceSemanticFixtureEnum
+    NestedStruct: SequenceSemanticFixtureNestedStruct
+    CustomSerializedStruct: SequenceSemanticFixtureSerializedStruct
+    StructuredSerializedStruct: SequenceSemanticFixtureStructuredSerializedStruct
+    PostSerializedStruct: SequenceSemanticFixturePostSerializedStruct
+    TextSerializedStruct: SequenceSemanticFixtureTextSerializedStruct
+    StaticSerializedValues: SequenceSemanticFixtureSerializedStruct
+    SerializedArray: list[SequenceSemanticFixtureSerializedStruct]
+    StaticIntValues: int
+    ArrayValue: list[SequenceSemanticFixtureNestedStruct]
+    BindingGuidArray: list[str]
+    SetValue: set[str]
+    MapValue: dict[str, int]
+    OptionalValue: Any
+    HardObjectValue: Object
+    SoftObjectValue: Object
+    WeakObjectValue: Object
+    ClassValue: Class | type
+    SoftClassValue: Class
+    InterfaceValue: Any
+    InstancedObjectValue: SequenceSemanticReflectionFixtureSubobject
+    InstancedStructValue: InstancedStruct
+    PropertyBagValue: InstancedPropertyBag
+    FrameRangeValue: MovieSceneFrameRange
+    LocatorValue: UniversalObjectLocator
+    DelegateValue: DelegateBase
+    MulticastDelegateValue: MulticastDelegateBase
+    FieldPathValue: FieldPath
+    TransientValue: int
+
+    def HandleFixtureDelegate(self, Value: int) -> None:
+        ...
+
+
+class SequenceSemanticReflectionFixtureSubobject(Object, SequenceSemanticFixtureInterface):
+    Payload: str
+    Child: SequenceSemanticReflectionFixtureSubobject
+    Peer: SequenceSemanticReflectionFixtureSubobject
+
+
+class SequenceSemanticSpecialCodecFixture(Object):
+    PropertyBagValue: InstancedPropertyBag
+    LocatorValue: UniversalObjectLocator
+    BindingGuidArray: list[str]
+    StableSet: set[str]
+    StableMap: dict[str, int]
+    FrameRangeVariants: list[MovieSceneFrameRange]
+    TimeWarpValue: MovieSceneTimeWarpVariant
+    DelegateValue: DelegateBase
+    MulticastDelegateValue: MulticastDelegateBase
+    FieldPathValue: FieldPath
+
+    def HandleFixtureDelegate(self, Value: int) -> None:
+        ...
+
 
 class SequenceValidatorMenuContext(Object):
     ...
@@ -102673,6 +107054,496 @@ class AbcAssetImportData(AssetImportData):
     ConversionSettings: AbcConversionSettings
 
 
+class AbilitiesGameplayEffectComponent(GameplayEffectComponent):
+    GrantAbilityConfigs: list[GameplayAbilitySpecConfig]
+
+
+class AbilitySystemBlueprintLibrary(BlueprintFunctionLibrary):
+    @staticmethod
+    def AbilityTargetDataFromActor(Actor: Actor) -> GameplayAbilityTargetDataHandle:
+        ...
+
+    @staticmethod
+    def AbilityTargetDataFromActorArray(ActorArray: list[Actor], OneTargetPerHandle: bool) -> GameplayAbilityTargetDataHandle:
+        ...
+
+    @staticmethod
+    def AbilityTargetDataFromHitResult(HitResult: HitResult) -> GameplayAbilityTargetDataHandle:
+        ...
+
+    @staticmethod
+    def AbilityTargetDataFromLocations(SourceLocation: GameplayAbilityTargetingLocationInfo, TargetLocation: GameplayAbilityTargetingLocationInfo) -> GameplayAbilityTargetDataHandle:
+        ...
+
+    @staticmethod
+    def AddAssetTag(SpecHandle: GameplayEffectSpecHandle, NewGameplayTag: GameplayTag) -> GameplayEffectSpecHandle:
+        ...
+
+    @staticmethod
+    def AddAssetTags(SpecHandle: GameplayEffectSpecHandle, NewGameplayTags: GameplayTagContainer) -> GameplayEffectSpecHandle:
+        ...
+
+    @staticmethod
+    def AddGameplayTags(Actor: Actor, GameplayTags: GameplayTagContainer, ReplicationRule: EGameplayTagReplicationState=EGameplayTagReplicationState.NONE) -> bool:
+        ...
+
+    @staticmethod
+    def AddGrantedTag(SpecHandle: GameplayEffectSpecHandle, NewGameplayTag: GameplayTag) -> GameplayEffectSpecHandle:
+        ...
+
+    @staticmethod
+    def AddGrantedTags(SpecHandle: GameplayEffectSpecHandle, NewGameplayTags: GameplayTagContainer) -> GameplayEffectSpecHandle:
+        ...
+
+    @staticmethod
+    def AddLooseGameplayTags(Actor: Actor, GameplayTags: GameplayTagContainer, bShouldReplicate: bool=False) -> bool:
+        ...
+
+    @staticmethod
+    def AppendTargetDataHandle(TargetHandle: GameplayAbilityTargetDataHandle, HandleToAdd: GameplayAbilityTargetDataHandle) -> GameplayAbilityTargetDataHandle:
+        ...
+
+    @staticmethod
+    def AssignSetByCallerMagnitude(SpecHandle: GameplayEffectSpecHandle, DataName: str, Magnitude: float) -> GameplayEffectSpecHandle:
+        ...
+
+    @staticmethod
+    def AssignTagSetByCallerMagnitude(SpecHandle: GameplayEffectSpecHandle, DataTag: GameplayTag, Magnitude: float) -> GameplayEffectSpecHandle:
+        ...
+
+    @staticmethod
+    def BindEventWrapperToAnyOfGameplayTagContainerChanged(AbilitySystemComponent: AbilitySystemComponent, TagContainer: GameplayTagContainer, GameplayTagChangedEventWrapperDelegate: DelegateBase, bExecuteImmediatelyIfTagApplied: bool=True, TagListeningPolicy: EGameplayTagEventType=EGameplayTagEventType.NewOrRemoved) -> GameplayTagChangedEventWrapperSpecHandle:
+        ...
+
+    @staticmethod
+    def BindEventWrapperToAnyOfGameplayTagsChanged(AbilitySystemComponent: AbilitySystemComponent, Tags: list[GameplayTag], GameplayTagChangedEventWrapperDelegate: DelegateBase, bExecuteImmediatelyIfTagApplied: bool=True, TagListeningPolicy: EGameplayTagEventType=EGameplayTagEventType.NewOrRemoved) -> GameplayTagChangedEventWrapperSpecHandle:
+        ...
+
+    @staticmethod
+    def BindEventWrapperToGameplayTagChanged(AbilitySystemComponent: AbilitySystemComponent, Tag: GameplayTag, GameplayTagChangedEventWrapperDelegate: DelegateBase, bExecuteImmediatelyIfTagApplied: bool=True, TagListeningPolicy: EGameplayTagEventType=EGameplayTagEventType.NewOrRemoved) -> GameplayTagChangedEventWrapperSpecHandle:
+        ...
+
+    @staticmethod
+    def BreakGameplayCueParameters(Parameters: GameplayCueParameters) -> tuple[float, float, GameplayEffectContextHandle, GameplayTag, GameplayTag, GameplayTagContainer, GameplayTagContainer, Vector, Vector, Actor, Actor, Object, PhysicalMaterial, int, int, SceneComponent, bool]:
+        ...
+
+    @staticmethod
+    def CloneSpecHandle(InNewInstigator: Actor, InEffectCauser: Actor, GameplayEffectSpecHandle_Clone: GameplayEffectSpecHandle) -> GameplayEffectSpecHandle:
+        ...
+
+    @staticmethod
+    def Conv_ScalableFloatToDouble(Input: ScalableFloat, Level: float=0) -> float:
+        ...
+
+    @staticmethod
+    def Conv_ScalableFloatToFloat(Input: ScalableFloat, Level: float=0) -> float:
+        ...
+
+    @staticmethod
+    def DoesGameplayCueMeetTagRequirements(Parameters: GameplayCueParameters, SourceTagReqs: GameplayTagRequirements, TargetTagReqs: GameplayTagRequirements) -> bool:
+        ...
+
+    @staticmethod
+    def DoesTargetDataContainActor(TargetData: GameplayAbilityTargetDataHandle, Index: int, Actor: Actor) -> bool:
+        ...
+
+    @staticmethod
+    def EffectContextAddHitResult(EffectContext: GameplayEffectContextHandle, HitResult: HitResult, bReset: bool) -> None:
+        ...
+
+    @staticmethod
+    def EffectContextGetEffectCauser(EffectContext: GameplayEffectContextHandle) -> Actor:
+        ...
+
+    @staticmethod
+    def EffectContextGetHitResult(EffectContext: GameplayEffectContextHandle) -> HitResult:
+        ...
+
+    @staticmethod
+    def EffectContextGetInstigatorActor(EffectContext: GameplayEffectContextHandle) -> Actor:
+        ...
+
+    @staticmethod
+    def EffectContextGetOrigin(EffectContext: GameplayEffectContextHandle) -> Vector:
+        ...
+
+    @staticmethod
+    def EffectContextGetOriginalInstigatorActor(EffectContext: GameplayEffectContextHandle) -> Actor:
+        ...
+
+    @staticmethod
+    def EffectContextGetSourceObject(EffectContext: GameplayEffectContextHandle) -> Object:
+        ...
+
+    @staticmethod
+    def EffectContextHasHitResult(EffectContext: GameplayEffectContextHandle) -> bool:
+        ...
+
+    @staticmethod
+    def EffectContextIsInstigatorLocallyControlled(EffectContext: GameplayEffectContextHandle) -> bool:
+        ...
+
+    @staticmethod
+    def EffectContextIsValid(EffectContext: GameplayEffectContextHandle) -> bool:
+        ...
+
+    @staticmethod
+    def EffectContextSetOrigin(EffectContext: GameplayEffectContextHandle, Origin: Vector) -> None:
+        ...
+
+    @staticmethod
+    def EqualEqual_ActiveGameplayEffectHandle(A: ActiveGameplayEffectHandle, B: ActiveGameplayEffectHandle) -> bool:
+        ...
+
+    @staticmethod
+    def EqualEqual_GameplayAbilitySpecHandle(A: GameplayAbilitySpecHandle, B: GameplayAbilitySpecHandle) -> bool:
+        ...
+
+    @staticmethod
+    def EqualEqual_GameplayAttributeGameplayAttribute(AttributeA: GameplayAttribute, AttributeB: GameplayAttribute) -> bool:
+        ...
+
+    @staticmethod
+    def EvaluateAttributeValueWithTags(AbilitySystem: AbilitySystemComponent, Attribute: GameplayAttribute, SourceTags: GameplayTagContainer, TargetTags: GameplayTagContainer) -> tuple[float, bool]:
+        ...
+
+    @staticmethod
+    def EvaluateAttributeValueWithTagsAndBase(AbilitySystem: AbilitySystemComponent, Attribute: GameplayAttribute, SourceTags: GameplayTagContainer, TargetTags: GameplayTagContainer, BaseValue: float) -> tuple[float, bool]:
+        ...
+
+    @staticmethod
+    def FilterTargetData(TargetDataHandle: GameplayAbilityTargetDataHandle, ActorFilterClass: GameplayTargetDataFilterHandle) -> GameplayAbilityTargetDataHandle:
+        ...
+
+    @staticmethod
+    def ForwardGameplayCueToTarget(TargetCueInterface: Any, EventType: EGameplayCueEvent, Parameters: GameplayCueParameters) -> None:
+        ...
+
+    @staticmethod
+    def GetAbilitySystemComponent(Actor: Actor) -> AbilitySystemComponent:
+        ...
+
+    @staticmethod
+    def GetAbilitySystemComponentFromActiveGameplayEffectHandle(Handle: ActiveGameplayEffectHandle) -> AbilitySystemComponent:
+        ...
+
+    @staticmethod
+    def GetActiveGameplayEffectDebugString(ActiveHandle: ActiveGameplayEffectHandle) -> str:
+        ...
+
+    @staticmethod
+    def GetActiveGameplayEffectExpectedEndTime(ActiveHandle: ActiveGameplayEffectHandle) -> float:
+        ...
+
+    @staticmethod
+    def GetActiveGameplayEffectRemainingDuration(WorldContextObject: Object, ActiveHandle: ActiveGameplayEffectHandle) -> float:
+        ...
+
+    @staticmethod
+    def GetActiveGameplayEffectStackCount(ActiveHandle: ActiveGameplayEffectHandle) -> int:
+        ...
+
+    @staticmethod
+    def GetActiveGameplayEffectStackLimitCount(ActiveHandle: ActiveGameplayEffectHandle) -> int:
+        ...
+
+    @staticmethod
+    def GetActiveGameplayEffectStartTime(ActiveHandle: ActiveGameplayEffectHandle) -> float:
+        ...
+
+    @staticmethod
+    def GetActiveGameplayEffectTotalDuration(ActiveHandle: ActiveGameplayEffectHandle) -> float:
+        ...
+
+    @staticmethod
+    def GetActorByIndex(Parameters: GameplayCueParameters, Index: int) -> Actor:
+        ...
+
+    @staticmethod
+    def GetActorCount(Parameters: GameplayCueParameters) -> int:
+        ...
+
+    @staticmethod
+    def GetActorsFromTargetData(TargetData: GameplayAbilityTargetDataHandle, Index: int) -> list[Actor]:
+        ...
+
+    @staticmethod
+    def GetAllActorsFromTargetData(TargetData: GameplayAbilityTargetDataHandle) -> list[Actor]:
+        ...
+
+    @staticmethod
+    def GetAssetTags(SpecHandle: GameplayEffectSpecHandle) -> GameplayTagContainer:
+        ...
+
+    @staticmethod
+    def GetDataCountFromTargetData(TargetData: GameplayAbilityTargetDataHandle) -> int:
+        ...
+
+    @staticmethod
+    def GetDebugStringFromGameplayAttribute(Attribute: GameplayAttribute) -> str:
+        ...
+
+    @staticmethod
+    def GetDurationPolicyFromGameplayEffectSpecHandle(Handle: GameplayEffectSpecHandle) -> EGameplayEffectDurationType:
+        ...
+
+    @staticmethod
+    def GetEffectContext(SpecHandle: GameplayEffectSpecHandle) -> GameplayEffectContextHandle:
+        ...
+
+    @staticmethod
+    def GetFloatAttribute(Actor: Actor, Attribute: GameplayAttribute) -> tuple[float, bool]:
+        ...
+
+    @staticmethod
+    def GetFloatAttributeBase(Actor: Actor, Attribute: GameplayAttribute) -> tuple[float, bool]:
+        ...
+
+    @staticmethod
+    def GetFloatAttributeBaseFromAbilitySystemComponent(AbilitySystemComponent: AbilitySystemComponent, Attribute: GameplayAttribute) -> tuple[float, bool]:
+        ...
+
+    @staticmethod
+    def GetFloatAttributeFromAbilitySystemComponent(AbilitySystem: AbilitySystemComponent, Attribute: GameplayAttribute) -> tuple[float, bool]:
+        ...
+
+    @staticmethod
+    def GetGameplayAbilityFromSpecHandle(AbilitySystem: AbilitySystemComponent, AbilitySpecHandle: GameplayAbilitySpecHandle) -> tuple[GameplayAbility, bool]:
+        ...
+
+    @staticmethod
+    def GetGameplayCueDirection(TargetActor: Actor, Parameters: GameplayCueParameters) -> tuple[bool, Vector]:
+        ...
+
+    @staticmethod
+    def GetGameplayCueEndLocationAndNormal(TargetActor: Actor, Parameters: GameplayCueParameters) -> tuple[bool, Vector, Vector]:
+        ...
+
+    @staticmethod
+    def GetGameplayEffectAssetTags(EffectClass: Class | type) -> GameplayTagContainer:
+        ...
+
+    @staticmethod
+    def GetGameplayEffectFromActiveEffectHandle(ActiveHandle: ActiveGameplayEffectHandle) -> GameplayEffect:
+        ...
+
+    @staticmethod
+    def GetGameplayEffectFromSpecHandle(Handle: GameplayEffectSpecHandle) -> GameplayEffect:
+        ...
+
+    @staticmethod
+    def GetGameplayEffectGrantedTags(EffectClass: Class | type) -> GameplayTagContainer:
+        ...
+
+    @staticmethod
+    def GetGameplayEffectUIData(EffectClass: Class | type, DataType: Class | type) -> GameplayEffectUIData:
+        ...
+
+    @staticmethod
+    def GetGrantedTags(SpecHandle: GameplayEffectSpecHandle) -> GameplayTagContainer:
+        ...
+
+    @staticmethod
+    def GetHitResult(Parameters: GameplayCueParameters) -> HitResult:
+        ...
+
+    @staticmethod
+    def GetHitResultFromTargetData(HitResult: GameplayAbilityTargetDataHandle, Index: int) -> HitResult:
+        ...
+
+    @staticmethod
+    def GetInstigatorActor(Parameters: GameplayCueParameters) -> Actor:
+        ...
+
+    @staticmethod
+    def GetInstigatorTransform(Parameters: GameplayCueParameters) -> Transform:
+        ...
+
+    @staticmethod
+    def GetModifiedAttributeMagnitude(SpecHandle: GameplayEffectSpecHandle, Attribute: GameplayAttribute) -> float:
+        ...
+
+    @staticmethod
+    def GetOrigin(Parameters: GameplayCueParameters) -> Vector:
+        ...
+
+    @staticmethod
+    def GetTargetDataEndPoint(TargetData: GameplayAbilityTargetDataHandle, Index: int) -> Vector:
+        ...
+
+    @staticmethod
+    def GetTargetDataEndPointTransform(TargetData: GameplayAbilityTargetDataHandle, Index: int) -> Transform:
+        ...
+
+    @staticmethod
+    def GetTargetDataOrigin(TargetData: GameplayAbilityTargetDataHandle, Index: int) -> Transform:
+        ...
+
+    @staticmethod
+    def HasAnyAbilitiesWithAssetTag(AbilitySystemComponent: AbilitySystemComponent, AssetTag: GameplayTag) -> bool:
+        ...
+
+    @staticmethod
+    def HasHitResult(Parameters: GameplayCueParameters) -> bool:
+        ...
+
+    @staticmethod
+    def IsActiveGameplayEffectHandleActive(Handle: ActiveGameplayEffectHandle) -> bool:
+        ...
+
+    @staticmethod
+    def IsActiveGameplayEffectHandleValid(Handle: ActiveGameplayEffectHandle) -> bool:
+        ...
+
+    @staticmethod
+    def IsDurationGameplayEffectSpecHandle(Handle: GameplayEffectSpecHandle) -> bool:
+        ...
+
+    @staticmethod
+    def IsGameplayAbilityActive(GameplayAbility: GameplayAbility) -> bool:
+        ...
+
+    @staticmethod
+    def IsInstigatorLocallyControlled(Parameters: GameplayCueParameters) -> bool:
+        ...
+
+    @staticmethod
+    def IsInstigatorLocallyControlledPlayer(Parameters: GameplayCueParameters) -> bool:
+        ...
+
+    @staticmethod
+    def IsValid(Attribute: GameplayAttribute) -> bool:
+        ...
+
+    @staticmethod
+    def MakeFilterHandle(Filter: GameplayTargetDataFilter, FilterActor: Actor) -> GameplayTargetDataFilterHandle:
+        ...
+
+    @staticmethod
+    def MakeGameplayCueParameters(NormalizedMagnitude: float, RawMagnitude: float, EffectContext: GameplayEffectContextHandle, MatchedTagName: GameplayTag, OriginalTag: GameplayTag, AggregatedSourceTags: GameplayTagContainer, AggregatedTargetTags: GameplayTagContainer, Location: Vector, Normal: Vector, Instigator: Actor, EffectCauser: Actor, SourceObject: Object, PhysicalMaterial: PhysicalMaterial, GameplayEffectLevel: int, AbilityLevel: int, TargetAttachComponent: SceneComponent, bReplicateLocationWhenUsingMinimalRepProxy: bool) -> GameplayCueParameters:
+        ...
+
+    @staticmethod
+    def MakeSpecHandleByClass(GameplayEffect: Class | type, Instigator: Actor, EffectCauser: Actor, Level: float=1) -> GameplayEffectSpecHandle:
+        ...
+
+    @staticmethod
+    def NotEqual_ActiveGameplayEffectHandle(A: ActiveGameplayEffectHandle, B: ActiveGameplayEffectHandle) -> bool:
+        ...
+
+    @staticmethod
+    def NotEqual_GameplayAbilitySpecHandle(A: GameplayAbilitySpecHandle, B: GameplayAbilitySpecHandle) -> bool:
+        ...
+
+    @staticmethod
+    def NotEqual_GameplayAttributeGameplayAttribute(AttributeA: GameplayAttribute, AttributeB: GameplayAttribute) -> bool:
+        ...
+
+    @staticmethod
+    def RemoveGameplayTags(Actor: Actor, GameplayTags: GameplayTagContainer, ReplicationRule: EGameplayTagReplicationState=EGameplayTagReplicationState.NONE) -> bool:
+        ...
+
+    @staticmethod
+    def RemoveLooseGameplayTags(Actor: Actor, GameplayTags: GameplayTagContainer, bShouldReplicate: bool=False) -> bool:
+        ...
+
+    @staticmethod
+    def SendGameplayEventToActor(Actor: Actor, EventTag: GameplayTag, Payload: GameplayEventData) -> None:
+        ...
+
+    @staticmethod
+    def SetDuration(SpecHandle: GameplayEffectSpecHandle, Duration: float) -> GameplayEffectSpecHandle:
+        ...
+
+    @staticmethod
+    def SetStackCount(SpecHandle: GameplayEffectSpecHandle, StackCount: int) -> GameplayEffectSpecHandle:
+        ...
+
+    @staticmethod
+    def SetStackCountToMax(SpecHandle: GameplayEffectSpecHandle) -> GameplayEffectSpecHandle:
+        ...
+
+    @staticmethod
+    def TargetDataHasActor(TargetData: GameplayAbilityTargetDataHandle, Index: int) -> bool:
+        ...
+
+    @staticmethod
+    def TargetDataHasEndPoint(TargetData: GameplayAbilityTargetDataHandle, Index: int) -> bool:
+        ...
+
+    @staticmethod
+    def TargetDataHasHitResult(HitResult: GameplayAbilityTargetDataHandle, Index: int) -> bool:
+        ...
+
+    @staticmethod
+    def TargetDataHasOrigin(TargetData: GameplayAbilityTargetDataHandle, Index: int) -> bool:
+        ...
+
+    @staticmethod
+    def UnbindAllGameplayTagChangedEventWrappersForHandle(Handle: GameplayTagChangedEventWrapperSpecHandle) -> None:
+        ...
+
+    @staticmethod
+    def UnbindGameplayTagChangedEventWrapperForHandle(Tag: GameplayTag, Handle: GameplayTagChangedEventWrapperSpecHandle) -> None:
+        ...
+
+
+class AbilitySystemCheatManagerExtension(CheatManagerExtension):
+    def AbilityActivate(self, PartialName: str) -> None:
+        ...
+
+    def AbilityCancel(self, PartialName: str) -> None:
+        ...
+
+    def AbilityGrant(self, AssetSearchString: str) -> None:
+        ...
+
+    def AbilityListGranted(self) -> None:
+        ...
+
+    def EffectApply(self, PartialName: str, EffectLevel: float=-1) -> None:
+        ...
+
+    def EffectListActive(self) -> None:
+        ...
+
+    def EffectRemove(self, NameOrHandle: str) -> None:
+        ...
+
+
+class AbilitySystemDebugHUDExtension_Attributes(AbilitySystemDebugHUDExtension):
+    ...
+
+class AbilitySystemDebugHUDExtension_BlockedAbilityTags(AbilitySystemDebugHUDExtension):
+    ...
+
+class AbilitySystemDebugHUDExtension_Tags(AbilitySystemDebugHUDExtension):
+    ...
+
+class AbilitySystemTestAttributeSet(AttributeSet):
+    MaxHealth: float
+    Health: float
+    Mana: GameplayAttributeData
+    MaxMana: float
+    Damage: float
+    SpellDamage: float
+    PhysicalDamage: float
+    CritChance: float
+    CritMultiplier: float
+    ArmorDamageReduction: float
+    DodgeChance: float
+    LifeSteal: float
+    Strength: float
+    StackingAttribute1: float
+    StackingAttribute2: float
+    NoStackAttribute: float
+
+
+class AbilityTask(GameplayTask):
+    Ability: GameplayAbility
+    AbilitySystemComponent: AbilitySystemComponent
+
+
 class AbstractSkeletonLabelBindingFactory(Factory):
     ...
 
@@ -103006,6 +107877,14 @@ class AddPatchToolProperties(InteractiveToolPropertySet):
 
 class AddPrimitiveToolBuilder(InteractiveToolBuilder):
     ...
+
+class AdditionalEffectsGameplayEffectComponent(GameplayEffectComponent):
+    bOnApplicationCopyDataFromOriginalSpec: bool
+    OnApplicationGameplayEffects: list[ConditionalGameplayEffect]
+    OnCompleteAlways: list[Class]
+    OnCompleteNormal: list[Class]
+    OnCompletePrematurely: list[Class]
+
 
 class AlembicImportFactory(Factory):
     ImportSettings: AbcImportSettings
@@ -103465,6 +108344,14 @@ class AnimNotifyState_Trail(AnimNotifyState):
 
     def OverridePSTemplate(self, MeshComp: SkeletalMeshComponent, Animation: AnimSequenceBase) -> ParticleSystem:
         ...
+
+
+class AnimNotify_GameplayCue(AnimNotify):
+    GameplayCue: GameplayCueTag
+
+
+class AnimNotify_GameplayCueState(AnimNotifyState):
+    GameplayCue: GameplayCueTag
 
 
 class AnimNotify_PauseClothingSimulation(AnimNotify):
@@ -104621,8 +109508,15 @@ class AssetRegUtilCommandlet(Commandlet):
 class AssetRegistryDumpCommandlet(Commandlet):
     ...
 
+class AssetSemanticCommandlet(Commandlet):
+    ...
+
 class AssetSizeQueryCommandlet(Commandlet):
     ...
+
+class AssetTagsGameplayEffectComponent(GameplayEffectComponent):
+    InheritableAssetTags: InheritedTagContainer
+
 
 class AssetThumbnailWidgetFactory(EditorDataStorageFactory):
     ...
@@ -106076,14 +110970,90 @@ class BlendSpacePlayerLibrary(BlueprintFunctionLibrary):
         ...
 
 
+class BlendStackAnimNodeLibrary(BlueprintFunctionLibrary):
+    @staticmethod
+    def BlendTo(Context: AnimUpdateContext, BlendStackNode: BlendStackAnimNodeReference, AnimationAsset: AnimationAsset | None=None, AnimationTime: float=0, bLoop: bool=False, bMirrored: bool=False, BlendTime: float=0.2, BlendParameters: Vector=Vector(), WantedPlayRate: float=1, ActivationDelay: float=0) -> None:
+        ...
+
+    @staticmethod
+    def BlendToWithSettings(Context: AnimUpdateContext, BlendStackNode: BlendStackAnimNodeReference, AnimationAsset: AnimationAsset | None=None, AnimationTime: float=0, bLoop: bool=False, bMirrored: bool=False, BlendTime: float=0.2, BlendProfile: BlendProfile | None=None, BlendOption: EAlphaBlendOption=EAlphaBlendOption.HermiteCubic, bInertialBlend: bool=False, BlendParameters: Vector=Vector(), WantedPlayRate: float=1, ActivationDelay: float=0) -> None:
+        ...
+
+    @staticmethod
+    def ConvertToBlendStackNode(Node: AnimNodeReference) -> tuple[BlendStackAnimNodeReference, EAnimNodeReferenceConversionResult]:
+        ...
+
+    @staticmethod
+    def ConvertToBlendStackNodePure(Node: AnimNodeReference) -> tuple[BlendStackAnimNodeReference, bool]:
+        ...
+
+    @staticmethod
+    def ForceBlendNextUpdate(BlendStackNode: BlendStackAnimNodeReference) -> None:
+        ...
+
+    @staticmethod
+    def GetCurrentAsset(BlendStackNode: BlendStackAnimNodeReference) -> AnimationAsset:
+        ...
+
+    @staticmethod
+    def GetCurrentAssetTime(BlendStackNode: BlendStackAnimNodeReference) -> float:
+        ...
+
+    @staticmethod
+    def GetCurrentAssetTimeRemaining(BlendStackNode: BlendStackAnimNodeReference) -> float:
+        ...
+
+    @staticmethod
+    def GetCurrentBlendStackAnimAsset(Node: AnimNodeReference) -> AnimationAsset:
+        ...
+
+    @staticmethod
+    def GetCurrentBlendStackAnimAssetMirrorTable(Node: AnimNodeReference) -> MirrorDataTable:
+        ...
+
+    @staticmethod
+    def GetCurrentBlendStackAnimAssetMirrored(Node: AnimNodeReference) -> bool:
+        ...
+
+    @staticmethod
+    def GetCurrentBlendStackAnimAssetTime(Node: AnimNodeReference) -> float:
+        ...
+
+    @staticmethod
+    def GetCurrentBlendStackAnimIsActive(Node: AnimNodeReference) -> bool:
+        ...
+
+    @staticmethod
+    def IsCurrentAssetLooping(BlendStackNode: BlendStackAnimNodeReference) -> bool:
+        ...
+
+
 class BlendStackCameraNode(CameraNode):
     BlendStackType: ECameraBlendStackType
     Layer: ECameraRigLayer
 
 
+class BlendStackInputAnimNodeLibrary(BlueprintFunctionLibrary):
+    @staticmethod
+    def ConvertToBlendStackInputNode(Node: AnimNodeReference) -> tuple[BlendStackInputAnimNodeReference, EAnimNodeReferenceConversionResult]:
+        ...
+
+    @staticmethod
+    def ConvertToBlendStackInputNodePure(Node: AnimNodeReference) -> tuple[BlendStackInputAnimNodeReference, bool]:
+        ...
+
+    @staticmethod
+    def GetProperties(BlendStackInputNode: BlendStackInputAnimNodeReference) -> tuple[AnimationAsset, float]:
+        ...
+
+
 class BlendStackRootCameraNode(CameraNode):
     Blend: BlendCameraNode
     RootNode: CameraNode
+
+
+class BlockAbilityTagsGameplayEffectComponent(GameplayEffectComponent):
+    InheritableBlockedAbilityTagsContainer: InheritedTagContainer
 
 
 class Blueprint(BlueprintCore):
@@ -107470,6 +112440,15 @@ class BlueprintPostProcessSettingsCollectionFunctionLibrary(BlueprintFunctionLib
         ...
 
 
+class BlueprintSemanticCommandlet(Commandlet):
+    ...
+
+class BlueprintSemanticImportMetadata(BlueprintExtension):
+    DocumentSignature: str
+    GraphSignature: str
+    GeneratedLogicDocumentText: str
+
+
 class BlueprintSetLibrary(BlueprintFunctionLibrary):
     @staticmethod
     def SetSetPropertyByName(Object: Object, PropertyName: str, Value: set[int]) -> None:
@@ -108629,6 +113608,12 @@ class CameraVariableCollectionEditor(AssetEditor):
 class CameraVariableCollectionFactory(Factory):
     ...
 
+class CancelAbilityTagsGameplayEffectComponent(GameplayEffectComponent):
+    ComponentMode: ECancelAbilityTagsGameplayEffectComponentMode
+    InheritableCancelAbilitiesWithTagsContainer: InheritedTagContainer
+    InheritableCancelAbilitiesWithoutTagsContainer: InheritedTagContainer
+
+
 class CancellableAsyncAction(BlueprintAsyncActionBase):
     def Cancel(self) -> None:
         ...
@@ -108658,6 +113643,10 @@ class CausticsGeneratorActor(Actor):
 
     def SpawnWaterPreviewGrid(self, HISMC: HierarchicalInstancedStaticMeshComponent, GridSize: float, GridTiles: int) -> None:
         ...
+
+
+class ChanceToApplyGameplayEffectComponent(GameplayEffectComponent):
+    ChanceToApplyToTarget: ScalableFloat
 
 
 class ChaosBlueprintLibrary(BlueprintFunctionLibrary):
@@ -108925,6 +113914,93 @@ class CheckForVirtualizedContentCommandlet(Commandlet):
 
 class CheckedStateBinding(PropertyBinding):
     def GetValue(self) -> ECheckBoxState:
+        ...
+
+
+class ChooserEditorSettings(DeveloperSettings):
+    DefaultCreateType: str
+
+
+class ChooserFunctionLibrary(BlueprintFunctionLibrary):
+    @staticmethod
+    def AddChooserObjectInput(Context: ChooserEvaluationContext, Object: Object) -> ChooserEvaluationContext:
+        ...
+
+    @staticmethod
+    def AddChooserStructInput(Context: ChooserEvaluationContext, Value: int) -> ChooserEvaluationContext:
+        ...
+
+    @staticmethod
+    def AddChooserStructInputOutput(Context: ChooserEvaluationContext, Value: int) -> ChooserEvaluationContext:
+        ...
+
+    @staticmethod
+    def EvaluateChooser(ContextObject: Object, ChooserTable: ChooserTable, ObjectClass: Class | type) -> Object:
+        ...
+
+    @staticmethod
+    def EvaluateChooserMulti(ContextObject: Object, ChooserTable: ChooserTable, ObjectClass: Class | type) -> list[Object]:
+        ...
+
+    @staticmethod
+    def EvaluateObjectChooserBase(Context: ChooserEvaluationContext, ObjectChooser: InstancedStruct, ObjectClass: Class | type, bResultIsClass: bool=False) -> tuple[Object, ChooserEvaluationContext]:
+        ...
+
+    @staticmethod
+    def EvaluateObjectChooserBaseMulti(Context: ChooserEvaluationContext, ObjectChooser: InstancedStruct, ObjectClass: Class | type, bResultIsClass: bool=False) -> tuple[list[Object], ChooserEvaluationContext]:
+        ...
+
+    @staticmethod
+    def EvaluateObjectChooserBaseMultiSoft(Context: ChooserEvaluationContext, ObjectChooser: InstancedStruct, ObjectClass: Class | type, bResultIsClass: bool=False) -> tuple[list[Object], ChooserEvaluationContext]:
+        ...
+
+    @staticmethod
+    def EvaluateObjectChooserBaseSoft(Context: ChooserEvaluationContext, ObjectChooser: InstancedStruct, ObjectClass: Class | type, bResultIsClass: bool=False) -> tuple[Object, ChooserEvaluationContext]:
+        ...
+
+    @staticmethod
+    def GetChooserObject(Context: ChooserEvaluationContext, ObjectClass: Class | type) -> tuple[Object, ChooserEvaluationContext]:
+        ...
+
+    @staticmethod
+    def GetChooserObjectInput(Context: ChooserEvaluationContext, Index: int, ObjectClass: Class | type) -> tuple[Object, ChooserEvaluationContext]:
+        ...
+
+    @staticmethod
+    def GetChooserStructOutput(Context: ChooserEvaluationContext, Index: int) -> tuple[ChooserEvaluationContext, int]:
+        ...
+
+    @staticmethod
+    def GetChooserStructOutputArray(Context: ChooserEvaluationContext, Index: int) -> tuple[ChooserEvaluationContext, list[int]]:
+        ...
+
+    @staticmethod
+    def MakeChooserEvaluationContext() -> ChooserEvaluationContext:
+        ...
+
+    @staticmethod
+    def MakeEvaluateChooser(Chooser: ChooserTable) -> InstancedStruct:
+        ...
+
+
+class ChooserSignatureFactory(Factory):
+    ChooserInitializer: InstancedStruct
+
+
+class ChooserTable(ChooserSignature):
+    RootChooser: ChooserTable
+    FallbackResult: InstancedStruct
+    ResultsStructs: list[InstancedStruct]
+    DisabledRows: list[bool]
+    NestedChoosers: list[ChooserTable]
+    NestedObjects: list[Object]
+    ParentTable: ChooserTable
+    EditorResultsColumnWidth: float
+    Version: int
+    CookedResults: list[InstancedStruct]
+    ColumnsStructs: list[InstancedStruct]
+
+    def ResultAssetFilter(self, AssetData: AssetData) -> bool:
         ...
 
 
@@ -110954,6 +116030,13 @@ class CurveEditorSmartReduceFilter(CurveEditorFilterBase):
 class CurveEditorSmartSnapFilter(CurveEditorFilterBase):
     ...
 
+class CurveExpressionsDataAsset(DataAsset):
+    Expressions: CurveExpressionList
+
+
+class CurveExpressionsDataAssetFactory(Factory):
+    ...
+
 class CurveFactory(Factory):
     CurveClass: Class | type
 
@@ -111022,6 +116105,10 @@ class CurveVector(CurveBase):
 
 class CurveVector3ThumbnailRenderer(ThumbnailRenderer):
     ...
+
+class CustomCanApplyGameplayEffectComponent(GameplayEffectComponent):
+    ApplicationRequirements: list[Class]
+
 
 class CustomizableObjectBulkValidationCommandlet(Commandlet):
     ...
@@ -111176,6 +116263,260 @@ class DEditorVectorParameterValue(DEditorParameterValue):
     ChannelNames: ParameterChannelNames
 
 
+class DMXAttributeNameConversions(BlueprintFunctionLibrary):
+    @staticmethod
+    def Conv_DMXAttributeToName(InAttribute: DMXAttributeName) -> str:
+        ...
+
+    @staticmethod
+    def Conv_DMXAttributeToString(InAttribute: DMXAttributeName) -> str:
+        ...
+
+
+class DMXComponent(ActorComponent):
+    OnFixturePatchReceived: MulticastDelegateBase
+    OnDMXComponentTick: MulticastDelegateBase
+    FixturePatchRef: DMXEntityFixturePatchRef
+    bReceiveDMXFromPatch: bool
+
+    def DMXComponentFixturePatchReceivedSignature__DelegateSignature(self, FixturePatch: DMXEntityFixturePatch, ValuePerAttribute: DMXNormalizedAttributeValueMap) -> None:
+        ...
+
+    def DMXOnDMXComponentTickSignature__DelegateSignature(self, DeltaTime: float) -> None:
+        ...
+
+    def GetFixturePatch(self) -> DMXEntityFixturePatch:
+        ...
+
+    def OnFixturePatchReceivedDMX(self, FixturePatch: DMXEntityFixturePatch, NormalizedValuePerAttribute: DMXNormalizedAttributeValueMap) -> None:
+        ...
+
+    def SetFixturePatch(self, InFixturePatch: DMXEntityFixturePatch) -> None:
+        ...
+
+    def SetReceiveDMXFromPatch(self, bReceive: bool) -> None:
+        ...
+
+
+class DMXEditorFactoryNew(Factory):
+    ...
+
+class DMXEntity(DMXObjectBase):
+    Name: str
+    ParentLibrary: DMXLibrary
+    Id: str
+
+
+class DMXEntityReferenceConversions(BlueprintFunctionLibrary):
+    @staticmethod
+    def Conv_FixturePatchObjToRef(InFixturePatch: DMXEntityFixturePatch) -> DMXEntityFixturePatchRef:
+        ...
+
+    @staticmethod
+    def Conv_FixturePatchRefToObj(InFixturePatchRef: DMXEntityFixturePatchRef) -> DMXEntityFixturePatch:
+        ...
+
+    @staticmethod
+    def Conv_FixtureTypeObjToRef(InFixtureType: DMXEntityFixtureType) -> DMXEntityFixtureTypeRef:
+        ...
+
+    @staticmethod
+    def Conv_FixtureTypeRefToObj(InFixtureTypeRef: DMXEntityFixtureTypeRef) -> DMXEntityFixtureType:
+        ...
+
+
+class DMXGDTFAssetImportData(AssetImportData):
+    FilePathAndName: str
+    RawSourceData: DMXByteArray64
+
+
+class DMXGDTFFactory(Factory):
+    ImportUI: DMXGDTFImportUI
+
+
+class DMXImportGDTF(DMXImport):
+    ActorClass: Class
+    GDTFAssetImportData: DMXGDTFAssetImportData
+
+
+class DMXImportGDTFAttributeDefinitions(DMXImportAttributeDefinitions):
+    ActivationGroups: list[DMXImportGDTFActivationGroup]
+    FeatureGroups: list[DMXImportGDTFFeatureGroup]
+    Attributes: list[DMXImportGDTFAttribute]
+
+
+class DMXImportGDTFDMXModes(DMXImportDMXModes):
+    DMXModes: list[DMXImportGDTFDMXMode]
+
+    def GetDMXChannelFunctions(self, InMode: DMXImportGDTFDMXMode) -> list[DMXImportGDTFChannelFunction]:
+        ...
+
+
+class DMXImportGDTFFixtureType(DMXImportFixtureType):
+    Name: str
+    ShortName: str
+    LongName: str
+    Manufacturer: str
+    Description: str
+    FixtureTypeID: str
+    Thumbnail: Texture2D
+    RefFT: str
+
+
+class DMXImportGDTFGeometries(DMXImportGeometries):
+    GeneralGeometry: list[DMXImportGDTFGeneralGeometry]
+
+
+class DMXImportGDTFModels(DMXImportModels):
+    Models: list[DMXImportGDTFModel]
+
+
+class DMXImportGDTFPhysicalDescriptions(DMXImportPhysicalDescriptions):
+    Emitters: list[DMXImportGDTFEmitter]
+    ColorSpace: DMXImportGDTFColorSpace
+    DMXProfiles: DMXImportGDTFDMXProfiles
+    CRIs: DMXImportGDTFCRIs
+
+
+class DMXImportGDTFProtocols(DMXImportProtocols):
+    Protocols: list[str]
+
+
+class DMXImportGDTFWheels(DMXImportWheels):
+    Wheels: list[DMXImportGDTFWheel]
+
+
+class DMXLibrary(DMXObjectBase):
+    PortReferences: DMXLibraryPortReferences
+    Entities: list[DMXEntity]
+    GeneralSceneDescription: DMXMVRGeneralSceneDescription
+
+
+class DMXLibraryFactory(Factory):
+    ...
+
+class DMXLibraryFromMVRFactory(Factory):
+    ...
+
+class DMXMVRAssetImportData(AssetImportData):
+    FilePathAndName: str
+    RawSourceData: DMXByteArray64
+
+
+class DMXMVRAssetUserData(AssetUserData):
+    MetaData: dict[str, str]
+
+
+class DMXMVRFixtureNode(DMXMVRParametricObjectNodeBase):
+    Name: str
+    MultiPatch: DMXOptionalGuid
+    Classing: DMXOptionalGuid
+    GDTFSpec: str
+    GDTFMode: str
+    Focus: DMXOptionalGuid
+    CastShadow: DMXOptionalBool
+    Position: DMXOptionalGuid
+    FixtureID: str
+    UnitNumber: int
+    Addresses: DMXMVRFixtureAddresses
+    CIEColor: DMXOptionalColorCIE1931
+    FixtureTypeId: DMXOptionalInt32
+    CustomId: DMXOptionalInt32
+    Mappings: list[DMXMVRFixtureMapping]
+    Gobo: DMXOptionalMVRFixtureGobo
+
+
+class DMXMVRGroupObjectNode(DMXMVRParametricObjectNodeBase):
+    Name: DMXOptionalString
+    ChildListNode: DMXMVRChildListNode
+
+
+class DMXMVRSceneActor(Actor):
+    bRespawnDeletedActorsOnRefresh: bool
+    bUpdateTransformsOnRefresh: bool
+    DMXLibrary: DMXLibrary
+    RelatedActors: list[Actor]
+    FixtureTypeToActorClasses: list[DMXMVRSceneFixtureTypeToActorClassPair]
+    DeletedMVRFixtureUUIDs: list[str]
+    FixtureTypeToActorClasses_PreEditChange: list[DMXMVRSceneFixtureTypeToActorClassPair]
+    MVRSceneRoot: SceneComponent
+
+
+class DMXMVRSceneActorFactory(ActorFactory):
+    ...
+
+class DMXModulator_CMYtoRGB(DMXModulator):
+    AttributeCyanToRed: DMXAttributeName
+    AttributeMagentaToGreen: DMXAttributeName
+    AttributeYellowToBlue: DMXAttributeName
+
+
+class DMXModulator_ExtraAttributes(DMXModulator):
+    ExtraAttributeNameToNormalizedValueMap: dict[DMXAttributeName, float]
+
+
+class DMXModulator_ExtraCellAttributes(DMXModulator):
+    ExtraAttributeNameToNormalizedValueMap: dict[DMXAttributeName, float]
+
+
+class DMXModulator_RGBtoCMY(DMXModulator):
+    AttributeRedToCyan: DMXAttributeName
+    AttributeGreenToMagenta: DMXAttributeName
+    AttributeBlueToYellow: DMXAttributeName
+
+
+class DMXNameContainersConversions(BlueprintFunctionLibrary):
+    @staticmethod
+    def Conv_DMXFixtureCategoryToName(InFixtureCategory: DMXFixtureCategory) -> str:
+        ...
+
+    @staticmethod
+    def Conv_DMXFixtureCategoryToString(InFixtureCategory: DMXFixtureCategory) -> str:
+        ...
+
+    @staticmethod
+    def Conv_DMXProtocolNameToName(InProtocolName: DMXProtocolName) -> str:
+        ...
+
+    @staticmethod
+    def Conv_DMXProtocolNameToString(InProtocolName: DMXProtocolName) -> str:
+        ...
+
+
+class DMXProtocolBlueprintLibrary(BlueprintFunctionLibrary):
+    @staticmethod
+    def GetLocalDMXNetworkInterfaceCardIPs() -> list[str]:
+        ...
+
+    @staticmethod
+    def IsReceiveDMXEnabled() -> bool:
+        ...
+
+    @staticmethod
+    def IsSendDMXEnabled() -> bool:
+        ...
+
+    @staticmethod
+    def SetDMXInputPortDeviceAddress(InputPort: DMXInputPortReference, DeviceAddress: str) -> None:
+        ...
+
+    @staticmethod
+    def SetDMXOutputPortDestinationAddresses(OutputPort: DMXOutputPortReference, DestinationAddresses: list[str]) -> None:
+        ...
+
+    @staticmethod
+    def SetDMXOutputPortDeviceAddress(OutputPort: DMXOutputPortReference, DeviceAddress: str) -> None:
+        ...
+
+    @staticmethod
+    def SetReceiveDMXEnabled(bReceiveDMXEnabled: bool=True, bAffectEditor: bool=False) -> None:
+        ...
+
+    @staticmethod
+    def SetSendDMXEnabled(bSendDMXEnabled: bool=True, bAffectEditor: bool=False) -> None:
+        ...
+
+
 class DNAAsset(AssetUserData):
     AssetImportData: AssetImportData
     bKeepDNAAfterInitialization: bool
@@ -111276,6 +116617,31 @@ class DataLayerToAssetCommandlet(Commandlet):
     bIgnoreActorLoadingErrors: bool
     DataLayerFactory: DataLayerFactory
     MainWorld: World
+
+
+class DataRegistryFactory(Factory):
+    DataRegistryClass: Class | type
+
+
+class DataRegistrySettings(DeveloperSettings):
+    DirectoriesToScan: list[DirectoryPath]
+    bInitializeAllLoadedRegistries: bool
+    bIgnoreMissingCookedAssetRegistryData: bool
+    bDelayLoadingDataRegistriesUntilPIE: bool
+
+
+class DataRegistrySource_CurveTable(DataRegistrySource):
+    SourceTable: CurveTable
+    TableRules: DataRegistrySource_DataTableRules
+    CachedTable: CurveTable
+    PreloadTable: CurveTable
+
+
+class DataRegistrySource_DataTable(DataRegistrySource):
+    SourceTable: DataTable
+    TableRules: DataRegistrySource_DataTableRules
+    CachedTable: DataTable
+    PreloadTable: DataTable
 
 
 class DataStreamChannel(Channel):
@@ -113790,6 +119156,11 @@ class FixedTestCameraDirector(CameraDirector):
     CameraRigNames: list[str]
 
 
+class FloatAutoPopulatorBlueprint(FloatAutoPopulator):
+    def AutoPopulate(self, Object: Object) -> tuple[bool, float]:
+        ...
+
+
 class FloatBinding(PropertyBinding):
     def GetValue(self) -> float:
         ...
@@ -114594,6 +119965,101 @@ class GameViewportClient(ScriptViewportClient):
         ...
 
 
+class GameplayAbilitiesBlueprintFactory(Factory):
+    BlueprintType: EBlueprintType
+    ParentClass: Class | type
+
+
+class GameplayAbilitiesDeveloperSettings(DeveloperSettings):
+    AbilitySystemGlobalsClassName: SoftClassPath
+    bUseDebugTargetFromHud: bool
+    GlobalAttributeSetDefaultsTableNames: list[SoftObjectPath]
+    GlobalAttributeMetaDataTableName: SoftObjectPath
+    GlobalGameplayCueManagerClass: SoftClassPath
+    GlobalGameplayCueManagerName: SoftObjectPath
+    GameplayCueNotifyPaths: list[str]
+    GlobalCurveTableName: SoftObjectPath
+    PredictTargetGameplayEffects: bool
+    ReplicateActivationOwnedTags: bool
+    ActivateFailCanActivateAbilityTag: GameplayTag
+    ActivateFailCooldownTag: GameplayTag
+    ActivateFailCostTag: GameplayTag
+    ActivateFailNetworkingTag: GameplayTag
+    ActivateFailTagsBlockedTag: GameplayTag
+    ActivateFailTagsMissingTag: GameplayTag
+    GameplayTagResponseTableName: SoftObjectPath
+    bAllowGameplayModEvaluationChannels: bool
+    DefaultGameplayModEvaluationChannel: EGameplayModEvaluationChannel
+    GameplayModEvaluationChannelAliases: str
+    MinimalReplicationTagCountBits: int
+
+
+class GameplayAbilityGraph(EdGraph):
+    ...
+
+class GameplayAbilitySet(DataAsset):
+    Abilities: list[GameplayAbilityBindInfo]
+
+
+class GameplayAbilityTargetActor(Actor):
+    ShouldProduceTargetDataOnServer: bool
+    StartLocation: GameplayAbilityTargetingLocationInfo
+    PrimaryPC: PlayerController
+    OwningAbility: GameplayAbility
+    bDestroyOnConfirmation: bool
+    SourceActor: Actor
+    ReticleParams: WorldReticleParameters
+    ReticleClass: Class | type
+    Filter: GameplayTargetDataFilterHandle
+    bDebug: bool
+    GenericDelegateBoundASC: AbilitySystemComponent
+
+    def CancelTargeting(self) -> None:
+        ...
+
+    def ConfirmTargeting(self) -> None:
+        ...
+
+
+class GameplayAbilityWorldReticle(Actor):
+    Parameters: WorldReticleParameters
+    bFaceOwnerFlat: bool
+    bSnapToTargetedActor: bool
+    bIsTargetValid: bool
+    bIsTargetAnActor: bool
+    PrimaryPC: PlayerController
+    TargetingActor: GameplayAbilityTargetActor
+
+    def FaceTowardSource(self, bFaceIn2D: bool) -> None:
+        ...
+
+    def OnParametersInitialized(self) -> None:
+        ...
+
+    def OnTargetingAnActor(self, bNewValue: bool) -> None:
+        ...
+
+    def OnValidTargetChanged(self, bNewValue: bool) -> None:
+        ...
+
+    def SetReticleMaterialParamFloat(self, ParamName: str, value: float) -> None:
+        ...
+
+    def SetReticleMaterialParamVector(self, ParamName: str, value: Vector) -> None:
+        ...
+
+
+class GameplayAbility_CharacterJump(GameplayAbility):
+    ...
+
+class GameplayAbility_Montage(GameplayAbility):
+    MontageToPlay: AnimMontage
+    PlayRate: float
+    SectionName: str
+    GameplayEffectClassesWhileAnimating: list[Class]
+    GameplayEffectsWhileAnimating: list[GameplayEffect]
+
+
 class GameplayCameraActorBase(Actor):
     ...
 
@@ -114670,6 +120136,95 @@ class GameplayControlRotationComponent(ActorComponent):
         ...
 
 
+class GameplayCueFunctionLibrary(BlueprintFunctionLibrary):
+    @staticmethod
+    def AddGameplayCueOnActor(Target: Actor, GameplayCueTag: GameplayTag, Parameters: GameplayCueParameters) -> None:
+        ...
+
+    @staticmethod
+    def ExecuteGameplayCueOnActor(Target: Actor, GameplayCueTag: GameplayTag, Parameters: GameplayCueParameters) -> None:
+        ...
+
+    @staticmethod
+    def MakeGameplayCueParametersFromHitResult(HitResult: HitResult) -> GameplayCueParameters:
+        ...
+
+    @staticmethod
+    def RemoveGameplayCueOnActor(Target: Actor, GameplayCueTag: GameplayTag, Parameters: GameplayCueParameters) -> None:
+        ...
+
+
+class GameplayCueManager(DataAsset):
+    RuntimeGameplayCueObjectLibrary: GameplayCueObjectLibrary
+    EditorGameplayCueObjectLibrary: GameplayCueObjectLibrary
+    LoadedGameplayCueNotifyClasses: list[Class]
+    GameplayCueClassesForPreallocation: list[Class]
+    PendingExecuteCues: list[GameplayCuePendingExecute]
+    GameplayCueSendContextCount: int
+    PreallocationInfoList_Internal: list[PreallocationInfo]
+
+
+class GameplayCueNotify_Actor(Actor):
+    bAutoDestroyOnRemove: bool
+    AutoDestroyDelay: float
+    WarnIfTimelineIsStillRunning: bool
+    WarnIfLatentActionIsStillRunning: bool
+    GameplayCueTag: GameplayTag
+    GameplayCueName: str
+    bAutoAttachToOwner: bool
+    IsOverride: bool
+    bUniqueInstancePerInstigator: bool
+    bUniqueInstancePerSourceObject: bool
+    bAllowMultipleOnActiveEvents: bool
+    bAllowMultipleWhileActiveEvents: bool
+    NumPreallocatedInstances: int
+
+    def K2_EndGameplayCue(self) -> None:
+        ...
+
+    def K2_HandleGameplayCue(self, MyTarget: Actor, EventType: EGameplayCueEvent, Parameters: GameplayCueParameters) -> None:
+        ...
+
+    def OnActive(self, MyTarget: Actor, Parameters: GameplayCueParameters) -> bool:
+        ...
+
+    def OnExecute(self, MyTarget: Actor, Parameters: GameplayCueParameters) -> bool:
+        ...
+
+    def OnOwnerDestroyed(self, DestroyedActor: Actor) -> None:
+        ...
+
+    def OnRemove(self, MyTarget: Actor, Parameters: GameplayCueParameters) -> bool:
+        ...
+
+    def WhileActive(self, MyTarget: Actor, Parameters: GameplayCueParameters) -> bool:
+        ...
+
+
+class GameplayCueNotify_Burst(GameplayCueNotify_Static):
+    DefaultSpawnCondition: GameplayCueNotify_SpawnCondition
+    DefaultPlacementInfo: GameplayCueNotify_PlacementInfo
+    BurstEffects: GameplayCueNotify_BurstEffects
+
+    def OnBurst(self, Target: Actor, Parameters: GameplayCueParameters, SpawnResults: GameplayCueNotify_SpawnResult) -> None:
+        ...
+
+
+class GameplayCueNotify_HitImpact(GameplayCueNotify_Static):
+    Sound: SoundBase
+    ParticleSystem: ParticleSystem
+
+
+class GameplayCueNotify_UnitTest(GameplayCueNotify_Static):
+    ...
+
+class GameplayCueSet(DataAsset):
+    GameplayCueData: list[GameplayCueNotifyData]
+
+
+class GameplayCueTranslator_Test(GameplayCueTranslator):
+    ...
+
 class GameplayDebuggerCategoryReplicator(Actor):
     OwnerPC: PlayerController
     bIsEnabled: bool
@@ -114724,6 +120279,52 @@ class GameplayDebuggerUserSettings(DeveloperSettings):
     MaxViewAngle: float
     EnabledCategories: set[str]
     FontSize: int
+
+
+class GameplayEffectExecutionCalculation(GameplayEffectCalculation):
+    bRequiresPassedInTags: bool
+    InvalidScopedModifierAttributes: list[GameplayEffectAttributeCaptureDefinition]
+    ValidTransientAggregatorIdentifiers: GameplayTagContainer
+
+    def Execute(self, ExecutionParams: GameplayEffectCustomExecutionParameters) -> GameplayEffectCustomExecutionOutput:
+        ...
+
+
+class GameplayEffectUIData(GameplayEffectComponent):
+    ...
+
+class GameplayModMagnitudeCalculation(GameplayEffectCalculation):
+    bAllowNonNetAuthorityDependencyRegistration: bool
+
+    def CalculateBaseMagnitude(self, Spec: GameplayEffectSpec) -> float:
+        ...
+
+    def GetSetByCallerMagnitudeByName(self, EffectSpec: GameplayEffectSpec, MagnitudeName: str) -> float:
+        ...
+
+    def GetSetByCallerMagnitudeByTag(self, EffectSpec: GameplayEffectSpec, Tag: GameplayTag) -> float:
+        ...
+
+    def GetSourceActorTags(self, EffectSpec: GameplayEffectSpec) -> GameplayTagContainer:
+        ...
+
+    def GetSourceAggregatedTags(self, EffectSpec: GameplayEffectSpec) -> GameplayTagContainer:
+        ...
+
+    def GetSourceSpecTags(self, EffectSpec: GameplayEffectSpec) -> GameplayTagContainer:
+        ...
+
+    def GetTargetActorTags(self, EffectSpec: GameplayEffectSpec) -> GameplayTagContainer:
+        ...
+
+    def GetTargetAggregatedTags(self, EffectSpec: GameplayEffectSpec) -> GameplayTagContainer:
+        ...
+
+    def GetTargetSpecTags(self, EffectSpec: GameplayEffectSpec) -> GameplayTagContainer:
+        ...
+
+    def K2_GetCapturedAttributeMagnitude(self, EffectSpec: GameplayEffectSpec, Attribute: GameplayAttribute, SourceTags: GameplayTagContainer, TargetTags: GameplayTagContainer) -> float:
+        ...
 
 
 class GameplayStatics(BlueprintFunctionLibrary):
@@ -115285,6 +120886,13 @@ class GameplayStatics(BlueprintFunctionLibrary):
 
     @staticmethod
     def UnloadStreamLevelBySoftObjectPtr(WorldContextObject: Object, Level: World, LatentInfo: LatentActionInfo, bShouldBlockOnUnload: bool) -> None:
+        ...
+
+
+class GameplayTagReponseTable(DataAsset):
+    Entries: list[GameplayTagResponseTableEntry]
+
+    def TagResponseEvent(self, Tag: GameplayTag, NewCount: int, ASC: AbilitySystemComponent, idx: int) -> None:
         ...
 
 
@@ -118980,6 +124588,32 @@ class HoleFillToolProperties(InteractiveToolPropertySet):
     bQuickFillSmallHoles: bool
 
 
+class HttpBlueprintFunctionLibrary(BlueprintFunctionLibrary):
+    @staticmethod
+    def AddHeader(HeaderObject: HttpHeader, NewHeader: str, NewHeaderValue: str) -> HttpHeader:
+        ...
+
+    @staticmethod
+    def GetAllHeaders(HeaderObject: HttpHeader) -> list[str]:
+        ...
+
+    @staticmethod
+    def GetAllHeaders_Map(HeaderObject: HttpHeader) -> dict[str, str]:
+        ...
+
+    @staticmethod
+    def GetHeaderValue(HeaderObject: HttpHeader, HeaderName: str) -> tuple[bool, str]:
+        ...
+
+    @staticmethod
+    def MakeRequestHeader(Headers: dict[str, str]) -> HttpHeader:
+        ...
+
+    @staticmethod
+    def RemoveHeader(HeaderObject: HttpHeader, HeaderToRemove: str) -> tuple[bool, HttpHeader]:
+        ...
+
+
 class IIRValueInterpolator(CameraValueInterpolator):
     Speed: float
     bUseFixedStep: bool
@@ -119396,6 +125030,10 @@ class ImgMediaSourceFactory(Factory):
 
 class ImgMediaSourceFactoryNew(Factory):
     ...
+
+class ImmunityGameplayEffectComponent(GameplayEffectComponent):
+    ImmunityQueries: list[GameplayEffectQuery]
+
 
 class ImplicitOffsetProperties(InteractiveToolPropertySet):
     Smoothness: float
@@ -121289,6 +126927,44 @@ class IterativeSmoothProperties(InteractiveToolPropertySet):
     SmoothingPerStep: float
     Steps: int
     bSmoothBoundary: bool
+
+
+class JsonBlueprintFunctionLibrary(BlueprintFunctionLibrary):
+    @staticmethod
+    def FromFile(File: FilePath) -> tuple[bool, JsonObjectWrapper]:
+        ...
+
+    @staticmethod
+    def FromString(JsonString: str) -> tuple[bool, JsonObjectWrapper]:
+        ...
+
+    @staticmethod
+    def GetField(JsonObject: JsonObjectWrapper, FieldName: str) -> tuple[bool, int]:
+        ...
+
+    @staticmethod
+    def GetFieldNames(JsonObject: JsonObjectWrapper) -> tuple[bool, list[str]]:
+        ...
+
+    @staticmethod
+    def HasField(JsonObject: JsonObjectWrapper, FieldName: str) -> bool:
+        ...
+
+    @staticmethod
+    def SetField(JsonObject: JsonObjectWrapper, FieldName: str, Value: int) -> bool:
+        ...
+
+    @staticmethod
+    def StructToJsonString(Struct: int) -> tuple[bool, str]:
+        ...
+
+    @staticmethod
+    def ToFile(JsonObject: JsonObjectWrapper, File: FilePath) -> bool:
+        ...
+
+    @staticmethod
+    def ToString(JsonObject: JsonObjectWrapper) -> tuple[bool, str]:
+        ...
 
 
 class JsonObjectGraphFunctionLibrary(BlueprintFunctionLibrary):
@@ -127864,11 +133540,354 @@ class ListMaterialsUsedWithMeshEmittersCommandlet(Commandlet):
 class ListStaticMeshesImportedFromSpeedTreesCommandlet(Commandlet):
     ...
 
+class LiveLinkAnimationRoleToTransform(LiveLinkFrameTranslator):
+    BoneName: str
+
+
+class LiveLinkAnimationVirtualSubject(LiveLinkVirtualSubject):
+    Attachments: list[LiveLinkVirtualSubjectBoneAttachment]
+    LocationBehavior: EBoneTransformResolution
+    RotationBehavior: EBoneTransformResolution
+    bAppendSubjectNameToBones: bool
+
+
+class LiveLinkBasicFrameInterpolationProcessor(LiveLinkFrameInterpolationProcessor):
+    bInterpolatePropertyValues: bool
+
+
 class LiveLinkBasicRole(LiveLinkRole):
     ...
 
+class LiveLinkBlueprintLibrary(BlueprintFunctionLibrary):
+    @staticmethod
+    def ChildCount(LiveLinkTransform: LiveLinkTransform) -> tuple[int, LiveLinkTransform]:
+        ...
+
+    @staticmethod
+    def ComponentSpaceTransform(LiveLinkTransform: LiveLinkTransform) -> tuple[LiveLinkTransform, Transform]:
+        ...
+
+    @staticmethod
+    def EvaluateLiveLinkFrameAtSceneTime(SubjectName: LiveLinkSubjectName, Role: Class | type, SceneTime: Timecode) -> tuple[bool, LiveLinkBaseBlueprintData]:
+        ...
+
+    @staticmethod
+    def EvaluateLiveLinkFrameAtWorldTimeOffset(SubjectName: LiveLinkSubjectName, Role: Class | type, WorldTimeOffset: float) -> tuple[bool, LiveLinkBaseBlueprintData]:
+        ...
+
+    @staticmethod
+    def EvaluateLiveLinkFrameWithSpecificRole(SubjectName: LiveLinkSubjectName, Role: Class | type) -> tuple[bool, LiveLinkBaseBlueprintData]:
+        ...
+
+    @staticmethod
+    def GetAnimationFrameData(SubjectFrameHandle: SubjectFrameHandle) -> tuple[bool, SubjectFrameHandle, LiveLinkAnimationFrameData]:
+        ...
+
+    @staticmethod
+    def GetAnimationStaticData(SubjectFrameHandle: SubjectFrameHandle) -> tuple[bool, SubjectFrameHandle, LiveLinkSkeletonStaticData]:
+        ...
+
+    @staticmethod
+    def GetBasicData(SubjectFrameHandle: SubjectFrameHandle) -> tuple[SubjectFrameHandle, LiveLinkBasicBlueprintData]:
+        ...
+
+    @staticmethod
+    def GetChildren(LiveLinkTransform: LiveLinkTransform) -> tuple[LiveLinkTransform, list[LiveLinkTransform]]:
+        ...
+
+    @staticmethod
+    def GetCurves(SubjectFrameHandle: SubjectFrameHandle) -> tuple[SubjectFrameHandle, dict[str, float]]:
+        ...
+
+    @staticmethod
+    def GetLiveLinkEnabledSubjectNames(bIncludeVirtualSubject: bool) -> list[LiveLinkSubjectName]:
+        ...
+
+    @staticmethod
+    def GetLiveLinkSubjectRole(SubjectName: LiveLinkSubjectName) -> Class | type:
+        ...
+
+    @staticmethod
+    def GetLiveLinkSubjectState(SubjectName: LiveLinkSubjectName) -> ELiveLinkSubjectState:
+        ...
+
+    @staticmethod
+    def GetLiveLinkSubjects(bIncludeDisabledSubject: bool, bIncludeVirtualSubject: bool) -> list[LiveLinkSubjectKey]:
+        ...
+
+    @staticmethod
+    def GetMetadata(SubjectFrameHandle: SubjectFrameHandle) -> tuple[SubjectFrameHandle, SubjectMetadata]:
+        ...
+
+    @staticmethod
+    def GetParent(LiveLinkTransform: LiveLinkTransform) -> tuple[LiveLinkTransform, LiveLinkTransform]:
+        ...
+
+    @staticmethod
+    def GetPropertyValue(BasicData: LiveLinkBasicBlueprintData, PropertyName: str) -> tuple[bool, LiveLinkBasicBlueprintData, float]:
+        ...
+
+    @staticmethod
+    def GetRootTransform(SubjectFrameHandle: SubjectFrameHandle) -> tuple[SubjectFrameHandle, LiveLinkTransform]:
+        ...
+
+    @staticmethod
+    def GetSourceMachineName(SourceHandle: LiveLinkSourceHandle) -> tuple[str, LiveLinkSourceHandle]:
+        ...
+
+    @staticmethod
+    def GetSourceStatus(SourceHandle: LiveLinkSourceHandle) -> tuple[str, LiveLinkSourceHandle]:
+        ...
+
+    @staticmethod
+    def GetSourceType(SourceHandle: LiveLinkSourceHandle) -> tuple[str, LiveLinkSourceHandle]:
+        ...
+
+    @staticmethod
+    def GetSourceTypeFromGuid(SourceGuid: str) -> str:
+        ...
+
+    @staticmethod
+    def GetSpecificLiveLinkSubjectRole(SubjectKey: LiveLinkSubjectKey) -> Class | type:
+        ...
+
+    @staticmethod
+    def GetTransformByIndex(SubjectFrameHandle: SubjectFrameHandle, TransformIndex: int) -> tuple[SubjectFrameHandle, LiveLinkTransform]:
+        ...
+
+    @staticmethod
+    def GetTransformByName(SubjectFrameHandle: SubjectFrameHandle, TransformName: str) -> tuple[SubjectFrameHandle, LiveLinkTransform]:
+        ...
+
+    @staticmethod
+    def HasParent(LiveLinkTransform: LiveLinkTransform) -> tuple[bool, LiveLinkTransform]:
+        ...
+
+    @staticmethod
+    def IsLiveLinkSubjectEnabled(SubjectName: LiveLinkSubjectName) -> bool:
+        ...
+
+    @staticmethod
+    def IsSourceStillValid(SourceHandle: LiveLinkSourceHandle) -> tuple[bool, LiveLinkSourceHandle]:
+        ...
+
+    @staticmethod
+    def IsSpecificLiveLinkSubjectEnabled(SubjectKey: LiveLinkSubjectKey, bForThisFrame: bool) -> bool:
+        ...
+
+    @staticmethod
+    def NumberOfTransforms(SubjectFrameHandle: SubjectFrameHandle) -> tuple[int, SubjectFrameHandle]:
+        ...
+
+    @staticmethod
+    def ParentBoneSpaceTransform(LiveLinkTransform: LiveLinkTransform) -> tuple[LiveLinkTransform, Transform]:
+        ...
+
+    @staticmethod
+    def PauseSubject(SubjectName: LiveLinkSubjectName) -> None:
+        ...
+
+    @staticmethod
+    def RemoveSource(SourceHandle: LiveLinkSourceHandle) -> tuple[bool, LiveLinkSourceHandle]:
+        ...
+
+    @staticmethod
+    def SetLiveLinkSubjectEnabled(SubjectKey: LiveLinkSubjectKey, bEnabled: bool) -> None:
+        ...
+
+    @staticmethod
+    def TransformName(LiveLinkTransform: LiveLinkTransform) -> tuple[LiveLinkTransform, str]:
+        ...
+
+    @staticmethod
+    def TransformNames(SubjectFrameHandle: SubjectFrameHandle) -> tuple[SubjectFrameHandle, list[str]]:
+        ...
+
+    @staticmethod
+    def UnpauseSubject(SubjectName: LiveLinkSubjectName) -> None:
+        ...
+
+
+class LiveLinkBlueprintVirtualSubject(LiveLinkVirtualSubject):
+    def OnInitialize(self) -> None:
+        ...
+
+    def OnUpdate(self) -> None:
+        ...
+
+    def UpdateVirtualSubjectFrameData_Internal(self, InStruct: LiveLinkBaseFrameData, bInShouldStampCurrentTime: bool) -> bool:
+        ...
+
+    def UpdateVirtualSubjectStaticData_Internal(self, InStruct: LiveLinkBaseStaticData) -> bool:
+        ...
+
+
+class LiveLinkBroadcastComponent(ActorComponent):
+    bEnable: bool
+    SubjectName: str
+    Role: Class | type
+    SourceMesh: ComponentReference
+    AllowedBoneNames: list[str]
+    AllowedCurveNames: list[str]
+    bRemoveSubjectWhenDisabled: bool
+
+
+class LiveLinkComponent(ActorComponent):
+    OnLiveLinkUpdated: MulticastDelegateBase
+
+
+class LiveLinkComponentController(ActorComponent):
+    SubjectRepresentation: LiveLinkSubjectRepresentation
+    ControllerMap: dict[Class, LiveLinkControllerBase]
+    bUpdateInEditor: bool
+    OnLiveLinkUpdated: MulticastDelegateBase
+    OnControllerMapUpdatedDelegate: MulticastDelegateBase
+    bDisableEvaluateLiveLinkWhenSpawnable: bool
+    bEvaluateLiveLink: bool
+    bUpdateInPreviewEditor: bool
+
+    def GetControlledComponent(self, InRoleClass: Class | type) -> ActorComponent:
+        ...
+
+    def GetSubjectRepresentation(self) -> LiveLinkSubjectRepresentation:
+        ...
+
+    def SetControlledComponent(self, InRoleClass: Class | type, InComponent: ActorComponent) -> None:
+        ...
+
+    def SetSubjectRepresentation(self, InSubjectRepresentation: LiveLinkSubjectRepresentation) -> None:
+        ...
+
+
 class LiveLinkCurveRemapSettings(LiveLinkSourceSettings):
     CurveConversionSettings: LiveLinkCurveConversionSettings
+
+
+class LiveLinkDataPreview(Actor):
+    Subjects: list[LiveLinkSubjectName]
+    bDrawLabels: bool
+    bEvaluateLiveLink: bool
+    BillboardComponent: BillboardComponent
+
+    def InitializeSubjects(self) -> None:
+        ...
+
+    def SetEnableLiveLinkData(self, bNewEvaluate: bool) -> None:
+        ...
+
+
+class LiveLinkDeviceSettings_BasicTest(LiveLinkDeviceSettings):
+    ...
+
+class LiveLinkDeviceSettings_Invalid(LiveLinkDeviceSettings):
+    ...
+
+class LiveLinkDevice_BasicTest(LiveLinkDevice, LiveLinkDeviceCapability_BasicTest):
+    ...
+
+class LiveLinkHubSessionExtraData_Device(LiveLinkHubSessionExtraData):
+    Devices: list[LiveLinkDevicePreset]
+
+
+class LiveLinkHubSubjectSettings(LiveLinkSubjectSettings):
+    SubjectName: str
+    OutboundName: str
+    Source: str
+    TranslatorsProxy: LiveLinkFrameTranslator
+
+
+class LiveLinkInstance(AnimInstance):
+    CurrentRetargetAsset: LiveLinkRetargetAsset
+
+    def EnableLiveLinkEvaluation(self, bDoEnable: bool) -> None:
+        ...
+
+    def SetRetargetAsset(self, RetargetAsset: Class | type) -> None:
+        ...
+
+    def SetSubject(self, SubjectName: LiveLinkSubjectName) -> None:
+        ...
+
+
+class LiveLinkLightController(LiveLinkControllerBase):
+    ...
+
+class LiveLinkMessageBusSourceFactory(LiveLinkSourceFactory):
+    ...
+
+class LiveLinkMessageBusSourceSettings(LiveLinkSourceSettings):
+    bEnableFrameResequencing: bool
+    ResequencerMaxBufferSize: int
+    ResequencerMaxWaitTimeSeconds: float
+
+
+class LiveLinkPreviewController(PersonaPreviewSceneController):
+    LiveLinkSubjectName: LiveLinkSubjectName
+    bEnableCameraSync: bool
+    RetargetAsset: Class | type
+
+
+class LiveLinkRemapAsset(LiveLinkRetargetAsset):
+    def GetRemappedBoneName(self, BoneName: str) -> str:
+        ...
+
+    def GetRemappedCurveName(self, CurveName: str) -> str:
+        ...
+
+    def RemapCurveElements(self, CurveItems: dict[str, float]) -> dict[str, float]:
+        ...
+
+
+class LiveLinkSequencerSettings(DeveloperSettings):
+    DefaultTrackRecordersForController: dict[Class, Class]
+
+
+class LiveLinkSequencerTrackFilter(SequencerTrackFilterExtension):
+    ...
+
+class LiveLinkSkeletonRemapper(LiveLinkSubjectRemapper):
+    ReferenceSkeleton: SkeletalMesh
+
+
+class LiveLinkTimeSynchronizationSource(TimeSynchronizationSource):
+    SubjectName: LiveLinkSubjectName
+
+
+class LiveLinkTimecodeProvider(TimecodeProvider):
+    SubjectKey: LiveLinkSubjectKey
+    Evaluation: ELiveLinkTimecodeProviderEvaluationType
+    bOverrideFrameRate: bool
+    OverrideFrameRate: FrameRate
+    BufferSize: int
+
+
+class LiveLinkTransformAxisSwitchPreProcessor(LiveLinkFramePreProcessor):
+    FrontAxis: ELiveLinkAxis
+    RightAxis: ELiveLinkAxis
+    UpAxis: ELiveLinkAxis
+    bUseOffsetPosition: bool
+    bUseOffsetOrientation: bool
+    OffsetPosition: Vector
+    OffsetOrientation: Rotator
+
+
+class LiveLinkTransformController(LiveLinkControllerBase):
+    TransformData: LiveLinkTransformControllerData
+    OffsetTransform: Transform
+
+
+class LiveLinkTransformDeadbandPreProcessor(LiveLinkFramePreProcessor):
+    bEnableDeadband: bool
+    TranslationDeadband: float
+    RotationDeadbandInDegrees: float
+
+
+class LiveLinkTransformRoleToAnimation(LiveLinkFrameTranslator):
+    OutputBoneName: str
+
+
+class LiveLinkVirtualSubjectSourceSettings(LiveLinkSourceSettings):
+    SourceName: str
 
 
 class LoadPackageCommandlet(Commandlet):
@@ -131036,6 +137055,12 @@ class MeshWeightChannelDensityProperties(InteractiveToolPropertySet):
         ...
 
 
+class MetaDataRegistrySource(DataRegistrySource):
+    AssetUsage: EMetaDataRegistrySourceAssetUsage
+    SearchRules: AssetManagerSearchRules
+    RuntimeChildren: dict[str, DataRegistrySource]
+
+
 class MetaHumanAssetManager(BlueprintFunctionLibrary):
     @staticmethod
     def CreateArchive(Assets: list[MetaHumanAssetDescription], ArchivePath: str) -> bool:
@@ -132071,6 +138096,10 @@ class MovieSceneCustomPrimitiveDataSystem(MovieSceneEntitySystem):
     DoubleBlenderSystem: MovieScenePiecewiseDoubleBlenderSystem
 
 
+class MovieSceneDMXLibraryTrackRecorder(MovieSceneTrackRecorder):
+    FixturePatchRefs: list[DMXEntityFixturePatchRef]
+
+
 class MovieSceneDataLayerSystem(MovieSceneEntitySystem):
     ...
 
@@ -132212,6 +138241,26 @@ class MovieSceneImageCaptureProtocolBase(MovieSceneCaptureProtocolBase):
     ...
 
 class MovieSceneLevelVisibilitySystem(MovieSceneEntitySystem, MovieScenePreAnimatedStateSystemInterface):
+    ...
+
+class MovieSceneLiveLinkControllerMapTrackRecorder(MovieSceneTrackRecorder):
+    ControllerRecorders: list[MovieSceneLiveLinkControllerTrackRecorder]
+
+
+class MovieSceneLiveLinkControllerTrackRecorder(MovieSceneTrackRecorder):
+    LiveLinkControllerToRecord: LiveLinkControllerBase
+
+
+class MovieSceneLiveLinkSubSectionAnimation(MovieSceneLiveLinkSubSection):
+    ...
+
+class MovieSceneLiveLinkSubSectionBasicRole(MovieSceneLiveLinkSubSection):
+    ...
+
+class MovieSceneLiveLinkSubSectionProperties(MovieSceneLiveLinkSubSection):
+    ...
+
+class MovieSceneLiveLinkTrackRecorder(MovieSceneTrackRecorder):
     ...
 
 class MovieSceneMaterialParameterCollectionSystem(MovieSceneEntitySystem):
@@ -134811,6 +140860,9 @@ class NiagaraScriptSource(NiagaraScriptSourceBase):
 
 
 class NiagaraScriptValidationCommandlet(Commandlet):
+    ...
+
+class NiagaraSemanticCommandlet(Commandlet):
     ...
 
 class NiagaraSequencerTrackFilter(SequencerTrackFilterExtension):
@@ -137437,6 +143489,79 @@ class PCGWorldPartitionBuilderHelper(BlueprintFunctionLibrary):
         ...
 
 
+class PGFActorLifecycleBinding(ActorComponent):
+    OnBeginPlay: MulticastDelegateBase
+    OnEndPlay: MulticastDelegateBase
+
+    def IsBindingActive(self) -> bool:
+        ...
+
+    def Unbind(self) -> None:
+        ...
+
+
+class PGFBlueprintLibrary(BlueprintFunctionLibrary):
+    @staticmethod
+    def BindActorLifecycle(Actor: Actor) -> PGFActorLifecycleBinding:
+        ...
+
+    @staticmethod
+    def BindInputAxis(PlayerController: PlayerController, AxisKey: Key, bConsumeInput: bool, bExecuteWhenPaused: bool, Priority: int) -> PGFInputAxisBinding:
+        ...
+
+    @staticmethod
+    def BindInputChord(PlayerController: PlayerController, Key: Key, bShift: bool, bCtrl: bool, bAlt: bool, bCmd: bool, InputEvent: EInputEvent, bConsumeInput: bool, bExecuteWhenPaused: bool, Priority: int) -> PGFInputBinding:
+        ...
+
+    @staticmethod
+    def BindInputKey(PlayerController: PlayerController, Key: Key, InputEvent: EInputEvent, bConsumeInput: bool, bExecuteWhenPaused: bool, Priority: int) -> PGFInputBinding:
+        ...
+
+    @staticmethod
+    def BindInputLongPress(PlayerController: PlayerController, Key: Key, HoldTimeSeconds: float, bConsumeInput: bool, bExecuteWhenPaused: bool, Priority: int) -> PGFInputLongPressBinding:
+        ...
+
+    @staticmethod
+    def BindInputLongPressChord(PlayerController: PlayerController, Key: Key, bShift: bool, bCtrl: bool, bAlt: bool, bCmd: bool, HoldTimeSeconds: float, bConsumeInput: bool, bExecuteWhenPaused: bool, Priority: int) -> PGFInputLongPressBinding:
+        ...
+
+    @staticmethod
+    def BindInputTouch(PlayerController: PlayerController, InputEvent: EInputEvent, bConsumeInput: bool, bExecuteWhenPaused: bool, Priority: int) -> PGFInputTouchBinding:
+        ...
+
+    @staticmethod
+    def FindWidget(Host: UserWidget, WidgetName: str) -> Widget:
+        ...
+
+    @staticmethod
+    def GetObjectUniqueId(Object: Object) -> int:
+        ...
+
+    @staticmethod
+    def HotReloadPythonRuntime() -> None:
+        ...
+
+    @staticmethod
+    def LoadClassAsync(WorldContextObject: Object, ClassPath: str) -> PGFAsyncLoadRequest:
+        ...
+
+    @staticmethod
+    def LoadObjectAsync(WorldContextObject: Object, AssetPath: str) -> PGFAsyncLoadRequest:
+        ...
+
+    @staticmethod
+    def ReloadPythonModule(ModuleName: str) -> None:
+        ...
+
+    @staticmethod
+    def ReloadPythonPackage(PackageName: str) -> None:
+        ...
+
+    @staticmethod
+    def UnbindActorLifecycle(Actor: Actor) -> None:
+        ...
+
+
 class PackFactory(Factory):
     ...
 
@@ -138977,8 +145102,36 @@ class PropertyValueTransform(PropertyValue):
 class PropertyValueVisibility(PropertyValue):
     ...
 
+class ProxyAssetFactory(Factory):
+    ...
+
 class ProxyLODMeshSimplificationSettings(DeveloperSettings):
     ProxyLODMeshReductionModuleName: str
+
+
+class ProxyTableFactory(Factory):
+    ...
+
+class ProxyTableFunctionLibrary(BlueprintFunctionLibrary):
+    @staticmethod
+    def EvaluateProxyAsset(ContextObject: Object, Proxy: ProxyAsset, ObjectClass: Class | type) -> Object:
+        ...
+
+    @staticmethod
+    def EvaluateProxyTable(ContextObject: Object, ProxyTable: ProxyTable, Key: str) -> Object:
+        ...
+
+    @staticmethod
+    def GetProxyTableEntries(ProxyTable: ProxyTable) -> dict[ProxyAsset, Object]:
+        ...
+
+    @staticmethod
+    def MakeLookupProxy(Proxy: ProxyAsset) -> InstancedStruct:
+        ...
+
+    @staticmethod
+    def MakeLookupProxyWithOverrideTable(Proxy: ProxyAsset, ProxyTable: ProxyTable) -> InstancedStruct:
+        ...
 
 
 class PyTestChildObject(PyTestObject):
@@ -139179,6 +145332,10 @@ class RemoveOccludedTrianglesToolProperties(InteractiveToolPropertySet):
     MinAreaIsland: float
     MinTriCountIsland: int
     Action: EOccludedAction
+
+
+class RemoveOtherGameplayEffectComponent(GameplayEffectComponent):
+    RemoveGameplayEffectQueries: list[GameplayEffectQuery]
 
 
 class RenderCaptureProperties(InteractiveToolPropertySet):
@@ -140138,6 +146295,86 @@ class SceneOutlinerTedsBridgeFactory(EditorDataStorageFactory):
 class SceneOutlinerWidgetFactory(EditorDataStorageFactory):
     ...
 
+class SceneStateActor(Actor):
+    SceneStateComponent: SceneStateComponent
+
+    def GetSceneState(self) -> SceneStateObject:
+        ...
+
+
+class SceneStateActorFactory(ActorFactory):
+    ...
+
+class SceneStateBlueprintExtension(BlueprintExtension):
+    ...
+
+class SceneStateBlueprintFactory(Factory):
+    SchemaClass: Class | type
+    ParentClass: Class | type
+
+
+class SceneStateComponent(ActorComponent):
+    SceneStatePlayer: SceneStateComponentPlayer
+
+    def GetSceneState(self) -> SceneStateObject:
+        ...
+
+
+class SceneStateComponentPlayer(SceneStatePlayer):
+    ...
+
+class SceneStateEventLibrary(BlueprintFunctionLibrary):
+    @staticmethod
+    def BroadcastEvent(WorldContextObject: Object, InEventSchemaHandle: SceneStateEventSchemaHandle, InEventData: InstancedStruct=InstancedStruct()) -> bool:
+        ...
+
+    @staticmethod
+    def EventDataToStruct(InEventData: InstancedStruct) -> tuple[bool, int]:
+        ...
+
+    @staticmethod
+    def FindEvent(InContextObject: Object, InEventStream: SceneStateEventStream, InEventSchemaHandle: SceneStateEventSchemaHandle, InEventHandlerId: str, bInCapturedEventsOnly: bool) -> tuple[bool, InstancedStruct]:
+        ...
+
+    @staticmethod
+    def HasEvent(InContextObject: Object, InEventStream: SceneStateEventStream, InEventSchemaHandle: SceneStateEventSchemaHandle, InEventHandlerId: str, bInCapturedEventsOnly: bool) -> bool:
+        ...
+
+    @staticmethod
+    def PushEvent(InEventStream: SceneStateEventStream, InEventSchemaHandle: SceneStateEventSchemaHandle, InEventData: InstancedStruct=InstancedStruct()) -> bool:
+        ...
+
+
+class SceneStateEventSchemaCollectionFactory(Factory):
+    ...
+
+class SceneStateGameplaySchema(SceneStateSchema):
+    ...
+
+class SceneStateMachineGraph(EdGraph):
+    Category: str
+    ParametersId: str
+    Parameters: InstancedPropertyBag
+    RunMode: ESceneStateMachineRunMode
+    CompiledIndex: Any
+
+
+class SceneStateMachineGraphSchema(EdGraphSchema):
+    ...
+
+class SceneStateMachineNode(EdGraphNode):
+    NodeName: str
+    BoundGraphs: list[EdGraph]
+
+
+class SceneStateTaskBlueprintFactory(Factory):
+    ParentClass: Class | type
+
+
+class SceneStateTransitionGraph(EdGraph):
+    ResultNode: SceneStateTransitionResultNode
+
+
 class SceneThumbnailInfo(ThumbnailInfo):
     OrbitPitch: float
     OrbitYaw: float
@@ -140363,6 +146600,19 @@ class SequenceRecorderBlueprintLibrary(BlueprintFunctionLibrary):
 
 class SequenceRecorderGroup(Actor):
     ActorGroups: list[SequenceRecorderActorGroup]
+
+
+class SequenceSemanticCommandlet(Commandlet):
+    ...
+
+class SequenceSemanticFixtureCameraShake(CameraShakeBase):
+    ...
+
+class SequenceSemanticSpawnableFixtureActor(Actor):
+    NativeRoot: SequenceSemanticFixtureSceneComponent
+    NativeChild: SequenceSemanticFixtureSceneComponent
+    SemanticValue: int
+    BindingGuidArray: list[str]
 
 
 class SequencerClockSourceMenuContext(SequencerToolMenuContext):
@@ -142505,12 +148755,32 @@ class TakeRecorderChaosCacheSource(TakeRecorderSource):
     TrackRecorder: MovieSceneChaosCacheTrackRecorder
 
 
+class TakeRecorderDMXLibrarySource(TakeRecorderSource):
+    DMXLibrary: DMXLibrary
+    AddAllPatchesDummy: AddAllPatchesButton
+    FixturePatchRefs: list[DMXEntityFixturePatchRef]
+    bRecordNormalizedValues: bool
+    TrackRecorder: MovieSceneDMXLibraryTrackRecorder
+
+    def AddAllPatches(self) -> None:
+        ...
+
+
 class TakeRecorderLevelSequenceSource(TakeRecorderSource):
     LevelSequencesToTrigger: list[LevelSequence]
 
 
 class TakeRecorderLevelVisibilitySourceSettings(TakeRecorderSource):
     LevelVisibilityTrackName: str
+
+
+class TakeRecorderLiveLinkSource(TakeRecorderSource):
+    bReduceKeys: bool
+    SubjectName: str
+    bSaveSubjectSettings: bool
+    bUseSourceTimecode: bool
+    bDiscardSamplesBeforeStart: bool
+    TrackRecorder: MovieSceneLiveLinkTrackRecorder
 
 
 class TakeRecorderMicrophoneAudioManager(TakeRecorderAudioInputSettings):
@@ -142590,6 +148860,16 @@ class TargetPoint(Actor):
 class TargetRayCastCameraNode(CameraNode):
     TraceChannel: ECollisionChannel
     AutoFocus: BooleanCameraParameter
+
+
+class TargetTagRequirementsGameplayEffectComponent(GameplayEffectComponent):
+    ApplicationTagRequirements: GameplayTagRequirements
+    OngoingTagRequirements: GameplayTagRequirements
+    RemovalTagRequirements: GameplayTagRequirements
+
+
+class TargetTagsGameplayEffectComponent(GameplayEffectComponent):
+    InheritableGrantedTagsContainer: InheritedTagContainer
 
 
 class TaskSyncManagerSettings(DeveloperSettings):
@@ -146955,6 +153235,745 @@ class AITask_RunEQS(AITask):
         ...
 
 
+class AbilityAsync(CancellableAsyncAction):
+    def EndAction(self) -> None:
+        ...
+
+
+class AbilitySystemComponent(GameplayTasksComponent, GameplayTagAssetInterface, AbilitySystemReplicationProxyInterface):
+    DefaultStartingData: list[AttributeDefaults]
+    AffectedAnimInstanceTag: str
+    OutgoingDuration: float
+    IncomingDuration: float
+    ClientDebugStrings: list[str]
+    ServerDebugStrings: list[str]
+    UserAbilityActivationInhibited: bool
+    ReplicationProxyEnabled: bool
+    bSuppressGrantAbility: bool
+    bSuppressGameplayCues: bool
+    SpawnedTargetActors: list[GameplayAbilityTargetActor]
+    OwnerActor: Actor
+    AvatarActor: Actor
+    ActivatableAbilities: GameplayAbilitySpecContainer
+    AllReplicatedInstancedAbilities: list[GameplayAbility]
+    RepAnimMontageInfo: GameplayAbilityRepAnimMontage
+    bCachedIsNetSimulated: bool
+    bPendingMontageRep: bool
+    LocalAnimMontageInfo: GameplayAbilityLocalAnimMontage
+    ActiveGameplayEffects: ActiveGameplayEffectsContainer
+    ActiveGameplayCues: ActiveGameplayCueContainer
+    MinimalReplicationGameplayCues: ActiveGameplayCueContainer
+    GameplayTagCountContainer: GameplayTagCountContainer
+    BlockedAbilityBindings: list[int]
+    MinimalReplicationTags: MinimalReplicationTagCountMap
+    SpawnedAttributes: list[AttributeSet]
+    ReplicatedLooseTags: MinimalReplicationTagCountMap
+    ReplicatedPredictionKeyMap: ReplicatedPredictionKeyMap
+
+    def AbilityAbilityKey__DelegateSignature(self, InputID: int) -> None:
+        ...
+
+    def AbilityConfirmOrCancel__DelegateSignature(self) -> None:
+        ...
+
+    def AreAbilityTagsBlocked(self, Tags: GameplayTagContainer) -> bool:
+        ...
+
+    def BP_ApplyGameplayEffectSpecToSelf(self, SpecHandle: GameplayEffectSpecHandle) -> ActiveGameplayEffectHandle:
+        ...
+
+    def BP_ApplyGameplayEffectSpecToTarget(self, SpecHandle: GameplayEffectSpecHandle, Target: AbilitySystemComponent) -> ActiveGameplayEffectHandle:
+        ...
+
+    def BP_ApplyGameplayEffectToSelf(self, GameplayEffectClass: Class | type, Level: float, EffectContext: GameplayEffectContextHandle) -> ActiveGameplayEffectHandle:
+        ...
+
+    def BP_ApplyGameplayEffectToTarget(self, GameplayEffectClass: Class | type, Target: AbilitySystemComponent, Level: float, Context: GameplayEffectContextHandle) -> ActiveGameplayEffectHandle:
+        ...
+
+    def ClearAbility(self, Handle: GameplayAbilitySpecHandle) -> None:
+        ...
+
+    def ClearAllAbilities(self) -> None:
+        ...
+
+    def ClearAllAbilitiesWithInputID(self, InputID: int=0) -> None:
+        ...
+
+    def ClientActivateAbilityFailed(self, AbilityToActivate: GameplayAbilitySpecHandle, PredictionKey: int) -> None:
+        ...
+
+    def ClientActivateAbilitySucceed(self, AbilityToActivate: GameplayAbilitySpecHandle, PredictionKey: PredictionKey) -> None:
+        ...
+
+    def ClientActivateAbilitySucceedWithEventData(self, AbilityToActivate: GameplayAbilitySpecHandle, PredictionKey: PredictionKey, TriggerEventData: GameplayEventData) -> None:
+        ...
+
+    def ClientCancelAbility(self, AbilityToCancel: GameplayAbilitySpecHandle, ActivationInfo: GameplayAbilityActivationInfo) -> None:
+        ...
+
+    def ClientEndAbility(self, AbilityToEnd: GameplayAbilitySpecHandle, ActivationInfo: GameplayAbilityActivationInfo) -> None:
+        ...
+
+    def ClientPrintDebug_Response(self, Strings: list[str], GameFlags: int) -> None:
+        ...
+
+    def ClientSetReplicatedEvent(self, EventType: EAbilityGenericReplicatedEvent, AbilityHandle: GameplayAbilitySpecHandle, AbilityOriginalPredictionKey: PredictionKey) -> None:
+        ...
+
+    def ClientTryActivateAbility(self, AbilityToActivate: GameplayAbilitySpecHandle) -> None:
+        ...
+
+    def FindAllAbilitiesMatchingQuery(self, Query: GameplayTagQuery) -> list[GameplayAbilitySpecHandle]:
+        ...
+
+    def FindAllAbilitiesWithInputID(self, InputID: int=0) -> list[GameplayAbilitySpecHandle]:
+        ...
+
+    def FindAllAbilitiesWithTags(self, Tags: GameplayTagContainer, bExactMatch: bool=True) -> list[GameplayAbilitySpecHandle]:
+        ...
+
+    def GetActiveEffects(self, Query: GameplayEffectQuery) -> list[ActiveGameplayEffectHandle]:
+        ...
+
+    def GetActiveEffectsWithAllTags(self, Tags: GameplayTagContainer) -> list[ActiveGameplayEffectHandle]:
+        ...
+
+    def GetAllAbilities(self) -> list[GameplayAbilitySpecHandle]:
+        ...
+
+    def GetAllAttributes(self) -> list[GameplayAttribute]:
+        ...
+
+    def GetAttributeSet(self, AttributeSetClass: Class | type) -> AttributeSet:
+        ...
+
+    def GetGameplayAttributeValue(self, Attribute: GameplayAttribute) -> tuple[float, bool]:
+        ...
+
+    def GetGameplayEffectCount(self, SourceGameplayEffect: Class | type, OptionalInstigatorFilterComponent: AbilitySystemComponent, bEnforceOnGoingCheck: bool=True) -> int:
+        ...
+
+    def GetGameplayEffectCount_IfLoaded(self, SoftSourceGameplayEffect: Class, OptionalInstigatorFilterComponent: AbilitySystemComponent, bEnforceOnGoingCheck: bool=True) -> int:
+        ...
+
+    def GetGameplayEffectMagnitude(self, Handle: ActiveGameplayEffectHandle, Attribute: GameplayAttribute) -> float:
+        ...
+
+    def GetGameplayTagCount(self, GameplayTag: GameplayTag) -> int:
+        ...
+
+    def GetUserAbilityActivationInhibited(self) -> bool:
+        ...
+
+    def InputCancel(self) -> None:
+        ...
+
+    def InputConfirm(self) -> None:
+        ...
+
+    def IsGameplayCueActive(self, GameplayCueTag: GameplayTag) -> bool:
+        ...
+
+    def K2_GiveAbility(self, AbilityClass: Class | type, Level: int=0, InputID: int=-1) -> GameplayAbilitySpecHandle:
+        ...
+
+    def K2_GiveAbilityAndActivateOnce(self, AbilityClass: Class | type, Level: int=0, InputID: int=-1) -> GameplayAbilitySpecHandle:
+        ...
+
+    def K2_InitStats(self, Attributes: Class | type, DataTable: DataTable) -> None:
+        ...
+
+    def MakeEffectContext(self) -> GameplayEffectContextHandle:
+        ...
+
+    def MakeOutgoingSpec(self, GameplayEffectClass: Class | type, Level: float, Context: GameplayEffectContextHandle) -> GameplayEffectSpecHandle:
+        ...
+
+    def NetMulticast_InvokeGameplayCueAdded(self, GameplayCueTag: GameplayTag, PredictionKey: PredictionKey, EffectContext: GameplayEffectContextHandle) -> None:
+        ...
+
+    def NetMulticast_InvokeGameplayCueAddedAndWhileActive_FromSpec(self, Spec: GameplayEffectSpecForRPC, PredictionKey: PredictionKey) -> None:
+        ...
+
+    def NetMulticast_InvokeGameplayCueAddedAndWhileActive_WithParams(self, GameplayCueTag: GameplayTag, PredictionKey: PredictionKey, GameplayCueParameters: GameplayCueParameters) -> None:
+        ...
+
+    def NetMulticast_InvokeGameplayCueAdded_WithParams(self, GameplayCueTag: GameplayTag, PredictionKey: PredictionKey, Parameters: GameplayCueParameters) -> None:
+        ...
+
+    def NetMulticast_InvokeGameplayCueExecuted(self, GameplayCueTag: GameplayTag, PredictionKey: PredictionKey, EffectContext: GameplayEffectContextHandle) -> None:
+        ...
+
+    def NetMulticast_InvokeGameplayCueExecuted_FromSpec(self, Spec: GameplayEffectSpecForRPC, PredictionKey: PredictionKey) -> None:
+        ...
+
+    def NetMulticast_InvokeGameplayCueExecuted_WithParams(self, GameplayCueTag: GameplayTag, PredictionKey: PredictionKey, GameplayCueParameters: GameplayCueParameters) -> None:
+        ...
+
+    def NetMulticast_InvokeGameplayCuesAddedAndWhileActive_WithParams(self, GameplayCueTags: GameplayTagContainer, PredictionKey: PredictionKey, GameplayCueParameters: GameplayCueParameters) -> None:
+        ...
+
+    def NetMulticast_InvokeGameplayCuesExecuted(self, GameplayCueTags: GameplayTagContainer, PredictionKey: PredictionKey, EffectContext: GameplayEffectContextHandle) -> None:
+        ...
+
+    def NetMulticast_InvokeGameplayCuesExecuted_WithParams(self, GameplayCueTags: GameplayTagContainer, PredictionKey: PredictionKey, GameplayCueParameters: GameplayCueParameters) -> None:
+        ...
+
+    def OnAvatarActorDestroyed(self, InActor: Actor) -> None:
+        ...
+
+    def OnOwnerActorDestroyed(self, InActor: Actor) -> None:
+        ...
+
+    def OnRep_ActivateAbilities(self) -> None:
+        ...
+
+    def OnRep_ClientDebugString(self) -> None:
+        ...
+
+    def OnRep_OwningActor(self) -> None:
+        ...
+
+    def OnRep_ReplicatedAnimMontage(self) -> None:
+        ...
+
+    def OnRep_ServerDebugString(self) -> None:
+        ...
+
+    def OnRep_SpawnedAttributes(self, PreviousSpawnedAttributes: list[AttributeSet]) -> None:
+        ...
+
+    def OnSpawnedAttributesEndPlayed(self, InActor: Actor, EndPlayReason: EEndPlayReason) -> None:
+        ...
+
+    def PressInputID(self, InputID: int) -> None:
+        ...
+
+    def ReleaseInputID(self, InputID: int) -> None:
+        ...
+
+    def RemoveActiveEffectsWithAppliedTags(self, Tags: GameplayTagContainer) -> int:
+        ...
+
+    def RemoveActiveEffectsWithGrantedTags(self, Tags: GameplayTagContainer) -> int:
+        ...
+
+    def RemoveActiveEffectsWithSourceTags(self, Tags: GameplayTagContainer) -> int:
+        ...
+
+    def RemoveActiveEffectsWithTags(self, Tags: GameplayTagContainer) -> int:
+        ...
+
+    def RemoveActiveGameplayEffect(self, Handle: ActiveGameplayEffectHandle, StacksToRemove: int=-1) -> bool:
+        ...
+
+    def RemoveActiveGameplayEffectBySourceEffect(self, GameplayEffect: Class | type, InstigatorAbilitySystemComponent: AbilitySystemComponent, StacksToRemove: int=-1) -> None:
+        ...
+
+    def ServerAbilityRPCBatch(self, BatchInfo: ServerAbilityRPCBatch) -> None:
+        ...
+
+    def ServerCancelAbility(self, AbilityToCancel: GameplayAbilitySpecHandle, ActivationInfo: GameplayAbilityActivationInfo) -> None:
+        ...
+
+    def ServerCurrentMontageJumpToSectionName(self, ClientAnimation: AnimSequenceBase, SectionName: str) -> None:
+        ...
+
+    def ServerCurrentMontageSetNextSectionName(self, ClientAnimation: AnimSequenceBase, ClientPosition: float, SectionName: str, NextSectionName: str) -> None:
+        ...
+
+    def ServerCurrentMontageSetPlayRate(self, ClientAnimation: AnimSequenceBase, InPlayRate: float) -> None:
+        ...
+
+    def ServerEndAbility(self, AbilityToEnd: GameplayAbilitySpecHandle, ActivationInfo: GameplayAbilityActivationInfo, PredictionKey: PredictionKey) -> None:
+        ...
+
+    def ServerPrintDebug_Request(self) -> None:
+        ...
+
+    def ServerPrintDebug_RequestWithStrings(self, Strings: list[str]) -> None:
+        ...
+
+    def ServerSetInputPressed(self, AbilityHandle: GameplayAbilitySpecHandle) -> None:
+        ...
+
+    def ServerSetInputReleased(self, AbilityHandle: GameplayAbilitySpecHandle) -> None:
+        ...
+
+    def ServerSetReplicatedEvent(self, EventType: EAbilityGenericReplicatedEvent, AbilityHandle: GameplayAbilitySpecHandle, AbilityOriginalPredictionKey: PredictionKey, CurrentPredictionKey: PredictionKey) -> None:
+        ...
+
+    def ServerSetReplicatedEventWithPayload(self, EventType: EAbilityGenericReplicatedEvent, AbilityHandle: GameplayAbilitySpecHandle, AbilityOriginalPredictionKey: PredictionKey, CurrentPredictionKey: PredictionKey, VectorPayload: Vector_NetQuantize100) -> None:
+        ...
+
+    def ServerSetReplicatedTargetData(self, AbilityHandle: GameplayAbilitySpecHandle, AbilityOriginalPredictionKey: PredictionKey, ReplicatedTargetDataHandle: GameplayAbilityTargetDataHandle, ApplicationTag: GameplayTag, CurrentPredictionKey: PredictionKey) -> None:
+        ...
+
+    def ServerSetReplicatedTargetDataCancelled(self, AbilityHandle: GameplayAbilitySpecHandle, AbilityOriginalPredictionKey: PredictionKey, CurrentPredictionKey: PredictionKey) -> None:
+        ...
+
+    def ServerTryActivateAbility(self, AbilityToActivate: GameplayAbilitySpecHandle, InputPressed: bool, PredictionKey: PredictionKey) -> None:
+        ...
+
+    def ServerTryActivateAbilityWithEventData(self, AbilityToActivate: GameplayAbilitySpecHandle, InputPressed: bool, PredictionKey: PredictionKey, TriggerEventData: GameplayEventData) -> None:
+        ...
+
+    def SetActiveGameplayEffectLevel(self, ActiveHandle: ActiveGameplayEffectHandle, NewLevel: int) -> None:
+        ...
+
+    def SetActiveGameplayEffectLevelUsingQuery(self, Query: GameplayEffectQuery, NewLevel: int) -> None:
+        ...
+
+    def SetUserAbilityActivationInhibited(self, NewInhibit: bool) -> None:
+        ...
+
+    def TargetCancel(self) -> None:
+        ...
+
+    def TargetConfirm(self) -> None:
+        ...
+
+    def TryActivateAbilitiesByTag(self, GameplayTagContainer: GameplayTagContainer, bAllowRemoteActivation: bool=True) -> bool:
+        ...
+
+    def TryActivateAbility(self, AbilityToActivate: GameplayAbilitySpecHandle, bAllowRemoteActivation: bool=True) -> bool:
+        ...
+
+    def TryActivateAbilityByClass(self, InAbilityToActivate: Class | type, bAllowRemoteActivation: bool=True) -> bool:
+        ...
+
+    def UpdateActiveGameplayEffectSetByCallerMagnitude(self, ActiveHandle: ActiveGameplayEffectHandle, SetByCallerTag: GameplayTag, NewValue: float) -> None:
+        ...
+
+    def UpdateActiveGameplayEffectSetByCallerMagnitudes(self, ActiveHandle: ActiveGameplayEffectHandle, NewSetByCallerValues: dict[GameplayTag, float]) -> None:
+        ...
+
+
+class AbilitySystemDebugHUD(HUD):
+    ...
+
+class AbilityTask_ApplyRootMotion_Base(AbilityTask):
+    ForceName: str
+    FinishVelocityMode: ERootMotionFinishVelocityMode
+    FinishSetVelocity: Vector
+    FinishClampVelocity: float
+    MovementComponent: CharacterMovementComponent
+
+
+class AbilityTask_MoveToLocation(AbilityTask):
+    OnTargetLocationReached: MulticastDelegateBase
+    StartLocation: Vector
+    TargetLocation: Vector
+    DurationOfMovement: float
+    LerpCurve: CurveFloat
+    LerpCurveVector: CurveVector
+
+    @staticmethod
+    def MoveToLocation(OwningAbility: GameplayAbility, TaskInstanceName: str, Location: Vector, Duration: float, OptionalInterpolationCurve: CurveFloat, OptionalVectorInterpolationCurve: CurveVector) -> AbilityTask_MoveToLocation:
+        ...
+
+
+class AbilityTask_NetworkSyncPoint(AbilityTask):
+    OnSync: MulticastDelegateBase
+
+    def OnSignalCallback(self) -> None:
+        ...
+
+    @staticmethod
+    def WaitNetSync(OwningAbility: GameplayAbility, SyncType: EAbilityTaskNetSyncType) -> AbilityTask_NetworkSyncPoint:
+        ...
+
+
+class AbilityTask_PlayAnimAndWait(AbilityTask):
+    OnCompleted: MulticastDelegateBase
+    OnBlendOut: MulticastDelegateBase
+    OnBlendIn: MulticastDelegateBase
+    OnInterrupted: MulticastDelegateBase
+    OnCancelled: MulticastDelegateBase
+    AnimSequenceToPlay: AnimSequence
+
+    @staticmethod
+    def CreatePlayAnimAndWaitProxy(OwningAbility: GameplayAbility, TaskInstanceName: str, AnimSequence: AnimSequence, SlotName: str="", BlendInTime: float=0.25, BlendOutTime: float=0.25, InPlayRate: float=1, StartTimeSeconds: float=0, bStopWhenAbilityEnds: bool=True, AnimRootMotionTranslationScale: float=1, InPlayCount: float=1) -> AbilityTask_PlayAnimAndWait:
+        ...
+
+    def OnMontageBlendedIn(self, Montage: AnimMontage) -> None:
+        ...
+
+    def OnMontageBlendingOut(self, Montage: AnimMontage, bInterrupted: bool) -> None:
+        ...
+
+    def OnMontageEnded(self, Montage: AnimMontage, bInterrupted: bool) -> None:
+        ...
+
+    def OnMontageInterrupted(self) -> None:
+        ...
+
+
+class AbilityTask_PlayMontageAndWait(AbilityTask):
+    OnCompleted: MulticastDelegateBase
+    OnBlendedIn: MulticastDelegateBase
+    OnBlendOut: MulticastDelegateBase
+    OnInterrupted: MulticastDelegateBase
+    OnCancelled: MulticastDelegateBase
+    MontageToPlay: AnimMontage
+    Rate: float
+    StartSection: str
+    AnimRootMotionTranslationScale: float
+    StartTimeSeconds: float
+    bStopWhenAbilityEnds: bool
+    bAllowInterruptAfterBlendOut: bool
+
+    @staticmethod
+    def CreatePlayMontageAndWaitProxy(OwningAbility: GameplayAbility, TaskInstanceName: str, MontageToPlay: AnimMontage, Rate: float=1, StartSection: str="", bStopWhenAbilityEnds: bool=True, AnimRootMotionTranslationScale: float=1, StartTimeSeconds: float=0, bAllowInterruptAfterBlendOut: bool=False) -> AbilityTask_PlayMontageAndWait:
+        ...
+
+    def OnGameplayAbilityCancelled(self) -> None:
+        ...
+
+    def OnMontageBlendedIn(self, Montage: AnimMontage) -> None:
+        ...
+
+    def OnMontageBlendingOut(self, Montage: AnimMontage, bInterrupted: bool) -> None:
+        ...
+
+    def OnMontageEnded(self, Montage: AnimMontage, bInterrupted: bool) -> None:
+        ...
+
+
+class AbilityTask_Repeat(AbilityTask):
+    OnPerformAction: MulticastDelegateBase
+    OnFinished: MulticastDelegateBase
+
+    @staticmethod
+    def RepeatAction(OwningAbility: GameplayAbility, TimeBetweenActions: float, TotalActionCount: int) -> AbilityTask_Repeat:
+        ...
+
+
+class AbilityTask_SpawnActor(AbilityTask):
+    Success: MulticastDelegateBase
+    DidNotSpawn: MulticastDelegateBase
+
+    def BeginSpawningActor(self, OwningAbility: GameplayAbility, TargetData: GameplayAbilityTargetDataHandle, Class: Class | type) -> tuple[bool, Actor]:
+        ...
+
+    def FinishSpawningActor(self, OwningAbility: GameplayAbility, TargetData: GameplayAbilityTargetDataHandle, SpawnedActor: Actor) -> None:
+        ...
+
+    @staticmethod
+    def SpawnActor(OwningAbility: GameplayAbility, TargetData: GameplayAbilityTargetDataHandle, Class: Class | type) -> AbilityTask_SpawnActor:
+        ...
+
+
+class AbilityTask_StartAbilityState(AbilityTask):
+    OnStateEnded: MulticastDelegateBase
+    OnStateInterrupted: MulticastDelegateBase
+
+    @staticmethod
+    def StartAbilityState(OwningAbility: GameplayAbility, StateName: str, bEndCurrentState: bool=True) -> AbilityTask_StartAbilityState:
+        ...
+
+
+class AbilityTask_VisualizeTargeting(AbilityTask):
+    TimeElapsed: MulticastDelegateBase
+
+    def BeginSpawningActor(self, OwningAbility: GameplayAbility, Class: Class | type) -> tuple[bool, GameplayAbilityTargetActor]:
+        ...
+
+    def FinishSpawningActor(self, OwningAbility: GameplayAbility, SpawnedActor: GameplayAbilityTargetActor) -> None:
+        ...
+
+    @staticmethod
+    def VisualizeTargeting(OwningAbility: GameplayAbility, Class: Class | type, TaskInstanceName: str, Duration: float=-1) -> AbilityTask_VisualizeTargeting:
+        ...
+
+    @staticmethod
+    def VisualizeTargetingUsingActor(OwningAbility: GameplayAbility, TargetActor: GameplayAbilityTargetActor, TaskInstanceName: str, Duration: float=-1) -> AbilityTask_VisualizeTargeting:
+        ...
+
+
+class AbilityTask_WaitAbilityActivate(AbilityTask):
+    OnActivate: MulticastDelegateBase
+
+    def OnAbilityActivate(self, ActivatedAbility: GameplayAbility) -> None:
+        ...
+
+    @staticmethod
+    def WaitForAbilityActivate(OwningAbility: GameplayAbility, WithTag: GameplayTag, WithoutTag: GameplayTag, IncludeTriggeredAbilities: bool=False, TriggerOnce: bool=True) -> AbilityTask_WaitAbilityActivate:
+        ...
+
+    @staticmethod
+    def WaitForAbilityActivateWithTagRequirements(OwningAbility: GameplayAbility, TagRequirements: GameplayTagRequirements, IncludeTriggeredAbilities: bool=False, TriggerOnce: bool=True) -> AbilityTask_WaitAbilityActivate:
+        ...
+
+    @staticmethod
+    def WaitForAbilityActivate_Query(OwningAbility: GameplayAbility, Query: GameplayTagQuery, IncludeTriggeredAbilities: bool=False, TriggerOnce: bool=True) -> AbilityTask_WaitAbilityActivate:
+        ...
+
+
+class AbilityTask_WaitAbilityCommit(AbilityTask):
+    OnCommit: MulticastDelegateBase
+
+    def OnAbilityCommit(self, ActivatedAbility: GameplayAbility) -> None:
+        ...
+
+    @staticmethod
+    def WaitForAbilityCommit(OwningAbility: GameplayAbility, WithTag: GameplayTag, WithoutTage: GameplayTag, TriggerOnce: bool=True) -> AbilityTask_WaitAbilityCommit:
+        ...
+
+    @staticmethod
+    def WaitForAbilityCommit_Query(OwningAbility: GameplayAbility, Query: GameplayTagQuery, TriggerOnce: bool=True) -> AbilityTask_WaitAbilityCommit:
+        ...
+
+
+class AbilityTask_WaitAttributeChange(AbilityTask):
+    OnChange: MulticastDelegateBase
+    ExternalOwner: AbilitySystemComponent
+
+    @staticmethod
+    def WaitForAttributeChange(OwningAbility: GameplayAbility, Attribute: GameplayAttribute, WithSrcTag: GameplayTag, WithoutSrcTag: GameplayTag, TriggerOnce: bool=True, OptionalExternalOwner: Actor | None=None) -> AbilityTask_WaitAttributeChange:
+        ...
+
+    @staticmethod
+    def WaitForAttributeChangeWithComparison(OwningAbility: GameplayAbility, InAttribute: GameplayAttribute, InWithTag: GameplayTag, InWithoutTag: GameplayTag, InComparisonType: EWaitAttributeChangeComparison, InComparisonValue: float, TriggerOnce: bool=True, OptionalExternalOwner: Actor | None=None) -> AbilityTask_WaitAttributeChange:
+        ...
+
+
+class AbilityTask_WaitAttributeChangeRatioThreshold(AbilityTask):
+    OnChange: MulticastDelegateBase
+    ExternalOwner: AbilitySystemComponent
+
+    @staticmethod
+    def WaitForAttributeChangeRatioThreshold(OwningAbility: GameplayAbility, AttributeNumerator: GameplayAttribute, AttributeDenominator: GameplayAttribute, ComparisonType: EWaitAttributeChangeComparison, ComparisonValue: float, bTriggerOnce: bool, OptionalExternalOwner: Actor | None=None) -> AbilityTask_WaitAttributeChangeRatioThreshold:
+        ...
+
+
+class AbilityTask_WaitAttributeChangeThreshold(AbilityTask):
+    OnChange: MulticastDelegateBase
+    ExternalOwner: AbilitySystemComponent
+
+    @staticmethod
+    def WaitForAttributeChangeThreshold(OwningAbility: GameplayAbility, Attribute: GameplayAttribute, ComparisonType: EWaitAttributeChangeComparison, ComparisonValue: float, bTriggerOnce: bool, OptionalExternalOwner: Actor | None=None) -> AbilityTask_WaitAttributeChangeThreshold:
+        ...
+
+
+class AbilityTask_WaitCancel(AbilityTask):
+    OnCancel: MulticastDelegateBase
+
+    def OnCancelCallback(self) -> None:
+        ...
+
+    def OnLocalCancelCallback(self) -> None:
+        ...
+
+    @staticmethod
+    def WaitCancel(OwningAbility: GameplayAbility) -> AbilityTask_WaitCancel:
+        ...
+
+
+class AbilityTask_WaitConfirm(AbilityTask):
+    OnConfirm: MulticastDelegateBase
+
+    def OnConfirmCallback(self, InAbility: GameplayAbility) -> None:
+        ...
+
+    @staticmethod
+    def WaitConfirm(OwningAbility: GameplayAbility) -> AbilityTask_WaitConfirm:
+        ...
+
+
+class AbilityTask_WaitConfirmCancel(AbilityTask):
+    OnConfirm: MulticastDelegateBase
+    OnCancel: MulticastDelegateBase
+
+    def OnCancelCallback(self) -> None:
+        ...
+
+    def OnConfirmCallback(self) -> None:
+        ...
+
+    def OnLocalCancelCallback(self) -> None:
+        ...
+
+    def OnLocalConfirmCallback(self) -> None:
+        ...
+
+    @staticmethod
+    def WaitConfirmCancel(OwningAbility: GameplayAbility) -> AbilityTask_WaitConfirmCancel:
+        ...
+
+
+class AbilityTask_WaitDelay(AbilityTask):
+    OnFinish: MulticastDelegateBase
+
+    @staticmethod
+    def WaitDelay(OwningAbility: GameplayAbility, Time: float) -> AbilityTask_WaitDelay:
+        ...
+
+
+class AbilityTask_WaitGameplayEffectApplied(AbilityTask):
+    ExternalOwner: AbilitySystemComponent
+
+    def OnApplyGameplayEffectCallback(self, Target: AbilitySystemComponent, SpecApplied: GameplayEffectSpec, ActiveHandle: ActiveGameplayEffectHandle) -> None:
+        ...
+
+
+class AbilityTask_WaitGameplayEffectBlockedImmunity(AbilityTask):
+    Blocked: MulticastDelegateBase
+    ExternalOwner: AbilitySystemComponent
+
+    @staticmethod
+    def WaitGameplayEffectBlockedByImmunity(OwningAbility: GameplayAbility, SourceTagRequirements: GameplayTagRequirements, TargetTagRequirements: GameplayTagRequirements, OptionalExternalTarget: Actor | None=None, OnlyTriggerOnce: bool=False) -> AbilityTask_WaitGameplayEffectBlockedImmunity:
+        ...
+
+
+class AbilityTask_WaitGameplayEffectRemoved(AbilityTask):
+    OnRemoved: MulticastDelegateBase
+    InvalidHandle: MulticastDelegateBase
+
+    def OnGameplayEffectRemoved(self, InGameplayEffectRemovalInfo: GameplayEffectRemovalInfo) -> None:
+        ...
+
+    @staticmethod
+    def WaitForGameplayEffectRemoved(OwningAbility: GameplayAbility, Handle: ActiveGameplayEffectHandle) -> AbilityTask_WaitGameplayEffectRemoved:
+        ...
+
+
+class AbilityTask_WaitGameplayEffectStackChange(AbilityTask):
+    OnChange: MulticastDelegateBase
+    InvalidHandle: MulticastDelegateBase
+
+    def OnGameplayEffectStackChange(self, Handle: ActiveGameplayEffectHandle, NewCount: int, OldCount: int) -> None:
+        ...
+
+    @staticmethod
+    def WaitForGameplayEffectStackChange(OwningAbility: GameplayAbility, Handle: ActiveGameplayEffectHandle) -> AbilityTask_WaitGameplayEffectStackChange:
+        ...
+
+
+class AbilityTask_WaitGameplayEvent(AbilityTask):
+    EventReceived: MulticastDelegateBase
+    OptionalExternalTarget: AbilitySystemComponent
+
+    @staticmethod
+    def WaitGameplayEvent(OwningAbility: GameplayAbility, EventTag: GameplayTag, OptionalExternalTarget: Actor | None=None, OnlyTriggerOnce: bool=False, OnlyMatchExact: bool=True) -> AbilityTask_WaitGameplayEvent:
+        ...
+
+
+class AbilityTask_WaitGameplayTag(AbilityTask):
+    OptionalExternalTarget: AbilitySystemComponent
+
+    def GameplayTagCallback(self, Tag: GameplayTag, NewCount: int) -> None:
+        ...
+
+
+class AbilityTask_WaitGameplayTagCountChanged(AbilityTask):
+    TagCountChanged: MulticastDelegateBase
+    OptionalExternalTarget: AbilitySystemComponent
+
+    @staticmethod
+    def WaitGameplayTagCountChange(OwningAbility: GameplayAbility, Tag: GameplayTag, InOptionalExternalTarget: Actor | None=None) -> AbilityTask_WaitGameplayTagCountChanged:
+        ...
+
+
+class AbilityTask_WaitGameplayTagQuery(AbilityTask):
+    Triggered: MulticastDelegateBase
+    OptionalExternalTarget: AbilitySystemComponent
+
+    def UpdateTargetTags(self, Tag: GameplayTag, NewCount: int) -> None:
+        ...
+
+    @staticmethod
+    def WaitGameplayTagQuery(OwningAbility: GameplayAbility, TagQuery: GameplayTagQuery, InOptionalExternalTarget: Actor | None=None, TriggerCondition: EWaitGameplayTagQueryTriggerCondition=EWaitGameplayTagQueryTriggerCondition.WhenTrue, bOnlyTriggerOnce: bool=False) -> AbilityTask_WaitGameplayTagQuery:
+        ...
+
+
+class AbilityTask_WaitInputPress(AbilityTask):
+    OnPress: MulticastDelegateBase
+
+    def OnPressCallback(self) -> None:
+        ...
+
+    @staticmethod
+    def WaitInputPress(OwningAbility: GameplayAbility, bTestAlreadyPressed: bool=False) -> AbilityTask_WaitInputPress:
+        ...
+
+
+class AbilityTask_WaitInputRelease(AbilityTask):
+    OnRelease: MulticastDelegateBase
+
+    def OnReleaseCallback(self) -> None:
+        ...
+
+    @staticmethod
+    def WaitInputRelease(OwningAbility: GameplayAbility, bTestAlreadyReleased: bool=False) -> AbilityTask_WaitInputRelease:
+        ...
+
+
+class AbilityTask_WaitMovementModeChange(AbilityTask):
+    OnChange: MulticastDelegateBase
+
+    @staticmethod
+    def CreateWaitMovementModeChange(OwningAbility: GameplayAbility, NewMode: EMovementMode) -> AbilityTask_WaitMovementModeChange:
+        ...
+
+    def OnMovementModeChange(self, Character: Character, PrevMovementMode: EMovementMode, PreviousCustomMode: int) -> None:
+        ...
+
+
+class AbilityTask_WaitOverlap(AbilityTask):
+    OnOverlap: MulticastDelegateBase
+
+    def OnHitCallback(self, HitComp: PrimitiveComponent, OtherActor: Actor, OtherComp: PrimitiveComponent, NormalImpulse: Vector, Hit: HitResult) -> None:
+        ...
+
+    @staticmethod
+    def WaitForOverlap(OwningAbility: GameplayAbility) -> AbilityTask_WaitOverlap:
+        ...
+
+
+class AbilityTask_WaitTargetData(AbilityTask):
+    ValidData: MulticastDelegateBase
+    Cancelled: MulticastDelegateBase
+    TargetClass: Class | type
+    TargetActor: GameplayAbilityTargetActor
+
+    def BeginSpawningActor(self, OwningAbility: GameplayAbility, Class: Class | type) -> tuple[bool, GameplayAbilityTargetActor]:
+        ...
+
+    def FinishSpawningActor(self, OwningAbility: GameplayAbility, SpawnedActor: GameplayAbilityTargetActor) -> None:
+        ...
+
+    def OnTargetDataCancelledCallback(self, Data: GameplayAbilityTargetDataHandle) -> None:
+        ...
+
+    def OnTargetDataReadyCallback(self, Data: GameplayAbilityTargetDataHandle) -> None:
+        ...
+
+    def OnTargetDataReplicatedCallback(self, Data: GameplayAbilityTargetDataHandle, ActivationTag: GameplayTag) -> None:
+        ...
+
+    def OnTargetDataReplicatedCancelledCallback(self) -> None:
+        ...
+
+    @staticmethod
+    def WaitTargetData(OwningAbility: GameplayAbility, TaskInstanceName: str, ConfirmationType: EGameplayTargetingConfirmation, Class: Class | type) -> AbilityTask_WaitTargetData:
+        ...
+
+    @staticmethod
+    def WaitTargetDataUsingActor(OwningAbility: GameplayAbility, TaskInstanceName: str, ConfirmationType: EGameplayTargetingConfirmation, TargetActor: GameplayAbilityTargetActor) -> AbilityTask_WaitTargetData:
+        ...
+
+
+class AbilityTask_WaitVelocityChange(AbilityTask):
+    OnVelocityChage: MulticastDelegateBase
+    CachedMovementComponent: MovementComponent
+
+    @staticmethod
+    def CreateWaitVelocityChange(OwningAbility: GameplayAbility, Direction: Vector, MinimumMagnitude: float) -> AbilityTask_WaitVelocityChange:
+        ...
+
+
 class AbstractNavData(NavigationData):
     ...
 
@@ -147432,6 +154451,10 @@ class AnimationBlendSpaceSampleGraph(AnimationGraph):
     ResultNode: AnimGraphNode_BlendSpaceSampleResult
 
 
+class AnimationBlendStackGraph(AnimationGraph):
+    ResultNode: AnimGraphNode_Root
+
+
 class AnimationConduitGraphSchema(EdGraphSchema_K2):
     ...
 
@@ -147551,6 +154574,12 @@ class AssetDefinition_ChaosCacheCollection(AssetDefinitionDefault):
 class AssetDefinition_ChaosSolver(AssetDefinitionDefault):
     ...
 
+class AssetDefinition_ChooserSignature(AssetDefinitionDefault):
+    ...
+
+class AssetDefinition_ChooserTable(AssetDefinitionDefault):
+    ...
+
 class AssetDefinition_ClassTypeBase(AssetDefinitionDefault):
     ...
 
@@ -147566,6 +154595,9 @@ class AssetDefinition_ControlRigPose(AssetDefinitionDefault):
 class AssetDefinition_Curve(AssetDefinitionDefault):
     ...
 
+class AssetDefinition_CurveExpressionsDataAsset(AssetDefinitionDefault):
+    ...
+
 class AssetDefinition_CurveTable(AssetDefinitionDefault):
     ...
 
@@ -147578,6 +154610,9 @@ class AssetDefinition_CustomizableObjectInstance(AssetDefinitionDefault):
 class AssetDefinition_CustomizableObjectMacroLibrary(AssetDefinitionDefault):
     ...
 
+class AssetDefinition_DMXEditorLibrary(AssetDefinitionDefault):
+    ...
+
 class AssetDefinition_DNAAsset(AssetDefinitionDefault):
     ...
 
@@ -147588,6 +154623,9 @@ class AssetDefinition_DataLayer(AssetDefinitionDefault):
     ...
 
 class AssetDefinition_DataLayerInstance(AssetDefinitionDefault):
+    ...
+
+class AssetDefinition_DataRegistry(AssetDefinitionDefault):
     ...
 
 class AssetDefinition_DataTable(AssetDefinitionDefault):
@@ -147806,6 +154844,12 @@ class AssetDefinition_PreviewMeshCollection(AssetDefinitionDefault):
 class AssetDefinition_ProceduralFoliageSpawner(AssetDefinitionDefault):
     ...
 
+class AssetDefinition_ProxyAsset(AssetDefinitionDefault):
+    ...
+
+class AssetDefinition_ProxyTable(AssetDefinitionDefault):
+    ...
+
 class AssetDefinition_Redirector(AssetDefinitionDefault):
     ...
 
@@ -147816,6 +154860,15 @@ class AssetDefinition_ResonanceAudioSpatializationSourceSettings(AssetDefinition
     ...
 
 class AssetDefinition_RuntimeVirtualTexture(AssetDefinitionDefault):
+    ...
+
+class AssetDefinition_SceneStateBlueprint(AssetDefinitionDefault):
+    ...
+
+class AssetDefinition_SceneStateEventSchemaCollection(AssetDefinitionDefault):
+    ...
+
+class AssetDefinition_SceneStateTaskBlueprint(AssetDefinitionDefault):
     ...
 
 class AssetDefinition_SkeletalMesh(AssetDefinitionDefault):
@@ -149847,6 +156900,12 @@ class ChildConnection(NetConnection):
     Parent: NetConnection
 
 
+class ChooserFindProperties(AnimAssetFindReplaceProcessor_StringBase):
+    ...
+
+class ChooserTableFactory(ChooserSignatureFactory):
+    ...
+
 class CineCameraActor(CameraActor):
     LookatTrackingSettings: CameraLookatTrackingSettings
 
@@ -150635,6 +157694,148 @@ class CylinderBuilder(EditorBrushBuilder):
     AlignToSide: bool
     Hollow: bool
 
+
+class DMXEntityFixturePatch(DMXEntity):
+    OnFixturePatchReceivedDMX: MulticastDelegateBase
+    UniverseID: int
+    StartingChannel: int
+    ParentFixtureTypeTemplate: DMXEntityFixtureType
+    ActiveMode: int
+    DefaultTransform: Transform
+    FixtureID: int
+    MVRFixtureUUID: str
+    CustomTags: list[str]
+    EditorColor: LinearColor
+    bReceiveDMXInEditor: bool
+
+    def ContainsAttribute(self, FunctionAttribute: DMXAttributeName) -> bool:
+        ...
+
+    def ConvertAttributeMapToRawMap(self, FunctionMap: dict[DMXAttributeName, int]) -> dict[int, int]:
+        ...
+
+    def ConvertToValidMap(self, FunctionMap: dict[DMXAttributeName, int]) -> dict[DMXAttributeName, int]:
+        ...
+
+    @staticmethod
+    def CreateFixturePatchInLibrary(ConstructionParams: DMXEntityFixturePatchConstructionParams, DesiredName: str, bMarkDMXLibraryDirty: bool=True) -> DMXEntityFixturePatch:
+        ...
+
+    def DMXOnFixturePatchReceivedDMXDelegate__DelegateSignature(self, FixturePatch: DMXEntityFixturePatch, ValuePerAttribute: DMXNormalizedAttributeValueMap) -> None:
+        ...
+
+    def GetAllAttributesInActiveMode(self) -> list[DMXAttributeName]:
+        ...
+
+    def GetAllMatrixCells(self) -> tuple[bool, list[DMXCell]]:
+        ...
+
+    def GetAttributeChannelAssignments(self) -> dict[DMXAttributeName, int]:
+        ...
+
+    def GetAttributeDefaultMap(self) -> dict[DMXAttributeName, int]:
+        ...
+
+    def GetAttributeFunctionsMap(self) -> dict[DMXAttributeName, DMXFixtureFunction]:
+        ...
+
+    def GetAttributeSignalFormats(self) -> dict[DMXAttributeName, EDMXFixtureSignalFormat]:
+        ...
+
+    def GetAttributeValue(self, Attribute: DMXAttributeName) -> tuple[int, bool]:
+        ...
+
+    def GetAttributeValues(self) -> dict[DMXAttributeName, int]:
+        ...
+
+    def GetCellAttributes(self) -> tuple[bool, list[DMXAttributeName]]:
+        ...
+
+    def GetChannelSpan(self) -> int:
+        ...
+
+    def GetEndingChannel(self) -> int:
+        ...
+
+    def GetMatrixCell(self, CellCoordinate: IntPoint) -> tuple[bool, DMXCell]:
+        ...
+
+    def GetMatrixCellChannelsAbsolute(self, CellCoordinate: IntPoint) -> tuple[bool, dict[DMXAttributeName, int]]:
+        ...
+
+    def GetMatrixCellChannelsAbsoluteWithValidation(self, InCellCoordinate: IntPoint) -> tuple[bool, dict[DMXAttributeName, int]]:
+        ...
+
+    def GetMatrixCellChannelsRelative(self, CellCoordinate: IntPoint) -> tuple[bool, dict[DMXAttributeName, int]]:
+        ...
+
+    def GetMatrixCellValues(self, CellCoordinate: IntPoint) -> tuple[bool, dict[DMXAttributeName, int]]:
+        ...
+
+    def GetMatrixProperties(self) -> tuple[bool, DMXFixtureMatrix]:
+        ...
+
+    def GetNormalizedAttributeValues(self) -> DMXNormalizedAttributeValueMap:
+        ...
+
+    def GetNormalizedMatrixCellValues(self, CellCoordinate: IntPoint) -> tuple[bool, dict[DMXAttributeName, float]]:
+        ...
+
+    def GetStartingChannel(self) -> int:
+        ...
+
+    def IsMapValid(self, FunctionMap: dict[DMXAttributeName, int]) -> bool:
+        ...
+
+    @staticmethod
+    def RemoveFixturePatchFromLibrary(FixturePatchRef: DMXEntityFixturePatchRef) -> None:
+        ...
+
+    def SendDMX(self, AttributeMap: dict[DMXAttributeName, int]) -> None:
+        ...
+
+    def SendDefaultValues(self) -> None:
+        ...
+
+    def SendMatrixCellValue(self, CellCoordinate: IntPoint, Attribute: DMXAttributeName, Value: int) -> bool:
+        ...
+
+    def SendNormalizedMatrixCellValue(self, CellCoordinate: IntPoint, Attribute: DMXAttributeName, RelativeValue: float) -> bool:
+        ...
+
+    def SendZeroValues(self) -> None:
+        ...
+
+    def SetFixtureType(self, NewFixtureType: DMXEntityFixtureType) -> None:
+        ...
+
+    def SetStartingChannel(self, NewStartingChannel: int) -> None:
+        ...
+
+    def SetUniverseID(self, NewUniverseID: int) -> None:
+        ...
+
+
+class DMXEntityFixtureType(DMXEntity):
+    DMXCategory: DMXFixtureCategory
+    Modes: list[DMXFixtureMode]
+    InputModulators: list[DMXModulator]
+    GDTFSource: DMXImportGDTF
+    bExportGeneratedGDTF: bool
+    ActorClassToSpawn: Class
+    bShowOnlyLatestGDTFModeRevisions: bool
+
+    @staticmethod
+    def CreateFixtureTypeInLibrary(ConstructionParams: DMXEntityFixtureTypeConstructionParams, DesiredName: str, bMarkDMXLibraryDirty: bool=True) -> DMXEntityFixtureType:
+        ...
+
+    @staticmethod
+    def RemoveFixtureTypeFromLibrary(FixtureTypeRef: DMXEntityFixtureTypeRef) -> None:
+        ...
+
+
+class DMXEntityUniverseManaged(DMXEntity):
+    ...
 
 class DataAssetLink(NameSpacedUserData):
     DataAsset: DataAsset
@@ -152319,6 +159520,34 @@ class GameStateBase(Info):
         ...
 
 
+class GameplayAbilitiesEditorDeveloperSettings(DeveloperSettingsBackedByCVars):
+    bIgnoreCooldowns: bool
+    bIgnoreCosts: bool
+    AbilitySystemGlobalScaler: float
+    DebugDrawMaxDistance: float
+
+
+class GameplayAbilityBlueprint(Blueprint):
+    ...
+
+class GameplayAbilityGraphSchema(EdGraphSchema_K2):
+    ...
+
+class GameplayAbilityTargetActor_Radius(GameplayAbilityTargetActor):
+    Radius: float
+
+
+class GameplayAbilityTargetActor_Trace(GameplayAbilityTargetActor):
+    MaxRange: float
+    TraceProfile: CollisionProfileName
+    bTraceAffectsAimPitch: bool
+
+
+class GameplayAbilityWorldReticle_ActorVisualization(GameplayAbilityWorldReticle):
+    CollisionComponent: CapsuleComponent
+    VisualizationComponents: list[ActorComponent]
+
+
 class GameplayCameraActor(GameplayCameraActorBase):
     CameraComponent: GameplayCameraComponent
     OutputCameraComponent: CineCameraComponent
@@ -152487,6 +159716,45 @@ class GameplayCamerasPlayerCameraManager(PlayerCameraManager, GameplayCameraSyst
 
     def StopCameraShakeAsset(self, InInstanceID: CameraShakeInstanceID, bImmediately: bool=False) -> bool:
         ...
+
+
+class GameplayCueNotify_BurstLatent(GameplayCueNotify_Actor):
+    DefaultSpawnCondition: GameplayCueNotify_SpawnCondition
+    DefaultPlacementInfo: GameplayCueNotify_PlacementInfo
+    BurstEffects: GameplayCueNotify_BurstEffects
+    BurstSpawnResults: GameplayCueNotify_SpawnResult
+
+    def OnBurst(self, Target: Actor, Parameters: GameplayCueParameters, SpawnResults: GameplayCueNotify_SpawnResult) -> None:
+        ...
+
+
+class GameplayCueNotify_Looping(GameplayCueNotify_Actor):
+    DefaultSpawnCondition: GameplayCueNotify_SpawnCondition
+    DefaultPlacementInfo: GameplayCueNotify_PlacementInfo
+    ApplicationEffects: GameplayCueNotify_BurstEffects
+    ApplicationSpawnResults: GameplayCueNotify_SpawnResult
+    LoopingEffects: GameplayCueNotify_LoopingEffects
+    LoopingSpawnResults: GameplayCueNotify_SpawnResult
+    RecurringEffects: GameplayCueNotify_BurstEffects
+    RecurringSpawnResults: GameplayCueNotify_SpawnResult
+    RemovalEffects: GameplayCueNotify_BurstEffects
+    RemovalSpawnResults: GameplayCueNotify_SpawnResult
+
+    def OnApplication(self, Target: Actor, Parameters: GameplayCueParameters, SpawnResults: GameplayCueNotify_SpawnResult) -> None:
+        ...
+
+    def OnLoopingStart(self, Target: Actor, Parameters: GameplayCueParameters, SpawnResults: GameplayCueNotify_SpawnResult) -> None:
+        ...
+
+    def OnRecurring(self, Target: Actor, Parameters: GameplayCueParameters, SpawnResults: GameplayCueNotify_SpawnResult) -> None:
+        ...
+
+    def OnRemoval(self, Target: Actor, Parameters: GameplayCueParameters, SpawnResults: GameplayCueNotify_SpawnResult) -> None:
+        ...
+
+
+class GameplayEffectUIData_TextOnly(GameplayEffectUIData):
+    Description: str
 
 
 class GameplayTagsK2Node_LiteralGameplayTag(K2Node):
@@ -154970,6 +162238,33 @@ class K2Node_EnumLiteral(K2Node, NodeDependingOnEnumInterface):
     Enum: Enum
 
 
+class K2Node_EvaluateChooser(K2Node):
+    Chooser: ChooserTable
+    Mode: EEvaluateChooserMode
+
+
+class K2Node_EvaluateChooser2(K2Node):
+    Chooser: ChooserTable
+    Mode: EEvaluateChooserMode
+    StructOutputMode: EEvaluateChooserStructOutputMode
+    bReturnSoftObjectReference: bool
+    bShowModeSetting: bool
+
+
+class K2Node_EvaluateLiveLinkFrame(K2Node):
+    ...
+
+class K2Node_EvaluateProxy(K2Node):
+    Proxy: ProxyAsset
+
+
+class K2Node_EvaluateProxy2(K2Node):
+    Proxy: ProxyAsset
+    Mode: EEvaluateProxyMode
+    StructOutputMode: EEvaluateProxyStructOutputMode
+    bReturnSoftObjectReference: bool
+
+
 class K2Node_ExecutionSequence(K2Node, K2Node_AddPinInterface):
     ...
 
@@ -154988,11 +162283,21 @@ class K2Node_GetArrayItem(K2Node):
     bReturnByRefDesired: bool
 
 
+class K2Node_GetChooserContextParameters(K2Node):
+    ChooserSignature: ChooserSignature
+
+
 class K2Node_GetClassDefaults(K2Node):
     BlueprintSubscribedTo: Blueprint
     ShowPinForProperties: list[OptionalPinFromProperty]
     bExcludeObjectContainers: bool
 
+
+class K2Node_GetDMXFixturePatch(K2Node):
+    ...
+
+class K2Node_GetDMXFixtureType(K2Node):
+    ...
 
 class K2Node_GetDataTableRow(K2Node):
     ...
@@ -155015,6 +162320,10 @@ class K2Node_GetSequenceBinding(K2Node):
 
 class K2Node_GetSubsystem(K2Node):
     CustomClass: Class | type
+
+
+class K2Node_HttpRequest(K2Node):
+    VerbEnum: Enum
 
 
 class K2Node_IfThenElse(K2Node):
@@ -155067,6 +162376,16 @@ class K2Node_MakeContainer(K2Node, K2Node_AddPinInterface):
     NumInputs: int
 
 
+class K2Node_MakeCurveExpressionMap(K2Node):
+    Expressions: CurveExpressionList
+
+
+class K2Node_MakeRequestHeader(K2Node, K2Node_AddPinInterface):
+    PresetEnumIndex: int
+    NumInputs: int
+    OptionalPins: list[OptionalPin]
+
+
 class K2Node_MakeStateTreeReference(K2Node):
     ShowPinForProperties: list[OptionalPinFromProperty]
     StateTree: StateTree
@@ -155091,6 +162410,10 @@ class K2Node_PropertyAccess(K2Node, ClassVariableCreator):
 
 class K2Node_PureAssignmentStatement(K2Node):
     ...
+
+class K2Node_SceneStateEventBase(K2Node):
+    EventSchemaHandle: SceneStateEventSchemaHandle
+
 
 class K2Node_Select(K2Node, NodeDependingOnEnumInterface, K2Node_AddPinInterface):
     NumOptionPins: int
@@ -155151,6 +162474,9 @@ class K2Node_TunnelBoundary(K2Node):
     BaseName: str
     TunnelBoundaryType: ETunnelBoundaryType
 
+
+class K2Node_UpdateVirtualSubjectDataBase(K2Node):
+    ...
 
 class K2Node_Variable(K2Node):
     VariableReference: MemberReference
@@ -155662,10 +162988,26 @@ class ListViewBase(Widget):
         ...
 
 
+class LiveLinkAnimationAxisSwitchPreProcessor(LiveLinkTransformAxisSwitchPreProcessor):
+    ...
+
+class LiveLinkAnimationFrameInterpolationProcessor(LiveLinkBasicFrameInterpolationProcessor):
+    ...
+
 class LiveLinkAnimationRole(LiveLinkBasicRole):
     ...
 
+class LiveLinkBlueprintVirtualSubjectFactory(BlueprintFactory):
+    Role: Class | type
+
+
+class LiveLinkCharacterController(LiveLinkTransformController):
+    ...
+
 class LiveLinkInputDeviceRole(LiveLinkBasicRole):
+    ...
+
+class LiveLinkLocatorAxisSwitchPreProcessor(LiveLinkTransformAxisSwitchPreProcessor):
     ...
 
 class LiveLinkLocatorRole(LiveLinkBasicRole):
@@ -156868,6 +164210,16 @@ class MeshVertexPaintToolUtilityActions(MeshVertexPaintToolActionPropertySet):
 
     def GetWeightMapsFunc(self) -> list[str]:
         ...
+
+
+class MetaDataRegistrySource_CurveTable(MetaDataRegistrySource):
+    CreatedSource: Class | type
+    TableRules: DataRegistrySource_DataTableRules
+
+
+class MetaDataRegistrySource_DataTable(MetaDataRegistrySource):
+    CreatedSource: Class | type
+    TableRules: DataRegistrySource_DataTableRules
 
 
 class MetaHumanComponentUE(MetaHumanComponentBase):
@@ -158757,6 +166109,18 @@ class PCGWorldRaycastDataInterface(PCGComputeDataInterface):
 
 class PCGWorldRaycastDataProvider(PCGComputeDataProvider):
     ...
+
+class PGFGameInstanceSubsystem(GameInstanceSubsystem):
+    def IsInitialized(self) -> bool:
+        ...
+
+
+class PGFInputComponent(InputComponent):
+    PGFBindings: list[PGFInputBinding]
+    PGFAxisBindings: list[PGFInputAxisBinding]
+    PGFLongPressBindings: list[PGFInputLongPressBinding]
+    PGFTouchBindings: list[PGFInputTouchBinding]
+
 
 class PackedLevelActor(LevelInstance):
     PackedVersion: str
@@ -162428,6 +169792,62 @@ class SceneCaptureCube(SceneCapture):
         ...
 
 
+class SceneStateBlueprint(Blueprint, SceneStateSchemaProvider, SceneStateBindingCollectionOwner):
+    StateMachineGraphs: list[EdGraph]
+    BindingCollection: SceneStateBindingCollection
+    SceneStateSchemaClass: Class | type
+    RootId: str
+
+
+class SceneStateConduitGraph(SceneStateTransitionGraph):
+    ...
+
+class SceneStateMachineConduitNode(SceneStateMachineNode, SceneStateTransitionGraphProvider):
+    bWaitForTasksToFinish: bool
+
+
+class SceneStateMachineEntryNode(SceneStateMachineNode):
+    ...
+
+class SceneStateMachineExitNode(SceneStateMachineNode):
+    ...
+
+class SceneStateMachineStateNode(SceneStateMachineNode, SceneStateEventHandlerProvider):
+    ParametersId: str
+    Parameters: InstancedPropertyBag
+    MainGraph: EdGraph
+    EventHandlers: list[SceneStateEventHandler]
+    CompiledIndex: Any
+
+
+class SceneStateMachineTaskNode(SceneStateMachineNode):
+    Task: InstancedStruct
+    TaskInstance: InstancedStruct
+    CompiledIndex: Any
+    TaskId: str
+
+
+class SceneStateMachineTransitionNode(SceneStateMachineNode, SceneStateTransitionGraphProvider):
+    TransitionGraph: EdGraph
+    Priority: int
+    bWaitForTasksToFinish: bool
+    ParametersId: str
+    Parameters: InstancedPropertyBag
+
+
+class SceneStatePropertyReferenceSchema(EdGraphSchema_K2):
+    ...
+
+class SceneStateTaskBlueprint(Blueprint):
+    ...
+
+class SceneStateTransitionGraphSchema(EdGraphSchema_K2):
+    ...
+
+class SceneStateTransitionResultNode(K2Node):
+    Result: SceneStateTransitionResult
+
+
 class SceneThumbnailInfoWithPrimitive(SceneThumbnailInfo):
     PrimitiveType: EThumbnailPrimType
     PreviewMesh: SoftObjectPath
@@ -162499,6 +169919,11 @@ class SculptMaxBrushOpProps(MeshSculptBrushOpProps):
     MaxHeight: float
     bUseFixedHeight: bool
     FixedHeight: float
+
+
+class SequenceSemanticFixtureSceneComponent(SceneComponent):
+    SemanticValue: int
+    BindingGuidArray: list[str]
 
 
 class SequencerPivotTool(MultiSelectionTool, BaseSequencerAnimTool):
@@ -165640,6 +173065,219 @@ class WrapBoxSlot(PanelSlot):
         ...
 
 
+class AbilityAsync_WaitAttributeChanged(AbilityAsync):
+    Changed: MulticastDelegateBase
+
+    def AsyncWaitAttributeChangedDelegate__DelegateSignature(self, Attribute: GameplayAttribute, NewValue: float, OldValue: float) -> None:
+        ...
+
+    @staticmethod
+    def WaitForAttributeChanged(TargetActor: Actor, Attribute: GameplayAttribute, OnlyTriggerOnce: bool=False) -> AbilityAsync_WaitAttributeChanged:
+        ...
+
+
+class AbilityAsync_WaitGameplayEffectApplied(AbilityAsync):
+    OnApplied: MulticastDelegateBase
+
+    def OnAppliedDelegate__DelegateSignature(self, Source: Actor, SpecHandle: GameplayEffectSpecHandle, ActiveHandle: ActiveGameplayEffectHandle) -> None:
+        ...
+
+    @staticmethod
+    def WaitGameplayEffectAppliedToActor(TargetActor: Actor, SourceFilter: GameplayTargetDataFilterHandle, SourceTagRequirements: GameplayTagRequirements, TargetTagRequirements: GameplayTagRequirements, AssetTagRequirements: GameplayTagRequirements, GrantedTagRequirements: GameplayTagRequirements, TriggerOnce: bool=False, ListenForPeriodicEffect: bool=False) -> AbilityAsync_WaitGameplayEffectApplied:
+        ...
+
+
+class AbilityAsync_WaitGameplayEvent(AbilityAsync):
+    EventReceived: MulticastDelegateBase
+
+    def EventReceivedDelegate__DelegateSignature(self, Payload: GameplayEventData) -> None:
+        ...
+
+    @staticmethod
+    def WaitGameplayEventToActor(TargetActor: Actor, EventTag: GameplayTag, OnlyTriggerOnce: bool=False, OnlyMatchExact: bool=True) -> AbilityAsync_WaitGameplayEvent:
+        ...
+
+
+class AbilityAsync_WaitGameplayTag(AbilityAsync):
+    def AsyncWaitGameplayTagDelegate__DelegateSignature(self) -> None:
+        ...
+
+
+class AbilityAsync_WaitGameplayTagCountChanged(AbilityAsync):
+    TagCountChanged: MulticastDelegateBase
+
+    def AsyncWaitGameplayTagCountDelegate__DelegateSignature(self, TagCount: int) -> None:
+        ...
+
+    @staticmethod
+    def WaitGameplayTagCountChangedOnActor(TargetActor: Actor, Tag: GameplayTag) -> AbilityAsync_WaitGameplayTagCountChanged:
+        ...
+
+
+class AbilityAsync_WaitGameplayTagQuery(AbilityAsync):
+    Triggered: MulticastDelegateBase
+
+    @staticmethod
+    def WaitGameplayTagQueryOnActor(TargetActor: Actor, TagQuery: GameplayTagQuery, TriggerCondition: EWaitGameplayTagQueryTriggerCondition=EWaitGameplayTagQueryTriggerCondition.WhenTrue, bOnlyTriggerOnce: bool=False) -> AbilityAsync_WaitGameplayTagQuery:
+        ...
+
+
+class AbilitySystemTestPawn(DefaultPawn, GameplayCueInterface, AbilitySystemInterface):
+    AbilitySystemComponent: AbilitySystemComponent
+
+
+class AbilityTask_ApplyRootMotionConstantForce(AbilityTask_ApplyRootMotion_Base):
+    OnFinish: MulticastDelegateBase
+    WorldDirection: Vector
+    Strength: float
+    Duration: float
+    bIsAdditive: bool
+    StrengthOverTime: CurveFloat
+    bEnableGravity: bool
+
+    @staticmethod
+    def ApplyRootMotionConstantForce(OwningAbility: GameplayAbility, TaskInstanceName: str, WorldDirection: Vector, Strength: float, Duration: float, bIsAdditive: bool, StrengthOverTime: CurveFloat, VelocityOnFinishMode: ERootMotionFinishVelocityMode, SetVelocityOnFinish: Vector, ClampVelocityOnFinish: float, bEnableGravity: bool) -> AbilityTask_ApplyRootMotionConstantForce:
+        ...
+
+
+class AbilityTask_ApplyRootMotionJumpForce(AbilityTask_ApplyRootMotion_Base):
+    OnFinish: MulticastDelegateBase
+    OnLanded: MulticastDelegateBase
+    Rotation: Rotator
+    Distance: float
+    Height: float
+    Duration: float
+    MinimumLandedTriggerTime: float
+    bFinishOnLanded: bool
+    PathOffsetCurve: CurveVector
+    TimeMappingCurve: CurveFloat
+
+    @staticmethod
+    def ApplyRootMotionJumpForce(OwningAbility: GameplayAbility, TaskInstanceName: str, Rotation: Rotator, Distance: float, Height: float, Duration: float, MinimumLandedTriggerTime: float, bFinishOnLanded: bool, VelocityOnFinishMode: ERootMotionFinishVelocityMode, SetVelocityOnFinish: Vector, ClampVelocityOnFinish: float, PathOffsetCurve: CurveVector, TimeMappingCurve: CurveFloat) -> AbilityTask_ApplyRootMotionJumpForce:
+        ...
+
+    def Finish(self) -> None:
+        ...
+
+    def OnLandedCallback(self, Hit: HitResult) -> None:
+        ...
+
+
+class AbilityTask_ApplyRootMotionMoveToActorForce(AbilityTask_ApplyRootMotion_Base):
+    OnFinished: MulticastDelegateBase
+    StartLocation: Vector
+    TargetLocation: Vector
+    TargetActor: Actor
+    TargetComponent: SceneComponent
+    TargetComponentRelativeLocation: Vector
+    TargetLocationOffset: Vector
+    OffsetAlignment: ERootMotionMoveToActorTargetOffsetType
+    Duration: float
+    bDisableDestinationReachedInterrupt: bool
+    ReachedDestinationDistance: float
+    bSetNewMovementMode: bool
+    NewMovementMode: EMovementMode
+    bRestrictSpeedToExpected: bool
+    PathOffsetCurve: CurveVector
+    TimeMappingCurve: CurveFloat
+    TargetLerpSpeedHorizontalCurve: CurveFloat
+    TargetLerpSpeedVerticalCurve: CurveFloat
+
+    @staticmethod
+    def ApplyRootMotionMoveToActorForce(OwningAbility: GameplayAbility, TaskInstanceName: str, TargetActor: Actor, TargetLocationOffset: Vector, OffsetAlignment: ERootMotionMoveToActorTargetOffsetType, Duration: float, TargetLerpSpeedHorizontal: CurveFloat, TargetLerpSpeedVertical: CurveFloat, bSetNewMovementMode: bool, MovementMode: EMovementMode, bRestrictSpeedToExpected: bool, PathOffsetCurve: CurveVector, TimeMappingCurve: CurveFloat, VelocityOnFinishMode: ERootMotionFinishVelocityMode, SetVelocityOnFinish: Vector, ClampVelocityOnFinish: float, bDisableDestinationReachedInterrupt: bool, ReachedDestinationDistance: float=50) -> AbilityTask_ApplyRootMotionMoveToActorForce:
+        ...
+
+    @staticmethod
+    def ApplyRootMotionMoveToComponentForce(OwningAbility: GameplayAbility, TaskInstanceName: str, TargetComponent: SceneComponent, TargetComponentRelativeLocation: Vector, TargetLocationOffset: Vector, OffsetAlignment: ERootMotionMoveToActorTargetOffsetType, Duration: float, TargetLerpSpeedHorizontal: CurveFloat, TargetLerpSpeedVertical: CurveFloat, bSetNewMovementMode: bool, MovementMode: EMovementMode, bRestrictSpeedToExpected: bool, PathOffsetCurve: CurveVector, TimeMappingCurve: CurveFloat, VelocityOnFinishMode: ERootMotionFinishVelocityMode, SetVelocityOnFinish: Vector, ClampVelocityOnFinish: float, bDisableDestinationReachedInterrupt: bool, ReachedDestinationDistance: float=50) -> AbilityTask_ApplyRootMotionMoveToActorForce:
+        ...
+
+    @staticmethod
+    def ApplyRootMotionMoveToTargetDataActorForce(OwningAbility: GameplayAbility, TaskInstanceName: str, TargetDataHandle: GameplayAbilityTargetDataHandle, TargetDataIndex: int, TargetActorIndex: int, TargetLocationOffset: Vector, OffsetAlignment: ERootMotionMoveToActorTargetOffsetType, Duration: float, TargetLerpSpeedHorizontal: CurveFloat, TargetLerpSpeedVertical: CurveFloat, bSetNewMovementMode: bool, MovementMode: EMovementMode, bRestrictSpeedToExpected: bool, PathOffsetCurve: CurveVector, TimeMappingCurve: CurveFloat, VelocityOnFinishMode: ERootMotionFinishVelocityMode, SetVelocityOnFinish: Vector, ClampVelocityOnFinish: float, bDisableDestinationReachedInterrupt: bool, ReachedDestinationDistance: float=50) -> AbilityTask_ApplyRootMotionMoveToActorForce:
+        ...
+
+    def OnRep_TargetLocation(self) -> None:
+        ...
+
+    def OnTargetActorSwapped(self, OriginalTarget: Actor, NewTarget: Actor) -> None:
+        ...
+
+
+class AbilityTask_ApplyRootMotionMoveToForce(AbilityTask_ApplyRootMotion_Base):
+    OnTimedOut: MulticastDelegateBase
+    OnTimedOutAndDestinationReached: MulticastDelegateBase
+    StartLocation: Vector
+    TargetLocation: Vector
+    Duration: float
+    bSetNewMovementMode: bool
+    NewMovementMode: EMovementMode
+    bRestrictSpeedToExpected: bool
+    PathOffsetCurve: CurveVector
+
+    @staticmethod
+    def ApplyRootMotionMoveToForce(OwningAbility: GameplayAbility, TaskInstanceName: str, TargetLocation: Vector, Duration: float, bSetNewMovementMode: bool, MovementMode: EMovementMode, bRestrictSpeedToExpected: bool, PathOffsetCurve: CurveVector, VelocityOnFinishMode: ERootMotionFinishVelocityMode, SetVelocityOnFinish: Vector, ClampVelocityOnFinish: float) -> AbilityTask_ApplyRootMotionMoveToForce:
+        ...
+
+
+class AbilityTask_ApplyRootMotionRadialForce(AbilityTask_ApplyRootMotion_Base):
+    OnFinish: MulticastDelegateBase
+    Location: Vector
+    LocationActor: Actor
+    Strength: float
+    Duration: float
+    Radius: float
+    bIsPush: bool
+    bIsAdditive: bool
+    bNoZForce: bool
+    StrengthDistanceFalloff: CurveFloat
+    StrengthOverTime: CurveFloat
+    bUseFixedWorldDirection: bool
+    FixedWorldDirection: Rotator
+
+    @staticmethod
+    def ApplyRootMotionRadialForce(OwningAbility: GameplayAbility, TaskInstanceName: str, Location: Vector, LocationActor: Actor, Strength: float, Duration: float, Radius: float, bIsPush: bool, bIsAdditive: bool, bNoZForce: bool, StrengthDistanceFalloff: CurveFloat, StrengthOverTime: CurveFloat, bUseFixedWorldDirection: bool, FixedWorldDirection: Rotator, VelocityOnFinishMode: ERootMotionFinishVelocityMode, SetVelocityOnFinish: Vector, ClampVelocityOnFinish: float) -> AbilityTask_ApplyRootMotionRadialForce:
+        ...
+
+
+class AbilityTask_WaitGameplayEffectApplied_Self(AbilityTask_WaitGameplayEffectApplied):
+    OnApplied: MulticastDelegateBase
+
+    @staticmethod
+    def WaitGameplayEffectAppliedToSelf(OwningAbility: GameplayAbility, SourceFilter: GameplayTargetDataFilterHandle, SourceTagRequirements: GameplayTagRequirements, TargetTagRequirements: GameplayTagRequirements, AssetTagRequirements: GameplayTagRequirements, GrantedTagRequirements: GameplayTagRequirements, TriggerOnce: bool=False, OptionalExternalOwner: Actor | None=None, ListenForPeriodicEffect: bool=False) -> AbilityTask_WaitGameplayEffectApplied_Self:
+        ...
+
+    @staticmethod
+    def WaitGameplayEffectAppliedToSelf_Query(OwningAbility: GameplayAbility, SourceFilter: GameplayTargetDataFilterHandle, SourceTagQuery: GameplayTagQuery, TargetTagQuery: GameplayTagQuery, AssetTagQuery: GameplayTagQuery, GrantedTagQuery: GameplayTagQuery, TriggerOnce: bool=False, OptionalExternalOwner: Actor | None=None, ListenForPeriodicEffect: bool=False) -> AbilityTask_WaitGameplayEffectApplied_Self:
+        ...
+
+
+class AbilityTask_WaitGameplayEffectApplied_Target(AbilityTask_WaitGameplayEffectApplied):
+    OnApplied: MulticastDelegateBase
+
+    @staticmethod
+    def WaitGameplayEffectAppliedToTarget(OwningAbility: GameplayAbility, TargetFilter: GameplayTargetDataFilterHandle, SourceTagRequirements: GameplayTagRequirements, TargetTagRequirements: GameplayTagRequirements, AssetTagRequirements: GameplayTagRequirements, GrantedTagRequirements: GameplayTagRequirements, TriggerOnce: bool=False, OptionalExternalOwner: Actor | None=None, ListenForPeriodicEffects: bool=False) -> AbilityTask_WaitGameplayEffectApplied_Target:
+        ...
+
+    @staticmethod
+    def WaitGameplayEffectAppliedToTarget_Query(OwningAbility: GameplayAbility, SourceFilter: GameplayTargetDataFilterHandle, SourceTagQuery: GameplayTagQuery, TargetTagQuery: GameplayTagQuery, AssetTagQuery: GameplayTagQuery, GrantedTagQuery: GameplayTagQuery, TriggerOnce: bool=False, OptionalExternalOwner: Actor | None=None, ListenForPeriodicEffect: bool=False) -> AbilityTask_WaitGameplayEffectApplied_Target:
+        ...
+
+
+class AbilityTask_WaitGameplayTagAdded(AbilityTask_WaitGameplayTag):
+    Added: MulticastDelegateBase
+
+    @staticmethod
+    def WaitGameplayTagAdd(OwningAbility: GameplayAbility, Tag: GameplayTag, InOptionalExternalTarget: Actor | None=None, OnlyTriggerOnce: bool=False) -> AbilityTask_WaitGameplayTagAdded:
+        ...
+
+
+class AbilityTask_WaitGameplayTagRemoved(AbilityTask_WaitGameplayTag):
+    Removed: MulticastDelegateBase
+
+    @staticmethod
+    def WaitGameplayTagRemove(OwningAbility: GameplayAbility, Tag: GameplayTag, InOptionalExternalTarget: Actor | None=None, OnlyTriggerOnce: bool=False) -> AbilityTask_WaitGameplayTagRemoved:
+        ...
+
+
 class ActorDescContainerSubsystem(EngineSubsystem):
     ...
 
@@ -165763,6 +173401,10 @@ class AnimGraphNode_BlendSpaceSampleResult(AnimGraphNode_Base):
     Node: AnimNode_BlendSpaceSampleResult
 
 
+class AnimGraphNode_BlendStackInput(AnimGraphNode_Base):
+    Node: AnimNode_BlendStackInput
+
+
 class AnimGraphNode_CallFunction(AnimGraphNode_Base):
     InnerGraph: EdGraph
     CallFunctionPrototype: K2Node_CallFunction
@@ -165800,6 +173442,10 @@ class AnimGraphNode_LinkedInputPose(AnimGraphNode_Base, ClassVariableCreator):
     InputPoseIndex: int
 
 
+class AnimGraphNode_LiveLinkPose(AnimGraphNode_Base):
+    Node: AnimNode_LiveLinkPose
+
+
 class AnimGraphNode_LocalToComponentSpace(AnimGraphNode_Base):
     Node: AnimNode_ConvertLocalToComponentSpace
 
@@ -165834,6 +173480,14 @@ class AnimGraphNode_RandomPlayer(AnimGraphNode_Base):
 
 class AnimGraphNode_RefPoseBase(AnimGraphNode_Base):
     Node: AnimNode_RefPose
+
+
+class AnimGraphNode_RemapCurves(AnimGraphNode_Base, RemapCurvesDebuggingProvider):
+    Node: AnimNode_RemapCurves
+
+
+class AnimGraphNode_RemapCurvesFromMesh(AnimGraphNode_Base, RemapCurvesDebuggingProvider):
+    Node: AnimNode_RemapCurvesFromMesh
 
 
 class AnimGraphNode_RemoveCurve(AnimGraphNode_Base):
@@ -165967,6 +173621,9 @@ class AnimMontage(AnimCompositeBase):
 
 
 class AnimNextUnitNode(RigVMUnitNode):
+    ...
+
+class AnimationBlendStackGraphSchema(AnimationGraphSchema):
     ...
 
 class AnimationCustomTransitionSchema(AnimationGraphSchema):
@@ -167744,6 +175401,102 @@ class DGGUI(UserWidget):
         ...
 
 
+class DMXEntityController(DMXEntityUniverseManaged):
+    ...
+
+class DMXSubsystem(EngineSubsystem):
+    def BytesToInt(self, Bytes: list[int], bUseLSB: bool=False) -> int:
+        ...
+
+    def BytesToNormalizedValue(self, Bytes: list[int], bUseLSB: bool=False) -> float:
+        ...
+
+    @staticmethod
+    def ClearDMXBuffers() -> None:
+        ...
+
+    def GetAllFixtureTypesInLibrary(self, DMXLibrary: DMXLibrary) -> list[DMXEntityFixtureType]:
+        ...
+
+    def GetAllFixturesInLibrary(self, DMXLibrary: DMXLibrary) -> list[DMXEntityFixturePatch]:
+        ...
+
+    def GetAllFixturesInUniverse(self, DMXLibrary: DMXLibrary, UniverseId: int) -> list[DMXEntityFixturePatch]:
+        ...
+
+    def GetAllFixturesOfCategory(self, DMXLibrary: DMXLibrary, Category: DMXFixtureCategory) -> list[DMXEntityFixturePatch]:
+        ...
+
+    def GetAllFixturesOfType(self, FixtureType: DMXEntityFixtureTypeRef) -> list[DMXEntityFixturePatch]:
+        ...
+
+    def GetAllFixturesWithTag(self, DMXLibrary: DMXLibrary, CustomTag: str) -> list[DMXEntityFixturePatch]:
+        ...
+
+    def GetAttributeLabel(self, AttributeName: DMXAttributeName) -> str:
+        ...
+
+    @staticmethod
+    def GetDMXDataFromInputPort(InputPortReference: DMXInputPortReference, LocalUniverse: int=1) -> list[int]:
+        ...
+
+    @staticmethod
+    def GetDMXDataFromOutputPort(OutputPortReference: DMXOutputPortReference, LocalUniverse: int=1) -> list[int]:
+        ...
+
+    def GetDMXLibraries(self) -> list[DMXLibrary]:
+        ...
+
+    @staticmethod
+    def GetDMXSubsystem_Callable() -> DMXSubsystem:
+        ...
+
+    @staticmethod
+    def GetDMXSubsystem_Pure() -> DMXSubsystem:
+        ...
+
+    def GetFixtureByName(self, DMXLibrary: DMXLibrary, Name: str) -> DMXEntityFixturePatch:
+        ...
+
+    def GetFixturePatch(self, InFixturePatch: DMXEntityFixturePatchRef) -> DMXEntityFixturePatch:
+        ...
+
+    def GetFixtureType(self, InFixtureType: DMXEntityFixtureTypeRef) -> DMXEntityFixtureType:
+        ...
+
+    def GetFixtureTypeByName(self, DMXLibrary: DMXLibrary, Name: str) -> DMXEntityFixtureType:
+        ...
+
+    def GetFunctionsMap(self, InFixturePatch: DMXEntityFixturePatch) -> tuple[bool, dict[DMXAttributeName, int]]:
+        ...
+
+    def GetFunctionsValue(self, FunctionAttributeName: str, InAttributesMap: dict[DMXAttributeName, int]) -> int:
+        ...
+
+    def IntToNormalizedValue(self, InValue: int, InSignalFormat: EDMXFixtureSignalFormat) -> float:
+        ...
+
+    @staticmethod
+    def IntValueToBytes(InValue: int, InSignalFormat: EDMXFixtureSignalFormat, bUseLSB: bool=False) -> list[int]:
+        ...
+
+    def LoadDMXLibrariesSynchronous(self) -> list[DMXLibrary]:
+        ...
+
+    def NormalizedValueToBytes(self, InValue: float, InSignalFormat: EDMXFixtureSignalFormat, bUseLSB: bool=False) -> list[int]:
+        ...
+
+    def PatchIsOfSelectedType(self, InFixturePatch: DMXEntityFixturePatch, RefTypeValue: str) -> bool:
+        ...
+
+    def PixelMappingDistributionSort(self, InDistribution: EDMXPixelMappingDistribution, InNumXPanels: int, InNumYPanels: int, InUnorderedList: list[int]) -> list[int]:
+        ...
+
+    @staticmethod
+    def SendDMXToOutputPort(OutputPortReference: DMXOutputPortReference, ChannelToValueMap: dict[int, int], LocalUniverse: int=1) -> None:
+        ...
+
+
 class DataDrivenCVarEngineSubsystem(EngineSubsystem):
     OnDataDrivenCVarDelegate: MulticastDelegateBase
 
@@ -167888,6 +175641,64 @@ class DataLayerEditorSubsystem(EditorSubsystem):
         ...
 
     def UpdateAllActorsVisibility(self, bNotifySelectionChange: bool, bRedrawViewports: bool) -> bool:
+        ...
+
+
+class DataRegistrySubsystem(EngineSubsystem):
+    @staticmethod
+    def AcquireItemBP(ItemId: DataRegistryId, AcquireCallback: DelegateBase) -> bool:
+        ...
+
+    @staticmethod
+    def Conv_DataRegistryIdToString(DataRegistryId: DataRegistryId) -> str:
+        ...
+
+    @staticmethod
+    def Conv_DataRegistryTypeToString(DataRegistryType: DataRegistryType) -> str:
+        ...
+
+    @staticmethod
+    def EqualEqual_DataRegistryId(A: DataRegistryId, B: DataRegistryId) -> bool:
+        ...
+
+    @staticmethod
+    def EqualEqual_DataRegistryType(A: DataRegistryType, B: DataRegistryType) -> bool:
+        ...
+
+    @staticmethod
+    def EvaluateDataRegistryCurve(ItemId: DataRegistryId, InputValue: float, DefaultValue: float) -> tuple[EDataRegistrySubsystemGetItemResult, float]:
+        ...
+
+    @staticmethod
+    def FindCachedItemBP(ItemId: DataRegistryId) -> tuple[EDataRegistrySubsystemGetItemResult, TableRowBase]:
+        ...
+
+    @staticmethod
+    def FindCachedItemFromLookupBP(ItemId: DataRegistryId, ResolvedLookup: DataRegistryLookup) -> tuple[EDataRegistrySubsystemGetItemResult, TableRowBase]:
+        ...
+
+    @staticmethod
+    def GetCachedItemBP(ItemId: DataRegistryId, OutItem: TableRowBase) -> tuple[bool, TableRowBase]:
+        ...
+
+    @staticmethod
+    def GetPossibleDataRegistryIdList(RegistryType: DataRegistryType) -> list[DataRegistryId]:
+        ...
+
+    @staticmethod
+    def IsValidDataRegistryId(DataRegistryId: DataRegistryId) -> bool:
+        ...
+
+    @staticmethod
+    def IsValidDataRegistryType(DataRegistryType: DataRegistryType) -> bool:
+        ...
+
+    @staticmethod
+    def NotEqual_DataRegistryId(A: DataRegistryId, B: DataRegistryId) -> bool:
+        ...
+
+    @staticmethod
+    def NotEqual_DataRegistryType(A: DataRegistryType, B: DataRegistryType) -> bool:
         ...
 
 
@@ -168997,6 +176808,14 @@ class GameViewportSubsystem(EngineSubsystem):
     def SetWidgetSlotPosition(Slot: GameViewportWidgetSlot, Widget: Widget, Position: Vector2D, bRemoveDPIScale: bool) -> GameViewportWidgetSlot:
         ...
 
+
+class GameplayAbilityTargetActor_GroundTrace(GameplayAbilityTargetActor_Trace):
+    CollisionRadius: float
+    CollisionHeight: float
+
+
+class GameplayAbilityTargetActor_SingleLineTrace(GameplayAbilityTargetActor_Trace):
+    ...
 
 class GameplayCameraComponent(GameplayCameraComponentBase):
     CameraReference: CameraAssetReference
@@ -170466,6 +178285,9 @@ class K2Node_AnimNextComponentSetVariable(K2Node_CallFunction):
 class K2Node_AsyncAction(K2Node_BaseAsyncTask):
     ...
 
+class K2Node_AsyncMakeRequestHeader(K2Node_BaseAsyncTask):
+    ...
+
 class K2Node_BaseAttributeActionNode(K2Node_CallFunction):
     ...
 
@@ -170533,6 +178355,15 @@ class K2Node_EditorPropertyAccessBase(K2Node_CallFunction):
 class K2Node_EnumInequality(K2Node_EnumEquality):
     ...
 
+class K2Node_EvaluateLiveLinkFrameAtSceneTime(K2Node_EvaluateLiveLinkFrame):
+    ...
+
+class K2Node_EvaluateLiveLinkFrameAtWorldTime(K2Node_EvaluateLiveLinkFrame):
+    ...
+
+class K2Node_EvaluateLiveLinkFrameWithSpecificRole(K2Node_EvaluateLiveLinkFrame):
+    ...
+
 class K2Node_Event(K2Node_EditablePinBase, K2Node_EventNodeInterface):
     EventReference: MemberReference
     bOverrideFunction: bool
@@ -170552,6 +178383,10 @@ class K2Node_FunctionTerminator(K2Node_EditablePinBase):
 
 class K2Node_GenericCreateObject(K2Node_ConstructObjectFromClass):
     ...
+
+class K2Node_GetDMXAttributeValues(K2Node_EditablePinBase):
+    bIsExposed: bool
+
 
 class K2Node_GetEditorSubsystem(K2Node_GetSubsystem):
     ...
@@ -170573,6 +178408,9 @@ class K2Node_GetInputAxisValue(K2Node_CallFunction):
     bConsumeInput: bool
     bExecuteWhenPaused: bool
 
+
+class K2Node_GetJsonField(K2Node_CallFunction):
+    ...
 
 class K2Node_GetSubsystemFromPC(K2Node_GetSubsystem):
     ...
@@ -170674,6 +178512,20 @@ class K2Node_PromotableOperator(K2Node_CallFunction, K2Node_AddPinInterface):
 class K2Node_RemoveDelegate(K2Node_BaseMCDelegate):
     ...
 
+class K2Node_SceneStateBroadcastEvent(K2Node_SceneStateEventBase):
+    ...
+
+class K2Node_SceneStateFindEventBase(K2Node_SceneStateEventBase):
+    bCapturedEventsOnly: bool
+    bCanHandleCapturedEventsOnly: bool
+
+
+class K2Node_SceneStatePushEvent(K2Node_SceneStateEventBase):
+    ...
+
+class K2Node_SetJsonField(K2Node_CallFunction):
+    ...
+
 class K2Node_SingleCameraRigParameterBase(K2Node_CameraRigBase):
     CameraParameterName: str
     CameraParameterType: EK2Node_CameraParameterType
@@ -170690,6 +178542,9 @@ class K2Node_SpawnActorFromClass(K2Node_ConstructObjectFromClass):
 class K2Node_StructOperation(K2Node_Variable):
     StructType: ScriptStruct
 
+
+class K2Node_StructToJsonString(K2Node_CallFunction):
+    ...
 
 class K2Node_SwitchEnum(K2Node_Switch, NodeDependingOnEnumInterface):
     Enum: Enum
@@ -170723,6 +178578,12 @@ class K2Node_UAFComponentGetVariable(K2Node_CallFunction):
 
 
 class K2Node_UAFComponentSetInputBinding(K2Node_CallFunction):
+    ...
+
+class K2Node_UpdateVirtualSubjectFrameData(K2Node_UpdateVirtualSubjectDataBase):
+    ...
+
+class K2Node_UpdateVirtualSubjectStaticData(K2Node_UpdateVirtualSubjectDataBase):
     ...
 
 class K2Node_VariableGet(K2Node_Variable):
@@ -171694,11 +179555,32 @@ class ListView(ListViewBase):
         ...
 
 
+class LiveLinkBroadcastSubsystem(EngineSubsystem):
+    ...
+
 class LiveLinkCameraRole(LiveLinkTransformRole):
     ...
 
 class LiveLinkCharacterRole(LiveLinkAnimationRole):
     ...
+
+class LiveLinkCustomTimeStep(GenlockedCustomTimeStep):
+    LiveLinkDataRate: FrameRate
+    SubjectKey: LiveLinkSubjectKey
+    bLockStepMode: bool
+    FrameRateDivider: int
+    TimeoutInSeconds: float
+
+
+class LiveLinkDeviceSubsystem(EngineSubsystem):
+    Devices: dict[str, LiveLinkDevice]
+
+    def GetDevicesByCapability(self, Capability: Class | type) -> list[LiveLinkDevice]:
+        ...
+
+    def GetDevicesByClass(self, DeviceClass: Class | type) -> list[LiveLinkDevice]:
+        ...
+
 
 class LiveLinkLightRole(LiveLinkTransformRole):
     ...
@@ -173037,6 +180919,38 @@ class MovieSceneComponentMaterialParameterSection(MovieSceneSection, MovieSceneE
         ...
 
 
+class MovieSceneDMXLibrarySection(MovieSceneSection):
+    bUseNormalizedValues: bool
+    FixturePatchChannels: list[DMXFixturePatchChannel]
+
+    def AddFixturePatch(self, InPatch: DMXEntityFixturePatch) -> None:
+        ...
+
+    def AddFixturePatches(self, InFixturePatchRefs: list[DMXEntityFixturePatchRef]) -> None:
+        ...
+
+    def ContainsFixturePatch(self, InPatch: DMXEntityFixturePatch) -> bool:
+        ...
+
+    def GetFixturePatchChannelEnabled(self, InPatch: DMXEntityFixturePatch, InChannelIndex: int) -> bool:
+        ...
+
+    def GetFixturePatches(self) -> list[DMXEntityFixturePatch]:
+        ...
+
+    def GetNumPatches(self) -> int:
+        ...
+
+    def RemoveFixturePatch(self, InPatch: DMXEntityFixturePatch) -> None:
+        ...
+
+    def SetFixturePatchActiveMode(self, InPatch: DMXEntityFixturePatch, InActiveMode: int) -> None:
+        ...
+
+    def ToggleFixturePatchChannel(self, InPatch: DMXEntityFixturePatch, InChannelIndex: int) -> None:
+        ...
+
+
 class MovieSceneDataLayerSection(MovieSceneSection, MovieSceneEntityProvider):
     DataLayerAssets: list[DataLayerAsset]
     DesiredState: EDataLayerRuntimeState
@@ -173157,6 +181071,12 @@ class MovieSceneLevelVisibilitySection(MovieSceneSection, MovieSceneEntityProvid
 
     def SetVisibility(self, InVisibility: ELevelVisibility) -> None:
         ...
+
+
+class MovieSceneLiveLinkSection(MovieSceneSection):
+    SubjectPreset: LiveLinkSubjectPreset
+    ChannelMask: list[bool]
+    SubSections: list[MovieSceneLiveLinkSubSection]
 
 
 class MovieSceneMarginSection(MovieSceneSection, MovieSceneEntityProvider):
@@ -176533,6 +184453,9 @@ class PCGWriteDataIndexSettings(PCGSettings):
     IndexAttribute: PCGAttributePropertyOutputSelector
 
 
+class PGFGameInstance(UPyGameInstance):
+    ...
+
 class PanelExtensionSubsystem(EditorSubsystem):
     ...
 
@@ -177238,6 +185161,16 @@ class SceneCaptureComponentCube(SceneCaptureComponent):
         ...
 
 
+class SceneStateConduitGraphSchema(SceneStateTransitionGraphSchema):
+    ...
+
+class SceneStateEventSubsystem(EngineSubsystem):
+    EventStreams: list[SceneStateEventStream]
+
+
+class SceneStateTransitionParametersNode(K2Node_EditablePinBase):
+    ...
+
 class ScreenshotFunctionalTest(ScreenshotFunctionalTestBase):
     bCameraCutOnScreenshotPrep: bool
 
@@ -177354,6 +185287,20 @@ class SecondarySmoothBrushOpProps(BaseSmoothBrushOpProps):
     Iterations: int
     bPreserveUVFlow: bool
     bFavorPolyGroupEdges: bool
+
+
+class SequenceSemanticFixtureSection(MovieSceneSection):
+    AddedSectionProperty: int
+
+
+class SequenceSemanticFixtureTimeWarpGetter(MovieSceneTimeWarpGetter):
+    Factor: float
+    SemanticLabel: str
+
+
+class SequenceSemanticFixtureTrack(MovieSceneTrack):
+    AddedTrackProperty: str
+    Sections: list[MovieSceneSection]
 
 
 class SequencerBakeSubsystem(EditorSubsystem):
@@ -179730,6 +187677,22 @@ class WrapBox(PanelWidget):
 class AISenseBlueprintListener(UserDefinedStruct):
     ...
 
+class AbilityAsync_WaitGameplayTagAdded(AbilityAsync_WaitGameplayTag):
+    Added: MulticastDelegateBase
+
+    @staticmethod
+    def WaitGameplayTagAddToActor(TargetActor: Actor, Tag: GameplayTag, OnlyTriggerOnce: bool=False) -> AbilityAsync_WaitGameplayTagAdded:
+        ...
+
+
+class AbilityAsync_WaitGameplayTagRemoved(AbilityAsync_WaitGameplayTag):
+    Removed: MulticastDelegateBase
+
+    @staticmethod
+    def WaitGameplayTagRemoveFromActor(TargetActor: Actor, Tag: GameplayTag, OnlyTriggerOnce: bool=False) -> AbilityAsync_WaitGameplayTagRemoved:
+        ...
+
+
 class AnimBlueprintGeneratedClass(BlueprintGeneratedClass, AnimClassInterface):
     BakedStateMachines: list[BakedAnimationStateMachine]
     TargetSkeleton: Skeleton
@@ -179775,6 +187738,13 @@ class AnimGraphNode_BlendSpaceBase(AnimGraphNode_AssetPlayerBase):
 
 class AnimGraphNode_BlendSpaceGraph(AnimGraphNode_BlendSpaceGraphBase):
     Node: AnimNode_BlendSpaceGraph
+
+
+class AnimGraphNode_BlendStackResult(AnimGraphNode_Root):
+    ...
+
+class AnimGraphNode_BlendStack_Base(AnimGraphNode_AssetPlayerBase):
+    BoundGraph: EdGraph
 
 
 class AnimGraphNode_BoneDrivenController(AnimGraphNode_SkeletalControlBase):
@@ -179932,10 +187902,16 @@ class AssetDefinition_EditorUtilityNamingTokens(AssetDefinition_Blueprint):
 class AssetDefinition_EndpointSubmix(AssetDefinition_SoundSubmix):
     ...
 
+class AssetDefinition_GameplayAbilitiesBlueprint(AssetDefinition_Blueprint):
+    ...
+
 class AssetDefinition_InterchangeBlueprintPipeline(AssetDefinition_Blueprint):
     ...
 
 class AssetDefinition_InterchangeEditorBlueprintPipeline(AssetDefinition_Blueprint):
+    ...
+
+class AssetDefinition_LiveLinkBlueprintVirtualSubject(AssetDefinition_Blueprint):
     ...
 
 class AssetDefinition_MaterialFunctionLayerBlendInstance(AssetDefinition_MaterialFunctionInstance):
@@ -181092,6 +189068,11 @@ class FractureToolVoronoiCutterBase(FractureToolCutterBase):
     VoronoiNoisePreviews: list[DynamicMeshComponent]
 
 
+class GameplayAbilityTargetActor_ActorPlacement(GameplayAbilityTargetActor_GroundTrace):
+    PlacedActorClass: Class | type
+    PlacedActorMaterial: MaterialInterface
+
+
 class GameplayDebuggerRenderingComponent(DebugDrawComponent):
     ...
 
@@ -181944,6 +189925,9 @@ class K2Node_FunctionEntry(K2Node_FunctionTerminator):
 class K2Node_FunctionResult(K2Node_FunctionTerminator):
     ...
 
+class K2Node_GameplayCueEvent(K2Node_Event):
+    ...
+
 class K2Node_GeneratedBoundEvent(K2Node_Event):
     DelegatePropertyName: str
     DelegateOwnerClass: Class | type
@@ -182010,6 +189994,9 @@ class K2Node_InputTouchEvent(K2Node_Event):
     bOverrideParentBinding: bool
 
 
+class K2Node_LatentAbilityCall(K2Node_LatentGameplayTaskCall):
+    ...
+
 class K2Node_MacroInstance(K2Node_Tunnel):
     MacroGraphReference: GraphReference
     ResolvedWildcardType: EdGraphPinType
@@ -182019,6 +190006,12 @@ class K2Node_ReadDataChannel(K2Node_DataChannelBase):
     ...
 
 class K2Node_ReadDataChannel_WithContext(K2Node_DataChannelBase):
+    ...
+
+class K2Node_SceneStateFindEvent(K2Node_SceneStateFindEventBase):
+    ...
+
+class K2Node_SceneStateHasEvent(K2Node_SceneStateFindEventBase):
     ...
 
 class K2Node_SetAttributeKeyGeneric(K2Node_BaseAttributeActionNode):
@@ -182448,6 +190441,11 @@ class MovieSceneCustomPrimitiveDataTrack(MovieSceneNameableTrack, MovieSceneEnti
     SectionToKey: MovieSceneSection
 
 
+class MovieSceneDMXLibraryTrack(MovieSceneNameableTrack, MovieSceneTrackTemplateProducer):
+    Sections: list[MovieSceneSection]
+    Library: DMXLibrary
+
+
 class MovieSceneDataLayerTrack(MovieSceneNameableTrack):
     Sections: list[MovieSceneSection]
 
@@ -182465,6 +190463,22 @@ class MovieSceneEventTrack(MovieSceneNameableTrack, MovieSceneTrackTemplateProdu
 
 class MovieSceneEventTriggerSection(MovieSceneEventSectionBase, MovieSceneEntityProvider):
     EventChannel: MovieSceneEventChannel
+
+
+class MovieSceneGameplayCueSection(MovieSceneHookSection):
+    Cue: MovieSceneGameplayCueKey
+
+
+class MovieSceneGameplayCueTrack(MovieSceneNameableTrack):
+    Sections: list[MovieSceneSection]
+
+    @staticmethod
+    def SetSequencerTrackHandler(InGameplayCueTrackHandler: DelegateBase) -> None:
+        ...
+
+
+class MovieSceneGameplayCueTriggerSection(MovieSceneHookSection):
+    Channel: MovieSceneGameplayCueChannel
 
 
 class MovieSceneGeometryCacheTrack(MovieSceneNameableTrack, MovieSceneTrackTemplateProducer):
@@ -184097,6 +192111,13 @@ class ScaleBox(ContentWidget):
         ...
 
 
+class SceneStateGeneratedClass(BlueprintGeneratedClass):
+    TemplateData: SceneStateTemplateData
+
+
+class SceneStateTaskGeneratedClass(BlueprintGeneratedClass):
+    ...
+
 class SeamSculptToolBuilder(MeshSurfacePointMeshEditingToolBuilder):
     ...
 
@@ -184110,6 +192131,15 @@ class SelfUnionMeshesToolBuilder(BaseCreateFromSelectedToolBuilder):
 
 class ShapeSprayToolBuilder(MeshSurfacePointMeshEditingToolBuilder):
     ...
+
+class SilverTextBlock(TextBlock):
+    IntValue: int
+    FloatValue: float
+    StringValue: str
+    BoolValue: bool
+    NameValue: str
+    TextValue: str
+
 
 class SizeBox(ContentWidget):
     def ClearHeightOverride(self) -> None:
@@ -185057,6 +193087,14 @@ class AnimGraphNode_BlendSpacePlayer(AnimGraphNode_BlendSpaceBase):
     Node: AnimNode_BlendSpacePlayer
 
 
+class AnimGraphNode_BlendStack(AnimGraphNode_BlendStack_Base):
+    Node: AnimNode_BlendStack
+
+
+class AnimGraphNode_ChooserPlayer(AnimGraphNode_BlendStack_Base, HasContextClass):
+    Node: AnimNode_ChooserPlayer
+
+
 class AnimGraphNode_LinkedAnimGraph(AnimGraphNode_LinkedAnimGraphBase, K2Node_ExternalGraphInterface):
     Node: AnimNode_LinkedAnimGraph
 
@@ -185707,6 +193745,10 @@ class MovieSceneFloatVectorTrack(MovieScenePropertyTrack):
 
 class MovieSceneIntegerTrack(MovieScenePropertyTrack):
     ...
+
+class MovieSceneLiveLinkTrack(MovieScenePropertyTrack, MovieSceneTrackTemplateProducer):
+    TrackRole: Class | type
+
 
 class MovieSceneMarginTrack(MovieScenePropertyTrack):
     ...
@@ -186825,6 +194867,29 @@ class InterchangeSpotLightFactoryNode(InterchangePointLightFactoryNode):
 
 class K2Node_SetFieldsInStruct(K2Node_MakeStruct):
     ...
+
+class LiveLinkDataPreviewComponent(InstancedStaticMeshComponent):
+    SubjectName: LiveLinkSubjectName
+    bEvaluateLiveLink: bool
+    bDrawLabels: bool
+    BoneVisualType: ELiveLinkVisualBoneType
+
+    def SetDrawLabels(self, bNewDrawLabel: bool) -> None:
+        ...
+
+    def SetEvaluateLiveLinkData(self, bNewEvaluateLiveLink: bool) -> None:
+        ...
+
+
+class LiveLinkMarkerVisualizer(InstancedStaticMeshComponent):
+    DynamicMaterial: MaterialInstanceDynamic
+    LiveLinkSubject: LiveLinkSubjectName
+    bEvaluateLiveLink: bool
+    bDrawLabels: bool
+    XAxisSign: EAxisSign
+    YAxisSign: EAxisSign
+    MarkerLocations: list[Transform]
+
 
 class MovieSceneFadeTrack(MovieSceneFloatTrack):
     ...

@@ -1493,8 +1493,9 @@ struct FMethods_ListView
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		Py_RETURN_NONE;
@@ -1510,8 +1511,9 @@ struct FMethods_ListView
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		Py_RETURN_NONE;
@@ -1529,12 +1531,13 @@ struct FMethods_ListView
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
 			if (Prop__ReturnValue)
 			{
-				Prop__ReturnValue->CopyCompleteValue_InContainer(&Result, Parms);
+				Prop__ReturnValue->CopyCompleteValue(&Result, Prop__ReturnValue->ContainerPtrToValuePtr<void>(Parms));
 			}
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		return UPyConversion::Pythonize(Result);
@@ -1552,12 +1555,13 @@ struct FMethods_ListView
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
 			if (Prop__ReturnValue)
 			{
-				Prop__ReturnValue->CopyCompleteValue_InContainer(&Result, Parms);
+				Prop__ReturnValue->CopyCompleteValue(&Result, Prop__ReturnValue->ContainerPtrToValuePtr<void>(Parms));
 			}
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		return UPyConversion::Pythonize(Result);
@@ -1577,16 +1581,17 @@ struct FMethods_ListView
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
 			if (Prop_Items)
 			{
-				Prop_Items->CopyCompleteValue_InContainer(&OutParam0, Parms);
+				Prop_Items->CopyCompleteValue(&OutParam0, Prop_Items->ContainerPtrToValuePtr<void>(Parms));
 			}
 			if (Prop__ReturnValue)
 			{
-				Prop__ReturnValue->CopyCompleteValue_InContainer(&ReturnValue, Parms);
+				Prop__ReturnValue->CopyCompleteValue(&ReturnValue, Prop__ReturnValue->ContainerPtrToValuePtr<void>(Parms));
 			}
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		PyObject* ReturnTuple = PyTuple_New(2);
@@ -1627,16 +1632,17 @@ struct FMethods_ListView
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			if (Prop_Item)
 			{
-				Prop_Item->CopyCompleteValue_InContainer(Parms, &Arg0);
+				Prop_Item->CopyCompleteValue(Prop_Item->ContainerPtrToValuePtr<void>(Parms), &Arg0);
 			}
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
 			if (Prop__ReturnValue)
 			{
-				Prop__ReturnValue->CopyCompleteValue_InContainer(&Result, Parms);
+				Prop__ReturnValue->CopyCompleteValue(&Result, Prop__ReturnValue->ContainerPtrToValuePtr<void>(Parms));
 			}
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		return PyBool_FromLong(Result ? 1 : 0);
@@ -1660,12 +1666,13 @@ struct FMethods_ListView
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			if (Prop_Item)
 			{
-				Prop_Item->CopyCompleteValue_InContainer(Parms, &Arg0);
+				Prop_Item->CopyCompleteValue(Prop_Item->ContainerPtrToValuePtr<void>(Parms), &Arg0);
 			}
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		Py_RETURN_NONE;
@@ -1689,12 +1696,13 @@ struct FMethods_ListView
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			if (Prop_Item)
 			{
-				Prop_Item->CopyCompleteValue_InContainer(Parms, &Arg0);
+				Prop_Item->CopyCompleteValue(Prop_Item->ContainerPtrToValuePtr<void>(Parms), &Arg0);
 			}
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		Py_RETURN_NONE;
@@ -1736,16 +1744,17 @@ struct FMethods_ListView
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			if (Prop_Item)
 			{
-				Prop_Item->CopyCompleteValue_InContainer(Parms, &Arg0);
+				Prop_Item->CopyCompleteValue(Prop_Item->ContainerPtrToValuePtr<void>(Parms), &Arg0);
 			}
 			if (Prop_bSelected)
 			{
-				Prop_bSelected->CopyCompleteValue_InContainer(Parms, &Arg1);
+				Prop_bSelected->CopyCompleteValue(Prop_bSelected->ContainerPtrToValuePtr<void>(Parms), &Arg1);
 			}
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		Py_RETURN_NONE;
@@ -1795,12 +1804,13 @@ struct FMethods_ListView
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			if (Prop_InListItems)
 			{
-				Prop_InListItems->CopyCompleteValue_InContainer(Parms, &Arg0);
+				Prop_InListItems->CopyCompleteValue(Prop_InListItems->ContainerPtrToValuePtr<void>(Parms), &Arg0);
 			}
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		Py_RETURN_NONE;
@@ -1824,12 +1834,13 @@ struct FMethods_ListView
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			if (Prop_Item)
 			{
-				Prop_Item->CopyCompleteValue_InContainer(Parms, &Arg0);
+				Prop_Item->CopyCompleteValue(Prop_Item->ContainerPtrToValuePtr<void>(Parms), &Arg0);
 			}
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		Py_RETURN_NONE;
@@ -1998,16 +2009,17 @@ struct FMethods_ListView
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			if (Prop_Item)
 			{
-				Prop_Item->CopyCompleteValue_InContainer(Parms, &Arg0);
+				Prop_Item->CopyCompleteValue(Prop_Item->ContainerPtrToValuePtr<void>(Parms), &Arg0);
 			}
 			if (Prop_EndPlayReason)
 			{
-				Prop_EndPlayReason->CopyCompleteValue_InContainer(Parms, &Arg1);
+				Prop_EndPlayReason->CopyCompleteValue(Prop_EndPlayReason->ContainerPtrToValuePtr<void>(Parms), &Arg1);
 			}
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		Py_RETURN_NONE;
@@ -2049,16 +2061,17 @@ struct FMethods_ListView
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			if (Prop_ItemOuter)
 			{
-				Prop_ItemOuter->CopyCompleteValue_InContainer(Parms, &Arg0);
+				Prop_ItemOuter->CopyCompleteValue(Prop_ItemOuter->ContainerPtrToValuePtr<void>(Parms), &Arg0);
 			}
 			if (Prop_EndPlayReason)
 			{
-				Prop_EndPlayReason->CopyCompleteValue_InContainer(Parms, &Arg1);
+				Prop_EndPlayReason->CopyCompleteValue(Prop_EndPlayReason->ContainerPtrToValuePtr<void>(Parms), &Arg1);
 			}
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		Py_RETURN_NONE;
@@ -2176,12 +2189,13 @@ struct FMethods_ListView
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			if (Prop_bEnabled)
 			{
-				Prop_bEnabled->CopyCompleteValue_InContainer(Parms, &Arg0);
+				Prop_bEnabled->CopyCompleteValue(Prop_bEnabled->ContainerPtrToValuePtr<void>(Parms), &Arg0);
 			}
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		Py_RETURN_NONE;

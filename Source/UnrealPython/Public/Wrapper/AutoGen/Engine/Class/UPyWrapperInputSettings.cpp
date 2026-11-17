@@ -79,7 +79,7 @@ struct FGetSets_InputSettings
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->AxisConfig, CastField<FArrayProperty>(GetPropertyDef_AxisConfig().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_AxisConfig(), "AxisConfig");
 	}
 
 	static int SetAxisConfig(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
@@ -151,7 +151,7 @@ struct FGetSets_InputSettings
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->ConsoleKeys, CastField<FArrayProperty>(GetPropertyDef_ConsoleKeys().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ConsoleKeys(), "ConsoleKeys");
 	}
 
 	static int SetConsoleKeys(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
@@ -423,7 +423,7 @@ struct FGetSets_InputSettings
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->ExcludedAutocorrectCultures, CastField<FArrayProperty>(GetPropertyDef_ExcludedAutocorrectCultures().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ExcludedAutocorrectCultures(), "ExcludedAutocorrectCultures");
 	}
 
 	static int SetExcludedAutocorrectCultures(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
@@ -459,7 +459,7 @@ struct FGetSets_InputSettings
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->ExcludedAutocorrectDeviceModels, CastField<FArrayProperty>(GetPropertyDef_ExcludedAutocorrectDeviceModels().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ExcludedAutocorrectDeviceModels(), "ExcludedAutocorrectDeviceModels");
 	}
 
 	static int SetExcludedAutocorrectDeviceModels(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)
@@ -495,7 +495,7 @@ struct FGetSets_InputSettings
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->ExcludedAutocorrectOS, CastField<FArrayProperty>(GetPropertyDef_ExcludedAutocorrectOS().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ExcludedAutocorrectOS(), "ExcludedAutocorrectOS");
 	}
 
 	static int SetExcludedAutocorrectOS(FUPyWrapperInputSettings* InSelf, PyObject* InValue, void* InClosure)

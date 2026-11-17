@@ -105,6 +105,13 @@ struct FFuncs_SlateColor
 {
 	static int SlateColor_Init_ArgCnt0_Overload0(FUPyWrapperSlateColor* InSelf, PyObject* InArgs, PyObject* InKwds)
 	{
+		static const char* ArgsKwdList[] = { nullptr };
+		if (!PyArg_ParseTupleAndKeywords(InArgs, InKwds, ":SlateColor::__init__", (char**)ArgsKwdList))
+		{
+			return -1;
+		}
+
+		InSelf->ScriptStruct->DestroyStruct(InSelf->StructInstance);
 		new (InSelf->StructInstance) FSlateColor();
 		return 0;
 	}
@@ -112,17 +119,20 @@ struct FFuncs_SlateColor
 
 	static int SlateColor_Init_ArgCnt1_Overload0(FUPyWrapperSlateColor* InSelf, PyObject* InArgs, PyObject* InKwds)
 	{
-		PyObject* PyArg0 = PyTuple_GetItem(InArgs, 0);
-		if (PyArg0 == nullptr)
+		PyObject* PyArg0 = nullptr;
+		static const char* ArgsKwdList[] = { "InColor", nullptr };
+		if (!PyArg_ParseTupleAndKeywords(InArgs, InKwds, "O:SlateColor::__init__", (char**)ArgsKwdList, &PyArg0))
 		{
 			return -1;
 		}
+
 		FLinearColor Arg0;
 		if (!UPyConversion::NativizeStructInstance(PyArg0, Arg0))
 		{
 			return -1;
 		}
 
+		InSelf->ScriptStruct->DestroyStruct(InSelf->StructInstance);
 		new (InSelf->StructInstance) FSlateColor(Arg0);
 		return 0;
 	}
@@ -130,17 +140,20 @@ struct FFuncs_SlateColor
 
 	static int SlateColor_Init_ArgCnt1_Overload1(FUPyWrapperSlateColor* InSelf, PyObject* InArgs, PyObject* InKwds)
 	{
-		PyObject* PyArg0 = PyTuple_GetItem(InArgs, 0);
-		if (PyArg0 == nullptr)
+		PyObject* PyArg0 = nullptr;
+		static const char* ArgsKwdList[] = { "InColor", nullptr };
+		if (!PyArg_ParseTupleAndKeywords(InArgs, InKwds, "O:SlateColor::__init__", (char**)ArgsKwdList, &PyArg0))
 		{
 			return -1;
 		}
+
 		FColor Arg0;
 		if (!UPyConversion::NativizeStructInstance(PyArg0, Arg0))
 		{
 			return -1;
 		}
 
+		InSelf->ScriptStruct->DestroyStruct(InSelf->StructInstance);
 		new (InSelf->StructInstance) FSlateColor(Arg0);
 		return 0;
 	}
@@ -148,17 +161,20 @@ struct FFuncs_SlateColor
 
 	static int SlateColor_Init_ArgCnt1_Overload2(FUPyWrapperSlateColor* InSelf, PyObject* InArgs, PyObject* InKwds)
 	{
-		PyObject* PyArg0 = PyTuple_GetItem(InArgs, 0);
-		if (PyArg0 == nullptr)
+		PyObject* PyArg0 = nullptr;
+		static const char* ArgsKwdList[] = { "InStyleColor", nullptr };
+		if (!PyArg_ParseTupleAndKeywords(InArgs, InKwds, "O:SlateColor::__init__", (char**)ArgsKwdList, &PyArg0))
 		{
 			return -1;
 		}
+
 		EStyleColor Arg0;
 		if (!UPyConversion::NativizeEnumEntry(PyArg0, StaticEnum<EStyleColor>(), Arg0))
 		{
 			return -1;
 		}
 
+		InSelf->ScriptStruct->DestroyStruct(InSelf->StructInstance);
 		new (InSelf->StructInstance) FSlateColor(Arg0);
 		return 0;
 	}
@@ -172,35 +188,17 @@ struct FFuncs_SlateColor
 			return BaseInit;
 		}
 
-		switch (PyTuple_Size(InArgs))
+		if (
+			UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_SlateColor::SlateColor_Init_ArgCnt0_Overload0)
+			|| UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_SlateColor::SlateColor_Init_ArgCnt1_Overload0)
+			|| UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_SlateColor::SlateColor_Init_ArgCnt1_Overload1)
+			|| UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_SlateColor::SlateColor_Init_ArgCnt1_Overload2)
+		)
 		{
-		case 0:
-		{
-			if (
-				UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_SlateColor::SlateColor_Init_ArgCnt0_Overload0)
-			)
-			{
-				return 0;
-			}
-			break;
-		}
-		case 1:
-		{
-			if (
-				UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_SlateColor::SlateColor_Init_ArgCnt1_Overload0)
-				|| UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_SlateColor::SlateColor_Init_ArgCnt1_Overload1)
-				|| UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_SlateColor::SlateColor_Init_ArgCnt1_Overload2)
-			)
-			{
-				return 0;
-			}
-			break;
-		}
-		default:
-			break;
+			return 0;
 		}
 
-		UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("SlateColor::__init__"), TEXT("invalid argument"));
+		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("SlateColor::__init__"), TEXT("invalid argument"));
 		return -1;
 	}
 

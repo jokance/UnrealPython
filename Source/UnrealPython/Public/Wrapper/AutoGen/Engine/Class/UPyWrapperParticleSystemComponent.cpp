@@ -246,7 +246,7 @@ struct FGetSets_ParticleSystemComponent
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->EmitterMaterials, CastField<FArrayProperty>(GetPropertyDef_EmitterMaterials().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_EmitterMaterials(), "EmitterMaterials");
 	}
 
 	static int SetEmitterMaterials(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
@@ -282,7 +282,7 @@ struct FGetSets_ParticleSystemComponent
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->InstanceParameters, CastField<FArrayProperty>(GetPropertyDef_InstanceParameters().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_InstanceParameters(), "InstanceParameters");
 	}
 
 	static int SetInstanceParameters(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
@@ -590,7 +590,7 @@ struct FGetSets_ParticleSystemComponent
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->ReplayClips, CastField<FArrayProperty>(GetPropertyDef_ReplayClips().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ReplayClips(), "ReplayClips");
 	}
 
 	static int SetReplayClips(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)
@@ -672,7 +672,7 @@ struct FGetSets_ParticleSystemComponent
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->SkelMeshComponents, CastField<FArrayProperty>(GetPropertyDef_SkelMeshComponents().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_SkelMeshComponents(), "SkelMeshComponents");
 	}
 
 	static int SetSkelMeshComponents(FUPyWrapperParticleSystemComponent* InSelf, PyObject* InValue, void* InClosure)

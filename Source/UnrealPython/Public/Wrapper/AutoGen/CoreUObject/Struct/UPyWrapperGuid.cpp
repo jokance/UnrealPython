@@ -125,6 +125,13 @@ struct FFuncs_Guid
 {
 	static int Guid_Init_ArgCnt0_Overload0(FUPyWrapperGuid* InSelf, PyObject* InArgs, PyObject* InKwds)
 	{
+		static const char* ArgsKwdList[] = { nullptr };
+		if (!PyArg_ParseTupleAndKeywords(InArgs, InKwds, ":Guid::__init__", (char**)ArgsKwdList))
+		{
+			return -1;
+		}
+
+		InSelf->ScriptStruct->DestroyStruct(InSelf->StructInstance);
 		new (InSelf->StructInstance) FGuid();
 		return 0;
 	}
@@ -132,50 +139,41 @@ struct FFuncs_Guid
 
 	static int Guid_Init_ArgCnt4_Overload0(FUPyWrapperGuid* InSelf, PyObject* InArgs, PyObject* InKwds)
 	{
-		PyObject* PyArg0 = PyTuple_GetItem(InArgs, 0);
-		if (PyArg0 == nullptr)
+		PyObject* PyArg0 = nullptr;
+		PyObject* PyArg1 = nullptr;
+		PyObject* PyArg2 = nullptr;
+		PyObject* PyArg3 = nullptr;
+		static const char* ArgsKwdList[] = { "A", "B", "C", "D", nullptr };
+		if (!PyArg_ParseTupleAndKeywords(InArgs, InKwds, "OOOO:Guid::__init__", (char**)ArgsKwdList, &PyArg0, &PyArg1, &PyArg2, &PyArg3))
 		{
 			return -1;
 		}
+
 		int32 Arg0 = 0;
 		if (!UPyConversion::Nativize(PyArg0, Arg0))
 		{
 			return -1;
 		}
 
-		PyObject* PyArg1 = PyTuple_GetItem(InArgs, 1);
-		if (PyArg1 == nullptr)
-		{
-			return -1;
-		}
 		int32 Arg1 = 0;
 		if (!UPyConversion::Nativize(PyArg1, Arg1))
 		{
 			return -1;
 		}
 
-		PyObject* PyArg2 = PyTuple_GetItem(InArgs, 2);
-		if (PyArg2 == nullptr)
-		{
-			return -1;
-		}
 		int32 Arg2 = 0;
 		if (!UPyConversion::Nativize(PyArg2, Arg2))
 		{
 			return -1;
 		}
 
-		PyObject* PyArg3 = PyTuple_GetItem(InArgs, 3);
-		if (PyArg3 == nullptr)
-		{
-			return -1;
-		}
 		int32 Arg3 = 0;
 		if (!UPyConversion::Nativize(PyArg3, Arg3))
 		{
 			return -1;
 		}
 
+		InSelf->ScriptStruct->DestroyStruct(InSelf->StructInstance);
 		new (InSelf->StructInstance) FGuid(Arg0, Arg1, Arg2, Arg3);
 		return 0;
 	}
@@ -189,33 +187,15 @@ struct FFuncs_Guid
 			return BaseInit;
 		}
 
-		switch (PyTuple_Size(InArgs))
+		if (
+			UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_Guid::Guid_Init_ArgCnt0_Overload0)
+			|| UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_Guid::Guid_Init_ArgCnt4_Overload0)
+		)
 		{
-		case 0:
-		{
-			if (
-				UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_Guid::Guid_Init_ArgCnt0_Overload0)
-			)
-			{
-				return 0;
-			}
-			break;
-		}
-		case 4:
-		{
-			if (
-				UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_Guid::Guid_Init_ArgCnt4_Overload0)
-			)
-			{
-				return 0;
-			}
-			break;
-		}
-		default:
-			break;
+			return 0;
 		}
 
-		UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("Guid::__init__"), TEXT("invalid argument"));
+		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("Guid::__init__"), TEXT("invalid argument"));
 		return -1;
 	}
 
@@ -228,6 +208,18 @@ struct FFuncs_Guid
 		}
 
 		const bool bResult = *(InSelf->ValuePtr()) == Arg0;
+		return bResult ? 1 : 0;
+	}
+
+	static int Guid___lt___CmpAttempt0(FUPyWrapperGuid* InSelf, PyObject* InOther)
+	{
+		FGuid Arg0;
+		if (!UPyConversion::NativizeStructInstance(InOther, Arg0))
+		{
+			return -1;
+		}
+
+		const bool bResult = *(InSelf->ValuePtr()) < Arg0;
 		return bResult ? 1 : 0;
 	}
 
@@ -271,6 +263,23 @@ struct FFuncs_Guid
 			if (!bHandled)
 			{
 				int AttemptResult = Guid___ne___CmpAttempt0(InSelf, InOther);
+				if (AttemptResult >= 0)
+				{
+					bHandled = true;
+					bResult = AttemptResult != 0;
+				}
+				else
+				{
+					PyErr_Clear();
+				}
+			}
+			break;
+		}
+		case Py_LT:
+		{
+			if (!bHandled)
+			{
+				int AttemptResult = Guid___lt___CmpAttempt0(InSelf, InOther);
 				if (AttemptResult >= 0)
 				{
 					bHandled = true;

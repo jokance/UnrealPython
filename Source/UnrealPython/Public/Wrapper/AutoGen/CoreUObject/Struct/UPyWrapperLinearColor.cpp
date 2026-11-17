@@ -126,6 +126,13 @@ struct FFuncs_LinearColor
 {
 	static int LinearColor_Init_ArgCnt0_Overload0(FUPyWrapperLinearColor* InSelf, PyObject* InArgs, PyObject* InKwds)
 	{
+		static const char* ArgsKwdList[] = { nullptr };
+		if (!PyArg_ParseTupleAndKeywords(InArgs, InKwds, ":LinearColor::__init__", (char**)ArgsKwdList))
+		{
+			return -1;
+		}
+
+		InSelf->ScriptStruct->DestroyStruct(InSelf->StructInstance);
 		new (InSelf->StructInstance) FLinearColor();
 		return 0;
 	}
@@ -133,50 +140,41 @@ struct FFuncs_LinearColor
 
 	static int LinearColor_Init_ArgCnt4_Overload0(FUPyWrapperLinearColor* InSelf, PyObject* InArgs, PyObject* InKwds)
 	{
-		PyObject* PyArg0 = PyTuple_GetItem(InArgs, 0);
-		if (PyArg0 == nullptr)
+		PyObject* PyArg0 = nullptr;
+		PyObject* PyArg1 = nullptr;
+		PyObject* PyArg2 = nullptr;
+		PyObject* PyArg3 = nullptr;
+		static const char* ArgsKwdList[] = { "R", "G", "B", "A", nullptr };
+		if (!PyArg_ParseTupleAndKeywords(InArgs, InKwds, "OOOO:LinearColor::__init__", (char**)ArgsKwdList, &PyArg0, &PyArg1, &PyArg2, &PyArg3))
 		{
 			return -1;
 		}
+
 		float Arg0 = 0.0f;
 		if (!UPyConversion::Nativize(PyArg0, Arg0))
 		{
 			return -1;
 		}
 
-		PyObject* PyArg1 = PyTuple_GetItem(InArgs, 1);
-		if (PyArg1 == nullptr)
-		{
-			return -1;
-		}
 		float Arg1 = 0.0f;
 		if (!UPyConversion::Nativize(PyArg1, Arg1))
 		{
 			return -1;
 		}
 
-		PyObject* PyArg2 = PyTuple_GetItem(InArgs, 2);
-		if (PyArg2 == nullptr)
-		{
-			return -1;
-		}
 		float Arg2 = 0.0f;
 		if (!UPyConversion::Nativize(PyArg2, Arg2))
 		{
 			return -1;
 		}
 
-		PyObject* PyArg3 = PyTuple_GetItem(InArgs, 3);
-		if (PyArg3 == nullptr)
-		{
-			return -1;
-		}
 		float Arg3 = 0.0f;
 		if (!UPyConversion::Nativize(PyArg3, Arg3))
 		{
 			return -1;
 		}
 
+		InSelf->ScriptStruct->DestroyStruct(InSelf->StructInstance);
 		new (InSelf->StructInstance) FLinearColor(Arg0, Arg1, Arg2, Arg3);
 		return 0;
 	}
@@ -184,17 +182,20 @@ struct FFuncs_LinearColor
 
 	static int LinearColor_Init_ArgCnt1_Overload0(FUPyWrapperLinearColor* InSelf, PyObject* InArgs, PyObject* InKwds)
 	{
-		PyObject* PyArg0 = PyTuple_GetItem(InArgs, 0);
-		if (PyArg0 == nullptr)
+		PyObject* PyArg0 = nullptr;
+		static const char* ArgsKwdList[] = { "Color", nullptr };
+		if (!PyArg_ParseTupleAndKeywords(InArgs, InKwds, "O:LinearColor::__init__", (char**)ArgsKwdList, &PyArg0))
 		{
 			return -1;
 		}
+
 		FColor Arg0;
 		if (!UPyConversion::NativizeStructInstance(PyArg0, Arg0))
 		{
 			return -1;
 		}
 
+		InSelf->ScriptStruct->DestroyStruct(InSelf->StructInstance);
 		new (InSelf->StructInstance) FLinearColor(Arg0);
 		return 0;
 	}
@@ -202,17 +203,20 @@ struct FFuncs_LinearColor
 
 	static int LinearColor_Init_ArgCnt1_Overload1(FUPyWrapperLinearColor* InSelf, PyObject* InArgs, PyObject* InKwds)
 	{
-		PyObject* PyArg0 = PyTuple_GetItem(InArgs, 0);
-		if (PyArg0 == nullptr)
+		PyObject* PyArg0 = nullptr;
+		static const char* ArgsKwdList[] = { "Vector", nullptr };
+		if (!PyArg_ParseTupleAndKeywords(InArgs, InKwds, "O:LinearColor::__init__", (char**)ArgsKwdList, &PyArg0))
 		{
 			return -1;
 		}
+
 		FVector Arg0;
 		if (!UPyConversion::NativizeStructInstance(PyArg0, Arg0))
 		{
 			return -1;
 		}
 
+		InSelf->ScriptStruct->DestroyStruct(InSelf->StructInstance);
 		new (InSelf->StructInstance) FLinearColor(Arg0);
 		return 0;
 	}
@@ -226,44 +230,17 @@ struct FFuncs_LinearColor
 			return BaseInit;
 		}
 
-		switch (PyTuple_Size(InArgs))
+		if (
+			UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_LinearColor::LinearColor_Init_ArgCnt0_Overload0)
+			|| UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_LinearColor::LinearColor_Init_ArgCnt4_Overload0)
+			|| UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_LinearColor::LinearColor_Init_ArgCnt1_Overload0)
+			|| UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_LinearColor::LinearColor_Init_ArgCnt1_Overload1)
+		)
 		{
-		case 0:
-		{
-			if (
-				UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_LinearColor::LinearColor_Init_ArgCnt0_Overload0)
-			)
-			{
-				return 0;
-			}
-			break;
-		}
-		case 1:
-		{
-			if (
-				UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_LinearColor::LinearColor_Init_ArgCnt1_Overload0)
-				|| UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_LinearColor::LinearColor_Init_ArgCnt1_Overload1)
-			)
-			{
-				return 0;
-			}
-			break;
-		}
-		case 4:
-		{
-			if (
-				UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_LinearColor::LinearColor_Init_ArgCnt4_Overload0)
-			)
-			{
-				return 0;
-			}
-			break;
-		}
-		default:
-			break;
+			return 0;
 		}
 
-		UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("LinearColor::__init__"), TEXT("invalid argument"));
+		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("LinearColor::__init__"), TEXT("invalid argument"));
 		return -1;
 	}
 
@@ -362,6 +339,10 @@ struct FNumberFuncs_LinearColor
 
 	static PyObject* Op_add(FUPyWrapperLinearColor* InSelf, PyObject* InRHS)
 	{
+		if (!UPyIsLinearColor((PyObject*)InSelf))
+		{
+			Py_RETURN_NOTIMPLEMENTED;
+		}
 		{
 			PyObject* AttemptResult = Op_add_Attempt0(InSelf, InRHS);
 			if (AttemptResult != nullptr)
@@ -389,6 +370,10 @@ struct FNumberFuncs_LinearColor
 
 	static PyObject* Op_iadd(FUPyWrapperLinearColor* InSelf, PyObject* InRHS)
 	{
+		if (!UPyIsLinearColor((PyObject*)InSelf))
+		{
+			Py_RETURN_NOTIMPLEMENTED;
+		}
 		{
 			PyObject* AttemptResult = Op_iadd_Attempt0(InSelf, InRHS);
 			if (AttemptResult != nullptr)
@@ -429,6 +414,10 @@ struct FNumberFuncs_LinearColor
 
 	static PyObject* Op_imul(FUPyWrapperLinearColor* InSelf, PyObject* InRHS)
 	{
+		if (!UPyIsLinearColor((PyObject*)InSelf))
+		{
+			Py_RETURN_NOTIMPLEMENTED;
+		}
 		{
 			PyObject* AttemptResult = Op_imul_Attempt0(InSelf, InRHS);
 			if (AttemptResult != nullptr)
@@ -464,6 +453,10 @@ struct FNumberFuncs_LinearColor
 
 	static PyObject* Op_isub(FUPyWrapperLinearColor* InSelf, PyObject* InRHS)
 	{
+		if (!UPyIsLinearColor((PyObject*)InSelf))
+		{
+			Py_RETURN_NOTIMPLEMENTED;
+		}
 		{
 			PyObject* AttemptResult = Op_isub_Attempt0(InSelf, InRHS);
 			if (AttemptResult != nullptr)
@@ -473,6 +466,58 @@ struct FNumberFuncs_LinearColor
 			PyErr_Clear();
 		}
 		UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("LinearColor::__isub__"), TEXT("operator not supported"));
+		return nullptr;
+	}
+
+	static PyObject* Op_itruediv_Attempt0(FUPyWrapperLinearColor* InSelf, PyObject* InRHS)
+	{
+		FLinearColor Arg0;
+		if (!UPyConversion::NativizeStructInstance(InRHS, Arg0))
+		{
+			return nullptr;
+		}
+
+		InSelf->ValuePtr()->operator/=(Arg0);
+		Py_INCREF(InSelf);
+		return (PyObject*)InSelf;
+	}
+
+	static PyObject* Op_itruediv_Attempt1(FUPyWrapperLinearColor* InSelf, PyObject* InRHS)
+	{
+		float Arg1 = 0.0f;
+		if (!UPyConversion::Nativize(InRHS, Arg1))
+		{
+			return nullptr;
+		}
+
+		InSelf->ValuePtr()->operator/=(Arg1);
+		Py_INCREF(InSelf);
+		return (PyObject*)InSelf;
+	}
+
+	static PyObject* Op_itruediv(FUPyWrapperLinearColor* InSelf, PyObject* InRHS)
+	{
+		if (!UPyIsLinearColor((PyObject*)InSelf))
+		{
+			Py_RETURN_NOTIMPLEMENTED;
+		}
+		{
+			PyObject* AttemptResult = Op_itruediv_Attempt0(InSelf, InRHS);
+			if (AttemptResult != nullptr)
+			{
+				return AttemptResult;
+			}
+			PyErr_Clear();
+		}
+		{
+			PyObject* AttemptResult = Op_itruediv_Attempt1(InSelf, InRHS);
+			if (AttemptResult != nullptr)
+			{
+				return AttemptResult;
+			}
+			PyErr_Clear();
+		}
+		UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("LinearColor::__itruediv__"), TEXT("operator not supported"));
 		return nullptr;
 	}
 
@@ -502,6 +547,10 @@ struct FNumberFuncs_LinearColor
 
 	static PyObject* Op_mul(FUPyWrapperLinearColor* InSelf, PyObject* InRHS)
 	{
+		if (!UPyIsLinearColor((PyObject*)InSelf))
+		{
+			Py_RETURN_NOTIMPLEMENTED;
+		}
 		{
 			PyObject* AttemptResult = Op_mul_Attempt0(InSelf, InRHS);
 			if (AttemptResult != nullptr)
@@ -536,6 +585,10 @@ struct FNumberFuncs_LinearColor
 
 	static PyObject* Op_sub(FUPyWrapperLinearColor* InSelf, PyObject* InRHS)
 	{
+		if (!UPyIsLinearColor((PyObject*)InSelf))
+		{
+			Py_RETURN_NOTIMPLEMENTED;
+		}
 		{
 			PyObject* AttemptResult = Op_sub_Attempt0(InSelf, InRHS);
 			if (AttemptResult != nullptr)
@@ -562,8 +615,8 @@ struct FNumberFuncs_LinearColor
 
 	static PyObject* Op_truediv_Attempt1(FUPyWrapperLinearColor* InSelf, PyObject* InRHS)
 	{
-		FLinearColor Arg1;
-		if (!UPyConversion::NativizeStructInstance(InRHS, Arg1))
+		float Arg1 = 0.0f;
+		if (!UPyConversion::Nativize(InRHS, Arg1))
 		{
 			return nullptr;
 		}
@@ -572,32 +625,12 @@ struct FNumberFuncs_LinearColor
 		return UPyConversion::PythonizeStructInstance(Result);
 	}
 
-	static PyObject* Op_truediv_Attempt2(FUPyWrapperLinearColor* InSelf, PyObject* InRHS)
-	{
-		float Arg2 = 0.0f;
-		if (!UPyConversion::Nativize(InRHS, Arg2))
-		{
-			return nullptr;
-		}
-
-		const auto Result = InSelf->ValuePtr()->operator/(Arg2);
-		return UPyConversion::PythonizeStructInstance(Result);
-	}
-
-	static PyObject* Op_truediv_Attempt3(FUPyWrapperLinearColor* InSelf, PyObject* InRHS)
-	{
-		float Arg3 = 0.0f;
-		if (!UPyConversion::Nativize(InRHS, Arg3))
-		{
-			return nullptr;
-		}
-
-		const auto Result = InSelf->ValuePtr()->operator/(Arg3);
-		return UPyConversion::PythonizeStructInstance(Result);
-	}
-
 	static PyObject* Op_truediv(FUPyWrapperLinearColor* InSelf, PyObject* InRHS)
 	{
+		if (!UPyIsLinearColor((PyObject*)InSelf))
+		{
+			Py_RETURN_NOTIMPLEMENTED;
+		}
 		{
 			PyObject* AttemptResult = Op_truediv_Attempt0(InSelf, InRHS);
 			if (AttemptResult != nullptr)
@@ -608,22 +641,6 @@ struct FNumberFuncs_LinearColor
 		}
 		{
 			PyObject* AttemptResult = Op_truediv_Attempt1(InSelf, InRHS);
-			if (AttemptResult != nullptr)
-			{
-				return AttemptResult;
-			}
-			PyErr_Clear();
-		}
-		{
-			PyObject* AttemptResult = Op_truediv_Attempt2(InSelf, InRHS);
-			if (AttemptResult != nullptr)
-			{
-				return AttemptResult;
-			}
-			PyErr_Clear();
-		}
-		{
-			PyObject* AttemptResult = Op_truediv_Attempt3(InSelf, InRHS);
 			if (AttemptResult != nullptr)
 			{
 				return AttemptResult;
@@ -886,6 +903,7 @@ PyTypeObject* DoInitWrapperLinearColor(const UScriptStruct* InStruct, PyTypeObje
 	PyNumber.nb_inplace_add = (binaryfunc)&FNumberFuncs_LinearColor::Op_iadd;
 	PyNumber.nb_inplace_multiply = (binaryfunc)&FNumberFuncs_LinearColor::Op_imul;
 	PyNumber.nb_inplace_subtract = (binaryfunc)&FNumberFuncs_LinearColor::Op_isub;
+	PyNumber.nb_inplace_true_divide = (binaryfunc)&FNumberFuncs_LinearColor::Op_itruediv;
 	PyNumber.nb_multiply = (binaryfunc)&FNumberFuncs_LinearColor::Op_mul;
 	PyNumber.nb_subtract = (binaryfunc)&FNumberFuncs_LinearColor::Op_sub;
 	PyNumber.nb_true_divide = (binaryfunc)&FNumberFuncs_LinearColor::Op_truediv;

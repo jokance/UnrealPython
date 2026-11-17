@@ -593,7 +593,7 @@ struct FGetSets_StaticMesh
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->Sockets, CastField<FArrayProperty>(GetPropertyDef_Sockets().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_Sockets(), "Sockets");
 	}
 
 	static int SetSockets(FUPyWrapperStaticMesh* InSelf, PyObject* InValue, void* InClosure)

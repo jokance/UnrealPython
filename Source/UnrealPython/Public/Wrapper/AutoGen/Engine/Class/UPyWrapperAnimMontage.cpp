@@ -240,7 +240,7 @@ struct FGetSets_AnimMontage
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->BranchingPointStateNotifyIndices, CastField<FArrayProperty>(GetPropertyDef_BranchingPointStateNotifyIndices().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_BranchingPointStateNotifyIndices(), "BranchingPointStateNotifyIndices");
 	}
 
 	static int SetBranchingPointStateNotifyIndices(FUPyWrapperAnimMontage* InSelf, PyObject* InValue, void* InClosure)
@@ -276,7 +276,7 @@ struct FGetSets_AnimMontage
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->CompositeSections, CastField<FArrayProperty>(GetPropertyDef_CompositeSections().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_CompositeSections(), "CompositeSections");
 	}
 
 	static int SetCompositeSections(FUPyWrapperAnimMontage* InSelf, PyObject* InValue, void* InClosure)
@@ -383,7 +383,7 @@ struct FGetSets_AnimMontage
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->SlotAnimTracks, CastField<FArrayProperty>(GetPropertyDef_SlotAnimTracks().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_SlotAnimTracks(), "SlotAnimTracks");
 	}
 
 	static int SetSlotAnimTracks(FUPyWrapperAnimMontage* InSelf, PyObject* InValue, void* InClosure)
@@ -818,16 +818,17 @@ struct FMethods_AnimMontage
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			if (Prop_SlotNodeName)
 			{
-				Prop_SlotNodeName->CopyCompleteValue_InContainer(Parms, &Arg0);
+				Prop_SlotNodeName->CopyCompleteValue(Prop_SlotNodeName->ContainerPtrToValuePtr<void>(Parms), &Arg0);
 			}
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
 			if (Prop__ReturnValue)
 			{
-				Prop__ReturnValue->CopyCompleteValue_InContainer(&Result, Parms);
+				Prop__ReturnValue->CopyCompleteValue(&Result, Prop__ReturnValue->ContainerPtrToValuePtr<void>(Parms));
 			}
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		return PyBool_FromLong(Result ? 1 : 0);

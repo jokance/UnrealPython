@@ -92,7 +92,7 @@ struct FGetSets_PlayerController
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->ActiveForceFeedbackEffects, CastField<FArrayProperty>(GetPropertyDef_ActiveForceFeedbackEffects().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ActiveForceFeedbackEffects(), "ActiveForceFeedbackEffects");
 	}
 
 	static int SetActiveForceFeedbackEffects(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
@@ -196,7 +196,7 @@ struct FGetSets_PlayerController
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->ClickEventKeys, CastField<FArrayProperty>(GetPropertyDef_ClickEventKeys().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_ClickEventKeys(), "ClickEventKeys");
 	}
 
 	static int SetClickEventKeys(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
@@ -442,7 +442,7 @@ struct FGetSets_PlayerController
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->HiddenActors, CastField<FArrayProperty>(GetPropertyDef_HiddenActors().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_HiddenActors(), "HiddenActors");
 	}
 
 	static int SetHiddenActors(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
@@ -478,7 +478,7 @@ struct FGetSets_PlayerController
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->HiddenPrimitiveComponents, CastField<FArrayProperty>(GetPropertyDef_HiddenPrimitiveComponents().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_HiddenPrimitiveComponents(), "HiddenPrimitiveComponents");
 	}
 
 	static int SetHiddenPrimitiveComponents(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
@@ -1040,7 +1040,7 @@ struct FGetSets_PlayerController
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->StreamingSourceShapes, CastField<FArrayProperty>(GetPropertyDef_StreamingSourceShapes().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_StreamingSourceShapes(), "StreamingSourceShapes");
 	}
 
 	static int SetStreamingSourceShapes(FUPyWrapperPlayerController* InSelf, PyObject* InValue, void* InClosure)
@@ -2030,16 +2030,17 @@ struct FMethods_PlayerController
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			if (Prop_ForceFeedbackEffect)
 			{
-				Prop_ForceFeedbackEffect->CopyCompleteValue_InContainer(Parms, &Arg0);
+				Prop_ForceFeedbackEffect->CopyCompleteValue(Prop_ForceFeedbackEffect->ContainerPtrToValuePtr<void>(Parms), &Arg0);
 			}
 			if (Prop_Params)
 			{
-				Prop_Params->CopyCompleteValue_InContainer(Parms, &Arg1);
+				Prop_Params->CopyCompleteValue(Prop_Params->ContainerPtrToValuePtr<void>(Parms), &Arg1);
 			}
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		Py_RETURN_NONE;
@@ -5554,16 +5555,17 @@ struct FMethods_PlayerController
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			if (Prop_PackageName)
 			{
-				Prop_PackageName->CopyCompleteValue_InContainer(Parms, &Arg0);
+				Prop_PackageName->CopyCompleteValue(Prop_PackageName->ContainerPtrToValuePtr<void>(Parms), &Arg0);
 			}
 			if (Prop_FileName)
 			{
-				Prop_FileName->CopyCompleteValue_InContainer(Parms, &Arg1);
+				Prop_FileName->CopyCompleteValue(Prop_FileName->ContainerPtrToValuePtr<void>(Parms), &Arg1);
 			}
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		Py_RETURN_NONE;

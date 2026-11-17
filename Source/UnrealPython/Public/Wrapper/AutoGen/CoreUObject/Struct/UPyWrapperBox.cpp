@@ -103,6 +103,13 @@ struct FFuncs_Box
 {
 	static int Box_Init_ArgCnt0_Overload0(FUPyWrapperBox* InSelf, PyObject* InArgs, PyObject* InKwds)
 	{
+		static const char* ArgsKwdList[] = { nullptr };
+		if (!PyArg_ParseTupleAndKeywords(InArgs, InKwds, ":Box::__init__", (char**)ArgsKwdList))
+		{
+			return -1;
+		}
+
+		InSelf->ScriptStruct->DestroyStruct(InSelf->StructInstance);
 		new (InSelf->StructInstance) FBox();
 		return 0;
 	}
@@ -110,28 +117,27 @@ struct FFuncs_Box
 
 	static int Box_Init_ArgCnt2_Overload0(FUPyWrapperBox* InSelf, PyObject* InArgs, PyObject* InKwds)
 	{
-		PyObject* PyArg0 = PyTuple_GetItem(InArgs, 0);
-		if (PyArg0 == nullptr)
+		PyObject* PyArg0 = nullptr;
+		PyObject* PyArg1 = nullptr;
+		static const char* ArgsKwdList[] = { "InMin", "InMax", nullptr };
+		if (!PyArg_ParseTupleAndKeywords(InArgs, InKwds, "OO:Box::__init__", (char**)ArgsKwdList, &PyArg0, &PyArg1))
 		{
 			return -1;
 		}
+
 		FVector Arg0;
 		if (!UPyConversion::NativizeStructInstance(PyArg0, Arg0))
 		{
 			return -1;
 		}
 
-		PyObject* PyArg1 = PyTuple_GetItem(InArgs, 1);
-		if (PyArg1 == nullptr)
-		{
-			return -1;
-		}
 		FVector Arg1;
 		if (!UPyConversion::NativizeStructInstance(PyArg1, Arg1))
 		{
 			return -1;
 		}
 
+		InSelf->ScriptStruct->DestroyStruct(InSelf->StructInstance);
 		new (InSelf->StructInstance) FBox(Arg0, Arg1);
 		return 0;
 	}
@@ -145,33 +151,15 @@ struct FFuncs_Box
 			return BaseInit;
 		}
 
-		switch (PyTuple_Size(InArgs))
+		if (
+			UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_Box::Box_Init_ArgCnt0_Overload0)
+			|| UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_Box::Box_Init_ArgCnt2_Overload0)
+		)
 		{
-		case 0:
-		{
-			if (
-				UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_Box::Box_Init_ArgCnt0_Overload0)
-			)
-			{
-				return 0;
-			}
-			break;
-		}
-		case 2:
-		{
-			if (
-				UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_Box::Box_Init_ArgCnt2_Overload0)
-			)
-			{
-				return 0;
-			}
-			break;
-		}
-		default:
-			break;
+			return 0;
 		}
 
-		UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("Box::__init__"), TEXT("invalid argument"));
+		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("Box::__init__"), TEXT("invalid argument"));
 		return -1;
 	}
 
@@ -270,6 +258,10 @@ struct FNumberFuncs_Box
 
 	static PyObject* Op_add(FUPyWrapperBox* InSelf, PyObject* InRHS)
 	{
+		if (!UPyIsBox((PyObject*)InSelf))
+		{
+			Py_RETURN_NOTIMPLEMENTED;
+		}
 		{
 			PyObject* AttemptResult = Op_add_Attempt0(InSelf, InRHS);
 			if (AttemptResult != nullptr)

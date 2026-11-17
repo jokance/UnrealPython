@@ -228,7 +228,7 @@ struct FGetSets_Actor
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->BlueprintCreatedComponents, CastField<FArrayProperty>(GetPropertyDef_BlueprintCreatedComponents().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_BlueprintCreatedComponents(), "BlueprintCreatedComponents");
 	}
 
 	static int SetBlueprintCreatedComponents(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
@@ -264,7 +264,7 @@ struct FGetSets_Actor
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->Children, CastField<FArrayProperty>(GetPropertyDef_Children().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_Children(), "Children");
 	}
 
 	static int SetChildren(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
@@ -776,7 +776,7 @@ struct FGetSets_Actor
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->Layers, CastField<FArrayProperty>(GetPropertyDef_Layers().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_Layers(), "Layers");
 	}
 
 	static int SetLayers(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
@@ -1969,7 +1969,7 @@ struct FGetSets_Actor
 		{
 			return nullptr;
 		}
-		return (PyObject*)FUPyWrapperArrayFactory::Get().CreateInstance((void*)&InSelf->ValuePtr()->Tags, CastField<FArrayProperty>(GetPropertyDef_Tags().Prop), FUPyWrapperOwnerContext((PyObject*)InSelf), EUPyConversionMethod::Reference);
+		return FUPyWrapperObject::GetPropertyValue(InSelf, GetPropertyDef_Tags(), "Tags");
 	}
 
 	static int SetTags(FUPyWrapperActor* InSelf, PyObject* InValue, void* InClosure)
@@ -5863,8 +5863,9 @@ struct FMethods_Actor
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		Py_RETURN_NONE;
@@ -6194,8 +6195,9 @@ struct FMethods_Actor
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		Py_RETURN_NONE;
@@ -6229,12 +6231,13 @@ struct FMethods_Actor
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			if (Prop_EndPlayReason)
 			{
-				Prop_EndPlayReason->CopyCompleteValue_InContainer(Parms, &Arg0);
+				Prop_EndPlayReason->CopyCompleteValue(Prop_EndPlayReason->ContainerPtrToValuePtr<void>(Parms), &Arg0);
 			}
 			InSelf->ValuePtr()->ProcessEvent(Func, Parms);
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		Py_RETURN_NONE;

@@ -102,6 +102,13 @@ struct FFuncs_Vector
 {
 	static int Vector_Init_ArgCnt0_Overload0(FUPyWrapperVector* InSelf, PyObject* InArgs, PyObject* InKwds)
 	{
+		static const char* ArgsKwdList[] = { nullptr };
+		if (!PyArg_ParseTupleAndKeywords(InArgs, InKwds, ":Vector::__init__", (char**)ArgsKwdList))
+		{
+			return -1;
+		}
+
+		InSelf->ScriptStruct->DestroyStruct(InSelf->StructInstance);
 		new (InSelf->StructInstance) FVector();
 		return 0;
 	}
@@ -109,17 +116,20 @@ struct FFuncs_Vector
 
 	static int Vector_Init_ArgCnt1_Overload0(FUPyWrapperVector* InSelf, PyObject* InArgs, PyObject* InKwds)
 	{
-		PyObject* PyArg0 = PyTuple_GetItem(InArgs, 0);
-		if (PyArg0 == nullptr)
+		PyObject* PyArg0 = nullptr;
+		static const char* ArgsKwdList[] = { "InF", nullptr };
+		if (!PyArg_ParseTupleAndKeywords(InArgs, InKwds, "O:Vector::__init__", (char**)ArgsKwdList, &PyArg0))
 		{
 			return -1;
 		}
+
 		double Arg0 = 0.0;
 		if (!UPyConversion::Nativize(PyArg0, Arg0))
 		{
 			return -1;
 		}
 
+		InSelf->ScriptStruct->DestroyStruct(InSelf->StructInstance);
 		new (InSelf->StructInstance) FVector(Arg0);
 		return 0;
 	}
@@ -127,17 +137,20 @@ struct FFuncs_Vector
 
 	static int Vector_Init_ArgCnt1_Overload1(FUPyWrapperVector* InSelf, PyObject* InArgs, PyObject* InKwds)
 	{
-		PyObject* PyArg0 = PyTuple_GetItem(InArgs, 0);
-		if (PyArg0 == nullptr)
+		PyObject* PyArg0 = nullptr;
+		static const char* ArgsKwdList[] = { "InI", nullptr };
+		if (!PyArg_ParseTupleAndKeywords(InArgs, InKwds, "O:Vector::__init__", (char**)ArgsKwdList, &PyArg0))
 		{
 			return -1;
 		}
+
 		int32 Arg0 = 0;
 		if (!UPyConversion::Nativize(PyArg0, Arg0))
 		{
 			return -1;
 		}
 
+		InSelf->ScriptStruct->DestroyStruct(InSelf->StructInstance);
 		new (InSelf->StructInstance) FVector(Arg0);
 		return 0;
 	}
@@ -145,39 +158,34 @@ struct FFuncs_Vector
 
 	static int Vector_Init_ArgCnt3_Overload0(FUPyWrapperVector* InSelf, PyObject* InArgs, PyObject* InKwds)
 	{
-		PyObject* PyArg0 = PyTuple_GetItem(InArgs, 0);
-		if (PyArg0 == nullptr)
+		PyObject* PyArg0 = nullptr;
+		PyObject* PyArg1 = nullptr;
+		PyObject* PyArg2 = nullptr;
+		static const char* ArgsKwdList[] = { "InX", "InY", "InZ", nullptr };
+		if (!PyArg_ParseTupleAndKeywords(InArgs, InKwds, "OOO:Vector::__init__", (char**)ArgsKwdList, &PyArg0, &PyArg1, &PyArg2))
 		{
 			return -1;
 		}
+
 		double Arg0 = 0.0;
 		if (!UPyConversion::Nativize(PyArg0, Arg0))
 		{
 			return -1;
 		}
 
-		PyObject* PyArg1 = PyTuple_GetItem(InArgs, 1);
-		if (PyArg1 == nullptr)
-		{
-			return -1;
-		}
 		double Arg1 = 0.0;
 		if (!UPyConversion::Nativize(PyArg1, Arg1))
 		{
 			return -1;
 		}
 
-		PyObject* PyArg2 = PyTuple_GetItem(InArgs, 2);
-		if (PyArg2 == nullptr)
-		{
-			return -1;
-		}
 		double Arg2 = 0.0;
 		if (!UPyConversion::Nativize(PyArg2, Arg2))
 		{
 			return -1;
 		}
 
+		InSelf->ScriptStruct->DestroyStruct(InSelf->StructInstance);
 		new (InSelf->StructInstance) FVector(Arg0, Arg1, Arg2);
 		return 0;
 	}
@@ -191,44 +199,17 @@ struct FFuncs_Vector
 			return BaseInit;
 		}
 
-		switch (PyTuple_Size(InArgs))
+		if (
+			UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_Vector::Vector_Init_ArgCnt0_Overload0)
+			|| UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_Vector::Vector_Init_ArgCnt1_Overload0)
+			|| UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_Vector::Vector_Init_ArgCnt1_Overload1)
+			|| UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_Vector::Vector_Init_ArgCnt3_Overload0)
+		)
 		{
-		case 0:
-		{
-			if (
-				UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_Vector::Vector_Init_ArgCnt0_Overload0)
-			)
-			{
-				return 0;
-			}
-			break;
-		}
-		case 1:
-		{
-			if (
-				UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_Vector::Vector_Init_ArgCnt1_Overload0)
-				|| UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_Vector::Vector_Init_ArgCnt1_Overload1)
-			)
-			{
-				return 0;
-			}
-			break;
-		}
-		case 3:
-		{
-			if (
-				UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_Vector::Vector_Init_ArgCnt3_Overload0)
-			)
-			{
-				return 0;
-			}
-			break;
-		}
-		default:
-			break;
+			return 0;
 		}
 
-		UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("Vector::__init__"), TEXT("invalid argument"));
+		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("Vector::__init__"), TEXT("invalid argument"));
 		return -1;
 	}
 
@@ -339,6 +320,10 @@ struct FNumberFuncs_Vector
 
 	static PyObject* Op_add(FUPyWrapperVector* InSelf, PyObject* InRHS)
 	{
+		if (!UPyIsVector((PyObject*)InSelf))
+		{
+			Py_RETURN_NOTIMPLEMENTED;
+		}
 		{
 			PyObject* AttemptResult = Op_add_Attempt0(InSelf, InRHS);
 			if (AttemptResult != nullptr)
@@ -374,6 +359,10 @@ struct FNumberFuncs_Vector
 
 	static PyObject* Op_iadd(FUPyWrapperVector* InSelf, PyObject* InRHS)
 	{
+		if (!UPyIsVector((PyObject*)InSelf))
+		{
+			Py_RETURN_NOTIMPLEMENTED;
+		}
 		{
 			PyObject* AttemptResult = Op_iadd_Attempt0(InSelf, InRHS);
 			if (AttemptResult != nullptr)
@@ -414,6 +403,10 @@ struct FNumberFuncs_Vector
 
 	static PyObject* Op_imul(FUPyWrapperVector* InSelf, PyObject* InRHS)
 	{
+		if (!UPyIsVector((PyObject*)InSelf))
+		{
+			Py_RETURN_NOTIMPLEMENTED;
+		}
 		{
 			PyObject* AttemptResult = Op_imul_Attempt0(InSelf, InRHS);
 			if (AttemptResult != nullptr)
@@ -449,6 +442,10 @@ struct FNumberFuncs_Vector
 
 	static PyObject* Op_isub(FUPyWrapperVector* InSelf, PyObject* InRHS)
 	{
+		if (!UPyIsVector((PyObject*)InSelf))
+		{
+			Py_RETURN_NOTIMPLEMENTED;
+		}
 		{
 			PyObject* AttemptResult = Op_isub_Attempt0(InSelf, InRHS);
 			if (AttemptResult != nullptr)
@@ -458,6 +455,58 @@ struct FNumberFuncs_Vector
 			PyErr_Clear();
 		}
 		UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("Vector::__isub__"), TEXT("operator not supported"));
+		return nullptr;
+	}
+
+	static PyObject* Op_itruediv_Attempt0(FUPyWrapperVector* InSelf, PyObject* InRHS)
+	{
+		double Arg0 = 0.0;
+		if (!UPyConversion::Nativize(InRHS, Arg0))
+		{
+			return nullptr;
+		}
+
+		InSelf->ValuePtr()->operator/=(Arg0);
+		Py_INCREF(InSelf);
+		return (PyObject*)InSelf;
+	}
+
+	static PyObject* Op_itruediv_Attempt1(FUPyWrapperVector* InSelf, PyObject* InRHS)
+	{
+		FVector Arg1;
+		if (!UPyConversion::NativizeStructInstance(InRHS, Arg1))
+		{
+			return nullptr;
+		}
+
+		InSelf->ValuePtr()->operator/=(Arg1);
+		Py_INCREF(InSelf);
+		return (PyObject*)InSelf;
+	}
+
+	static PyObject* Op_itruediv(FUPyWrapperVector* InSelf, PyObject* InRHS)
+	{
+		if (!UPyIsVector((PyObject*)InSelf))
+		{
+			Py_RETURN_NOTIMPLEMENTED;
+		}
+		{
+			PyObject* AttemptResult = Op_itruediv_Attempt0(InSelf, InRHS);
+			if (AttemptResult != nullptr)
+			{
+				return AttemptResult;
+			}
+			PyErr_Clear();
+		}
+		{
+			PyObject* AttemptResult = Op_itruediv_Attempt1(InSelf, InRHS);
+			if (AttemptResult != nullptr)
+			{
+				return AttemptResult;
+			}
+			PyErr_Clear();
+		}
+		UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("Vector::__itruediv__"), TEXT("operator not supported"));
 		return nullptr;
 	}
 
@@ -487,6 +536,10 @@ struct FNumberFuncs_Vector
 
 	static PyObject* Op_mul(FUPyWrapperVector* InSelf, PyObject* InRHS)
 	{
+		if (!UPyIsVector((PyObject*)InSelf))
+		{
+			Py_RETURN_NOTIMPLEMENTED;
+		}
 		{
 			PyObject* AttemptResult = Op_mul_Attempt0(InSelf, InRHS);
 			if (AttemptResult != nullptr)
@@ -541,6 +594,10 @@ struct FNumberFuncs_Vector
 
 	static PyObject* Op_or(FUPyWrapperVector* InSelf, PyObject* InRHS)
 	{
+		if (!UPyIsVector((PyObject*)InSelf))
+		{
+			Py_RETURN_NOTIMPLEMENTED;
+		}
 		{
 			PyObject* AttemptResult = Op_or_Attempt0(InSelf, InRHS);
 			if (AttemptResult != nullptr)
@@ -579,6 +636,10 @@ struct FNumberFuncs_Vector
 
 	static PyObject* Op_sub(FUPyWrapperVector* InSelf, PyObject* InRHS)
 	{
+		if (!UPyIsVector((PyObject*)InSelf))
+		{
+			Py_RETURN_NOTIMPLEMENTED;
+		}
 		{
 			PyObject* AttemptResult = Op_sub_Attempt0(InSelf, InRHS);
 			if (AttemptResult != nullptr)
@@ -613,8 +674,8 @@ struct FNumberFuncs_Vector
 
 	static PyObject* Op_truediv_Attempt1(FUPyWrapperVector* InSelf, PyObject* InRHS)
 	{
-		double Arg1 = 0.0;
-		if (!UPyConversion::Nativize(InRHS, Arg1))
+		FVector Arg1;
+		if (!UPyConversion::NativizeStructInstance(InRHS, Arg1))
 		{
 			return nullptr;
 		}
@@ -623,32 +684,12 @@ struct FNumberFuncs_Vector
 		return UPyConversion::PythonizeStructInstance(Result);
 	}
 
-	static PyObject* Op_truediv_Attempt2(FUPyWrapperVector* InSelf, PyObject* InRHS)
-	{
-		FVector Arg2;
-		if (!UPyConversion::NativizeStructInstance(InRHS, Arg2))
-		{
-			return nullptr;
-		}
-
-		const auto Result = InSelf->ValuePtr()->operator/(Arg2);
-		return UPyConversion::PythonizeStructInstance(Result);
-	}
-
-	static PyObject* Op_truediv_Attempt3(FUPyWrapperVector* InSelf, PyObject* InRHS)
-	{
-		FVector Arg3;
-		if (!UPyConversion::NativizeStructInstance(InRHS, Arg3))
-		{
-			return nullptr;
-		}
-
-		const auto Result = InSelf->ValuePtr()->operator/(Arg3);
-		return UPyConversion::PythonizeStructInstance(Result);
-	}
-
 	static PyObject* Op_truediv(FUPyWrapperVector* InSelf, PyObject* InRHS)
 	{
+		if (!UPyIsVector((PyObject*)InSelf))
+		{
+			Py_RETURN_NOTIMPLEMENTED;
+		}
 		{
 			PyObject* AttemptResult = Op_truediv_Attempt0(InSelf, InRHS);
 			if (AttemptResult != nullptr)
@@ -659,22 +700,6 @@ struct FNumberFuncs_Vector
 		}
 		{
 			PyObject* AttemptResult = Op_truediv_Attempt1(InSelf, InRHS);
-			if (AttemptResult != nullptr)
-			{
-				return AttemptResult;
-			}
-			PyErr_Clear();
-		}
-		{
-			PyObject* AttemptResult = Op_truediv_Attempt2(InSelf, InRHS);
-			if (AttemptResult != nullptr)
-			{
-				return AttemptResult;
-			}
-			PyErr_Clear();
-		}
-		{
-			PyObject* AttemptResult = Op_truediv_Attempt3(InSelf, InRHS);
 			if (AttemptResult != nullptr)
 			{
 				return AttemptResult;
@@ -699,6 +724,10 @@ struct FNumberFuncs_Vector
 
 	static PyObject* Op_xor(FUPyWrapperVector* InSelf, PyObject* InRHS)
 	{
+		if (!UPyIsVector((PyObject*)InSelf))
+		{
+			Py_RETURN_NOTIMPLEMENTED;
+		}
 		{
 			PyObject* AttemptResult = Op_xor_Attempt0(InSelf, InRHS);
 			if (AttemptResult != nullptr)
@@ -1249,6 +1278,7 @@ PyTypeObject* DoInitWrapperVector(const UScriptStruct* InStruct, PyTypeObject* I
 	PyNumber.nb_inplace_add = (binaryfunc)&FNumberFuncs_Vector::Op_iadd;
 	PyNumber.nb_inplace_multiply = (binaryfunc)&FNumberFuncs_Vector::Op_imul;
 	PyNumber.nb_inplace_subtract = (binaryfunc)&FNumberFuncs_Vector::Op_isub;
+	PyNumber.nb_inplace_true_divide = (binaryfunc)&FNumberFuncs_Vector::Op_itruediv;
 	PyNumber.nb_multiply = (binaryfunc)&FNumberFuncs_Vector::Op_mul;
 	PyNumber.nb_negative = (unaryfunc)&FNumberFuncs_Vector::Op_neg;
 	PyNumber.nb_or = (binaryfunc)&FNumberFuncs_Vector::Op_or;

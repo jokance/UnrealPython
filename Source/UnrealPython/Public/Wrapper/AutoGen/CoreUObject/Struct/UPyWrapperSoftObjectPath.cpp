@@ -22,6 +22,13 @@ struct FFuncs_SoftObjectPath
 {
 	static int SoftObjectPath_Init_ArgCnt0_Overload0(FUPyWrapperSoftObjectPath* InSelf, PyObject* InArgs, PyObject* InKwds)
 	{
+		static const char* ArgsKwdList[] = { nullptr };
+		if (!PyArg_ParseTupleAndKeywords(InArgs, InKwds, ":SoftObjectPath::__init__", (char**)ArgsKwdList))
+		{
+			return -1;
+		}
+
+		InSelf->ScriptStruct->DestroyStruct(InSelf->StructInstance);
 		new (InSelf->StructInstance) FSoftObjectPath();
 		return 0;
 	}
@@ -29,17 +36,20 @@ struct FFuncs_SoftObjectPath
 
 	static int SoftObjectPath_Init_ArgCnt1_Overload0(FUPyWrapperSoftObjectPath* InSelf, PyObject* InArgs, PyObject* InKwds)
 	{
-		PyObject* PyArg0 = PyTuple_GetItem(InArgs, 0);
-		if (PyArg0 == nullptr)
+		PyObject* PyArg0 = nullptr;
+		static const char* ArgsKwdList[] = { "PathString", nullptr };
+		if (!PyArg_ParseTupleAndKeywords(InArgs, InKwds, "O:SoftObjectPath::__init__", (char**)ArgsKwdList, &PyArg0))
 		{
 			return -1;
 		}
+
 		FString Arg0;
 		if (!UPyConversion::Nativize(PyArg0, Arg0))
 		{
 			return -1;
 		}
 
+		InSelf->ScriptStruct->DestroyStruct(InSelf->StructInstance);
 		new (InSelf->StructInstance) FSoftObjectPath(Arg0);
 		return 0;
 	}
@@ -47,17 +57,20 @@ struct FFuncs_SoftObjectPath
 
 	static int SoftObjectPath_Init_ArgCnt1_Overload1(FUPyWrapperSoftObjectPath* InSelf, PyObject* InArgs, PyObject* InKwds)
 	{
-		PyObject* PyArg0 = PyTuple_GetItem(InArgs, 0);
-		if (PyArg0 == nullptr)
+		PyObject* PyArg0 = nullptr;
+		static const char* ArgsKwdList[] = { "InObject", nullptr };
+		if (!PyArg_ParseTupleAndKeywords(InArgs, InKwds, "O:SoftObjectPath::__init__", (char**)ArgsKwdList, &PyArg0))
 		{
 			return -1;
 		}
+
 		UObject* Arg0 = nullptr;
 		if (!UPyConversion::Nativize(PyArg0, Arg0))
 		{
 			return -1;
 		}
 
+		InSelf->ScriptStruct->DestroyStruct(InSelf->StructInstance);
 		new (InSelf->StructInstance) FSoftObjectPath(Arg0);
 		return 0;
 	}
@@ -71,34 +84,16 @@ struct FFuncs_SoftObjectPath
 			return BaseInit;
 		}
 
-		switch (PyTuple_Size(InArgs))
+		if (
+			UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_SoftObjectPath::SoftObjectPath_Init_ArgCnt0_Overload0)
+			|| UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_SoftObjectPath::SoftObjectPath_Init_ArgCnt1_Overload0)
+			|| UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_SoftObjectPath::SoftObjectPath_Init_ArgCnt1_Overload1)
+		)
 		{
-		case 0:
-		{
-			if (
-				UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_SoftObjectPath::SoftObjectPath_Init_ArgCnt0_Overload0)
-			)
-			{
-				return 0;
-			}
-			break;
-		}
-		case 1:
-		{
-			if (
-				UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_SoftObjectPath::SoftObjectPath_Init_ArgCnt1_Overload0)
-				|| UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_SoftObjectPath::SoftObjectPath_Init_ArgCnt1_Overload1)
-			)
-			{
-				return 0;
-			}
-			break;
-		}
-		default:
-			break;
+			return 0;
 		}
 
-		UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("SoftObjectPath::__init__"), TEXT("invalid argument"));
+		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("SoftObjectPath::__init__"), TEXT("invalid argument"));
 		return -1;
 	}
 

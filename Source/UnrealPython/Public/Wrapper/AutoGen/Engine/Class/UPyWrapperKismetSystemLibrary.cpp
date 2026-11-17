@@ -6657,16 +6657,17 @@ struct FMethods_KismetSystemLibrary
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			if (Prop_Path)
 			{
-				Prop_Path->CopyCompleteValue_InContainer(Parms, &Arg0);
+				Prop_Path->CopyCompleteValue(Prop_Path->ContainerPtrToValuePtr<void>(Parms), &Arg0);
 			}
 			GetMutableDefault<UKismetSystemLibrary>()->ProcessEvent(Func, Parms);
 			if (Prop__ReturnValue)
 			{
-				Prop__ReturnValue->CopyCompleteValue_InContainer(&Result, Parms);
+				Prop__ReturnValue->CopyCompleteValue(&Result, Prop__ReturnValue->ContainerPtrToValuePtr<void>(Parms));
 			}
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		return UPyConversion::Pythonize(Result);
@@ -7066,16 +7067,17 @@ struct FMethods_KismetSystemLibrary
 		if (Func)
 		{
 			uint8* Parms = (uint8*)FMemory::Malloc(Func->ParmsSize);
-			FMemory::Memzero(Parms, Func->ParmsSize);
+			Func->InitializeStruct(Parms);
 			if (Prop_Path)
 			{
-				Prop_Path->CopyCompleteValue_InContainer(Parms, &Arg0);
+				Prop_Path->CopyCompleteValue(Prop_Path->ContainerPtrToValuePtr<void>(Parms), &Arg0);
 			}
 			GetMutableDefault<UKismetSystemLibrary>()->ProcessEvent(Func, Parms);
 			if (Prop__ReturnValue)
 			{
-				Prop__ReturnValue->CopyCompleteValue_InContainer(&Result, Parms);
+				Prop__ReturnValue->CopyCompleteValue(&Result, Prop__ReturnValue->ContainerPtrToValuePtr<void>(Parms));
 			}
+			Func->DestroyStruct(Parms);
 			FMemory::Free(Parms);
 		}
 		return UPyConversion::Pythonize(Result);

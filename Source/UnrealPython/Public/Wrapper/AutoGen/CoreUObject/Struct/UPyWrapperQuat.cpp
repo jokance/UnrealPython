@@ -126,6 +126,13 @@ struct FFuncs_Quat
 {
 	static int Quat_Init_ArgCnt0_Overload0(FUPyWrapperQuat* InSelf, PyObject* InArgs, PyObject* InKwds)
 	{
+		static const char* ArgsKwdList[] = { nullptr };
+		if (!PyArg_ParseTupleAndKeywords(InArgs, InKwds, ":Quat::__init__", (char**)ArgsKwdList))
+		{
+			return -1;
+		}
+
+		InSelf->ScriptStruct->DestroyStruct(InSelf->StructInstance);
 		new (InSelf->StructInstance) FQuat();
 		return 0;
 	}
@@ -133,28 +140,27 @@ struct FFuncs_Quat
 
 	static int Quat_Init_ArgCnt2_Overload0(FUPyWrapperQuat* InSelf, PyObject* InArgs, PyObject* InKwds)
 	{
-		PyObject* PyArg0 = PyTuple_GetItem(InArgs, 0);
-		if (PyArg0 == nullptr)
+		PyObject* PyArg0 = nullptr;
+		PyObject* PyArg1 = nullptr;
+		static const char* ArgsKwdList[] = { "Axis", "AngleRad", nullptr };
+		if (!PyArg_ParseTupleAndKeywords(InArgs, InKwds, "OO:Quat::__init__", (char**)ArgsKwdList, &PyArg0, &PyArg1))
 		{
 			return -1;
 		}
+
 		FVector Arg0;
 		if (!UPyConversion::NativizeStructInstance(PyArg0, Arg0))
 		{
 			return -1;
 		}
 
-		PyObject* PyArg1 = PyTuple_GetItem(InArgs, 1);
-		if (PyArg1 == nullptr)
-		{
-			return -1;
-		}
 		double Arg1 = 0.0;
 		if (!UPyConversion::Nativize(PyArg1, Arg1))
 		{
 			return -1;
 		}
 
+		InSelf->ScriptStruct->DestroyStruct(InSelf->StructInstance);
 		new (InSelf->StructInstance) FQuat(Arg0, Arg1);
 		return 0;
 	}
@@ -162,17 +168,20 @@ struct FFuncs_Quat
 
 	static int Quat_Init_ArgCnt1_Overload0(FUPyWrapperQuat* InSelf, PyObject* InArgs, PyObject* InKwds)
 	{
-		PyObject* PyArg0 = PyTuple_GetItem(InArgs, 0);
-		if (PyArg0 == nullptr)
+		PyObject* PyArg0 = nullptr;
+		static const char* ArgsKwdList[] = { "M", nullptr };
+		if (!PyArg_ParseTupleAndKeywords(InArgs, InKwds, "O:Quat::__init__", (char**)ArgsKwdList, &PyArg0))
 		{
 			return -1;
 		}
+
 		FMatrix Arg0;
 		if (!UPyConversion::NativizeStructInstance(PyArg0, Arg0))
 		{
 			return -1;
 		}
 
+		InSelf->ScriptStruct->DestroyStruct(InSelf->StructInstance);
 		new (InSelf->StructInstance) FQuat(Arg0);
 		return 0;
 	}
@@ -180,17 +189,20 @@ struct FFuncs_Quat
 
 	static int Quat_Init_ArgCnt1_Overload1(FUPyWrapperQuat* InSelf, PyObject* InArgs, PyObject* InKwds)
 	{
-		PyObject* PyArg0 = PyTuple_GetItem(InArgs, 0);
-		if (PyArg0 == nullptr)
+		PyObject* PyArg0 = nullptr;
+		static const char* ArgsKwdList[] = { "R", nullptr };
+		if (!PyArg_ParseTupleAndKeywords(InArgs, InKwds, "O:Quat::__init__", (char**)ArgsKwdList, &PyArg0))
 		{
 			return -1;
 		}
+
 		FRotator Arg0;
 		if (!UPyConversion::NativizeStructInstance(PyArg0, Arg0))
 		{
 			return -1;
 		}
 
+		InSelf->ScriptStruct->DestroyStruct(InSelf->StructInstance);
 		new (InSelf->StructInstance) FQuat(Arg0);
 		return 0;
 	}
@@ -198,50 +210,41 @@ struct FFuncs_Quat
 
 	static int Quat_Init_ArgCnt4_Overload0(FUPyWrapperQuat* InSelf, PyObject* InArgs, PyObject* InKwds)
 	{
-		PyObject* PyArg0 = PyTuple_GetItem(InArgs, 0);
-		if (PyArg0 == nullptr)
+		PyObject* PyArg0 = nullptr;
+		PyObject* PyArg1 = nullptr;
+		PyObject* PyArg2 = nullptr;
+		PyObject* PyArg3 = nullptr;
+		static const char* ArgsKwdList[] = { "InX", "InY", "InZ", "InW", nullptr };
+		if (!PyArg_ParseTupleAndKeywords(InArgs, InKwds, "OOOO:Quat::__init__", (char**)ArgsKwdList, &PyArg0, &PyArg1, &PyArg2, &PyArg3))
 		{
 			return -1;
 		}
+
 		double Arg0 = 0.0;
 		if (!UPyConversion::Nativize(PyArg0, Arg0))
 		{
 			return -1;
 		}
 
-		PyObject* PyArg1 = PyTuple_GetItem(InArgs, 1);
-		if (PyArg1 == nullptr)
-		{
-			return -1;
-		}
 		double Arg1 = 0.0;
 		if (!UPyConversion::Nativize(PyArg1, Arg1))
 		{
 			return -1;
 		}
 
-		PyObject* PyArg2 = PyTuple_GetItem(InArgs, 2);
-		if (PyArg2 == nullptr)
-		{
-			return -1;
-		}
 		double Arg2 = 0.0;
 		if (!UPyConversion::Nativize(PyArg2, Arg2))
 		{
 			return -1;
 		}
 
-		PyObject* PyArg3 = PyTuple_GetItem(InArgs, 3);
-		if (PyArg3 == nullptr)
-		{
-			return -1;
-		}
 		double Arg3 = 0.0;
 		if (!UPyConversion::Nativize(PyArg3, Arg3))
 		{
 			return -1;
 		}
 
+		InSelf->ScriptStruct->DestroyStruct(InSelf->StructInstance);
 		new (InSelf->StructInstance) FQuat(Arg0, Arg1, Arg2, Arg3);
 		return 0;
 	}
@@ -255,54 +258,18 @@ struct FFuncs_Quat
 			return BaseInit;
 		}
 
-		switch (PyTuple_Size(InArgs))
+		if (
+			UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_Quat::Quat_Init_ArgCnt0_Overload0)
+			|| UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_Quat::Quat_Init_ArgCnt2_Overload0)
+			|| UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_Quat::Quat_Init_ArgCnt1_Overload0)
+			|| UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_Quat::Quat_Init_ArgCnt1_Overload1)
+			|| UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_Quat::Quat_Init_ArgCnt4_Overload0)
+		)
 		{
-		case 0:
-		{
-			if (
-				UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_Quat::Quat_Init_ArgCnt0_Overload0)
-			)
-			{
-				return 0;
-			}
-			break;
-		}
-		case 1:
-		{
-			if (
-				UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_Quat::Quat_Init_ArgCnt1_Overload0)
-				|| UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_Quat::Quat_Init_ArgCnt1_Overload1)
-			)
-			{
-				return 0;
-			}
-			break;
-		}
-		case 2:
-		{
-			if (
-				UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_Quat::Quat_Init_ArgCnt2_Overload0)
-			)
-			{
-				return 0;
-			}
-			break;
-		}
-		case 4:
-		{
-			if (
-				UPyUtil::TryInit(InSelf, InArgs, InKwds, &FFuncs_Quat::Quat_Init_ArgCnt4_Overload0)
-			)
-			{
-				return 0;
-			}
-			break;
-		}
-		default:
-			break;
+			return 0;
 		}
 
-		UPyUtil::SetPythonError(PyExc_RuntimeError, TEXT("Quat::__init__"), TEXT("invalid argument"));
+		UPyUtil::SetPythonError(PyExc_TypeError, TEXT("Quat::__init__"), TEXT("invalid argument"));
 		return -1;
 	}
 };
@@ -323,6 +290,10 @@ struct FNumberFuncs_Quat
 
 	static PyObject* Op_add(FUPyWrapperQuat* InSelf, PyObject* InRHS)
 	{
+		if (!UPyIsQuat((PyObject*)InSelf))
+		{
+			Py_RETURN_NOTIMPLEMENTED;
+		}
 		{
 			PyObject* AttemptResult = Op_add_Attempt0(InSelf, InRHS);
 			if (AttemptResult != nullptr)
@@ -350,6 +321,10 @@ struct FNumberFuncs_Quat
 
 	static PyObject* Op_iadd(FUPyWrapperQuat* InSelf, PyObject* InRHS)
 	{
+		if (!UPyIsQuat((PyObject*)InSelf))
+		{
+			Py_RETURN_NOTIMPLEMENTED;
+		}
 		{
 			PyObject* AttemptResult = Op_iadd_Attempt0(InSelf, InRHS);
 			if (AttemptResult != nullptr)
@@ -377,6 +352,10 @@ struct FNumberFuncs_Quat
 
 	static PyObject* Op_imul(FUPyWrapperQuat* InSelf, PyObject* InRHS)
 	{
+		if (!UPyIsQuat((PyObject*)InSelf))
+		{
+			Py_RETURN_NOTIMPLEMENTED;
+		}
 		{
 			PyObject* AttemptResult = Op_imul_Attempt0(InSelf, InRHS);
 			if (AttemptResult != nullptr)
@@ -404,6 +383,10 @@ struct FNumberFuncs_Quat
 
 	static PyObject* Op_isub(FUPyWrapperQuat* InSelf, PyObject* InRHS)
 	{
+		if (!UPyIsQuat((PyObject*)InSelf))
+		{
+			Py_RETURN_NOTIMPLEMENTED;
+		}
 		{
 			PyObject* AttemptResult = Op_isub_Attempt0(InSelf, InRHS);
 			if (AttemptResult != nullptr)
@@ -442,6 +425,10 @@ struct FNumberFuncs_Quat
 
 	static PyObject* Op_mul(FUPyWrapperQuat* InSelf, PyObject* InRHS)
 	{
+		if (!UPyIsQuat((PyObject*)InSelf))
+		{
+			Py_RETURN_NOTIMPLEMENTED;
+		}
 		{
 			PyObject* AttemptResult = Op_mul_Attempt0(InSelf, InRHS);
 			if (AttemptResult != nullptr)
@@ -476,6 +463,10 @@ struct FNumberFuncs_Quat
 
 	static PyObject* Op_sub(FUPyWrapperQuat* InSelf, PyObject* InRHS)
 	{
+		if (!UPyIsQuat((PyObject*)InSelf))
+		{
+			Py_RETURN_NOTIMPLEMENTED;
+		}
 		{
 			PyObject* AttemptResult = Op_sub_Attempt0(InSelf, InRHS);
 			if (AttemptResult != nullptr)
