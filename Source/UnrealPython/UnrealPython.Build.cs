@@ -55,7 +55,8 @@ public class UnrealPython : ModuleRules
 				"EditorSubsystem",
 				"BlueprintGraph",
 				"UnrealEd",
-				"ToolMenus"
+				"ToolMenus",
+				"DirectoryWatcher"
 			]);
 
 			PublicDefinitions.Add("WITH_UPY_DOC_STRINGS=1");

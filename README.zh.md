@@ -40,6 +40,7 @@ UnrealPython 是一个用于在 Unreal Engine 运行时嵌入 CPython 的插件�
     - [Generated Type](#generated-type)
     - [Packaged / Dedicated Server](#packaged--dedicated-server)
     - [Timer Manager](#timer-manager)
+    - [热重载](#热重载)
     - [编辑器工具 (UnrealPythonEditor)](#编辑器工具-unrealpythoneditor)
   - [注意事项](#注意事项)
 
@@ -483,6 +484,16 @@ UUPyTimerManager::ClearTimer(TimerHandle);
 UUPyTimerManager::ClearAllTimers();
 ```
 
+### 热重载
+
+在编辑器构建中（Editor、PIE，以及使用编辑器二进制启动的 `-game` 会话），UnrealPython 会监听脚本目录和 **Additional Paths**。已加载模块的 `.py` 文件变化后，该模块会重新执行，已有的函数、实例、子类以及 `from module import Name` 引用都会切换到新定义。`@ue.uclass` / `@ue.ustruct` / `@ue.uenum` 类型会被重新实例化。
+
+- 关闭 **Project Settings -> Plugins -> Unreal Python -> Auto Reload Scripts** 后只按需重载。
+- `UnrealPython.Reload` 重载已收集的变化；`UnrealPython.Reload game.player` 重载指定模块。
+- 保存状态的模块全局变量（类、函数和模块以外的值）会保留原值。把名称列入 `__reload_use_new__ = ("MAX_HP",)` 可使用文件中的新值，也可以使用 `__before_reload__()` / `__after_reload__(state)` 钩子。
+
+完整行为与限制见 [Docs/HotReload.zh.md](Docs/HotReload.zh.md)。
+
 ### 编辑器工具 (UnrealPythonEditor)
 
 插件在 Unreal Engine 编辑器中提供了一些辅助工具。
@@ -507,4 +518,5 @@ UUPyTimerManager::ClearAllTimers();
 - [Python Generated Type 使用说明](Docs/GeneratedType.zh.md)：说明 `ue.uclass()`、`ue.ustruct()`、`ue.uenum()`、`ue.uproperty()` 和 `ue.ufunction()` 的用法与限制。
 - [GenerationSettings.json 配置说明](Docs/GenerationSettings.zh.md)：说明静态 wrapper 生成范围、成员过滤、`ForceReflection*`、`IsInline`、项目模块输出和验证流程。
 - [Python 3.14 Runtime 构建与打包流程](Docs/PythonRuntimeBuild.zh.md)：记录插件自带 Python 运行时的来源、平台目录、构建和打包验证方式。
+- [Python 热重载](Docs/HotReload.zh.md)：说明自动与按需重载、旧对象如何更新、模块状态保留以及限制。
 - [UnrealPython 与 UE PythonScriptPlugin 源码差异](Docs/PythonScriptPluginDifferences.zh.md)：对比本插件和 UE 内置 `PythonScriptPlugin` 的定位、模块结构和运行时差异。

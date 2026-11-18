@@ -17,6 +17,9 @@ public:
 	void SaveThread();
 	void RestoreThread();
 
+	/** Absolute paths of the existing project script directories: the main script path and the Additional Paths setting. */
+	TArray<FString> GetScriptDirectories() const;
+
 private:
 	FUPyVirtualMachine() = default;
 	~FUPyVirtualMachine() = default;
@@ -25,7 +28,7 @@ private:
 
 	void ConfigureSearchPaths(PyConfig& PythonConfig);
 
-	FString GetPythonScriptPath();
+	FString GetPythonScriptPath() const;
 
 	void SetPythonSysArgv();
 

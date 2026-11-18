@@ -11,6 +11,7 @@
 #include "Wrapper/UPyWrapperSet.h"
 #include "Wrapper/UPyWrapperMap.h"
 #include "Wrapper/UPyWrapperDelegate.h"
+#include "Subclassing/UPyGeneratedClass.h"
 #include "UObject/UObjectGlobals.h"
 
 namespace
@@ -90,6 +91,38 @@ void InvalidateOwnedPyProp(FUPyWrapperBase* PyProp)
 	}
 }
 
+#if WITH_EDITOR
+/** Whether a wrapper of this Python type was created for an instance of the given class. */
+bool IsWrapperTypeOfClass(const PyTypeObject* WrapperType, const UClass* Class)
+{
+	if (WrapperType == FUPyWrapperTypeRegistry::Get().GetWrappedClassType(Class))
+	{
+		return true;
+	}
+
+	// A replaced Python generated class is no longer registered, but still knows its Python type.
+	const UUPyGeneratedClass* GeneratedClass = Cast<UUPyGeneratedClass>(Class);
+	return GeneratedClass && GeneratedClass->GetPythonType() == WrapperType;
+}
+
+/** Change the Python type of a wrapper, keeping the references held on heap types balanced. */
+void SetWrapperType(PyObject* Wrapper, PyTypeObject* NewType)
+{
+	PyTypeObject* OldType = Py_TYPE(Wrapper);
+	if (PyType_HasFeature(NewType, Py_TPFLAGS_HEAPTYPE))
+	{
+		Py_INCREF(NewType);
+	}
+
+	Py_SET_TYPE(Wrapper, NewType);
+
+	if (PyType_HasFeature(OldType, Py_TPFLAGS_HEAPTYPE))
+	{
+		Py_DECREF(OldType);
+	}
+}
+#endif
+
 } // namespace
 
 #if WITH_EDITOR
@@ -108,16 +141,13 @@ void FUPyWrapperObjectFactory::OnObjectsReplaced(const TMap<UObject*, UObject*>&
 		if (FUPyWrapperObjectBase** WrapperPtr = MappedInstances.Find(OldObject))
 		{
 			FUPyWrapperObjectBase* Wrapper = *WrapperPtr;
-			const PyTypeObject* OldExpectedType = FUPyWrapperTypeRegistry::Get().GetWrappedClassType(OldObject->GetClass());
-			const PyTypeObject* NewExpectedType = FUPyWrapperTypeRegistry::Get().GetWrappedClassType(NewObject->GetClass());
-			if (OldExpectedType && NewExpectedType && OldExpectedType != NewExpectedType)
+			PyTypeObject* NewExpectedType = const_cast<PyTypeObject*>(FUPyWrapperTypeRegistry::Get().GetWrappedClassType(NewObject->GetClass()));
+			PyTypeObject* CurrentType = Py_TYPE((PyObject*)Wrapper);
+			if (NewExpectedType && CurrentType != NewExpectedType && IsWrapperTypeOfClass(CurrentType, OldObject->GetClass())
+				&& CurrentType->tp_basicsize == NewExpectedType->tp_basicsize)
 			{
-				PyTypeObject* CurrentType = Py_TYPE((PyObject*)Wrapper);
-				if (CurrentType == OldExpectedType && CurrentType->tp_basicsize == NewExpectedType->tp_basicsize)
-				{
-					FUPyScopedGIL Gil;
-					Py_SET_TYPE((PyObject*)Wrapper, const_cast<PyTypeObject*>(NewExpectedType));
-				}
+				FUPyScopedGIL Gil;
+				SetWrapperType((PyObject*)Wrapper, NewExpectedType);
 			}
 
 			Wrapper->ObjectInstance = NewObject;

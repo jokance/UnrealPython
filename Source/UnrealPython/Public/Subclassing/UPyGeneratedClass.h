@@ -59,6 +59,12 @@ public:
 	/** Unregister this type from FPyWrapperTypeRegistry */
 	void UnregisterGeneratedType();
 
+	/** Python type this class was generated from; still set after the class was replaced by a newer version */
+	PyTypeObject* GetPythonType() const
+	{
+		return PyType.GetPtr();
+	}
+
 	virtual bool IsFunctionImplementedInScript(FName InFunctionName) const override;
 
 	bool GetGeneratedPropertyReplicationInfo(FName InPropertyName, ELifetimeCondition& OutReplicationCondition, ELifetimeRepNotifyCondition& OutRepNotifyCondition, bool& bOutPushBased) const;

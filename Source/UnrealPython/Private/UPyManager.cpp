@@ -9,6 +9,9 @@
 #include "Wrapper/UPyReferenceCollector.h"
 #include "Wrapper/UPyWrapperTypeFactory.h"
 #include "PyGameFramework/UPyTimerManager.h"
+#if WITH_EDITOR
+#include "Core/UPyHotReload.h"
+#endif
 
 void FUPyPythonOwnedObjectReferencer::Add(UObject* Object)
 {
@@ -74,6 +77,8 @@ void UUPyManager::Initialize()
 	GUObjectArray.AddUObjectDeleteListener(this);
 #if WITH_EDITOR
 	FCoreUObjectDelegates::OnObjectsReplaced.AddUObject(this, &UUPyManager::OnObjectsReplaced);
+	// Re-instancing Python generated classes only broadcasts OnObjectsReplaced through GEditor, which -game processes lack.
+	FCoreUObjectDelegates::OnObjectsReinstanced.AddUObject(this, &UUPyManager::OnObjectsReplaced);
 #endif
 
 	if (!FUPyVirtualMachine::Get().InitializePython())
@@ -94,6 +99,10 @@ void UUPyManager::Initialize()
 	FUPyVirtualMachine::Get().SaveThread();
 
 	RegisterTicker();
+
+#if WITH_EDITOR
+	FUPyHotReload::Get().Startup(FUPyVirtualMachine::Get().GetScriptDirectories());
+#endif
 }
 
 void UUPyManager::Shutdown()
@@ -102,6 +111,7 @@ void UUPyManager::Shutdown()
 
 #if WITH_EDITOR
 	FCoreUObjectDelegates::OnObjectsReplaced.RemoveAll(this);
+	FCoreUObjectDelegates::OnObjectsReinstanced.RemoveAll(this);
 #endif
 
 	if (!FUPyVirtualMachine::Get().IsInitialized())
@@ -109,6 +119,10 @@ void UUPyManager::Shutdown()
 		UUPyTimerManager::Shutdown();
 		return;
 	}
+
+#if WITH_EDITOR
+	FUPyHotReload::Get().Shutdown();
+#endif
 
 	UnregisterTicker();
 
@@ -245,6 +259,10 @@ void UUPyManager::UnregisterTicker()
 
 bool UUPyManager::Tick(float DeltaTime)
 {
+#if WITH_EDITOR
+	FUPyHotReload::Get().Tick(DeltaTime);
+#endif
+
 	FUPyScopedGIL GIL;
 	PyRun_SimpleString("import ue_site; ue_site.on_tick()");
 	return true;

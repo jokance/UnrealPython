@@ -38,6 +38,7 @@ To speed up game development, try these companion plugins:
   - [Generated Type](#generated-type)
   - [Packaged / Dedicated Server](#packaged--dedicated-server)
   - [Timer Manager](#timer-manager)
+  - [Hot Reload](#hot-reload)
   - [Editor Tools (UnrealPythonEditor)](#editor-tools-unrealpythoneditor)
 - [Notes](#notes)
 - [Related Documentation](#related-documentation)
@@ -479,6 +480,16 @@ UUPyTimerManager::ClearTimer(TimerHandle);
 UUPyTimerManager::ClearAllTimers();
 ```
 
+### Hot Reload
+
+In editor builds (Editor, PIE, and `-game` sessions started with editor binaries), UnrealPython watches the script directory and **Additional Paths**. When a `.py` file of a loaded module changes, the module re-executes and existing functions, instances, subclasses, and `from module import Name` references switch to the new definitions. `@ue.uclass` / `@ue.ustruct` / `@ue.uenum` types are re-instanced.
+
+- Disable **Project Settings -> Plugins -> Unreal Python -> Auto Reload Scripts** to reload only on demand.
+- `UnrealPython.Reload` reloads the collected changes; `UnrealPython.Reload game.player` reloads named modules.
+- Module globals that hold state (anything but classes, functions, and modules) keep their values. List names in `__reload_use_new__ = ("MAX_HP",)` to take the file's new values, or use the `__before_reload__()` / `__after_reload__(state)` hooks.
+
+See [Docs/HotReload.md](Docs/HotReload.md) for the full behavior and limitations.
+
 ### Editor Tools (UnrealPythonEditor)
 
 The plugin provides helper tools in the Unreal Engine editor.
@@ -503,6 +514,7 @@ The plugin provides helper tools in the Unreal Engine editor.
 - [Python Generated Type Guide](Docs/GeneratedType.md): explains `ue.uclass()`, `ue.ustruct()`, `ue.uenum()`, `ue.uproperty()`, and `ue.ufunction()` usage and limitations.
 - [GenerationSettings.json Guide](Docs/GenerationSettings.md): documents static wrapper generation scope, member filtering, `ForceReflection*`, `IsInline`, project module output, and verification flow.
 - [Python 3.14 Runtime Build and Packaging Flow](Docs/PythonRuntimeBuild.md): records the source, platform directories, build process, and packaging verification for the bundled Python runtime.
+- [Python Hot Reload](Docs/HotReload.md): explains automatic and on-demand reloading, how previous objects are updated, keeping module state, and limitations.
 - [Differences Between UnrealPython and UE PythonScriptPlugin](Docs/PythonScriptPluginDifferences.md): compares this plugin with UE's built-in `PythonScriptPlugin` in positioning, module structure, and runtime behavior.
 
 ## Community

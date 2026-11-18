@@ -50,4 +50,12 @@ public:
 	UPROPERTY(config, EditAnywhere, Category=Python, meta=(ConfigRestartRequired=true, RelativeToGameDir))
 	TArray<FDirectoryPath> AdditionalPaths;
 
+#if WITH_EDITORONLY_DATA
+	/**
+	 * Reload loaded Python modules automatically when their script files change (editor builds only).
+	 * When disabled, changes are collected until the UnrealPython.Reload console command runs.
+	 */
+	UPROPERTY(config, EditAnywhere, Category=Python)
+	bool bAutoReloadScripts = true;
+#endif
 };

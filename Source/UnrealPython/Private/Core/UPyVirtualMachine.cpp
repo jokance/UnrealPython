@@ -629,10 +629,42 @@ void FUPyVirtualMachine::ConfigureSearchPaths(PyConfig& PythonConfig)
 		PyWideStringList_Append(&PythonConfig.module_search_paths, TCHAR_TO_WCHAR(*AbsoluteScriptDir));
 	}
 
+#if WITH_EDITOR
+	// Editor-only modules shipped with the plugin (ue_hotreload). Added last so project scripts take precedence.
+	if (TSharedPtr<IPlugin> Plugin = IPluginManager::Get().FindPlugin(TEXT("UnrealPython")))
+	{
+		const FString PluginPythonPath = FPaths::ConvertRelativePathToFull(FPaths::Combine(Plugin->GetContentDir(), TEXT("Python")));
+		if (FPaths::DirectoryExists(PluginPythonPath))
+		{
+			PyWideStringList_Append(&PythonConfig.module_search_paths, TCHAR_TO_WCHAR(*PluginPythonPath));
+		}
+	}
+#endif
+
 	UE_LOG(LogUnrealPython, Log, TEXT("ConfigureSearchPaths--------: %s"), *FPaths::ProjectUserDir());
 }
 
-FString FUPyVirtualMachine::GetPythonScriptPath()
+TArray<FString> FUPyVirtualMachine::GetScriptDirectories() const
+{
+	TArray<FString> ScriptDirectories;
+	ScriptDirectories.Add(GetPythonScriptPath());
+
+	for (const FDirectoryPath& AdditionalPath : GetDefault<UUPySettings>()->AdditionalPaths)
+	{
+		if (!AdditionalPath.Path.IsEmpty())
+		{
+			ScriptDirectories.AddUnique(FPaths::ConvertRelativePathToFull(FPaths::Combine(FPaths::ProjectDir(), AdditionalPath.Path)));
+		}
+	}
+
+	ScriptDirectories.RemoveAll([](const FString& ScriptDirectory)
+	{
+		return !FPaths::DirectoryExists(ScriptDirectory);
+	});
+	return ScriptDirectories;
+}
+
+FString FUPyVirtualMachine::GetPythonScriptPath() const
 {
 	FString OverridePath;
 	if (GConfig && GConfig->GetString(TEXT("UnrealPython"), TEXT("ScriptPath"), OverridePath, GGameIni))
